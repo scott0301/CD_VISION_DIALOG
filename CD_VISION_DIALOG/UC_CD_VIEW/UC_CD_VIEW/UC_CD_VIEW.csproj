@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{173B199C-8F34-48B3-8D85-FC0A09A38C7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UC_CD_VIEW</RootNamespace>
+    <AssemblyName>UC_CD_View</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DEF_PARAMS">
+      <HintPath>..\..\Library\DEF_PARAMS.dll</HintPath>
+    </Reference>
+    <Reference Include="DispObject">
+      <HintPath>..\..\Library\DispObject.dll</HintPath>
+    </Reference>
+    <Reference Include="LIB_CD_VISION, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LIB_CD_Vision\Lib\LIB_CD_VISION.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WrapperClass, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\WrapperClass.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper_ImageIO.cs" />
+    <Compile Include="Helper_Polar.cs" />
+    <Compile Include="Helper_TimeCode.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="FormPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPopup.Designer.cs">
+      <DependentUpon>FormPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UIThread.cs" />
+    <Compile Include="uc_cd_view.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uc_cd_view.Designer.cs">
+      <DependentUpon>uc_cd_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormPopup.resx">
+      <DependentUpon>FormPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uc_cd_view.resx">
+      <DependentUpon>uc_cd_view.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\floppydisk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mag origin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mag minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mag plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toggle Off-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toggle On-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder Upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureHor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureVer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureVer1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureCir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureDig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureRec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureVer2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Applications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joystick_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joystick_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrawFigure Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawfigure On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaintBrush_Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaintBrush_On.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

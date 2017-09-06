@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{212E5EA7-EAB4-4753-BF00-E822D532786A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CD_VISION_DIALOG</RootNamespace>
+    <AssemblyName>CD_VISION_DIALOG</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>alien male.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DEF_PARAMS">
+      <HintPath>Library\DEF_PARAMS.dll</HintPath>
+    </Reference>
+    <Reference Include="DispObject, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\DispObject.dll</HintPath>
+    </Reference>
+    <Reference Include="IPCData">
+      <HintPath>CDData\IPCData\Library\IPCData.dll</HintPath>
+    </Reference>
+    <Reference Include="IPCUtility">
+      <HintPath>CDData\IPCData\Library\IPCUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="LIB_CD_VISION, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LIB_CD_Vision\Lib\LIB_CD_VISION.dll</HintPath>
+    </Reference>
+    <Reference Include="PylonC.NET">
+      <HintPath>CDData\IPCData\Library\PylonC.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UC_CD_PARAM">
+      <HintPath>UC_CD_PARAM\Lib\UC_CD_PARAM.dll</HintPath>
+    </Reference>
+    <Reference Include="UC_CD_VIEW, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\UC_CD_VIEW.DLL</HintPath>
+    </Reference>
+    <Reference Include="UC_GRAPH">
+      <HintPath>Library\UC_GRAPH.dll</HintPath>
+    </Reference>
+    <Reference Include="UC_LOG_VIEW, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\UC_LOG_VIEW.dll</HintPath>
+    </Reference>
+    <Reference Include="uc_thumb_nail_viewer">
+      <HintPath>Library\uc_thumb_nail_viewer.dll</HintPath>
+    </Reference>
+    <Reference Include="WrapperClass">
+      <HintPath>Library\WrapperClass.dll</HintPath>
+    </Reference>
+    <Reference Include="WrapperCognex, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\WrapperCognex.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseRecpCopyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseRecpCopyForm.Designer.cs">
+      <DependentUpon>BaseRecpCopyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CDMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CDMainForm.Designer.cs">
+      <DependentUpon>CDMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_Config.Designer.cs">
+      <DependentUpon>Dlg_Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_Hacker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_Hacker.Designer.cs">
+      <DependentUpon>Dlg_Hacker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_HistoryP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_HistoryP.Designer.cs">
+      <DependentUpon>Dlg_HistoryP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_HistoryM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_HistoryM.Designer.cs">
+      <DependentUpon>Dlg_HistoryM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DLg_Processing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DLg_Processing.Designer.cs">
+      <DependentUpon>DLg_Processing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DLG_Ptrn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DLG_Ptrn.Designer.cs">
+      <DependentUpon>DLG_Ptrn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_Recipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_Recipe.Designer.cs">
+      <DependentUpon>Dlg_Recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg_Tunning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_Tunning.Designer.cs">
+      <DependentUpon>Dlg_Tunning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Native.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseRecpManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseRecpManageForm.Designer.cs">
+      <DependentUpon>BaseRecpManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="supports.cs" />
+    <EmbeddedResource Include="BaseRecpCopyForm.resx">
+      <DependentUpon>BaseRecpCopyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDMainForm.resx">
+      <DependentUpon>CDMainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_Config.resx">
+      <DependentUpon>Dlg_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLG_HACKER.resx">
+      <DependentUpon>Dlg_Hacker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_HistoryM.resx">
+      <DependentUpon>Dlg_HistoryM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_HistoryP.resx">
+      <DependentUpon>Dlg_HistoryP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLg_Processing.resx">
+      <DependentUpon>DLg_Processing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLG_Ptrn.resx">
+      <DependentUpon>DLG_Ptrn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_Recipe.resx">
+      <DependentUpon>Dlg_Recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_Tunning.resx">
+      <DependentUpon>Dlg_Tunning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="BaseRecpManageForm.resx">
+      <DependentUpon>BaseRecpManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cam1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cam2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera info1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dir top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrawFigure Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawfigure On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image save_ovr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joystick_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joystick_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\matchfind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureCir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureOVL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureRec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measureVer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package graphics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaintBrush_Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaintBrush_On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Posterious.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recipe load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recipe save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\simulation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trash empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom init.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom plus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="alien male.ico" />
+    <None Include="Resources\matrix.png" />
+    <None Include="Resources\alien male.png" />
+    <None Include="Resources\unify.png" />
+    <None Include="Resources\camera info2.png" />
+    <None Include="Resources\setting1.png" />
+    <None Include="Resources\delete3.png" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\image2.png" />
+    <None Include="Resources\setting.png" />
+    <None Include="Resources\process.png" />
+    <None Include="Resources\patching.png" />
+    <None Include="Resources\new_recp.png" />
+    <None Include="Resources\history %281%29.png" />
+    <None Include="Resources\history %282%29.png" />
+    <None Include="Resources\configs.png" />
+    <None Include="Resources\view_refresh.png" />
+    <None Include="Resources\replace.png" />
+    <None Include="Resources\open_folder.png" />
+    <None Include="Resources\edit_yo.png" />
+    <None Include="Resources\copy_1.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\Check.png" />
+    <None Include="Resources\apply3.png" />
+    <None Include="Resources\show_result.png" />
+    <None Include="Resources\apply_ll.png" />
+    <None Include="Resources\apply4.png" />
+    <None Include="Resources\apiply2.png" />
+    <None Include="Resources\apply.png" />
+    <None Include="Resources\openfile.png" />
+    <None Include="Resources\Posterious1.png" />
+    <None Include="Resources\quick restart.png" />
+    <None Include="Resources\button_ok.png" />
+    <None Include="Resources\button_cancel.png" />
+    <None Include="Resources\record_on.png" />
+    <None Include="Resources\record_off.png" />
+    <None Include="Resources\recp New.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

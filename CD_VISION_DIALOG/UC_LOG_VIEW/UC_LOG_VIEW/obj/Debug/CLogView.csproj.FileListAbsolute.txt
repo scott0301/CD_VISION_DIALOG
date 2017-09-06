@@ -1,0 +1,14 @@
+D:\Develope\CLogView\CLogView\bin\Debug\CLogView.dll
+D:\Develope\CLogView\CLogView\bin\Debug\CLogView.pdb
+D:\Develope\CLogView\CLogView\obj\Debug\CLogView.UC_LOG_VIEWER.resources
+D:\Develope\CLogView\CLogView\obj\Debug\CLogView.csproj.GenerateResource.Cache
+D:\Develope\CLogView\CLogView\obj\Debug\CLogView.dll
+D:\Develope\CLogView\CLogView\obj\Debug\CLogView.pdb
+D:\Develope\CLogView\Library\CLogView.dll
+D:\Develope\CLogView\Library\CLogView.pdb
+D:\Develope\UC_LogView\CLogView\obj\Debug\CLogView.csproj.GenerateResource.Cache
+D:\Develope\Library\UC_LOG_VIEW.dll
+D:\Develope\Library\UC_LOG_VIEW.pdb
+D:\Develope\UC_LogView\CLogView\obj\Debug\UC_LOG_VIEW.dll
+D:\Develope\UC_LogView\CLogView\obj\Debug\UC_LOG_VIEW.pdb
+D:\Develope\UC_LogView\CLogView\obj\Debug\UC_LOG_VIEW.UC_LOG_VIEWER.resources

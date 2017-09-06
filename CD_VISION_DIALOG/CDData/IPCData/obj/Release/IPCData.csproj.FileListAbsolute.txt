@@ -1,0 +1,5 @@
+E:\20170629\CDData\IPCData\bin\Release\IPCData.dll
+E:\20170629\CDData\IPCData\bin\Release\IPCData.pdb
+E:\20170629\CDData\IPCData\obj\Release\IPCData.csprojResolveAssemblyReference.cache
+E:\20170629\CDData\IPCData\obj\Release\IPCData.dll
+E:\20170629\CDData\IPCData\obj\Release\IPCData.pdb
