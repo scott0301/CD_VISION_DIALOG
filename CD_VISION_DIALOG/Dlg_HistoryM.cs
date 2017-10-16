@@ -52,8 +52,7 @@ namespace CD_VISION_DIALOG
         {
             this.m_fm = fm;
 
-            TXT_PATH_HISTORY_MEASURE.Text = m_fm.config.i15_PATH_HIST_MEASURE;
-
+ 
             BTN_UPDATE_HISTORY_Click(null, EventArgs.Empty);
 
             return true;
@@ -110,7 +109,7 @@ namespace CD_VISION_DIALOG
         {
             System.Threading.Thread thr = new System.Threading.Thread(delegate()
             {
-                string strTimeCode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
+                string strTimeCode = WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM();
 
                 string strPathImageView = strTimeCode + "_DCIM.BMP";
                 string strPathImageTemplate = strTimeCode + "_" + m_fm.param_ptrn.PTRN_FILE;
@@ -118,8 +117,8 @@ namespace CD_VISION_DIALOG
                 string strPathInspRes = strTimeCode + "_INSP.txt";
 
                 // Setup Daily Directory
-                string strPathDaily = Path.Combine(m_fm.config.i15_PATH_HIST_MEASURE, Computer.TIME_GetTImeCode_YY_MM_DD());
-                Support.MakeSureDirectoryExistance(strPathDaily);
+                string strPathDaily = Path.Combine(m_fm.config.i15_PATH_HIST_MEASURE, WrapperDateTime.GetTimeCode4Save_YYYY_MM_DD());
+                WrapperFile.EnsureFolderExsistance(strPathDaily);
 
                 // Backup Recp File
                 string strRecipeSource = Path.Combine(m_fm.config.i04_PATH_RECP_REAL, m_fm.RECP_FILE);

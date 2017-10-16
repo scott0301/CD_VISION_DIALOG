@@ -37,3 +37,12 @@ C:\Users\tester\Desktop\170728 sIMULATOR\CD_VISION_DIALOG - MERGE - SEND\CD_VISI
 C:\Users\tester\Desktop\170728 sIMULATOR\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_View.dll
 C:\Users\tester\Desktop\170728 sIMULATOR\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_View.pdb
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_VIEW.csprojResolveAssemblyReference.cache
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\Lib\UC_CD_View.dll
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\Lib\UC_CD_View.pdb
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_VIEW.csprojResolveAssemblyReference.cache
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\CD_View.FormPopup.resources
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_VIEW.Properties.Resources.resources
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\CD_View.UC_CD_VIEWER.resources
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_VIEW.csproj.GenerateResource.Cache
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_View.dll
+C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\UC_CD_VIEW\UC_CD_VIEW\obj\Debug\UC_CD_View.pdb

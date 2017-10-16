@@ -199,7 +199,7 @@ namespace CD_Measure
                     // kill tail
                     arrValueList_X2[X2_MaxIndex - 1] = 0;
                 }
-                else if (X2_MaxIndex < arrValueList_X1.Length && arrValueList_X1[X2_MaxIndex + 1] == X2_fMax)
+                else if (X2_MaxIndex !=0 && X2_MaxIndex < arrValueList_X1.Length - 1 && arrValueList_X1[X2_MaxIndex + 1] == X2_fMax)
                 {
                     lineTail = listLine[X2_MaxIndex + 1];
                     // kill tail
@@ -249,7 +249,7 @@ namespace CD_Measure
                     // kill tail
                     arrValueList_Y2[Y2_MinIndex - 1] = int.MaxValue;
                 }
-                else if (Y2_MinIndex < arrValueList_Y1.Length && arrValueList_Y1[Y2_MinIndex + 1] == Y2_fMin)
+                else if (Y2_MinIndex != 0 && Y2_MinIndex < arrValueList_Y1.Length-1 && arrValueList_Y1[Y2_MinIndex + 1] == Y2_fMin)
                 {
                     lineTail = listLine[Y2_MinIndex + 1];
                     // kill tail

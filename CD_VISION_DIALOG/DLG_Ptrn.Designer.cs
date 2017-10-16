@@ -650,6 +650,8 @@
             // 
             this.uc_view_ptrn.AllowDrop = true;
             this.uc_view_ptrn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_ptrn.BOOL_DRAW_FOCUS_ROI = true;
+            this.uc_view_ptrn.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_ptrn.BOOL_TEACHING_ACTIVATION = false;
             this.uc_view_ptrn.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uc_view_ptrn.ForeColor = System.Drawing.Color.Lime;
@@ -666,7 +668,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(1307, 774);
+            this.ClientSize = new System.Drawing.Size(1305, 770);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);

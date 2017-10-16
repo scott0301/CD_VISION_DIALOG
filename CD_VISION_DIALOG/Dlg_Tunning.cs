@@ -100,9 +100,9 @@ namespace CD_VISION_DIALOG
             CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked = true;
             CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(null, EventArgs.Empty);
 
-            for (int i = 0; i < this.fm.COUNT_PAIR_DIA; i++)
+            for (int i = 0; i < this.fm.COUNT_PAIR_RCT; i++)
             {
-                CMeasurePairDia single = this.fm.list_pair_Dia.ElementAt(i);
+                CMeasurePairRct single = this.fm.list_pair_Rct.ElementAt(i);
 
                 RectangleF rcFST = single.rc_FST.ToRectangleF();
                 RectangleF rcSCD = single.rc_SCD.ToRectangleF();
@@ -252,7 +252,7 @@ namespace CD_VISION_DIALOG
             TXT_CIR_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
 
             // 03 Show Raw Data
-            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_03_BOOL_SHOW_RAW_DATA;
+            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_04_BOOL_SHOW_RAW_DATA;
 
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
@@ -290,15 +290,15 @@ namespace CD_VISION_DIALOG
             double.TryParse(TXT_CIR_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
 
             // show raw data
-            single.param_comm_03_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
+            single.param_comm_04_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
 
             return single;
         }
-        private CMeasurePairDia _FromUI_GetParameters_Rect()
+        private CMeasurePairRct _FromUI_GetParameters_Rect()
         {
             double fValue = 0; int nValue = 0;
 
-            CMeasurePairDia single = new CMeasurePairDia();
+            CMeasurePairRct single = new CMeasurePairRct();
 
             // algorithm 
             single.param_00_algorithm = _FromUI_GetMeasureAlgorithm(TARGEt_FIGURE_TYPE_REC);
@@ -322,8 +322,8 @@ namespace CD_VISION_DIALOG
             // compensation 
             double.TryParse(TXT_RECT_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
             double.TryParse(TXT_RECT_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
-
-            single.param_comm_03_BOOL_SHOW_RAW_DATA = CHK_RECT_SHOW_RAW_DATA.Checked;
+            
+            single.param_comm_04_BOOL_SHOW_RAW_DATA = CHK_RECT_SHOW_RAW_DATA.Checked;
  
 
 
@@ -413,21 +413,22 @@ namespace CD_VISION_DIALOG
                     arrCircle[element].param_06_EdgePos/*******************/= single.param_06_EdgePos;
                     arrCircle[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
                     arrCircle[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
-                    arrCircle[element].param_comm_03_BOOL_SHOW_RAW_DATA/***/= single.param_comm_03_BOOL_SHOW_RAW_DATA;
+                    arrCircle[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
+                    arrCircle[element].param_comm_04_BOOL_SHOW_RAW_DATA/***/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
                 }
 
                 this.fm.list_pair_Cir = arrCircle.ToList();
             }
             else if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_RECT)
             {
-                CMeasurePairDia[] arrRect = fm.ToArray_PairDia();
+                CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
 
                 string strTarget = TXT_RECT_SELECTED_FIGURE.Text;
 
                 int element = 0;
                 Int32.TryParse(TXT_RECT_SELECTED_INDEX.Text, out element);
 
-                CMeasurePairDia single = _FromUI_GetParameters_Rect();
+                CMeasurePairRct single = _FromUI_GetParameters_Rect();
 
                 if (arrRect[element].NICKNAME == strTarget)
                 {
@@ -441,9 +442,10 @@ namespace CD_VISION_DIALOG
                     arrRect[element].param_07_edge_position_scd/*********/= single.param_07_edge_position_scd;
                     arrRect[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
                     arrRect[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
-                    arrRect[element].param_comm_03_BOOL_SHOW_RAW_DATA/***/= single.param_comm_03_BOOL_SHOW_RAW_DATA;
+                    arrRect[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
+                    arrRect[element].param_comm_04_BOOL_SHOW_RAW_DATA /**/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
                 }
-                this.fm.list_pair_Dia = arrRect.ToList();
+                this.fm.list_pair_Rct = arrRect.ToList();
             }
 
             MessageBox.Show("Update Finished", "JOB FINISHED", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -478,7 +480,8 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_CIR_EDGE_POSITION.Checked/******/) { arrCircle[i].param_06_EdgePos /*******************/= single.param_06_EdgePos; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_03_BOOL_SHOW_RAW_DATA /***/= single.param_comm_03_BOOL_SHOW_RAW_DATA; }
+                    //
+                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_04_BOOL_SHOW_RAW_DATA /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA; }
                     
                 }
 
@@ -490,9 +493,9 @@ namespace CD_VISION_DIALOG
             }
             else if (TAB_TUNNING_TARGET.SelectedIndex == TYPE_REC)
             {
-                CMeasurePairDia single = _FromUI_GetParameters_Rect();
+                CMeasurePairRct single = _FromUI_GetParameters_Rect();
 
-                CMeasurePairDia[] arrRect = fm.ToArray_PairDia();
+                CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
 
                 for (int i = 0; i < arrRect.Length; i++)
                 {
@@ -506,10 +509,11 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_07_edge_position_scd /*********/= single.param_07_edge_position_scd; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_03_BOOL_SHOW_RAW_DATA /***/= single.param_comm_03_BOOL_SHOW_RAW_DATA; }
+                    //
+                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_04_BOOL_SHOW_RAW_DATA /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA; }
                 }
 
-                this.fm.list_pair_Dia = arrRect.ToList();
+                this.fm.list_pair_Rct = arrRect.ToList();
 
                 CHK_SAVE_RECT_ALGORITHM.Checked = CHK_SAVE_RECT_COMPENSATION.Checked = CHK_SAVE_RECT_EDGE_POSITION.Checked = CHK_SAVE_RECT_SHOW_RAW_DATA.Checked = CHK_SAVE_RECT0__EDGE_DETECTION.Checked = false;
             }
@@ -531,7 +535,7 @@ namespace CD_VISION_DIALOG
             int nIndex = uc_thumb_nail_rect.FocusedItem.Index;
             Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
 
-            CMeasurePairDia single = fm.ElementAt_PairDia(nIndex);
+            CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
             // 01 Target Info
             TXT_RECT_SELECTED_INDEX.Text = nIndex.ToString("N0");
@@ -544,9 +548,9 @@ namespace CD_VISION_DIALOG
             if (single.param_00_algorithm == IFX_ALGORITHM.DIR_IN) { RDO_RECT_ALGO_DIR_IN.Checked = true; }
 
             // 01 Rectangle Type { HOR | VER | DIA }
-            /***/if (single.RC_TYPE == IFX_FIGURE.PAIR_HOR) RDO_RECT_TYPE_HOR.Checked = true;
-            else if (single.RC_TYPE == IFX_FIGURE.PAIR_VER) RDO_RECT_TYPE_VER.Checked = true;
-            else if (single.RC_TYPE == IFX_FIGURE.PAIR_DIA) RDO_RECT_TYPE_DIA.Checked = true;
+            /***/if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR) RDO_RECT_TYPE_HOR.Checked = true;
+            else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER) RDO_RECT_TYPE_VER.Checked = true;
+            else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA) RDO_RECT_TYPE_DIA.Checked = true;
 
             CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked = single.param_01_bool_Use_AutoDetection;
             CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(null, EventArgs.Empty);
@@ -568,7 +572,7 @@ namespace CD_VISION_DIALOG
            TXT_RECT_EDGE_POSITION_SCD.Text = single.param_07_edge_position_scd.ToString("F2");
 
             // 05 show raw data 
-            CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_03_BOOL_SHOW_RAW_DATA;
+            CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_04_BOOL_SHOW_RAW_DATA;
             
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
@@ -714,7 +718,7 @@ namespace CD_VISION_DIALOG
                 int nIndex = uc_thumb_nail_rect.FocusedItem.Index;
                 Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
 
-                CMeasurePairDia single = fm.ElementAt_PairDia(nIndex);
+                CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
                 TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_02_peakTargetIndex_fst.ToString("N0");
                 CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_02_peakTargetIndex_fst;
             }
@@ -729,7 +733,7 @@ namespace CD_VISION_DIALOG
                 int nIndex = uc_thumb_nail_rect.FocusedItem.Index;
                 Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
 
-                CMeasurePairDia single = fm.ElementAt_PairDia(nIndex);
+                CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
                 TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_03_peakTargetIndex_scd.ToString("N0");
                 CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_03_peakTargetIndex_scd;

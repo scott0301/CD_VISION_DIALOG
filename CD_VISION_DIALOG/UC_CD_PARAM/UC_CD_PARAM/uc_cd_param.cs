@@ -25,9 +25,7 @@ namespace CD_Paramter
 
         }
 
-        public void SetParam_RC_PAIR_HOR(PROPERTY_PairHor single){property.SelectedObject = single;}
-        public void SetParam_RC_PAIR_VER(PROPERTY_PairVer single){property.SelectedObject = single;}
-        public void SetParam_RC_PAIR_DIG(PROPERTY_PairDia single){property.SelectedObject = single;}
+        public void SetParam_RC_PAIR_DIG(PROPERTY_PairRct single){property.SelectedObject = single;}
         public void SetParam_Circle/***/(PROPERTY_PairCir single){property.SelectedObject = single;}
         public void SetParam_Overlay/**/(PROPERTY_PairOvl single) { property.SelectedObject = single; }
 

@@ -56,32 +56,7 @@ namespace CD_Measure
             return array;
         }
 
-        #region TIME CODE
-        public static string TIME_GetTImeCode_YY_MM_DD()
-        {
-            DateTime curr = DateTime.Now;
-            string strTime = string.Format("[{0:0000}-{1:00}-{2:00}]", curr.Year, curr.Month, curr.Day);
-            return strTime;
-        }
-        public static string TIME_GetTimeCode_MD_HMS_MS()
-        {
-            DateTime curr = DateTime.Now;
-            string strTime = string.Format("[{0:00}{1:00}_{2:00}:{3:00}:{4:00}_{5:00}]", curr.Month, curr.Day, curr.Hour, curr.Minute, curr.Second, curr.Millisecond);
-            return strTime;
-        }
-        public static string GetTimeCode4Save_MM_DD_HH_MM_SS()
-        {
-            DateTime curr = DateTime.Now;
-            string strTime = string.Format("{0:00}_{1:00}_{2:00}{3:00}{4:00}", curr.Month, curr.Day, curr.Hour, curr.Minute, curr.Second);
-            return strTime;
-        }
-        public static string GetTimeCode4Save_HH_MM_SS_MMM()
-        {
-            DateTime curr = DateTime.Now;
-            string strTime = string.Format("{0:00}_{1:00}_{2:00}_{3:000}", curr.Hour, curr.Minute, curr.Second, curr.Millisecond);
-            return strTime;
-        }
-        #endregion
+     
 
         #region IMAGE IO
         public static void /*****/SaveImage(byte[] rawImage, int imageW, int imageH, string strPath)
@@ -398,8 +373,7 @@ namespace CD_Measure
             byte [] rawOut = listRot.ToArray();
             return rawOut;
         }
-
-        #endregion
+       #endregion
 
 
         public static double[] GetAnglurarSliceArray(byte[] rawImage, int imageW, int imageH, int nRadiLength, int nRadiStart, PointF ptCenter, bool bReverse)
@@ -439,6 +413,10 @@ namespace CD_Measure
 
                     double fInterplated = Computer.GetInterPolatedValue(x, y, x1, x2, y1, y2, q11, q12, q21, q22);
 
+                    if (fInterplated == 0)
+                    {
+                       fInterplated = rawImage[(int)y * imageW + (int)x];
+                    }
                     buffLine[nIndex++] = fInterplated;
                 }
 
@@ -475,7 +453,69 @@ namespace CD_Measure
 
             return pvalue;
         }
-        
+
+        // Get the Filtered Points according to the damage tolerance 170921
+        public static List<PointF> GetFilterdedCircleEdgesByDamageTolderance(byte[] raImage, int imageW, int imageH, RectangleF rc, List<PointF> listEdges, double fDMG_Tol)
+        {
+            PointF ptCenter = CRect.GetCenter(rc);
+            byte[] rawPoloar = Computer.HC_CropImage_Interpolated_Polar(raImage, imageW, (int)imageH, rc, ptCenter);
+
+            int[] arrProj = Computer.GetAngularProjection_Horizontal(rawPoloar, 360, rawPoloar.Length / 360);
+
+            int nMinValue = arrProj.Min();
+            int nMaxValue = arrProj.Max();
+
+            int nThreshold = nMinValue + Convert.ToInt32((nMaxValue - nMinValue) * fDMG_Tol);
+
+            List<PointF> tempFiltered = new List<PointF>();
+
+            for (int nAngle = 0; nAngle < 360; nAngle++)
+            {
+                PointF ptAngle = listEdges.ElementAt(nAngle);
+
+                if (arrProj[nAngle] > nThreshold && CPoint.IsValid(ptAngle))
+                {
+                    tempFiltered.Add(ptAngle);
+                }
+            }
+            return tempFiltered;
+        }
+
+        // get the filtered points according to the damage tolerance iteratively. Find the minimum variation Tolerance Value 170921
+        public static List<PointF> GetIterativeCircleDiaByDmgTolerance(byte[] rawImage, int imageW, int imageH, RectangleF rc, List<PointF> listEdges)
+        {
+            double fRadius = 0;
+            PointF ptCenter = new PointF();
+
+            double[] arrDmgTol = { 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 };
+            double[] arrRadi = new double[9];
+            double[] arrDist = new double[9];
+
+            for (int nLoop_DmgTol = 0; nLoop_DmgTol < arrDmgTol.Length; nLoop_DmgTol++)
+            {
+                List<PointF> list = GetFilterdedCircleEdgesByDamageTolderance(rawImage, imageW, imageH, rc, listEdges, arrDmgTol[nLoop_DmgTol]);
+
+                Computer.HC_FIT_Circle(list, ref ptCenter, ref fRadius);
+
+                arrRadi[nLoop_DmgTol] = fRadius * 2;
+            }
+
+            arrDist[0] = double.MaxValue;
+            for (int i = 1; i < arrRadi.Length; i++)
+            {
+                arrDist[i] = Math.Abs(arrRadi[i] - arrRadi[i-1]);
+            }
+            
+            double fminVal = arrDist.Min();
+            int nMinIndex = Array.IndexOf(arrDist, fminVal);
+
+            double fTol = nMinIndex / 10.0;
+
+            List<PointF> listFinal = GetFilterdedCircleEdgesByDamageTolderance(rawImage, imageW, imageH, rc, listEdges, fTol);
+
+            return listFinal;
+        }
+
         // 블럭 average 170511 테스트용
         public static double GetMeanValue(byte[] rawImage, int imageW, int imageH, int x, int y, int nKernelSize)
         {
@@ -1101,11 +1141,37 @@ namespace CD_Measure
 
             double[] fKernel = null;
 
+            if (nKernelSize == 5)
+            {
+                if (nSign == 1)
+                {
+                    fKernel = new double[] 
+                    { +0,+0,+01,+0,+0,
+                      +0,+1,+02,+1,+0,
+                      +1,+2,-16,+2,+1,
+                      +0,+1,+02,+1,+0,
+                      +0,+0,+01,+0,+0
+                    };
+                }
+                else if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { -0,-0,-01,-0,-0,
+                      -0,-1,-02,-1,-0,
+                      -1,-2,+16,-2,-1,
+                      -0,-1,-02,-1,-0,
+                      -0,-0,-01,-0,-0
+                    };
 
-            if (nSign == -1)
+                }
+            }
+            else if (nKernelSize == 9)
             {
 
-                fKernel = new double[]{
+                if (nSign == -1)
+                {
+
+                    fKernel = new double[]{
                     -0, -0, -3,  -2,  -2,  -2, -3, -0, -0,
                     -0, -2, -3,  -5,  -5,  -5, -3, -2, -0,
                     -3, -3, -5,  -3,  -0,  -3, -5, -3, -3,
@@ -1115,10 +1181,10 @@ namespace CD_Measure
                     -3, -3, -5,  -3,  -0,  -3, -5, -3, -3,
                     -0, -2, -3,  -5,  -5,  -5, -3, -2, -0,
                     -0, -0, -3,  -2,  -2,  -2, -3, -0, -0};
-            }
-            else
-            {
-                fKernel = new double[]{
+                }
+                else
+                {
+                    fKernel = new double[]{
                     0, 0, 3,  2,  2,  2, 3, 0, 0,
                     0, 2, 3,  5,  5,  5, 3, 2, 0,
                     3, 3, 5,  3,  0,  3, 5, 3, 3,
@@ -1128,8 +1194,8 @@ namespace CD_Measure
                     3, 3, 5,  3,  0,  3, 5, 3, 3,
                     0, 2, 3,  5,  5,  5, 3, 2, 0,
                     0, 0, 3,  2,  2,  2, 3, 0, 0};
+                }
             }
-
 
             return fKernel;
         }
@@ -1352,8 +1418,10 @@ namespace CD_Measure
                     Array.Reverse(buffPoints);
                     fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
                     fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-                    ptIN = new PointF(x, ey - (buffPoints.Length - (float)fSubPosIN));
-                    ptEX = new PointF(x, ey - (buffPoints.Length - (float)fSubPosEX));
+                    ptIN = new PointF(x, ey - ( (float)fSubPosIN));
+                    ptEX = new PointF(x, ey - ( (float)fSubPosEX));
+                    //ptIN = new PointF(x, ey - (buffPoints.Length - (float)fSubPosIN));
+                    //ptEX = new PointF(x, ey - (buffPoints.Length - (float)fSubPosEX));
 
                 }
 
@@ -1822,9 +1890,11 @@ namespace CD_Measure
             bool bUSE_OLD = true;
             double fSubPos = 0;
 
+            if (arrPoints.Length == 0) return fSubPos;
+
             if( bUSE_OLD == true)
             {
-                #region oldversion
+              #region oldversion
                 double[] fKernel = HC_FILTER_GetLogKernel(5, 1.6, nSign);
 
                 double[] fImage = new double[arrPoints.Length];
@@ -2380,6 +2450,8 @@ namespace CD_Measure
 
         public static double HC_EDGE_Get2ndDerivLine_PosMax(double[] line)
         {
+            if (line.Length <= 2) return 0;
+
             double[] buff_1st = new double[line.Length - 1];
             double[] buff_2nd = new double[line.Length - 2];
 
@@ -2395,6 +2467,8 @@ namespace CD_Measure
         }
         public static double HC_EDGE_Get2ndDerivLine_PosMin(double[] line)
         {
+            if (line.Length <= 2) return 0;
+
             double[] buff_1st = new double[line.Length - 1];
             double[] buff_2nd = new double[line.Length - 2];
 
@@ -2508,6 +2582,7 @@ namespace CD_Measure
             List<PointF> list = new List<PointF>();
 
             if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list; // 170523 rectangle out of range exception
+            if (buffLine.Length == 0) return list; // exception for the region detection failed 170907
 
             for (int x = sx; x < ex; x++)
             {
@@ -4062,6 +4137,16 @@ namespace CD_Measure
             rawImage = HC_CONV_Double2Byte(fImage);
 
             return rawImage;
+        }
+        public static byte[] HC_FILTER_ADF_Window(byte[] rawImage, int imageW, int imageH, RectangleF rc, double fKappa, double iter, double fDelta)
+        {
+            int cropW = (int)rc.Width;
+            int cropH = (int)rc.Height;
+            byte[] cropImage = HC_CropImage(rawImage, imageW, imageH, rc);
+
+            byte[] adfResult = HC_FILTER_ADF(cropImage, cropW, cropH, fKappa, iter, fDelta);
+
+            return HC_CropImage_Overlap(rawImage, imageW, imageH, adfResult, cropW, cropH, rc);
         }
         private static double[] CalcDifussion(double[] rawImage, double[] fImage, double fkappa)
         {

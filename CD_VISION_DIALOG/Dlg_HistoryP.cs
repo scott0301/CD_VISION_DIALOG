@@ -34,7 +34,6 @@ namespace CD_VISION_DIALOG
         public bool SetParam(PARAM_CONFIG config)
         {
             this.config = config;
-            TXT_PATH_HISTORY_MATCHING.Text = this.config.i11_PATH_IMG_PTRN;
 
             return true;
         }
@@ -182,6 +181,11 @@ namespace CD_VISION_DIALOG
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            WrapperUnion.WrapperLV.SortData(LV_HISTORY, e.Column);
         }
 
     }

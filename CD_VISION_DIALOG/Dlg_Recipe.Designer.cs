@@ -491,7 +491,7 @@
             this.panel1.Controls.Add(this.groupBox6);
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(479, 558);
+            this.panel1.Size = new System.Drawing.Size(472, 558);
             this.panel1.TabIndex = 49;
             // 
             // label16
@@ -566,7 +566,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(499, 580);
+            this.ClientSize = new System.Drawing.Size(484, 572);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);

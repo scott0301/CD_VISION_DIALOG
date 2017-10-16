@@ -35,8 +35,6 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.TXT_PATH_HISTORY_MATCHING = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -52,6 +50,8 @@
             // 
             this.uc_view_history.AllowDrop = true;
             this.uc_view_history.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_history.BOOL_DRAW_FOCUS_ROI = true;
+            this.uc_view_history.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_history.BOOL_TEACHING_ACTIVATION = false;
             this.uc_view_history.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uc_view_history.ForeColor = System.Drawing.Color.Lime;
@@ -80,6 +80,7 @@
             this.LV_HISTORY.TabIndex = 58;
             this.LV_HISTORY.UseCompatibleStateImageBehavior = false;
             this.LV_HISTORY.View = System.Windows.Forms.View.Details;
+            this.LV_HISTORY.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.LV_HISTORY_ColumnClick);
             this.LV_HISTORY.SelectedIndexChanged += new System.EventHandler(this.LV_HISTORY_SelectedIndexChanged);
             // 
             // columnHeader3
@@ -99,8 +100,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.TXT_PATH_HISTORY_MATCHING);
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label17);
@@ -116,25 +115,6 @@
             this.panel1.Size = new System.Drawing.Size(1199, 739);
             this.panel1.TabIndex = 62;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // TXT_PATH_HISTORY_MATCHING
-            // 
-            this.TXT_PATH_HISTORY_MATCHING.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_PATH_HISTORY_MATCHING.ForeColor = System.Drawing.Color.White;
-            this.TXT_PATH_HISTORY_MATCHING.Location = new System.Drawing.Point(684, 598);
-            this.TXT_PATH_HISTORY_MATCHING.Name = "TXT_PATH_HISTORY_MATCHING";
-            this.TXT_PATH_HISTORY_MATCHING.Size = new System.Drawing.Size(506, 22);
-            this.TXT_PATH_HISTORY_MATCHING.TabIndex = 80;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(626, 601);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 14);
-            this.label10.TabIndex = 79;
-            this.label10.Text = "PATH :";
             // 
             // label3
             // 
@@ -223,7 +203,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(1218, 765);
+            this.ClientSize = new System.Drawing.Size(1212, 758);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Dlg_HistoryP";
@@ -251,7 +231,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox TXT_PATH_HISTORY_MATCHING;
-        private System.Windows.Forms.Label label10;
     }
 }

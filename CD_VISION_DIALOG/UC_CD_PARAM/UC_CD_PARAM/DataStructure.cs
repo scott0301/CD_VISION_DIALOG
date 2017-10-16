@@ -124,222 +124,19 @@ namespace CD_Paramter
             RectangleF rect = new RectangleF(this.X, this.Y, this.Width, this.Height);
             return rect;
         }
+        public parseRect ToParseRect()
+        {
+            RectangleF rc = ToRectangleF();
+            parseRect prc = new parseRect(rc.X, rc.Y, rc.Width, rc.Height);
+            return prc;
+        }
         
     }
 
-    public class PROPERTY_PairHor
+ 
+    public class PROPERTY_PairRct
     {
-        private CustomRectangleD rcTop = new CustomRectangleD();
-        private CustomRectangleD rcBtm = new CustomRectangleD();
-
-        private string measure_TOP;
-        private string measure_BTM;
-
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
-        public string NICKNAME { get; set; }
-
-        //[CategoryAttribute("03 TOP Region"), DescriptionAttribute("Region Croodinates"), ReadOnly(true)]
-        private CustomRectangleD RC_TOP { get { return rcTop; } }
-        //[CategoryAttribute("04 BTN region"), DescriptionAttribute("Region Croodinates"), ReadOnly(true)]
-        private CustomRectangleD RC_BTM { get { return rcBtm; } }
-
-        [CategoryAttribute("05 Measure Method - TOP"), DescriptionAttribute("Measure Method For TOP Region")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_TOP
-        {
-            get
-            {
-                string str = "";
-
-                if (measure_TOP != null)
-                {
-                    str = measure_TOP;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measure_TOP = value; }
-
-        }
-
-        [CategoryAttribute("06 Measure Method - BTM"), DescriptionAttribute("Measure Method For BTM Region")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_BTM
-        {
-            get
-            {
-                string str = "";
-
-                if (measure_BTM != null)
-                {
-                    str = measure_BTM;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measure_BTM = value; }
-
-        }
-
-        [CategoryAttribute("07 Searching Direction "), DescriptionAttribute("Only For LoG Based Approach\nSets of Parameters : -1 or 1")]
-        public double DIR_TOP { get; set; }
-
-        [CategoryAttribute("08 Searching Direction"), DescriptionAttribute("Only For LoG Based Approach\nSets of Parameters : -1 or 1")]
-        public double DIR_BTM { get; set; }
-
-        [CategoryAttribute("09 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get; set; }
-
-        public CMeasurePairHor ToFigure()
-        {
-            CMeasurePairHor single = new CMeasurePairHor();
-
-            single.NICKNAME = NICKNAME;
-
-            single.measure_TOP = IFX_ALGORITHM.ToNumericType(measure_TOP);
-            single.measure_BTM = IFX_ALGORITHM.ToNumericType(measure_BTM);
-
-            single.rc_TOP = RC_TOP.ToRectangleF();
-            single.rc_BTM = RC_BTM.ToRectangleF();
-
-            single.DIR_TOP = Convert.ToInt32(DIR_TOP);
-            single.DIR_BTM = Convert.ToInt32(DIR_BTM);
-            single.param_comm_03_BOOL_SHOW_RAW_DATA = SHOW_RAW_DATA;
-
-            return single;
-        }
-        public void FromFigure(CMeasurePairHor single)
-        {
-            this.NICKNAME = single.NICKNAME;
-            this.RC_TOP.SetValue(single.rc_TOP);
-            this.RC_BTM.SetValue(single.rc_BTM);
-            this.measure_TOP = IFX_ALGORITHM.ToStringType(single.measure_TOP);
-            this.measure_BTM = IFX_ALGORITHM.ToStringType(single.measure_BTM);
-            this.DIR_TOP = single.DIR_TOP;
-            this.DIR_BTM = single.DIR_BTM;
-            this.SHOW_RAW_DATA = single.param_comm_03_BOOL_SHOW_RAW_DATA;
-        }
-    }
-    public class PROPERTY_PairVer
-    {
-        private CustomRectangleD rc_LFT = new CustomRectangleD();
-        private CustomRectangleD rc_RHT = new CustomRectangleD();
-
-        private string measure_LFT;
-        private string measure_RHT;
-
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
-        public string NICKNAME { get; set; }
-
-        //[CategoryAttribute("03 LFT Region"), DescriptionAttribute("Region Croodinates"), ReadOnly(true)]
-        private CustomRectangleD RC_LFT{get { return rc_LFT; }}
-
-        //[CategoryAttribute("04 RHT Region"), DescriptionAttribute("Region Croodinates"), ReadOnly(true)]
-        private CustomRectangleD RC_RHT{get { return rc_RHT; }}
-
-        [CategoryAttribute("05 Measure Method - LFT"), DescriptionAttribute("Measure Method For LFT Region")]
-
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-
-        public string MEASURE_LFT
-        {
-            get
-            {
-                string str = "";
-
-                if (measure_LFT != null)
-                {
-                    str = measure_LFT;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measure_LFT = value; }
-
-        }
-
-        [CategoryAttribute("06 Measure Method - RHT"), DescriptionAttribute("Measure Method For RHT Region")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-
-        public string MEASURE_RHT
-        {
-            get
-            {
-                string str = "";
-
-                if (measure_RHT != null)
-                {
-                    str = measure_RHT;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measure_RHT = value; }
-
-        }
-        [CategoryAttribute("07 Searching Direction"), DescriptionAttribute("Only For LoG Based Approach\nSets of Parameters : -1 or 1")]
-        public double DIR_LFT { get; set; }
-
-        [CategoryAttribute("08 Searching Direction"), DescriptionAttribute("Only For LoG Based Approach\nSets of Parameters : -1 or 1")]
-        public double DIR_RHT { get; set; }
-
-        [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get; set; }
-
-        public CMeasurePairVer ToFigure()
-        {
-            CMeasurePairVer single = new CMeasurePairVer();
-
-            single.NICKNAME = NICKNAME;
-
-            single.measure_LFT = IFX_ALGORITHM.ToNumericType(measure_LFT);
-            single.measure_RHT = IFX_ALGORITHM.ToNumericType(measure_RHT);
-
-            single.rc_LFT = RC_LFT.ToRectangleF();
-            single.rc_RHT = RC_RHT.ToRectangleF();
-
-            single.DIR_LFT = Convert.ToInt32(DIR_LFT);
-            single.DIR_RHT = Convert.ToInt32(DIR_RHT);
-            single.param_comm_03_BOOL_SHOW_RAW_DATA = this.SHOW_RAW_DATA;
-
-            return single;
-        }
-        public void FromFigure(CMeasurePairVer single)
-        {
-            this.NICKNAME = single.NICKNAME;
-            this.rc_LFT.SetValue(single.rc_LFT);
-            this.rc_RHT.SetValue(single.rc_RHT);
-            this.measure_LFT = IFX_ALGORITHM.ToStringType(single.measure_LFT);
-            this.measure_RHT = IFX_ALGORITHM.ToStringType(single.measure_RHT);
-            this.DIR_LFT = single.DIR_LFT;
-            this.DIR_RHT = single.DIR_RHT;
-            this.SHOW_RAW_DATA = single.param_comm_03_BOOL_SHOW_RAW_DATA;
-        }
-    }
-
-    public class PROPERTY_PairDia
-    {
-        public PROPERTY_PairDia()
+        public PROPERTY_PairRct()
         {
             param_00_algorithm = string.Empty;
             param_01_bool_use_auto_peak_detection = false;
@@ -352,12 +149,15 @@ namespace CD_Paramter
 
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
-            param_comm_03_BOOL_SHOW_RAW_DATA = false;
+            param_comm_03_spc_enhance = 0;
+            param_comm_04_BOOL_SHOW_RAW_DATA = false;
+            
 
         }
         private double param_comm_01_compen_A;
         private double param_comm_02_compen_B;
-        private bool param_comm_03_BOOL_SHOW_RAW_DATA;
+        private int    param_comm_03_spc_enhance;
+        private bool param_comm_04_BOOL_SHOW_RAW_DATA;
 
         private string param_00_algorithm;
         private bool   param_01_bool_use_auto_peak_detection;
@@ -446,19 +246,19 @@ namespace CD_Paramter
 
         }
 
-        [CategoryAttribute("04 Edge Detection Type"), DescriptionAttribute("true | false")]
+        [CategoryAttribute("04 Auto Peak detection"), DescriptionAttribute("true | false")]
         public bool USE_AUTO_PEAK_DETECTION{ get{return param_01_bool_use_auto_peak_detection;} set{param_01_bool_use_auto_peak_detection = value;} }
 
-        [CategoryAttribute("05 Peak Target Index For FST "), DescriptionAttribute("In case of EDGE_DETECTION_TYPE > 0 & has to be  <= Peak Candidate ")]
+        [CategoryAttribute("05 Peak Target Index For FST "), DescriptionAttribute("If Use Auto Peak Detection,   0 ~  Peak Candidate count")]
         public double PEAK_TARGET_IDX_FST{ get { return param_02_peak_target_index_fst; } set { param_02_peak_target_index_fst= value; } }
 
-        [CategoryAttribute("06 Peak Target Index For SCD"), DescriptionAttribute("In case of EDGE_DETECTION_TYPE > 0 & has to be  <= Peak Candidate ")]
+        [CategoryAttribute("06 Peak Target Index For SCD"), DescriptionAttribute("If Use Auto Peak Detection 0 ~ Peak Candidate ")]
         public double PEAK_TARGET_IDX_SCD { get { return param_03_peak_target_index_scd; } set { param_03_peak_target_index_scd = value; } }
 
-        [CategoryAttribute("07 Peak Candidate Count"), DescriptionAttribute("In case of EDGE_DETECTION_TYPE > 0 & 2 ~ ∞")]
+        [CategoryAttribute("07 Peak Candidate Count"), DescriptionAttribute("2 ~ ∞")]
         public double PEAK_CANDIDATE { get { return param_04_peak_candidate; } set { param_04_peak_candidate = value; } }
 
-        [CategoryAttribute("08 Window Size"), DescriptionAttribute("In case of EDGE_DETECTION_TYPE > 0 & 2 ~ ∞")]
+        [CategoryAttribute("08 Window Size"), DescriptionAttribute("0 & 2 ~ ∞")]
         public double WINDOW_SIZE { get { return param_05_window_size; } set { param_05_window_size= value; } }
 
 
@@ -472,16 +272,19 @@ namespace CD_Paramter
         [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get{ return param_comm_02_compen_B;} set{param_comm_02_compen_B=value;} }
 
-        [CategoryAttribute("13 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get { return param_comm_03_BOOL_SHOW_RAW_DATA; } set { param_comm_03_BOOL_SHOW_RAW_DATA = value; } }
+        [CategoryAttribute("13 SPC Enhance"), DescriptionAttribute("DEFAULT(0) : 1, 2 ..")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        public CMeasurePairDia ToFigure()
+        [CategoryAttribute("14 Show Raw Data"), DescriptionAttribute("True or False")]
+        public bool SHOW_RAW_DATA { get { return param_comm_04_BOOL_SHOW_RAW_DATA; } set { param_comm_04_BOOL_SHOW_RAW_DATA = value; } }
+
+        public CMeasurePairRct ToFigure()
         {
-            CMeasurePairDia single = new CMeasurePairDia();
+            CMeasurePairRct single = new CMeasurePairRct();
 
             single.NICKNAME = NICKNAME;
 
-            single.RC_TYPE = IFX_FIGURE.ToNumericType(RECT_TYPE);
+            single.RC_TYPE = IFX_RECT_TYPE.ToNumericType(RECT_TYPE);
 
             single.rc_FST = CustomPointD.ToParseRect(pt_FST_LT, pt_FST_RT, pt_FST_LB, pt_FST_RB);
             single.rc_SCD = CustomPointD.ToParseRect(pt_SCD_LT, pt_SCD_RT, PT_SCD_LB, pt_SCD_RB);
@@ -500,10 +303,11 @@ namespace CD_Paramter
 
             single.param_comm_01_compen_A/************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B/************/= this.param_comm_02_compen_B;
-            single.param_comm_03_BOOL_SHOW_RAW_DATA/**/= this.SHOW_RAW_DATA;
+            single.param_comm_03_spc_enhance /***********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_BOOL_SHOW_RAW_DATA/**/= this.param_comm_04_BOOL_SHOW_RAW_DATA;
             return single;
         }
-        public void FromFigure(CMeasurePairDia single)
+        public void FromFigure(CMeasurePairRct single)
         {
             this.NICKNAME = single.NICKNAME;
             
@@ -538,16 +342,30 @@ namespace CD_Paramter
             this.param_06_edge_pos_fst/*******************/= single.param_06_edge_position_fst;
             this.param_07_edge_pos_scd/*******************/= single.param_07_edge_position_scd;
 
-            this.RECT_TYPE = IFX_FIGURE.ToStringType(single.RC_TYPE);
+            this.RECT_TYPE = IFX_RECT_TYPE.ToStringType(single.RC_TYPE);
 
             this.param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
             this.param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
-            this.param_comm_03_BOOL_SHOW_RAW_DATA/***/= single.param_comm_03_BOOL_SHOW_RAW_DATA;
+            this.param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
+            this.param_comm_04_BOOL_SHOW_RAW_DATA /**/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
         }
     }
 
     public class PROPERTY_PairOvl
     {
+        private double param_comm_01_compen_A { get; set; }
+        private double param_comm_02_compen_B { get; set; }
+        private int/**/param_comm_03_spc_enhance { get; set; }
+        private bool param_comm_04_show_raw_data { get; set; }
+
+
+        public PROPERTY_PairOvl()
+        {
+            param_comm_01_compen_A = 1;
+            param_comm_02_compen_B = 0;
+            param_comm_03_spc_enhance = 0;
+            param_comm_04_show_raw_data = false;
+        }
         [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
@@ -791,31 +609,38 @@ namespace CD_Paramter
 
         //*****************************************************************************************
 
-        [CategoryAttribute("15 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_HOR_IN_L { get; set; }
-        [CategoryAttribute("16 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_HOR_IN_R { get; set; }
-        [CategoryAttribute("17 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_VER_IN_T { get; set; }
-        [CategoryAttribute("18 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_VER_IN_B { get; set; }
+        [CategoryAttribute("15 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_HOR_IN_L { get; set; }
+        [CategoryAttribute("16 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_HOR_IN_R { get; set; }
+        [CategoryAttribute("17 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_VER_IN_T { get; set; }
+        [CategoryAttribute("18 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_VER_IN_B { get; set; }
 
         //*****************************************************************************************
 
-        [CategoryAttribute("19 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_HOR_EX_L { get; set; }
-        [CategoryAttribute("20 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_HOR_EX_R { get; set; }
-        [CategoryAttribute("21 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_VER_EX_T { get; set; }
-        [CategoryAttribute("22 Searching Direction"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double DIR_VER_EX_B { get; set; }
+        [CategoryAttribute("19 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_HOR_EX_L { get; set; }
+        [CategoryAttribute("20 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_HOR_EX_R { get; set; }
+        [CategoryAttribute("21 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_VER_EX_T { get; set; }
+        [CategoryAttribute("22 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_VER_EX_B { get; set; }
 
 
         //*****************************************************************************************
 
+        [CategoryAttribute("31 COMPENSATION A "), DescriptionAttribute("True or False")]
+        public double COMPEN_A {get{return param_comm_01_compen_A;} set{param_comm_01_compen_A =value;}}
+        [CategoryAttribute("31 COMPENSATION B"), DescriptionAttribute("True or False")]
+        public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
         [CategoryAttribute("31 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get; set; }
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+        [CategoryAttribute("31 Show Raw Data"), DescriptionAttribute("True or False")]
+        public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;}}
+
 
         public CMeasurePairOvl ToFigure()
         {
@@ -823,75 +648,82 @@ namespace CD_Paramter
 
             single.NICKNAME = NICKNAME;
 
-            single.measureHOR_IN_L = IFX_ALGORITHM.ToNumericType(measureHOR_IN_L);
-            single.measureHOR_IN_R = IFX_ALGORITHM.ToNumericType(measureHOR_IN_R);
-            single.measureHOR_EX_L = IFX_ALGORITHM.ToNumericType(measureHOR_EX_L);
-            single.measureHOR_EX_R = IFX_ALGORITHM.ToNumericType(measureHOR_EX_R);
+            single.algorithm_HOR_IN_L = IFX_ALGORITHM.ToNumericType(measureHOR_IN_L);
+            single.algorithm_HOR_IN_R = IFX_ALGORITHM.ToNumericType(measureHOR_IN_R);
+            single.algorithm_HOR_EX_L = IFX_ALGORITHM.ToNumericType(measureHOR_EX_L);
+            single.algorithm_HOR_EX_R = IFX_ALGORITHM.ToNumericType(measureHOR_EX_R);
 
-            single.measureVER_IN_T = IFX_ALGORITHM.ToNumericType(measureVER_IN_T);
-            single.measureVER_IN_B = IFX_ALGORITHM.ToNumericType(measureVER_IN_B);
-            single.measureVER_EX_T = IFX_ALGORITHM.ToNumericType(measureVER_EX_T);
-            single.measureVER_EX_B = IFX_ALGORITHM.ToNumericType(measureVER_EX_B);
+            single.algorithm_VER_IN_T = IFX_ALGORITHM.ToNumericType(measureVER_IN_T);
+            single.algorithm_VER_IN_B = IFX_ALGORITHM.ToNumericType(measureVER_IN_B);
+            single.algorithm_VER_EX_T = IFX_ALGORITHM.ToNumericType(measureVER_EX_T);
+            single.algorithm_VER_EX_B = IFX_ALGORITHM.ToNumericType(measureVER_EX_B);
 
-            single.RC_HOR_IN.rc_LFT = RC_HOR_IN_LFT.ToRectangleF();
-            single.RC_HOR_IN.rc_RHT = RC_HOR_IN_RHT.ToRectangleF();
-            single.RC_HOR_EX.rc_LFT = RC_HOR_EX_LFT.ToRectangleF();
-            single.RC_HOR_EX.rc_RHT = RC_HOR_EX_RHT.ToRectangleF();
+            single.RC_HOR_IN.rc_FST = new parseRect(RC_HOR_IN_LFT.ToRectangleF());
+            single.RC_HOR_IN.rc_SCD = new parseRect(RC_HOR_IN_RHT.ToRectangleF());
+            single.RC_HOR_EX.rc_FST = new parseRect(RC_HOR_EX_LFT.ToRectangleF());
+            single.RC_HOR_EX.rc_SCD = new parseRect(RC_HOR_EX_RHT.ToRectangleF());
 
-            single.RC_VER_IN.rc_TOP = RC_VER_IN_TOP.ToRectangleF();
-            single.RC_VER_IN.rc_BTM = RC_VER_IN_BTM.ToRectangleF();
-            single.RC_VER_EX.rc_TOP = RC_VER_EX_TOP.ToRectangleF();
-            single.RC_VER_EX.rc_BTM = RC_VER_EX_BTM.ToRectangleF();
+            single.RC_VER_IN.rc_FST = new parseRect(RC_VER_IN_TOP.ToRectangleF());
+            single.RC_VER_IN.rc_SCD = new parseRect(RC_VER_IN_BTM.ToRectangleF());
+            single.RC_VER_EX.rc_FST = new parseRect(RC_VER_EX_TOP.ToRectangleF());
+            single.RC_VER_EX.rc_SCD = new parseRect(RC_VER_EX_BTM.ToRectangleF());
 
             
-            single.DIR_HOR_IN_L = Convert.ToInt32(DIR_HOR_IN_L);
-            single.DIR_HOR_IN_R = Convert.ToInt32(DIR_HOR_IN_R);
-            single.DIR_HOR_EX_L = Convert.ToInt32(DIR_HOR_EX_L);
-            single.DIR_HOR_EX_R = Convert.ToInt32(DIR_HOR_EX_R);
+            single.param_01_edge_position_hor_in_L = Convert.ToInt32(EDGE_POS_HOR_IN_L);
+            single.param_02_edge_position_hor_in_R = Convert.ToInt32(EDGE_POS_HOR_IN_R);
+            single.param_03_edge_position_hor_ex_L = Convert.ToInt32(EDGE_POS_HOR_EX_L);
+            single.param_04_edge_position_hor_ex_R = Convert.ToInt32(EDGE_POS_HOR_EX_R);
 
-            single.DIR_VER_IN_T = Convert.ToInt32(DIR_VER_IN_T);
-            single.DIR_VER_IN_B = Convert.ToInt32(DIR_VER_IN_B);
-            single.DIR_VER_EX_T = Convert.ToInt32(DIR_VER_EX_T);
-            single.DIR_VER_EX_B = Convert.ToInt32(DIR_VER_EX_B);
+            single.param_05_edge_position_ver_in_T = Convert.ToInt32(EDGE_POS_VER_IN_T);
+            single.param_06_edge_position_ver_in_B = Convert.ToInt32(EDGE_POS_VER_IN_B);
+            single.param_07_edge_position_ver_ex_T = Convert.ToInt32(EDGE_POS_VER_EX_T);
+            single.param_08_edge_position_ver_ex_B = Convert.ToInt32(EDGE_POS_VER_EX_B);
 
-            single.param_comm_03_BOOL_SHOW_RAW_DATA = this.SHOW_RAW_DATA;
+            single.param_comm_01_compen_A = this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B = this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
+            single.param_comm_04_BOOL_SHOW_RAW_DATA = this.SHOW_RAW_DATA;
+
             return single;
         }
         public void FromFigure(CMeasurePairOvl single)
         {
             this.NICKNAME = single.NICKNAME;
 
-            this.MEASURE_HOR_IN_L = IFX_ALGORITHM.ToStringType(single.measureHOR_IN_L);
-            this.MEASURE_HOR_IN_R = IFX_ALGORITHM.ToStringType(single.measureHOR_IN_R);
-            this.MEASURE_HOR_EX_L = IFX_ALGORITHM.ToStringType(single.measureHOR_EX_L);
-            this.MEASURE_HOR_EX_R = IFX_ALGORITHM.ToStringType(single.measureHOR_EX_R);
+            this.MEASURE_HOR_IN_L = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_IN_L);
+            this.MEASURE_HOR_IN_R = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_IN_R);
+            this.MEASURE_HOR_EX_L = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_EX_L);
+            this.MEASURE_HOR_EX_R = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_EX_R);
 
-            this.MEASURE_VER_IN_T = IFX_ALGORITHM.ToStringType(single.measureVER_IN_T);
-            this.MEASURE_VER_IN_B = IFX_ALGORITHM.ToStringType(single.measureVER_IN_B);
-            this.MEASURE_VER_EX_T = IFX_ALGORITHM.ToStringType(single.measureVER_EX_T);
-            this.MEASURE_VER_EX_B = IFX_ALGORITHM.ToStringType(single.measureVER_EX_B);
+            this.MEASURE_VER_IN_T = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN_T);
+            this.MEASURE_VER_IN_B = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN_B);
+            this.MEASURE_VER_EX_T = IFX_ALGORITHM.ToStringType(single.algorithm_VER_EX_T);
+            this.MEASURE_VER_EX_B = IFX_ALGORITHM.ToStringType(single.algorithm_VER_EX_B);
 
-            this.RC_HOR_IN_LFT = new CustomRectangleD(single.RC_HOR_IN.rc_LFT);
-            this.RC_HOR_IN_RHT = new CustomRectangleD(single.RC_HOR_IN.rc_RHT);
-            this.RC_HOR_EX_LFT = new CustomRectangleD(single.RC_HOR_EX.rc_LFT);
-            this.RC_HOR_EX_RHT = new CustomRectangleD(single.RC_HOR_EX.rc_RHT);
+            this.RC_HOR_IN_LFT = new CustomRectangleD(single.RC_HOR_IN.rc_FST.ToRectangleF());
+            this.RC_HOR_IN_RHT = new CustomRectangleD(single.RC_HOR_IN.rc_SCD.ToRectangleF());
+            this.RC_HOR_EX_LFT = new CustomRectangleD(single.RC_HOR_EX.rc_FST.ToRectangleF());
+            this.RC_HOR_EX_RHT = new CustomRectangleD(single.RC_HOR_EX.rc_SCD.ToRectangleF());
 
-            this.RC_VER_IN_TOP = new CustomRectangleD(single.RC_VER_IN.rc_TOP);
-            this.RC_VER_IN_BTM = new CustomRectangleD(single.RC_VER_IN.rc_BTM);
-            this.RC_VER_EX_TOP = new CustomRectangleD(single.RC_VER_EX.rc_TOP);
-            this.RC_VER_EX_BTM = new CustomRectangleD(single.RC_VER_EX.rc_BTM);
+            this.RC_VER_IN_TOP = new CustomRectangleD(single.RC_VER_IN.rc_FST.ToRectangleF());
+            this.RC_VER_IN_BTM = new CustomRectangleD(single.RC_VER_IN.rc_SCD.ToRectangleF());
+            this.RC_VER_EX_TOP = new CustomRectangleD(single.RC_VER_EX.rc_FST.ToRectangleF());
+            this.RC_VER_EX_BTM = new CustomRectangleD(single.RC_VER_EX.rc_SCD.ToRectangleF());
 
-            this.DIR_HOR_IN_L = single.DIR_HOR_IN_L;
-            this.DIR_HOR_IN_R = single.DIR_HOR_IN_R;
-            this.DIR_HOR_EX_L = single.DIR_HOR_EX_L;
-            this.DIR_HOR_EX_R = single.DIR_HOR_EX_R;
+            this.EDGE_POS_HOR_IN_L = single.param_01_edge_position_hor_in_L;
+            this.EDGE_POS_HOR_IN_R = single.param_02_edge_position_hor_in_R;
+            this.EDGE_POS_HOR_EX_L = single.param_03_edge_position_hor_ex_L;
+            this.EDGE_POS_HOR_EX_R = single.param_04_edge_position_hor_ex_R;
 
-            this.DIR_VER_IN_T = single.DIR_VER_IN_T;
-            this.DIR_VER_IN_B = single.DIR_VER_IN_B;
-            this.DIR_VER_EX_T = single.DIR_VER_EX_T;
-            this.DIR_VER_EX_B = single.DIR_VER_EX_B;
+            this.EDGE_POS_VER_IN_T= single.param_05_edge_position_ver_in_T;
+            this.EDGE_POS_VER_IN_B = single.param_06_edge_position_ver_in_B;
+            this.EDGE_POS_VER_EX_T = single.param_07_edge_position_ver_ex_T;
+            this.EDGE_POS_VER_EX_B = single.param_08_edge_position_ver_ex_B;
 
-            this.SHOW_RAW_DATA = single.param_comm_03_BOOL_SHOW_RAW_DATA;
+            this.param_comm_01_compen_A = single.param_comm_01_compen_A;
+            this.param_comm_02_compen_B = single.param_comm_02_compen_B;
+            this.param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
+            this.param_comm_04_show_raw_data = single.param_comm_04_BOOL_SHOW_RAW_DATA;
         }
 
     }
@@ -910,7 +742,8 @@ namespace CD_Paramter
 
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
-            param_comm_03_bool_show_raw_data = false;
+            param_comm_03_spc_enhance = 0;
+            param_comm_04_show_raw_data = false;
         }
 
         public string param_00_algorithm;
@@ -923,7 +756,8 @@ namespace CD_Paramter
 
         public double param_comm_01_compen_A;
         public double param_comm_02_compen_B;
-        public bool param_comm_03_bool_show_raw_data;
+        public int param_comm_03_spc_enhance;
+        public bool param_comm_04_show_raw_data;
 
         private CustomRectangleD rcEX = new CustomRectangleD();
         private CustomRectangleD rcIN = new CustomRectangleD();
@@ -989,8 +823,11 @@ namespace CD_Paramter
         [CategoryAttribute("09 Ellipse Process"), DescriptionAttribute("Treat As Ellipse\nTrue or False")]
         public bool TREAT_AS_ELLIPSE { get{return param_02_bool_treat_as_ellipse;} set{param_02_bool_treat_as_ellipse = value;} }
 
+        [CategoryAttribute("10 Special Enhancement"), DescriptionAttribute("Default(0), 1, 2...")]
+        public int SPC_ENHANCE{ get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+
         [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get{return param_comm_03_bool_show_raw_data;} set{param_comm_03_bool_show_raw_data = value;} }
+        public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;} }
 
         public CMeasurePairCir ToFigure()
         {
@@ -1014,7 +851,8 @@ namespace CD_Paramter
 
             single.param_comm_01_compen_A /*************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B /*************/= this.param_comm_02_compen_B;
-            single.param_comm_03_BOOL_SHOW_RAW_DATA /***/= this.param_comm_03_bool_show_raw_data;
+            single.param_comm_03_spc_enhance /**********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_BOOL_SHOW_RAW_DATA /***/= this.param_comm_04_show_raw_data;
 
 
             return single;
@@ -1039,7 +877,8 @@ namespace CD_Paramter
 
             this.param_comm_01_compen_A /*************/= single.param_comm_01_compen_A;
             this.param_comm_02_compen_B /*************/= single.param_comm_02_compen_B;
-            this.param_comm_03_bool_show_raw_data /***/= single.param_comm_03_BOOL_SHOW_RAW_DATA;
+            this.param_comm_03_spc_enhance /**********/= single.param_comm_03_spc_enhance;
+            this.param_comm_04_show_raw_data /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
         }
 
     }

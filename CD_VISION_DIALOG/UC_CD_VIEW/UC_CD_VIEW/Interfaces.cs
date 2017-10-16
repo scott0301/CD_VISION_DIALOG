@@ -49,7 +49,7 @@ namespace CD_View
         //*****************************************************************************************
         // shared functions for paired figure 
         void iGet_CropsRectPairNormal(RectangleF rc1, RectangleF rc2, out byte[] crop1, out byte[] crop2);
-        void iGet_CropsRectPairDigonal(CMeasurePairDia single, out byte[] crop1, out byte[] crop2);
+        void iGet_CropsRectPairDigonal(CMeasurePairRct single, out byte[] crop1, out byte[] crop2);
         void iGet_CropsCircle(CMeasurePairCir single, out byte[] crop1, out byte[] crop2);
 
         //*****************************************************************************************

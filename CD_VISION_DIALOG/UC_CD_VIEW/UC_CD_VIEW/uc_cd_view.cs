@@ -338,8 +338,8 @@ namespace CD_View
  
         public void iMod_RectPair_DigonalAngle(int nIndex, int nAngle)
         {
-            CMeasurePairDia[] array = fm.ToArray_PairDia();
-            CMeasurePairDia single = array[nIndex];
+            CMeasurePairRct[] array = fm.ToArray_PairRct();
+            CMeasurePairRct single = array[nIndex];
 
             single.ApplyAbsoluteRotation(nAngle);
 
@@ -350,23 +350,11 @@ namespace CD_View
 
         public void iMod_Figure(object single, int nIndex)
         {
-            if (single.GetType().Name == "CMeasurePairHor")
+ 
+            if (single.GetType().Name == "CMeasurePairRct")
             {
-                CMeasurePairHor[] array = fm.ToArray_PairHor();
-                array[nIndex] = (CMeasurePairHor)single;
-                fm.Figure_Replace(array);
-                
-            }
-            else if (single.GetType().Name == "CMeasurePairVer")
-            {
-                CMeasurePairVer[] array = fm.ToArrya_PairVer();
-                array[nIndex] = (CMeasurePairVer)single;
-                fm.Figure_Replace(array);
-            }
-            else if (single.GetType().Name == "CMeasurePairDia")
-            {
-                CMeasurePairDia[] array = fm.ToArray_PairDia();
-                array[nIndex] = (CMeasurePairDia)single;
+                CMeasurePairRct[] array = fm.ToArray_PairRct();
+                array[nIndex] = (CMeasurePairRct)single;
                 fm.Figure_Replace(array);
             }
             else if(single.GetType().Name == "CMeasurePairCir")
@@ -388,10 +376,8 @@ namespace CD_View
         {
             object objReturn = new object();
 
-            /***/if (nFigureType == IFX_FIGURE.PAIR_HOR){if (fm.COUNT_PAIR_HOR >= nIndex){objReturn = fm.ElementAt_PairHor(nIndex);}}
-            else if( nFigureType == IFX_FIGURE.PAIR_VER){if (fm.COUNT_PAIR_VER >= nIndex){objReturn = fm.ElementAt_PairVer(nIndex);}}
-            else if (nFigureType == IFX_FIGURE.PAIR_DIA){if (fm.COUNT_PAIR_DIA >= nIndex){objReturn = fm.ElementAt_PairDia(nIndex);}}
-            else if (nFigureType == IFX_FIGURE.PAIR_CIR){if (fm.COUNT_PAIR_CIR >= nIndex){objReturn = fm.ElementAt_PairCir(nIndex);}}
+            /***/if (nFigureType == IFX_FIGURE.PAIR_RCT) { if (fm.COUNT_PAIR_RCT >= nIndex) { objReturn = fm.ElementAt_PairRct(nIndex); } }
+            else if (nFigureType == IFX_FIGURE.PAIR_CIR) { if (fm.COUNT_PAIR_CIR >= nIndex) { objReturn = fm.ElementAt_PairCir(nIndex); } }
             else if (nFigureType == IFX_FIGURE.PAIR_OVL) { if (fm.COUNT_PAIR_OVL >= nIndex) { objReturn = fm.ElementAt_PairOvl(nIndex); } }
             return objReturn;
         }
@@ -446,7 +432,7 @@ namespace CD_View
             int nRadius = Math.Max(nCX, nCY);
         }
 
-        public void iGet_CropsRectPairDigonal(CMeasurePairDia single, out byte[] crop1, out byte[] crop2)
+        public void iGet_CropsRectPairDigonal(CMeasurePairRct single, out byte[] crop1, out byte[] crop2)
         {
             byte[] rawImgae = GetDisplay_Raw();
             int imageW = VIEW_GetImageW();
@@ -465,10 +451,10 @@ namespace CD_View
             int imageW = VIEW_GetImageW();
             int imageH = VIEW_GetImageH();
 
-            if (nFigureType == IFX_FIGURE.PAIR_DIA)
+            if (nFigureType == IFX_FIGURE.PAIR_RCT)
             {
-                CMeasurePairDia[] array = fm.ToArray_PairDia();
-                CMeasurePairDia single = fm.ElementAt_PairDia(nIndex);
+                CMeasurePairRct[] array = fm.ToArray_PairRct();
+                CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
                 /***/if (nAction == IFX_ADJ_ACTION.POS) { single.AdjustPos(x, y); }
                 else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
@@ -1642,9 +1628,9 @@ namespace CD_View
                 }
             }
 
-            for (int i = 0; i < fm.COUNT_PAIR_DIA; i++)
+            for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
             {
-                CMeasurePairDia single = fm.ElementAt_PairDia(i);
+                CMeasurePairRct single = fm.ElementAt_PairRct(i);
 
                 parseRect rcFirst = single.rc_FST;
                 parseRect rcSecon = single.rc_SCD;
@@ -1657,17 +1643,17 @@ namespace CD_View
 
                 //e.Graphics.DrawLine(new Pen(Color.Yellow, 5), rcFirst.LT.off, rcFirst.RT);
 
-                if (single.RC_TYPE == IFX_FIGURE.PAIR_HOR)
+                if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR)
                 {
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.LB, fTransX, fTransY));
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.LB, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
                 }
-                else if (single.RC_TYPE == IFX_FIGURE.PAIR_VER)
+                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER)
                 {
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
                 }
-                else if (single.RC_TYPE == IFX_FIGURE.PAIR_DIA)
+                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA)
                 {
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
                     e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
@@ -1714,15 +1700,15 @@ namespace CD_View
             {
                 CMeasurePairOvl single = fm.ElementAt_PairOvl(i);
 
-                RectangleF rcHOR_IN_L = single.RC_HOR_IN.rc_LFT;
-                RectangleF rcHOR_IN_R = single.RC_HOR_IN.rc_RHT;
-                RectangleF rcHOR_EX_L = single.RC_HOR_EX.rc_LFT;
-                RectangleF rcHOR_EX_R = single.RC_HOR_EX.rc_RHT;
+                RectangleF rcHOR_IN_L = single.RC_HOR_IN.rc_FST.ToRectangleF();
+                RectangleF rcHOR_IN_R = single.RC_HOR_IN.rc_SCD.ToRectangleF();
+                RectangleF rcHOR_EX_L = single.RC_HOR_EX.rc_FST.ToRectangleF();
+                RectangleF rcHOR_EX_R = single.RC_HOR_EX.rc_SCD.ToRectangleF();
 
-                RectangleF rcVER_IN_T = single.RC_VER_IN.rc_TOP;
-                RectangleF rcVER_IN_B = single.RC_VER_IN.rc_BTM;
-                RectangleF rcVER_EX_T = single.RC_VER_EX.rc_TOP;
-                RectangleF rcVER_EX_B = single.RC_VER_EX.rc_BTM;
+                RectangleF rcVER_IN_T = single.RC_VER_IN.rc_FST.ToRectangleF();
+                RectangleF rcVER_IN_B = single.RC_VER_IN.rc_SCD.ToRectangleF();
+                RectangleF rcVER_EX_T = single.RC_VER_EX.rc_FST.ToRectangleF();
+                RectangleF rcVER_EX_B = single.RC_VER_EX.rc_SCD.ToRectangleF();
 
                 rcHOR_IN_L.Offset(fTransX, fTransY);rcHOR_IN_R.Offset(fTransX, fTransY);
                 rcHOR_EX_L.Offset(fTransX, fTransY);rcHOR_EX_R.Offset(fTransX, fTransY);
@@ -2055,7 +2041,7 @@ namespace CD_View
                     Bitmap bmp = (Bitmap)Bitmap.FromFile(strPath);
                     e.bmp = new Bitmap(bmp);
                     bmp.Dispose();
-                }
+                 }
                 OnThreadFinishedImageLoad(e);
             }
         }

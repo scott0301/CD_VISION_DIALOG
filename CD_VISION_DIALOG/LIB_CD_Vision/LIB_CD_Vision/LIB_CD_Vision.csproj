@@ -47,8 +47,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WrapperClass">
-      <HintPath>..\Library\WrapperClass.dll</HintPath>
+    <Reference Include="WrapperUnion">
+      <HintPath>..\..\..\..\Library\WrapperUnion.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

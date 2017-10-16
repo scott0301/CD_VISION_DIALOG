@@ -81,6 +81,7 @@ namespace CD_VISION_DIALOG
             
             // set main view image
             BTN_SET_INTERNAL_IMAGE_Click(null, EventArgs.Empty);
+            BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
 
             TXT_PTRN_FILE_NAME.Text = param_ptrn.PTRN_FILE;
             TXT_PTRN_ACC_RATIO.Text = param_ptrn.ACC_RATIO.ToString("F4");
@@ -98,6 +99,12 @@ namespace CD_VISION_DIALOG
             TXT_PTRN_TEACH_ROI_W.Text = param_ptrn.RC_TEMPLATE.Width.ToString("F4");
             TXT_PTRN_TEACH_ROI_H.Text = param_ptrn.RC_TEMPLATE.Height.ToString("F4");
 
+            if (param_ptrn.BOOL_GLOBAL_SEARCHING == false &&
+                param_ptrn.RC_SEARCH_RGN.Width != 0 &&
+                param_ptrn.RC_SEARCH_RGN.Height != 0)
+            {
+                uc_view_ptrn.DrawRect(param_ptrn.RC_SEARCH_RGN, Color.Orange);
+            }
 
             // only for Ptrn File Existance.
             if (bPtrnMissing == false)
@@ -267,6 +274,16 @@ namespace CD_VISION_DIALOG
             ptrn.BOOL_GLOBAL_SEARCHING  = CHK_PTRN_SEARCH_GLOBAL.Checked;
             ptrn.PTRN_FILE = strCurrentPtrnFile;
             ptrn.RC_SEARCH_RGN = rcPtrnRgn;
+
+            if( CHK_PTRN_SEARCH_GLOBAL.Checked == false)
+            {
+                float rx = float.Parse(TXT_LOCAL_SEARCH_RGN_X.Text);
+                float ry = float.Parse(TXT_LOCAL_SEARCH_RGN_Y.Text);
+                float rw = float.Parse(TXT_LOCAL_SEARCH_RGN_W.Text);
+                float rh = float.Parse(TXT_LOCAL_SEARCH_RGN_H.Text);
+
+                ptrn.RC_SEARCH_RGN = new RectangleF(rx, ry, rw, rh);
+            }
             ptrn.RC_TEMPLATE = rcTeaching;
             ptrn.ACC_RATIO = fACCR;
 

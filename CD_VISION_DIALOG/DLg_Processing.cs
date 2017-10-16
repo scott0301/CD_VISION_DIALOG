@@ -375,7 +375,7 @@ namespace CD_VISION_DIALOG
 
         private void _PRINT_MSG(string msg)
         {
-            string s = Computer.TIME_GetTimeCode_MD_HMS_MS() + msg + System.Environment.NewLine;
+            string s = WrapperUnion.WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM() +msg + System.Environment.NewLine;
             RICH_MESSAGE_WINDOW.AppendText(s);
             RICH_MESSAGE_WINDOW.ScrollToCaret();
             

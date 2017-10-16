@@ -17,11 +17,20 @@ namespace DEF_PARAMS
     {
         public bool BOOL_SHOW_IMAGE_PROCESS { get; set; }
         public bool BOOL_SHOW_DETECT_CROSS { get; set; }
+        public bool BOOL_USE_LOOP_COUNTER { get; set; }
+        public bool BOOL_USE_GRAB_SAVE { get; set; }
+        public bool BOOL_USE_FOCUS_SAVE { get; set; }
+
+        public int INT_LOOP_COUNTER { get; set; }
 
         public CHacker()
         {
             BOOL_SHOW_IMAGE_PROCESS = false;
-            BOOL_SHOW_DETECT_CROSS = true; 
+            BOOL_SHOW_DETECT_CROSS = true;
+            BOOL_USE_LOOP_COUNTER = false;
+            BOOL_USE_GRAB_SAVE = false;
+            BOOL_USE_FOCUS_SAVE = false;
+            INT_LOOP_COUNTER = 1;
         }
 
     }
@@ -343,7 +352,7 @@ namespace DEF_PARAMS
             i03_PATH_RECP_BASE = "C:\\CD_METER\\RECP_BASE";
             i04_PATH_RECP_REAL = "C:\\CD_METER\\RECP";
 
-            i10_PATH_IMG_ORG = "C:\\CD_METER\\IMAGE";
+            i10_PATH_IMG_ORG = "C:\\CD_METER\\IMAGE_INPUT";
             i11_PATH_IMG_PTRN = "C:\\CD_METER\\PTRN_TEACHING";
 
             i15_PATH_HIST_MEASURE = "C:\\CD_METER\\HISTORY";
@@ -385,22 +394,43 @@ namespace DEF_PARAMS
         public static int DIR_RHT = 2;
         public static int DIR_BTM = 3;
     }
-    public static class IFX_FIGURE
+    public static class IFX_RECT_TYPE
     {
-        public static int PAIR_HOR = 0;
-        public static int PAIR_VER = 1;
-        public static int PAIR_DIA = 2;
-        public static int PAIR_CIR = 3;
-        public static int PAIR_OVL = 4;
-        public static int TOTAL = 5;
+        public static int DIR_HOR = 0;
+        public static int DIR_VER = 1;
+        public static int DIR_DIA = 2;
 
         public static int ToNumericType(string strType)
         {
             int nReturn = 0;
 
-            /***/if (strType == "PAIR_HOR") { nReturn = PAIR_HOR; }
-            else if (strType == "PAIR_VER") { nReturn = PAIR_VER; }
-            else if (strType == "PAIR_DIA") { nReturn = PAIR_DIA; }
+            /***/if (strType == "DIR_HOR") { nReturn = DIR_HOR; }
+            else if (strType == "DIR_VER") { nReturn = DIR_VER; }
+            else if (strType == "DIR_DIA") { nReturn = DIR_DIA; }
+            return nReturn;
+        }
+        public static string ToStringType(int nType)
+        {
+            string strType = string.Empty;
+
+            /***/if (nType == DIR_HOR) strType = "DIR_HOR";
+            else if (nType == DIR_VER) strType = "DIR_VER";
+            else if (nType == DIR_DIA) strType = "DIR_DIA";
+            return strType;
+        }
+    }
+    public static class IFX_FIGURE
+    {
+        public static int PAIR_RCT = 0;
+        public static int PAIR_CIR = 1;
+        public static int PAIR_OVL = 2;
+        public static int TOTAL = 3;
+
+        public static int ToNumericType(string strType)
+        {
+            int nReturn = 0;
+
+            /***/if (strType == "PAIR_RCT") { nReturn = PAIR_RCT; }
             else if (strType == "PAIR_CIR") { nReturn = PAIR_CIR; }
             else if (strType == "PAIR_OVL") { nReturn = PAIR_OVL; }
             return nReturn;
@@ -409,9 +439,7 @@ namespace DEF_PARAMS
         {
             string strType = string.Empty;
 
-            /***/if (nType == PAIR_HOR) strType = "PAIR_HOR";
-            else if (nType == PAIR_VER) strType = "PAIR_VER";
-            else if (nType == PAIR_DIA) strType = "PAIR_DIA";
+            /***/if (nType == PAIR_RCT) strType = "PAIR_RCT";
             else if (nType == PAIR_CIR) strType = "PAIR_CIR";
             else if (nType == PAIR_OVL) strType = "PAIR_OVL";
             return strType;
@@ -446,29 +474,8 @@ namespace DEF_PARAMS
         public static int ASYM = 3;
     }
 
-    public static class IFX_RECT_CRECTION_CODE
-    {
-        public static int NONE/*****/ = 0;
-        public static int PKO_NEG/***/= 1;
-        public static int PKO_POS/***/= 2;
-
-        public static string ToStringType(int nType)
-        {
-            string strType = string.Empty;
-            /***/if (nType == NONE/*****/) strType = "NONE";
-            else if (nType == PKO_NEG/**/) strType = "PEAK-ORIENT_NEG";
-            else if (nType == PKO_POS/**/) strType = "PEAK-ORIENT_POS";
-            return strType;
-        }
-        public static int ToNumericType(string strType)
-        {
-            int nReturn = 0;
-            /***/if (strType == "NONE") nReturn = NONE;
-            else if (strType == "PEAK-ORIENT_NEG") nReturn = PKO_NEG;
-            else if (strType == "PEAK-ORIENT_POS") nReturn = PKO_POS;
-            return nReturn;
-        }
-    }
+   
+    
     public static class IFX_ALGORITHM
     {
         public static int MEXHAT = 0;

@@ -20,6 +20,12 @@ namespace Remote
 
         public const int MC_IMAGE_GRAB_REQ = 501;
         public const int CM_IMAGE_GRAB_REP = 502;
+        
+        //MEASURE START - MESSAGE => "CYCLE,POINTS"
+        public const int CM_MEASURE_START = 503;
+        //MEASURE END - MESSAGE => ""
+        public const int CM_MEASURE_END = 504;
+
         public const int CM_MACRO_LIST_REQ = 601;
         public const int MC_MACRO_LIST_REP = 602;
         public const int CM_MACRO_LOAD_REQ = 701;
@@ -39,7 +45,7 @@ namespace Remote
     [Serializable]
     public class FocusInfo
     {
-        //FocusType : 0-> Focus Non, 1 -> ZAF, 2 -> LAF, 3 -> IAF 
+        //FocusType : 0-> Focus Non, 1 -> ZAF, 2 -> LAF, 4 -> IAF 
         public int FocusType = 0;
         // rect, unit pixel -> matching 기준 x,y(left,top), width, height 
         public double X = 0;
@@ -52,10 +58,13 @@ namespace Remote
     [Serializable]
     public class PosInfo
     {
+        //No -> 1,2,3,4,5....
+        public int No;
         public double X;
         public double Y;
-        public PosInfo(double x, double y)
+        public PosInfo(int no, double x, double y)
         {
+            No = no;
             X = x;
             Y = y;
         }
@@ -173,10 +182,10 @@ namespace Remote
     [Serializable]
     public class MeasureInfo
     {
+        //No -> 1,2,3,4,5...., PosInfo에서 받은 그대로 .. 
         public int Result = 0;
-
+        public int No = 0;
         public string Macro = "";
-
         public List<RES_DATA> list = new List<RES_DATA>();
     }
 }

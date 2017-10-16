@@ -116,6 +116,8 @@
             // 
             this.uc_view_processing.AllowDrop = true;
             this.uc_view_processing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_processing.BOOL_DRAW_FOCUS_ROI = true;
+            this.uc_view_processing.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_processing.BOOL_TEACHING_ACTIVATION = false;
             this.uc_view_processing.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uc_view_processing.ForeColor = System.Drawing.Color.Lime;
@@ -928,7 +930,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1610, 709);
+            this.ClientSize = new System.Drawing.Size(1607, 709);
             this.Controls.Add(this.GB_OPERATIONS2);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label12);

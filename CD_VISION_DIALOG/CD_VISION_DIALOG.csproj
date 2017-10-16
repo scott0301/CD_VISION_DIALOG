@@ -69,9 +69,9 @@
     <Reference Include="UC_CD_PARAM">
       <HintPath>UC_CD_PARAM\Lib\UC_CD_PARAM.dll</HintPath>
     </Reference>
-    <Reference Include="UC_CD_VIEW, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UC_CD_View, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\UC_CD_VIEW.DLL</HintPath>
+      <HintPath>UC_CD_VIEW\Lib\UC_CD_View.dll</HintPath>
     </Reference>
     <Reference Include="UC_GRAPH">
       <HintPath>Library\UC_GRAPH.dll</HintPath>
@@ -83,12 +83,13 @@
     <Reference Include="uc_thumb_nail_viewer">
       <HintPath>Library\uc_thumb_nail_viewer.dll</HintPath>
     </Reference>
-    <Reference Include="WrapperClass">
-      <HintPath>Library\WrapperClass.dll</HintPath>
-    </Reference>
     <Reference Include="WrapperCognex, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\WrapperCognex.dll</HintPath>
+    </Reference>
+    <Reference Include="WrapperUnion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\WrapperUnion.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,12 @@
     <Compile Include="Dlg_Recipe.Designer.cs">
       <DependentUpon>Dlg_Recipe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dlg_Spc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg_Spc.Designer.cs">
+      <DependentUpon>Dlg_Spc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dlg_Tunning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dlg_Recipe.resx">
       <DependentUpon>Dlg_Recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dlg_Spc.resx">
+      <DependentUpon>Dlg_Spc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dlg_Tunning.resx">
       <DependentUpon>Dlg_Tunning.cs</DependentUpon>
@@ -317,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="alien male.ico" />
+    <None Include="Resources\trends.png" />
     <None Include="Resources\matrix.png" />
     <None Include="Resources\alien male.png" />
     <None Include="Resources\unify.png" />

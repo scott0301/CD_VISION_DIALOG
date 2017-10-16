@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using CodeKing.Native;
 using DEF_PARAMS;
@@ -154,6 +155,18 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
+
+        private void BTN_OPEN_PATH_i01_Click(object sender, EventArgs e) { Process.Start(config.i01_PATH_MAIN); }
+        private void BTN_OPEN_PATH_i02_Click(object sender, EventArgs e) { Process.Start(config.i02_PATH_DATA_DUMP); }
+        private void BTN_OPEN_PATH_i03_Click(object sender, EventArgs e) { Process.Start(config.i03_PATH_RECP_BASE); }
+        private void BTN_OPEN_PATH_i04_Click(object sender, EventArgs e) { Process.Start(config.i04_PATH_RECP_REAL); }
+        private void BTN_OPEN_PATH_i11_Click(object sender, EventArgs e) { Process.Start(config.i11_PATH_IMG_PTRN); }
+
+        private void BTN_OPEN_PATH_i10_Click(object sender, EventArgs e) { Process.Start(config.i10_PATH_IMG_ORG); }
+        private void BTN_OPEN_PATH_i15_Click(object sender, EventArgs e) { Process.Start(config.i15_PATH_HIST_MEASURE); }
+        private void BTN_OPEN_PATH_i16_Click(object sender, EventArgs e) { Process.Start(config.i16_PATH_HIST_PTRN); }
+        private void BTN_OPEN_PATH_i20_Click(object sender, EventArgs e) { Process.Start(config.i20_PATH_INI); }
+        private void BTN_OPEN_PATH_i21_Click(object sender, EventArgs e) { Process.Start(config.i21_PATH_LOG); }
 
     }
 }

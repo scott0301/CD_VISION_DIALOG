@@ -43,8 +43,6 @@
             this.uc_view_history = new CD_View.UC_CD_VIEWER();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.TXT_PATH_HISTORY_MEASURE = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -151,7 +149,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "DATA";
-            this.columnHeader4.Width = 488;
+            this.columnHeader4.Width = 365;
             // 
             // RICH_HISTORY_MSG
             // 
@@ -168,6 +166,8 @@
             // 
             this.uc_view_history.AllowDrop = true;
             this.uc_view_history.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_history.BOOL_DRAW_FOCUS_ROI = true;
+            this.uc_view_history.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_history.BOOL_TEACHING_ACTIVATION = false;
             this.uc_view_history.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uc_view_history.ForeColor = System.Drawing.Color.Lime;
@@ -183,8 +183,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.TXT_PATH_HISTORY_MEASURE);
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.groupBox1);
@@ -200,7 +198,7 @@
             this.panel1.Controls.Add(this.BTN_OPEN_HISTORY_FOLDER);
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1225, 752);
+            this.panel1.Size = new System.Drawing.Size(1217, 752);
             this.panel1.TabIndex = 58;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -213,25 +211,6 @@
             this.label7.Size = new System.Drawing.Size(52, 14);
             this.label7.TabIndex = 77;
             this.label7.Text = "CLOSE";
-            // 
-            // TXT_PATH_HISTORY_MEASURE
-            // 
-            this.TXT_PATH_HISTORY_MEASURE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_PATH_HISTORY_MEASURE.ForeColor = System.Drawing.Color.White;
-            this.TXT_PATH_HISTORY_MEASURE.Location = new System.Drawing.Point(690, 277);
-            this.TXT_PATH_HISTORY_MEASURE.Name = "TXT_PATH_HISTORY_MEASURE";
-            this.TXT_PATH_HISTORY_MEASURE.Size = new System.Drawing.Size(377, 22);
-            this.TXT_PATH_HISTORY_MEASURE.TabIndex = 52;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(632, 280);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 14);
-            this.label10.TabIndex = 49;
-            this.label10.Text = "PATH :";
             // 
             // label16
             // 
@@ -367,7 +346,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(1246, 777);
+            this.ClientSize = new System.Drawing.Size(1233, 767);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.Name = "Dlg_HistoryM";
@@ -409,7 +388,5 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox TXT_PATH_HISTORY_MEASURE;
-        private System.Windows.Forms.Label label10;
     }
 }

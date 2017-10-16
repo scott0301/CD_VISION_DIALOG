@@ -118,56 +118,59 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="matchfind" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\matchfind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="image2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zoom_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="button_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Trash_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trash empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="image_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PaintBrush_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PaintBrush_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_load" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="matrix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\matrix.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="measure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\package graphics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\quick restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="show_result" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\show_result.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cam2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cam2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="simulation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\simulation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apply3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apply3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="patching" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\patching.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PaintBrush_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PaintBrush_Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="image_save_ovr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image save_ovr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="apiply2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apiply2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="history (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\history (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="apply" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joystick_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joystick_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="process" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\process.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="image2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="new_recp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\new_recp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Posterious" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Posterious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cam2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cam2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="open_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open_folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,142 +178,142 @@
   <data name="setting1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setting1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="record_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\record_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dir_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dir top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="record_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\record_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="measureOVL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\measureOVL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zoom_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="image_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dir_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dir right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_yo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit_yo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PaintBrush_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PaintBrush_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="measureVer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\measureVer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dir_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dir left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PaintBrush_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PaintBrush_Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simulation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\simulation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="unify" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\unify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="camera_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\camera info2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="image_load" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="measureCir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\measureCir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dir_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dir bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="alien male" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\alien male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zoom_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom init.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="measureRec" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\measureRec.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="apply3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apply3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="drawfigure_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\drawfigure On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Posterious1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Posterious1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="configs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\configs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="show_result" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\show_result.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DrawFigure_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DrawFigure Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="recpNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\recp New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="history (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\history (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="patching" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\patching.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="copy_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\copy_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="apply_ll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apply_ll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Trash_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Trash empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="view_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="apply4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apply4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\quick restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="joystick_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joystick_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="copy_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\copy_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="measureCir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\measureCir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Posterious1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Posterious1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="recipe_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\recipe save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="configs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\configs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Posterious" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Posterious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="recpNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\recp New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom init.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unify" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="recipe_load" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\recipe load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="matrix" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\matrix.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="measureRec" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\measureRec.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="history (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\history (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apply4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apply4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="matchfind" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\matchfind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="measureVer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\measureVer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="record_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\record_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apiply2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apiply2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apply_ll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apply_ll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="record_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\record_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="new_recp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\new_recp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joystick_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joystick_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="process" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\process.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="history (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\history (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="alien male" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\alien male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="measureOVL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\measureOVL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="camera_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camera info2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joystick_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joystick_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="drawfigure_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drawfigure On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit_yo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_yo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DrawFigure_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DrawFigure Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trends" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trends.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

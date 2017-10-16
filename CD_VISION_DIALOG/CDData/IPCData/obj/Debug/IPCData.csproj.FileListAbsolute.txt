@@ -39,3 +39,8 @@ D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\CDData\IPCData\obj\
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\CDData\IPCData\Library\IPCData.dll
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\CDData\IPCData\Library\IPCData.pdb
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.csprojResolveAssemblyReference.cache
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Library\IPCData.dll
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Library\IPCData.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.csprojResolveAssemblyReference.cache
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.dll
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.pdb
