@@ -150,14 +150,16 @@ namespace CD_Paramter
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_BOOL_SHOW_RAW_DATA = false;
+            param_comm_04_refinement = 3;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false;
             
 
         }
         private double param_comm_01_compen_A;
         private double param_comm_02_compen_B;
         private int    param_comm_03_spc_enhance;
-        private bool param_comm_04_BOOL_SHOW_RAW_DATA;
+        private int param_comm_04_refinement;
+        private bool param_comm_05_BOOL_SHOW_RAW_DATA;
 
         private string param_00_algorithm;
         private bool   param_01_bool_use_auto_peak_detection;
@@ -275,8 +277,11 @@ namespace CD_Paramter
         [CategoryAttribute("13 SPC Enhance"), DescriptionAttribute("DEFAULT(0) : 1, 2 ..")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        [CategoryAttribute("14 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get { return param_comm_04_BOOL_SHOW_RAW_DATA; } set { param_comm_04_BOOL_SHOW_RAW_DATA = value; } }
+        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
+        public int REFINEMENT { get { return param_comm_04_refinement; } set { param_comm_04_refinement= value; } }
+
+        [CategoryAttribute("15 Show Raw Data"), DescriptionAttribute("True or False")]
+        public bool SHOW_RAW_DATA { get { return param_comm_05_BOOL_SHOW_RAW_DATA; } set { param_comm_05_BOOL_SHOW_RAW_DATA = value; } }
 
         public CMeasurePairRct ToFigure()
         {
@@ -303,8 +308,10 @@ namespace CD_Paramter
 
             single.param_comm_01_compen_A/************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B/************/= this.param_comm_02_compen_B;
-            single.param_comm_03_spc_enhance /***********/= this.param_comm_03_spc_enhance;
-            single.param_comm_04_BOOL_SHOW_RAW_DATA/**/= this.param_comm_04_BOOL_SHOW_RAW_DATA;
+            single.param_comm_03_spc_enhance /*********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_refinement /**********/= this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA/**/= this.param_comm_05_BOOL_SHOW_RAW_DATA;
+
             return single;
         }
         public void FromFigure(CMeasurePairRct single)
@@ -347,7 +354,8 @@ namespace CD_Paramter
             this.param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
             this.param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
             this.param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
-            this.param_comm_04_BOOL_SHOW_RAW_DATA /**/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
+            this.param_comm_04_refinement/***********/= single.param_comm_04_refinement;
+            this.param_comm_05_BOOL_SHOW_RAW_DATA /**/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
         }
     }
 
@@ -356,7 +364,8 @@ namespace CD_Paramter
         private double param_comm_01_compen_A { get; set; }
         private double param_comm_02_compen_B { get; set; }
         private int/**/param_comm_03_spc_enhance { get; set; }
-        private bool param_comm_04_show_raw_data { get; set; }
+        private int/**/param_comm_04_refinement { get; set; } 
+        private bool param_comm_05_show_raw_data { get; set; }
 
 
         public PROPERTY_PairOvl()
@@ -364,7 +373,8 @@ namespace CD_Paramter
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_show_raw_data = false;
+            param_comm_04_refinement = 3;
+            param_comm_05_show_raw_data = false;
         }
         [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
@@ -638,8 +648,10 @@ namespace CD_Paramter
         public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
         [CategoryAttribute("31 Show Raw Data"), DescriptionAttribute("True or False")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-        [CategoryAttribute("31 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;}}
+        [CategoryAttribute("32 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
+        public int REFINEMENT { get { return param_comm_04_refinement; } set { param_comm_04_refinement = value; } }
+        [CategoryAttribute("33 Show Raw Data"), DescriptionAttribute("True or False")]
+        public bool SHOW_RAW_DATA { get{return param_comm_05_show_raw_data;} set{param_comm_05_show_raw_data = value;}}
 
 
         public CMeasurePairOvl ToFigure()
@@ -682,7 +694,8 @@ namespace CD_Paramter
             single.param_comm_01_compen_A = this.param_comm_01_compen_A;
             single.param_comm_02_compen_B = this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = this.SHOW_RAW_DATA;
+            single.param_comm_04_refinement = this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA = this.param_comm_05_show_raw_data;
 
             return single;
         }
@@ -723,7 +736,8 @@ namespace CD_Paramter
             this.param_comm_01_compen_A = single.param_comm_01_compen_A;
             this.param_comm_02_compen_B = single.param_comm_02_compen_B;
             this.param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
-            this.param_comm_04_show_raw_data = single.param_comm_04_BOOL_SHOW_RAW_DATA;
+            this.param_comm_04_refinement = single.param_comm_04_refinement;
+            this.param_comm_05_show_raw_data = single.param_comm_05_BOOL_SHOW_RAW_DATA;
         }
 
     }
@@ -743,7 +757,8 @@ namespace CD_Paramter
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_show_raw_data = false;
+            param_comm_04_refinement = 3;
+            param_comm_05_show_raw_data = false;
         }
 
         public string param_00_algorithm;
@@ -757,7 +772,8 @@ namespace CD_Paramter
         public double param_comm_01_compen_A;
         public double param_comm_02_compen_B;
         public int param_comm_03_spc_enhance;
-        public bool param_comm_04_show_raw_data;
+        public int param_comm_04_refinement;
+        public bool param_comm_05_show_raw_data;
 
         private CustomRectangleD rcEX = new CustomRectangleD();
         private CustomRectangleD rcIN = new CustomRectangleD();
@@ -827,7 +843,7 @@ namespace CD_Paramter
         public int SPC_ENHANCE{ get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
         [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
-        public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;} }
+        public bool SHOW_RAW_DATA { get{return param_comm_05_show_raw_data;} set{param_comm_05_show_raw_data = value;} }
 
         public CMeasurePairCir ToFigure()
         {
@@ -852,7 +868,8 @@ namespace CD_Paramter
             single.param_comm_01_compen_A /*************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B /*************/= this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance /**********/= this.param_comm_03_spc_enhance;
-            single.param_comm_04_BOOL_SHOW_RAW_DATA /***/= this.param_comm_04_show_raw_data;
+            single.param_comm_04_refinement /***********/= this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA /***/= this.param_comm_05_show_raw_data;
 
 
             return single;
@@ -878,7 +895,8 @@ namespace CD_Paramter
             this.param_comm_01_compen_A /*************/= single.param_comm_01_compen_A;
             this.param_comm_02_compen_B /*************/= single.param_comm_02_compen_B;
             this.param_comm_03_spc_enhance /**********/= single.param_comm_03_spc_enhance;
-            this.param_comm_04_show_raw_data /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
+            this.param_comm_04_refinement /***********/= single.param_comm_04_refinement;
+            this.param_comm_05_show_raw_data /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
         }
 
     }

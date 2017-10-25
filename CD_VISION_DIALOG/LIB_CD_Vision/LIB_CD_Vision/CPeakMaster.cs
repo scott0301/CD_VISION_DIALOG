@@ -646,6 +646,8 @@ namespace CD_Measure
             return arr2nd;
         }
 
+       
+
         // sliding window averaging approach 170825 
         public static double[] HC_HISTO_MovingAverageFilter(double[] arr, int nWindow)
         {

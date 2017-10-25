@@ -117,24 +117,9 @@ namespace CD_VISION_DIALOG
             hacker.BOOL_SHOW_DETECT_CROSS = CHK_OFF_DETECT_CROSS.Checked;
         }
 
-        private void BTN_INIT_LOOP_COUNTER_Click(object sender, EventArgs e)
-        {
-            hacker.INT_LOOP_COUNTER = 1;
-            TXT_LOOP_COUNTER.Text = hacker.INT_LOOP_COUNTER.ToString();
-        }
+        
 
-        private void CHK_USE_LOOP_COUNTER_CheckedChanged(object sender, EventArgs e)
-        {
-            TXT_LOOP_COUNTER.Text = hacker.INT_LOOP_COUNTER.ToString();
-            if (CHK_USE_LOOP_COUNTER.Checked == true)
-            {
-                hacker.BOOL_USE_LOOP_COUNTER = true;
-            }
-            else
-            {
-                hacker.BOOL_USE_LOOP_COUNTER = false;
-            }
-        }
+        
 
         private void CHK_USE_GRAB_SAVE_CheckedChanged(object sender, EventArgs e)
         {
@@ -144,6 +129,19 @@ namespace CD_VISION_DIALOG
         private void CHK_USE_FOCUS_IMAGE_CheckedChanged(object sender, EventArgs e)
         {
             hacker.BOOL_USE_FOCUS_SAVE = CHK_USE_FOCUS_IMAGE_SAVE.Checked;
+        }
+
+        private void CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Checked;
+        }
+
+        private void BTN_SET_SAVE_IMAGE_SET_Click(object sender, EventArgs e)
+        {
+            string strPath =WrapperUnion.WrapperFile.SelectFolder();
+            TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
+
+            hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
         }
     }
 }

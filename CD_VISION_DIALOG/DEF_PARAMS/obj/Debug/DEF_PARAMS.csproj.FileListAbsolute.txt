@@ -21,3 +21,4 @@ C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\DEF_PARAMS.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\DEF_PARAMS\obj\Debug\DEF_PARAMS.csprojResolveAssemblyReference.cache
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\DEF_PARAMS\obj\Debug\DEF_PARAMS.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\DEF_PARAMS\obj\Debug\DEF_PARAMS.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\DEF_PARAMS\obj\Debug\DEF_PARAMS.csprojResolveAssemblyReference.cache

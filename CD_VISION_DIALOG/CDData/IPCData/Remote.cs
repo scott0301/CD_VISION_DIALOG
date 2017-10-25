@@ -179,6 +179,76 @@ namespace Remote
         public PointF OVL = new PointF();
     }
 
+    public class StaticResult
+    {
+        public int m_nCycleTarget { get; set; }
+        public int m_nCycleCurrent { get; set; }
+        public int m_nPointTarget { get; set; }
+        public int m_nSequentialIndex { get; set; }
+
+        public List<RES_DATA[,]> mapData = new List<RES_DATA[,]>();
+
+        public void StatisticResult()
+        {
+            ClearMap();
+        }
+
+        public void SetInit( int nDataCount)
+        {
+            for (int nData = 0; nData < nDataCount; nData++)
+            {
+                RES_DATA[,] singlemap = new RES_DATA[m_nPointTarget,m_nCycleTarget];
+                mapData.Add(singlemap);
+            }
+         }
+        public bool InsertData(int nPointCurrent, int dataindex, RES_DATA res, out string strResult)
+        {
+            strResult = string.Empty;
+
+          
+
+            try
+            {
+                RES_DATA[,] single = mapData[dataindex];
+
+                int nPoint = nPointCurrent - 1;
+                int nCycle = m_nCycleCurrent;
+
+                if( nPoint > this.m_nPointTarget || 
+                    nCycle > this.m_nCycleTarget)
+                {
+                    strResult = string.Format("SEQ-TWISTED. CYCLE{0:00}-POINT{1:00}", nPoint, nCycle);
+                    return false;
+                }
+                else
+                {
+                    single[nPoint, nCycle] = res;
+                }
+
+               
+               
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+        public void ClearMap()
+        {
+            this.m_nCycleTarget = 0;
+            this.m_nPointTarget = 0;
+            this.m_nSequentialIndex = 0;
+            this.m_nCycleCurrent = 0;
+
+            if (mapData != null)
+            {
+                mapData.Clear();
+            }
+            
+        }
+
+    }
     [Serializable]
     public class MeasureInfo
     {

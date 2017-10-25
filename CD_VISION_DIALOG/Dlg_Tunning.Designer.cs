@@ -768,7 +768,7 @@
             // 
             // uc_thumb_nail_circle
             // 
-            this.uc_thumb_nail_circle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.uc_thumb_nail_circle.BackColor = System.Drawing.Color.Black;
             this.uc_thumb_nail_circle.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.uc_thumb_nail_circle.Location = new System.Drawing.Point(35, 5);
             this.uc_thumb_nail_circle.m_bLoadAvailable = false;
@@ -816,7 +816,7 @@
             this.groupBox18.ForeColor = System.Drawing.Color.Coral;
             this.groupBox18.Location = new System.Drawing.Point(540, 284);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(188, 153);
+            this.groupBox18.Size = new System.Drawing.Size(188, 118);
             this.groupBox18.TabIndex = 104;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "DETEC PARAM";
@@ -826,7 +826,7 @@
             this.BTN_CHECK_EDGE_DETECTION.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_CHECK_EDGE_DETECTION.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_CHECK_EDGE_DETECTION.ForeColor = System.Drawing.Color.Black;
-            this.BTN_CHECK_EDGE_DETECTION.Location = new System.Drawing.Point(6, 100);
+            this.BTN_CHECK_EDGE_DETECTION.Location = new System.Drawing.Point(10, 80);
             this.BTN_CHECK_EDGE_DETECTION.Name = "BTN_CHECK_EDGE_DETECTION";
             this.BTN_CHECK_EDGE_DETECTION.Size = new System.Drawing.Size(173, 30);
             this.BTN_CHECK_EDGE_DETECTION.TabIndex = 80;
@@ -838,7 +838,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(11, 40);
+            this.label21.Location = new System.Drawing.Point(14, 25);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(94, 14);
             this.label21.TabIndex = 93;
@@ -848,7 +848,7 @@
             // 
             this.TXT_RECT_CANDIDATE_COUNT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.TXT_RECT_CANDIDATE_COUNT.ForeColor = System.Drawing.Color.White;
-            this.TXT_RECT_CANDIDATE_COUNT.Location = new System.Drawing.Point(111, 34);
+            this.TXT_RECT_CANDIDATE_COUNT.Location = new System.Drawing.Point(114, 19);
             this.TXT_RECT_CANDIDATE_COUNT.Maximum = new decimal(new int[] {
             10,
             0,
@@ -872,7 +872,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(13, 67);
+            this.label27.Location = new System.Drawing.Point(16, 52);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(93, 14);
             this.label27.TabIndex = 93;
@@ -882,7 +882,7 @@
             // 
             this.TXT_RECT_WINDOW_SIZE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.TXT_RECT_WINDOW_SIZE.ForeColor = System.Drawing.Color.White;
-            this.TXT_RECT_WINDOW_SIZE.Location = new System.Drawing.Point(112, 62);
+            this.TXT_RECT_WINDOW_SIZE.Location = new System.Drawing.Point(115, 47);
             this.TXT_RECT_WINDOW_SIZE.Maximum = new decimal(new int[] {
             11,
             0,
@@ -1031,7 +1031,7 @@
             this.groupBox17.ForeColor = System.Drawing.Color.Coral;
             this.groupBox17.Location = new System.Drawing.Point(34, 278);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(500, 152);
+            this.groupBox17.Size = new System.Drawing.Size(500, 124);
             this.groupBox17.TabIndex = 99;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "AUTO PEAK DETECTION";
@@ -1063,7 +1063,7 @@
             this.BTN_RECT_UPDATE_DETECTION_RELATED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_UPDATE_DETECTION_RELATED.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_UPDATE_DETECTION_RELATED.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Location = new System.Drawing.Point(274, 106);
+            this.BTN_RECT_UPDATE_DETECTION_RELATED.Location = new System.Drawing.Point(271, 86);
             this.BTN_RECT_UPDATE_DETECTION_RELATED.Name = "BTN_RECT_UPDATE_DETECTION_RELATED";
             this.BTN_RECT_UPDATE_DETECTION_RELATED.Size = new System.Drawing.Size(216, 30);
             this.BTN_RECT_UPDATE_DETECTION_RELATED.TabIndex = 80;
@@ -1075,7 +1075,7 @@
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Location = new System.Drawing.Point(419, 70);
+            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Location = new System.Drawing.Point(416, 50);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Name = "BTN_RECT_VERIFY_EDGE_REGION_SCD";
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Size = new System.Drawing.Size(71, 30);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.TabIndex = 80;
@@ -1088,7 +1088,7 @@
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Location = new System.Drawing.Point(274, 70);
+            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Location = new System.Drawing.Point(271, 50);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Name = "BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD";
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Size = new System.Drawing.Size(27, 30);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.TabIndex = 80;
@@ -1101,7 +1101,7 @@
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Location = new System.Drawing.Point(274, 39);
+            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Location = new System.Drawing.Point(271, 19);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Name = "BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST";
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Size = new System.Drawing.Size(27, 30);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.TabIndex = 80;
@@ -1114,7 +1114,7 @@
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Location = new System.Drawing.Point(419, 40);
+            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Location = new System.Drawing.Point(416, 20);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Name = "BTN_RECT_VERIFY_EDGE_REGION_FST";
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Size = new System.Drawing.Size(71, 30);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.TabIndex = 80;
@@ -1140,7 +1140,7 @@
             "7",
             "8",
             "9"});
-            this.CB_RECT_TARGET_INDEX_SCD.Location = new System.Drawing.Point(307, 75);
+            this.CB_RECT_TARGET_INDEX_SCD.Location = new System.Drawing.Point(304, 55);
             this.CB_RECT_TARGET_INDEX_SCD.Name = "CB_RECT_TARGET_INDEX_SCD";
             this.CB_RECT_TARGET_INDEX_SCD.Size = new System.Drawing.Size(106, 22);
             this.CB_RECT_TARGET_INDEX_SCD.TabIndex = 94;
@@ -1164,7 +1164,7 @@
             "7",
             "8",
             "9"});
-            this.CB_RECT_TARGET_INDEX_FST.Location = new System.Drawing.Point(307, 43);
+            this.CB_RECT_TARGET_INDEX_FST.Location = new System.Drawing.Point(304, 23);
             this.CB_RECT_TARGET_INDEX_FST.Name = "CB_RECT_TARGET_INDEX_FST";
             this.CB_RECT_TARGET_INDEX_FST.Size = new System.Drawing.Size(106, 22);
             this.CB_RECT_TARGET_INDEX_FST.TabIndex = 94;
@@ -1502,7 +1502,7 @@
             // 
             // uc_thumb_nail_rect
             // 
-            this.uc_thumb_nail_rect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.uc_thumb_nail_rect.BackColor = System.Drawing.Color.Black;
             this.uc_thumb_nail_rect.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.uc_thumb_nail_rect.Location = new System.Drawing.Point(35, 5);
             this.uc_thumb_nail_rect.m_bLoadAvailable = false;

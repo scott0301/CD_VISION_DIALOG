@@ -39,7 +39,7 @@ namespace CD_View
         void iRemove_Roi_All();
 
         void iSave_Roi_At(int nIndex);
-        string iSave_Roi_Ptrn();
+        string iSave_Roi_Ptrn(string filename ="");
         
         //******************************************************************************************
         // for vertical rect pair

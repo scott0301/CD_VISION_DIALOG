@@ -1600,7 +1600,10 @@ namespace CD_Measure
 
             });
 
-            double [] fDerivative = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(fImage);
+            // 2nd derivate result is fuck!! noisy image so.. change to 1st derivated
+            //double [] fDerivative = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(fImage);
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
             double fSubPos = 0;
 
             try
@@ -2048,7 +2051,7 @@ namespace CD_Measure
             int rcw = (int)rc.Width;
             int rch = (int)rc.Height;
 
-            bool bSave = false;
+            bool bSave = true;
 
             // get the crop image 
             byte[] processedImage = HC_CropImage(rawImage, imageW, imageH, rcx, rcy, rcw, rch);
@@ -2064,11 +2067,38 @@ namespace CD_Measure
                 sub = HC_ARITH_SUB(sub, processedImage, rcw, rch);
                 Array.Copy(sub, processedImage, sub.Length);
             }
+            else if (nOption == 3)
+            {
+                double[] fImage = processedImage.Select(element => (double)element).ToArray();
+                double[] fBase1 = Computer.ARRAY_GetMeanImage(fImage, rcw, rch, 3);
+                double[] fBase2 = Computer.ARRAY_GetMeanImage(fImage, rcw, rch, 7);
 
+                byte [] rBase1 = Computer.ARRAY_GetNormalizedImage(fBase1);
+                byte [] rBase2 = Computer.ARRAY_GetNormalizedImage(fBase2);
+                processedImage = Computer.HC_ARITH_SUB(rBase1, rBase2, rcw, rch);
+            }
+            else if (nOption == 4)
+            {
+                double[] fKernel = HC_FILTER_GenerateGaussianFilter_MODFIED(0.5, 11);
+                processedImage = HC_FILTER_Convolution(fKernel, processedImage, rcw, rch);
+
+                byte[] reverse = HC_TRANS_Reverse(processedImage, rcw, rch);
+                byte[] rev = HC_ARITH_SUB(reverse, processedImage, rcw, rch);
+                processedImage = HC_ARITH_SUB(rev, processedImage, rcw, rch);
+                
+            }
+
+            if (bSave == true)
+            {
+                SaveImage(processedImage, rcw, rch, "c:\\nicetomeetyou1.bmp");
+            }
             // generate threshold image
             processedImage = HC_THR_Huang(processedImage, rcw, rch);
 
-            if( bSave == true) SaveImage(processedImage, rcw, rch, "c:\\nicetomeetyou2.bmp");
+            if (bSave == true)
+            {
+                SaveImage(processedImage, rcw, rch, "c:\\nicetomeetyou2.bmp");
+            }
 
             CLabelWorker label = new CLabelWorker();
             // set labeling map
@@ -2136,7 +2166,17 @@ namespace CD_Measure
             
             return arr2nd;
         }
+        public static double[] HC_EDGE_Get1stDerivativeArrayFromLineBuff(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
 
+            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            }
+            arr1st[0] = arr1st[1];
+            return arr1st;
+        }
         // get the every raw points based on directional 2nd derivative 170419 
         // this functions prepared for the point filtering or fitting which has outliers.
         public static List<PointF> GetPointList_Derivative_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_TOP, int nDir)
@@ -2416,7 +2456,40 @@ namespace CD_Measure
             }
             return list;
         }
+        public static double HC_EDGE_Get1stDerivativeLine_PosMax(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
 
+            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            }
+            arr1st[0] = arr1st[1];
+
+            double fMax = arr1st.Max();
+            int/**/nPos = Array.IndexOf(arr1st, fMax);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
+
+            return fSubPixel + nPos;
+        }
+        public static double HC_EDGE_Get1stDerivativeLine_PosMin(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
+
+            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            }
+            arr1st[0] = arr1st[1];
+
+            double fMin = arr1st.Min();
+            int/**/nPos = Array.IndexOf(arr1st, fMin);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
+
+            return fSubPixel + nPos;
+        }
         public static double HC_EDGE_Get2ndDerivLine_PosMax(byte[] line)
         {
             double[] buff_1st = new double[line.Length - 1];
@@ -2664,10 +2737,11 @@ namespace CD_Measure
 
                 if (bReverse == false)
                 {
+                    
                     //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
                     //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     ptIN = new PointF(sx + (float)fSubPosIN, y);
                     ptEX = new PointF(sx + (float)fSubPosEX, y);
                 }
@@ -2676,8 +2750,8 @@ namespace CD_Measure
                     Array.Reverse(buffLine);
                     //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
                     //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     ptIN = new PointF(ex - (float)fSubPosIN, y);
                     ptEX = new PointF(ex - (float)fSubPosEX, y);
                 }
@@ -2725,7 +2799,14 @@ namespace CD_Measure
 
                 if (bReverse == false)
                 {
+                    // replace new 171023
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+
+                    // sub new 
                     Computer.HC_EDGE_PREWITT_SUBPIXEL(buffLine, ref fSubPosIN, ref fSubPosEX);
+                    
+                    // original 
                     //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
                     //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
 
@@ -2735,9 +2816,16 @@ namespace CD_Measure
                 else if (bReverse == true)
                 {
                     Array.Reverse(buffLine);
+
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+
+                    // sub new
+                    Computer.HC_EDGE_PREWITT_SUBPIXEL(buffLine, ref fSubPosIN, ref fSubPosEX);
+
+                    // original 
                     //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
                     //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    Computer.HC_EDGE_PREWITT_SUBPIXEL(buffLine, ref fSubPosIN, ref fSubPosEX);
 
                     ptIN = new PointF(x, ey - (float)fSubPosIN);
                     ptEX = new PointF(x, ey - (float)fSubPosEX);
@@ -3967,6 +4055,21 @@ namespace CD_Measure
         // Filters
         //*****************************************************************************************
         #region FILTERES
+        public static byte[] HC_FILTER_MEAN_Window(byte[] rawImage, int imageW, int imageH, RectangleF rc, int nKernelSize)
+        {
+            int cropW = (int)rc.Width;
+            int cropH = (int)rc.Height;
+            byte[] cropImage = HC_CropImage(rawImage, imageW, imageH, rc);
+
+            double[] fImageCrop = null;
+            Parallel.Invoke(() => { fImageCrop = cropImage.Select(element => (double)element).ToArray(); });
+
+            double[] meanPow = ARRAY_GetMeanImage(fImageCrop, cropW, cropH, nKernelSize);
+
+            byte[] cropRaw = ARRAY_GetNormalizedImage(fImageCrop); ;
+            return HC_CropImage_Overlap(rawImage, imageW, imageH, cropRaw, cropW, cropH, rc);
+
+        }
         public static byte[] HC_FILTER_STD_Window(byte[] rawImage, int imageW, int imageH, RectangleF rc, int nKernelSize, double powValue = 0.5)
         {
             int cropW = (int)rc.Width;
@@ -4613,6 +4716,8 @@ namespace CD_Measure
             int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
 
 
+            int nFuckCount = 0;
+
             for (int i = 0; i < 50; i++)
             {
                 samples.Clear();
@@ -4624,7 +4729,15 @@ namespace CD_Measure
 
                 // 이 데이터를 정상적인 데이터로 보고 모델 파라메터를 예측한다.
                 estimated_model = compute_ellipse_model(ref samples);
-                if (!estimated_model.convert_std_form()) { --i; continue; }
+                if (!estimated_model.convert_std_form()) 
+                {
+                    if (nFuckCount < 1000)
+                    {
+                        nFuckCount++;
+                        --i;
+                        continue;
+                    }
+                }
 
                 // 2. Verification
 

@@ -35,8 +35,7 @@ namespace CD_Figure
         public int COUNT_PAIR_CIR { get { return list_pair_Cir.Count; } }
         public int COUNT_PAIR_OVL { get { return list_pair_Ovl.Count; } }
         public int COUNT_RECT { get { return list_rect.Count; } }
-
-   
+           
         public virtual object Clone() { return new CFigureManager(this); }
 
         public bool BOOL_USE_IMAGE_FOCUS { get; set; }
@@ -447,7 +446,8 @@ namespace CD_Figure
         public double param_comm_01_compen_A { get; set; }
         public double param_comm_02_compen_B { get; set; }
         public int/**/param_comm_03_spc_enhance { get; set; }
-        public bool param_comm_04_BOOL_SHOW_RAW_DATA { get; set; }
+        public int param_comm_04_refinement { get; set; }
+        public bool param_comm_05_BOOL_SHOW_RAW_DATA { get; set; }
 
 
         public CMeasureMotherFucker() // common creator 
@@ -458,7 +458,8 @@ namespace CD_Figure
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_BOOL_SHOW_RAW_DATA = false;
+            param_comm_04_refinement = 3;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false;
 
             param_comm_fitting_thr = 3;
         }
@@ -519,8 +520,37 @@ namespace CD_Figure
         // Backup Original Position
         public abstract void CroodinateBackup();
         public abstract void CroodinateRecover();
- 
-        public abstract byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc);
+
+        public byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc)
+        {
+            double[] fKernel = Computer.HC_FILTER_GenerateGaussianFilter(fSigma, KSize);
+            rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
+            return rawImage;
+        }
+        public byte[] DoSPCProcess(byte[] rawImage, int imageW, int imageH, RectangleF rc, int nProcessType)
+        {
+            if (nProcessType == 1)
+            {
+                double fKappa = 1;
+                int nIter = 5;
+                double fDelta = 0.5;
+                rawImage = Computer.HC_FILTER_ADF_Window(rawImage, imageW, imageH, rc, fKappa, nIter, fDelta);
+            }
+            else if (nProcessType == 2)
+            {
+                byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
+                rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
+            }
+            else if (nProcessType == 3)
+            {
+                rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rc, 5, 1);
+            }
+            else if (nProcessType == 4)
+            {
+                rawImage = Computer.HC_FILTER_MEAN_Window(rawImage, imageW, imageH, rc, 5);
+            }
+            return rawImage;
+        }
 
         //***************************************************************************
         // Realistic Member Functions
@@ -597,7 +627,8 @@ namespace CD_Figure
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_BOOL_SHOW_RAW_DATA = false;
+            param_comm_04_refinement = 3;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false;
 
         }
       
@@ -617,18 +648,19 @@ namespace CD_Figure
             single._rc_SCD = this._rc_SCD.CopyTo();
 
             single.param_00_algorithm = this.param_00_algorithm;
-            single.param_01_bool_Use_AutoDetection = this.param_01_bool_Use_AutoDetection;
-            single.param_02_peakTargetIndex_fst = this.param_02_peakTargetIndex_fst;
-            single.param_03_peakTargetIndex_scd = this.param_03_peakTargetIndex_scd;
-            single.param_04_peakCandidate = this.param_04_peakCandidate;
-            single.param_05_windowSize = this.param_05_windowSize;
-            single.param_06_edge_position_fst = this.param_06_edge_position_fst;
-            single.param_07_edge_position_scd = this.param_07_edge_position_scd;
+            single.param_01_bool_Use_AutoDetection/***/= this.param_01_bool_Use_AutoDetection;
+            single.param_02_peakTargetIndex_fst/******/= this.param_02_peakTargetIndex_fst;
+            single.param_03_peakTargetIndex_scd/******/= this.param_03_peakTargetIndex_scd;
+            single.param_04_peakCandidate/************/= this.param_04_peakCandidate;
+            single.param_05_windowSize/***************/= this.param_05_windowSize;
+            single.param_06_edge_position_fst/********/= this.param_06_edge_position_fst;
+            single.param_07_edge_position_scd/********/= this.param_07_edge_position_scd;
              
-            single.param_comm_01_compen_A = this.param_comm_01_compen_A;
-            single.param_comm_02_compen_B = this.param_comm_02_compen_B;
-            single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = this.param_comm_04_BOOL_SHOW_RAW_DATA;
+            single.param_comm_01_compen_A/*************/= this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B/*************/= this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance/**********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_refinement/***********/= this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA/***/= this.param_comm_05_BOOL_SHOW_RAW_DATA;
 
 
             return single;
@@ -787,22 +819,7 @@ namespace CD_Figure
             rc_SCD.OffsetRect(ptDelta);
         }
 
-         public override byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc)
-        {
-            rc.Inflate((int)(rc.Width / 2), (int)(rc.Width / 2));
-
-            double[] fKernel = Computer.HC_FILTER_GenerateGaussianFilter(fSigma, KSize);
-            rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
-
-            bool bSave = false;
-
-            if (bSave == true)
-            {
-                
-                Computer.SaveImage(rawImage, imageW, imageH, "c:\\" +  WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM()+ ".bmp"); 
-            }
-            return rawImage;
-        }
+         
         #endregion
 
         public void ConvertRectangleType(int nPrevious, int nCurrent)
@@ -879,12 +896,14 @@ namespace CD_Figure
             ref List<PointF> listEdges_SIN,
             out PointF p1, out PointF p2, out RectangleF rcEstimated)
         {
+         
+            //********************************************************************************************
+            
+          #region PRE-PROCESS
+
             parseRect rcFST = this.rc_FST;
             parseRect rcSCD = this.rc_SCD;
 
-            //********************************************************************************************
-            
-            #region PRE-PROCESS
             RectangleF rcfFST = rcFST.ToRectangleF();
             RectangleF rcfSCD = rcSCD.ToRectangleF();
             RectangleF rcMerged = CRect.GetMergedRect(rcfFST, rcfSCD);
@@ -892,14 +911,10 @@ namespace CD_Figure
             byte[] rawBackup = new byte[imageW * imageH];
             Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcMerged));
-
-            if (param_comm_03_spc_enhance == 1)
-            {
-                RectangleF rcBuff = rcMerged;
-                rcBuff.Inflate( rcBuff.Width / 2, rcBuff.Height/2);
-                rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcBuff, 7);
-            }
+            RectangleF rcInflate = rcMerged;
+            rcInflate.Inflate(rcInflate.Width / 2, rcInflate.Height / 2);
+            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+            rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
 
             rcEstimated = new RectangleF();
             #endregion
@@ -971,31 +986,23 @@ namespace CD_Figure
                     listEdges_SEX = Computer.HC_EDGE_GetRawPoints_CARDIN_HOR(rawImage, imageW, imageH, rectSF, false, +1);
                     listEdges_SIN = Computer.HC_EDGE_GetRawPoints_CARDIN_HOR(rawImage, imageW, imageH, rectSS, false, -1);
                     listEdges_SMD = CPoint.GetInterMediateList(listEdges_SEX, listEdges_SIN, true);
-
-
-                    //listEdges_FEX = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectFS/* Changed */, false, +1); // rectengle change for option difference 
-                    //listEdges_FIN = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectFF/* Changed */, false, -1); // rectengle change for option difference 
-                    //listEdges_FMD = CPoint.GetInterMediateList(listEdges_FEX, listEdges_FIN, true);
-                    //
-                    //listEdges_SEX = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectSF, true, +1);
-                    //listEdges_SIN = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectSS, true, -1);
-                    //listEdges_SMD = CPoint.GetInterMediateList(listEdges_SEX, listEdges_SIN, true);
                  }
                 else if( param_01_bool_Use_AutoDetection == false)
                 {
-                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(rawImage, imageW, imageH, rectFirst, true, listEdges_FEX, listEdges_FMD, listEdges_FIN);
-                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(rawImage, imageW, imageH, rectSecon, false, listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(rawImage, imageW, imageH, rectFirst, true, listEdges_FIN, listEdges_FMD, listEdges_FEX);
+                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(rawImage, imageW, imageH, rectSecon, false, listEdges_SIN, listEdges_SMD, listEdges_SEX);
                 }
-                //listEdges_FEX = Computer.HC_EDGE_GetRawPoints_CARDIN_HOR(rawImage, imageW, imageH, rectFirst, true, (int)this.param_07_edge_position_fst);
-                //listEdges_FIN = Computer.HC_EDGE_GetRawPoints_CARDIN_HOR(rawImage, imageW, imageH, rectSecon, false, (int)this.param_08_edge_position_scd);
-                
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, 3);
-                
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, 3);
+
+                if (param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, param_comm_04_refinement);
+
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, param_comm_04_refinement);
+                }
 
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 3, listEdges_FEX.Count * 2);
@@ -1013,7 +1020,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_Y(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangleF(), (float)model_fex.sy);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangleF(), (float)model_fmd.sy);
@@ -1080,39 +1087,20 @@ namespace CD_Figure
                 }
                 else if (param_01_bool_Use_AutoDetection == false)
                 {
- 
-                    //listEdges_FEX = Computer.HC_EDGE_GetRawPoints_CARDIN_VER(rawImage, imageW, imageH, rectFirst, true, (int)this.param_07_edge_position_fst);
-                    //listEdges_FIN = Computer.HC_EDGE_GetRawPoints_CARDIN_VER(rawImage, imageW, imageH, rectSecon, false, (int)this.param_08_edge_position_scd);
-                    //
-                    //listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, 3);
-                    //listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, 3);
-
-
-                    //CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_FST, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
-                    //CRansac.ransac_Line_fitting(listEdges_FIN.ToArray(), ref model_SCD, param_comm_fitting_thr, listEdges_FIN.Count / 2, listEdges_FIN.Count * 2);
-
-                    //fDistance = _GetDistance(model_FST.sx, model_SCD.sx);
-                    //
-                    //p1 = new PointF((float)model_FST.sx, (float)model_FST.sy);
-                    //p2 = new PointF((float)model_SCD.sx, (float)model_SCD.sy);
-                    //
-                    //if (this.param_comm_03_BOOL_SHOW_RAW_DATA == false)
-                    //{
-                    //    listEdges_FEX = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangleF(), (float)model_FST.sx);
-                    //    listEdges_FIN = Computer.ReplacePointList_Absolute_X(rcSCD.ToRectangleF(), (float)model_SCD.sx);
-                    //}
-
-
-                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rectFirst, true, listEdges_FEX, listEdges_FMD, listEdges_FIN);
-                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rectSecon, false, listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rectFirst, true, listEdges_FIN, listEdges_FMD, listEdges_FEX);
+                    Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rectSecon, false, listEdges_SIN, listEdges_SMD, listEdges_SEX);
                 }
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, 3);
 
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, 3);
+                if(param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, param_comm_04_refinement);
+                                                                                                  
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, param_comm_04_refinement);
+                }
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
                 CRansac.ransac_Line_fitting(listEdges_FMD.ToArray(), ref model_fmd, param_comm_fitting_thr, listEdges_FMD.Count / 2, listEdges_FMD.Count * 2);
@@ -1129,7 +1117,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_X(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangleF(), (float)model_fex.sx);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangleF(), (float)model_fmd.sx);
@@ -1165,7 +1153,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance(p1, p2);
                  
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     CLine line1 = CRansac.GetFittedLine_VER(model_FST, rc_FST.ToRectangleF());
                     CLine line2 = CRansac.GetFittedLine_VER(model_SCD, rc_SCD.ToRectangleF());
@@ -1199,7 +1187,7 @@ namespace CD_Figure
             parseRect rcSCD = this.rc_SCD;
 
             //********************************************************************************************
-
+            
             #region PRE-PROCESS
 
             RectangleF rcfFST = rcFST.ToRectangleF();
@@ -1209,18 +1197,15 @@ namespace CD_Figure
             byte[] rawBackup = new byte[imageW * imageH];
             Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcMerged));
+            RectangleF rcInflate = rcMerged;
+            rcInflate.Inflate(rcInflate.Width / 2, rcInflate.Height / 2);
+            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+            rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
 
             rcEstimated = new RectangleF();
 
             #endregion 
 
-            if (param_comm_03_spc_enhance == 1)
-            {
-                RectangleF rcBuff = rcMerged;
-                rcBuff.Inflate(rcBuff.Width / 2, rcBuff.Height / 2);
-                rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcBuff, 7);
-            }
             //********************************************************************************************
 
             double fDistance = 0;
@@ -1260,8 +1245,9 @@ namespace CD_Figure
                 RectangleF rectFirst = rcFST.ToRectangleF();
                 RectangleF rectSecon = rcSCD.ToRectangleF();
 
-                if ( param_01_bool_Use_AutoDetection == true) 
+                if ( param_01_bool_Use_AutoDetection == true)
                 {
+                    #region use_auto_detection
                     CPeakPair peakData = new CPeakPair();
                     CPeakPair.PeakPair single = new CPeakPair.PeakPair();
 
@@ -1314,6 +1300,7 @@ namespace CD_Figure
                         listEdges_SMD = CPoint.GetInterMediateList(listEdges_SEX, listEdges_SIN, true);
 
                     }
+                    #endregion
                 }
                 else if (param_01_bool_Use_AutoDetection == false)
                 {
@@ -1334,25 +1321,16 @@ namespace CD_Figure
                     }
                 }
 
-                //listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, 3);
-                //listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, 3);
-                //
-                //
-                //CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_FST, param_comm_fitting_thr, listEdges_FEX.Count / 3, listEdges_FEX.Count * 2);
-                //CRansac.ransac_Line_fitting(listEdges_FIN.ToArray(), ref model_SCD, param_comm_fitting_thr, listEdges_FIN.Count / 3, listEdges_FIN.Count * 2);
-                //
-                //fDistance = _GetDistance(model_SCD.sy, model_FST.sy);
-                //
-                //p1 = new PointF((float)model_FST.sx, (float)model_FST.sy);
-                //p2 = new PointF((float)model_SCD.sx, (float)model_SCD.sy);
+                if (param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, param_comm_04_refinement);
 
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, 3);
-
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, 3);
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, param_comm_04_refinement);
+                }
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
                 CRansac.ransac_Line_fitting(listEdges_FMD.ToArray(), ref model_fmd, param_comm_fitting_thr, listEdges_FMD.Count / 2, listEdges_FMD.Count * 2);
@@ -1369,7 +1347,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_Y(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangle(), (float)model_fex.sy);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangle(), (float)model_fmd.sy);
@@ -1396,6 +1374,7 @@ namespace CD_Figure
 
                 if (param_01_bool_Use_AutoDetection == true)
                 {
+                    #region use_auto_detection
                     CPeakPair peakData = new CPeakPair();
                     CPeakPair.PeakPair single = new CPeakPair.PeakPair();
 
@@ -1444,6 +1423,7 @@ namespace CD_Figure
                         listEdges_SIN = Computer.HC_EDGE_GetRawPoints_2ndDeriv_HOR(rawImage, imageW, imageH, rectSS, false, -1);
                         listEdges_SMD = CPoint.GetInterMediateList(listEdges_SEX, listEdges_SIN, false);
                     }
+                    #endregion
                 }
                 else if (param_01_bool_Use_AutoDetection == false)
                 {
@@ -1458,21 +1438,24 @@ namespace CD_Figure
                     }
                     else if (this.param_00_algorithm == IFX_ALGORITHM.DIR_EX)
                     {
-                        Computer.HC_EDGE_GetRawPoints_2ndDeriv_MULTI_HOR(rawImage, imageW, imageH, rectFirst, true, listEdges_FEX, listEdges_FMD, listEdges_FIN);
-                        Computer.HC_EDGE_GetRawPoints_2ndDeriv_MULTI_HOR(rawImage, imageW, imageH, rectSecon, false, listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                        Computer.HC_EDGE_GetRawPoints_2ndDeriv_MULTI_HOR(rawImage, imageW, imageH, rectFirst, true, listEdges_FIN, listEdges_FMD, listEdges_FEX);
+                        Computer.HC_EDGE_GetRawPoints_2ndDeriv_MULTI_HOR(rawImage, imageW, imageH, rectSecon, false, listEdges_SIN, listEdges_SMD, listEdges_SEX);
 
                         //listEdges_FEX = Computer.HC_EDGE_GetRawPoints_2ndDeriv_HOR(rawImage, imageW, imageH, rectFirst, true, this.param_07_edge_position_fst);
                         //listEdges_FIN = Computer.HC_EDGE_GetRawPoints_2ndDeriv_HOR(rawImage, imageW, imageH, rectSecon, false, this.param_08_edge_position_scd); 
                     }
                 }
 
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, 3);
+                if (param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, param_comm_04_refinement);
 
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, 3);
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, param_comm_04_refinement);
+                }
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
                 CRansac.ransac_Line_fitting(listEdges_FMD.ToArray(), ref model_fmd, param_comm_fitting_thr, listEdges_FMD.Count / 2, listEdges_FMD.Count * 2);
@@ -1495,7 +1478,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_X(p1, p2);
                 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangle(), (float)model_fex.sx);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangle(), (float)model_fmd.sx);
@@ -1573,7 +1556,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance(p1, p2);
       
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangle(), (float)model_FST.sx);
                     listEdges_FIN = Computer.ReplacePointList_Absolute_X(rcSCD.ToRectangle(), (float)model_SCD.sx);
@@ -1607,17 +1590,15 @@ namespace CD_Figure
             byte[] rawBackup = new byte[imageW * imageH];
             Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA,KERNEL, Rectangle.Round(rcMerged));
+            RectangleF rcInflate = rcMerged;
+            rcInflate.Inflate(rcInflate.Width / 2, rcInflate.Height / 2);
+            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+            rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);           
+
             rcEstimated = new RectangleF();
 
             #endregion 
 
-            if (param_comm_03_spc_enhance == 1)
-            {
-                RectangleF rcBuff = rcMerged;
-                rcBuff.Inflate(rcBuff.Width / 2, rcBuff.Height / 2);
-                rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcBuff, 7);
-            }
             //********************************************************************************************
 
             CModelLine model_FST = new CModelLine();
@@ -1694,23 +1675,19 @@ namespace CD_Figure
                 else if( param_01_bool_Use_AutoDetection == false )
                 {
                     Computer.HC_EDGE_GetRawPoints_HOR_LOG_MULTI_Sign(rawImage, imageW, imageH, rectFirst, false, listEdges_FEX, listEdges_FMD, listEdges_FIN);
-                    ; Computer.HC_EDGE_GetRawPoints_HOR_LOG_MULTI_Sign(rawImage, imageW, imageH, rectSecon, true, listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                    ; Computer.HC_EDGE_GetRawPoints_HOR_LOG_MULTI_Sign(rawImage, imageW, imageH, rectSecon, true, listEdges_SIN, listEdges_SMD, listEdges_SEX);
                 }
 
-                // without major cutting, fucking error will be meet for the fucking focused image. 170906
+                if (param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, param_comm_04_refinement);
 
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, false, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, 3);
-                
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, 3);
-
-                //stEdges_FEX = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectFirst, false, (int)this.param_07_edge_position_fst,0);
-                //stEdges_FIN = Computer.HC_EDGE_GetRawPoints_HOR_LOG_Sign(rawImage, imageW, imageH, rectSecon, true, (int)this.param_08_edge_position_scd, 1);
-                //listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, false, 3);
-                //listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, false, 3);
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, false, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, false, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, false, param_comm_04_refinement);
+                }
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
                 CRansac.ransac_Line_fitting(listEdges_FMD.ToArray(), ref model_fmd, param_comm_fitting_thr, listEdges_FMD.Count / 2, listEdges_FMD.Count * 2);
@@ -1727,7 +1704,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_Y(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangle(), (float)model_fex.sy);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_Y(rcFST.ToRectangle(), (float)model_fmd.sy);
@@ -1796,24 +1773,16 @@ namespace CD_Figure
                     Computer.HC_EDGE_GetRawPoints_VER_LOG_MULTI_Sign(rawImage, imageW, imageH, rectSecon, false, listEdges_SEX, listEdges_SMD, listEdges_SIN);
                 }
 
+                if (param_comm_04_refinement != 0)
+                {
+                    listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, param_comm_04_refinement);
+                    listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, param_comm_04_refinement);
+                    listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, param_comm_04_refinement);
 
-                listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, 3);
-                listEdges_FMD = Computer.GetList_FilterBy_MajorDistance(listEdges_FMD, true, 3);
-                listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, 3);
-
-                listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, 3);
-                listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, 3);
-                listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, 3);
-
-
-                //listEdges_FEX = Computer.HC_EDGE_GetRawPoints_VER_LOG_Sign(rawImage, imageW, imageH, rectFirst, false, (int)this.param_07_edge_position_fst,0);
-                //listEdges_FIN = Computer.HC_EDGE_GetRawPoints_VER_LOG_Sign(rawImage, imageW, imageH, rectSecon, true,(int)this.param_08_edge_position_scd,1);
-                //
-                //listEdges_FEX = Computer.GetList_FilterBy_MajorDistance(listEdges_FEX, true, 3);
-                //listEdges_FIN = Computer.GetList_FilterBy_MajorDistance(listEdges_FIN, true, 3);
-                //
-                //CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_FST, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
-                //CRansac.ransac_Line_fitting(listEdges_FIN.ToArray(), ref model_SCD, param_comm_fitting_thr, listEdges_FIN.Count / 2, listEdges_FIN.Count * 2);
+                    listEdges_SEX = Computer.GetList_FilterBy_MajorDistance(listEdges_SEX, true, param_comm_04_refinement);
+                    listEdges_SMD = Computer.GetList_FilterBy_MajorDistance(listEdges_SMD, true, param_comm_04_refinement);
+                    listEdges_SIN = Computer.GetList_FilterBy_MajorDistance(listEdges_SIN, true, param_comm_04_refinement);
+                }
 
                 CRansac.ransac_Line_fitting(listEdges_FEX.ToArray(), ref model_fex, param_comm_fitting_thr, listEdges_FEX.Count / 2, listEdges_FEX.Count * 2);
                 CRansac.ransac_Line_fitting(listEdges_FMD.ToArray(), ref model_fmd, param_comm_fitting_thr, listEdges_FMD.Count / 2, listEdges_FMD.Count * 2);
@@ -1829,7 +1798,7 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance_Only_X(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     listEdges_FEX = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangle(), (float)model_fex.sx);
                     listEdges_FMD = Computer.ReplacePointList_Absolute_X(rcFST.ToRectangle(), (float)model_fmd.sx);
@@ -1865,9 +1834,9 @@ namespace CD_Figure
 
                 fDistance = CPoint.GetDistance(p1, p2);
 
-                if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
-                    if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                    if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
                     {
                         CLine line1 = CRansac.GetFittedLine_VER(model_FST, rcFST.ToRectangleF());
                         CLine line2 = CRansac.GetFittedLine_VER(model_SCD, rcSCD.ToRectangleF());
@@ -1997,7 +1966,7 @@ namespace CD_Figure
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_BOOL_SHOW_RAW_DATA = false;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false;
 
         }
 
@@ -2035,8 +2004,11 @@ namespace CD_Figure
             single.param_07_edge_position_ver_ex_T  = this.param_07_edge_position_ver_ex_T;
             single.param_08_edge_position_ver_ex_B  = this.param_08_edge_position_ver_ex_B;
 
-            
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = this.param_comm_04_BOOL_SHOW_RAW_DATA;
+            single.param_comm_01_compen_A = this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B = this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
+            single.param_comm_04_refinement = this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA = this.param_comm_05_BOOL_SHOW_RAW_DATA;
 
             return single;
         }
@@ -2092,14 +2064,7 @@ namespace CD_Figure
             return string.Empty;
         }
 
-        public override byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc)
-        {
-            rc.Inflate((int)(rc.Width / 2), (int)(rc.Width / 2));
-
-            double[] fKernel = Computer.HC_FILTER_GenerateGaussianFilter(fSigma, KSize);
-            rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
-            return rawImage;
-        }
+   
         public override bool VeryfyMeasurementMatching()
         {
             // 이새끼도 Position 별로 세팅 값이 다를 수 있으므로 멀티 로 해야되겠네 . 젠장. 
@@ -2476,7 +2441,11 @@ namespace CD_Figure
             RectangleF rcMergedH = CRect.GetMergedRect(rcHOR_EX_LFT, rcHOR_EX_RHT);
             RectangleF rcMergedA = CRect.GetMergedRect(rcMergedH, rcMergedV);
 
-            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcMergedA));
+            RectangleF rcInflate = rcMergedA;
+            rcInflate.Inflate(rcInflate.Width / 2, rcInflate.Height / 2);
+            rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+            rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);           
+
 
             //*************************************************************************************
             // 01 HORIZONTAL - EXTERNAL TOP 
@@ -2610,15 +2579,18 @@ namespace CD_Figure
                 listEdges_HOR_EX_RHT = Computer.HC_EDGE_GetRawPoints_CARDIN_VER(rawImage, imageW, imageH, rcHOR_EX_RHT, false, 0);
             }
 
-            listEdges_HOR_EX_LFT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_EX_LFT, true, 5);
-            listEdges_HOR_IN_LFT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_IN_LFT, true, 5);
-            listEdges_HOR_IN_RHT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_IN_RHT, true, 5);
-            listEdges_HOR_EX_RHT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_EX_RHT, true, 5);
+            if (param_comm_04_refinement != 0)
+            {
+                listEdges_HOR_EX_LFT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_EX_LFT, true, param_comm_04_refinement);
+                listEdges_HOR_IN_LFT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_IN_LFT, true, param_comm_04_refinement);
+                listEdges_HOR_IN_RHT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_IN_RHT, true, param_comm_04_refinement);
+                listEdges_HOR_EX_RHT = Computer.GetList_FilterBy_MajorDistance(listEdges_HOR_EX_RHT, true, param_comm_04_refinement);
 
-            listEdges_VER_EX_TOP = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_EX_TOP, false, 5);
-            listEdges_VER_IN_TOP = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_IN_TOP, false, 5);
-            listEdges_VER_IN_BTM = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_IN_BTM, false, 5);
-            listEdges_VER_EX_BTM = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_EX_BTM, false, 5);
+                listEdges_VER_EX_TOP = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_EX_TOP, false, param_comm_04_refinement);
+                listEdges_VER_IN_TOP = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_IN_TOP, false, param_comm_04_refinement);
+                listEdges_VER_IN_BTM = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_IN_BTM, false, param_comm_04_refinement);
+                listEdges_VER_EX_BTM = Computer.GetList_FilterBy_MajorDistance(listEdges_VER_EX_BTM, false, param_comm_04_refinement);
+            }
 
             //*************************************************************************************
             // 10 Summary Every Edges
@@ -2644,7 +2616,7 @@ namespace CD_Figure
             CRansac.ransac_Line_fitting(listEdges_VER_IN_BTM.ToArray(), ref model_VER_IN_BTM, param_comm_fitting_thr, listEdges_VER_IN_BTM.Count / 2, listEdges_VER_IN_BTM.Count);
             CRansac.ransac_Line_fitting(listEdges_VER_EX_BTM.ToArray(), ref model_VER_EX_BTM, param_comm_fitting_thr, listEdges_VER_EX_BTM.Count / 2, listEdges_VER_EX_BTM.Count);
 
-            if (this.param_comm_04_BOOL_SHOW_RAW_DATA == false)
+            if (this.param_comm_05_BOOL_SHOW_RAW_DATA == false)
             {
                 listEdges_HOR_EX_LFT = Computer.ReplacePointList_Absolute_X(rcHOR_EX_LFT, (float)model_HOR_EX_LFT.sx);
                 listEdges_HOR_IN_LFT = Computer.ReplacePointList_Absolute_X(rcHOR_IN_LFT, (float)model_HOR_IN_LFT.sx);
@@ -2698,8 +2670,8 @@ namespace CD_Figure
 
     public class CMeasurePairCir : CMeasureMotherFucker
     {
-        private double _SIGMA = 1.0;
-        private int _KERNEL = 9;
+        private double SIGMA = 1.0;
+        private int KERNEL = 9;
         private int _CENTERING_INFLATE = 10;
 
         public bool UI_SELECTED { get; set; }
@@ -2709,13 +2681,13 @@ namespace CD_Figure
         public RectangleF _rc_EX = new RectangleF(); // 170726 in order to remove relative croodinates
         public RectangleF _rc_IN = new RectangleF();
 
-        public int param_00_algorithm_CIR { get; set; }
-        public double param_01_DMG_Tol { get; set; }
-        public bool param_02_BOOL_TREAT_AS_ELLIPSE { get; set; }
-        public int param_03_CircleDetecType { get; set; }
-        public double param_04_Shrinkage{ get; set; }
-        public int param_05_Outlier_Filter { get; set; }
-        public double param_06_EdgePos { get; set; }
+        public int/******/param_00_algorithm_CIR { get; set; }
+        public double/***/param_01_DMG_Tol { get; set; }
+        public bool/*****/param_02_BOOL_TREAT_AS_ELLIPSE { get; set; }
+        public int/******/param_03_CircleDetecType { get; set; }
+        public double/***/param_04_Shrinkage{ get; set; }
+        public int/******/param_05_Outlier_Filter { get; set; }
+        public double/***/param_06_EdgePos { get; set; }
 
         public CMeasurePairCir() 
         {
@@ -2730,7 +2702,8 @@ namespace CD_Figure
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
             param_comm_03_spc_enhance = 0;
-            param_comm_04_BOOL_SHOW_RAW_DATA = false; 
+            param_comm_04_refinement = 3;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false; 
         }
 
         public CMeasurePairCir CopyTo() // In order to avoid icloneable
@@ -2755,7 +2728,7 @@ namespace CD_Figure
             single.param_comm_01_compen_A = this.param_comm_01_compen_A;
             single.param_comm_02_compen_B = this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = this.param_comm_04_BOOL_SHOW_RAW_DATA;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA = this.param_comm_05_BOOL_SHOW_RAW_DATA;
 
             return single;
         }
@@ -2840,12 +2813,8 @@ namespace CD_Figure
             rc_EX.Offset(ptDelta);
             rc_IN.Offset(ptDelta);
         }
-        public override byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc)
-        {
-            double[] fKernel = Computer.HC_FILTER_GenerateGaussianFilter(fSigma, KSize);
-            rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
-            return rawImage;
-        }
+       
+         
 
         private int GetRadiLength() { return Convert.ToInt32(Math.Max(this.rc_EX.Width / 2.0, this.rc_EX.Height / 2.0)); }
         private int GetRadiLength_INFULL() { return Convert.ToInt32(Math.Max(this.rc_IN.Width / 2.0, this.rc_IN.Height / 2.0)); }
@@ -2863,6 +2832,9 @@ namespace CD_Figure
             out PointF p1, out PointF p2, out RectangleF rcEstimated)
         {
             double fRadius = 0;
+            double fRadius_EX = 0;
+            double fRadius_MD = 0;
+            double fRadius_IN = 0;
 
             // set default value 170720
             p1 = p2 = new PointF(0, 0);
@@ -2877,50 +2849,41 @@ namespace CD_Figure
 
                 //***********************************************************************************
 
-                #region PRE-PROCESS
+              #region PRE-PROCESS
 
                 if (param_03_CircleDetecType != 0)
                 {
-                    //rawImage = Computer.HC_TRANS_MAGMEDI(rawImage, imageW, imageH);
                     rcEstimated = Computer.HC_CIRCLE_CENTERING(rawImage, imageW, imageH, Rectangle.Round(rcInflate), param_04_Shrinkage, param_03_CircleDetecType);
 
                     rcInflate = CRect.SetCenter(rcInflate, rcEstimated.X, rcEstimated.Y);
                     rcCirEx = CRect.SetCenter(rcCirEx, rcEstimated.X, rcEstimated.Y);
                 }
 
-                rawImage = DoPreProcess(rawImage, imageW, imageH, _SIGMA, _KERNEL, Rectangle.Round(rcInflate));
-
                 byte[] rawBackup = new byte[rawImage.Length];
                 Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-                if (param_comm_03_spc_enhance == 1)
+                rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+                rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
+
+                if (rawBackup.Length == 10000)
                 {
-                    double fKappa = 1;
-                    int nIter = 5;
-                    double fDelta = 0.5;
-                    rawImage = Computer.HC_FILTER_ADF_Window(rawImage, imageW, imageH, rcInflate, fKappa, nIter, fDelta);
-                }
-                else if (param_comm_03_spc_enhance == 2)
-                {
-                    byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
-                    rawImage  = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
-                }
-                else if (param_comm_03_spc_enhance == 3)
-                {
-                    rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcInflate, 5, 1);
+                    Computer.SaveImage(rawImage, imageW, imageH, "c:\\yellowShip.bmp");
                 }
 
-                PointF ptCenter = CRect.GetCenter(rcCirEx);
-                #endregion 
+                PointF ptCenter_EX = CRect.GetCenter(rcCirEx);
+                PointF ptCenter_MD = CRect.GetCenter(rcCirEx); ;
+                PointF ptCenter_IN = CRect.GetCenter(rcCirEx); ;
+
+              #endregion 
 
                 //********************************************************************************************
 
                 listEdges_FEX.Clear();
+                listEdges_FMD.Clear();
                 listEdges_FIN.Clear();
 
                 int nRadiLength = this.GetRadiLength();
                 int nRadiStart = this.GetRadiStart();
-                int nRealRadi = nRadiLength - nRadiStart;
 
                 //***********************************************************************************
                 // Get Rough Edges
@@ -2928,22 +2891,21 @@ namespace CD_Figure
                 double[] arrayCos = Computer.GetArray_COS();
                 double[] arraySin = Computer.GetArray_SIN();
 
-                int[] arrSubPosEX = new int[360];
-                int[] arrSubPosIN = new int[360];
-
-                PointF[] arrContour = new PointF[360];
+                PointF[] arrContour_EX = new PointF[360];
+                PointF[] arrContour_MD = new PointF[360];
+                PointF[] arrContour_IN = new PointF[360];
 
               #region EDGE EXTRACTION
-                //for (int nAngle = 0; nAngle < 360; nAngle++)
-                Parallel.For(0, 360, nAngle =>
+                for (int nAngle = 0; nAngle < 360; nAngle++)
+                //Parallel.For(0, 360, nAngle =>
                 {
                     PointF[] ptTarget_IN = new PointF[nRadiLength - nRadiStart];
                     PointF[] ptTarget_EX = new PointF[nRadiLength - nRadiStart];
 
                     for (int nRadiPos = nRadiStart, nIndex = 0; nRadiPos < nRadiLength; nRadiPos++)
                     {
-                        double x = ptCenter.X + (nRadiPos * arrayCos[nAngle]);
-                        double y = ptCenter.Y + (nRadiPos * arraySin[nAngle]);
+                        double x = ptCenter_EX.X + (nRadiPos * arrayCos[nAngle]);
+                        double y = ptCenter_EX.Y + (nRadiPos * arraySin[nAngle]);
 
                         if (x < 0 || y < 0 || x >= imageW || y >= imageH) { continue; }
 
@@ -2959,49 +2921,37 @@ namespace CD_Figure
                     double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, ptTarget_IN, -1);
                     double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, ptTarget_EX, +1);
 
-                    arrSubPosEX[nAngle] = (int)Math.Floor(fSubPosEX);
-                    arrSubPosIN[nAngle] = (int)Math.Floor(fSubPosIN);
-
-                    double EX_X = 0; double EX_Y = 0;
-                    double IN_X = 0; double IN_Y = 0;
+                    double EX_X = ptCenter_EX.X; double EX_Y = ptCenter_EX.Y;
+                    double IN_X = ptCenter_EX.X; double IN_Y = ptCenter_EX.Y;
 
                     if (fSubPosEX != 0)
                     {
-                        EX_X = ptCenter.X + ((nRadiLength - fSubPosEX) * arrayCos[nAngle]);
-                        EX_Y = ptCenter.Y + ((nRadiLength - fSubPosEX) * arraySin[nAngle]);
+                        EX_X = ptCenter_EX.X + ((double)(nRadiLength - fSubPosEX) * arrayCos[nAngle]);
+                        EX_Y = ptCenter_EX.Y + ((double)(nRadiLength - fSubPosEX) * arraySin[nAngle]);
 
                     }
                     if (fSubPosIN != 0)
                     {
-                        IN_X = ptCenter.X + ((nRadiStart + fSubPosIN) * arrayCos[nAngle]);
-                        IN_Y = ptCenter.Y + ((nRadiStart + fSubPosIN) * arraySin[nAngle]);
+                        IN_X = ptCenter_IN.X + ((double)(nRadiStart + fSubPosIN) * arrayCos[nAngle]);
+                        IN_Y = ptCenter_IN.Y + ((double)(nRadiStart + fSubPosIN) * arraySin[nAngle]);
                     }
+
 
                     PointF pt_EX = new PointF((float)EX_X, (float)EX_Y);
                     PointF pt_IN = new PointF((float)IN_X, (float)IN_Y);
+                    PointF pt_MD = CPoint.GetMidPoint(pt_EX, pt_IN);
 
-                    if (this.param_06_EdgePos == 0)
-                    {
-                        if (fSubPosEX != 0 && fSubPosIN != 0)
-                        {
-                            CLine line = new CLine(pt_IN, pt_EX);
-                            PointF ptEstimatedCenter = line.CENTER;
-                            arrContour[nAngle] = ptEstimatedCenter;
-                        }
-                        else{arrContour[nAngle] = ptCenter;}
-                    }
+                    arrContour_EX[nAngle] = pt_EX;
+                    arrContour_MD[nAngle] = pt_MD;
+                    arrContour_IN[nAngle] = pt_IN;
 
-                    if (this.param_06_EdgePos == +1) { if (fSubPosEX != 0) { arrContour[nAngle] = pt_EX; } else { arrContour[nAngle] = ptCenter; } }
-                    if (this.param_06_EdgePos == -1) { if (fSubPosIN != 0) { arrContour[nAngle] = pt_IN; } else { arrContour[nAngle] = ptCenter; } }
-                });
+                }//);
 
                 #endregion
 
-                double fMajorEX = (double)Computer.GetMajorValue(arrSubPosEX);
-                double fMajorIN = (double)Computer.GetMajorValue(arrSubPosIN);
-
-            
-                listEdges_FEX = arrContour.ToList();
+                listEdges_FEX = arrContour_EX.ToList();
+                listEdges_FMD = arrContour_MD.ToList();
+                listEdges_FIN = arrContour_IN.ToList();
 
                 // Currently listcount = raw contour points !@!!@!@!@!@
                 //********************************************************************
@@ -3012,67 +2962,89 @@ namespace CD_Figure
                     if (0 < param_01_DMG_Tol && param_01_DMG_Tol < 1)
                     {
                         listEdges_FEX = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX, this.param_01_DMG_Tol);
+                        listEdges_FMD = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD, this.param_01_DMG_Tol);
+                        listEdges_FIN = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN, this.param_01_DMG_Tol);
                     }
                     else if (this.param_01_DMG_Tol == 1)
                     {
                         listEdges_FEX = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX);
+                        listEdges_FMD = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD);
+                        listEdges_FIN = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN);
                     }
 
                     if (param_05_Outlier_Filter == 1)
                     {
                         Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -(rcEstimated.Width / 2.0), -(rcEstimated.Height / 2.0));
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
 
-                    // backup rawdata 
-                    listEdges_FIN = listEdges_FEX.ToList();
+                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter_EX, ref fRadius_EX);
+                    Computer.HC_FIT_Circle(listEdges_FMD, ref ptCenter_MD, ref fRadius_MD);
+                    Computer.HC_FIT_Circle(listEdges_FIN, ref ptCenter_IN, ref fRadius_IN);
 
-                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter, ref fRadius);
+                    fRadius = fRadius_MD;
 
-                    p1 = new PointF((float)(ptCenter.X - fRadius), ptCenter.Y);
-                    p2 = new PointF((float)(ptCenter.X + fRadius), ptCenter.Y);
-
+                    p1 = new PointF((float)(ptCenter_EX.X - fRadius_EX), (float)ptCenter_EX.Y);
+                    p2 = new PointF((float)(ptCenter_EX.X + fRadius_EX), (float)ptCenter_EX.Y);
                     #endregion
                 }
                 else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
                 {
-                    #region THIS IS AN ELLIPSE
+                  #region THIS IS AN ELLIPSE
                     if (param_05_Outlier_Filter == 1)
                     {
-                        Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -(rcEstimated.Width / 2.0), -(rcEstimated.Height / 2.0));
+                        Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -rcEstimated.Width, -rcEstimated.Height);
+
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
 
                     double distanceThreshold = 50;
-                    CModelEllipse model = new CModelEllipse();
-                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model, distanceThreshold);
+                    CModelEllipse model_EX = new CModelEllipse();
+                    CModelEllipse model_MD = new CModelEllipse();
+                    CModelEllipse model_IN = new CModelEllipse();
 
-                    listEdges_FIN = listEdges_FEX.ToList();
-                    listEdges_FEX= CRansac.GetEllipseContours(model);
+                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model_EX, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FMD.ToArray(), ref model_MD, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FIN.ToArray(), ref model_IN, distanceThreshold);
+
+                    listEdges_SEX = CRansac.GetEllipseContours(model_EX);
+                    listEdges_SMD = CRansac.GetEllipseContours(model_MD);
+                    listEdges_SIN = CRansac.GetEllipseContours(model_IN);
+
+                    PointF[] arrPt_EX = listEdges_FEX.ToArray();
+                    PointF[] arrPt_MD = listEdges_FMD.ToArray();
+                    PointF[] arrPt_IN = listEdges_FIN.ToArray();
+
+                    fRadius_EX = model_EX.w;
+                    fRadius_MD = model_MD.w;
+                    fRadius_IN = model_IN.w;
 
 
-                    for (int i = 0; i < listEdges_FEX.Count; i++)
-                    {
-                        PointF pt = listEdges_FEX.ElementAt(i);
-                        fRadius += CPoint.GetDistance(ptCenter, pt);
-                    }
-                    fRadius /= listEdges_FEX.Count;
+                    fRadius = fRadius_MD;
                     #endregion
                 }
 
-                if (param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
-                  #region SHOW RAW DATA
+                  #region Show raw data
                     if (param_02_BOOL_TREAT_AS_ELLIPSE == false)
                     {
-                        listEdges_FEX = Computer.GenCircleContourPoints(fRadius, ptCenter);
-                        listEdges_FIN.Clear();
+                        listEdges_FEX = Computer.GenCircleContourPoints(fRadius_EX, ptCenter_EX);
+                        listEdges_FMD = Computer.GenCircleContourPoints(fRadius_MD, ptCenter_EX);
+                        listEdges_FIN = Computer.GenCircleContourPoints(fRadius_IN, ptCenter_EX);
+
                     }
                     else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
                     {
-                        listEdges_FIN = listEdges_FEX.ToList();
+                        listEdges_FEX = listEdges_SEX.ToList();
+                        listEdges_FMD = listEdges_SMD.ToList();
+                        listEdges_FIN = listEdges_SIN.ToList();
                     }
-                    #endregion
+                  #endregion
                 } 
             }
             catch (Exception ex)
@@ -3094,6 +3066,9 @@ namespace CD_Figure
             out PointF p1, out PointF p2, out RectangleF rcEstimated)
         {
             double fRadius = 0;
+            double fRadius_EX = 0;
+            double fRadius_MD = 0;
+            double fRadius_IN = 0;
 
             // set default value 170720
             p1 = p2 = new PointF(0, 0);
@@ -3107,46 +3082,37 @@ namespace CD_Figure
 
                 //********************************************************************************************
 
-                #region PRE-PREOCESS
+                #region PRE-PROCESS
+
                 if (param_03_CircleDetecType != 0)
                 {
-                    //rawImage = Computer.HC_TRANS_MAGMEDI(rawImage, imageW, imageH);
-
                     rcEstimated = Computer.HC_CIRCLE_CENTERING(rawImage, imageW, imageH, Rectangle.Round(rcInflate), param_04_Shrinkage, param_03_CircleDetecType);
+
                     rcInflate = CRect.SetCenter(rcInflate, rcEstimated.X, rcEstimated.Y);
                     rcCirEx = CRect.SetCenter(rcCirEx, rcEstimated.X, rcEstimated.Y);
                 }
-                
-                rawImage = DoPreProcess(rawImage, imageW, imageH, _SIGMA, _KERNEL, Rectangle.Round(rcInflate));
 
                 byte[] rawBackup = new byte[rawImage.Length];
                 Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-                if (param_comm_03_spc_enhance == 1)
-                {
-                    double fKappa = 1;
-                    int nIter = 5;
-                    double fDelta = 0.5;
-                    rawImage = Computer.HC_FILTER_ADF_Window(rawImage, imageW, imageH, rcInflate, fKappa, nIter, fDelta);
-                 }
-                else if (param_comm_03_spc_enhance == 2)
-                {
-                    byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
-                    rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
-                }
-                else if (param_comm_03_spc_enhance == 3)
-                {
-                    rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcInflate, 5, 0.5);
-                }
-                //Computer.SaveImage(rawImage, imageW, imageH, "c:\\wackfucker.bmp");
+                rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+                rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
 
-                PointF ptCenter = CRect.GetCenter(rcCirEx);
+                if (rawBackup.Length == 10000)
+                {
+                    Computer.SaveImage(rawImage, imageW, imageH, "c:\\yellowShip.bmp");
+                }
+
+                PointF ptCenter_EX = CRect.GetCenter(rcCirEx);
+                PointF ptCenter_MD = CRect.GetCenter(rcCirEx); ;
+                PointF ptCenter_IN = CRect.GetCenter(rcCirEx); ;
 
                 #endregion
 
                 //********************************************************************************************
 
                 listEdges_FEX.Clear();
+                listEdges_FMD.Clear();
                 listEdges_FIN.Clear();
  
                 int nRadiLength = this.GetRadiLength();
@@ -3156,168 +3122,183 @@ namespace CD_Figure
                 double[] arrayCos = Computer.GetArray_COS();
                 double[] arraySin = Computer.GetArray_SIN();
 
-                PointF[] arrContour = new PointF[360];
+                PointF[] arrContour_EX = new PointF[360];
+                PointF[] arrContour_MD = new PointF[360];
+                PointF[] arrContour_IN = new PointF[360];
 
                 if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_EX)
                 {
-                    #region DIRECTION_EXTERNAL
-                    double [] rawAnglurarSlice = Computer.GetAnglurarSliceArray(rawImage, imageW, imageH, nRadiLength, nRadiStart, ptCenter, false);
+                  #region DIRECTION_EXTERNAL
+
+                    double[] rawAnglurarSlice = Computer.GetAnglurarSliceArray(rawImage, imageW, imageH, nRadiLength, nRadiStart, ptCenter_EX, false);
+                    
                     byte[] rawAS = Computer.HC_CONV_Double2Byte(rawAnglurarSlice);
                     Computer.SaveImage(rawAS, nRadiLength-nRadiStart, 360, "c:\\licker.bmp");
-                    //for (int nAngle = 0; nAngle < 360; nAngle++)
-                    Parallel.For(0, 360, nAngle =>
+                    
+                    for (int nAngle = 0; nAngle < 360; nAngle++)
+                    //Parallel.For(0, 360, nAngle =>
                     {
-                        double fSubPos = 0;
-                        double ex = 0;
-                        double ey = 0;
+                        double EX_X = ptCenter_EX.X; double EX_Y = ptCenter_EX.Y;
+                        double IN_X = ptCenter_EX.X; double IN_Y = ptCenter_EX.Y;
 
                         double[] buffLine = new double[nRealRadi];
                         Array.Copy(rawAnglurarSlice, (nAngle * nRealRadi), buffLine, 0, nRealRadi);
 
-                        if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_EX && this.param_06_EdgePos == +1)
-                        {
-                            fSubPos = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                            ex = ptCenter.X + ((nRadiStart + fSubPos) * arrayCos[nAngle]);
-                            ey = ptCenter.Y + ((nRadiStart + fSubPos) * arraySin[nAngle]);
-                        }
-                        else if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_EX && this.param_06_EdgePos == -1)
-                        {
-                            fSubPos = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                            ex = ptCenter.X + ((nRadiStart + fSubPos) * arrayCos[nAngle]);
-                            ey = ptCenter.Y + ((nRadiStart + fSubPos) * arraySin[nAngle]);
-                        }
-                        else if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_EX && this.param_06_EdgePos == 0)
-                        {
-                            double fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                            double EX_X = ptCenter.X + ((nRadiStart + fSubPosEX) * arrayCos[nAngle]);
-                            double EX_Y = ptCenter.Y + ((nRadiStart + fSubPosEX) * arraySin[nAngle]);
+                        double fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                        double fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
 
-                            double fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                            double IN_X = ptCenter.X + ((nRadiStart + fSubPosIN) * arrayCos[nAngle]);
-                            double IN_Y = ptCenter.Y + ((nRadiStart + fSubPosIN) * arraySin[nAngle]);
-
-                            ex = Math.Min(EX_X, IN_X) + ((Math.Max(EX_X, IN_X) - Math.Min(EX_X, IN_X)) / 2.0);
-                            ey = Math.Min(EX_Y, IN_Y) + ((Math.Max(EX_Y, IN_Y) - Math.Min(EX_Y, IN_Y)) / 2.0);
+                        if (fSubPosEX != 0)
+                        {
+                            EX_X = ptCenter_EX.X + ((nRadiStart + fSubPosEX) * arrayCos[nAngle]);
+                            EX_Y = ptCenter_EX.Y + ((nRadiStart + fSubPosEX) * arraySin[nAngle]);
                         }
 
-                        arrContour[nAngle] = new PointF((float)ex, (float)ey); ;
-                    });
+                        if (fSubPosIN != 0)
+                        {
+                            IN_X = ptCenter_EX.X + ((nRadiStart + fSubPosIN) * arrayCos[nAngle]);
+                            IN_Y = ptCenter_EX.Y + ((nRadiStart + fSubPosIN) * arraySin[nAngle]);
+                        }
+
+                        PointF pt_EX = new PointF((float)EX_X, (float)EX_Y);
+                        PointF pt_IN = new PointF((float)IN_X, (float)IN_Y);
+                        PointF pt_MD = CPoint.GetMidPoint(pt_EX, pt_IN);
+
+                        arrContour_EX[nAngle] = pt_EX;
+                        arrContour_MD[nAngle] = pt_MD;
+                        arrContour_IN[nAngle] = pt_IN;
+                    }
                     #endregion
                 }
                 else if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_IN)
                 {
-                    #region DIRECTION_INTERANAL
-                    double [] rawAnglurarSlice = Computer.GetAnglurarSliceArray(rawImage, imageW, imageH, nRadiLength, nRadiStart, ptCenter, true);
+                  #region DIRECTION_INTERANAL
+                    double[] rawAnglurarSlice = Computer.GetAnglurarSliceArray(rawImage, imageW, imageH, nRadiLength, nRadiStart, ptCenter_EX, true);
 
                     //for (int nAngle = 0; nAngle < 360; nAngle++)
                     Parallel.For(0, 360, nAngle =>
                     {
-                        double fSubPos = 0;
-                        double ex = 0;
-                        double ey = 0;
-
                         double[] buffLine = new double[nRealRadi];
                         Array.Copy(rawAnglurarSlice, (nAngle * nRealRadi), buffLine, 0, nRealRadi);
 
-                        if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_IN && this.param_06_EdgePos == +1)
-                        {
-                            fSubPos = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                            ex = ptCenter.X + ((nRadiLength - 1 - fSubPos) * arrayCos[nAngle]);
-                            ey = ptCenter.Y + ((nRadiLength - 1 - fSubPos) * arraySin[nAngle]);
-                        }
-                        else if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_IN && this.param_06_EdgePos == -1)
-                        {
-                            fSubPos = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                            ex = ptCenter.X + ((nRadiLength - 1 - fSubPos) * arrayCos[nAngle]);
-                            ey = ptCenter.Y + ((nRadiLength - 1 - fSubPos) * arraySin[nAngle]);
-                        }
-                        else if (this.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_IN && this.param_06_EdgePos == 0)
-                        {
-                            double fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                            double EX_X = ptCenter.X + ((nRadiLength - 1 - fSubPosEX) * arrayCos[nAngle]);
-                            double EX_Y = ptCenter.Y + ((nRadiLength - 1 - fSubPosEX) * arraySin[nAngle]);
+                        double EX_X = ptCenter_EX.X; double EX_Y = ptCenter_EX.Y;
+                        double IN_X = ptCenter_EX.X; double IN_Y = ptCenter_EX.Y;
 
-                            double fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                            double IN_X = ptCenter.X + ((nRadiLength - 1 - fSubPosIN) * arrayCos[nAngle]);
-                            double IN_Y = ptCenter.Y + ((nRadiLength - 1 - fSubPosIN) * arraySin[nAngle]);
-                            ex = Math.Min(EX_X, IN_X) + ((Math.Max(EX_X, IN_X) - Math.Min(EX_X, IN_X)) / 2.0);
-                            ey = Math.Min(EX_Y, IN_Y) + ((Math.Max(EX_Y, IN_Y) - Math.Min(EX_Y, IN_Y)) / 2.0);
+                        double fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                        double fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+
+                        if( fSubPosEX != 0)
+                        {
+                            EX_X = ptCenter_EX.X + ((nRadiLength - 1 - fSubPosEX) * arrayCos[nAngle]);
+                            EX_Y = ptCenter_EX.Y + ((nRadiLength - 1 - fSubPosEX) * arraySin[nAngle]);
                         }
-                        arrContour[nAngle] = new PointF((float)ex, (float)ey); ;
+                        if (fSubPosIN != 0)
+                        {
+                            IN_X = ptCenter_EX.X + ((nRadiLength - 1 - fSubPosIN) * arrayCos[nAngle]);
+                            IN_Y = ptCenter_EX.Y + ((nRadiLength - 1 - fSubPosIN) * arraySin[nAngle]);
+                        }
+
+                        PointF pt_EX = new PointF((float)EX_X, (float)EX_Y);
+                        PointF pt_IN = new PointF((float)IN_X, (float)IN_Y);
+                        PointF pt_MD = CPoint.GetMidPoint(pt_EX, pt_IN);
+
+                        arrContour_EX[nAngle] = pt_EX;
+                        arrContour_MD[nAngle] = pt_MD;
+                        arrContour_IN[nAngle] = pt_IN;
                     });
                     #endregion
                 }
 
-                listEdges_FEX = arrContour.ToList();
+                listEdges_FEX = arrContour_EX.ToList();
+                listEdges_FMD = arrContour_MD.ToList();
+                listEdges_FIN = arrContour_IN.ToList();
 
                 if (param_02_BOOL_TREAT_AS_ELLIPSE == false)
                 {
-                  #region THIS IS NOT AN ELLIPSE
+                    #region THIS IS NOT AN ELLIPSE
                     if (0 < param_01_DMG_Tol && param_01_DMG_Tol < 1)
                     {
                         listEdges_FEX = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX, this.param_01_DMG_Tol);
+                        listEdges_FMD = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD, this.param_01_DMG_Tol);
+                        listEdges_FIN = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN, this.param_01_DMG_Tol);
                     }
                     else if (this.param_01_DMG_Tol == 1)
                     {
                         listEdges_FEX = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX);
+                        listEdges_FMD = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD);
+                        listEdges_FIN = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN);
                     }
-
-                    // Additive Work 1 : Get the tempolary Radius 
-                    //CModelCircle model = new CModelCircle();
-                    //CRansac.ransac_Circle_fitting(listContour.ToArray(), ref model, 1.0, tempFiltered.Count / 3, tempFiltered.Count * 2);
-                    //double fTempRadi = model.r;
 
                     if (param_05_Outlier_Filter == 1)
                     {
                         Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -(rcEstimated.Width / 2.0), -(rcEstimated.Height / 2.0));
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
 
-                    listEdges_FIN = listEdges_FEX.ToList();
+                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter_EX, ref fRadius_EX);
+                    Computer.HC_FIT_Circle(listEdges_FMD, ref ptCenter_MD, ref fRadius_MD);
+                    Computer.HC_FIT_Circle(listEdges_FIN, ref ptCenter_IN, ref fRadius_IN);
 
-                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter, ref fRadius);
+                    fRadius = fRadius_MD;
 
-                    p1 = new PointF((float)(ptCenter.X - fRadius), ptCenter.Y);
-                    p2 = new PointF((float)(ptCenter.X + fRadius), ptCenter.Y);
+                    p1 = new PointF((float)(ptCenter_EX.X - fRadius_EX), (float)ptCenter_EX.Y);
+                    p2 = new PointF((float)(ptCenter_EX.X + fRadius_EX), (float)ptCenter_EX.Y);
                     #endregion
                 }
                 else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
                 {
-                    #region ELLIPSE
+                    #region THIS IS AN ELLIPSE
                     if (param_05_Outlier_Filter == 1)
                     {
-                        Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -(rcEstimated.Width / 2.0), -(rcEstimated.Height / 2.0));
+                        Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -rcEstimated.Width, -rcEstimated.Height);
+
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
 
                     double distanceThreshold = 50;
-                    CModelEllipse model = new CModelEllipse();
-                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model, distanceThreshold);
+                    CModelEllipse model_EX = new CModelEllipse();
+                    CModelEllipse model_MD = new CModelEllipse();
+                    CModelEllipse model_IN = new CModelEllipse();
 
-                    listEdges_FIN = listEdges_FEX.ToList();
-                    listEdges_FEX = CRansac.GetEllipseContours(model);
+                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model_EX, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FMD.ToArray(), ref model_MD, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FIN.ToArray(), ref model_IN, distanceThreshold);
 
-                    for (int i = 0; i < listEdges_FIN.Count; i++)
-                    {
-                        PointF pt = listEdges_FIN.ElementAt(i);
-                        fRadius += CPoint.GetDistance(ptCenter, pt);
-                    }
-                    fRadius /= listEdges_FIN.Count;
+                    listEdges_SEX = CRansac.GetEllipseContours(model_EX);
+                    listEdges_SMD = CRansac.GetEllipseContours(model_MD);
+                    listEdges_SIN = CRansac.GetEllipseContours(model_IN);
+
+                    PointF[] arrPt_EX = listEdges_FEX.ToArray();
+                    PointF[] arrPt_MD = listEdges_FMD.ToArray();
+                    PointF[] arrPt_IN = listEdges_FIN.ToArray();
+
+                    fRadius_EX = model_EX.w;
+                    fRadius_MD = model_MD.w;
+                    fRadius_IN = model_IN.w;
+                    
+                    fRadius = fRadius_MD;
 #endregion
                 }
 
-                if (param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
-                    #region Show data
+                    #region Show raw data
                     if (param_02_BOOL_TREAT_AS_ELLIPSE == false)
-                        {
-                            listEdges_FEX = Computer.GenCircleContourPoints(fRadius, ptCenter);
-                            listEdges_FIN.Clear();
-                        }
-                        else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
-                        {
-                            listEdges_FEX = listEdges_FIN.ToList();
-                        }
+                    {
+                        listEdges_FEX = Computer.GenCircleContourPoints(fRadius_EX, ptCenter_EX);
+                        listEdges_FMD = Computer.GenCircleContourPoints(fRadius_MD, ptCenter_EX);
+                        listEdges_FIN = Computer.GenCircleContourPoints(fRadius_IN, ptCenter_EX);
+
+                    }
+                    else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
+                    {
+                        listEdges_FEX = listEdges_SEX.ToList();
+                        listEdges_FMD = listEdges_SMD.ToList();
+                        listEdges_FIN = listEdges_SIN.ToList();
+                    }
                     #endregion
                 } // bShowData
             }
@@ -3339,6 +3320,9 @@ namespace CD_Figure
             out PointF p1, out PointF p2, out RectangleF rcEstimated)
         {
             double fRadius = 0;
+            double fRadius_EX = 0;
+            double fRadius_MD = 0;
+            double fRadius_IN = 0;
 
             // set default value 170720
             p1 = p2 = new PointF(0, 0);
@@ -3348,50 +3332,35 @@ namespace CD_Figure
             {
                 RectangleF rcCirEx = this.rc_EX;
                 RectangleF rcCirIn = this.rc_IN;
-
                 RectangleF rcInflate = CRect.InflateRect(rcCirEx, _CENTERING_INFLATE);
 
                 //***********************************************************************************
 
-                #region PRE-PROCESS
+              #region PRE-PROCESS
                 if (param_03_CircleDetecType != 0)
                 {
-                    //rawImage = Computer.HC_TRANS_MAGMEDI(rawImage, imageW, imageH);
-
                     rcEstimated = Computer.HC_CIRCLE_CENTERING(rawImage, imageW, imageH, Rectangle.Round(rcInflate), param_04_Shrinkage, param_03_CircleDetecType);
 
                     rcInflate = CRect.SetCenter(rcInflate, rcEstimated.X, rcEstimated.Y);
-                    rcCirEx = CRect.SetCenter( rcCirEx, rcEstimated.X, rcEstimated.Y);
+                    rcCirEx = CRect.SetCenter(rcCirEx, rcEstimated.X, rcEstimated.Y);
                 }
-
-                rawImage = DoPreProcess(rawImage, imageW, imageH, _SIGMA, _KERNEL, Rectangle.Round(rcInflate));
 
                 byte[] rawBackup = new byte[rawImage.Length];
                 Array.Copy(rawImage, rawBackup, rawImage.Length);
 
-                if (param_comm_03_spc_enhance == 1)
-                {
-                    double fKappa = 1;
-                    int nIter = 5;
-                    double fDelta = 0.5;
-                    rawImage = Computer.HC_FILTER_ADF_Window(rawImage, imageW, imageH, rcInflate, fKappa, nIter, fDelta);
-                }
-                else if (param_comm_03_spc_enhance == 2)
-                {
-                    byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
-                    rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
-                 }
-                else if (param_comm_03_spc_enhance == 3)
-                {
-                    rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rcInflate, 5, 0.5);
-                }
-                PointF ptCenter = CRect.GetCenter(rcCirEx);
+                rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
+                rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
 
-                #endregion
+                PointF ptCenter_EX = CRect.GetCenter(rcCirEx);
+                PointF ptCenter_MD = CRect.GetCenter(rcCirEx); ;
+                PointF ptCenter_IN = CRect.GetCenter(rcCirEx); ;
+
+              #endregion
 
                 //***********************************************************************************
 
                 listEdges_FEX.Clear();
+                listEdges_FMD.Clear();
                 listEdges_FIN.Clear();
 
                 int nRadiLength = this.GetRadiLength();
@@ -3403,12 +3372,11 @@ namespace CD_Figure
                 double[] arrayCos = Computer.GetArray_COS();
                 double[] arraySin = Computer.GetArray_SIN();
 
-                int[] arrSubPosEX = new int[360];
-                int[] arrSubPosIN = new int[360];
+                PointF[] arrContour_EX = new PointF[360];
+                PointF[] arrContour_MD = new PointF[360];
+                PointF[] arrContour_IN = new PointF[360];
 
-                PointF[] arrContour = new PointF[360];
-
-                #region EDGE-EXTRACTION
+              #region EDGE-EXTRACTION
                 for (int nAngle = 0; nAngle < 360; nAngle++)
                 //Parallel.For(0, 360, nAngle =>
                 {
@@ -3418,8 +3386,8 @@ namespace CD_Figure
  
                     for (int nRadiPos = nRadiStart, nIndex = 0; nRadiPos < nRadiLength; nRadiPos++)
                     {
-                        double x = ptCenter.X + (nRadiPos * arrayCos[nAngle]);
-                        double y = ptCenter.Y + (nRadiPos * arraySin[nAngle]);
+                        double x = ptCenter_EX.X + (nRadiPos * arrayCos[nAngle]);
+                        double y = ptCenter_EX.Y + (nRadiPos * arraySin[nAngle]);
 
                         if (x < 0 || y < 0 || x >= imageW || y >= imageH) { continue; }
 
@@ -3438,48 +3406,36 @@ namespace CD_Figure
                     double fSubPos_EX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, ptTarget_EX, 1);
                     double fSubPos_IN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, ptTarget_IN, 1);
 
-                    arrSubPosEX[nAngle] = (int)Math.Floor(fSubPos_EX);
-                    arrSubPosIN[nAngle] = (int)Math.Floor(fSubPos_IN);
-
-                    double EX_X = 0; double EX_Y = 0;
-                    double IN_X = 0; double IN_Y = 0;
+                    double EX_X = ptCenter_EX.X; double EX_Y = ptCenter_EX.Y;
+                    double IN_X = ptCenter_EX.X; double IN_Y = ptCenter_EX.Y;
 
                     if (fSubPos_EX != 0)
                     {
-                        EX_X = ptCenter.X + ((nRadiLength - fSubPos_EX) * arrayCos[nAngle]);
-                        EX_Y = ptCenter.Y + ((nRadiLength - fSubPos_EX) * arraySin[nAngle]);
+                        EX_X = ptCenter_EX.X + ((nRadiLength - fSubPos_EX) * arrayCos[nAngle]);
+                        EX_Y = ptCenter_EX.Y + ((nRadiLength - fSubPos_EX) * arraySin[nAngle]);
 
                     }
                     if (fSubPos_IN != 0)
                     {
-                        IN_X = ptCenter.X + ((nRadiStart + fSubPos_IN) * arrayCos[nAngle]);
-                        IN_Y = ptCenter.Y + ((nRadiStart + fSubPos_IN) * arraySin[nAngle]);
+                        IN_X = ptCenter_EX.X + ((nRadiStart + fSubPos_IN) * arrayCos[nAngle]);
+                        IN_Y = ptCenter_EX.Y + ((nRadiStart + fSubPos_IN) * arraySin[nAngle]);
                     }
 
                     PointF pt_EX = new PointF((float)EX_X, (float)EX_Y);
                     PointF pt_IN = new PointF((float)IN_X, (float)IN_Y);
+                    PointF pt_MD = CPoint.GetMidPoint(pt_EX, pt_IN);
 
-                    if (this.param_06_EdgePos == 0)
-                    {
-                        if (fSubPos_EX != 0 && fSubPos_IN != 0)
-                        {
-                            CLine line = new CLine(pt_IN, pt_EX);
-                            PointF ptEstimatedCenter = line.CENTER;
-                            arrContour[nAngle] = ptEstimatedCenter;
-                        }
-                        else
-                        {
-                            arrContour[nAngle]  = ptCenter;
-                        }
-                    }
-
-                    if (this.param_06_EdgePos == +1) { if (fSubPos_EX != 0) { arrContour[nAngle] = pt_EX; } else { arrContour[nAngle] = ptCenter; } }
-                    if (this.param_06_EdgePos == -1) { if (fSubPos_IN != 0) { arrContour[nAngle] = pt_IN; } else { arrContour[nAngle] = ptCenter; } }
+                    arrContour_EX[nAngle] = pt_EX;
+                    arrContour_MD[nAngle] = pt_MD;
+                    arrContour_IN[nAngle] = pt_IN;
+                    
                 }//);
 
                 #endregion
 
-                listEdges_FEX = arrContour.ToList();
+                listEdges_FEX = arrContour_EX.ToList();
+                listEdges_FMD = arrContour_MD.ToList();
+                listEdges_FIN = arrContour_IN.ToList();
 
                 // Currently listcount = raw contour points !@!!@!@!@!@
                 //********************************************************************
@@ -3490,60 +3446,88 @@ namespace CD_Figure
                     if (0 < param_01_DMG_Tol && param_01_DMG_Tol < 1)
                     {
                         listEdges_FEX = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX, this.param_01_DMG_Tol);
+                        listEdges_FMD = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD, this.param_01_DMG_Tol);
+                        listEdges_FIN = Computer.GetFilterdedCircleEdgesByDamageTolderance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN, this.param_01_DMG_Tol);
                     }
                     else if (this.param_01_DMG_Tol == 1)
                     {
                         listEdges_FEX = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FEX);
+                        listEdges_FMD = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FMD);
+                        listEdges_FIN = Computer.GetIterativeCircleDiaByDmgTolerance(rawBackup, imageW, imageH, rcCirEx, listEdges_FIN);
                     }
 
                     if (param_05_Outlier_Filter == 1)
                     {
                         Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -(rcEstimated.Width/2.0), -(rcEstimated.Height/2.0));
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
 
-                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter, ref fRadius);
+                    Computer.HC_FIT_Circle(listEdges_FEX, ref ptCenter_EX, ref fRadius_EX);
+                    Computer.HC_FIT_Circle(listEdges_FMD, ref ptCenter_MD, ref fRadius_MD);
+                    Computer.HC_FIT_Circle(listEdges_FIN, ref ptCenter_IN, ref fRadius_IN);
 
-                    p1 = new PointF((float)(ptCenter.X - fRadius), (float)ptCenter.Y);
-                    p2 = new PointF((float)(ptCenter.X + fRadius), (float)ptCenter.Y);
+                    p1 = new PointF((float)(ptCenter_EX.X - fRadius_EX), (float)ptCenter_EX.Y);
+                    p2 = new PointF((float)(ptCenter_EX.X + fRadius_EX), (float)ptCenter_EX.Y);
+
+                    fRadius = fRadius_MD;
+
                   #endregion
                 }
                 else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
                 {
-                   #region THIS IS AN ELLIPSE
+                  #region THIS IS AN ELLIPSE
                     if (param_05_Outlier_Filter == 1)
                     {
                         Rectangle rcEstCompen = CRect.OffsetRect(Rectangle.Round(rcEstimated), -rcEstimated.Width, -rcEstimated.Height);
+
                         listEdges_FEX = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FEX);
+                        listEdges_FMD = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FMD);
+                        listEdges_FIN = CLine.GetFilteredEllipsePoints_OUTSIDE(rcEstCompen, listEdges_FIN);
                     }
  
                     double distanceThreshold = 50;
-                    CModelEllipse model = new CModelEllipse();
-                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model, distanceThreshold);
+                    CModelEllipse model_EX = new CModelEllipse();
+                    CModelEllipse model_MD = new CModelEllipse();
+                    CModelEllipse model_IN = new CModelEllipse();
 
-                    listEdges_FIN = listEdges_FEX.ToList();
-                    listEdges_FEX = CRansac.GetEllipseContours(model);
+                    CRansac.ransac_ellipse_fitting(listEdges_FEX.ToArray(), ref model_EX, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FMD.ToArray(), ref model_MD, distanceThreshold);
+                    CRansac.ransac_ellipse_fitting(listEdges_FIN.ToArray(), ref model_IN, distanceThreshold);
 
-                    for (int i = 0; i < listEdges_FIN.Count; i++)
-                    {
-                        PointF pt = listEdges_FIN.ElementAt(i);
-                        fRadius += CPoint.GetDistance(ptCenter, pt);
-                    }
-                    fRadius /= listEdges_FIN.Count;
+                    listEdges_SEX = CRansac.GetEllipseContours(model_EX);
+                    listEdges_SMD = CRansac.GetEllipseContours(model_MD);
+                    listEdges_SIN = CRansac.GetEllipseContours(model_IN);
+
+                    PointF[] arrPt_EX = listEdges_FEX.ToArray();
+                    PointF[] arrPt_MD = listEdges_FMD.ToArray();
+                    PointF[] arrPt_IN = listEdges_FIN.ToArray();
+
+                    fRadius_EX = model_EX.w;
+                    fRadius_MD = model_MD.w;
+                    fRadius_IN = model_IN.w;
+
+
+                    fRadius = fRadius_MD;
                     #endregion
                 }
 
-                if (param_comm_04_BOOL_SHOW_RAW_DATA == false)
+                if (param_comm_05_BOOL_SHOW_RAW_DATA == false)
                 {
                     #region Show raw data
                     if (param_02_BOOL_TREAT_AS_ELLIPSE == false)
                     {
-                        listEdges_FEX = Computer.GenCircleContourPoints(fRadius, ptCenter);
-                        listEdges_FEX.Add(ptCenter);
+                        listEdges_FEX = Computer.GenCircleContourPoints(fRadius_EX, ptCenter_EX);
+                        listEdges_FMD = Computer.GenCircleContourPoints(fRadius_MD, ptCenter_EX);
+                        listEdges_FIN = Computer.GenCircleContourPoints(fRadius_IN, ptCenter_EX);
+                        
                     }
                     else if (param_02_BOOL_TREAT_AS_ELLIPSE == true)
                     {
-                        listEdges_FEX = listEdges_FIN.ToList();
+                        listEdges_FEX = listEdges_SEX.ToList();
+                        listEdges_FMD = listEdges_SMD.ToList();
+                        listEdges_FIN = listEdges_SIN.ToList();
                     }
                     #endregion
                 } // bShowData
@@ -3552,6 +3536,7 @@ namespace CD_Figure
             {
                 Console.WriteLine(ex.ToString());
             }
+
             return Convert.ToSingle(fRadius * 2.0);
         }
 
@@ -3560,7 +3545,8 @@ namespace CD_Figure
             ref List<PointF> listEdges_SEX,ref List<PointF> listEdges_SMD,ref List<PointF> listEdges_SIN,
             out PointF P1, out PointF P2, out RectangleF rcEstimated)
         {
-            #region NOT IMPLEMENTED
+           #region Call Algorithm Functions For each 
+
             double fDistance = 0;
             // set default value 170720
             P1 = P2 = new PointF(0, 0);
@@ -3637,10 +3623,12 @@ namespace CD_Figure
         public string INSP_FILE { get; set; }
         
         public List<double> listRaw_Figure = new List<double>();
+        public List<double> listRaw_Mag = new List<double>();
         public List<COverlay> listRaw_Overlay = new List<COverlay>();
 
         public int DataCount_Figure { get { return listRaw_Figure.Count; } }
         public int DataCount_Overlay { get { return listRaw_Overlay.Count; } }
+        public int DataCount_Magnitude { get { return listRaw_Mag.Count; } }
 
         public abstract void CalcAccResult();
 
@@ -3648,17 +3636,22 @@ namespace CD_Figure
 
     public class CMeasureReport
     {
+        public bool INTERRUPT { get; set; }
         private List<DataFigure> m_listFigure = new List<DataFigure>();
         private List<DataOverlay> m_listOverlay = new List<DataOverlay>();
+        public List<double> m_listFocusMag = new List<double>();
+        public List<PointF> m_listMatchPoint = new List<PointF>();
 
         public string INFO_RECIPE { get; set; }
         public string INFO_PTRN { get; set; }
         public double INFO_PIXEL_X { get; set; }
-        public double INFO_PIXEL_Y { get; set; }
         public string INFO_TIME { get; set; }
 
         private int/**/COUNT_FIGURE { get { return m_listFigure.Count; } }
         private int/**/COUNT_OVERLAY { get { return m_listOverlay.Count; } }
+
+        public int MEAS_CYCLE { get; set; }
+        public int MEAS_POINT { get; set; }
 
         public class DataOverlay : CMeasureFather
         {
@@ -3672,7 +3665,7 @@ namespace CD_Figure
             public string INSP_METHOD_VER_IN_BTM { get; set; }
             public string INSP_METHOD_VER_EX_BTM { get; set; }
 
-            public double INSP_DX { get; set; }
+             public double INSP_DX { get; set; }
             public double INSP_DY { get; set; }
 
             public int TOTAL_COUNT { get { return listRaw_Overlay.Count; } }
@@ -3707,13 +3700,13 @@ namespace CD_Figure
                 listRaw_Overlay.Add(single);
                 INSP_DX += dx;
                 INSP_DY += dy;
-             }
+              }
 
             public override void CalcAccResult()
             {
                 INSP_DX /= listRaw_Overlay.Count();
                 INSP_DY /= listRaw_Overlay.Count();
-            }
+             }
             public COverlay calcSigma(double fPixelRes )
             {
                 COverlay[] arrRaw = listRaw_Overlay.ToArray();
@@ -3746,8 +3739,7 @@ namespace CD_Figure
         }
         public class DataFigure : CMeasureFather
         {
-            public string INSP_METHOD1 { get; set; }
-            public string INSP_METHOD2 { get; set; }
+            public string INSP_METHOD { get; set; }
             public double INSP_RES { get; set; }
             public double DMG_IGNORANCE { get; set; }
             public int TOTAL_COUNT { get { return listRaw_Figure.Count; } }
@@ -3759,12 +3751,11 @@ namespace CD_Figure
                 single.INSP_FILE = this.INSP_FILE;
                 single.INSP_FIGURE_TYPE = this.INSP_FIGURE_TYPE;
                 single.INSP_TARGET_NAME = this.INSP_TARGET_NAME;
-                single.INSP_METHOD1 = this.INSP_METHOD1;
-                single.INSP_METHOD2 = this.INSP_METHOD2;
+                single.INSP_METHOD = this.INSP_METHOD;
                 single.DMG_IGNORANCE = this.DMG_IGNORANCE;
                 single.INSP_TIME = this.INSP_TIME;
                 single.INSP_RES = this.INSP_RES;
-                
+                 
 
                 return single;
             }
@@ -3777,7 +3768,10 @@ namespace CD_Figure
              }
 
             // sumarry function
-            public override void CalcAccResult() { INSP_RES /= listRaw_Figure.Count; }
+            public override void CalcAccResult() 
+            {
+                INSP_RES /= listRaw_Figure.Count;
+            }
             public double calcSigma(double fPixelRes)
             {
                 double[] arrRaw = listRaw_Figure.ToArray();
@@ -3909,7 +3903,7 @@ namespace CD_Figure
                 int nIndex = Find_UniqueIndex_Overlay(arrUnitData, single);
 
                 double dx = single.INSP_DX * INFO_PIXEL_X;
-                double dy = single.INSP_DY * INFO_PIXEL_Y;
+                double dy = single.INSP_DY * INFO_PIXEL_X;
 
                 arrUnitData[nIndex].Insert_Data(dx, dy);
             }
@@ -3991,45 +3985,36 @@ namespace CD_Figure
             return bExistance;
         }
 
-        public void SetInit()
+        public void SetInit(int nCycle, int nPoint)
         {
             m_listFigure.Clear();
             m_listOverlay.Clear();
+            m_listFocusMag.Clear();
+            m_listMatchPoint.Clear();
+            MEAS_CYCLE = nCycle;
+            MEAS_POINT = nPoint;
+            INTERRUPT = false;
         }
-     
+
+        // 171018 focus magnitude 
+        public void AddFocusMag(double fFocusMag) { m_listFocusMag.Add(fFocusMag); }
+        public double GetFocusMagAvg(){return m_listFocusMag.Average();}
 
         public void AddResult_FIG(int nFigureType, string strFile, object Ini, double fResult)
         {
             string strTargetName = string.Empty;
             string strMethod1 = string.Empty;
-            string strMethod2 = string.Empty;
             string strFigureType = string.Empty;
             double fDmgIgnorance = 0.0;
 
-            //if (nFigureType == IFX_FIGURE.PAIR_HOR)
-            //{
-            //    CMeasurePairHor buff = ((CMeasurePairHor)Ini);
-            //
-            //    strTargetName = buff.NICKNAME;
-            //    strMethod1 = IFX_ALGORITHM.ToStringType(buff.measure_TOP);
-            //    strMethod2 = IFX_ALGORITHM.ToStringType(buff.measure_BTM);
-            //}
-            //else if( nFigureType == IFX_FIGURE.PAIR_VER)
-            //{
-            //    CMeasurePairVer buff = ((CMeasurePairVer)Ini);
-            //
-            //    strTargetName = buff.NICKNAME;
-            //    strMethod1 = IFX_ALGORITHM.ToStringType(buff.measure_LFT);
-            //    strMethod2 = IFX_ALGORITHM.ToStringType(buff.measure_RHT);
-            //}
+          
             if( nFigureType == IFX_FIGURE.PAIR_RCT)
             {
                 CMeasurePairRct buff = ((CMeasurePairRct)Ini);
 
                 strTargetName = buff.NICKNAME;
                 strMethod1 = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm);
-                strMethod2 = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm);
-
+ 
                 strFigureType = IFX_RECT_TYPE.ToStringType(buff.RC_TYPE);
             }
             else if (nFigureType == IFX_FIGURE.PAIR_CIR)
@@ -4038,8 +4023,7 @@ namespace CD_Figure
 
                 strTargetName = buff.NICKNAME;
                 strMethod1 = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_CIR);
-                strMethod2 = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_CIR);
-                fDmgIgnorance = buff.param_01_DMG_Tol;
+                 fDmgIgnorance = buff.param_01_DMG_Tol;
                 strFigureType = IFX_FIGURE.ToStringType(IFX_FIGURE.PAIR_CIR); ;
             }
 
@@ -4048,11 +4032,10 @@ namespace CD_Figure
             single.INSP_FIGURE_TYPE = strFigureType;
             single.INSP_FILE = strFile;
             single.INSP_TARGET_NAME = strTargetName;
-            single.INSP_METHOD1 = strMethod1;
-            single.INSP_METHOD2 = strMethod2;
-            single.DMG_IGNORANCE = fDmgIgnorance;
+            single.INSP_METHOD = strMethod1;
+             single.DMG_IGNORANCE = fDmgIgnorance;
             single.INSP_RES = fResult;
-            single.INSP_TIME = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
+             single.INSP_TIME = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
 
             m_listFigure.Add(single);
         }
@@ -4076,12 +4059,83 @@ namespace CD_Figure
 
             single.INSP_DX = fOLX;
             single.INSP_DY = fOLY;
-
             m_listOverlay.Add(single);
+        }
+
+        public List<double[]> GetListByCycle_FocusMag()
+        {
+            List<double[]> list = new List<double[]>();
+
+            double[] arr = m_listFocusMag.ToArray();
+
+            
+            for( int y = 0; y < MEAS_CYCLE; y++)
+            {
+                double[] arrFocusMag = new double[MEAS_POINT];
+
+                for( int x = 0; x < MEAS_POINT; x++)
+                {
+                    int nIndex = y * MEAS_POINT + x;
+
+                    if (nIndex >= arr.Length) continue;
+                    arrFocusMag[x] = arr[y * MEAS_POINT + x];
+                }
+                list.Add(arrFocusMag);
+            }
+            return list;
+        }
+        public List<float[]> GetListByCycle_PTRN_X()
+        {
+            List<float[]> list = new List<float[]>();
+
+            PointF[] arr = m_listMatchPoint.ToArray();
+            float[] arrX = arr.Select(element => element.X).ToArray();
+            float[] arrY = arr.Select(element => element.Y).ToArray();
+
+            for (int y = 0; y < MEAS_CYCLE; y++)
+            {
+                float[] arrPtrn_X = new float[MEAS_POINT];
+
+                for (int x = 0; x < MEAS_POINT; x++)
+                {
+                    int nIndex = y * MEAS_POINT + x;
+
+                    if (nIndex >= arr.Length) continue;
+                    arrPtrn_X[x] = arrX[y * MEAS_POINT + x];
+                }
+                list.Add(arrPtrn_X);
+            }
+            return list;
+        }
+        public List<float[]> GetListByCycle_PTRN_Y()
+        {
+            List<float[]> list = new List<float[]>();
+
+            PointF[] arr = m_listMatchPoint.ToArray();
+            float[] arrX = arr.Select(element => element.X).ToArray();
+            float[] arrY = arr.Select(element => element.Y).ToArray();
+
+            for (int y = 0; y < MEAS_CYCLE; y++)
+            {
+                float[] arrPtrn_Y = new float[MEAS_POINT];
+
+                for (int x = 0; x < MEAS_POINT; x++)
+                {
+                    int nIndex = y * MEAS_POINT + x;
+
+                    if (nIndex >= arr.Length) continue;
+                    arrPtrn_Y[x] = arrY[y * MEAS_POINT + x];
+                }
+                list.Add(arrPtrn_Y);
+            }
+            return list;
         }
 
         public static void _WriteMeasurementData(CMeasureReport report, string strSavePath)
         {
+
+            if (report.INTERRUPT == true) return;
+            
             WrapperExcel ex = new WrapperExcel();
 
             string[] header = new string[10];
@@ -4110,9 +4164,8 @@ namespace CD_Figure
                 single[0] = "TOTAL"; /***********/single[1] = nACC.ToString("N0");/****/ex.data.Add(single.ToArray());
                 single[0] = "TYPE"; /************/single[1] = summary.INSP_FIGURE_TYPE; ex.data.Add(single.ToArray());
                 single[0] = "NAME"; /************/single[1] = summary.INSP_TARGET_NAME; ex.data.Add(single.ToArray());
-                single[0] = "MEASURE TYPE 1";/***/single[1] = summary.INSP_METHOD1; /**/ex.data.Add(single.ToArray());
-                single[0] = "MEASURE TYPE 2";/***/single[1] = summary.INSP_METHOD2; /**/ex.data.Add(single.ToArray());
-
+                single[0] = "MEASURE TYPE";/*****/single[1] = summary.INSP_METHOD; /**/ex.data.Add(single.ToArray());
+ 
                 if (summary.INSP_FIGURE_TYPE != IFX_FIGURE.ToStringType(IFX_FIGURE.PAIR_CIR))
                 {
                     single[0] = "WIDTH"; single[1] = summary.INSP_RES.ToString("F4"); ex.data.Add(single.ToArray());
@@ -4123,48 +4176,231 @@ namespace CD_Figure
                     single[0] = "DMG IGNORANCE"; single[1] = summary.DMG_IGNORANCE.ToString("F2"); ex.data.Add(single.ToArray());
 
                 }
-                single[0] = "3-SIGMA";/***/single[1] = fSigam.ToString("F4"); /**/ex.data.Add(single.ToArray());
-                single[0] = single[1] = ""; ex.data.Add(single.ToArray());
+                single[0] = "FOCUS-MAG";/**/single[1] = report.GetFocusMagAvg().ToString("f2"); ex.data.Add(single.ToArray()); 
+                single[0] = "3-SIGMA";/****/single[1] = fSigam.ToString("F4"); /**/ex.data.Add(single.ToArray());
+                single[0] = /**************/single[1] = ""; ex.data.Add(single.ToArray());
             }
 
             header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
             header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
 
+            //************************************************************************************
+            // FOCUS-MAGNITUDE 
+            //************************************************************************************
 
+            if (report.MEAS_CYCLE == 0)
+            {
+                int nFocusIter = report.m_listFocusMag.Count;
+                string[] arrHeader_FocusMag = new string[nFocusIter + 1];
+                arrHeader_FocusMag[0] = "Focus-Mag";
+
+                for (int nColumn = 1; nColumn < arrHeader_FocusMag.Length; nColumn++)
+                {
+                    arrHeader_FocusMag[nColumn] = "POINT_" + nColumn.ToString("N0");
+                }
+                ex.data.Add(arrHeader_FocusMag.ToArray());
+
+                //**************************************************************************
+ 
+                string[] arrFocusMag = new string[nFocusIter + 1];
+                for (int nColumn = 1; nColumn < arrFocusMag.Length; nColumn++) 
+                {
+                    arrFocusMag[nColumn] = report.m_listFocusMag.ElementAt(nColumn - 1).ToString("F2"); 
+                }
+                ex.data.Add(arrFocusMag);
+            }
+            else if( report.MEAS_CYCLE > 0)
+            {
+                int nFocusIter = report.MEAS_POINT;
+                string[] arrHeader_FocusMag = new string[nFocusIter + 1];
+                arrHeader_FocusMag[0] = "Focus-Mag";
+
+                for (int nColumn = 1; nColumn < arrHeader_FocusMag.Length; nColumn++)
+                {
+                    arrHeader_FocusMag[nColumn] = "POINT_" + nColumn.ToString("N0");
+                }
+                ex.data.Add(arrHeader_FocusMag);
+
+                //**************************************************************************
+                // iterative data
+
+
+                List<double[]> listFocusMag = report.GetListByCycle_FocusMag();
+                 
+                for (int nCycle = 0; nCycle < report.MEAS_CYCLE; nCycle++)
+                {
+                    string[] strArrFocusMag = new string[nFocusIter + 1];
+                    double[] fArrFocusMag = listFocusMag.ElementAt(nCycle);
+
+                    for (int nColumn = 1; nColumn < strArrFocusMag.Length; nColumn++)
+                    {
+                        strArrFocusMag[0] = "ITER_" + (nCycle + 1).ToString("N0");
+                        strArrFocusMag[nColumn] = fArrFocusMag[nColumn - 1].ToString("F4");
+                    }
+                    ex.data.Add(strArrFocusMag);
+                }
+            }
+           
+             
+            header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
+            header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
+
+            //*************************************************************************************
+            // PTRN_POSITION TRACKING
+            //*************************************************************************************
+            #region PTRN_POSITION
+            for (int nPoint = 0; nPoint < 2; nPoint++ )
+            {
+                // if nPoint == x or nPoint == Y
+
+                if (report.MEAS_CYCLE == 0)
+                {
+                    int nPtrnIter = report.m_listMatchPoint.Count;
+                    string[] arrHeader_PTRN = new string[nPtrnIter + 1];
+
+                    /***/if (nPoint == 0){arrHeader_PTRN[0] = "PTRN_POS_X";}
+                    else if (nPoint == 1){arrHeader_PTRN[0] = "PTRN_POS_Y";}
+
+                    for (int nColumn = 1; nColumn < arrHeader_PTRN.Length; nColumn++)
+                    {
+                        arrHeader_PTRN[nColumn] = "POINT_" + nColumn.ToString("N0");
+                    }
+                    ex.data.Add(arrHeader_PTRN.ToArray());
+
+                    //**************************************************************************
+
+                    string[] arrPTRN = new string[nPtrnIter + 1];
+                    for (int nColumn = 1; nColumn < arrPTRN.Length; nColumn++)
+                    {
+                        /***/if (nPoint == 0) { arrPTRN[nColumn] = report.m_listMatchPoint.ElementAt(nColumn - 1).X.ToString("F3"); }
+                        else if (nPoint == 1) { arrPTRN[nColumn] = report.m_listMatchPoint.ElementAt(nColumn - 1).Y.ToString("F3"); }
+                        
+                    }
+                    ex.data.Add(arrPTRN);
+                }
+                else if (report.MEAS_CYCLE > 0)
+                {
+                    int nPtrnIter = report.MEAS_POINT;
+                    string[] arrHeader_PTRN = new string[nPtrnIter + 1];
+
+                    /***/if (nPoint == 0) { arrHeader_PTRN[0] = "PTRN_POS_X"; }
+                    else if (nPoint == 1) { arrHeader_PTRN[0] = "PTRN_POS_Y"; }
+
+                    for (int nColumn = 1; nColumn < arrHeader_PTRN.Length; nColumn++)
+                    {
+                        arrHeader_PTRN[nColumn] = "POINT_" + nColumn.ToString("N0");
+                    }
+                    ex.data.Add(arrHeader_PTRN);
+
+                    //**************************************************************************
+                    // iterative data
+
+
+                    List<float[]> listPtrn = null;
+
+                    /***/if (nPoint == 0) listPtrn = report.GetListByCycle_PTRN_X();
+                    else if (nPoint == 1) listPtrn = report.GetListByCycle_PTRN_Y();
+
+                    for (int nCycle = 0; nCycle < report.MEAS_CYCLE; nCycle++)
+                    {
+                        string[] strArrPTRN = new string[nPtrnIter + 1];
+                        float[] fArrPtrn = listPtrn.ElementAt(nCycle);
+
+                        for (int nColumn = 1; nColumn < strArrPTRN.Length; nColumn++)
+                        {
+                            strArrPTRN[0] = "ITER_" + (nCycle + 1).ToString("N0");
+                            strArrPTRN[nColumn] = fArrPtrn[nColumn - 1].ToString("F4");
+                        }
+                        ex.data.Add(strArrPTRN);
+                    }
+                }
+
+
+                header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
+                header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
+            }
+
+            #endregion
+
+            //************************************************************************************
+            // RAW-DATA-FIGURE
+            //************************************************************************************
             if (listFigure.Count != 0)
             {
                 //*******************************************************************************
                 // Entire Data Chart In detail : Column Generation
                 //*******************************************************************************
+                int nShotCount = report.m_listFocusMag.Count();
+                int nItemTotal = report.m_listFigure.Count();
+                int nItemCount = nItemTotal / nShotCount;
+                int nCycle = report.MEAS_CYCLE;
+                int nPoint = report.MEAS_POINT;
 
-                // column header [Empty] + [Index 0]...[Index N-1]
-                int nIterationCount = listFigure.ElementAt(0).TOTAL_COUNT;  // 첫번째걸로 하는데 갯수 안맞을 수 있어 170811
-                int nHeaderLength = nIterationCount + 1;
-                string[] arrHeader = new string[nHeaderLength];
-                arrHeader[0] = "ITEM";
-
-                for (int nColumn = 1; nColumn < nHeaderLength; nColumn++) { arrHeader[nColumn] = "ITER_" + nColumn.ToString("N0"); }
-                ex.data.Add(arrHeader.ToArray());
-
-                //*******************************************************************************
-                // Raw Data Listing
-                //*******************************************************************************
-
-                for (int nItem = 0; nItem < listFigure.Count; nItem++)
+                if (report.MEAS_CYCLE == 0)
                 {
-                    CMeasureReport.DataFigure summary = listFigure.ElementAt(nItem);
+                    // column header [Empty] + [Index 0]...[Index N-1]
+                    string[] arrHeader = new string[nShotCount + 1];
+                    arrHeader[0] = "ITEM";
 
-                    string[] rawData = new string[nHeaderLength];
-
-                    rawData[0] = summary.INSP_TARGET_NAME;
-                    for (int i = 0; i < summary.TOTAL_COUNT; i++)  // 갯수가 엇박일수 있으니까 돌리는건 지 숫자대로
+                    for (int nColumn = 1; nColumn < arrHeader.Length; nColumn++)
                     {
-                        rawData[i + 1] = summary.listRaw_Figure.ElementAt(i).ToString("F4");
+                        arrHeader[nColumn] = "ITER_" + nColumn.ToString("N0");
                     }
-                    ex.data.Add(rawData.ToArray());
-                }
-            }
+                    ex.data.Add(arrHeader.ToArray());
 
+                    //*******************************************************************************
+                    // Raw Data Listing
+                    //*******************************************************************************
+
+                    for (int nItem = 0; nItem < listFigure.Count; nItem++)
+                    {
+                        CMeasureReport.DataFigure summary = listFigure.ElementAt(nItem);
+
+                        string[] rawData = new string[arrHeader.Length];
+
+                        rawData[0] = summary.INSP_TARGET_NAME;
+                        for (int i = 0; i < summary.TOTAL_COUNT; i++)  // 갯수가 엇박일수 있으니까 돌리는건 지 숫자대로
+                        {
+                            rawData[i + 1] = summary.listRaw_Figure.ElementAt(i).ToString("F4");
+                        }
+                        ex.data.Add(rawData.ToArray());
+                    }
+                }
+                else if( report.MEAS_CYCLE > 0)
+                {
+                    for (int nItem = 0; nItem < listFigure.Count; nItem++)
+                    {
+                        CMeasureReport.DataFigure summary = listFigure.ElementAt(nItem);
+
+                        string[] arrHeader = new string[ nPoint +1 ];
+                        arrHeader[0] = summary.INSP_TARGET_NAME; ;
+
+                        for (int nColumn = 1; nColumn < arrHeader.Length; nColumn++)
+                        {
+                            arrHeader[nColumn] = "POINT_" + nColumn.ToString("N0");
+                        }
+                        ex.data.Add(arrHeader.ToArray());
+                        
+                        double[] fArrFigure = summary.listRaw_Figure.ToArray();
+
+                        for (int nIter = 0; nIter < nCycle; nIter++ )
+                        {
+                            arrHeader[0] = "ITER_" + (1+nIter).ToString("N0");
+                            for( int x = 0; x < nPoint; x++)
+                            {
+                                arrHeader[1 + x] = fArrFigure[nIter * nPoint + x].ToString("F4");
+                            }
+                            ex.data.Add(arrHeader.ToArray());
+                        }
+                        header[0] = /****************/ header[1] = ""; /*************************************/ ex.data.Add(header.ToArray());
+                    }
+                }
+
+              
+            }
+            //************************************************************************************
+            // RAW-DATA-OVERLAY
+            //************************************************************************************
             for (int nItem = 0; nItem < listOverlay.Count; nItem++)
             {
                 string[] single = new string[10];
@@ -4237,11 +4473,12 @@ namespace CD_Figure
                     ex.data.Add(rawData_Y.ToArray());
                 }
             }
-            
-            string strDumpFileName = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM() + ".CSV";
-            string strDumpFilePath = Path.Combine(strSavePath, strDumpFileName);
 
-            //ex.Dump_Data(strDumpFilePath);
+            string strPathDir = Path.Combine( strSavePath, WrapperDateTime.GetTimeCode4Save_YYYY_MM_DD());
+            WrapperFile.EnsureFolderExsistance(strPathDir);
+
+            string strDumpFileName = WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM() + ".CSV";
+            string strDumpFilePath = Path.Combine(strPathDir, strDumpFileName);
 
             WrapperCVS cvs = new WrapperCVS();
             cvs.SaveCSVFile(strDumpFilePath, ex.data);

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TXT_PATH_HISTORY_MEASURE = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,32 +45,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).BeginInit();
             this.SuspendLayout();
             // 
-            // TXT_PATH_HISTORY_MEASURE
-            // 
-            this.TXT_PATH_HISTORY_MEASURE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_PATH_HISTORY_MEASURE.ForeColor = System.Drawing.Color.White;
-            this.TXT_PATH_HISTORY_MEASURE.Location = new System.Drawing.Point(1042, 564);
-            this.TXT_PATH_HISTORY_MEASURE.Margin = new System.Windows.Forms.Padding(4);
-            this.TXT_PATH_HISTORY_MEASURE.Name = "TXT_PATH_HISTORY_MEASURE";
-            this.TXT_PATH_HISTORY_MEASURE.Size = new System.Drawing.Size(460, 23);
-            this.TXT_PATH_HISTORY_MEASURE.TabIndex = 81;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(979, 564);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 16);
-            this.label10.TabIndex = 80;
-            this.label10.Text = "PATH :";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(1596, 616);
+            this.label16.Location = new System.Drawing.Point(1346, 604);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(64, 16);
@@ -83,7 +60,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(1524, 616);
+            this.label17.Location = new System.Drawing.Point(1274, 604);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(64, 16);
@@ -115,7 +92,7 @@
             this.LV_HISTORY.Margin = new System.Windows.Forms.Padding(4);
             this.LV_HISTORY.MultiSelect = false;
             this.LV_HISTORY.Name = "LV_HISTORY";
-            this.LV_HISTORY.Size = new System.Drawing.Size(742, 501);
+            this.LV_HISTORY.Size = new System.Drawing.Size(492, 501);
             this.LV_HISTORY.TabIndex = 77;
             this.LV_HISTORY.UseCompatibleStateImageBehavior = false;
             this.LV_HISTORY.View = System.Windows.Forms.View.Details;
@@ -129,19 +106,19 @@
             // 
             this.columnHeader5.Text = "DATE";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 256;
+            this.columnHeader5.Width = 156;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "TIME";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 365;
+            this.columnHeader4.Width = 238;
             // 
             // BTN_UPDATE_HISTORY
             // 
             this.BTN_UPDATE_HISTORY.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.quick_restart;
             this.BTN_UPDATE_HISTORY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_UPDATE_HISTORY.Location = new System.Drawing.Point(1527, 552);
+            this.BTN_UPDATE_HISTORY.Location = new System.Drawing.Point(1277, 540);
             this.BTN_UPDATE_HISTORY.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_UPDATE_HISTORY.Name = "BTN_UPDATE_HISTORY";
             this.BTN_UPDATE_HISTORY.Size = new System.Drawing.Size(60, 60);
@@ -153,7 +130,7 @@
             // 
             this.BTN_OPEN_HISTORY_FOLDER.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.open_folder;
             this.BTN_OPEN_HISTORY_FOLDER.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_OPEN_HISTORY_FOLDER.Location = new System.Drawing.Point(1595, 552);
+            this.BTN_OPEN_HISTORY_FOLDER.Location = new System.Drawing.Point(1345, 540);
             this.BTN_OPEN_HISTORY_FOLDER.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_OPEN_HISTORY_FOLDER.Name = "BTN_OPEN_HISTORY_FOLDER";
             this.BTN_OPEN_HISTORY_FOLDER.Size = new System.Drawing.Size(60, 60);
@@ -186,7 +163,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1667, 616);
+            this.label2.Location = new System.Drawing.Point(1417, 604);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 87;
@@ -196,17 +173,18 @@
             // 
             this.BTN_CLOSE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_cancel;
             this.BTN_CLOSE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_CLOSE.Location = new System.Drawing.Point(1662, 552);
+            this.BTN_CLOSE.Location = new System.Drawing.Point(1412, 540);
             this.BTN_CLOSE.Name = "BTN_CLOSE";
             this.BTN_CLOSE.Size = new System.Drawing.Size(60, 60);
             this.BTN_CLOSE.TabIndex = 86;
             this.BTN_CLOSE.UseVisualStyleBackColor = true;
+            this.BTN_CLOSE.Click += new System.EventHandler(this.BTN_CLOSE_Click);
             // 
             // BTN_CLEAR
             // 
-            this.BTN_CLEAR.Location = new System.Drawing.Point(222, 539);
+            this.BTN_CLEAR.Location = new System.Drawing.Point(13, 539);
             this.BTN_CLEAR.Name = "BTN_CLEAR";
-            this.BTN_CLEAR.Size = new System.Drawing.Size(122, 23);
+            this.BTN_CLEAR.Size = new System.Drawing.Size(130, 35);
             this.BTN_CLEAR.TabIndex = 88;
             this.BTN_CLEAR.Text = "Clear";
             this.BTN_CLEAR.UseVisualStyleBackColor = true;
@@ -217,13 +195,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(1742, 692);
+            this.ClientSize = new System.Drawing.Size(1486, 627);
             this.Controls.Add(this.BTN_CLEAR);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BTN_CLOSE);
             this.Controls.Add(this.dgview);
-            this.Controls.Add(this.TXT_PATH_HISTORY_MEASURE);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label1);
@@ -244,8 +220,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TXT_PATH_HISTORY_MEASURE;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         public System.Windows.Forms.Label label4;

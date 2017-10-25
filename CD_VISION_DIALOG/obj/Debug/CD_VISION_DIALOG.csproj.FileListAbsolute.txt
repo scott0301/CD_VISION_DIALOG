@@ -219,7 +219,6 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\EPPlus.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\DEF_PARAMS.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\IPCData.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\uc_thumb_nail_viewer.pdb
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_CD_PARAM.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\CD_VISION_DIALOG.exe.config
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.exe
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.pdb
@@ -278,3 +277,4 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\LIB_CD_VISION.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\NPOI.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Spc.resources
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_CD_PARAM.dll

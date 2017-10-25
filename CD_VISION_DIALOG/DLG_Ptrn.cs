@@ -29,6 +29,7 @@ namespace CD_VISION_DIALOG
 
         iPtrn m_pHandle = null;
 
+ 
         private CFigureManager m_fm = new CFigureManager();
 
         public DLG_Ptrn(iPtrn handle)
@@ -62,6 +63,8 @@ namespace CD_VISION_DIALOG
 
         public bool SetParam(CFigureManager fm)
         {
+            m_fm = fm;
+
             PARAM_PTRN param_ptrn = fm.param_ptrn;
 
             string strPtrnPath = param_ptrn.PTRN_FILE;
@@ -117,8 +120,7 @@ namespace CD_VISION_DIALOG
                 bmpPtrn.Dispose();
             }
 
-
-            return true;   
+             return true;   
         }
 
         private void _ToUI_SetPTRNView(string strFileName)
@@ -357,11 +359,11 @@ namespace CD_VISION_DIALOG
             }
             else if (CHK_PTRN_SEARCH_GLOBAL.Checked == false)
             {
-                int px = 0; int py = 0; int pw = 0; int ph = 0;
-                int.TryParse(TXT_LOCAL_SEARCH_RGN_X.Text, out px);
-                int.TryParse(TXT_LOCAL_SEARCH_RGN_Y.Text, out py);
-                int.TryParse(TXT_LOCAL_SEARCH_RGN_W.Text, out pw);
-                int.TryParse(TXT_LOCAL_SEARCH_RGN_H.Text, out ph);
+                float px = 0; float py = 0; float pw = 0; float ph = 0;
+                float.TryParse(TXT_LOCAL_SEARCH_RGN_X.Text, out px);
+                float.TryParse(TXT_LOCAL_SEARCH_RGN_Y.Text, out py);
+                float.TryParse(TXT_LOCAL_SEARCH_RGN_W.Text, out pw);
+                float.TryParse(TXT_LOCAL_SEARCH_RGN_H.Text, out ph);
 
                 rcSearching = new RectangleF(px, py, pw, ph);
             }
@@ -395,14 +397,35 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.iDrawPtrn(true);
             uc_view_ptrn.Refresh();
         }
+        private void BTN_PTRN_TEACH_OVERWRITE_Click(object sender, EventArgs e)
+        {
+            string fileName = TXT_PTRN_FILE_NAME.Text;
 
-        private void BTN_PTRN_TEACH_Click(object sender, EventArgs e)
+            Rectangle rc = uc_view_ptrn.iGet_Roi_Ptrn();
+
+            if (rc.Width != 0 && rc.Height != 0 && rc.X > 0 && rc.Y > 0)
+            {
+                string strFileName = uc_view_ptrn.iSave_Roi_Ptrn(Path.Combine(m_fm.config.i11_PATH_IMG_PTRN, fileName));
+
+                _PRINT_MESSAGE("PTRN Teaching Finished.");
+
+                _ToUI_SetPTRNView(Path.GetFileName(strFileName));
+                BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
+            }
+            else
+            {
+                MessageBox.Show("Invalid PTRN ROI.\nPlease Check ROI FOR PTRN Teaching.", "INVALID ROI DRAWING", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            uc_view_ptrn.iRemove_Roi_Ptrn();
+            uc_view_ptrn.Refresh();
+        }
+        private void BTN_PTRN_TEACH_NEW_Click(object sender, EventArgs e)
         {
             Rectangle rc = uc_view_ptrn.iGet_Roi_Ptrn();
 
             if (rc.Width != 0 && rc.Height != 0 && rc.X > 0 && rc.Y > 0)
             {
-                string strFileName = uc_view_ptrn.iSave_Roi_Ptrn();
+                string strFileName = uc_view_ptrn.iSave_Roi_Ptrn("");
 
                 _PRINT_MESSAGE("PTRN Teaching Finished.");
 
@@ -550,5 +573,12 @@ namespace CD_VISION_DIALOG
         {
             WrapperUnion.WrapperLV.SortData(LV_PTRN, e.Column);
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

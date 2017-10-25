@@ -32,15 +32,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING = new System.Windows.Forms.Button();
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING = new System.Windows.Forms.Button();
             this.BTN_SET_PATH_i04_REAL_RECP = new System.Windows.Forms.Button();
             this.BTN_SET_PATH_i03_BASE_RECP = new System.Windows.Forms.Button();
             this.TXT_PATH_i11_IMAGE_PTRN = new System.Windows.Forms.TextBox();
             this.BTN_SET_PATH_i02_DATA_DUMP = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i11 = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i04 = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i03 = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i02 = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i04_REAL_RECP = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i03_BASE_RECP = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i02_DATA_DUMP = new System.Windows.Forms.Button();
             this.BTN_OPEN_PATH_i01_MAIN = new System.Windows.Forms.Button();
             this.BTN_SET_PATH_i01_MAIN = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,24 +55,24 @@
             this.BTN_SET_PATH_i10_IMAGE_ORG = new System.Windows.Forms.Button();
             this.TXT_PATH_i10_IMAGE_ORG = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.BTN_OPEN_PATH_i10 = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.BTN_SET_PATH_i16_HISTORY_PTRN = new System.Windows.Forms.Button();
             this.BTN_SET_PATH_i15_HISTORY_MEASURE = new System.Windows.Forms.Button();
             this.TXT_PATH_i16_HISTORY_PTRN = new System.Windows.Forms.TextBox();
-            this.BTN_OPEN_PATH_i16 = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i15 = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE = new System.Windows.Forms.Button();
             this.TXT_PATH_i15_HISTORY_MEASURE = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.BTN_SET_PATH_i21_INI = new System.Windows.Forms.Button();
-            this.BTN_SET_PATH_i20_LOG = new System.Windows.Forms.Button();
+            this.BTN_SET_PATH_i21_LOG = new System.Windows.Forms.Button();
+            this.BTN_SET_PATH_i20_INI = new System.Windows.Forms.Button();
             this.TXT_PATH_i20_INI = new System.Windows.Forms.TextBox();
-            this.BTN_OPEN_PATH_i21 = new System.Windows.Forms.Button();
-            this.BTN_OPEN_PATH_i20 = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i21_LOG = new System.Windows.Forms.Button();
+            this.BTN_OPEN_PATH_i20_INI = new System.Windows.Forms.Button();
             this.TXT_PATH_i21_LOG = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -120,15 +120,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.BTN_SET_PATH_i11_IMAGE_MATCHING);
+            this.groupBox1.Controls.Add(this.BTN_SET_PATH_i11_IMAGE_TEACHING);
             this.groupBox1.Controls.Add(this.BTN_SET_PATH_i04_REAL_RECP);
             this.groupBox1.Controls.Add(this.BTN_SET_PATH_i03_BASE_RECP);
             this.groupBox1.Controls.Add(this.TXT_PATH_i11_IMAGE_PTRN);
             this.groupBox1.Controls.Add(this.BTN_SET_PATH_i02_DATA_DUMP);
-            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i11);
-            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i04);
-            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i03);
-            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i02);
+            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i11_IMAGE_TEACHING);
+            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i04_REAL_RECP);
+            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i03_BASE_RECP);
+            this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i02_DATA_DUMP);
             this.groupBox1.Controls.Add(this.BTN_OPEN_PATH_i01_MAIN);
             this.groupBox1.Controls.Add(this.BTN_SET_PATH_i01_MAIN);
             this.groupBox1.Controls.Add(this.label10);
@@ -147,16 +147,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // BTN_SET_PATH_i11_IMAGE_MATCHING
+            // BTN_SET_PATH_i11_IMAGE_TEACHING
             // 
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.ForeColor = System.Drawing.Color.Black;
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.Location = new System.Drawing.Point(753, 145);
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.Name = "BTN_SET_PATH_i11_IMAGE_MATCHING";
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.Size = new System.Drawing.Size(30, 23);
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.TabIndex = 2;
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.Text = "▲";
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.UseVisualStyleBackColor = true;
-            this.BTN_SET_PATH_i11_IMAGE_MATCHING.Click += new System.EventHandler(this.BTN_SET_PATH_i11_IMAGE_PTRN_Click);
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.ForeColor = System.Drawing.Color.Black;
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.Location = new System.Drawing.Point(753, 145);
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.Name = "BTN_SET_PATH_i11_IMAGE_TEACHING";
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.Size = new System.Drawing.Size(30, 23);
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.TabIndex = 2;
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.Text = "▲";
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.UseVisualStyleBackColor = true;
+            this.BTN_SET_PATH_i11_IMAGE_TEACHING.Click += new System.EventHandler(this.BTN_SET_PATH_i11_IMAGE_PTRN_Click);
             // 
             // BTN_SET_PATH_i04_REAL_RECP
             // 
@@ -200,49 +200,49 @@
             this.BTN_SET_PATH_i02_DATA_DUMP.UseVisualStyleBackColor = true;
             this.BTN_SET_PATH_i02_DATA_DUMP.Click += new System.EventHandler(this.BTN_SET_PATH_i02_DATA_DUMP_Click);
             // 
-            // BTN_OPEN_PATH_i11
+            // BTN_OPEN_PATH_i11_IMAGE_TEACHING
             // 
-            this.BTN_OPEN_PATH_i11.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i11.Location = new System.Drawing.Point(788, 142);
-            this.BTN_OPEN_PATH_i11.Name = "BTN_OPEN_PATH_i11";
-            this.BTN_OPEN_PATH_i11.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i11.TabIndex = 2;
-            this.BTN_OPEN_PATH_i11.Text = "GO";
-            this.BTN_OPEN_PATH_i11.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i11.Click += new System.EventHandler(this.BTN_OPEN_PATH_i11_Click);
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.Location = new System.Drawing.Point(788, 142);
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.Name = "BTN_OPEN_PATH_i11_IMAGE_TEACHING";
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.TabIndex = 2;
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.Text = "GO";
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i11_IMAGE_TEACHING.Click += new System.EventHandler(this.BTN_OPEN_PATH_i11_IMAGE_TAECHING_Click);
             // 
-            // BTN_OPEN_PATH_i04
+            // BTN_OPEN_PATH_i04_REAL_RECP
             // 
-            this.BTN_OPEN_PATH_i04.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i04.Location = new System.Drawing.Point(788, 112);
-            this.BTN_OPEN_PATH_i04.Name = "BTN_OPEN_PATH_i04";
-            this.BTN_OPEN_PATH_i04.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i04.TabIndex = 2;
-            this.BTN_OPEN_PATH_i04.Text = "GO";
-            this.BTN_OPEN_PATH_i04.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i04.Click += new System.EventHandler(this.BTN_OPEN_PATH_i04_Click);
+            this.BTN_OPEN_PATH_i04_REAL_RECP.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i04_REAL_RECP.Location = new System.Drawing.Point(788, 112);
+            this.BTN_OPEN_PATH_i04_REAL_RECP.Name = "BTN_OPEN_PATH_i04_REAL_RECP";
+            this.BTN_OPEN_PATH_i04_REAL_RECP.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i04_REAL_RECP.TabIndex = 2;
+            this.BTN_OPEN_PATH_i04_REAL_RECP.Text = "GO";
+            this.BTN_OPEN_PATH_i04_REAL_RECP.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i04_REAL_RECP.Click += new System.EventHandler(this.BTN_OPEN_PATH_i04_REAL_RECP_Click);
             // 
-            // BTN_OPEN_PATH_i03
+            // BTN_OPEN_PATH_i03_BASE_RECP
             // 
-            this.BTN_OPEN_PATH_i03.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i03.Location = new System.Drawing.Point(788, 82);
-            this.BTN_OPEN_PATH_i03.Name = "BTN_OPEN_PATH_i03";
-            this.BTN_OPEN_PATH_i03.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i03.TabIndex = 2;
-            this.BTN_OPEN_PATH_i03.Text = "GO";
-            this.BTN_OPEN_PATH_i03.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i03.Click += new System.EventHandler(this.BTN_OPEN_PATH_i03_Click);
+            this.BTN_OPEN_PATH_i03_BASE_RECP.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i03_BASE_RECP.Location = new System.Drawing.Point(788, 82);
+            this.BTN_OPEN_PATH_i03_BASE_RECP.Name = "BTN_OPEN_PATH_i03_BASE_RECP";
+            this.BTN_OPEN_PATH_i03_BASE_RECP.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i03_BASE_RECP.TabIndex = 2;
+            this.BTN_OPEN_PATH_i03_BASE_RECP.Text = "GO";
+            this.BTN_OPEN_PATH_i03_BASE_RECP.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i03_BASE_RECP.Click += new System.EventHandler(this.BTN_OPEN_PATH_i03_BASE_RECP_Click);
             // 
-            // BTN_OPEN_PATH_i02
+            // BTN_OPEN_PATH_i02_DATA_DUMP
             // 
-            this.BTN_OPEN_PATH_i02.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i02.Location = new System.Drawing.Point(788, 52);
-            this.BTN_OPEN_PATH_i02.Name = "BTN_OPEN_PATH_i02";
-            this.BTN_OPEN_PATH_i02.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i02.TabIndex = 2;
-            this.BTN_OPEN_PATH_i02.Text = "GO";
-            this.BTN_OPEN_PATH_i02.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i02.Click += new System.EventHandler(this.BTN_OPEN_PATH_i02_Click);
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.Location = new System.Drawing.Point(788, 52);
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.Name = "BTN_OPEN_PATH_i02_DATA_DUMP";
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.TabIndex = 2;
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.Text = "GO";
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i02_DATA_DUMP.Click += new System.EventHandler(this.BTN_OPEN_PATH_i02_DATA_DUMP_Click);
             // 
             // BTN_OPEN_PATH_i01_MAIN
             // 
@@ -253,7 +253,7 @@
             this.BTN_OPEN_PATH_i01_MAIN.TabIndex = 2;
             this.BTN_OPEN_PATH_i01_MAIN.Text = "GO";
             this.BTN_OPEN_PATH_i01_MAIN.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i01_MAIN.Click += new System.EventHandler(this.BTN_OPEN_PATH_i01_Click);
+            this.BTN_OPEN_PATH_i01_MAIN.Click += new System.EventHandler(this.BTN_OPEN_PATH_i01_MAIN_Click);
             // 
             // BTN_SET_PATH_i01_MAIN
             // 
@@ -347,7 +347,7 @@
             this.groupBox2.Controls.Add(this.BTN_SET_PATH_i10_IMAGE_ORG);
             this.groupBox2.Controls.Add(this.TXT_PATH_i10_IMAGE_ORG);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.BTN_OPEN_PATH_i10);
+            this.groupBox2.Controls.Add(this.BTN_OPEN_PATH_i10_IMAGE_ORG);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(23, 239);
             this.groupBox2.Name = "groupBox2";
@@ -385,16 +385,16 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "INPUT";
             // 
-            // BTN_OPEN_PATH_i10
+            // BTN_OPEN_PATH_i10_IMAGE_ORG
             // 
-            this.BTN_OPEN_PATH_i10.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i10.Location = new System.Drawing.Point(788, 20);
-            this.BTN_OPEN_PATH_i10.Name = "BTN_OPEN_PATH_i10";
-            this.BTN_OPEN_PATH_i10.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i10.TabIndex = 2;
-            this.BTN_OPEN_PATH_i10.Text = "GO";
-            this.BTN_OPEN_PATH_i10.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i10.Click += new System.EventHandler(this.BTN_OPEN_PATH_i10_Click);
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.Location = new System.Drawing.Point(788, 20);
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.Name = "BTN_OPEN_PATH_i10_IMAGE_ORG";
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.TabIndex = 2;
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.Text = "GO";
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i10_IMAGE_ORG.Click += new System.EventHandler(this.BTN_OPEN_PATH_i10_IMAGE_ORG_Click);
             // 
             // label13
             // 
@@ -411,8 +411,8 @@
             this.groupBox3.Controls.Add(this.BTN_SET_PATH_i16_HISTORY_PTRN);
             this.groupBox3.Controls.Add(this.BTN_SET_PATH_i15_HISTORY_MEASURE);
             this.groupBox3.Controls.Add(this.TXT_PATH_i16_HISTORY_PTRN);
-            this.groupBox3.Controls.Add(this.BTN_OPEN_PATH_i16);
-            this.groupBox3.Controls.Add(this.BTN_OPEN_PATH_i15);
+            this.groupBox3.Controls.Add(this.BTN_OPEN_PATH_i16_HISTORY_PTRN);
+            this.groupBox3.Controls.Add(this.BTN_OPEN_PATH_i15_HISTORY_MEASURE);
             this.groupBox3.Controls.Add(this.TXT_PATH_i15_HISTORY_MEASURE);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label9);
@@ -454,27 +454,27 @@
             this.TXT_PATH_i16_HISTORY_PTRN.Size = new System.Drawing.Size(634, 23);
             this.TXT_PATH_i16_HISTORY_PTRN.TabIndex = 1;
             // 
-            // BTN_OPEN_PATH_i16
+            // BTN_OPEN_PATH_i16_HISTORY_PTRN
             // 
-            this.BTN_OPEN_PATH_i16.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i16.Location = new System.Drawing.Point(788, 45);
-            this.BTN_OPEN_PATH_i16.Name = "BTN_OPEN_PATH_i16";
-            this.BTN_OPEN_PATH_i16.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i16.TabIndex = 2;
-            this.BTN_OPEN_PATH_i16.Text = "GO";
-            this.BTN_OPEN_PATH_i16.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i16.Click += new System.EventHandler(this.BTN_OPEN_PATH_i16_Click);
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.Location = new System.Drawing.Point(788, 45);
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.Name = "BTN_OPEN_PATH_i16_HISTORY_PTRN";
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.TabIndex = 2;
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.Text = "GO";
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i16_HISTORY_PTRN.Click += new System.EventHandler(this.BTN_OPEN_PATH_i16_HISTORY_PTRN_Click);
             // 
-            // BTN_OPEN_PATH_i15
+            // BTN_OPEN_PATH_i15_HISTORY_MEASURE
             // 
-            this.BTN_OPEN_PATH_i15.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i15.Location = new System.Drawing.Point(788, 16);
-            this.BTN_OPEN_PATH_i15.Name = "BTN_OPEN_PATH_i15";
-            this.BTN_OPEN_PATH_i15.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i15.TabIndex = 2;
-            this.BTN_OPEN_PATH_i15.Text = "GO";
-            this.BTN_OPEN_PATH_i15.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i15.Click += new System.EventHandler(this.BTN_OPEN_PATH_i15_Click);
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.Location = new System.Drawing.Point(788, 16);
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.Name = "BTN_OPEN_PATH_i15_HISTORY_MEASURE";
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.TabIndex = 2;
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.Text = "GO";
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i15_HISTORY_MEASURE.Click += new System.EventHandler(this.BTN_OPEN_PATH_i15_HISTORY_MEASURE_Click);
             // 
             // TXT_PATH_i15_HISTORY_MEASURE
             // 
@@ -517,11 +517,11 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.BTN_SET_PATH_i21_INI);
-            this.groupBox4.Controls.Add(this.BTN_SET_PATH_i20_LOG);
+            this.groupBox4.Controls.Add(this.BTN_SET_PATH_i21_LOG);
+            this.groupBox4.Controls.Add(this.BTN_SET_PATH_i20_INI);
             this.groupBox4.Controls.Add(this.TXT_PATH_i20_INI);
-            this.groupBox4.Controls.Add(this.BTN_OPEN_PATH_i21);
-            this.groupBox4.Controls.Add(this.BTN_OPEN_PATH_i20);
+            this.groupBox4.Controls.Add(this.BTN_OPEN_PATH_i21_LOG);
+            this.groupBox4.Controls.Add(this.BTN_OPEN_PATH_i20_INI);
             this.groupBox4.Controls.Add(this.TXT_PATH_i21_LOG);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label14);
@@ -532,64 +532,64 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             // 
-            // BTN_SET_PATH_i21_INI
+            // BTN_SET_PATH_i21_LOG
             // 
-            this.BTN_SET_PATH_i21_INI.ForeColor = System.Drawing.Color.Black;
-            this.BTN_SET_PATH_i21_INI.Location = new System.Drawing.Point(746, 45);
-            this.BTN_SET_PATH_i21_INI.Name = "BTN_SET_PATH_i21_INI";
-            this.BTN_SET_PATH_i21_INI.Size = new System.Drawing.Size(30, 23);
-            this.BTN_SET_PATH_i21_INI.TabIndex = 2;
-            this.BTN_SET_PATH_i21_INI.Text = "▲";
-            this.BTN_SET_PATH_i21_INI.UseVisualStyleBackColor = true;
-            this.BTN_SET_PATH_i21_INI.Click += new System.EventHandler(this.BTN_SET_PATH_i20_INI_Click);
+            this.BTN_SET_PATH_i21_LOG.ForeColor = System.Drawing.Color.Black;
+            this.BTN_SET_PATH_i21_LOG.Location = new System.Drawing.Point(746, 45);
+            this.BTN_SET_PATH_i21_LOG.Name = "BTN_SET_PATH_i21_LOG";
+            this.BTN_SET_PATH_i21_LOG.Size = new System.Drawing.Size(30, 23);
+            this.BTN_SET_PATH_i21_LOG.TabIndex = 2;
+            this.BTN_SET_PATH_i21_LOG.Text = "▲";
+            this.BTN_SET_PATH_i21_LOG.UseVisualStyleBackColor = true;
+            this.BTN_SET_PATH_i21_LOG.Click += new System.EventHandler(this.BTN_SET_PATH_i20_INI_Click);
             // 
-            // BTN_SET_PATH_i20_LOG
+            // BTN_SET_PATH_i20_INI
             // 
-            this.BTN_SET_PATH_i20_LOG.ForeColor = System.Drawing.Color.Black;
-            this.BTN_SET_PATH_i20_LOG.Location = new System.Drawing.Point(746, 16);
-            this.BTN_SET_PATH_i20_LOG.Name = "BTN_SET_PATH_i20_LOG";
-            this.BTN_SET_PATH_i20_LOG.Size = new System.Drawing.Size(30, 23);
-            this.BTN_SET_PATH_i20_LOG.TabIndex = 2;
-            this.BTN_SET_PATH_i20_LOG.Text = "▲";
-            this.BTN_SET_PATH_i20_LOG.UseVisualStyleBackColor = true;
-            this.BTN_SET_PATH_i20_LOG.Click += new System.EventHandler(this.BTN_SET_PATH_i21_LOG_Click);
+            this.BTN_SET_PATH_i20_INI.ForeColor = System.Drawing.Color.Black;
+            this.BTN_SET_PATH_i20_INI.Location = new System.Drawing.Point(746, 16);
+            this.BTN_SET_PATH_i20_INI.Name = "BTN_SET_PATH_i20_INI";
+            this.BTN_SET_PATH_i20_INI.Size = new System.Drawing.Size(30, 23);
+            this.BTN_SET_PATH_i20_INI.TabIndex = 2;
+            this.BTN_SET_PATH_i20_INI.Text = "▲";
+            this.BTN_SET_PATH_i20_INI.UseVisualStyleBackColor = true;
+            this.BTN_SET_PATH_i20_INI.Click += new System.EventHandler(this.BTN_SET_PATH_i21_LOG_Click);
             // 
             // TXT_PATH_i20_INI
             // 
             this.TXT_PATH_i20_INI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_PATH_i20_INI.ForeColor = System.Drawing.Color.White;
-            this.TXT_PATH_i20_INI.Location = new System.Drawing.Point(106, 45);
+            this.TXT_PATH_i20_INI.Location = new System.Drawing.Point(106, 16);
             this.TXT_PATH_i20_INI.Name = "TXT_PATH_i20_INI";
             this.TXT_PATH_i20_INI.Size = new System.Drawing.Size(634, 23);
             this.TXT_PATH_i20_INI.TabIndex = 1;
             // 
-            // BTN_OPEN_PATH_i21
+            // BTN_OPEN_PATH_i21_LOG
             // 
-            this.BTN_OPEN_PATH_i21.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i21.Location = new System.Drawing.Point(782, 45);
-            this.BTN_OPEN_PATH_i21.Name = "BTN_OPEN_PATH_i21";
-            this.BTN_OPEN_PATH_i21.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i21.TabIndex = 2;
-            this.BTN_OPEN_PATH_i21.Text = "GO";
-            this.BTN_OPEN_PATH_i21.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i21.Click += new System.EventHandler(this.BTN_OPEN_PATH_i21_Click);
+            this.BTN_OPEN_PATH_i21_LOG.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i21_LOG.Location = new System.Drawing.Point(782, 45);
+            this.BTN_OPEN_PATH_i21_LOG.Name = "BTN_OPEN_PATH_i21_LOG";
+            this.BTN_OPEN_PATH_i21_LOG.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i21_LOG.TabIndex = 2;
+            this.BTN_OPEN_PATH_i21_LOG.Text = "GO";
+            this.BTN_OPEN_PATH_i21_LOG.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i21_LOG.Click += new System.EventHandler(this.BTN_OPEN_PATH_i21_LOG_Click);
             // 
-            // BTN_OPEN_PATH_i20
+            // BTN_OPEN_PATH_i20_INI
             // 
-            this.BTN_OPEN_PATH_i20.ForeColor = System.Drawing.Color.Black;
-            this.BTN_OPEN_PATH_i20.Location = new System.Drawing.Point(782, 16);
-            this.BTN_OPEN_PATH_i20.Name = "BTN_OPEN_PATH_i20";
-            this.BTN_OPEN_PATH_i20.Size = new System.Drawing.Size(45, 23);
-            this.BTN_OPEN_PATH_i20.TabIndex = 2;
-            this.BTN_OPEN_PATH_i20.Text = "GO";
-            this.BTN_OPEN_PATH_i20.UseVisualStyleBackColor = true;
-            this.BTN_OPEN_PATH_i20.Click += new System.EventHandler(this.BTN_OPEN_PATH_i20_Click);
+            this.BTN_OPEN_PATH_i20_INI.ForeColor = System.Drawing.Color.Black;
+            this.BTN_OPEN_PATH_i20_INI.Location = new System.Drawing.Point(782, 16);
+            this.BTN_OPEN_PATH_i20_INI.Name = "BTN_OPEN_PATH_i20_INI";
+            this.BTN_OPEN_PATH_i20_INI.Size = new System.Drawing.Size(45, 23);
+            this.BTN_OPEN_PATH_i20_INI.TabIndex = 2;
+            this.BTN_OPEN_PATH_i20_INI.Text = "GO";
+            this.BTN_OPEN_PATH_i20_INI.UseVisualStyleBackColor = true;
+            this.BTN_OPEN_PATH_i20_INI.Click += new System.EventHandler(this.BTN_OPEN_PATH_i20_INI_Click);
             // 
             // TXT_PATH_i21_LOG
             // 
             this.TXT_PATH_i21_LOG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_PATH_i21_LOG.ForeColor = System.Drawing.Color.White;
-            this.TXT_PATH_i21_LOG.Location = new System.Drawing.Point(106, 16);
+            this.TXT_PATH_i21_LOG.Location = new System.Drawing.Point(106, 42);
             this.TXT_PATH_i21_LOG.Name = "TXT_PATH_i21_LOG";
             this.TXT_PATH_i21_LOG.Size = new System.Drawing.Size(634, 23);
             this.TXT_PATH_i21_LOG.TabIndex = 1;
@@ -597,7 +597,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 19);
+            this.label12.Location = new System.Drawing.Point(16, 45);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 16);
@@ -607,7 +607,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 48);
+            this.label14.Location = new System.Drawing.Point(14, 19);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(30, 16);
@@ -684,6 +684,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(873, 627);
             this.panel1.TabIndex = 77;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Dlg_Config
             // 
@@ -728,7 +729,7 @@
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button BTN_SET_PATH_i11_IMAGE_MATCHING;
+        private System.Windows.Forms.Button BTN_SET_PATH_i11_IMAGE_TEACHING;
         private System.Windows.Forms.Button BTN_SET_PATH_i10_IMAGE_ORG;
         private System.Windows.Forms.TextBox TXT_PATH_i11_IMAGE_PTRN;
         private System.Windows.Forms.TextBox TXT_PATH_i10_IMAGE_ORG;
@@ -747,8 +748,8 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button BTN_SET_PATH_i21_INI;
-        private System.Windows.Forms.Button BTN_SET_PATH_i20_LOG;
+        private System.Windows.Forms.Button BTN_SET_PATH_i21_LOG;
+        private System.Windows.Forms.Button BTN_SET_PATH_i20_INI;
         private System.Windows.Forms.TextBox TXT_PATH_i20_INI;
         private System.Windows.Forms.TextBox TXT_PATH_i21_LOG;
         private System.Windows.Forms.Label label12;
@@ -759,15 +760,15 @@
         private System.Windows.Forms.Button BTN_CANCEL;
         private System.Windows.Forms.Button BTN_APPLY;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i11;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i04;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i03;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i02;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i11_IMAGE_TEACHING;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i04_REAL_RECP;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i03_BASE_RECP;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i02_DATA_DUMP;
         private System.Windows.Forms.Button BTN_OPEN_PATH_i01_MAIN;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i10;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i16;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i15;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i21;
-        private System.Windows.Forms.Button BTN_OPEN_PATH_i20;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i10_IMAGE_ORG;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i16_HISTORY_PTRN;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i15_HISTORY_MEASURE;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i21_LOG;
+        private System.Windows.Forms.Button BTN_OPEN_PATH_i20_INI;
     }
 }

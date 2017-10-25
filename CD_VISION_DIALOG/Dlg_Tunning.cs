@@ -252,7 +252,7 @@ namespace CD_VISION_DIALOG
             TXT_CIR_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
 
             // 03 Show Raw Data
-            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_04_BOOL_SHOW_RAW_DATA;
+            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
 
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
@@ -290,7 +290,7 @@ namespace CD_VISION_DIALOG
             double.TryParse(TXT_CIR_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
 
             // show raw data
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
 
             return single;
         }
@@ -323,7 +323,7 @@ namespace CD_VISION_DIALOG
             double.TryParse(TXT_RECT_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
             double.TryParse(TXT_RECT_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
             
-            single.param_comm_04_BOOL_SHOW_RAW_DATA = CHK_RECT_SHOW_RAW_DATA.Checked;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA = CHK_RECT_SHOW_RAW_DATA.Checked;
  
 
 
@@ -393,6 +393,9 @@ namespace CD_VISION_DIALOG
 
             if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_CIR)
             {
+                // empty operation exception 171017
+                if (fm.COUNT_PAIR_CIR == 0) return;
+
                 CMeasurePairCir[] arrCircle = fm.ToArray_PairCir();
 
                 string strTarget = TXT_CIRCLE_SELECTED_FIGURE.Text;
@@ -414,13 +417,17 @@ namespace CD_VISION_DIALOG
                     arrCircle[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
                     arrCircle[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
                     arrCircle[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
-                    arrCircle[element].param_comm_04_BOOL_SHOW_RAW_DATA/***/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
+                    arrCircle[element].param_comm_04_refinement /**********/= single.param_comm_04_refinement;
+                    arrCircle[element].param_comm_05_BOOL_SHOW_RAW_DATA/***/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
                 }
 
                 this.fm.list_pair_Cir = arrCircle.ToList();
             }
             else if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_RECT)
             {
+                // empty operation exception 171017
+                if (fm.COUNT_PAIR_RCT == 0) return;
+
                 CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
 
                 string strTarget = TXT_RECT_SELECTED_FIGURE.Text;
@@ -443,7 +450,8 @@ namespace CD_VISION_DIALOG
                     arrRect[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
                     arrRect[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
                     arrRect[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
-                    arrRect[element].param_comm_04_BOOL_SHOW_RAW_DATA /**/= single.param_comm_04_BOOL_SHOW_RAW_DATA;
+                    arrRect[element].param_comm_04_refinement /**********/= single.param_comm_04_refinement;
+                    arrRect[element].param_comm_05_BOOL_SHOW_RAW_DATA /**/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
                 }
                 this.fm.list_pair_Rct = arrRect.ToList();
             }
@@ -480,8 +488,9 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_CIR_EDGE_POSITION.Checked/******/) { arrCircle[i].param_06_EdgePos /*******************/= single.param_06_EdgePos; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    //
-                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_04_BOOL_SHOW_RAW_DATA /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA; }
+                    //arrCircle[i].param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
+                    //arrCircle[i].param_comm_04_refinement = single.param_comm_04_refinement;
+                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
                     
                 }
 
@@ -509,8 +518,9 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_07_edge_position_scd /*********/= single.param_07_edge_position_scd; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    //
-                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_04_BOOL_SHOW_RAW_DATA /***/= single.param_comm_04_BOOL_SHOW_RAW_DATA; }
+                    //arrRect[i].param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
+                    //arrRect[i].param_comm_04_refinement = single.param_comm_04_refinement;
+                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
                 }
 
                 this.fm.list_pair_Rct = arrRect.ToList();
@@ -572,7 +582,7 @@ namespace CD_VISION_DIALOG
            TXT_RECT_EDGE_POSITION_SCD.Text = single.param_07_edge_position_scd.ToString("F2");
 
             // 05 show raw data 
-            CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_04_BOOL_SHOW_RAW_DATA;
+            CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
             
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);

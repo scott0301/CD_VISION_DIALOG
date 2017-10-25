@@ -38,7 +38,8 @@ namespace CD_VISION_DIALOG
         public UdpIPC MsgIPC = null;
         public IpcBuffer sharedIPC1 = null;
 
-        
+        StaticResult staticManager = new StaticResult();
+
         private void IPC_Init()
         {
             IpcClient ipcC = new IpcClient();
@@ -62,9 +63,20 @@ namespace CD_VISION_DIALOG
             //*************************************************************************************
             if (e.Id == IPC_ID.CM_MEASURE_START)
             {
-                string strData = e.Msg;
-                UC_LOG_VIEWER.WRITE_LOG("[★REQ]-MEASUREMENT_START", DEF_OPERATION.OPER_06_COMM);
+                string [] LoopInfo = e.Msg.Split(',');
 
+                int nCycle = Convert.ToInt32(LoopInfo[0]);
+                int nPoint = Convert.ToInt32(LoopInfo[1]);
+
+                nCycle += 1; // sequence index started from 0 !!!
+
+                report.SetInit(nCycle, nPoint);
+                staticManager.ClearMap();
+                staticManager.m_nCycleTarget = nCycle;
+                staticManager.m_nPointTarget = nPoint;
+
+                UC_LOG_VIEWER.WRITE_LOG("[★REQ]-MEASUREMENT_START", DEF_OPERATION.OPER_06_COMM);
+                UC_LOG_VIEWER.WRITE_LOG(string.Format("[☆ACK]CYCLE={0:00}, POINTS={1:00}",nCycle, nPoint), DEF_OPERATION.OPER_06_COMM);
             }
 
             //*************************************************************************************
@@ -73,8 +85,37 @@ namespace CD_VISION_DIALOG
             if (e.Id == IPC_ID.CM_MEASURE_END)
             {
                 UC_LOG_VIEWER.WRITE_LOG("[★REQ]-MEASUREMENT_END", DEF_OPERATION.OPER_06_COMM);
+ 
+                int nSecFin = (staticManager.m_nCycleTarget) * staticManager.m_nPointTarget;
+                if (staticManager.m_nSequentialIndex == nSecFin)
+                {
+                    UC_LOG_VIEWER.WRITE_LOG(string.Format("[☆ACK]CYCLE=[{0:00}/{1:00}], FIN-PNT=[{2:00}/{3:00}]",
+                        staticManager.m_nCycleTarget, staticManager.m_nCycleTarget,
+                        staticManager.m_nPointTarget, staticManager.m_nPointTarget), DEF_OPERATION.OPER_06_COMM);
+                }
+                else
+                {
+                    int nRestPoints = staticManager.m_nSequentialIndex - nSecFin;
+                    int nTargetTotal = staticManager.m_nCycleTarget * staticManager.m_nPointTarget;
+                    UC_LOG_VIEWER.WRITE_LOG(string.Format("[☆ACK]CYCLE=[{0:00}/{1:00}], FIN-PNT=[{2:00}/{3:00}], Rest-PNT={4:00}", 
+                        staticManager.m_nCycleCurrent,staticManager.m_nCycleTarget,
+                        staticManager.m_nSequentialIndex, nTargetTotal,
+                         nRestPoints), DEF_OPERATION.OPER_06_COMM);
 
-            }
+                    report.INTERRUPT = true;
+                }
+
+                report.INFO_PTRN = imageView1.fm.param_ptrn.PTRN_FILE;
+                report.INFO_RECIPE = imageView1.fm.RECP_FILE;
+                report.INFO_TIME = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
+                report.INFO_PIXEL_X = imageView1.fm.param_optics.PIXEL_RES * 1000.0;
+
+                //*************************************************************************
+                // make report file
+
+                
+                CMeasureReport._WriteMeasurementData(report, imageView1.fm.config.i02_PATH_DATA_DUMP);
+             }
 
             //*************************************************************************************
             // measuremet
@@ -85,15 +126,45 @@ namespace CD_VISION_DIALOG
 
                 buffer = sharedIPC1.Buffer;
                 GrabInfo obj = ByteArraySerializer<GrabInfo>.Deserialize(buffer);
-
-
+                
                 Remote.MeasureInfo mi = CDOL_OnReqMeasure(obj.POS.X, obj.POS.Y, obj.IMG.Buffer, obj.IMG.Width, obj.IMG.Height);
+
+                int nPoint = obj.POS.No;
+                /***/mi.No = obj.POS.No;
+
+                int nDataCount = mi.list.Count;
+                if (staticManager.m_nSequentialIndex == 0){staticManager.SetInit(nDataCount);}
+
+                for (int nItem = 0; nItem < nDataCount; nItem++)
+                {
+                    string strResult = string.Empty;
+
+                    if (staticManager.InsertData(nPoint, nItem, mi.list.ElementAt(nItem), out strResult) == false)
+                    {
+                        _PRINT_MSG("[ERROR]-" + strResult);
+                    }
+                }
+
                 UC_LOG_VIEWER.WRITE_LOG("[★REQ]-MEASURE", DEF_OPERATION.OPER_06_COMM);
-                UC_LOG_VIEWER.WRITE_LOG(string.Format("[☆ACK] POS = [{0:F3},{1:F3}] SUCESS-{2}", obj.POS.X, obj.POS.Y, mi.Result), DEF_OPERATION.OPER_06_COMM);
+                UC_LOG_VIEWER.WRITE_LOG(string.Format("[☆ACK] CYCLE[{0:00}/{1:00}] POS[{2:00}/{3:00}] SUCESS-{4}", staticManager.m_nCycleCurrent, staticManager.m_nCycleTarget, nPoint, staticManager.m_nPointTarget, mi.Result), DEF_OPERATION.OPER_06_COMM);
 
                 sharedIPC1.Buffer = IPCUtility.ByteArraySerializer<MeasureInfo>.Serialize(mi);
                 MsgIPC.Send(IPC_ID.MC_IMAGE_MEASURE_REP, "", 5510);
 
+                if( m_hacker.BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET == true)
+                {
+                    string timecode = WrapperUnion.WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM();
+                    string savePath = Path.Combine(m_hacker.PATH_EXPERIMENTAL_IMAGE_SET, string.Format("ITER{0:00}CYCLE{1:00}_{2}.bmp",staticManager.m_nCycleCurrent+1, nPoint, timecode));
+                    imageView2.ThreadCall_SaveImage(savePath, obj.IMG.Buffer, obj.IMG.Width, obj.IMG.Height);
+                }
+                staticManager.m_nSequentialIndex++;
+
+                if( staticManager. m_nSequentialIndex != 0 &&
+                    staticManager.m_nSequentialIndex % staticManager.m_nPointTarget == 0)
+                {
+                    staticManager.m_nCycleCurrent++;
+                }
+                 
             }
             //*************************************************************************************
             // matching
@@ -111,7 +182,7 @@ namespace CD_VISION_DIALOG
 
                 if (mi.Result == -1)
                 {
-                    UC_LOG_VIEWER.WRITE_LOG("ERR - PTRN", DEF_OPERATION.OPER_05_MEAS);
+                    UC_LOG_VIEWER.WRITE_LOG("[☆ACK]ERR - PTRN", DEF_OPERATION.OPER_06_COMM);
                 }
                 else
                 {
@@ -362,11 +433,7 @@ namespace CD_VISION_DIALOG
         Dlg_Hacker dlgHacker = null;
         Dlg_Spc dlgSPC = null;
 
-
         CHacker m_hacker = new CHacker();
-
-
-
 
         //****************************************************
         // Constant Variable
@@ -2070,7 +2137,7 @@ namespace CD_VISION_DIALOG
         private async void BTN_MEASURE_Click(object sender, EventArgs e)
         {
             imageView1.VIEW_Set_Clear_DispObject();
-            report.SetInit();
+            report.SetInit(0,0);
 
             CFigureManager fm = imageView1.fm.Clone() as CFigureManager;
 
@@ -2111,6 +2178,7 @@ namespace CD_VISION_DIALOG
                     {
                         MessageBox.Show("Sudden Attack!!!", "Priority 1 Interrupt Occured", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         nHarras = 0;
+                        report.INTERRUPT = true;
                         _PRINT_MSG("USER CALLED URGENT INTERUPT.");
                         break;
                     }
@@ -2126,8 +2194,7 @@ namespace CD_VISION_DIALOG
                 report.INFO_RECIPE = fm.RECP_FILE;
                 report.INFO_TIME = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
                 report.INFO_PIXEL_X = fm.param_optics.PIXEL_RES*1000.0;
-                report.INFO_PIXEL_Y = fm.param_optics.PIXEL_RES*1000.0;
-
+ 
                 //*************************************************************************
                 // make report file
 
@@ -2474,6 +2541,7 @@ namespace CD_VISION_DIALOG
             PointF ptDelta = imageView1.fm.PT_PTRN_DELTA;
             imageView1.DrawPatternMathcing(ptTemplateCenter, rcTemplate);
 
+
             if (ptTemplateCenter.X != 0 && ptTemplateCenter.Y != 0)
             {
                 imageView1.fm.SetRelativeMovemntFocusRect();
@@ -2482,6 +2550,12 @@ namespace CD_VISION_DIALOG
                 if (rcFocus.X > 0 && rcFocus.Y > 0 && rcFocus.Width > 0 && rcFocus.Height > 0)
                 {
                     byte[] rawFocus = Computer.HC_CropImage(rawImage, imageW, imageH, rcFocus);
+
+                    byte[] gradient = Computer.HC_TRANS_GradientImage(rawFocus, rcFocus.Width, rcFocus.Height);
+                    double[] fGradient = gradient.Select(element => (double)element).ToArray();
+
+                    report.AddFocusMag(fGradient.Average());
+
                     Bitmap bmpFocus = Computer.HC_CONV_Byte2Bmp(rawFocus, rcFocus.Width, rcFocus.Height);
                     PIC_FOCUS.Image = bmpFocus.Clone() as Bitmap;
 
@@ -2512,8 +2586,9 @@ namespace CD_VISION_DIALOG
                     imageView2.ThreadCall_SaveImage(Path.Combine(strPathDir, strTimeCode + "_ERROR.BMP"), rawBuff, imageW, imageH);
                 }
             }
+
+            report.m_listMatchPoint.Add(ptTemplateCenter);
            
-            
 
             if (fMatchingRatio == 0) { _SetColor_PtrnResul(0); } else { _SetColor_PtrnResul(1); } 
 
@@ -2563,8 +2638,6 @@ namespace CD_VISION_DIALOG
                 // take inspection result 
                 string strInspRes = string.Format("{0} : Dia  = {1:F4} um", single.NICKNAME, fDistance );
 
-                if (m_hacker.BOOL_USE_LOOP_COUNTER == true){strInspRes = string.Format("{0}_", m_hacker.INT_LOOP_COUNTER) + strInspRes;}
-
                 listMeasureResult.Add(strInspRes);
 
                 // leave inspection result 
@@ -2580,10 +2653,12 @@ namespace CD_VISION_DIALOG
                 // write log 
                 UC_LOG_VIEWER.WRITE_LOG(strInspRes, DEF_OPERATION.OPER_05_MEAS);
 
+                DumpPoints(listEdges_FEX);
+
                 // draw fucking edges 
-                imageView1.DrawPoints(listEdges_FEX, /***/1, (float)0.1, Color.Magenta);
+                imageView1.DrawPoints(listEdges_FEX, /***/1, (float)0.1, Color.Red);
                 imageView1.DrawPoints(listEdges_FMD, /***/1, (float)0.1, Color.LimeGreen);
-                imageView1.DrawPoints(listEdges_FIN, /***/1, (float)0.1, Color.Magenta);
+                imageView1.DrawPoints(listEdges_FIN, /***/1, (float)0.1, Color.Blue);
 
                 // draw fucking major point 
 
@@ -2620,27 +2695,23 @@ namespace CD_VISION_DIALOG
                 RectangleF rcEstimaged = new RectangleF();
                 // get measure data 
                 double fDistance = single.MeasureData(rawImage, imageW, imageH, 
-                    ref listEdges_FEX, 
-                    ref listEdges_FMD, 
-                    ref listEdges_FIN,
-                    ref listEdges_SEX,
-                    ref listEdges_SMD,
-                    ref listEdges_SIN, 
+                    ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,
+                    ref listEdges_SEX,ref listEdges_SMD, ref listEdges_SIN, 
                     out P1, out P2, out rcEstimaged);
 
                 // take mearsure result 
                 string strInspRes = string.Format("{0} : Width  = {1:F4} um", single.NICKNAME, fDistance );
 
-                if (m_hacker.BOOL_USE_LOOP_COUNTER == true) { strInspRes = string.Format("{0}_", m_hacker.INT_LOOP_COUNTER) + strInspRes; }
-
+ 
                 listMeasureResult.Add(strInspRes);
 
                 // leave inspection result 
-                if (bSimulation == true)
-                {
-                    report.AddResult_FIG(IFX_FIGURE.PAIR_RCT, strFileName, single, fDistance);
-                }
-                else if (bSimulation == false)
+                //if (bSimulation == true)
+                //{
+                report.AddResult_FIG(IFX_FIGURE.PAIR_RCT, strFileName, single, fDistance);
+                //}
+
+                if (bSimulation == false)
                 {
                     mi.list.Add(InsertMeasureData(fDistance, P1, P2));
                 }
@@ -2688,8 +2759,7 @@ namespace CD_VISION_DIALOG
                 // get measure data 
                 string strInspRes = string.Format("{0} : OVL [X,Y]  = [{1:F4}, {2:F4}] um", single.NICKNAME, fOL_X , fOL_Y );
 
-                if (m_hacker.BOOL_USE_LOOP_COUNTER == true) { strInspRes = string.Format("{0}_", m_hacker.INT_LOOP_COUNTER) + strInspRes; }
-
+ 
                 listMeasureResult.Add(strInspRes);
 
                 // leave measurement result 
@@ -2718,7 +2788,7 @@ namespace CD_VISION_DIALOG
             System.Threading.Thread.Sleep(50);
 
             //*************************************************************************************
-            if (CHK_USE_HISTORY.Checked == true)
+            if (CHK_USE_HISTORY_MEASURE.Checked == true)
             //*************************************************************************************
             {
                 Bitmap bmp = Computer.HC_CONV_Byte2Bmp(rawBuff, imageW, imageH);
@@ -2726,12 +2796,27 @@ namespace CD_VISION_DIALOG
             }
 
             if (bSimulation == false){mi.Result = mi.list.Count == 0 ? -1 : 1;}
-            if (m_hacker.BOOL_USE_LOOP_COUNTER == true) { m_hacker.INT_LOOP_COUNTER++; }
-
+ 
             return mi;
         }
 
-        
+        private void DumpPoints(List<PointF> list)
+        {
+            WrapperExcel ex = new WrapperExcel();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                string[] data = new string[2];
+
+                data[0] = list.ElementAt(i).X.ToString();
+                data[1] = list.ElementAt(i).Y.ToString();
+
+                ex.data.Add(data);
+            }
+
+            ex.Dump_Data("c:\\" + WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM() + "_COORD.xlsx");
+
+        }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -2949,6 +3034,13 @@ namespace CD_VISION_DIALOG
 
                 if (nIndex == nCount) nIndex = 0;
             }
+        }
+
+        private void PIC_FOCUS_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
         }
 
         

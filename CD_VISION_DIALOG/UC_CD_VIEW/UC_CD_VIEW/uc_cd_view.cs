@@ -267,7 +267,7 @@ namespace CD_View
 
             HELPER_IMAGE_IO.SaveImage(cropImage, rc.Width, rc.Height, strPath);
         }
-        public string iSave_Roi_Ptrn()
+        public string iSave_Roi_Ptrn(string filename)
         {
             Rectangle rc = ROI_PTRN;
             string strFileName = string.Empty;
@@ -280,7 +280,17 @@ namespace CD_View
 
                 byte[] cropRC = HELPER_IMAGE_IO.HC_CropImage(rawImage, imageW, imageH, rc.X, rc.Y, rc.Width, rc.Height);
 
-                strFileName = HELPER_IMAGE_IO._SelectAndSaveFileAsBitmap(fm.config.i11_PATH_IMG_PTRN);
+                // selective file name
+                if (filename == "")
+                {
+                    strFileName = HELPER_IMAGE_IO._SelectAndSaveFileAsBitmap(fm.config.i11_PATH_IMG_PTRN);
+                }
+                // user defined file name  171017
+                else if ( filename != "")
+                {
+                    strFileName =filename;
+                }
+
 
                 if (strFileName != "")
                 {

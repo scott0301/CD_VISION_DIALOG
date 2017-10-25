@@ -12,9 +12,9 @@ D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\LIB_CD_Vision\Lib\L
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.dll
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.pdb
 D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\Lib\LIB_CD_VISION.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\Lib\LIB_CD_VISION.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache

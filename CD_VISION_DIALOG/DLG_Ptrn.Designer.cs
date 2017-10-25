@@ -40,6 +40,7 @@
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,7 +67,8 @@
             this.CHK_PTRN_APPLY_EDGE_BASED = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.PIC_PTRN_EDGE = new System.Windows.Forms.PictureBox();
-            this.BTN_PTRN_TEACH = new System.Windows.Forms.Button();
+            this.BTN_PTRN_TEACH_OVERWRITE = new System.Windows.Forms.Button();
+            this.BTN_PTRN_TEACH_NEW = new System.Windows.Forms.Button();
             this.BTN_PTRN_DRAW = new System.Windows.Forms.Button();
             this.RICH_MESSAGE = new System.Windows.Forms.RichTextBox();
             this.BTN_SET_EXTERNAL_IMAGE = new System.Windows.Forms.Button();
@@ -189,6 +191,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -199,7 +202,8 @@
             this.groupBox1.Controls.Add(this.TXT_PTRN_FILE_NAME);
             this.groupBox1.Controls.Add(this.PIC_PTRN_EDGE);
             this.groupBox1.Controls.Add(this.PIC_PTRN_NORMAL);
-            this.groupBox1.Controls.Add(this.BTN_PTRN_TEACH);
+            this.groupBox1.Controls.Add(this.BTN_PTRN_TEACH_OVERWRITE);
+            this.groupBox1.Controls.Add(this.BTN_PTRN_TEACH_NEW);
             this.groupBox1.Controls.Add(this.BTN_PTRN_DRAW);
             this.groupBox1.Controls.Add(this.BTN_MATCHING);
             this.groupBox1.Controls.Add(this.BTN_UPDATE_PTRN_LIST);
@@ -223,15 +227,27 @@
             this.label7.TabIndex = 77;
             this.label7.Text = "DRAW";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(403, 316);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(80, 16);
+            this.label12.TabIndex = 77;
+            this.label12.Text = "Overwrite";
+            this.label12.Click += new System.EventHandler(this.label6_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(334, 316);
+            this.label6.Location = new System.Drawing.Point(328, 316);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 16);
+            this.label6.Size = new System.Drawing.Size(75, 16);
             this.label6.TabIndex = 77;
-            this.label6.Text = "TEACH";
+            this.label6.Text = "SaveNew";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -529,18 +545,31 @@
             this.PIC_PTRN_EDGE.TabIndex = 30;
             this.PIC_PTRN_EDGE.TabStop = false;
             // 
-            // BTN_PTRN_TEACH
+            // BTN_PTRN_TEACH_OVERWRITE
             // 
-            this.BTN_PTRN_TEACH.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
-            this.BTN_PTRN_TEACH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PTRN_TEACH.ForeColor = System.Drawing.Color.Black;
-            this.BTN_PTRN_TEACH.Location = new System.Drawing.Point(333, 252);
-            this.BTN_PTRN_TEACH.Margin = new System.Windows.Forms.Padding(4);
-            this.BTN_PTRN_TEACH.Name = "BTN_PTRN_TEACH";
-            this.BTN_PTRN_TEACH.Size = new System.Drawing.Size(60, 60);
-            this.BTN_PTRN_TEACH.TabIndex = 31;
-            this.BTN_PTRN_TEACH.UseVisualStyleBackColor = true;
-            this.BTN_PTRN_TEACH.Click += new System.EventHandler(this.BTN_PTRN_TEACH_Click);
+            this.BTN_PTRN_TEACH_OVERWRITE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
+            this.BTN_PTRN_TEACH_OVERWRITE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_PTRN_TEACH_OVERWRITE.ForeColor = System.Drawing.Color.Black;
+            this.BTN_PTRN_TEACH_OVERWRITE.Location = new System.Drawing.Point(398, 252);
+            this.BTN_PTRN_TEACH_OVERWRITE.Margin = new System.Windows.Forms.Padding(4);
+            this.BTN_PTRN_TEACH_OVERWRITE.Name = "BTN_PTRN_TEACH_OVERWRITE";
+            this.BTN_PTRN_TEACH_OVERWRITE.Size = new System.Drawing.Size(60, 60);
+            this.BTN_PTRN_TEACH_OVERWRITE.TabIndex = 31;
+            this.BTN_PTRN_TEACH_OVERWRITE.UseVisualStyleBackColor = true;
+            this.BTN_PTRN_TEACH_OVERWRITE.Click += new System.EventHandler(this.BTN_PTRN_TEACH_OVERWRITE_Click);
+            // 
+            // BTN_PTRN_TEACH_NEW
+            // 
+            this.BTN_PTRN_TEACH_NEW.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
+            this.BTN_PTRN_TEACH_NEW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_PTRN_TEACH_NEW.ForeColor = System.Drawing.Color.Black;
+            this.BTN_PTRN_TEACH_NEW.Location = new System.Drawing.Point(333, 252);
+            this.BTN_PTRN_TEACH_NEW.Margin = new System.Windows.Forms.Padding(4);
+            this.BTN_PTRN_TEACH_NEW.Name = "BTN_PTRN_TEACH_NEW";
+            this.BTN_PTRN_TEACH_NEW.Size = new System.Drawing.Size(60, 60);
+            this.BTN_PTRN_TEACH_NEW.TabIndex = 31;
+            this.BTN_PTRN_TEACH_NEW.UseVisualStyleBackColor = true;
+            this.BTN_PTRN_TEACH_NEW.Click += new System.EventHandler(this.BTN_PTRN_TEACH_NEW_Click);
             // 
             // BTN_PTRN_DRAW
             // 
@@ -709,7 +738,7 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.RichTextBox RICH_MESSAGE;
         private System.Windows.Forms.Button BTN_PTRN_DRAW;
-        private System.Windows.Forms.Button BTN_PTRN_TEACH;
+        private System.Windows.Forms.Button BTN_PTRN_TEACH_NEW;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox CHK_PTRN_SEARCH_GLOBAL;
@@ -740,5 +769,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button BTN_PTRN_TEACH_OVERWRITE;
+        private System.Windows.Forms.Label label12;
     }
 }

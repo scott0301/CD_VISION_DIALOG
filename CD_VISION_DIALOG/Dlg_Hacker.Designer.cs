@@ -32,11 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.CHK_OFF_DETECT_CROSS = new System.Windows.Forms.CheckBox();
-            this.BTN_INIT_LOOP_COUNTER = new System.Windows.Forms.Button();
-            this.TXT_LOOP_COUNTER = new System.Windows.Forms.TextBox();
-            this.CHK_USE_LOOP_COUNTER = new System.Windows.Forms.CheckBox();
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET = new System.Windows.Forms.CheckBox();
             this.CHK_USE_GRAB_SAVE = new System.Windows.Forms.CheckBox();
             this.CHK_USE_FOCUS_IMAGE_SAVE = new System.Windows.Forms.CheckBox();
+            this.TXT_SAVE_IMAGE_SET_PATH = new System.Windows.Forms.TextBox();
+            this.BTN_SET_SAVE_IMAGE_SET = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CHK_SHOW_IMAGE_PROCESSING
@@ -83,33 +83,16 @@
             this.CHK_OFF_DETECT_CROSS.UseVisualStyleBackColor = true;
             this.CHK_OFF_DETECT_CROSS.CheckedChanged += new System.EventHandler(this.CHK_OFF_DETECT_CROSS_CheckedChanged);
             // 
-            // BTN_INIT_LOOP_COUNTER
+            // CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET
             // 
-            this.BTN_INIT_LOOP_COUNTER.Location = new System.Drawing.Point(44, 92);
-            this.BTN_INIT_LOOP_COUNTER.Name = "BTN_INIT_LOOP_COUNTER";
-            this.BTN_INIT_LOOP_COUNTER.Size = new System.Drawing.Size(167, 23);
-            this.BTN_INIT_LOOP_COUNTER.TabIndex = 86;
-            this.BTN_INIT_LOOP_COUNTER.Text = "INIT_LOOP_COUNTER";
-            this.BTN_INIT_LOOP_COUNTER.UseVisualStyleBackColor = true;
-            this.BTN_INIT_LOOP_COUNTER.Click += new System.EventHandler(this.BTN_INIT_LOOP_COUNTER_Click);
-            // 
-            // TXT_LOOP_COUNTER
-            // 
-            this.TXT_LOOP_COUNTER.Location = new System.Drawing.Point(217, 94);
-            this.TXT_LOOP_COUNTER.Name = "TXT_LOOP_COUNTER";
-            this.TXT_LOOP_COUNTER.Size = new System.Drawing.Size(76, 22);
-            this.TXT_LOOP_COUNTER.TabIndex = 87;
-            this.TXT_LOOP_COUNTER.Text = "0";
-            // 
-            // CHK_USE_LOOP_COUNTER
-            // 
-            this.CHK_USE_LOOP_COUNTER.AutoSize = true;
-            this.CHK_USE_LOOP_COUNTER.Location = new System.Drawing.Point(23, 97);
-            this.CHK_USE_LOOP_COUNTER.Name = "CHK_USE_LOOP_COUNTER";
-            this.CHK_USE_LOOP_COUNTER.Size = new System.Drawing.Size(15, 14);
-            this.CHK_USE_LOOP_COUNTER.TabIndex = 0;
-            this.CHK_USE_LOOP_COUNTER.UseVisualStyleBackColor = true;
-            this.CHK_USE_LOOP_COUNTER.CheckedChanged += new System.EventHandler(this.CHK_USE_LOOP_COUNTER_CheckedChanged);
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.AutoSize = true;
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Location = new System.Drawing.Point(23, 97);
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Name = "CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET";
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Size = new System.Drawing.Size(296, 18);
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.TabIndex = 0;
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Text = "USE_SAVE_EXPERIMENTAL_IMAGE_SET";
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.UseVisualStyleBackColor = true;
+            this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.CheckedChanged += new System.EventHandler(this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET_CheckedChanged);
             // 
             // CHK_USE_GRAB_SAVE
             // 
@@ -133,17 +116,34 @@
             this.CHK_USE_FOCUS_IMAGE_SAVE.UseVisualStyleBackColor = true;
             this.CHK_USE_FOCUS_IMAGE_SAVE.CheckedChanged += new System.EventHandler(this.CHK_USE_FOCUS_IMAGE_CheckedChanged);
             // 
+            // TXT_SAVE_IMAGE_SET_PATH
+            // 
+            this.TXT_SAVE_IMAGE_SET_PATH.Location = new System.Drawing.Point(335, 97);
+            this.TXT_SAVE_IMAGE_SET_PATH.Name = "TXT_SAVE_IMAGE_SET_PATH";
+            this.TXT_SAVE_IMAGE_SET_PATH.Size = new System.Drawing.Size(215, 22);
+            this.TXT_SAVE_IMAGE_SET_PATH.TabIndex = 86;
+            // 
+            // BTN_SET_SAVE_IMAGE_SET
+            // 
+            this.BTN_SET_SAVE_IMAGE_SET.Location = new System.Drawing.Point(556, 96);
+            this.BTN_SET_SAVE_IMAGE_SET.Name = "BTN_SET_SAVE_IMAGE_SET";
+            this.BTN_SET_SAVE_IMAGE_SET.Size = new System.Drawing.Size(92, 23);
+            this.BTN_SET_SAVE_IMAGE_SET.TabIndex = 87;
+            this.BTN_SET_SAVE_IMAGE_SET.Text = "SET_PATH";
+            this.BTN_SET_SAVE_IMAGE_SET.UseVisualStyleBackColor = true;
+            this.BTN_SET_SAVE_IMAGE_SET.Click += new System.EventHandler(this.BTN_SET_SAVE_IMAGE_SET_Click);
+            // 
             // Dlg_Hacker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(900, 366);
-            this.Controls.Add(this.TXT_LOOP_COUNTER);
-            this.Controls.Add(this.BTN_INIT_LOOP_COUNTER);
+            this.Controls.Add(this.BTN_SET_SAVE_IMAGE_SET);
+            this.Controls.Add(this.TXT_SAVE_IMAGE_SET_PATH);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.CHK_USE_LOOP_COUNTER);
+            this.Controls.Add(this.CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET);
             this.Controls.Add(this.CHK_USE_FOCUS_IMAGE_SAVE);
             this.Controls.Add(this.CHK_USE_GRAB_SAVE);
             this.Controls.Add(this.CHK_OFF_DETECT_CROSS);
@@ -164,10 +164,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox CHK_OFF_DETECT_CROSS;
-        private System.Windows.Forms.Button BTN_INIT_LOOP_COUNTER;
-        private System.Windows.Forms.TextBox TXT_LOOP_COUNTER;
-        private System.Windows.Forms.CheckBox CHK_USE_LOOP_COUNTER;
+        private System.Windows.Forms.CheckBox CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET;
         private System.Windows.Forms.CheckBox CHK_USE_GRAB_SAVE;
         private System.Windows.Forms.CheckBox CHK_USE_FOCUS_IMAGE_SAVE;
+        private System.Windows.Forms.TextBox TXT_SAVE_IMAGE_SET_PATH;
+        private System.Windows.Forms.Button BTN_SET_SAVE_IMAGE_SET;
     }
 }

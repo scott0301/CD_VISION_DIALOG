@@ -44,8 +44,6 @@ namespace CD_VISION_DIALOG
         {
             this.config = config;
 
-            TXT_PATH_HISTORY_MEASURE.Text = config.i02_PATH_DATA_DUMP;
-
             BTN_UPDATE_HISTORY_Click(null, EventArgs.Empty);
 
             return true;
@@ -69,7 +67,11 @@ namespace CD_VISION_DIALOG
                 string strFileName = Path.GetFileName(single);
                 if (strFileName.Contains("$") == true) continue;
 
-                string strDate = single.Replace(config.i16_PATH_HIST_PTRN + "\\", "");
+                // Get File Name 
+                strFileName = WrapperUnion.WrapperFile.GetFileName(strFileName);
+                // Get Folder Name 
+                string strDate = Path.GetDirectoryName(single);
+                /****/ strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
  
                 
                 ListViewItem lvi = new ListViewItem();
@@ -165,7 +167,18 @@ namespace CD_VISION_DIALOG
             int nIndex = LV_HISTORY.FocusedItem.Index;
             
             string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
-            string strImageFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
+            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
+
+            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
+
+            WrapperCVS cvs = new WrapperCVS();
+            cvs.ReadCSVFile(strFullPath);
+
+            m_dgview.Clear();
+            List<string[]> list = cvs.GetAll();
+
+            m_dgview.DisplayData(list);
+
             
             //// Parsing
             //string PATH_DATE = Path.Combine(m_fm.config.i15_PATH_HIST_MEASURE, strDate);
@@ -195,6 +208,11 @@ namespace CD_VISION_DIALOG
             LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
 
 
+        }
+
+        private void BTN_CLOSE_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
     }

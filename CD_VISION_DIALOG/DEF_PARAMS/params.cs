@@ -17,18 +17,19 @@ namespace DEF_PARAMS
     {
         public bool BOOL_SHOW_IMAGE_PROCESS { get; set; }
         public bool BOOL_SHOW_DETECT_CROSS { get; set; }
-        public bool BOOL_USE_LOOP_COUNTER { get; set; }
         public bool BOOL_USE_GRAB_SAVE { get; set; }
         public bool BOOL_USE_FOCUS_SAVE { get; set; }
-
+        public bool BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET { get; set; }
+        public string PATH_EXPERIMENTAL_IMAGE_SET { get; set; }
         public int INT_LOOP_COUNTER { get; set; }
 
         public CHacker()
         {
             BOOL_SHOW_IMAGE_PROCESS = false;
             BOOL_SHOW_DETECT_CROSS = true;
-            BOOL_USE_LOOP_COUNTER = false;
             BOOL_USE_GRAB_SAVE = false;
+            BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = false;
+            PATH_EXPERIMENTAL_IMAGE_SET = string.Empty;
             BOOL_USE_FOCUS_SAVE = false;
             INT_LOOP_COUNTER = 1;
         }
@@ -313,21 +314,7 @@ namespace DEF_PARAMS
         }
     }
 
-    public class PARAM_PRE_PROCESS
-    {
-        public int nBrightness { get; set; }
-        public int nContrast { get; set; }
-        public bool USE_CTRL_BR { get; set; }
-        public bool USE_CTRL_CONT { get; set; }
-
-        public PARAM_PRE_PROCESS()
-        {
-            nBrightness = 0;
-            nContrast = 0;
-            USE_CTRL_BR = false;
-            USE_CTRL_CONT = false;
-        }
-    }
+    
 
     public class PARAM_CONFIG
     {
