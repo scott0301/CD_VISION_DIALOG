@@ -136,8 +136,16 @@ namespace HP_Troops
         }
         public static void /*****/SaveImage(byte[] rawImage, int imageW, int imageH, string strPath)
         {
-            Bitmap bmp = (Bitmap)HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
-            bmp.Save(strPath);
+            try
+            {
+
+                Bitmap bmp = (Bitmap)HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
+                bmp.Save(strPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
         public static byte[] HC_CropImage(byte[] rawInput, int imageW, int imageH, int ptX, int ptY, int cropW, int cropH)
         {

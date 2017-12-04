@@ -17,4 +17,6 @@ C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\Lib\LIB_CD_VIS
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\CD_Measure.CVerifier.resources
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csproj.GenerateResource.Cache
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache

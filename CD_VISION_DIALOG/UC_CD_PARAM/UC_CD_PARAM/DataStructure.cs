@@ -264,9 +264,9 @@ namespace CD_Paramter
         public double WINDOW_SIZE { get { return param_05_window_size; } set { param_05_window_size= value; } }
 
 
-        [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_FST { get{return param_06_edge_pos_fst;} set{param_06_edge_pos_fst=value;} }
-        [CategoryAttribute("10 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        [CategoryAttribute("10 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_SCD { get { return param_07_edge_pos_scd; } set { param_07_edge_pos_scd = value; } }
 
         [CategoryAttribute("11 Compensation A"), DescriptionAttribute("A of Ax + B")]
@@ -274,10 +274,10 @@ namespace CD_Paramter
         [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get{ return param_comm_02_compen_B;} set{param_comm_02_compen_B=value;} }
 
-        [CategoryAttribute("13 SPC Enhance"), DescriptionAttribute("DEFAULT(0) : 1, 2 ..")]
+        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
+        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
         public int REFINEMENT { get { return param_comm_04_refinement; } set { param_comm_04_refinement= value; } }
 
         [CategoryAttribute("15 Show Raw Data"), DescriptionAttribute("True or False")]
@@ -379,6 +379,7 @@ namespace CD_Paramter
         [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
+        // for absolution coordinate for display 
         private CustomRectangleD rect_HOR_in_lft = new CustomRectangleD();
         private CustomRectangleD rect_HOR_in_rht = new CustomRectangleD();
         private CustomRectangleD rect_HOR_ex_lft = new CustomRectangleD();
@@ -388,6 +389,17 @@ namespace CD_Paramter
         private CustomRectangleD rect_VER_in_btm = new CustomRectangleD();
         private CustomRectangleD rect_VER_ex_top = new CustomRectangleD();
         private CustomRectangleD rect_VER_ex_btm = new CustomRectangleD();
+
+
+        // for relative coordinate backup 
+        private RectangleF rc_HOR_IN_FST = new RectangleF();
+        private RectangleF rc_HOR_IN_SCD = new RectangleF();
+        private RectangleF rc_HOR_EX_FST = new RectangleF();
+        private RectangleF rc_HOR_EX_SCD = new RectangleF();
+        private RectangleF rc_VER_IN_FST = new RectangleF();
+        private RectangleF rc_VER_IN_SCD = new RectangleF();
+        private RectangleF rc_VER_EX_FST = new RectangleF();
+        private RectangleF rc_VER_EX_SCD = new RectangleF();
 
         //*****************************************************************************************
 
@@ -420,29 +432,24 @@ namespace CD_Paramter
 
         //*****************************************************************************************
 
-        public string measureHOR_IN_L = string.Empty;
-        public string measureHOR_IN_R = string.Empty;
-        public string measureHOR_EX_L = string.Empty;
-        public string measureHOR_EX_R = string.Empty;
-
-        public string measureVER_IN_T = string.Empty;
-        public string measureVER_IN_B = string.Empty;
-        public string measureVER_EX_T = string.Empty;
-        public string measureVER_EX_B = string.Empty;
+        public string measureHOR_IN = string.Empty;
+        public string measureVER_IN = string.Empty;
+        public string measureHOR_EX = string.Empty;
+        public string measureVER_EX = string.Empty;
 
         //*****************************************************************************************
         [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_IN_L
+        public string MEASURE_HOR_IN
         {
             get
             {
                 string str = "";
 
-                if (measureHOR_IN_L != null)
+                if (measureHOR_IN != null)
                 {
-                    str = measureHOR_IN_L;
+                    str = measureHOR_IN;
                 }
                 else
                 {
@@ -451,21 +458,21 @@ namespace CD_Paramter
                 return str;
             }
 
-            set { measureHOR_IN_L = value; }
+            set { measureHOR_IN = value; }
         }
 
-        [CategoryAttribute("12 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_IN_R
+        public string MEASURE_HOR_EX
         {
             get
             {
                 string str = "";
 
-                if (measureHOR_IN_R != null)
+                if (measureHOR_EX != null)
                 {
-                    str = measureHOR_IN_R;
+                    str = measureHOR_EX;
                 }
                 else
                 {
@@ -474,69 +481,24 @@ namespace CD_Paramter
                 return str;
             }
 
-            set { measureHOR_IN_R = value; }
+            set { measureHOR_EX = value; }
         }
-
-        [CategoryAttribute("13 Measure Method"), DescriptionAttribute("Measure Method")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_IN_T
-        {
-            get
-            {
-                string str = "";
-
-                if (measureVER_IN_T != null)
-                {
-                    str = measureVER_IN_T;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measureVER_IN_T = value; }
-        }
-
-        [CategoryAttribute("14 Measure Method"), DescriptionAttribute("Measure Method")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_IN_B
-        {
-            get
-            {
-                string str = "";
-
-                if (measureVER_IN_B != null)
-                {
-                    str = measureVER_IN_B;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measureVER_IN_B = value; }
-        }
+        
 
         //*****************************************************************************************
 
         [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_EX_L
+        public string MEASURE_VER_IN
         {
             get
             {
                 string str = "";
 
-                if (measureHOR_EX_L != null)
+                if (measureVER_IN != null)
                 {
-                    str = measureHOR_EX_L;
+                    str = measureVER_IN;
                 }
                 else
                 {
@@ -545,21 +507,21 @@ namespace CD_Paramter
                 return str;
             }
 
-            set { measureHOR_EX_L = value; }
+            set { measureVER_IN = value; }
         }
 
-        [CategoryAttribute("12 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_EX_R
+        public string MEASURE_VER_EX
         {
             get
             {
                 string str = "";
 
-                if (measureHOR_EX_R != null)
+                if (measureVER_EX != null)
                 {
-                    str = measureHOR_EX_R;
+                    str = measureVER_EX;
                 }
                 else
                 {
@@ -568,76 +530,23 @@ namespace CD_Paramter
                 return str;
             }
 
-            set { measureHOR_EX_R = value; }
+            set { measureVER_EX = value; }
         }
 
-        [CategoryAttribute("13 Measure Method"), DescriptionAttribute("Measure Method")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_EX_T
-        {
-            get
-            {
-                string str = "";
-
-                if (measureVER_EX_T != null)
-                {
-                    str = measureVER_EX_T;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measureVER_EX_T = value; }
-        }
-
-        [CategoryAttribute("14 Measure Method"), DescriptionAttribute("Measure Method")]
-        [Browsable(true)]
-        [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_EX_B
-        {
-            get
-            {
-                string str = "";
-
-                if (measureVER_EX_B != null)
-                {
-                    str = measureVER_EX_B;
-                }
-                else
-                {
-                    str = IFX_ALGORITHM.ToStringType(0);
-                }
-                return str;
-            }
-
-            set { measureVER_EX_B = value; }
-        }
 
         //*****************************************************************************************
 
         [CategoryAttribute("15 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_IN_L { get; set; }
+        public double EDGE_POS_HOR_IN { get; set; }
         [CategoryAttribute("16 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_IN_R { get; set; }
-        [CategoryAttribute("17 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_VER_IN_T { get; set; }
-        [CategoryAttribute("18 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_VER_IN_B { get; set; }
+        public double EDGE_POS_VER_IN { get; set; }
 
         //*****************************************************************************************
 
-        [CategoryAttribute("19 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_EX_L { get; set; }
-        [CategoryAttribute("20 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_EX_R { get; set; }
-        [CategoryAttribute("21 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_VER_EX_T { get; set; }
-        [CategoryAttribute("22 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_VER_EX_B { get; set; }
+        [CategoryAttribute("17 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_HOR_EX { get; set; }
+        [CategoryAttribute("18 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        public double EDGE_POS_VER_EX { get; set; }
 
 
         //*****************************************************************************************
@@ -660,16 +569,13 @@ namespace CD_Paramter
 
             single.NICKNAME = NICKNAME;
 
-            single.algorithm_HOR_IN_L = IFX_ALGORITHM.ToNumericType(measureHOR_IN_L);
-            single.algorithm_HOR_IN_R = IFX_ALGORITHM.ToNumericType(measureHOR_IN_R);
-            single.algorithm_HOR_EX_L = IFX_ALGORITHM.ToNumericType(measureHOR_EX_L);
-            single.algorithm_HOR_EX_R = IFX_ALGORITHM.ToNumericType(measureHOR_EX_R);
+            single.algorithm_HOR_IN = IFX_ALGORITHM.ToNumericType(measureHOR_IN);
+            single.algorithm_HOR_EX = IFX_ALGORITHM.ToNumericType(measureHOR_EX);
 
-            single.algorithm_VER_IN_T = IFX_ALGORITHM.ToNumericType(measureVER_IN_T);
-            single.algorithm_VER_IN_B = IFX_ALGORITHM.ToNumericType(measureVER_IN_B);
-            single.algorithm_VER_EX_T = IFX_ALGORITHM.ToNumericType(measureVER_EX_T);
-            single.algorithm_VER_EX_B = IFX_ALGORITHM.ToNumericType(measureVER_EX_B);
+            single.algorithm_VER_IN = IFX_ALGORITHM.ToNumericType(measureVER_IN);
+            single.algorithm_VER_EX = IFX_ALGORITHM.ToNumericType(measureVER_EX);
 
+             // for main croodinates 
             single.RC_HOR_IN.rc_FST = new parseRect(RC_HOR_IN_LFT.ToRectangleF());
             single.RC_HOR_IN.rc_SCD = new parseRect(RC_HOR_IN_RHT.ToRectangleF());
             single.RC_HOR_EX.rc_FST = new parseRect(RC_HOR_EX_LFT.ToRectangleF());
@@ -680,16 +586,22 @@ namespace CD_Paramter
             single.RC_VER_EX.rc_FST = new parseRect(RC_VER_EX_TOP.ToRectangleF());
             single.RC_VER_EX.rc_SCD = new parseRect(RC_VER_EX_BTM.ToRectangleF());
 
-            
-            single.param_01_edge_position_hor_in_L = Convert.ToInt32(EDGE_POS_HOR_IN_L);
-            single.param_02_edge_position_hor_in_R = Convert.ToInt32(EDGE_POS_HOR_IN_R);
-            single.param_03_edge_position_hor_ex_L = Convert.ToInt32(EDGE_POS_HOR_EX_L);
-            single.param_04_edge_position_hor_ex_R = Convert.ToInt32(EDGE_POS_HOR_EX_R);
+            // for sub croodinates
+            single.RC_HOR_IN._rc_FST = new parseRect(rc_HOR_IN_FST);
+            single.RC_HOR_IN._rc_SCD = new parseRect(rc_HOR_IN_SCD);
+            single.RC_HOR_EX._rc_FST = new parseRect(rc_HOR_EX_FST);
+            single.RC_HOR_EX._rc_SCD = new parseRect(rc_HOR_EX_SCD);
 
-            single.param_05_edge_position_ver_in_T = Convert.ToInt32(EDGE_POS_VER_IN_T);
-            single.param_06_edge_position_ver_in_B = Convert.ToInt32(EDGE_POS_VER_IN_B);
-            single.param_07_edge_position_ver_ex_T = Convert.ToInt32(EDGE_POS_VER_EX_T);
-            single.param_08_edge_position_ver_ex_B = Convert.ToInt32(EDGE_POS_VER_EX_B);
+            single.RC_VER_IN._rc_FST = new parseRect(rc_VER_IN_FST);
+            single.RC_VER_IN._rc_SCD = new parseRect(rc_VER_IN_SCD);
+            single.RC_VER_EX._rc_FST = new parseRect(rc_VER_EX_FST);
+            single.RC_VER_EX._rc_SCD = new parseRect(rc_VER_EX_SCD);
+            
+            single.param_01_edge_position_hor_in = Convert.ToInt32(EDGE_POS_HOR_IN);
+            single.param_02_edge_position_hor_ex = Convert.ToInt32(EDGE_POS_HOR_IN);
+            single.param_03_edge_position_ver_in = Convert.ToInt32(EDGE_POS_HOR_EX);
+            single.param_04_edge_position_ver_ex = Convert.ToInt32(EDGE_POS_HOR_EX);
+
 
             single.param_comm_01_compen_A = this.param_comm_01_compen_A;
             single.param_comm_02_compen_B = this.param_comm_02_compen_B;
@@ -703,15 +615,11 @@ namespace CD_Paramter
         {
             this.NICKNAME = single.NICKNAME;
 
-            this.MEASURE_HOR_IN_L = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_IN_L);
-            this.MEASURE_HOR_IN_R = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_IN_R);
-            this.MEASURE_HOR_EX_L = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_EX_L);
-            this.MEASURE_HOR_EX_R = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_EX_R);
+            this.MEASURE_HOR_IN = IFX_ALGORITHM.ToStringType(single.algorithm_HOR_IN);
+            this.MEASURE_HOR_EX = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN);
 
-            this.MEASURE_VER_IN_T = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN_T);
-            this.MEASURE_VER_IN_B = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN_B);
-            this.MEASURE_VER_EX_T = IFX_ALGORITHM.ToStringType(single.algorithm_VER_EX_T);
-            this.MEASURE_VER_EX_B = IFX_ALGORITHM.ToStringType(single.algorithm_VER_EX_B);
+            this.MEASURE_VER_IN = IFX_ALGORITHM.ToStringType(single.algorithm_VER_IN);
+            this.MEASURE_VER_EX = IFX_ALGORITHM.ToStringType(single.algorithm_VER_EX);
 
             this.RC_HOR_IN_LFT = new CustomRectangleD(single.RC_HOR_IN.rc_FST.ToRectangleF());
             this.RC_HOR_IN_RHT = new CustomRectangleD(single.RC_HOR_IN.rc_SCD.ToRectangleF());
@@ -723,15 +631,21 @@ namespace CD_Paramter
             this.RC_VER_EX_TOP = new CustomRectangleD(single.RC_VER_EX.rc_FST.ToRectangleF());
             this.RC_VER_EX_BTM = new CustomRectangleD(single.RC_VER_EX.rc_SCD.ToRectangleF());
 
-            this.EDGE_POS_HOR_IN_L = single.param_01_edge_position_hor_in_L;
-            this.EDGE_POS_HOR_IN_R = single.param_02_edge_position_hor_in_R;
-            this.EDGE_POS_HOR_EX_L = single.param_03_edge_position_hor_ex_L;
-            this.EDGE_POS_HOR_EX_R = single.param_04_edge_position_hor_ex_R;
+            this.rc_HOR_IN_FST = single.RC_HOR_IN._rc_FST.ToRectangleF();
+            this.rc_HOR_IN_SCD = single.RC_HOR_IN._rc_SCD.ToRectangleF();
+            this.rc_HOR_EX_FST = single.RC_HOR_EX._rc_FST.ToRectangleF();
+            this.rc_HOR_EX_SCD = single.RC_HOR_EX._rc_SCD.ToRectangleF();
 
-            this.EDGE_POS_VER_IN_T= single.param_05_edge_position_ver_in_T;
-            this.EDGE_POS_VER_IN_B = single.param_06_edge_position_ver_in_B;
-            this.EDGE_POS_VER_EX_T = single.param_07_edge_position_ver_ex_T;
-            this.EDGE_POS_VER_EX_B = single.param_08_edge_position_ver_ex_B;
+            this.rc_VER_IN_FST = single.RC_VER_IN._rc_FST.ToRectangleF();
+            this.rc_VER_IN_SCD = single.RC_VER_IN._rc_SCD.ToRectangleF();
+            this.rc_VER_EX_FST = single.RC_VER_EX._rc_FST.ToRectangleF();
+            this.rc_VER_EX_SCD = single.RC_VER_EX._rc_SCD.ToRectangleF();
+
+            this.EDGE_POS_HOR_IN = single.param_01_edge_position_hor_in;
+            this.EDGE_POS_HOR_EX = single.param_02_edge_position_hor_ex;
+
+            this.EDGE_POS_VER_IN= single.param_03_edge_position_ver_in;
+            this.EDGE_POS_VER_EX = single.param_04_edge_position_ver_ex;
 
             this.param_comm_01_compen_A = single.param_comm_01_compen_A;
             this.param_comm_02_compen_B = single.param_comm_02_compen_B;
@@ -746,13 +660,14 @@ namespace CD_Paramter
 
         public PROPERTY_PairCir()
         {
-            param_00_algorithm = IFX_ALGORITHM.ToStringType(IFX_ALGORITHM.MEXHAT);
+            param_00_algorithm = IFX_ALGORITHM.ToStringType(IFX_ALGORITHM.DIR_EX);
             param_01_damage_tolerance = 0;
             param_02_bool_treat_as_ellipse = false;
             param_03_circle_detect_type = 0;
             param_04_Shrinkage = 0.1;
             param_05_Outlier_Filter = 1;
             param_06_edge_pos = 0;
+            param_07_coverage = "0";
 
             param_comm_01_compen_A = 1;
             param_comm_02_compen_B = 0;
@@ -768,6 +683,7 @@ namespace CD_Paramter
         public double param_04_Shrinkage;
         public int param_05_Outlier_Filter;
         public double param_06_edge_pos;
+        public string param_07_coverage;
 
         public double param_comm_01_compen_A;
         public double param_comm_02_compen_B;
@@ -823,7 +739,7 @@ namespace CD_Paramter
         [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
 
-        [CategoryAttribute("05 Pre Circle Detection"), DescriptionAttribute("Available [ 0 = DEFAULT, 1 = POSSITIVE_CON 2 = NEGATIVE_DIFF]")]
+        [CategoryAttribute("05 Pre Circle Detection"), DescriptionAttribute("DEFAULT(0) : DRVS(1), RVS(2), MNDIF(3), BRSA(4), GGRAD(5)")]
         public int CIRCLE_DETECT_TYPE { get { return param_03_circle_detect_type; } set { param_03_circle_detect_type = value; } }
 
         [CategoryAttribute("06 Estimated Circle Shrinkage"), DescriptionAttribute(" ±F(%)")]
@@ -835,14 +751,16 @@ namespace CD_Paramter
         [CategoryAttribute("08 Circle DAM Mag"), DescriptionAttribute("Available [ 0 ~ 0.99 (%)]")]
         public double DMG_IGNORANCE { get{return param_01_damage_tolerance;} set{param_01_damage_tolerance = value;} }
 
-
         [CategoryAttribute("09 Ellipse Process"), DescriptionAttribute("Treat As Ellipse\nTrue or False")]
         public bool TREAT_AS_ELLIPSE { get{return param_02_bool_treat_as_ellipse;} set{param_02_bool_treat_as_ellipse = value;} }
 
-        [CategoryAttribute("10 Special Enhancement"), DescriptionAttribute("Default(0), 1, 2...")]
+        [CategoryAttribute("10 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6) RVSGRD(7)")]
         public int SPC_ENHANCE{ get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("11 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
+        public string COVERAGE { get { return param_07_coverage; } set { param_07_coverage= value; } }
+
+        [CategoryAttribute("12 Show Raw Data"), DescriptionAttribute("True or False")]
         public bool SHOW_RAW_DATA { get{return param_comm_05_show_raw_data;} set{param_comm_05_show_raw_data = value;} }
 
         public CMeasurePairCir ToFigure()
@@ -864,13 +782,13 @@ namespace CD_Paramter
             single.param_04_Shrinkage /***************/= this.param_04_Shrinkage;
             single.param_05_Outlier_Filter/***********/= this.param_05_Outlier_Filter;
             single.param_06_EdgePos/******************/= this.param_06_edge_pos;
+            single.param_07_Coverage /****************/= this.param_07_coverage;
 
             single.param_comm_01_compen_A /*************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B /*************/= this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance /**********/= this.param_comm_03_spc_enhance;
             single.param_comm_04_refinement /***********/= this.param_comm_04_refinement;
             single.param_comm_05_BOOL_SHOW_RAW_DATA /***/= this.param_comm_05_show_raw_data;
-
 
             return single;
         }
@@ -891,6 +809,7 @@ namespace CD_Paramter
             this.param_04_Shrinkage /***************/= single.param_04_Shrinkage;
             this.param_05_Outlier_Filter /**********/= single.param_05_Outlier_Filter;
             this.param_06_edge_pos /****************/= single.param_06_EdgePos;
+            this.param_07_coverage /****************/= single.param_07_Coverage;
 
             this.param_comm_01_compen_A /*************/= single.param_comm_01_compen_A;
             this.param_comm_02_compen_B /*************/= single.param_comm_02_compen_B;

@@ -262,8 +262,8 @@ namespace CD_View
 
             byte[] cropImage = HELPER_IMAGE_IO.HC_CropImage(rawImage, imageW, imageH, rc.X, rc.Y, rc.Width, rc.Height);
 
-            
-            string strPath = _SelectSaveFile(fm.config.i11_PATH_IMG_PTRN);
+
+            string strPath = _SelectSaveFile(fm.param_path.i11_PATH_IMG_PTRN);
 
             HELPER_IMAGE_IO.SaveImage(cropImage, rc.Width, rc.Height, strPath);
         }
@@ -283,7 +283,7 @@ namespace CD_View
                 // selective file name
                 if (filename == "")
                 {
-                    strFileName = HELPER_IMAGE_IO._SelectAndSaveFileAsBitmap(fm.config.i11_PATH_IMG_PTRN);
+                    strFileName = HELPER_IMAGE_IO._SelectAndSaveFileAsBitmap(fm.param_path.i11_PATH_IMG_PTRN);
                 }
                 // user defined file name  171017
                 else if ( filename != "")

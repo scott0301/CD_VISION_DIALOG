@@ -69,6 +69,9 @@
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.CHK_USE_CENTERING = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TXT_CAM_EXP = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -410,7 +413,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(426, 57);
+            this.label1.Location = new System.Drawing.Point(425, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 12);
             this.label1.TabIndex = 45;
@@ -420,7 +423,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Coral;
-            this.label9.Location = new System.Drawing.Point(301, 35);
+            this.label9.Location = new System.Drawing.Point(300, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(66, 16);
             this.label9.TabIndex = 44;
@@ -431,7 +434,7 @@
             this.TXT_PIXEL_RES.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_PIXEL_RES.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_PIXEL_RES.ForeColor = System.Drawing.Color.White;
-            this.TXT_PIXEL_RES.Location = new System.Drawing.Point(368, 31);
+            this.TXT_PIXEL_RES.Location = new System.Drawing.Point(367, 9);
             this.TXT_PIXEL_RES.Name = "TXT_PIXEL_RES";
             this.TXT_PIXEL_RES.Size = new System.Drawing.Size(95, 23);
             this.TXT_PIXEL_RES.TabIndex = 43;
@@ -442,7 +445,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(431, 121);
+            this.label18.Location = new System.Drawing.Point(431, 78);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(32, 12);
             this.label18.TabIndex = 48;
@@ -452,7 +455,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Coral;
-            this.label8.Location = new System.Drawing.Point(301, 97);
+            this.label8.Location = new System.Drawing.Point(301, 54);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 16);
             this.label8.TabIndex = 47;
@@ -463,7 +466,7 @@
             this.TXT_LIGHT_GAIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_LIGHT_GAIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_LIGHT_GAIN.ForeColor = System.Drawing.Color.White;
-            this.TXT_LIGHT_GAIN.Location = new System.Drawing.Point(368, 93);
+            this.TXT_LIGHT_GAIN.Location = new System.Drawing.Point(368, 50);
             this.TXT_LIGHT_GAIN.Name = "TXT_LIGHT_GAIN";
             this.TXT_LIGHT_GAIN.Size = new System.Drawing.Size(95, 23);
             this.TXT_LIGHT_GAIN.TabIndex = 46;
@@ -475,10 +478,13 @@
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.BTN_PTRN_CANCEL);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.BTN_PTRN_APPLY);
+            this.panel1.Controls.Add(this.TXT_CAM_EXP);
             this.panel1.Controls.Add(this.TXT_LIGHT_GAIN);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.label1);
@@ -561,6 +567,38 @@
             this.CHK_USE_CENTERING.UseVisualStyleBackColor = true;
             this.CHK_USE_CENTERING.CheckedChanged += new System.EventHandler(this.CHK_FOCUS_NONE_CheckedChanged);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Coral;
+            this.label5.Location = new System.Drawing.Point(301, 97);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 16);
+            this.label5.TabIndex = 47;
+            this.label5.Text = "EXP";
+            // 
+            // TXT_CAM_EXP
+            // 
+            this.TXT_CAM_EXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_CAM_EXP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CAM_EXP.ForeColor = System.Drawing.Color.White;
+            this.TXT_CAM_EXP.Location = new System.Drawing.Point(368, 95);
+            this.TXT_CAM_EXP.Name = "TXT_CAM_EXP";
+            this.TXT_CAM_EXP.Size = new System.Drawing.Size(95, 23);
+            this.TXT_CAM_EXP.TabIndex = 46;
+            this.TXT_CAM_EXP.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(431, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 12);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "(val)";
+            // 
             // Dlg_Recp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -636,5 +674,8 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox CHK_USE_CENTERING;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TXT_CAM_EXP;
     }
 }

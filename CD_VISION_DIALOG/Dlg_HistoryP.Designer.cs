@@ -135,6 +135,7 @@
             this.label2.Size = new System.Drawing.Size(61, 14);
             this.label2.TabIndex = 78;
             this.label2.Text = "UPDATE";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label17
             // 

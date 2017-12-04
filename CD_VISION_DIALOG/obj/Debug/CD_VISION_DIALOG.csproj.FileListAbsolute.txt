@@ -6,7 +6,6 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_CD_View.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_GRAPH.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_LOG_VIEW.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperCognex.dll
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperClass.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\GeneralMatrix.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.PMAlign.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.Core.dll
@@ -272,9 +271,14 @@ C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.c
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Spc.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\NPOI.dll
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\LIB_CD_VISION.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\NPOI.dll
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Spc.resources
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.dll
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.xml
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_CD_PARAM.dll
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\ReinlessView.dll
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\ReinlessView.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\LIB_CD_VISION.dll

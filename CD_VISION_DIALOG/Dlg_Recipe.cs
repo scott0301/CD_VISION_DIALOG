@@ -33,7 +33,7 @@ namespace CD_VISION_DIALOG
             BASE_RECP baseRecp = fm.baseRecp;
 
             string strPathRecp = fm.RECP_FILE;
-            strPathRecp = Path.Combine(fm.config.i04_PATH_RECP_REAL, strPathRecp);
+            strPathRecp = Path.Combine(fm.param_path.i04_PATH_RECP_REAL, strPathRecp);
 
             if (File.Exists(strPathRecp) == false)
             {
@@ -57,6 +57,8 @@ namespace CD_VISION_DIALOG
             else if (nLightIndex == 3) RDO_LIGHT_DF.Checked = true;
 
             TXT_LIGHT_GAIN.Text = param_optic.LIGHT_VALUE.ToString("N0");
+
+            TXT_CAM_EXP.Text = param_optic.EXPOSURE.ToString("N0");
 
             CHK_FOCUS_NONE.Checked = true;
             CHK_FOCUS_NONE.Checked = false;
@@ -117,6 +119,11 @@ namespace CD_VISION_DIALOG
 
                 int nLightGain = -1;
                 int.TryParse(TXT_LIGHT_GAIN.Text, out nLightGain);
+
+                int nCamExp = 0;
+                int.TryParse(TXT_CAM_EXP.Text, out nCamExp);
+
+                fm.param_optics.EXPOSURE = nCamExp;
 
                 fm.param_optics.LIGHT_VALUE = nLightGain;
 

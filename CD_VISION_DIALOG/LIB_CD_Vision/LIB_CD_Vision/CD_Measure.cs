@@ -6,12 +6,165 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 
 using DispObject;
 using DotNetMatrix;
 
+using System.Windows.Forms;
+
+using nsReinlessView;
+using CD_Figure;
+
 namespace CD_Measure
 {
+
+    public class CVerifier : Form
+    {
+        private nsReinlessView.ReinlessView reinlessView;
+        private Button button1;
+        public Bitmap m_Bitmap;
+
+
+        public CVerifier(Bitmap bmp)
+        {
+            InitializeComponent();
+
+            m_Bitmap = new Bitmap(bmp);
+        }
+        public CVerifier(byte[] rawImage, int imageW, int imageH)
+        {
+            InitializeComponent();
+
+            m_Bitmap = Computer.HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
+        }
+        private void InitializeComponent()
+        {
+            this.reinlessView = new nsReinlessView.ReinlessView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // reinlessView
+            // 
+            this.reinlessView.AllowDrop = true;
+            this.reinlessView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.reinlessView.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reinlessView.ForeColor = System.Drawing.Color.Lime;
+            this.reinlessView.Location = new System.Drawing.Point(12, 12);
+            this.reinlessView.Name = "reinlessView";
+            this.reinlessView.Size = new System.Drawing.Size(600, 650);
+            this.reinlessView.TabIndex = 0;
+            this.reinlessView.eventDele_HereComesNewImage += new nsReinlessView.dele_HereComesNewImage(this.fuck);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(651, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 49);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // CVerifier
+            // 
+            this.ClientSize = new System.Drawing.Size(784, 728);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.reinlessView);
+            this.Name = "CVerifier";
+            this.Load += new System.EventHandler(this.CVerifier_Load);
+            this.ResumeLayout(false);
+
+        }
+        private void fuck()
+        {
+        }
+
+        private void CVerifier_Load(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            reinlessView.SetInit();
+            reinlessView.SetDisplay(m_Bitmap);
+            reinlessView.MakeOriginalView();
+        }
+    }
+
+    public class CThrProc_FocusTool
+    {
+        public event EventHandler<ThreadFinishedEventArgs> EventThreadFinished_CalcFocus;
+ 
+        public class ThreadFinishedEventArgs : EventArgs
+        {
+            public Bitmap bmp = null;
+            public double fFocusValue = 0;
+            public CInspectionUnit iu = null;
+            public int nInterruptCount = 0;
+            public int nLoopIndex = 0;
+            public int nLoopTarget = 0;
+            public string strFileName; 
+        }
+
+        public static Task<Bitmap> staticImageLoadAsync(string strPath)
+        {
+            return Task.Run<Bitmap>(() =>
+            {
+                return staticImageLoad(strPath);
+            });
+        }
+        public static Bitmap staticImageLoad(string strPath)
+        {
+            Bitmap bmp = null;
+            if (File.Exists(strPath) == true)
+            {
+                using (var bmpTemp = new Bitmap(strPath))
+                {
+                    bmp = new Bitmap(bmpTemp);
+                }
+            }
+            return bmp;
+        }
+        
+        
+        public void ThreadCall_CalcFocus(byte[] rawImage, int imageW, int imageH, Rectangle rcFocus, ThreadFinishedEventArgs e)
+        {
+            if (rcFocus.X > 0 && rcFocus.Y > 0 && rcFocus.Width > 0 && rcFocus.Height > 0)
+            {
+                byte[] rawFocus = Computer.HC_CropImage(rawImage, imageW, imageH, rcFocus);
+
+                byte[] gradient = Computer.HC_TRANS_GradientImage(rawFocus, rcFocus.Width, rcFocus.Height);
+                double[] fGradient = gradient.Select(element => (double)element).ToArray();
+                e.fFocusValue = fGradient.Average();
+
+                Bitmap bmpFocus = Computer.HC_CONV_Byte2Bmp(rawFocus, rcFocus.Width, rcFocus.Height);
+
+                e.bmp = bmpFocus.Clone() as Bitmap;
+            }
+            else
+            {
+                e.bmp = new Bitmap(200, 200);
+               
+            }
+
+            OnThreadFinished_CalcFocus(e);
+        }
+        
+        protected virtual void OnThreadFinished_CalcFocus(ThreadFinishedEventArgs e)
+        {
+            EventHandler<ThreadFinishedEventArgs> handler = EventThreadFinished_CalcFocus;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        
+    }
+    
     public static class Computer
     {
         static int DIR_INFALL = 1;
@@ -57,7 +210,11 @@ namespace CD_Measure
         }
 
      
-
+        public static  void CVerifier(Byte[] rawImage, int imageW, int imageH)
+        {
+            CVerifier vf = new CVerifier(rawImage, imageW, imageH);
+            vf.ShowDialog();
+        }
         #region IMAGE IO
         public static void /*****/SaveImage(byte[] rawImage, int imageW, int imageH, string strPath)
         {
@@ -375,7 +532,7 @@ namespace CD_Measure
         }
        #endregion
 
-
+      
         public static double[] GetAnglurarSliceArray(byte[] rawImage, int imageW, int imageH, int nRadiLength, int nRadiStart, PointF ptCenter, bool bReverse)
         {
             int nRealRadi = nRadiLength - nRadiStart;
@@ -385,6 +542,11 @@ namespace CD_Measure
             Array.Clear(rawAngularSlice, 0, rawAngularSlice.Length);
 
             double fToDegree = Math.PI / 180.0;
+
+            bool bIntergerInterpolation = false; // 171106 seperated 
+            // test at 171106, interpolation integer or float are almost same against repeatability. contact adi  about 30~31nm
+            // but their graph looks so different, when correlation problem occured, 
+            // this has to be verified. "side effect for interpolation type to correlation. 
 
             for (int nAngle = 0; nAngle < 360; nAngle++)
             {
@@ -396,28 +558,44 @@ namespace CD_Measure
                 for (int nRadiPos = nRadiStart, nIndex = 0; nRadiPos < nRadiLength; nRadiPos++)
                 {
                     double fRadi = nRadiPos;
-                    double x = (double)ptCenter.X + (fRadi * Math.Cos(fDegree));
-                    double y = (double)ptCenter.Y + (fRadi * Math.Sin(fDegree));
+                    double cx = (double)ptCenter.X + (fRadi * Math.Cos(fDegree));
+                    double cy = (double)ptCenter.Y + (fRadi * Math.Sin(fDegree));
 
-                    if (x < 0 || y < 0 || x >= imageW || y >= imageH) { continue; }
+                    if (cx < 0 || cy < 0 || cx >= imageW || cy >= imageH) { continue; }
 
-                    int x1 = (int)Math.Floor(x);
-                    int x2 = (int)Math.Ceiling(x);
-                    int y1 = (int)Math.Floor(y);
-                    int y2 = (int)Math.Ceiling(y);
+                    double fInterpolated = 0;
 
-                    int q11 = rawImage[y1 * imageW + x1];
-                    int q12 = rawImage[y2 * imageW + x1];
-                    int q21 = rawImage[y1 * imageW + x2];
-                    int q22 = rawImage[y2 * imageW + x2];
-
-                    double fInterplated = Computer.GetInterPolatedValue(x, y, x1, x2, y1, y2, q11, q12, q21, q22);
-
-                    if (fInterplated == 0)
+                    if (bIntergerInterpolation == false)
                     {
-                       fInterplated = rawImage[(int)y * imageW + (int)x];
+                        //float interpolation 
+                        int x1 = (int)Math.Floor(cx);
+                        int x2 = (int)Math.Ceiling(cx);
+                        int y1 = (int)Math.Floor(cy);
+                        int y2 = (int)Math.Ceiling(cy);
+
+                        int q11 = rawImage[y1 * imageW + x1];
+                        int q12 = rawImage[y2 * imageW + x1];
+                        int q21 = rawImage[y1 * imageW + x2];
+                        int q22 = rawImage[y2 * imageW + x2];
+
+                        fInterpolated = Computer.GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
                     }
-                    buffLine[nIndex++] = fInterplated;
+                    else
+                    {
+
+                        //integer interpolation 
+                        fInterpolated = Computer.GetInterPolatedValue(cx, cy, cx + 1, cx - 1, cy + 1, cy - 1,
+                            rawImage[(int)(cy + 1) * imageW + (int)(cx + 1)],
+                            rawImage[(int)(cy - 1) * imageW + (int)(cx + 1)],
+                            rawImage[(int)(cy + 1) * imageW + (int)(cx - 1)],
+                            rawImage[(int)(cy - 1) * imageW + (int)(cx + 1)]);
+                    }
+
+                    if (fInterpolated == 0)
+                    {
+                        fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                    }
+                    buffLine[nIndex++] = fInterpolated;
                 }
 
                 if (bReverse == true)
@@ -455,10 +633,10 @@ namespace CD_Measure
         }
 
         // Get the Filtered Points according to the damage tolerance 170921
-        public static List<PointF> GetFilterdedCircleEdgesByDamageTolderance(byte[] raImage, int imageW, int imageH, RectangleF rc, List<PointF> listEdges, double fDMG_Tol)
+        public static List<PointF> GetFilterdedCircleEdgesByDamageTolderance(byte[] raImage, int imageW, int imageH, RectangleF rcProcessedRegion, List<PointF> listEdges, double fDMG_Tol)
         {
-            PointF ptCenter = CRect.GetCenter(rc);
-            byte[] rawPoloar = Computer.HC_CropImage_Interpolated_Polar(raImage, imageW, (int)imageH, rc, ptCenter);
+            PointF ptCenter = CRect.GetCenter(rcProcessedRegion);
+            byte[] rawPoloar = Computer.HC_CropImage_Interpolated_Polar(raImage, imageW, (int)imageH, rcProcessedRegion, ptCenter);
 
             int[] arrProj = Computer.GetAngularProjection_Horizontal(rawPoloar, 360, rawPoloar.Length / 360);
 
@@ -637,6 +815,17 @@ namespace CD_Measure
             }
             return newImage;
         }
+        public static byte[] HC_ARITH_ADD(byte[] rawImage1, byte[] rawImage2, int imageW, int imageH)
+        {
+            byte[] newImage = new byte[imageW * imageH];
+
+            for (int i = 0; i < imageW * imageH; i++)
+            {
+                int nValue = rawImage1[i] + rawImage2[i];
+                newImage[i] = nValue > 255  ? (byte)255 : (byte)nValue;
+            }
+            return newImage;
+        }
 
         #endregion
 
@@ -712,6 +901,17 @@ namespace CD_Measure
 
             return rawImage;
         }
+        
+        public static Bitmap _Ptrn_Preprocess_Edge(Bitmap bmp)
+        {
+            int imageW = 0; int imageH = 0;
+            byte[] rawImage = Computer.HC_CONV_Bmp2Raw(bmp, ref imageW, ref imageH);
+
+            rawImage = Computer.HC_TRANS_GradientImage(rawImage, imageW, imageH);
+
+            return Computer.HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
+        }
+
         public static byte[] /**/HC_CONV_Bmp2Raw(System.Drawing.Bitmap bmpImage, ref int imageW, ref int imageH)
         {
             imageW = bmpImage.Width;
@@ -1129,7 +1329,8 @@ namespace CD_Measure
         //*****************************************************************************************
         // LoG-based Approaches
         //*****************************************************************************************
-        #region FOR LAPLACIAN OF GAUSSIAN 2ND DERIVATIVE FUCKER
+        #region LOG & CARDIN
+
         public static double[] HC_FILTER_GetLogKernel(int nKernelSize, double fSigma, int nSign = 1)
         {
             //double[] fKernel = new double[5 * 5] 
@@ -1146,21 +1347,21 @@ namespace CD_Measure
                 if (nSign == 1)
                 {
                     fKernel = new double[] 
-                    { +0,+0,+01,+0,+0,
-                      +0,+1,+02,+1,+0,
-                      +1,+2,-16,+2,+1,
-                      +0,+1,+02,+1,+0,
-                      +0,+0,+01,+0,+0
+                    { +00,+00,+01,+00,+00,
+                      +00,+01,+02,+01,+00,
+                      +01,+02,-16,+02,+01,
+                      +00,+01,+02,+01,+00,
+                      +00,+00,+01,+00,+00
                     };
                 }
                 else if (nSign == -1)
                 {
                     fKernel = new double[] 
-                    { -0,-0,-01,-0,-0,
-                      -0,-1,-02,-1,-0,
-                      -1,-2,+16,-2,-1,
-                      -0,-1,-02,-1,-0,
-                      -0,-0,-01,-0,-0
+                    { -00,-00,-01,-00,-00,
+                      -00,-01,-02,-01,-00,
+                      -01,-02,+16,-02,-01,
+                      -00,-01,-02,-01,-00,
+                      -00,-00,-01,-00,-00
                     };
 
                 }
@@ -1172,37 +1373,35 @@ namespace CD_Measure
                 {
 
                     fKernel = new double[]{
-                    -0, -0, -3,  -2,  -2,  -2, -3, -0, -0,
-                    -0, -2, -3,  -5,  -5,  -5, -3, -2, -0,
-                    -3, -3, -5,  -3,  -0,  -3, -5, -3, -3,
-                    -2, -5, -3, +12, +23, +12, -3, -5, -2,
-                    -2, -5, -0, +23, +40, +23, -0, -5, -2,
-                    -2, -5, -3, +12, +23, +12, -3, -5, -2,
-                    -3, -3, -5,  -3,  -0,  -3, -5, -3, -3,
-                    -0, -2, -3,  -5,  -5,  -5, -3, -2, -0,
-                    -0, -0, -3,  -2,  -2,  -2, -3, -0, -0};
+                    -00,-00,-03,-02,-02,-02,-03,-00,-00,
+                    -00,-02,-03,-05,-05,-05,-03,-02,-00,
+                    -03,-03,-05,-03,-00,-03,-05,-03,-03,
+                    -02,-05,-03,+12,+23,+12,-03,-05,-02,
+                    -02,-05,-00,+23,+40,+23,-00,-05,-02,
+                    -02,-05,-03,+12,+23,+12,-03,-05,-02,
+                    -03,-03,-05,-03,-00,-03,-05,-03,-03,
+                    -00,-02,-03,-05,-05,-05,-03,-02,-00,
+                    -00,-00,-03,-02,-02,-02,-03,-00,-00};
                 }
                 else
                 {
                     fKernel = new double[]{
-                    0, 0, 3,  2,  2,  2, 3, 0, 0,
-                    0, 2, 3,  5,  5,  5, 3, 2, 0,
-                    3, 3, 5,  3,  0,  3, 5, 3, 3,
-                    2, 5, 3,-12,-23,-12, 3, 5, 2,
-                    2, 5, 0,-23,-40,-23, 0, 5, 2,
-                    2, 5, 3,-12,-23,-12, 3, 5, 2,
-                    3, 3, 5,  3,  0,  3, 5, 3, 3,
-                    0, 2, 3,  5,  5,  5, 3, 2, 0,
-                    0, 0, 3,  2,  2,  2, 3, 0, 0};
+                    +00,+00,+03,+02,+02,+02,+03,+00,+00,
+                    +00,+02,+03,+05,+05,+05,+03,+02,+00,
+                    +03,+03,+05,+03,+00,+03,+05,+03,+03,
+                    +02,+05,+03,-12,-23,-12,+03,+05,+02,
+                    +02,+05,+00,-23,-40,-23,+00,+05,+02,
+                    +02,+05,+03,-12,-23,-12,+03,+05,+02,
+                    +03,+03,+05,+03,+00,+03,+05,+03,+03,
+                    +00,+02,+03,+05,+05,+05,+03,+02,+00,
+                    +00,+00,+03,+02,+02,+02,+03,+00,+00};
                 }
             }
 
             return fKernel;
         }
 
-     
-        
-        public static List<PointF> HC_EDGE_GetRawPoints_HOR_LOG_Sign(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
+        public static List<PointF> HC_EDGE_GetRawPoints_LOG_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -1211,12 +1410,9 @@ namespace CD_Measure
             int ey = (int)rc.Height + sy;
 
             PointF[] buffPoints = new PointF[(int)rc.Height];
-
             List<PointF> list = new List<PointF>();
-
             if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list; // 170523 rectangle out of range exception
 
-          
             for (int x = sx; x < ex; x++)
             {
                 Array.Clear(buffPoints, 0, buffPoints.Length);
@@ -1226,82 +1422,27 @@ namespace CD_Measure
                     buffPoints[nIndex++] = new PointF(x, y);
                 }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
+                double fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  - 1);
+                double fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  + 1);
 
-                PointF ptIN = new PointF(0,0);
-                PointF ptEX = new PointF(0, 0);
-
-                if (bReverse == false)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(x, sy + (float)fSubPosIN);
-                    ptEX = new PointF(x, sy + (float)fSubPosEX);
-
-                }
-                else if (bReverse == true)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-                    ptIN = new PointF(x, ey - (float)fSubPosIN);
-                    ptEX = new PointF(x, ey - (float)fSubPosEX);
-
-                }
+                PointF ptIN = new PointF(x, sy + (float)fSubPosIN);
+                PointF ptEX = new PointF(x, sy + (float)fSubPosEX);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
 
                 /***/if (nSign == -1) { list.Add(ptIN); }
                 else if (nSign == +1) { list.Add(ptEX); }
-                else if (nSign == +0)
-                {
-                    double miny = Math.Min(ptIN.Y, ptEX.Y);
-                    double maxy = Math.Max(ptIN.Y, ptEX.Y);
-                    double midY = miny + ((maxy - miny) / 2.0);
-                    PointF ptMid = new PointF(ptIN.X, (float)midY);
-                    list.Add(ptMid);
-                }
+                else if (nSign == +0) { list.Add(ptMD); }
             }
 
             return list;
         }
-        public static List<PointF> HC_EDGE_GetRawPoints_VER_LOG_Sign(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
+        public static List<PointF> HC_EDGE_GetRawPoints_LOG_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
         {
-            //bool bIMRC = false;
-            //
-            //int nInitStatus = 0;
-            //double nDiff = 0;
-            //
-            //
-            //BEGIN:
-
             // get joint points positions
             int sx = (int)rc.X;
             int ex = (int)rc.Width + sx;
             int sy = (int)rc.Y;
             int ey = (int)rc.Height + sy;
-
-           //List<double> buffListIN = new List<double>();
-           //List<double> buffListEX = new List<double>();
-           //
-           //if (nInitStatus == 1)
-           //{
-           //    // if in and ex position is confusing..
-           //    // rearrange measurement position automatically,  
-           //    // according to for each position. 170811
-           //
-           //    int nGap = (int)(nDiff / 2.0);
-           //    if (nPos == 0)
-           //    {
-           //        sx += nGap;
-           //        ex += nGap;
-           //    }
-           //    if (nPos == 1)
-           //    {
-           //        sx -= nGap;
-           //        ex -= nGap;
-           //    }
-           //}
 
             PointF[] buffPoints = new PointF[(int)rc.Width];
 
@@ -1309,7 +1450,6 @@ namespace CD_Measure
 
             if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list;   // 170523 rectangle out of range exception
 
-            
 
             for (int y = sy; y < ey; y++)
             {
@@ -1320,59 +1460,54 @@ namespace CD_Measure
                     buffPoints[nIndex++] = new PointF(x, y);
                 }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
+                double fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  -1);
+                double fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  +1);
 
-                PointF ptIN = new PointF(0, 0);
-                PointF ptEX = new PointF(0, 0);
-
-                if (bReverse == false)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(sx + (float)fSubPosIN, y);
-                    ptEX = new PointF(sx + (float)fSubPosEX, y);
-                }
-                else if (bReverse == true)
-                {
-                    Array.Reverse(buffPoints);
-
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(ex - (float)fSubPosIN, y);
-                    ptEX = new PointF(ex - (float)fSubPosEX, y);
-                }
-                
+                PointF ptIN = new PointF(sx + (float)fSubPosIN, y);
+                PointF ptEX = new PointF(sx + (float)fSubPosEX, y);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
 
                 /***/if (nSign == -1) { list.Add(ptIN); }
-                else if (nSign == 1) { list.Add(ptEX); }
-                else if (nSign == 0)
-                {
-                    double minx = Math.Min(ptIN.X, ptEX.X);
-                    double maxx = Math.Max(ptIN.X, ptEX.X);
-                    double midx = minx + ((maxx - minx) / 2.0);
-                    PointF ptMid = new PointF((float)midx, ptIN.Y);
-                    list.Add(ptMid);
-                }
+                else if (nSign == +1) { list.Add(ptEX); }
+                else if (nSign == +0) { list.Add(ptMD); }
             }
+            return list;
+        }
+        public static List<PointF> HC_EDGE_GetRawPoints_LOG_DIA(byte[] rawImage, int imageW, int imageH, int nbuffLength, List<PointF> listEdges, int nSign)
+        {
+            List<PointF> list = new List<PointF>();
 
-            //double avgIN = buffListIN.Average();
-            //double avgEX = buffListEX.Average();
-            //nDiff = Math.Abs(avgIN - avgEX);
-            //
-            //if (nInitStatus == 0 && nDiff > 10 && bIMRC == true)
-            //{
-            //    nInitStatus++;
-            //
-            //    goto BEGIN;
-            //}
+            PointF[] arrPoints = new PointF[nbuffLength];
 
+            RectangleF rcBound = CPoint.GetBoundingRect(listEdges);
+            if (CRect.IsBoarderPosition(rcBound, imageW, imageH) == true) return list; // 170615 rectangle out of range exception
+
+            for (int i = 0; i < listEdges.Count; i++)
+            {
+                int imgX = (int)listEdges.ElementAt(i).X;
+                int imgY = (int)listEdges.ElementAt(i).Y;
+
+                Array.Clear(arrPoints, 0, arrPoints.Length);
+                for (int x = (int)imgX, nIndex = 0; x < (int)imgX + nbuffLength; x++)
+                {
+                    arrPoints[nIndex++] = new PointF(x, imgY);
+                }
+
+                double fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, arrPoints,  -1);
+                double fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, arrPoints,  +1);
+
+                PointF ptIN = new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY);
+                PointF ptEX = new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY);
+                PointF ptMD = CPoint.GetMidPoint(ptIN, ptEX);
+
+                /***/if (nSign == -1) { list.Add(ptIN); }
+                else if (nSign == +1) { list.Add(ptEX); }
+                else if (nSign == +0) { list.Add(ptMD); }
+            }
             return list;
         }
 
-        public static void HC_EDGE_GetRawPoints_HOR_LOG_MULTI_Sign(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN )
+        public static /******/void HC_EDGE_GetRawPoints_LOG_MULTI_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, List<PointF> listEdges_EX, List<PointF> listEdges_MD, List<PointF> listEdges_IN )
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -1382,9 +1517,9 @@ namespace CD_Measure
 
             PointF[] buffPoints = new PointF[(int)rc.Height];
 
-            list_EX.Clear();
-            list_IN.Clear();
-            list_MD.Clear();
+            listEdges_EX.Clear();
+            listEdges_IN.Clear();
+            listEdges_MD.Clear();
 
             if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return; // 170523 rectangle out of range exception
 
@@ -1398,39 +1533,19 @@ namespace CD_Measure
                     buffPoints[nIndex++] = new PointF(x, y);
                 }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
+                double fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  -1);
+                double fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  +1);
 
-                PointF ptIN = new PointF(0, 0);
-                PointF ptEX = new PointF(0, 0);
+                PointF ptIN = new PointF(x, sy + (float)fSubPosIN);
+                PointF ptEX = new PointF(x, sy + (float)fSubPosEX);
+                PointF ptMD = CPoint.GetMidPoint_Only_Y(ptIN, ptEX);
 
-                if (bReverse == false)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(x, sy + (float)fSubPosIN);
-                    ptEX = new PointF(x, sy + (float)fSubPosEX);
-
-                }
-                else if (bReverse == true)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-                    ptIN = new PointF(x, ey - ( (float)fSubPosIN));
-                    ptEX = new PointF(x, ey - ( (float)fSubPosEX));
-                    //ptIN = new PointF(x, ey - (buffPoints.Length - (float)fSubPosIN));
-                    //ptEX = new PointF(x, ey - (buffPoints.Length - (float)fSubPosEX));
-
-                }
-
-                list_IN.Add(ptIN);
-                list_MD.Add(CPoint.GetMidPoint_Only_Y(ptIN, ptEX));
-                list_EX.Add(ptEX);
+                listEdges_IN.Add(ptIN);
+                listEdges_MD.Add(ptMD);
+                listEdges_EX.Add(ptEX);
             }
         }
-        public static void HC_EDGE_GetRawPoints_VER_LOG_MULTI_Sign(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN )
+        public static /******/void HC_EDGE_GetRawPoints_LOG_MULTI_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, List<PointF> listEdges_EX, List<PointF> listEdges_MD, List<PointF> listEdges_IN )
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -1440,10 +1555,11 @@ namespace CD_Measure
 
             PointF[] buffPoints = new PointF[(int)rc.Width];
 
-            List<PointF> list = new List<PointF>();
+            listEdges_EX.Clear();
+            listEdges_IN.Clear();
+            listEdges_MD.Clear();
 
             if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return;   // 170523 rectangle out of range exception
-
 
             for (int y = sy; y < ey; y++)
             {
@@ -1454,293 +1570,166 @@ namespace CD_Measure
                     buffPoints[nIndex++] = new PointF(x, y);
                 }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
+                double fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  -1);
+                double fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, buffPoints,  +1);
+                    
+                PointF ptIN = new PointF(sx + (float)fSubPosIN, y);
+                PointF ptEX = new PointF(sx + (float)fSubPosEX, y);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
 
-                PointF ptIN = new PointF(0, 0);
-                PointF ptEX = new PointF(0, 0);
-
-                if (bReverse == false)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(sx + (float)fSubPosIN, y);
-                    ptEX = new PointF(sx + (float)fSubPosEX, y);
-                }
-                else if (bReverse == true)
-                {
-                    Array.Reverse(buffPoints);
-
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(ex - (float)fSubPosIN, y);
-                    ptEX = new PointF(ex - (float)fSubPosEX, y);
-                }
-
-                list_IN.Add(ptIN);
-                list_MD.Add(CPoint.GetMidPoint_Only_X(ptIN, ptEX));
-                list_EX.Add(ptEX);
-
+                listEdges_IN.Add(ptIN);
+                listEdges_MD.Add(ptMD);
+                listEdges_EX.Add(ptEX);
+            }
+            bool bShow= false;
+            if (bShow == true)
+            {
+                CVerifier cv = new CVerifier(rawImage, imageW, imageH);
+                cv.Show();
             }
         }
-
-        public static List<PointF> HC_EDGE_GetRawPoints_DIA_LOG_Sign(byte[] rawImage, int imageW, int imageH, int nbuffLength, List<PointF> listEdges, int nDir)
+        public static List<PointF> HC_EDGE_GetRawPoints_LOG_MULTI_DIA(byte[] rawImage, int imageW, int imageH, List<PointF> ptRegion2D, int regionW, int regionH, ref List<PointF> listEdges_IN, ref List<PointF> listEdges_MD, ref List<PointF> listEdges_EX, bool bFixedPos)
         {
+            listEdges_EX.Clear(); listEdges_MD.Clear(); listEdges_IN.Clear();
+
+            PointF[] arrPoints = new PointF[regionW];
+            List<PointF> listGravity = new List<PointF>();
+
+            if (regionW == 0 || regionH == 0) return listGravity;
+
+            for (int y = 0; y < regionH; y++)
+            {
+                Array.Clear(arrPoints, 0, arrPoints.Length);
+
+                for (int x = 0; x < regionW; x++)
+                {
+                    arrPoints[x] = ptRegion2D.ElementAt(y * regionW + x);
+                }
+
+                PointF ptGravity = CPoint.GetCentroid(arrPoints.ToList());
+
+                double fSubPosEX = 0;
+                double fSubPosIN = 0;
+
+                if (bFixedPos == false)
+                {
+                    fSubPosEX = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, arrPoints, +1);
+                    fSubPosIN = Computer.HC_EDGE_GetLogPos(rawImage, imageW, imageH, arrPoints, -1);
+                }
+                else if (bFixedPos == true)
+                {
+                    fSubPosEX = Computer.HC_EDGE_GetLogPos_FixedPos(rawImage, imageW, imageH, arrPoints, +1, 0);
+                    fSubPosIN = Computer.HC_EDGE_GetLogPos_FixedPos(rawImage, imageW, imageH, arrPoints, -1, 1);
+                }
+
+                PointF ptEX = arrPoints[(int)fSubPosEX];
+                PointF ptIN = arrPoints[(int)fSubPosIN];
+                PointF ptMD = CPoint.GetMidPoint(ptEX, ptIN);
+
+                listEdges_EX.Add(ptEX);
+                listEdges_IN.Add(ptIN);
+                listEdges_MD.Add(ptMD);
+                listGravity.Add(ptGravity);
+
+            }
+            return listGravity;
+
+        } 
+
+        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
+        {
+            // get joint points positions
+            int sx = (int)rc.X;
+            int ex = (int)rc.Width + sx;
+            int sy = (int)rc.Y;
+            int ey = (int)rc.Height + sy;
+
+            PointF[] arrPoints = new PointF[(int)rc.Height];
             List<PointF> list = new List<PointF>();
+            if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list; // 170523 rectangle out of range exception
 
+            for (int x = sx; x < ex; x++)
+            {
+                Array.Clear(arrPoints, 0, arrPoints.Length);
+
+                for (int y = sy, nIndex = 0; y < ey; y++)
+                {
+                    arrPoints[nIndex++] = new PointF(x, y);
+                }
+
+                double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, -1, +1);
+                double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, +1, +1);
+
+                PointF ptIN = new PointF(x, sy + (float)fSubPosIN);
+                PointF ptEX = new PointF(x, sy + (float)fSubPosEX);
+                PointF ptMD = CPoint.GetMidPoint(ptIN, ptEX);
+
+                /***/if (nSign == -1) { list.Add(ptIN); }
+                else if (nSign == +1) { list.Add(ptEX); }
+                else if (nSign == +0) { list.Add(ptMD); }
+            }
+            return list;
+        }
+        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nSign)
+        {
+            // get joint points positions
+            int sx = (int)rc.X;
+            int ex = (int)rc.Width + sx;
+            int sy = (int)rc.Y;
+            int ey = (int)rc.Height + sy;
+
+            PointF[] arrPoints = new PointF[(int)rc.Width];
+            List<PointF> list = new List<PointF>();
+            if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list;   // 170523 rectangle out of range exception
+
+            for (int y = sy; y < ey; y++)
+            {
+                Array.Clear(arrPoints, 0, arrPoints.Length);
+
+                for (int x = sx, nIndex = 0; x < ex; x++) { arrPoints[nIndex++] = new PointF(x, y); }
+
+                double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, -1,1);
+                double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, +1,1);
+
+                PointF ptIN = new PointF(sx + (float)fSubPosIN, y);
+                PointF ptEX = new PointF(sx + (float)fSubPosEX, y);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
+
+                /***/if (nSign == -1) { list.Add(ptIN); }
+                else if (nSign == +1) { list.Add(ptEX); }
+                else if (nSign == +0) { list.Add(ptMD); }
+            }
+            return list;
+        }
+        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_DIA(byte[] rawImage, int imageW, int imageH, int nbuffLength, List<PointF> listEdges, bool bReverse, int nSign)
+        {
             PointF[] arrPoints = new PointF[nbuffLength];
-
-            RectangleF rcBound = CPoint.GetBoundingRect(listEdges);
-            if (CRect.IsBoarderPosition(rcBound, imageW, imageH) == true) return list; // 170615 rectangle out of range exception
-            
+            List<PointF> list = new List<PointF>();
+ 
             for (int i = 0; i < listEdges.Count; i++)
             {
                 int imgX = (int)listEdges.ElementAt(i).X;
                 int imgY = (int)listEdges.ElementAt(i).Y;
 
                 Array.Clear(arrPoints, 0, arrPoints.Length);
-                for (int x = (int)imgX, nIndex = 0; x < (int)imgX + nbuffLength; x++)
-                {
-                    arrPoints[nIndex++] = new PointF(x, imgY);
-                }
 
-                double fSubPosEX = 0;
-                double fSubPosIN = 0;
+                for (int x = (int)imgX, nIndex = 0; x < (int)imgX + nbuffLength; x++) { arrPoints[nIndex++] = new PointF(x, imgY); }
 
-                if (nDir == +1)
-                {
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, arrPoints, +1);
-                    list.Add(new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY));
-                }
-                else if (nDir == -1)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, arrPoints, -1);
-                    list.Add(new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY));
+                double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, +1, 0);
+                double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, -1, 0);
 
-                }
-                else if (nDir == 0)
-                {
-                    fSubPosEX = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, arrPoints, +1);
-                    fSubPosIN = Computer.HC_EDGE_GetLogPos_Sign(rawImage, imageW, imageH, arrPoints, -1);
+                PointF ptIN = new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY);
+                PointF ptEX = new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
 
-                    PointF ptEX = new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY);
-                    PointF ptIN = new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY);
-                    PointF ptCT = CPoint.GetMidPoint(ptEX, ptIN);
-
-                    list.Add(ptCT);
-                }
+                /***/if (nSign == -1) { list.Add(ptIN); }
+                else if (nSign == +1) { list.Add(ptEX); }
+                else if (nSign == +0) { list.Add(ptMD); }
             }
             return list;
         }
-         
-        public static double HC_EDGE_GetCARDINPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign)
-        {
-            double[] fKernel= new double[] 
-            { 
-                    + 1,+ 1,+ 1,+15,+ 1,+ 1,+ 1,
-                    + 1,+ 1,+ 1,+15,+ 1,+ 1,+ 1,
-                    + 1,+ 1,+15,+15,+15,+ 1,+ 1,
-                    +15,+15,+15,+15,+15,+15,+15, 
-                    + 1,+ 1,+15,+15,+15,+ 1,+ 1,
-                    + 1,+ 1,+ 1,+15,+ 1,+ 1,+ 1,
-                    + 1,+ 1,+ 1,+15,+ 1,+ 1,+ 1
-            };
 
-            double[] fImage = new double[arrPoints.Length];
-
-            int KSIZE = (int)Math.Sqrt(fKernel.Length);
-            int GAP = KSIZE / 2;
-
-            //for (int i = 0; i < arrPoints.Length; i++)
-            Parallel.For(0, arrPoints.Length, i =>
-            {
-                float x = arrPoints.ElementAt(i).X;
-                float y = arrPoints.ElementAt(i).Y;
-
-                double kernelSum = 0;
-
-                for (int j = -GAP; j <= GAP; j++)
-                {
-
-                    for (int k = -GAP; k <= GAP; k++)
-                    {
-                        //   kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * rawImage[(y - j) * imageW + (x - k)]);
-
-                        float dy = y - j;
-                        float dx = x - k;
-
-                        int x1 = (int)Math.Floor(dx);
-                        int x2 = (int)Math.Ceiling(dx);
-                        int y1 = (int)Math.Floor(dy);
-                        int y2 = (int)Math.Ceiling(dy);
-
-                        int q11 = rawImage[y1 * imageW + x1];
-                        int q12 = rawImage[y2 * imageW + x1];
-                        int q21 = rawImage[y1 * imageW + x2];
-                        int q22 = rawImage[y2 * imageW + x2];
-
-                        double fInterplated = GetInterPolatedValue(dx, dy, x1, x2, y1, y2, q11, q12, q21, q22);
-
-                        byte valueOrg = rawImage[(int)y * imageW + (int)x];
-
-                        // if interpolation is not successful, zero value produced. 170623
-                        // thus, in this case, if non interpolated value is not zero?
-                        // replace error interpolated value from non interpolated original value.
-                        byte value = fInterplated < 0 ? (byte)0 : fInterplated > 255 ? (byte)255 : (byte)fInterplated;
-
-                        if (double.IsNaN(fInterplated) == true || (fInterplated == 0 && valueOrg != 0)) value = valueOrg;
-
-                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * value);
-                    }
-                }
-                fImage[i] = kernelSum;
-                //fTemp[i] = rawImage[y * imageW + x];
-
-            });
-
-            // 2nd derivate result is fuck!! noisy image so.. change to 1st derivated
-            //double [] fDerivative = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(fImage);
-
-            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
-            double fSubPos = 0;
-
-            try
-            {
-                if (nSign == -1)
-                {
-                    double fValue = fDerivative.Min();
-                    int nPos = Array.IndexOf(fDerivative, fValue);
-                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
-                }
-                else if (nSign == +1)
-                {
-                    double fValue = fDerivative.Max();
-                    int nPos = Array.IndexOf(fDerivative, fValue);
-                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
-                }
-            }
-            catch { }
-
-            return fSubPos;
-        }
-
-        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool isTop, int nSign)
-        {
-            // get joint points positions
-            int sx = (int)rc.X;
-            int ex = (int)rc.Width + sx;
-            int sy = (int)rc.Y;
-            int ey = (int)rc.Height + sy;
-
-            PointF[] buffPoints = new PointF[(int)rc.Height];
-
-            List<PointF> list = new List<PointF>();
-
-            if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list; // 170523 rectangle out of range exception
-
-            for (int x = sx; x < ex; x++)
-            {
-                Array.Clear(buffPoints, 0, buffPoints.Length);
-
-                for (int y = sy, nIndex = 0; y < ey; y++)
-                {
-                    buffPoints[nIndex++] = new PointF(x, y);
-                }
-
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
-                PointF ptIN = new PointF();
-                PointF ptEX = new PointF();
-                if (isTop == true)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(x, sy + (float)fSubPosIN);
-                    ptEX = new PointF(x, sy + (float)fSubPosEX);
-                }
-                else if (isTop == false)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(x, ey - (float)fSubPosIN);
-                    ptEX = new PointF(x, ey - (float)fSubPosEX);
-                }
-
-                /***/
-                if (nSign == -1) { list.Add(ptIN); }
-                else if (nSign == 1) { list.Add(ptEX); }
-                else if (nSign == 0)
-                {
-                    double miny = Math.Min(ptIN.Y, ptEX.Y);
-                    double maxy = Math.Max(ptIN.Y, ptEX.Y);
-                    double midY = miny + ((maxy - miny) / 2.0);
-                    PointF ptMid = new PointF(ptIN.X, (float)midY);
-                    list.Add(ptMid);
-                }
-            }
-            return list;
-        }
-        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool isLFT, int nSign)
-        {
-            // get joint points positions
-            int sx = (int)rc.X;
-            int ex = (int)rc.Width + sx;
-            int sy = (int)rc.Y;
-            int ey = (int)rc.Height + sy;
-
-            PointF[] buffPoints = new PointF[(int)rc.Width];
-
-            List<PointF> list = new List<PointF>();
-
-            if (CRect.IsBoarderPosition(rc, imageW, imageH) == true) return list;   // 170523 rectangle out of range exception
-
-            for (int y = sy; y < ey; y++)
-            {
-                Array.Clear(buffPoints, 0, buffPoints.Length);
-
-                for (int x = sx, nIndex = 0; x < ex; x++) { buffPoints[nIndex++] = new PointF(x, y); }
-
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
-                PointF ptIN = new PointF();
-                PointF ptEX = new PointF();
-                if (isLFT == true)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(sx + (float)fSubPosIN, y);
-                    ptEX = new PointF(sx + (float)fSubPosEX, y);
-                }
-                else if (isLFT == false)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(ex - (float)fSubPosIN, y);
-                    ptEX = new PointF(ex - (float)fSubPosEX, y);
-                }
-
-                if (nSign == -1) { list.Add(ptIN); }
-                else if (nSign == 1) { list.Add(ptEX); }
-                else if (nSign == 0)
-                {
-                    double minx = Math.Min(ptIN.X, ptEX.X);
-                    double maxx = Math.Max(ptIN.X, ptEX.X);
-                    double midx = minx + ((maxx - minx) / 2.0);
-                    PointF ptMid = new PointF((float)midx, ptIN.Y);
-                    list.Add(ptMid);
-                }
-            }
-            return list;
-        }
-        public static void HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool isTop, List<PointF> listEdges_EX, List<PointF> listEdges_MD, List<PointF> listEdges_IN)
+        public static /******/void HC_EDGE_GetRawPoints_CARDIN_MULTI_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> listEdges_EX, List<PointF> listEdges_MD, List<PointF> listEdges_IN)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -1765,36 +1754,19 @@ namespace CD_Measure
                     buffPoints[nIndex++] = new PointF(x, y);
                 }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
-                PointF ptIN = new PointF();
-                PointF ptEX = new PointF();
-                if (isTop == true)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
+                double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1, +1);
+                double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1, +1);
 
-                    ptIN = new PointF(x, sy + (float)fSubPosIN);
-                    ptEX = new PointF(x, sy + (float)fSubPosEX);
-                }
-                else if (isTop == false)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(x, ey - (float)fSubPosIN);
-                    ptEX = new PointF(x, ey - (float)fSubPosEX);
-                }
+                PointF ptIN = new PointF(x, sy + (float)fSubPosIN);
+                PointF ptEX = new PointF(x, sy + (float)fSubPosEX);
+                PointF ptMD = CPoint.GetMidPoint_Only_Y(ptIN, ptEX);
 
                 listEdges_IN.Add(ptIN);
-                listEdges_MD.Add(CPoint.GetMidPoint_Only_Y(ptIN, ptEX));
+                listEdges_MD.Add(ptMD);
                 listEdges_EX.Add(ptEX);
             }
         }
-
-        // in order to display and visualize  ex, mid, in ... split version 
-        public static void HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool isLFT, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
+        public static /******/void HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -1816,233 +1788,147 @@ namespace CD_Measure
 
                 for (int x = sx, nIndex = 0; x < ex; x++) { buffPoints[nIndex++] = new PointF(x, y); }
 
-                double fSubPosIN = 0;
-                double fSubPosEX = 0;
+                double fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints,  -1, +2);
+                double fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints,  +1, +2);
 
-                PointF ptIN = new PointF();
-                PointF ptEX = new PointF();
-
-                if (isLFT == true)
-                {
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(sx + (float)fSubPosIN, y);
-                    ptEX = new PointF(sx + (float)fSubPosEX, y);
-                }
-                else if (isLFT == false)
-                {
-                    Array.Reverse(buffPoints);
-                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, -1);
-                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, buffPoints, +1);
-
-                    ptIN = new PointF(ex - (float)fSubPosIN, y);
-                    ptEX = new PointF(ex - (float)fSubPosEX, y);
-                }
+                PointF ptIN = new PointF(sx + (float)fSubPosIN, y);
+                PointF ptEX = new PointF(sx + (float)fSubPosEX, y);
+                PointF ptMD = CPoint.GetMidPoint_Only_X(ptIN, ptEX);
 
                 list_IN.Add(ptIN);
-                list_MD.Add(CPoint.GetMidPoint_Only_X(ptIN, ptEX));
+                list_MD.Add(ptMD);
                 list_EX.Add(ptEX);
             }
         }
-        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_DIA(byte[] rawImage, int imageW, int imageH, int nbuffLength, List<PointF> listEdges, int nDir, bool bReverse)
+        public static List<PointF> HC_EDGE_GetRawPoints_CARDIN_MULTI_DIA(byte[] rawImage, int imageW, int imageH, List<PointF> ptRegion2D, int regionW, int regionH, bool bReverse, ref List<PointF> list_IN, ref List<PointF> list_MD, ref List<PointF> list_EX, bool bFixedPos, int nObjSequence)
         {
-            List<PointF> list = new List<PointF>();
+            list_EX.Clear(); list_MD.Clear(); list_IN.Clear();
+            
+            PointF[] arrPoints = new PointF[regionW];
+            List<PointF> listGravity = new List<PointF>();
 
-            PointF[] arrPoints = new PointF[nbuffLength];
-
-            for (int i = 0; i < listEdges.Count; i++)
+            if (regionW == 0 || regionH == 0) return listGravity;
+ 
+            for (int y = 0; y < regionH; y++)
             {
-                int imgX = (int)listEdges.ElementAt(i).X;
-                int imgY = (int)listEdges.ElementAt(i).Y;
-
                 Array.Clear(arrPoints, 0, arrPoints.Length);
-                for (int x = (int)imgX, nIndex = 0; x < (int)imgX + nbuffLength; x++)
+
+                for (int x = 0; x < regionW; x++)
                 {
-                    arrPoints[nIndex++] = new PointF(x, imgY);
+                    arrPoints[x] = ptRegion2D.ElementAt(y * regionW + x);
                 }
+
+                PointF ptGravity = CPoint.GetCentroid(arrPoints.ToList());
 
                 double fSubPosEX = 0;
                 double fSubPosIN = 0;
 
-                fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, +1);
-                fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, -1);
+                if (bFixedPos == false)
+                {
+                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, +1, 0);
+                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos(rawImage, imageW, imageH, arrPoints, -1, 0);
+                }
+                else if( bFixedPos == true)
+                {
+                    fSubPosEX = Computer.HC_EDGE_GetCARDINPos_FixedPos(rawImage, imageW, imageH, arrPoints, +1, 0, nObjSequence);
+                    fSubPosIN = Computer.HC_EDGE_GetCARDINPos_FixedPos(rawImage, imageW, imageH, arrPoints, -1, 0, nObjSequence);
+                }
 
-                if (nDir == +1)
-                {
-                    list.Add(new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY));
-                }
-                else if (nDir == -1)
-                {
-                    list.Add(new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY));
-                }
-                else if (nDir == 0)
-                {
-                    PointF ptEX = new PointF(listEdges.ElementAt(i).X + (float)fSubPosEX, imgY);
-                    PointF ptIN = new PointF(listEdges.ElementAt(i).X + (float)fSubPosIN, imgY);
-                    PointF ptCT = CPoint.GetMidPoint(ptEX, ptIN);
+                PointF ptEX = arrPoints[(int)fSubPosEX];
+                PointF ptIN = arrPoints[(int)fSubPosIN];
+                PointF ptMD = CPoint.GetMidPoint(ptEX, ptIN);
 
-                    list.Add(ptCT);
-                }
+                list_EX.Add(ptEX);
+                list_IN.Add(ptIN);
+                list_MD.Add(ptMD);
+                listGravity.Add(ptGravity);
+
             }
-            return list;
+            return listGravity;
         }
 
-        public static double HC_EDGE_GetLogPos_Sign(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign)
+        public static /******/void HC_EDGE_FILTERING_FOR_DIGONAL(List<PointF> list_Gravity, ref List<PointF> Edges_EX, ref List<PointF> Edges_MD, ref List<PointF> Edges_IN, double param_refinement)
         {
-            bool bUSE_OLD = true;
-            double fSubPos = 0;
+            PointF[] arrEdges_FEX = Edges_EX.ToArray();
+            PointF[] arrEdges_FMD = Edges_MD.ToArray();
+            PointF[] arrEdges_FIN = Edges_IN.ToArray();
 
-            if (arrPoints.Length == 0) return fSubPos;
+            double[] arrLENG_FEX = new double[Edges_EX.Count];
+            double[] arrDEGR_FEX = new double[Edges_EX.Count];
 
-            if( bUSE_OLD == true)
+            double[] arrLENG_FMD = new double[Edges_MD.Count];
+            double[] arrDEGR_FMD = new double[Edges_MD.Count];
+
+            double[] arrLENG_FIN = new double[Edges_IN.Count];
+            double[] arrDEGR_FIN = new double[Edges_IN.Count];
+
+
+            for (int i = 0; i < arrEdges_FEX.Length; i++)
             {
-              #region oldversion
-                double[] fKernel = HC_FILTER_GetLogKernel(5, 1.6, nSign);
+                CLine line = new CLine(arrEdges_FEX[i], list_Gravity.ElementAt(i));
+                arrLENG_FEX[i] = line.LENGTH;
+                arrDEGR_FEX[i] = line.GetLineAngle();
+            }
 
-                double[] fImage = new double[arrPoints.Length];
-                double[] fTemp = new double[arrPoints.Length];
+            double fDIST_LL = Computer.GetMajorValue(arrLENG_FEX);
+            double fDIST_LA = Computer.GetMajorValue(arrDEGR_FEX);
 
-                int KSIZE = (int)Math.Sqrt(fKernel.Length);
-                int GAP = KSIZE / 2;
+            Edges_EX.Clear();
 
-                for (int i = 0; i < arrPoints.Length; i++)
+            for (int i = 0; i < arrLENG_FEX.Length; i++)
+            {
+                if (Math.Abs(fDIST_LL - arrLENG_FEX[i]) <= param_refinement && Math.Abs(fDIST_LA - arrDEGR_FEX[i]) <= param_refinement)
                 {
-                    int x = (int)arrPoints.ElementAt(i).X;
-                    int y = (int)arrPoints.ElementAt(i).Y;
-
-                    double kernelSum = 0;
-                    for (int j = -GAP; j <= GAP; j++)
-                    {
-                        for (int k = -GAP; k <= GAP; k++)
-                        {
-                            kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * rawImage[(y - j) * imageW + (x - k)]);
-                        }
-                    }
-                    fImage[i] = kernelSum;
-                    fTemp[i] = rawImage[y * imageW + x];
+                    Edges_EX.Add(arrEdges_FEX[i]);
                 }
-
-                double fValue = fImage.Max();
-                int nPos = Array.IndexOf(fImage, fValue);
-                fSubPos = nPos + GetSubPixelFromLineBuff(fImage, nPos);
-                #endregion
             }
-            else if (bUSE_OLD == false)
+
+            for (int i = 0; i < arrEdges_FMD.Length; i++)
             {
-                #region new version
-                double[] fKernel = HC_FILTER_GetLogKernel(5, 1.6, nSign);
-                
-                double[] fImage = new double[arrPoints.Length];
-                
-                int KSIZE = (int)Math.Sqrt(fKernel.Length);
-                int GAP = KSIZE / 2;
-                
-                for (int i = 0; i < arrPoints.Length; i++)
+                CLine line = new CLine(arrEdges_FMD[i], list_Gravity.ElementAt(i));
+                arrLENG_FMD[i] = line.LENGTH;
+                arrDEGR_FMD[i] = line.GetLineAngle();
+            }
+
+            fDIST_LL = Computer.GetMajorValue(arrLENG_FMD);
+            fDIST_LA = Computer.GetMajorValue(arrDEGR_FMD);
+
+            Edges_MD.Clear();
+
+            for (int i = 0; i < arrLENG_FMD.Length; i++)
+            {
+                if (Math.Abs(fDIST_LL - arrLENG_FMD[i]) <= param_refinement && Math.Abs(fDIST_LA - arrDEGR_FMD[i]) <= param_refinement)
                 {
-                    float x = arrPoints.ElementAt(i).X;
-                    float y = arrPoints.ElementAt(i).Y;
-                
-                    double kernelSum = 0;
-                
-                    for (int j = -GAP; j <= GAP; j++)
-                    {
-                        for (int k = -GAP; k <= GAP; k++)
-                        {
-                            float dy = y - j;
-                            float dx = x - k;
-                
-                            int x1 = (int)Math.Floor(dx);
-                            int x2 = (int)Math.Ceiling(dx);
-                            int y1 = (int)Math.Floor(dy);
-                            int y2 = (int)Math.Ceiling(dy);
-                            
-                            int q11 = rawImage[y1 * imageW + x1];
-                            int q12 = rawImage[y2 * imageW + x1];
-                            int q21 = rawImage[y1 * imageW + x2];
-                            int q22 = rawImage[y2 * imageW + x2];
-                            
-                            double fInterplated = GetInterPolatedValue(dx, dy, x1, x2, y1, y2, q11, q12, q21, q22);
-                
-                            byte valueOrg = rawImage[(int)y * imageW + (int)x];
-                
-                            // if interpolation is not successful, zero value produced. 170623
-                            // thus, in this case, if non interpolated value is not zero?
-                            // replace error interpolated value from non interpolated original value.
-                            byte value = fInterplated < 0 ? (byte)0 : fInterplated > 255 ? (byte)255 : (byte)fInterplated;
-                            
-                            if (double.IsNaN(fInterplated) == true || (fInterplated == 0 && valueOrg != 0)) value = valueOrg;
-                
-                            kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * value);
-                        }
-                    }
-                    fImage[i] = kernelSum;
+                    Edges_MD.Add(arrEdges_FMD[i]);
                 }
-                
-                double fValue = fImage.Max();
-                int nPos = Array.IndexOf(fImage, fValue);
-                fSubPos = nPos + GetSubPixelFromLineBuff(fImage, nPos);
-                #endregion
             }
-            return fSubPos;
-         }
-        public static double HC_EDGE_GetLoG_PosMax(byte[] rawImage, int imageW, int imageH, PointF[] list)
-        {
-            double[] arrDerivative = new double[list.Length];
 
-            for (int i = 0; i < list.Length; i++)
+            for (int i = 0; i < arrEdges_FIN.Length; i++)
             {
-                int xx = (int)list.ElementAt(i).X;
-                int yy = (int)list.ElementAt(i).Y;
-
-                arrDerivative[i] = rawImage[yy * imageW + xx + 1] + rawImage[yy * imageW + xx - 1] - (2 * rawImage[yy * imageW + xx]);
+                CLine line = new CLine(arrEdges_FIN[i], list_Gravity.ElementAt(i));
+                arrLENG_FIN[i] = line.LENGTH;
+                arrDEGR_FIN[i] = line.GetLineAngle();
             }
 
-            double fMaxVal = arrDerivative.Max();
-            int nMaxPos = Array.IndexOf(arrDerivative, fMaxVal);
+            fDIST_LL = Computer.GetMajorValue(arrLENG_FIN);
+            fDIST_LA = Computer.GetMajorValue(arrDEGR_FIN);
 
-            double fSubPixel = GetSubPixelFromLineBuff(arrDerivative, nMaxPos);
+            Edges_IN.Clear();
 
-            return nMaxPos + fSubPixel;
-        }
-        public static double HC_EDGE_GetLoG_PosMin(byte[] rawImage, int imageW, int imageH, PointF[] list)
-        {
-            double[] arrDerivative = new double[list.Length];
-
-            for (int i = 0; i < list.Length; i++)
+            for (int i = 0; i < arrLENG_FIN.Length; i++)
             {
-                int xx = (int)list.ElementAt(i).X;
-                int yy = (int)list.ElementAt(i).Y;
-
-                arrDerivative[i] = rawImage[(yy + 0) * imageW + xx + 1] +
-                                   rawImage[(yy + 0) * imageW + xx - 1] +
-                                   rawImage[(yy + 1) * imageW + xx + 0] +
-                                   rawImage[(yy - 1) * imageW + xx + 0] -
-                                   (4 * rawImage[yy * imageW + xx]);
+                if (Math.Abs(fDIST_LL - arrLENG_FIN[i]) <= param_refinement && Math.Abs(fDIST_LA - arrDEGR_FIN[i]) <= param_refinement)
+                {
+                    Edges_IN.Add(arrEdges_FIN[i]);
+                }
             }
-
-            double fMin = arrDerivative.Min();
-            int nMinPos = Array.IndexOf(arrDerivative, fMin);
-
-            double fSubpixel = GetSubPixelFromLineBuff(arrDerivative, nMinPos);
-
-            return nMinPos + fSubpixel;
         }
         #endregion
 
         //*******************************************************************************************
         // METHOD Serise
 
-        public static byte[] HC_TRANS_MAGMEDI(byte[] rawImage, int imageW, int imageH)
-        {
-            byte[] rawDump = new byte[imageW*imageH];
-            Array.Copy( rawImage, rawDump, rawImage.Length);
-
-            rawDump = HC_TRANS_GradientImage(rawImage, imageW, imageH);
-            rawDump = HC_TRANS_Contrast(rawImage, imageW, imageH, 30);
-            rawDump = HC_FILTER_Median(rawImage, imageW, imageH, 5);
-            return rawDump;
-        }
+        
         public static RectangleF HC_CIRCLE_CENTERING(byte[] rawImage, int imageW, int imageH, RectangleF rc, double fShrinkage, int nOption)
         {
             // get the rectangle info as integer
@@ -2051,67 +1937,81 @@ namespace CD_Measure
             int rcw = (int)rc.Width;
             int rch = (int)rc.Height;
 
-            bool bSave = true;
+            bool bSave = false;
 
             // get the crop image 
-            byte[] processedImage = HC_CropImage(rawImage, imageW, imageH, rcx, rcy, rcw, rch);
+            byte[] ImagecropOrg = HC_CropImage(rawImage, imageW, imageH, rcx, rcy, rcw, rch);
 
             if (nOption == 1)
             {
-                processedImage = HC_TRANS_SIGMOID_Contrast(processedImage, rcw, rch, 0.4, 20);
+                // (original - reverse) * 2
+                byte[] reverse = HC_TRANS_Reverse(ImagecropOrg, rcw, rch);
+                byte[] sub = HC_ARITH_SUB(ImagecropOrg, reverse, rcw, rch);
+                sub = HC_ARITH_ADD(sub, sub, rcw, rch);
+                Array.Copy(sub, ImagecropOrg, sub.Length);
+
             }
             else if (nOption == 2)
             {
-                byte[] reverse = HC_TRANS_Reverse(processedImage, rcw, rch);
-                byte[] sub = HC_ARITH_SUB(reverse, processedImage, rcw, rch);
-                sub = HC_ARITH_SUB(sub, processedImage, rcw, rch);
-                Array.Copy(sub, processedImage, sub.Length);
+                // reverse - origianl = reverse sub - original 
+                
+                byte[] reverse = HC_TRANS_Reverse(ImagecropOrg, rcw, rch);
+                byte[] sub = HC_ARITH_SUB(reverse, ImagecropOrg, rcw, rch);
+                sub = HC_ARITH_SUB(sub, ImagecropOrg, rcw, rch);
+                
+                Array.Copy(sub, ImagecropOrg, sub.Length);
             }
             else if (nOption == 3)
             {
-                double[] fImage = processedImage.Select(element => (double)element).ToArray();
+                double[] fImage = ImagecropOrg.Select(element => (double)element).ToArray();
                 double[] fBase1 = Computer.ARRAY_GetMeanImage(fImage, rcw, rch, 3);
                 double[] fBase2 = Computer.ARRAY_GetMeanImage(fImage, rcw, rch, 7);
 
                 byte [] rBase1 = Computer.ARRAY_GetNormalizedImage(fBase1);
                 byte [] rBase2 = Computer.ARRAY_GetNormalizedImage(fBase2);
-                processedImage = Computer.HC_ARITH_SUB(rBase1, rBase2, rcw, rch);
+                ImagecropOrg = Computer.HC_ARITH_SUB(rBase1, rBase2, rcw, rch);
             }
             else if (nOption == 4)
             {
-                double[] fKernel = HC_FILTER_GenerateGaussianFilter_MODFIED(0.5, 11);
-                processedImage = HC_FILTER_Convolution(fKernel, processedImage, rcw, rch);
-
-                byte[] reverse = HC_TRANS_Reverse(processedImage, rcw, rch);
-                byte[] rev = HC_ARITH_SUB(reverse, processedImage, rcw, rch);
-                processedImage = HC_ARITH_SUB(rev, processedImage, rcw, rch);
-                
+                byte[] brightUP = Computer.HC_TRANS_Brightness(ImagecropOrg, imageW, imageH, 128);
+                ImagecropOrg = HC_ARITH_SUB(brightUP, ImagecropOrg, rcw, rch);
+                ImagecropOrg = HC_ARITH_ADD(ImagecropOrg, ImagecropOrg, rcw, rch);
+            }
+            else if (nOption == 5)
+            {
+                double [] fKernel = HC_FILTER_GenerateGaussianFilter(1.0, 5);
+                ImagecropOrg = Computer.HC_FILTER_Convolution(fKernel, ImagecropOrg, rcw, rch);
+                ImagecropOrg = Computer.HC_TRANS_GradientImage(ImagecropOrg, rcw, rch);
             }
 
             if (bSave == true)
             {
-                SaveImage(processedImage, rcw, rch, "c:\\nicetomeetyou1.bmp");
+                SaveImage(ImagecropOrg, rcw, rch, "c:\\nicetomeetyou1.bmp");
             }
-            // generate threshold image
-            processedImage = HC_THR_Huang(processedImage, rcw, rch);
+
+            if (nOption != 4)
+            {
+                // generate threshold image
+                ImagecropOrg = HC_THR_Huang(ImagecropOrg, rcw, rch);
+            }
 
             if (bSave == true)
             {
-                SaveImage(processedImage, rcw, rch, "c:\\nicetomeetyou2.bmp");
+                SaveImage(ImagecropOrg, rcw, rch, "c:\\nicetomeetyou2.bmp");
             }
 
             CLabelWorker label = new CLabelWorker();
             // set labeling map
-            label.Set(processedImage, rcw, rch);
+            label.Set(ImagecropOrg, rcw, rch);
 
             int cx = rcw / 2;
             int cy = rch / 2;
 
             // get the center value from the threshold image
-            int value = processedImage[cy * rcw+ cx];
+            int value = ImagecropOrg[cy * rcw+ cx];
 
             // extract center oriented segment 
-            List<Point> list = label.ExtractSingleSegment(processedImage, rcw, rch, cx, cy, value);
+            List<Point> list = label.ExtractSingleSegment(ImagecropOrg, rcw, rch, cx, cy, value);
 
             CSegment seg = new CSegment(list, 1);
 
@@ -2131,462 +2031,696 @@ namespace CD_Measure
 
             return rcCenter;
         }
-     
-        //*****************************************************************************************
-        // 2nd Derivative approaches
-        //*****************************************************************************************
 
-        #region FOR 2nd DERIVATIVE APPROACH
-
-        public static double[] HC_EDGE_Get2ndDerivativeArrayFromLineBuff(double[] fLineBuff)
+        public static double HC_EDGE_GetCARDINPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign, int nFilterType)
         {
-            // fucking error exception 170901 
-            if (fLineBuff == null || fLineBuff.Length < 2) return new double[2];
+            double[] fKernel = null;
 
-            double[] arr1st = new double[fLineBuff.Length - 1];
-            double[] arr2nd = new double[fLineBuff.Length - 2];
+            if (nFilterType == 0)
+            {
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+15,+15,+15,+01,+01,
+                        +15,+15,+15,+15,+15,+15,+15, 
+                        +01,+01,+15,+15,+15,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-15,-15,-15,-01,-01,
+                        -15,-15,-15,-15,-15,-15,-15, 
+                        -01,-01,-15,-15,-15,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01
+                    };
+                }
+            }
+            else if (nFilterType == 1)
+            {
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +77,+77,+77,+00,+77,+77,+77,
+                        +55,+55,+55,+00,+55,+55,+55,
+                        +99,+99,+99,+00,+99,+99,+99,
+                        +00,+00,+00,+00,+00,+00,+00,
+                        -99,-99,-99,+00,-99,-99,-99,
+                        -55,-55,-55,+00,-55,-55,-55,
+                        -77,-77,-77,+00,-77,-77,-77
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -77,-77,-77,-00,-77,-77,-77,
+                        -55,-55,-55,-00,-55,-55,+55,
+                        -99,-99,-99,-00,-99,-99,-99,
+                        +00,+00,+00,+00,+00,+00,+00,
+                        +99,+99,+99,+00,+99,+99,+99,
+                        +55,+55,+55,+00,+55,+55,+55,
+                        +77,+77,+77,+00,+77,+77,+77
+                    };
+                }
+                
+
+            }
+            else if (nFilterType == 2)
+            {
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +00,+00,+00,+00,-00,-00,-00,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -00,-00,-00,-00,+00,+00,+00,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77
+                    };
+                }
+            }
+ 
+            double[] fImage = new double[arrPoints.Length];
+
+            int KSIZE = (int)Math.Sqrt(fKernel.Length);
+            int GAP = KSIZE / 2;
+
+            for (int i = 0; i < arrPoints.Length; i++)
+            //Parallel.For(0, arrPoints.Length, i =>
+            {
+                float x = arrPoints.ElementAt(i).X;
+                float y = arrPoints.ElementAt(i).Y;
+
+                double kernelSum = 0;
+
+                for (int j = -GAP; j <= GAP; j++)
+                {
+
+                    for (int k = -GAP; k <= GAP; k++)
+                    {
+                        float cy = y - j;
+                        float cx = x - k;
+
+                        int x1 = (int)Math.Floor(cx);
+                        int x2 = (int)Math.Ceiling(cx);
+                        int y1 = (int)Math.Floor(cy);
+                        int y2 = (int)Math.Ceiling(cy);
+
+                        int q11 = rawImage[y1 * imageW + x1];
+                        int q12 = rawImage[y2 * imageW + x1];
+                        int q21 = rawImage[y1 * imageW + x2];
+                        int q22 = rawImage[y2 * imageW + x2];
+
+                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                        if (fInterpolated == 0)
+                        {
+                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                        }
+
+                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * (double)fInterpolated);
+
+                    }
+                }
+                fImage[i] = kernelSum;
+
+            }//);
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            double fSubPos = 0;
 
             try
             {
-                for (int i = 0; i < fLineBuff.Length - 1; i++)
-                {
-                    arr1st[i] = fLineBuff[i + 1] - fLineBuff[i];
-                }
-                for (int i = 0; i < arr1st.Length - 1 + 0; i++)
-                {
-                    arr2nd[i] = arr1st[i + 1] - arr1st[i];
-                }
+                double fValue = fDerivative.Max();
+                int nPos = Array.IndexOf(fDerivative, fValue);
+                fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            
+            catch { }
 
-            
-            return arr2nd;
+            return fSubPos;
         }
-        public static double[] HC_EDGE_Get1stDerivativeArrayFromLineBuff(double[] fLineBuff)
+        public static double HC_EDGE_GetCARDINPos_FixedPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign, int nFilterType, int nObjSequence)
         {
-            double[] arr1st = new double[fLineBuff.Length - 1];
+            double[] fKernel = null;
 
-            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            if (nFilterType == 0)
             {
-                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+15,+15,+15,+01,+01,
+                        +15,+15,+15,+15,+15,+15,+15, 
+                        +01,+01,+15,+15,+15,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01,
+                        +01,+01,+01,+15,+01,+01,+01
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-15,-15,-15,-01,-01,
+                        -15,-15,-15,-15,-15,-15,-15, 
+                        -01,-01,-15,-15,-15,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01,
+                        -01,-01,-01,-15,-01,-01,-01
+                    };
+                }
             }
-            arr1st[0] = arr1st[1];
-            return arr1st;
-        }
-        // get the every raw points based on directional 2nd derivative 170419 
-        // this functions prepared for the point filtering or fitting which has outliers.
-        public static List<PointF> GetPointList_Derivative_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_TOP, int nDir)
-        {
+            else if (nFilterType == 1)
+            {
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +77,+77,+77,+00,+77,+77,+77,
+                        +55,+55,+55,+00,+55,+55,+55,
+                        +99,+99,+99,+00,+99,+99,+99,
+                        +00,+00,+00,+00,+00,+00,+00,
+                        -99,-99,-99,+00,-99,-99,-99,
+                        -55,-55,-55,+00,-55,-55,-55,
+                        -77,-77,-77,+00,-77,-77,-77
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -77,-77,-77,-00,-77,-77,-77,
+                        -55,-55,-55,-00,-55,-55,+55,
+                        -99,-99,-99,-00,-99,-99,-99,
+                        +00,+00,+00,+00,+00,+00,+00,
+                        +99,+99,+99,+00,+99,+99,+99,
+                        +55,+55,+55,+00,+55,+55,+55,
+                        +77,+77,+77,+00,+77,+77,+77
+                    };
+                }
 
+
+            }
+            else if (nFilterType == 2)
+            {
+                if (nSign == -1)
+                {
+                    fKernel = new double[] 
+                    { 
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +00,+00,+00,+00,-00,-00,-00,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77,
+                        +77,+55,+99,+00,-99,-55,-77
+                    };
+                }
+                else
+                {
+                    fKernel = new double[] 
+                    { 
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -00,-00,-00,-00,+00,+00,+00,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77,
+                        -77,-55,-99,-00,+99,+55,+77
+                    };
+                }
+            }
+
+            double[] fImage = new double[arrPoints.Length];
+
+            int KSIZE = (int)Math.Sqrt(fKernel.Length);
+            int GAP = KSIZE / 2;
+
+            for (int i = 0; i < arrPoints.Length; i++)
+            //Parallel.For(0, arrPoints.Length, i =>
+            {
+                float x = arrPoints.ElementAt(i).X;
+                float y = arrPoints.ElementAt(i).Y;
+
+                double kernelSum = 0;
+
+                for (int j = -GAP; j <= GAP; j++)
+                {
+
+                    for (int k = -GAP; k <= GAP; k++)
+                    {
+                        float cy = y - j;
+                        float cx = x - k;
+
+                        int x1 = (int)Math.Floor(cx);
+                        int x2 = (int)Math.Ceiling(cx);
+                        int y1 = (int)Math.Floor(cy);
+                        int y2 = (int)Math.Ceiling(cy);
+
+                        int q11 = rawImage[y1 * imageW + x1];
+                        int q12 = rawImage[y2 * imageW + x1];
+                        int q21 = rawImage[y1 * imageW + x2];
+                        int q22 = rawImage[y2 * imageW + x2];
+
+                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                        if (fInterpolated == 0)
+                        {
+                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                        }
+
+                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * (double)fInterpolated);
+
+                    }
+                }
+                fImage[i] = kernelSum;
+
+            }//);
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            double fSubPos = 0;
+
+            try
+            {
+                int nOptimalPos = 0;
+                double fPosBase = 0;
+
+                PointF p1 = CPeakMaster.GetPeaks_bySequence(fDerivative, 0, false);
+                PointF p2 = CPeakMaster.GetPeaks_bySequence(fDerivative, 1, false);
+
+                if (nObjSequence == 0) fPosBase = Math.Max(p1.Y, p2.Y); 
+                if( nObjSequence == 1 ) fPosBase = Math.Min(p1.Y, p2.Y);
+
+                double[] fDerivBuff = new double[fDerivative.Length];
+                Array.Copy(fDerivative, fDerivBuff, fDerivative.Length);
+
+                // minimum distance point
+                    
+                for (int i = 0; i < fDerivative.Length; i++)
+                {
+                    double fValue = fDerivBuff.Min();
+                    int nPos = Array.IndexOf(fDerivBuff, fValue);
+                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+
+                    if (Math.Abs(fSubPos - fPosBase) < 2)
+                    {
+                        nOptimalPos = nPos;
+                        break;
+                    }
+                    else
+                    {
+                        fDerivBuff[nPos] = 0;
+                    }
+                }
+                fSubPos = nOptimalPos;
+            }
+            catch { }
+
+            return fSubPos;
+        }
+
+        public static double HC_EDGE_Get1stDerivPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, bool bReverse, int nSign)
+        {
+            double[] fImage = new double[arrPoints.Length];
+
+            //for (int i = 0; i < arrPoints.Length; i++)
+            Parallel.For(0, arrPoints.Length, i =>
+            {
+                float cx = arrPoints.ElementAt(i).X;
+                float cy = arrPoints.ElementAt(i).Y;
+
+                int x1 = (int)Math.Floor(cx);
+                int x2 = (int)Math.Ceiling(cx);
+                int y1 = (int)Math.Floor(cy);
+                int y2 = (int)Math.Ceiling(cy);
+
+                int q11 = rawImage[y1 * imageW + x1];
+                int q12 = rawImage[y2 * imageW + x1];
+                int q21 = rawImage[y1 * imageW + x2];
+                int q22 = rawImage[y2 * imageW + x2];
+
+                double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                if (fInterpolated == 0)
+                {
+                    fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                }
+
+                fImage[i] = fInterpolated;
+            });
+
+            // reverse searching direction 171114
+            if (bReverse == true){Array.Reverse(fImage);}
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            // recover searching direction 171114 
+            if (bReverse == true){Array.Reverse(fDerivative);}
+
+            double fSubPos = 0;
+
+            try
+            {
+
+                if (nSign == -1)
+                {
+                    double fValue = fDerivative.Min();
+                    int nPos = Array.IndexOf(fDerivative, fValue);
+                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+                }
+                else if (nSign == +1)
+                {
+                    double fValue = fDerivative.Max();
+                    int nPos = Array.IndexOf(fDerivative, fValue);
+                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+                }
+            }
+            catch { }
+
+            return fSubPos;
+        }
+        public static double HC_EDGE_Get1stDerivPos_FixedPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, bool bReverse, int nSign)
+        {
+            double[] fImage = new double[arrPoints.Length];
+
+            //for (int i = 0; i < arrPoints.Length; i++)
+            Parallel.For(0, arrPoints.Length, i =>
+            {
+                float cx = arrPoints.ElementAt(i).X;
+                float cy = arrPoints.ElementAt(i).Y;
+
+                int x1 = (int)Math.Floor(cx);
+                int x2 = (int)Math.Ceiling(cx);
+                int y1 = (int)Math.Floor(cy);
+                int y2 = (int)Math.Ceiling(cy);
+
+                int q11 = rawImage[y1 * imageW + x1];
+                int q12 = rawImage[y2 * imageW + x1];
+                int q21 = rawImage[y1 * imageW + x2];
+                int q22 = rawImage[y2 * imageW + x2];
+
+                double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                if (fInterpolated == 0)
+                {
+                    fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                }
+
+                fImage[i] = fInterpolated;
+            });
+
+            // reverse searching direction 171114
+            if (bReverse == true) { Array.Reverse(fImage); }
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            // recover searching direction 171114 
+            if (bReverse == true) { Array.Reverse(fDerivative); }
+
+            double fSubPos = 0;
+
+            try
+            {
+                int nOptimalPos = 0;
+                double fPosBase = 0;
+ 
+                if (nSign == -1)
+                {
+                    PointF p1 = CPeakMaster.GetPeaks_bySequence(fDerivative, 0, false);
+                    PointF p2 = CPeakMaster.GetPeaks_bySequence(fDerivative, 1, false);
+
+                    /***/if (bReverse == false) { fPosBase = Math.Min(p1.Y, p2.Y); }
+                    else if (bReverse == true)  { fPosBase = Math.Max(p1.Y, p2.Y); }
+
+                    double[] fDerivBuff = new double[fDerivative.Length];
+                    Array.Copy(fDerivative, fDerivBuff, fDerivative.Length);
+
+                    // minimum distance point
+                    
+                    for (int i = 0; i < fDerivative.Length; i++)
+                    {
+                        double fValue = fDerivBuff.Min();
+                        int nPos = Array.IndexOf(fDerivBuff, fValue);
+                        fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+
+                        if (Math.Abs(fSubPos - fPosBase) < 2)
+                        {
+                            nOptimalPos = nPos;
+                            break;
+                        }
+                        else
+                        {
+                            fDerivBuff[nPos] = 0;
+                        }
+                    }
+                    fSubPos = nOptimalPos;
+                    
+                }
+                else if (nSign == +1)
+                {
+                    PointF p1 = CPeakMaster.GetPeaks_bySequence(fDerivative, 0, true);
+                    PointF p2 = CPeakMaster.GetPeaks_bySequence(fDerivative, 1, true);
+
+                    /***/if (bReverse == false){ fPosBase = Math.Min(p1.Y, p2.Y); }
+                    else if (bReverse == true) { fPosBase = Math.Max(p1.Y, p2.Y); }
+
+                    double[] fDerivBuff = new double[fDerivative.Length];
+                    Array.Copy(fDerivative, fDerivBuff, fDerivative.Length);
+
+                    for (int i = 0; i < fDerivative.Length; i++)
+                    {
+                        double fValue = fDerivBuff.Max();
+                        int nPos = Array.IndexOf(fDerivBuff, fValue);
+                        fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+
+                        if (Math.Abs(fSubPos - fPosBase) < 2 )
+                        {
+                            nOptimalPos = nPos;
+                            break;
+                        }
+                        else
+                        {
+                            fDerivBuff[nPos] = 0;
+                        }
+                    }
+
+                    fSubPos = nOptimalPos;
+                }
+            }
+            catch { }
+
+            return fSubPos;
+        }
+        public static double HC_EDGE_GetLogPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign)
+        {
+            if (arrPoints.Length == 0) return 0;
+
+            double[] fKernel = HC_FILTER_GetLogKernel(9, 0.5, nSign);
+            double[] fImage = new double[arrPoints.Length];
+
+            int KSIZE = (int)Math.Sqrt(fKernel.Length);
+            int GAP = KSIZE / 2;
+
+            for (int i = 0; i < arrPoints.Length; i++)
+            {
+                float x = arrPoints.ElementAt(i).X;
+                float y = arrPoints.ElementAt(i).Y;
+
+                double kernelSum = 0;
+
+                for (int j = -GAP; j <= GAP; j++)
+                {
+                    for (int k = -GAP; k <= GAP; k++)
+                    {
+                        float cy = y - j;
+                        float cx = x - k;
+
+                        int x1 = (int)Math.Floor(cx);
+                        int x2 = (int)Math.Ceiling(cx);
+                        int y1 = (int)Math.Floor(cy);
+                        int y2 = (int)Math.Ceiling(cy);
+
+                        int q11 = rawImage[y1 * imageW + x1];
+                        int q12 = rawImage[y2 * imageW + x1];
+                        int q21 = rawImage[y1 * imageW + x2];
+                        int q22 = rawImage[y2 * imageW + x2];
+
+                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                        if (fInterpolated == 0)
+                        {
+                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                        }
+
+                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * fInterpolated);
+                    }
+                }
+                fImage[i] = kernelSum;
+            }
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            double fSubPos = 0;
+
+            try
+            {
+                double fValue = fDerivative.Max();
+                int nPos = Array.IndexOf(fDerivative, fValue);
+                fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+            }
+            catch { }
+
+            return fSubPos;
+        }
+        public static double HC_EDGE_GetLogPos_FixedPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign, int nObjSequence)
+        {
+            if (arrPoints.Length == 0) return 0;
+
+            double[] fKernel = HC_FILTER_GetLogKernel(9, 0.5, nSign);
+            double[] fImage = new double[arrPoints.Length];
+
+            int KSIZE = (int)Math.Sqrt(fKernel.Length);
+            int GAP = KSIZE / 2;
+
+            //for (int i = 0; i < arrPoints.Length; i++)
+            Parallel.For(0, arrPoints.Length, i =>
+            {
+                float x = arrPoints.ElementAt(i).X;
+                float y = arrPoints.ElementAt(i).Y;
+
+                double kernelSum = 0;
+
+                for (int j = -GAP; j <= GAP; j++)
+                {
+                    for (int k = -GAP; k <= GAP; k++)
+                    {
+                        float cy = y - j;
+                        float cx = x - k;
+
+                        int x1 = (int)Math.Floor(cx);
+                        int x2 = (int)Math.Ceiling(cx);
+                        int y1 = (int)Math.Floor(cy);
+                        int y2 = (int)Math.Ceiling(cy);
+
+                        int q11 = rawImage[y1 * imageW + x1];
+                        int q12 = rawImage[y2 * imageW + x1];
+                        int q21 = rawImage[y1 * imageW + x2];
+                        int q22 = rawImage[y2 * imageW + x2];
+
+                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                        if (fInterpolated == 0)
+                        {
+                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                        }
+
+                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * fInterpolated);
+                    }
+                }
+                fImage[i] = kernelSum;
+            });
+
+            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
+            double fSubPos = 0;
+
+            try
+            {
+                int nOptimalPos = 0;
+                double fPosBase = 0;
+ 
+                PointF p1 = CPeakMaster.GetPeaks_bySequence(fDerivative, 0, false);
+                PointF p2 = CPeakMaster.GetPeaks_bySequence(fDerivative, 1, false);
+
+                if (nObjSequence == 0) fPosBase = Math.Max(p1.Y, p2.Y);
+                if (nObjSequence == 1) fPosBase = Math.Min(p1.Y, p2.Y);
+
+                double[] fDerivBuff = new double[fDerivative.Length];
+                Array.Copy(fDerivative, fDerivBuff, fDerivative.Length);
+
+                // minimum distance point
+
+                for (int i = 0; i < fDerivative.Length; i++)
+                {
+                    double fValue = fDerivBuff.Min();
+                    int nPos = Array.IndexOf(fDerivBuff, fValue);
+                    fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
+
+                    if (Math.Abs(fSubPos - fPosBase) < 2)
+                    {
+                        nOptimalPos = nPos;
+                        break;
+                    }
+                    else
+                    {
+                        fDerivBuff[nPos] = 0;
+                    }
+                }
+                fSubPos = nOptimalPos;
+            }
+            catch { }
+
+            return fSubPos;
+        }
+        //*****************************************************************************************
+        // Derivative approaches
+        //*****************************************************************************************
+
+        // generate rotated perpendicular points 2d from  axis-line points 171113 
+        // for digonal searching.
+        public static List<PointF> GetRotateRegionaldCroodinates(List<PointF> listDigonalPoints, int nGap, double fAngle)
+        {
             List<PointF> list = new List<PointF>();
 
-            // get joint points positions
-            int sx = (int)rc.X;
-            int ex = (int)rc.Width + sx;
-            int sy = (int)rc.Y;
-            int ey = (int)rc.Height + sy;
-
-            double fSubPixel = 0.0;
-
-            double[] buff_Org = new double[(int)rc.Height + 2];
-
-            if (bTarget_TOP == true)
+            for (int i = 0; i < listDigonalPoints.Count; i++)
             {
-                #region FOR TOP REGION : IN-RISE & IN-FALL
-                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
+                PointF ptCurr = listDigonalPoints.ElementAt(i);
+
+                for (int j = 0; j < nGap; j++)
                 {
-                    for (int x = sx; x < ex; x++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int y = sy, nIndex = 0; y < ey + 2; y++)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-
-                        if (nDir == DIR_INFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-
-                            list.Add(new PointF(x, (float)(sy + maxPos + fSubPixel)));
-                        }
-                        else if (nDir == DIR_INRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-
-                            list.Add(new PointF(x, (float)(sy + minPos + fSubPixel)));
-                        }
-                    }
+                    PointF ptNew = new PointF(ptCurr.X + j, ptCurr.Y);
+                    ptNew = Computer._RotatePointByGravity(ptNew, ptCurr, fAngle);
+                    list.Add(ptNew);
                 }
-                #endregion
-
-                #region FOR TOP REGION : IN-RISE AND IN-FALL
-
-                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
-                {
-                    for (int x = sx; x < ex; x++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int y = ey - 1, nIndex = 0; y >= sy - 2; y--)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_Top_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_EXFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_Top_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_Top_2nd, maxPos);
-
-                            list.Add(new PointF(x, (float)(ey - maxPos - fSubPixel)));
-                        }
-                        else if (nDir == DIR_EXRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_Top_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_Top_2nd, minPos);
-                            list.Add(new PointF(x, (float)(ey - minPos - fSubPixel)));
-                        }
-                    }
-                }
-                #endregion
-
-            }
-            else if (bTarget_TOP == false)
-            {
-                #region FOR BTM REGION : IN-RISE AND IN-FALL
-                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
-                {
-                    for (int x = sx; x < ex; x++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int y = ey - 1, nIndex = 0; y >= sy - 2; y--)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_INFALL)
-                        {
-                            int minPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-
-                            list.Add(new PointF(x, (float)(ey - minPos - fSubPixel)));
-
-                        }
-                        else if (nDir == DIR_INRISE)
-                        {
-                            int maxPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-
-                            list.Add(new PointF(x, (float)(ey - maxPos - fSubPixel)));
-                        }
-                    }
-                }
-                #endregion
-
-                #region FOR BTM REGION : EX-RISE AND EX-FALL
-                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
-                {
-                    for (int x = sx; x < ex; x++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int y = sy, nIndex = 0; y < ey + 2; y++)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_EXFALL)
-                        {
-                            int minPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-                            list.Add(new PointF(x, (float)(sy + minPos + fSubPixel)));
-
-                        }
-                        else if (nDir == DIR_EXRISE)
-                        {
-                            int maxPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-                            list.Add(new PointF(x, (float)(sy + maxPos + fSubPixel)));
-                        }
-                    }
-                }
-                #endregion
-            }
-
-            return list;
-        }
-        public static List<PointF> GetPointList_Derivative_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_LFT, int nDir)
-        {
-            List<PointF> list = new List<PointF>();
-
-            // get joint points positions
-            int sx = (int)rc.X;
-            int ex = (int)rc.Width + sx;
-            int sy = (int)rc.Y;
-            int ey = (int)rc.Height + sy;
-
-            double fSubPixel = 0.0;
-
-            double[] buff_Org = new double[(int)rc.Width + 2];
-
-            if (bTarget_LFT == true)
-            {
-                #region FOR TOP REGION : IN-RISE & IN-FALL
-                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
-                {
-                    for (int y = sy; y < ey; y++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int x = sx, nIndex = 0; x < ex + 2; x++)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_INFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-                            list.Add(new PointF((float)(sx + maxPos + fSubPixel), y));
-                        }
-                        else if (nDir == DIR_INRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-                            list.Add(new PointF((float)(sx + minPos + fSubPixel), y));
-                        }
-                    }
-                }
-                #endregion
-
-                #region FOR TOP REGION : IN-RISE AND IN-FALL
-                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
-                {
-                    for (int y = sy; y < ey; y++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int x = ex - 1, nIndex = 0; x >= sx - 2; x--)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_EXFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-                            list.Add(new PointF((float)(ex - maxPos - fSubPixel), y));
-                        }
-                        else if (nDir == DIR_EXRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-                            list.Add(new PointF((float)(ex - minPos - fSubPixel), y));
-                        }
-                    }
-                }
-                #endregion
-            }
-            else if (bTarget_LFT == false)
-            {
-                #region FOR BTM REGION : IN-RISE AND IN-FALL
-
-                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
-                {
-                    for (int y = sy; y < ey; y++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int x = ex - 1, nIndex = 0; x >= sx - 2; x--)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_RHT_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-
-                        if (nDir == DIR_INFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_RHT_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_RHT_2nd, maxPos);
-                            list.Add(new PointF((float)(ex - maxPos - fSubPixel), y));
-                        }
-                        else if (nDir == DIR_INRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_RHT_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_RHT_2nd, minPos);
-                            list.Add(new PointF((float)(ex - minPos - fSubPixel), y));
-                        }
-                    }
-                }
-                #endregion
-
-                #region FOR BTM REGION : EX-RISE AND EX-FALL
-                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
-                {
-                    for (int y = sy; y < ey; y++)
-                    {
-                        Array.Clear(buff_Org, 0, buff_Org.Length);
-                        for (int x = sx, nIndex = 0; x < ex + 2; x++)
-                        {
-                            buff_Org[nIndex++] = rawImage[y * imageW + x];
-                        }
-                        double[] buff_2nd = Computer.HC_EDGE_Get2ndDerivativeArrayFromLineBuff(buff_Org);
-                        if (nDir == DIR_EXFALL)
-                        {
-                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
-                            list.Add(new PointF((float)(sx + maxPos + fSubPixel), y));
-                        }
-                        else if (nDir == DIR_EXRISE)
-                        {
-                            int minPos = Computer.GetMinElementPosition(buff_2nd);
-                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
-
-                            list.Add(new PointF((float)(sx + minPos + fSubPixel), y));
-                        }
-                    }
-                }
-                #endregion
             }
             return list;
         }
-        public static double HC_EDGE_Get1stDerivativeLine_PosMax(double[] fLineBuff)
+
+        #region FOR DERIVATIVE APPROACH
+
+        public static List<PointF> HC_EDGE_GetRawPoints_2ndDeriv_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nDir)
         {
-            double[] arr1st = new double[fLineBuff.Length - 1];
-
-            for (int i = 1; i < fLineBuff.Length - 1; i++)
-            {
-                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
-            }
-            arr1st[0] = arr1st[1];
-
-            double fMax = arr1st.Max();
-            int/**/nPos = Array.IndexOf(arr1st, fMax);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
-
-            return fSubPixel + nPos;
-        }
-        public static double HC_EDGE_Get1stDerivativeLine_PosMin(double[] fLineBuff)
-        {
-            double[] arr1st = new double[fLineBuff.Length - 1];
-
-            for (int i = 1; i < fLineBuff.Length - 1; i++)
-            {
-                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
-            }
-            arr1st[0] = arr1st[1];
-
-            double fMin = arr1st.Min();
-            int/**/nPos = Array.IndexOf(arr1st, fMin);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
-
-            return fSubPixel + nPos;
-        }
-        public static double HC_EDGE_Get2ndDerivLine_PosMax(byte[] line)
-        {
-            double[] buff_1st = new double[line.Length - 1];
-            double[] buff_2nd = new double[line.Length - 2];
-
-            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
-            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
-
-            double fMax = buff_2nd.Max();
-            int/**/nPos = Array.IndexOf(buff_2nd, fMax);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
-
-            return fSubPixel + nPos;
-        }
-        public static double HC_EDGE_Get2ndDerivLine_PosMin(byte[] line)
-        {
-            double[] buff_1st = new double[line.Length - 1];
-            double[] buff_2nd = new double[line.Length - 2];
-
-            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
-            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
-
-            double fMin = buff_2nd.Min();
-            int/**/nPos = Array.IndexOf(buff_2nd, fMin);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
-
-            return fSubPixel + nPos;
-        }
-
-        public static double HC_EDGE_Get2ndDerivLine_PosMax(double[] line)
-        {
-            if (line.Length <= 2) return 0;
-
-            double[] buff_1st = new double[line.Length - 1];
-            double[] buff_2nd = new double[line.Length - 2];
-
-            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
-            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
-
-            double fMax = buff_2nd.Max();
-            int/**/nPos = Array.IndexOf(buff_2nd, fMax);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
-
-            return fSubPixel + nPos;
-        }
-        public static double HC_EDGE_Get2ndDerivLine_PosMin(double[] line)
-        {
-            if (line.Length <= 2) return 0;
-
-            double[] buff_1st = new double[line.Length - 1];
-            double[] buff_2nd = new double[line.Length - 2];
-
-            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
-            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
-
-            double fMin = buff_2nd.Min();
-            int/**/nPos = Array.IndexOf(buff_2nd, fMin);
-
-            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
-
-            return fSubPixel + nPos;
-        }
-        public static void HC_EDGE_PREWITT_SUBPIXEL(double[] buffLine, ref double fMaxPos, ref double fMinPos )
-        {
-            double [] profile = new double[buffLine.Length];
-
-            for (int nIndex = 1; nIndex < buffLine.Length-1; nIndex++)
-            {
-                profile[nIndex] += buffLine[(nIndex + 1)] - buffLine[(nIndex - 1)];
-            }
-            profile[0] = profile[1];
-            profile[profile.Length - 1] = profile[profile.Length - 2];
-
-            double fMaxValue = profile.Max();
-            double fMinValue = profile.Min();
-            int nMaxValuePos = 0;
-            int nMinValuePos = 0;
-
-            nMaxValuePos = Array.IndexOf(profile, fMaxValue);
-            nMinValuePos = Array.IndexOf(profile, fMinValue);
-
-            double fSubPixelMax = 0;
-            double fSubPixelMin = 0;
-            
-            fSubPixelMax = Computer.GetSubPixelFromLineBuff(profile, nMaxValuePos);
-            fSubPixelMin = Computer.GetSubPixelFromLineBuff(profile, nMinValuePos);
-
-            fMaxPos = nMaxValuePos + fSubPixelMax;
-            fMinPos = nMinValuePos + fSubPixelMin;
-        }
-
-        public static List<PointF> HC_EDGE_GetRawPoints_2ndDeriv_HOR( byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nDir)
-        {
-             // get joint points positions
+            // get joint points positions
             int sx = (int)rc.X;
             int ex = (int)rc.Width + sx;
             int sy = (int)rc.Y;
@@ -2604,13 +2738,13 @@ namespace CD_Measure
 
                 for (int x = sx, nIndex = 0; x < ex; x++)
                 {
-                    buffLine[nIndex++] = rawImage[y*imageW+x];
+                    buffLine[nIndex++] = rawImage[y * imageW + x];
                 }
 
                 double fSubPosIN = 0;
                 double fSubPosEX = 0;
 
-                PointF ptIN = new PointF(0,0);
+                PointF ptIN = new PointF(0, 0);
                 PointF ptEX = new PointF(0, 0);
 
                 if (bReverse == false)
@@ -2621,7 +2755,7 @@ namespace CD_Measure
                     ptIN = new PointF(sx + (float)fSubPosIN, y);
                     ptEX = new PointF(sx + (float)fSubPosEX, y);
                 }
-                else if( bReverse == true)
+                else if (bReverse == true)
                 {
                     Array.Reverse(buffLine);
                     fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
@@ -2631,14 +2765,15 @@ namespace CD_Measure
                     ptEX = new PointF(ex - (float)fSubPosEX, y);
                 }
 
-                /***/if (nDir == -1) { list.Add(ptIN); }
+                /***/
+                if (nDir == -1) { list.Add(ptIN); }
                 else if (nDir == +1) { list.Add(ptEX); }
                 else if (nDir == +0)
                 {
-                    list.Add( CPoint.GetMidPoint_Only_X(ptIN, ptEX));
+                    list.Add(CPoint.GetMidPoint_Only_X(ptIN, ptEX));
                 }
             }
-                 
+
             return list;
 
         }
@@ -2690,11 +2825,12 @@ namespace CD_Measure
                     ptEX = new PointF(x, ey - (float)fSubPosEX);
                 }
 
-                /***/if (nDir == -1) { list.Add(ptIN); }
+                /***/
+                if (nDir == -1) { list.Add(ptIN); }
                 else if (nDir == +1) { list.Add(ptEX); }
                 else if (nDir == +0)
                 {
-                    list.Add( CPoint.GetMidPoint_Only_Y(ptIN, ptEX));
+                    list.Add(CPoint.GetMidPoint_Only_Y(ptIN, ptEX));
                 }
             }
 
@@ -2702,7 +2838,428 @@ namespace CD_Measure
 
         }
 
-        public static void HC_EDGE_GetRawPoints_2ndDeriv_MULTI_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
+        public static double HC_EDGE_Get2ndDerivLine_PosMax(byte[] line)
+        {
+            double[] buff_1st = new double[line.Length - 1];
+            double[] buff_2nd = new double[line.Length - 2];
+
+            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
+            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
+
+            double fMax = buff_2nd.Max();
+            int/**/nPos = Array.IndexOf(buff_2nd, fMax);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
+
+            return fSubPixel + nPos;
+        }
+        public static double HC_EDGE_Get2ndDerivLine_PosMin(byte[] line)
+        {
+            double[] buff_1st = new double[line.Length - 1];
+            double[] buff_2nd = new double[line.Length - 2];
+
+            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
+            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
+
+            double fMin = buff_2nd.Min();
+            int/**/nPos = Array.IndexOf(buff_2nd, fMin);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
+
+            return fSubPixel + nPos;
+        }
+        public static double HC_EDGE_Get2ndDerivLine_PosMax(double[] line)
+        {
+            if (line.Length <= 2) return 0;
+
+            double[] buff_1st = new double[line.Length - 1];
+            double[] buff_2nd = new double[line.Length - 2];
+
+            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
+            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
+
+            double fMax = buff_2nd.Max();
+            int/**/nPos = Array.IndexOf(buff_2nd, fMax);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
+
+            return fSubPixel + nPos;
+        }
+        public static double HC_EDGE_Get2ndDerivLine_PosMin(double[] line)
+        {
+            if (line.Length <= 2) return 0;
+
+            double[] buff_1st = new double[line.Length - 1];
+            double[] buff_2nd = new double[line.Length - 2];
+
+            for (int nIndex = 0; nIndex < line.Length - 1; nIndex++) { buff_1st[nIndex] = line[nIndex + 1] - line[nIndex]; }
+            for (int nIndex = 0; nIndex < line.Length - 2; nIndex++) { buff_2nd[nIndex] = buff_1st[nIndex + 1] - buff_1st[nIndex]; }
+
+            double fMin = buff_2nd.Min();
+            int/**/nPos = Array.IndexOf(buff_2nd, fMin);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, nPos);
+
+            return fSubPixel + nPos;
+        }
+
+        public static double[] HC_EDGE_Get2ndDerivativeArrayFromLineBuff(double[] fLineBuff)
+        {
+            // fucking error exception 170901 
+            if (fLineBuff == null || fLineBuff.Length < 2) return new double[2];
+
+            double[] arr1st = new double[fLineBuff.Length - 1];
+            double[] arr2nd = new double[fLineBuff.Length - 2];
+
+            try
+            {
+                for (int i = 0; i < fLineBuff.Length - 1; i++)
+                {
+                    arr1st[i] = fLineBuff[i + 1] - fLineBuff[i];
+                }
+                for (int i = 0; i < arr1st.Length - 1 + 0; i++)
+                {
+                    arr2nd[i] = arr1st[i + 1] - arr1st[i];
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
+
+            
+            return arr2nd;
+        }
+        public static double[] HC_EDGE_Get1stDerivativeArrayFromLineBuff(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
+
+            //for (int i = 1; i < fLineBuff.Length - 1; i++)
+            Parallel.For(1, fLineBuff.Length-1, i =>
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            });
+            arr1st[0] = arr1st[1];
+            return arr1st;
+        }
+
+        // get the every raw points based on directional 2nd derivative 170419 
+        // this functions prepared for the point filtering or fitting which has outliers.
+        public static List<PointF> GetPointList_Derivative_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_TOP, int nDir)
+        {
+
+            List<PointF> list = new List<PointF>();
+
+            // get joint points positions
+            int sx = (int)rc.X;
+            int ex = (int)rc.Width + sx;
+            int sy = (int)rc.Y;
+            int ey = (int)rc.Height + sy;
+
+            double fSubPixel = 0.0;
+
+            double[] buff_Org = new double[(int)rc.Height + 2];
+
+            if (bTarget_TOP == true)
+            {
+                #region FOR TOP REGION : IN-RISE & IN-FALL
+                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
+                {
+                    for (int x = sx; x < ex; x++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int y = sy, nIndex = 0; y < ey + 2; y++)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+
+                        if (nDir == DIR_INFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, maxPos);
+
+                            list.Add(new PointF(x, (float)(sy + maxPos + fSubPixel)));
+                        }
+                        else if (nDir == DIR_INRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, minPos);
+
+                            list.Add(new PointF(x, (float)(sy + minPos + fSubPixel)));
+                        }
+                    }
+                }
+                #endregion
+
+                #region FOR TOP REGION : IN-RISE AND IN-FALL
+
+                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
+                {
+                    for (int x = sx; x < ex; x++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int y = ey - 1, nIndex = 0; y >= sy - 2; y--)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_EXFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, maxPos);
+
+                            list.Add(new PointF(x, (float)(ey - maxPos - fSubPixel)));
+                        }
+                        else if (nDir == DIR_EXRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, minPos);
+                            list.Add(new PointF(x, (float)(ey - minPos - fSubPixel)));
+                        }
+                    }
+                }
+                #endregion
+
+            }
+            else if (bTarget_TOP == false)
+            {
+                #region FOR BTM REGION : IN-RISE AND IN-FALL
+                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
+                {
+                    for (int x = sx; x < ex; x++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int y = ey - 1, nIndex = 0; y >= sy - 2; y--)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff_2nd = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_INFALL)
+                        {
+                            int minPos = Computer.GetMaxElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
+
+                            list.Add(new PointF(x, (float)(ey - minPos - fSubPixel)));
+
+                        }
+                        else if (nDir == DIR_INRISE)
+                        {
+                            int maxPos = Computer.GetMinElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
+
+                            list.Add(new PointF(x, (float)(ey - maxPos - fSubPixel)));
+                        }
+                    }
+                }
+                #endregion
+
+                #region FOR BTM REGION : EX-RISE AND EX-FALL
+                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
+                {
+                    for (int x = sx; x < ex; x++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int y = sy, nIndex = 0; y < ey + 2; y++)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_EXFALL)
+                        {
+                            int minPos = Computer.GetMaxElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, minPos);
+                            list.Add(new PointF(x, (float)(sy + minPos + fSubPixel)));
+
+                        }
+                        else if (nDir == DIR_EXRISE)
+                        {
+                            int maxPos = Computer.GetMinElementPosition(buff);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff, maxPos);
+                            list.Add(new PointF(x, (float)(sy + maxPos + fSubPixel)));
+                        }
+                    }
+                }
+                #endregion
+            }
+
+            return list;
+        }
+        public static List<PointF> GetPointList_Derivative_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_LFT, int nDir)
+        {
+            List<PointF> list = new List<PointF>();
+
+            // get joint points positions
+            int sx = (int)rc.X;
+            int ex = (int)rc.Width + sx;
+            int sy = (int)rc.Y;
+            int ey = (int)rc.Height + sy;
+
+            double fSubPixel = 0.0;
+
+            double[] buff_Org = new double[(int)rc.Width + 2];
+
+            if (bTarget_LFT == true)
+            {
+                #region FOR TOP REGION : IN-RISE & IN-FALL
+                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
+                {
+                    for (int y = sy; y < ey; y++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int x = sx, nIndex = 0; x < ex + 2; x++)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff_2nd = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_INFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
+                            list.Add(new PointF((float)(sx + maxPos + fSubPixel), y));
+                        }
+                        else if (nDir == DIR_INRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
+                            list.Add(new PointF((float)(sx + minPos + fSubPixel), y));
+                        }
+                    }
+                }
+                #endregion
+
+                #region FOR TOP REGION : IN-RISE AND IN-FALL
+                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
+                {
+                    for (int y = sy; y < ey; y++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int x = ex - 1, nIndex = 0; x >= sx - 2; x--)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff_2nd = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_EXFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
+                            list.Add(new PointF((float)(ex - maxPos - fSubPixel), y));
+                        }
+                        else if (nDir == DIR_EXRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
+                            list.Add(new PointF((float)(ex - minPos - fSubPixel), y));
+                        }
+                    }
+                }
+                #endregion
+            }
+            else if (bTarget_LFT == false)
+            {
+                #region FOR BTM REGION : IN-RISE AND IN-FALL
+
+                if (nDir == DIR_INFALL || nDir == DIR_INRISE)
+                {
+                    for (int y = sy; y < ey; y++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int x = ex - 1, nIndex = 0; x >= sx - 2; x--)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff_RHT_2nd = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+
+                        if (nDir == DIR_INFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff_RHT_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_RHT_2nd, maxPos);
+                            list.Add(new PointF((float)(ex - maxPos - fSubPixel), y));
+                        }
+                        else if (nDir == DIR_INRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff_RHT_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_RHT_2nd, minPos);
+                            list.Add(new PointF((float)(ex - minPos - fSubPixel), y));
+                        }
+                    }
+                }
+                #endregion
+
+                #region FOR BTM REGION : EX-RISE AND EX-FALL
+                else if (nDir == DIR_EXFALL || nDir == DIR_EXRISE)
+                {
+                    for (int y = sy; y < ey; y++)
+                    {
+                        Array.Clear(buff_Org, 0, buff_Org.Length);
+                        for (int x = sx, nIndex = 0; x < ex + 2; x++)
+                        {
+                            buff_Org[nIndex++] = rawImage[y * imageW + x];
+                        }
+                        double[] buff_2nd = Computer.HC_EDGE_Get1stDerivativeArrayFromLineBuff(buff_Org);
+                        if (nDir == DIR_EXFALL)
+                        {
+                            int maxPos = Computer.GetMaxElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, maxPos);
+                            list.Add(new PointF((float)(sx + maxPos + fSubPixel), y));
+                        }
+                        else if (nDir == DIR_EXRISE)
+                        {
+                            int minPos = Computer.GetMinElementPosition(buff_2nd);
+                            fSubPixel = Computer.GetSubPixelFromLineBuff(buff_2nd, minPos);
+
+                            list.Add(new PointF((float)(sx + minPos + fSubPixel), y));
+                        }
+                    }
+                }
+                #endregion
+            }
+            return list;
+        }
+
+        public static double HC_EDGE_Get1stDerivativeLine_PosMax(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
+
+            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            }
+            arr1st[0] = arr1st[1];
+
+            double fMax = arr1st.Max();
+            int/**/nPos = Array.IndexOf(arr1st, fMax);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
+
+            return fSubPixel + nPos;
+        }
+        public static double HC_EDGE_Get1stDerivativeLine_PosMin(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
+
+            for (int i = 1; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i - 1] - fLineBuff[i];
+            }
+            arr1st[0] = arr1st[1];
+
+            double fMin = arr1st.Min();
+            int/**/nPos = Array.IndexOf(arr1st, fMin);
+
+            double fSubPixel = Computer.GetSubPixelFromLineBuff(arr1st, nPos);
+
+            return fSubPixel + nPos;
+        }
+
+        public static /******/void HC_EDGE_GetRawPoints_1stDeriv_MULTI_HOR(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -2726,7 +3283,25 @@ namespace CD_Measure
 
                 for (int x = sx, nIndex = 0; x < ex; x++)
                 {
-                    buffLine[nIndex++] = rawImage[y * imageW + x];
+                    int x1 = (int)x + 1;
+                    int x2 = (int)x - 1;
+                    int y1 = (int)y + 1;
+                    int y2 = (int)y - 1;
+
+                    int q11 = rawImage[y1 * imageW + x1];
+                    int q12 = rawImage[y2 * imageW + x1];
+                    int q21 = rawImage[y1 * imageW + x2];
+                    int q22 = rawImage[y2 * imageW + x2];
+
+                    double fInterplated = GetInterPolatedValue(x, y, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                    if (double.IsNaN(fInterplated) == true || fInterplated == 0)
+                    {
+                        fInterplated = rawImage[(int)(y) * imageW + (int)(x)];
+                    }
+                    //buffLine[nIndex++] = rawImage[y * imageW + x];
+
+                    buffLine[nIndex++] = fInterplated;
                 }
 
                 double fSubPosIN = 0;
@@ -2737,9 +3312,6 @@ namespace CD_Measure
 
                 if (bReverse == false)
                 {
-                    
-                    //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
                     fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     ptIN = new PointF(sx + (float)fSubPosIN, y);
@@ -2748,8 +3320,6 @@ namespace CD_Measure
                 else if (bReverse == true)
                 {
                     Array.Reverse(buffLine);
-                    //fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    //fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
                     fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     ptIN = new PointF(ex - (float)fSubPosIN, y);
@@ -2764,7 +3334,7 @@ namespace CD_Measure
             return ;
 
         }
-        public static void HC_EDGE_GetRawPoints_2ndDeriv_MULTI_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
+        public static /******/void HC_EDGE_GetRawPoints_1stDeriv_MULTI_VER(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, List<PointF> list_EX, List<PointF> list_MD, List<PointF> list_IN)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -2788,7 +3358,25 @@ namespace CD_Measure
 
                 for (int y = sy, nIndex = 0; y < ey; y++)
                 {
-                    buffLine[nIndex++] = rawImage[y * imageW + x];
+                    int x1 = (int)x + 1;
+                    int x2 = (int)x - 1;
+                    int y1 = (int)y + 1;
+                    int y2 = (int)y - 1;
+
+                    int q11 = rawImage[y1 * imageW + x1];
+                    int q12 = rawImage[y2 * imageW + x1];
+                    int q21 = rawImage[y1 * imageW + x2];
+                    int q22 = rawImage[y2 * imageW + x2];
+
+                    double fInterplated = GetInterPolatedValue(x, y, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                    if (double.IsNaN(fInterplated) == true || fInterplated == 0)
+                    {
+                        fInterplated = rawImage[(int)(y) * imageW + (int)(x)];
+                    }
+
+                    buffLine[nIndex++] = fInterplated; ;
+                    //buffLine[nIndex++] = rawImage[y * imageW + x];
                 }
 
                 double fSubPosIN = 0;
@@ -2800,8 +3388,8 @@ namespace CD_Measure
                 if (bReverse == false)
                 {
                     // replace new 171023
-                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                    //fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    //fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
 
                     // sub new 
                     Computer.HC_EDGE_PREWITT_SUBPIXEL(buffLine, ref fSubPosIN, ref fSubPosEX);
@@ -2817,8 +3405,8 @@ namespace CD_Measure
                 {
                     Array.Reverse(buffLine);
 
-                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                   // fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                   // fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
 
                     // sub new
                     Computer.HC_EDGE_PREWITT_SUBPIXEL(buffLine, ref fSubPosIN, ref fSubPosEX);
@@ -2829,6 +3417,8 @@ namespace CD_Measure
 
                     ptIN = new PointF(x, ey - (float)fSubPosIN);
                     ptEX = new PointF(x, ey - (float)fSubPosEX);
+
+                    
                 }
                 
                 
@@ -2842,7 +3432,53 @@ namespace CD_Measure
             return ;
 
         }
-        public static List<PointF> HC_EDGE_GetRawPoints_2ndDeriv_DIA(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nDir)
+        public static /******/List<PointF> HC_EDGE_GetRawPoints_1stDeriv_MULTI_DIA(byte[] rawImage, int imageW, int imageH, List<PointF> ptRegion2D, int regionW, int regionH, bool bReverse, ref List<PointF> list_IN, ref List<PointF> list_MD, ref List<PointF> list_EX, bool bFixedPos)
+        {
+            list_EX.Clear(); list_MD.Clear(); list_IN.Clear();
+            
+            PointF[] arrPoints = new PointF[regionW];
+            List<PointF> listGravity = new List<PointF>();
+
+            if (regionW == 0 || regionH == 0) return listGravity;
+
+            for (int y = 0; y < regionH; y++)
+            {
+                Array.Clear(arrPoints, 0, arrPoints.Length);
+
+                for (int x = 0; x < regionW; x++)
+                {
+                    arrPoints[x] = ptRegion2D.ElementAt(y * regionW + x);
+                }
+
+                double fSubPosEX = 0;
+                double fSubPosIN = 0;
+
+                PointF ptGravity = CPoint.GetCentroid(arrPoints.ToList());
+
+                if (bFixedPos == false)
+                {
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivPos(rawImage, imageW, imageH, arrPoints, bReverse, +1);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivPos(rawImage, imageW, imageH, arrPoints, bReverse, -1);
+                }
+                else if( bFixedPos == true )
+                {
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivPos_FixedPos(rawImage, imageW, imageH, arrPoints, bReverse, +1);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivPos_FixedPos(rawImage, imageW, imageH, arrPoints, bReverse, -1);
+                }
+
+                PointF ptEX = arrPoints[(int)fSubPosEX];
+                PointF ptIN = arrPoints[(int)fSubPosIN];
+                PointF ptMD = CPoint.GetMidPoint(ptEX, ptIN);
+
+                list_EX.Add(ptEX);
+                list_IN.Add(ptIN);
+                list_MD.Add(ptMD);
+                listGravity.Add(ptGravity);
+            }
+            return listGravity;
+        }
+
+        public static List<PointF> HC_EDGE_GetRawPoints_1stDeriv_DIA(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bReverse, int nDir)
         {
             // get joint points positions
             int sx = (int)rc.X;
@@ -2862,7 +3498,26 @@ namespace CD_Measure
 
                 for (int x = sx, nIndex = 0; x < ex; x++)
                 {
-                    buffLine[nIndex++] = rawImage[y * imageW + x];
+
+                    int x1 = (int)x + 1;
+                    int x2 = (int)x - 1;
+                    int y1 = (int)y + 1;
+                    int y2 = (int)y - 1;
+
+                    int q11 = rawImage[y1 * imageW + x1];
+                    int q12 = rawImage[y2 * imageW + x1];
+                    int q21 = rawImage[y1 * imageW + x2];
+                    int q22 = rawImage[y2 * imageW + x2];
+
+                    double fInterplated = GetInterPolatedValue(x, y, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                    if (double.IsNaN(fInterplated) == true || fInterplated == 0)
+                    {
+                        fInterplated = rawImage[(int)(y) * imageW + (int)(x)];
+                    }
+
+                    buffLine[nIndex++] = fInterplated; ;
+                    //buffLine[nIndex++] = rawImage[y * imageW + x];
                 }
 
                 double fSubPosIN = 0;
@@ -2873,8 +3528,8 @@ namespace CD_Measure
 
                 if (bReverse == false)
                 {
-                    fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
 
                     ptIN = new PointF(sx + (float)fSubPosIN, y);
                     ptEX = new PointF(sx + (float)fSubPosEX, y);
@@ -2882,8 +3537,8 @@ namespace CD_Measure
                 else if (bReverse == true)
                 {
                     Array.Reverse(buffLine);
-                    fSubPosIN = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
-                    fSubPosEX = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    fSubPosIN = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
+                    fSubPosEX = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
 
                     ptIN = new PointF(ex - (float)fSubPosIN, y);
                     ptEX = new PointF(ex - (float)fSubPosEX, y);
@@ -2904,9 +3559,7 @@ namespace CD_Measure
             return list;
 
         }
-
-
-        public static List<double> HC_EDGE_GetRawPoints_2ndDeriv_HOR(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosLeft, int nSign, bool bReverse)
+        public static List<double> HC_EDGE_GetRawPoints_1stDeriv_HOR(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosLeft, int nSign, bool bReverse)
         {
             List<double> list = new List<double>();
 
@@ -2935,18 +3588,18 @@ namespace CD_Measure
 
                 if (nSign == -1)
                 {
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     list.Add(posMin);
                 }
                 else if (nSign == 1)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     list.Add(posMax);
                 }
                 else if (nSign == 0)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     double posMid = Math.Min(posMax, posMin) + ((Math.Max(posMax, posMin) - Math.Min(posMax, posMin)) / 2.0);
 
                     list.Add(posMid);
@@ -2955,7 +3608,7 @@ namespace CD_Measure
 
             return list;
         }
-        public static List<double> HC_EDGE_GetRawPoints_2ndDeriv_VER(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosTop, int nSign, bool bReverse)
+        public static List<double> HC_EDGE_GetRawPoints_1stDeriv_VER(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosTop, int nSign, bool bReverse)
         {
             List<double> list = new List<double>();
 
@@ -2991,18 +3644,18 @@ namespace CD_Measure
 
                 if (nSign == -1)
                 {
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     list.Add(posMin);
                 }
                 else if (nSign == 1)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     list.Add(posMax);
                 }
                 else if (nSign == 0)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     double posMid = Math.Min(posMax, posMin) + ((Math.Max(posMax, posMin) - Math.Min(posMax, posMin)) / 2.0);
 
                     list.Add(posMid);
@@ -3011,7 +3664,7 @@ namespace CD_Measure
 
             return list;
         }
-        public static List<double> HC_EDGE_GetRawPoints_2ndDeriv_DIA(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosLeft, int nSign, bool bReverse)
+        public static List<double> HC_EDGE_GetRawPoints_1stDeriv_DIA(List<PointF> listEdges, int nBuffLength, byte[] rawImage, int imageW, int imageH, bool bPosLeft, int nSign, bool bReverse)
         {
             List<double> list = new List<double>();
 
@@ -3048,18 +3701,18 @@ namespace CD_Measure
 
                 if (nSign == -1)
                 {
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     list.Add(posMin);
                 }
                 else if (nSign == 1)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
                     list.Add(posMax);
                 }
                 else if (nSign == 0)
                 {
-                    double posMax = Computer.HC_EDGE_Get2ndDerivLine_PosMax(buffLine);
-                    double posMin = Computer.HC_EDGE_Get2ndDerivLine_PosMin(buffLine);
+                    double posMax = Computer.HC_EDGE_Get1stDerivativeLine_PosMax(buffLine);
+                    double posMin = Computer.HC_EDGE_Get1stDerivativeLine_PosMin(buffLine);
                     double posMid = Math.Min(posMax, posMin) + ((Math.Max(posMax, posMin) - Math.Min(posMax, posMin)) / 2.0);
 
                     list.Add(posMid);
@@ -3125,7 +3778,34 @@ namespace CD_Measure
             // set fucking value
             return Convert.ToSingle(nMinPos + NRValue);
         }
+        public static void HC_EDGE_PREWITT_SUBPIXEL(double[] buffLine, ref double fMaxPos, ref double fMinPos)
+        {
+            double[] profile = new double[buffLine.Length];
 
+            for (int nIndex = 1; nIndex < buffLine.Length - 1; nIndex++)
+            {
+                profile[nIndex] += buffLine[(nIndex + 1)] - buffLine[(nIndex - 1)];
+            }
+            profile[0] = profile[1];
+            profile[profile.Length - 1] = profile[profile.Length - 2];
+
+            double fMaxValue = profile.Max();
+            double fMinValue = profile.Min();
+            int nMaxValuePos = 0;
+            int nMinValuePos = 0;
+
+            nMaxValuePos = Array.IndexOf(profile, fMaxValue);
+            nMinValuePos = Array.IndexOf(profile, fMinValue);
+
+            double fSubPixelMax = 0;
+            double fSubPixelMin = 0;
+
+            fSubPixelMax = Computer.GetSubPixelFromLineBuff(profile, nMaxValuePos);
+            fSubPixelMin = Computer.GetSubPixelFromLineBuff(profile, nMinValuePos);
+
+            fMaxPos = nMaxValuePos + fSubPixelMax;
+            fMinPos = nMinValuePos + fSubPixelMin;
+        }
         //  capsulated Edge detection function for only horizontal and vertical  170412 
         public static List<PointF> GetRawPoints_HOR_Prewitt(byte[] rawImage, int imageW, int imageH, RectangleF rc, bool bTarget_TOP, int nDir)
         {
@@ -3400,6 +4080,16 @@ namespace CD_Measure
 
                     // simple quadratic interpolation
                     fSubPixel = 0.5 * (pa - pc) / (pa - (2 * pb) + pc);
+
+                    if (double.IsNaN(fSubPixel) == true)
+                    {
+                        fSubPixel = 0;
+                    }
+                    else if (double.IsInfinity(fSubPixel) == true)
+                    {
+                        fSubPixel = 0;
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -3899,13 +4589,7 @@ namespace CD_Measure
 
             return res;
         }
-        public static byte EnsureByte(object value)
-        {
-            if (double.IsNaN((double)value) == true) return 0;
-
-            double result /*****/= (double)value; ;
-            return (byte)result > 255 ? (byte)255 : (byte)result < 0 ? (byte)0 : (byte)result;
-        }
+        
         public static double[] /***/HC_FILTER_Convolution(double[] fKernel, double[] fRawImage, int imageW, int imageH)
         {
             int KSIZE = (int)Math.Sqrt(fKernel.Length);
@@ -3962,13 +4646,15 @@ namespace CD_Measure
                     }
                 });
 
-                Parallel.For(rc.Y, rc.Y + rc.Height, y =>
-                {
-                    for (int x = rc.X; x < rc.X + rc.Width; x++)
-                    {
-                        rawImage[y * imageW + x] = (byte)fImage[y * imageW + x];
-                    }
-                });
+                rawImage = HC_CONV_GetNormalizedImage(fImage);
+
+                //Parallel.For(rc.Y, rc.Y + rc.Height, y =>
+                //{
+                //    for (int x = rc.X; x < rc.X + rc.Width; x++)
+                //    {
+                //        rawImage[y * imageW + x] = (byte)fImage[y * imageW + x];
+                //    }
+                //});
             }
 
             return rawImage;
@@ -4011,16 +4697,38 @@ namespace CD_Measure
             Parallel.For(0, fImage.Length, i =>
             {
                 fPowImage[i] = fImage[i] * fImage[i];
-                    
+
             });
             return fPowImage;
         }
+        public static byte[] ARRAY_GetPowImage(byte[] rawImage)
+        {
+            double[] fPowImage = new double[rawImage.Length];
+
+            // in double case : just do it
+            Parallel.For(0, rawImage.Length, i =>
+            {
+                fPowImage[i] = rawImage[i] * rawImage[i];
+
+            });
+            return HC_CONV_GetNormalizedImage(fPowImage) ;
+        }
+         
 
         public static byte[] HC_CropImage_Overlap(byte[] rawInput, int imageW, int imageH, byte[] cropImage, int cropW, int cropH, RectangleF rc)
         {
             int posX = Convert.ToInt32(rc.X);
             int posY = Convert.ToInt32(rc.Y);
-            Parallel.For(0, cropH, y => { Buffer.BlockCopy(cropImage, y * cropW, rawInput, (posY + y) * imageW + posX, cropW); });
+
+            try
+            {
+                Parallel.For(0, cropH, y => { Buffer.BlockCopy(cropImage, y * cropW, rawInput, (posY + y) * imageW + posX, cropW); });
+
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());	
+            }
             return rawInput;
         }
         public static byte[] ARRAY_GetNormalizedImage(double[] fImage)
@@ -4048,6 +4756,14 @@ namespace CD_Measure
                 rawImage[i] = (byte)fValue;
             });
             return rawImage;
+        }
+
+        public static byte EnsureByte(object value)
+        {
+            if (double.IsNaN((double)value) == true) return 0;
+
+            double result /*****/= (double)value; ;
+            return (byte)result > 255 ? (byte)255 : (byte)result < 0 ? (byte)0 : (byte)result;
         }
         #endregion
 
@@ -4518,12 +5234,74 @@ namespace CD_Measure
             int nMaxPos = Array.IndexOf(histo, max);
             return nMaxPos;
         }
+        public static double GetMajorValue(double[] array)
+        {
+            var res = from n in array
+                      group n by n into g
+                      orderby g.Count() descending
+                      select g;
+
+            var gr = res.First();
+
+            return gr.Average();
+        }
+
+       //public static void GetList_FilteredBy_RegionOverlap_HOR(ref List<PointF> listEX, ref List<PointF> listMD, ref List<PointF> listIN, RectangleF rc, int nDistance)
+       //{
+       //    listEX = GetList_FilteredBy_RegionOverlap_HOR(listEX, rc, nDistance);
+       //    listMD = GetList_FilteredBy_RegionOverlap_HOR(listMD, rc, nDistance);
+       //    listIN = GetList_FilteredBy_RegionOverlap_HOR(listIN, rc, nDistance);
+       //}
+       //
+       //public static void GetList_FilteredBy_RegionOverlap_VER(ref List<PointF> listEX, ref List<PointF> listMD, ref List<PointF> listIN, RectangleF rc, int nDistance)
+       //{
+       //    listEX = GetList_FilteredBy_RegionOverlap_VER(listEX, rc, nDistance);
+       //    listMD = GetList_FilteredBy_RegionOverlap_VER(listMD, rc, nDistance);
+       //    listIN = GetList_FilteredBy_RegionOverlap_VER(listIN, rc, nDistance);
+       //}
+       //
+       //public static List<PointF> GetList_FilteredBy_RegionOverlap_HOR(List<PointF> listPoints, RectangleF rc, int nDistance)
+       //{
+       //    List<PointF> list = new List<PointF>();
+       //
+       //    float ty = rc.Y;
+       //    float by = rc.Y + rc.Height;
+       //
+       //    for (int i = 0; i < listPoints.Count; i++)
+       //    {
+       //        PointF ptCurrent = listPoints.ElementAt(i);
+       //
+       //        if (Math.Abs(ptCurrent.Y - ty) <= nDistance) continue;
+       //        if (Math.Abs(ptCurrent.Y - by) <= nDistance) continue;
+       //
+       //        list.Add(ptCurrent);
+       //    }
+       //    return list;
+       //}
+       //public static List<PointF> GetList_FilteredBy_RegionOverlap_VER(List<PointF> listPoints, RectangleF rc, int nDistance)
+       //{
+       //    List<PointF> list = new List<PointF>();
+       //
+       //    float lx = rc.X;
+       //    float rx = rc.X + rc.Width;
+       //
+       //    for (int i = 0; i < listPoints.Count; i++)
+       //    {
+       //        PointF ptCurrent = listPoints.ElementAt(i);
+       //
+       //        if (Math.Abs(ptCurrent.X - lx) <= nDistance) continue;
+       //        if (Math.Abs(ptCurrent.X - rx) <= nDistance) continue;
+       //
+       //        list.Add(ptCurrent);
+       //    }
+       //    return list;
+       //}
         #endregion
     }
 
     //*****************************************************************************************
     // Ransac Models
-    //***************************************************************************************** * 
+    //*****************************************************************************************  
 
     #region RANSAC MODELS
     public class CModelEllipse
@@ -4595,7 +5373,24 @@ namespace CD_Measure
 
     public static class CRansac
     {
+        public static PointF GetMidPoint_by_Ratio(PointF P1, PointF P2, double fRatio)
+        {
+            double dx = CPoint.GetRatioDistance(P1.X, P2.X, fRatio);
+            double dy = CPoint.GetRatioDistance(P1.Y, P2.Y, fRatio);
 
+            return new PointF((float)dx, (float)dy);
+        }
+
+        public static PointF GetMidPoint_by_Ratio(CModelLine lineEX, CModelLine lineIN, double fRatio)
+        {
+            PointF P1 = new PointF((float)lineEX.sx, (float)lineEX.sy);
+            PointF P2 = new PointF((float)lineIN.sx, (float)lineIN.sy);
+
+            double dx = CPoint.GetRatioDistance(P1.X, P2.X, fRatio);
+            double dy = CPoint.GetRatioDistance(P1.Y, P2.Y, fRatio);
+
+            return new PointF((float)dx, (float)dy);
+        }
         public static PointF GetMidPointY_by_Ratio(CModelLine lex, CModelLine lin, double fRatio)
         {
             PointF P1 = new PointF((float)lex.sx, (float)lex.sy);

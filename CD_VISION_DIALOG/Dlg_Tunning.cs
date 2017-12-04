@@ -233,9 +233,9 @@ namespace CD_VISION_DIALOG
             CHK_CIR_TREAT_AS_ELLIPSE.Checked = single.param_02_BOOL_TREAT_AS_ELLIPSE;
 
             // 03 Auto Circle Detection
-            /***/if (single.param_03_CircleDetecType == 1) { RDO_CIR_DETEC_PASS.Checked = true; RDO_CIRCLE_DETECT_POSSITIVE_Click(null, EventArgs.Empty); }
-            else if (single.param_03_CircleDetecType == 2) { RDO_CIR_DETEC_NEGA.Checked = true; RDO_CIRCLE_DETEC_NEGATIVE_Click(null, EventArgs.Empty); }
-            else/*************************************/ { RDO_CIR_DETEC_NONE.Checked = true; RDO_CIRCLE_DETEC_NONE_Click(null, EventArgs.Empty); }
+
+            int nValue = _FromUI_GetCircleDetectionType();
+            _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nValue);
 
             // 04 Shrinkage 
             TXT_CIR_SHRINKAGE.Text = single.param_04_Shrinkage.ToString("F2");
@@ -250,6 +250,8 @@ namespace CD_VISION_DIALOG
             // 0102 Compensation
             TXT_CIR_COMPEN_A.Text = single.param_comm_01_compen_A.ToString("F2");
             TXT_CIR_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
+
+            TXT_CIR_COVERAGE.Text = single.param_07_Coverage;
 
             // 03 Show Raw Data
             CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
@@ -276,6 +278,7 @@ namespace CD_VISION_DIALOG
 
             // auto circle detection
             single.param_03_CircleDetecType = _FromUI_GetCircleDetectionType();
+
             // shrinkage
             single.param_04_Shrinkage = Convert.ToDouble(TXT_CIR_SHRINKAGE.Value);
 
@@ -288,6 +291,8 @@ namespace CD_VISION_DIALOG
             // compensation
             double.TryParse(TXT_CIR_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
             double.TryParse(TXT_CIR_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
+
+            int.TryParse(CB_CIR_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
 
             // show raw data
             single.param_comm_05_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
@@ -318,6 +323,12 @@ namespace CD_VISION_DIALOG
             // edge positions for each rectangles
             int.TryParse(TXT_RECT_EDGE_POSITION_FST.Text, out nValue); single.param_06_edge_position_fst = nValue;
             int.TryParse(TXT_RECT_EDGE_POSITION_SCD.Text, out nValue); single.param_07_edge_position_scd = nValue;
+
+            // outlier filtering refinement value 
+            int.TryParse(TXT_RECT_EDGE_REFINEMENT.Text, out nValue); single.param_comm_04_refinement = nValue;
+
+            // spc enhancement value 
+            int.TryParse(CB_RECT_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
 
             // compensation 
             double.TryParse(TXT_RECT_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
@@ -353,12 +364,12 @@ namespace CD_VISION_DIALOG
 
         private int _FromUI_GetCircleDetectionType()
         {
-            if (RDO_CIR_DETEC_PASS.Checked == true) return 1;
-            if (RDO_CIR_DETEC_NEGA.Checked == true) return 2;
-            return 0;
+            int nValue = 0;
+            int.TryParse(CB_CIRCLE_AUTO_DETECTION_TYPE.Text, out nValue);
+            return nValue; ;
         }
 
-        private void _CHANGE_RADIO_CIRCLE_TYPE(int nType)
+        private void _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(int nType)
         {
             uc_tunning_view.VIEW_Set_Clear_DispObject();
 
@@ -378,8 +389,8 @@ namespace CD_VISION_DIALOG
          
 
         private void RDO_CIRCLE_DETEC_NONE_Click(object sender, EventArgs e){uc_tunning_view.VIEW_Set_Clear_DispObject();uc_tunning_view.Refresh();}
-        private void RDO_CIRCLE_DETECT_POSSITIVE_Click(object sender, EventArgs e){_CHANGE_RADIO_CIRCLE_TYPE(1);}
-        private void RDO_CIRCLE_DETEC_NEGATIVE_Click(object sender, EventArgs e){_CHANGE_RADIO_CIRCLE_TYPE(2);}
+        private void RDO_CIRCLE_DETECT_POSSITIVE_Click(object sender, EventArgs e){_CHANGE_AUTO_CIRCLE_DETECTION_TYPE(1);}
+        private void RDO_CIRCLE_DETEC_NEGATIVE_Click(object sender, EventArgs e){_CHANGE_AUTO_CIRCLE_DETECTION_TYPE(2);}
 
         private void BTN_PARAM_WRITE_Click(object sender, EventArgs e)
         {
@@ -390,6 +401,10 @@ namespace CD_VISION_DIALOG
 
             const int TARGET_CIR = 0;
             const int TARGET_RECT = 1;
+
+            //*************************************************************************************
+            // CIRCLE 
+            //*************************************************************************************
 
             if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_CIR)
             {
@@ -414,6 +429,7 @@ namespace CD_VISION_DIALOG
                     arrCircle[element].param_04_Shrinkage/*****************/= single.param_04_Shrinkage;
                     arrCircle[element].param_05_Outlier_Filter/************/= single.param_05_Outlier_Filter;
                     arrCircle[element].param_06_EdgePos/*******************/= single.param_06_EdgePos;
+                    arrCircle[element].param_07_Coverage /*****************/= single.param_07_Coverage;
                     arrCircle[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
                     arrCircle[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
                     arrCircle[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
@@ -423,6 +439,9 @@ namespace CD_VISION_DIALOG
 
                 this.fm.list_pair_Cir = arrCircle.ToList();
             }
+            //*************************************************************************************
+            // RECTANGLE
+            //*************************************************************************************
             else if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_RECT)
             {
                 // empty operation exception 171017
@@ -488,7 +507,7 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_CIR_EDGE_POSITION.Checked/******/) { arrCircle[i].param_06_EdgePos /*******************/= single.param_06_EdgePos; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    //arrCircle[i].param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
+                    if (CHK_SAVE_CIR_SPC_ENHANCEMENT.Checked/****/) { arrCircle[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
                     //arrCircle[i].param_comm_04_refinement = single.param_comm_04_refinement;
                     if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
                     
@@ -518,8 +537,8 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_07_edge_position_scd /*********/= single.param_07_edge_position_scd; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    //arrRect[i].param_comm_03_spc_enhance = single.param_comm_03_spc_enhance;
-                    //arrRect[i].param_comm_04_refinement = single.param_comm_04_refinement;
+                    if (CHK_SAVE_RECT_SPC_ENHANCEMENT.Checked/****/) { arrRect[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
+                    if (CHK_SAVE_RECT_REFINEMENT.Checked/*********/) { arrRect[i].param_comm_04_refinement/************/= single.param_comm_04_refinement; }
                     if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
                 }
 
@@ -536,7 +555,7 @@ namespace CD_VISION_DIALOG
             if (e.KeyCode == Keys.Enter)
             {
                 int nType = _FromUI_GetCircleDetectionType();
-                _CHANGE_RADIO_CIRCLE_TYPE(nType);
+                _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nType);
             }
         }
 
@@ -765,6 +784,69 @@ namespace CD_VISION_DIALOG
         {
             TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = CB_RECT_TARGET_INDEX_SCD.Text;
         }
+
+        
+
+        private void BTN_CIRCLE_CHECK_AUTO_DETECTION_Click(object sender, EventArgs e)
+        {
+            int nType = _FromUI_GetCircleDetectionType();
+            _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nType);
+        }
+
+        private void CHK_SHOW_SECTOR_DRAWING_CheckedChanged(object sender, EventArgs e)
+        {
+            uc_tunning_view.VIEW_Set_Clear_DispObject();
+
+            if (CHK_SHOW_SECTOR.Checked == true)
+            {
+                int imageW = uc_tunning_view.VIEW_GetImageW();
+                int imageH = uc_tunning_view.VIEW_GetImageH();
+
+                PointF ptCenter = new PointF(imageW / 2, imageH / 2);
+
+                uc_tunning_view.DrawCircle(ptCenter, (float)3, (float)3, Color.LimeGreen, 1);
+
+                double[] arrayCos = Computer.GetArray_COS();
+                double[] arraySin = Computer.GetArray_SIN();
+
+                double radius = Math.Sqrt((imageW * imageW) + (imageH * imageH)) / 2.0;
+
+                for (int nAngle = 0; nAngle < 360; nAngle += 30)
+                {
+                    PointF ptEdge = new PointF();
+
+                    for (int nPos = 0; nPos < (int)radius; nPos++)
+                    {
+                        double x = ptCenter.X + (nPos * arrayCos[nAngle]);
+                        double y = ptCenter.Y + (nPos * arraySin[nAngle]);
+
+                        if (x < 0 || y < 0 || x >= imageW || y >= imageH) { continue; }
+
+                        ptEdge = new PointF((float)x, (float)y);
+                    }
+
+                    uc_tunning_view.DrawLine(ptCenter, ptEdge, 1, Color.LimeGreen);
+                    uc_tunning_view.DrawCircle(ptEdge, (float)3, (float)3, Color.LimeGreen, 1);
+                }//);
+
+                int nSector = 1;
+                for (int nAngle = 15; nAngle < 360; nAngle += 30)
+                {
+                    double x = ptCenter.X + ((radius*0.5) * arrayCos[nAngle]);
+                    double y = ptCenter.Y + ((radius*0.5) * arraySin[nAngle]);
+
+                    PointF ptMid = new PointF((float)x, (float)y);
+
+                    uc_tunning_view.DrawString(string.Format("{0}", nSector++), (int)ptMid.X, (int)ptMid.Y, 5, Color.Yellow);
+
+                }
+
+                uc_tunning_view.Refresh();
+            }
+
+        }
+
+         
 
       
 

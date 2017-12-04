@@ -293,12 +293,14 @@ namespace DEF_PARAMS
         public double /***/PIXEL_RES { get; set; }
         public int /******/LIGHT_INDEX { get; set; }
         public int /******/LIGHT_VALUE { get; set; }
+        public int /******/EXPOSURE { get; set; }
     
         public PARAM_OPTICS()
         {
             CAM_INDEX = 0;
             PIXEL_RES = 0.000069;
             LIGHT_INDEX = LIGHT_VALUE = 0;
+            EXPOSURE = 100;
         }
 
         public PARAM_OPTICS CopyTo()
@@ -309,14 +311,15 @@ namespace DEF_PARAMS
             single.LIGHT_INDEX = this.LIGHT_INDEX;
             single.LIGHT_VALUE = this.LIGHT_VALUE;
             single.PIXEL_RES = this.PIXEL_RES;
+            single.EXPOSURE = this.EXPOSURE;
 
             return single;
         }
     }
 
-    
 
-    public class PARAM_CONFIG
+  
+    public class PARAM_PATH
     {
         public string i01_PATH_MAIN { get; set; }
         public string i02_PATH_DATA_DUMP { get; set; }
@@ -332,7 +335,7 @@ namespace DEF_PARAMS
         public string i20_PATH_INI { get; set; }
         public string i21_PATH_LOG { get; set; }
 
-        public PARAM_CONFIG()
+        public PARAM_PATH()
         {
             i01_PATH_MAIN = "C:\\CD_METER";
             i02_PATH_DATA_DUMP = "C:\\CD_METER\\DUMP";
@@ -348,9 +351,9 @@ namespace DEF_PARAMS
             i20_PATH_INI = "C:\\CD_METER\\INI";
             i21_PATH_LOG = "C:\\CD_METER\\LOG";
         }
-        public PARAM_CONFIG CopyTo()
+        public PARAM_PATH CopyTo()
         {
-            PARAM_CONFIG single = new PARAM_CONFIG();
+            PARAM_PATH single = new PARAM_PATH();
 
             single.i01_PATH_MAIN = this.i01_PATH_MAIN;
             single.i02_PATH_DATA_DUMP = this.i02_PATH_DATA_DUMP;

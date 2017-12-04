@@ -33,6 +33,12 @@
             this.label16 = new System.Windows.Forms.Label();
             this.TAB_TUNNING_TARGET = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.CHK_SHOW_SECTOR = new System.Windows.Forms.CheckBox();
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT = new System.Windows.Forms.CheckBox();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.CB_CIR_SPC_ENHANCEMENT = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
             this.CHK_SAVE_CIR_SHRINKAGE = new System.Windows.Forms.CheckBox();
             this.CHK_SAVE_CIR_SHOW_RAW_DATA = new System.Windows.Forms.CheckBox();
             this.CHK_SAVE_CIR_COMPENSATION = new System.Windows.Forms.CheckBox();
@@ -79,9 +85,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RDO_CIR_DETEC_NONE = new System.Windows.Forms.RadioButton();
-            this.RDO_CIR_DETEC_PASS = new System.Windows.Forms.RadioButton();
-            this.RDO_CIR_DETEC_NEGA = new System.Windows.Forms.RadioButton();
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION = new System.Windows.Forms.Button();
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE = new System.Windows.Forms.ComboBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.uc_thumb_nail_circle = new NS_UC_THUMB_NAIL.UC_THUMB_NAIL();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
@@ -92,11 +98,12 @@
             this.TXT_RECT_WINDOW_SIZE = new System.Windows.Forms.NumericUpDown();
             this.CHK_SAVE_RECT_SHOW_RAW_DATA = new System.Windows.Forms.CheckBox();
             this.CHK_SAVE_RECT0__EDGE_DETECTION = new System.Windows.Forms.CheckBox();
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT = new System.Windows.Forms.CheckBox();
+            this.CHK_SAVE_RECT_REFINEMENT = new System.Windows.Forms.CheckBox();
             this.CHK_SAVE_RECT_COMPENSATION = new System.Windows.Forms.CheckBox();
             this.CHK_SAVE_RECT_EDGE_POSITION = new System.Windows.Forms.CheckBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.TXT_RECT_EDGE_POSITION_SCD = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.TXT_RECT_EDGE_POSITION_FST = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -104,7 +111,6 @@
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.RDO_RECT_APD_SCD = new System.Windows.Forms.RadioButton();
             this.RDO_RECT_APD_FST = new System.Windows.Forms.RadioButton();
-            this.BTN_RECT_UPDATE_DETECTION_RELATED = new System.Windows.Forms.Button();
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD = new System.Windows.Forms.Button();
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD = new System.Windows.Forms.Button();
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST = new System.Windows.Forms.Button();
@@ -114,6 +120,13 @@
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION = new System.Windows.Forms.CheckBox();
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD = new System.Windows.Forms.TextBox();
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST = new System.Windows.Forms.TextBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.CB_RECT_SPC_ENHANCEMENT = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.TXT_RECT_EDGE_REFINEMENT = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -137,8 +150,6 @@
             this.TXT_RECT_SELECTED_INDEX = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.PNL_RCRC_PEAK_INFO = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.uc_thumb_nail_rect = new NS_UC_THUMB_NAIL.UC_THUMB_NAIL();
             this.BTN_PARAM_WRITE = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -148,8 +159,12 @@
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.BTN_RECOVER = new System.Windows.Forms.Button();
             this.BTN_PARAM_WRITE_ALL = new System.Windows.Forms.Button();
+            this.TXT_CIR_COVERAGE = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.TAB_TUNNING_TARGET.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -167,20 +182,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.TXT_RECT_WINDOW_SIZE)).BeginInit();
             this.groupBox13.SuspendLayout();
             this.groupBox17.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.groupBox19.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.PNL_RCRC_PEAK_INFO.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(1307, 679);
+            this.label16.Location = new System.Drawing.Point(1307, 689);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(52, 14);
             this.label16.TabIndex = 81;
@@ -195,13 +210,18 @@
             this.TAB_TUNNING_TARGET.Name = "TAB_TUNNING_TARGET";
             this.TAB_TUNNING_TARGET.Padding = new System.Drawing.Point(0, 0);
             this.TAB_TUNNING_TARGET.SelectedIndex = 0;
-            this.TAB_TUNNING_TARGET.Size = new System.Drawing.Size(749, 598);
+            this.TAB_TUNNING_TARGET.Size = new System.Drawing.Size(749, 608);
             this.TAB_TUNNING_TARGET.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TAB_TUNNING_TARGET.TabIndex = 83;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.tabPage1.Controls.Add(this.TXT_CIR_COVERAGE);
+            this.tabPage1.Controls.Add(this.CHK_SHOW_SECTOR);
+            this.tabPage1.Controls.Add(this.label33);
+            this.tabPage1.Controls.Add(this.CHK_SAVE_CIR_SPC_ENHANCEMENT);
+            this.tabPage1.Controls.Add(this.groupBox21);
             this.tabPage1.Controls.Add(this.CHK_SAVE_CIR_SHRINKAGE);
             this.tabPage1.Controls.Add(this.CHK_SAVE_CIR_SHOW_RAW_DATA);
             this.tabPage1.Controls.Add(this.CHK_SAVE_CIR_COMPENSATION);
@@ -226,9 +246,82 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 44);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(741, 550);
+            this.tabPage1.Size = new System.Drawing.Size(741, 560);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "CIRCLE";
+            // 
+            // CHK_SHOW_SECTOR
+            // 
+            this.CHK_SHOW_SECTOR.AutoSize = true;
+            this.CHK_SHOW_SECTOR.ForeColor = System.Drawing.Color.White;
+            this.CHK_SHOW_SECTOR.Location = new System.Drawing.Point(46, 500);
+            this.CHK_SHOW_SECTOR.Name = "CHK_SHOW_SECTOR";
+            this.CHK_SHOW_SECTOR.Size = new System.Drawing.Size(133, 18);
+            this.CHK_SHOW_SECTOR.TabIndex = 105;
+            this.CHK_SHOW_SECTOR.Text = "SHOW_SECTOR";
+            this.CHK_SHOW_SECTOR.UseVisualStyleBackColor = true;
+            this.CHK_SHOW_SECTOR.CheckedChanged += new System.EventHandler(this.CHK_SHOW_SECTOR_DRAWING_CheckedChanged);
+            // 
+            // CHK_SAVE_CIR_SPC_ENHANCEMENT
+            // 
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.AutoSize = true;
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.Location = new System.Drawing.Point(375, 517);
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.Name = "CHK_SAVE_CIR_SPC_ENHANCEMENT";
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.Size = new System.Drawing.Size(15, 14);
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.TabIndex = 104;
+            this.CHK_SAVE_CIR_SPC_ENHANCEMENT.UseVisualStyleBackColor = true;
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.CB_CIR_SPC_ENHANCEMENT);
+            this.groupBox21.Controls.Add(this.label31);
+            this.groupBox21.Controls.Add(this.label32);
+            this.groupBox21.ForeColor = System.Drawing.Color.Coral;
+            this.groupBox21.Location = new System.Drawing.Point(396, 497);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(330, 50);
+            this.groupBox21.TabIndex = 103;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "SPC ENHANCEMENT";
+            // 
+            // CB_CIR_SPC_ENHANCEMENT
+            // 
+            this.CB_CIR_SPC_ENHANCEMENT.FormattingEnabled = true;
+            this.CB_CIR_SPC_ENHANCEMENT.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.CB_CIR_SPC_ENHANCEMENT.Location = new System.Drawing.Point(67, 19);
+            this.CB_CIR_SPC_ENHANCEMENT.Name = "CB_CIR_SPC_ENHANCEMENT";
+            this.CB_CIR_SPC_ENHANCEMENT.Size = new System.Drawing.Size(144, 22);
+            this.CB_CIR_SPC_ENHANCEMENT.TabIndex = 3;
+            this.CB_CIR_SPC_ENHANCEMENT.Text = "0";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.ForeColor = System.Drawing.Color.White;
+            this.label31.Location = new System.Drawing.Point(9, 22);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(42, 14);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "TYPE";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label32.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label32.Location = new System.Drawing.Point(231, 22);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(64, 12);
+            this.label32.TabIndex = 2;
+            this.label32.Text = "( 0, ... , 7 )";
             // 
             // CHK_SAVE_CIR_SHRINKAGE
             // 
@@ -242,7 +335,7 @@
             // CHK_SAVE_CIR_SHOW_RAW_DATA
             // 
             this.CHK_SAVE_CIR_SHOW_RAW_DATA.AutoSize = true;
-            this.CHK_SAVE_CIR_SHOW_RAW_DATA.Location = new System.Drawing.Point(12, 467);
+            this.CHK_SAVE_CIR_SHOW_RAW_DATA.Location = new System.Drawing.Point(13, 467);
             this.CHK_SAVE_CIR_SHOW_RAW_DATA.Name = "CHK_SAVE_CIR_SHOW_RAW_DATA";
             this.CHK_SAVE_CIR_SHOW_RAW_DATA.Size = new System.Drawing.Size(15, 14);
             this.CHK_SAVE_CIR_SHOW_RAW_DATA.TabIndex = 88;
@@ -383,7 +476,7 @@
             this.TXT_CIR_EDGE_POSITION.ForeColor = System.Drawing.Color.White;
             this.TXT_CIR_EDGE_POSITION.Location = new System.Drawing.Point(57, 18);
             this.TXT_CIR_EDGE_POSITION.Name = "TXT_CIR_EDGE_POSITION";
-            this.TXT_CIR_EDGE_POSITION.Size = new System.Drawing.Size(184, 22);
+            this.TXT_CIR_EDGE_POSITION.Size = new System.Drawing.Size(183, 22);
             this.TXT_CIR_EDGE_POSITION.TabIndex = 1;
             // 
             // label11
@@ -395,7 +488,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(67, 12);
             this.label11.TabIndex = 2;
-            this.label11.Text = "( -1 , 0 , 1 )";
+            this.label11.Text = "( 0, 0.5, 1 )";
             // 
             // label7
             // 
@@ -640,7 +733,7 @@
             // 
             this.groupBox3.Controls.Add(this.CHK_CIR_SHOW_RAW_DATA);
             this.groupBox3.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox3.Location = new System.Drawing.Point(36, 446);
+            this.groupBox3.Location = new System.Drawing.Point(37, 446);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(330, 50);
             this.groupBox3.TabIndex = 83;
@@ -714,9 +807,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.RDO_CIR_DETEC_NONE);
-            this.groupBox1.Controls.Add(this.RDO_CIR_DETEC_PASS);
-            this.groupBox1.Controls.Add(this.RDO_CIR_DETEC_NEGA);
+            this.groupBox1.Controls.Add(this.BTN_CIRCLE_CHECK_AUTO_DETECTION);
+            this.groupBox1.Controls.Add(this.CB_CIRCLE_AUTO_DETECTION_TYPE);
+            this.groupBox1.Controls.Add(this.label30);
             this.groupBox1.ForeColor = System.Drawing.Color.Coral;
             this.groupBox1.Location = new System.Drawing.Point(34, 282);
             this.groupBox1.Name = "groupBox1";
@@ -725,46 +818,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AUTO CIRCLE DETECTION";
             // 
-            // RDO_CIR_DETEC_NONE
+            // BTN_CIRCLE_CHECK_AUTO_DETECTION
             // 
-            this.RDO_CIR_DETEC_NONE.AutoSize = true;
-            this.RDO_CIR_DETEC_NONE.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.RDO_CIR_DETEC_NONE.ForeColor = System.Drawing.Color.White;
-            this.RDO_CIR_DETEC_NONE.Location = new System.Drawing.Point(9, 21);
-            this.RDO_CIR_DETEC_NONE.Name = "RDO_CIR_DETEC_NONE";
-            this.RDO_CIR_DETEC_NONE.Size = new System.Drawing.Size(60, 17);
-            this.RDO_CIR_DETEC_NONE.TabIndex = 1;
-            this.RDO_CIR_DETEC_NONE.Text = "NONE";
-            this.RDO_CIR_DETEC_NONE.UseVisualStyleBackColor = true;
-            this.RDO_CIR_DETEC_NONE.Click += new System.EventHandler(this.RDO_CIRCLE_DETEC_NONE_Click);
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.ForeColor = System.Drawing.Color.Black;
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Location = new System.Drawing.Point(234, 14);
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Name = "BTN_CIRCLE_CHECK_AUTO_DETECTION";
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Size = new System.Drawing.Size(61, 30);
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.TabIndex = 81;
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Text = "CHECK";
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.UseVisualStyleBackColor = true;
+            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Click += new System.EventHandler(this.BTN_CIRCLE_CHECK_AUTO_DETECTION_Click);
             // 
-            // RDO_CIR_DETEC_PASS
+            // CB_CIRCLE_AUTO_DETECTION_TYPE
             // 
-            this.RDO_CIR_DETEC_PASS.AutoSize = true;
-            this.RDO_CIR_DETEC_PASS.Checked = true;
-            this.RDO_CIR_DETEC_PASS.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.RDO_CIR_DETEC_PASS.ForeColor = System.Drawing.Color.White;
-            this.RDO_CIR_DETEC_PASS.Location = new System.Drawing.Point(71, 21);
-            this.RDO_CIR_DETEC_PASS.Name = "RDO_CIR_DETEC_PASS";
-            this.RDO_CIR_DETEC_PASS.Size = new System.Drawing.Size(128, 17);
-            this.RDO_CIR_DETEC_PASS.TabIndex = 1;
-            this.RDO_CIR_DETEC_PASS.TabStop = true;
-            this.RDO_CIR_DETEC_PASS.Text = "POSSITIVE_CON";
-            this.RDO_CIR_DETEC_PASS.UseVisualStyleBackColor = true;
-            this.RDO_CIR_DETEC_PASS.Click += new System.EventHandler(this.RDO_CIRCLE_DETECT_POSSITIVE_Click);
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.FormattingEnabled = true;
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Location = new System.Drawing.Point(84, 18);
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Name = "CB_CIRCLE_AUTO_DETECTION_TYPE";
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Size = new System.Drawing.Size(144, 22);
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.TabIndex = 5;
+            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Text = "0";
             // 
-            // RDO_CIR_DETEC_NEGA
+            // label30
             // 
-            this.RDO_CIR_DETEC_NEGA.AutoSize = true;
-            this.RDO_CIR_DETEC_NEGA.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.RDO_CIR_DETEC_NEGA.ForeColor = System.Drawing.Color.White;
-            this.RDO_CIR_DETEC_NEGA.Location = new System.Drawing.Point(199, 21);
-            this.RDO_CIR_DETEC_NEGA.Name = "RDO_CIR_DETEC_NEGA";
-            this.RDO_CIR_DETEC_NEGA.Size = new System.Drawing.Size(129, 17);
-            this.RDO_CIR_DETEC_NEGA.TabIndex = 1;
-            this.RDO_CIR_DETEC_NEGA.Text = "NEGATIVE_DIFF";
-            this.RDO_CIR_DETEC_NEGA.UseVisualStyleBackColor = true;
-            this.RDO_CIR_DETEC_NEGA.Click += new System.EventHandler(this.RDO_CIRCLE_DETEC_NEGATIVE_Click);
+            this.label30.AutoSize = true;
+            this.label30.ForeColor = System.Drawing.Color.White;
+            this.label30.Location = new System.Drawing.Point(26, 21);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(42, 14);
+            this.label30.TabIndex = 4;
+            this.label30.Text = "TYPE";
             // 
             // uc_thumb_nail_circle
             // 
@@ -787,10 +880,14 @@
             this.tabPage2.Controls.Add(this.groupBox18);
             this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_SHOW_RAW_DATA);
             this.tabPage2.Controls.Add(this.CHK_SAVE_RECT0__EDGE_DETECTION);
+            this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_SPC_ENHANCEMENT);
+            this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_REFINEMENT);
             this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_COMPENSATION);
             this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_EDGE_POSITION);
             this.tabPage2.Controls.Add(this.groupBox13);
             this.tabPage2.Controls.Add(this.groupBox17);
+            this.tabPage2.Controls.Add(this.groupBox20);
+            this.tabPage2.Controls.Add(this.groupBox19);
             this.tabPage2.Controls.Add(this.groupBox14);
             this.tabPage2.Controls.Add(this.groupBox15);
             this.tabPage2.Controls.Add(this.CHK_SAVE_RECT_ALGORITHM);
@@ -802,7 +899,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 44);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(741, 550);
+            this.tabPage2.Size = new System.Drawing.Size(741, 560);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RECT";
             // 
@@ -814,9 +911,9 @@
             this.groupBox18.Controls.Add(this.label27);
             this.groupBox18.Controls.Add(this.TXT_RECT_WINDOW_SIZE);
             this.groupBox18.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox18.Location = new System.Drawing.Point(540, 284);
+            this.groupBox18.Location = new System.Drawing.Point(394, 281);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(188, 118);
+            this.groupBox18.Size = new System.Drawing.Size(167, 113);
             this.groupBox18.TabIndex = 104;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "DETEC PARAM";
@@ -828,7 +925,7 @@
             this.BTN_CHECK_EDGE_DETECTION.ForeColor = System.Drawing.Color.Black;
             this.BTN_CHECK_EDGE_DETECTION.Location = new System.Drawing.Point(10, 80);
             this.BTN_CHECK_EDGE_DETECTION.Name = "BTN_CHECK_EDGE_DETECTION";
-            this.BTN_CHECK_EDGE_DETECTION.Size = new System.Drawing.Size(173, 30);
+            this.BTN_CHECK_EDGE_DETECTION.Size = new System.Drawing.Size(148, 30);
             this.BTN_CHECK_EDGE_DETECTION.TabIndex = 80;
             this.BTN_CHECK_EDGE_DETECTION.Text = "DETECTION";
             this.BTN_CHECK_EDGE_DETECTION.UseVisualStyleBackColor = true;
@@ -860,7 +957,7 @@
             0,
             0});
             this.TXT_RECT_CANDIDATE_COUNT.Name = "TXT_RECT_CANDIDATE_COUNT";
-            this.TXT_RECT_CANDIDATE_COUNT.Size = new System.Drawing.Size(68, 22);
+            this.TXT_RECT_CANDIDATE_COUNT.Size = new System.Drawing.Size(43, 22);
             this.TXT_RECT_CANDIDATE_COUNT.TabIndex = 95;
             this.TXT_RECT_CANDIDATE_COUNT.Value = new decimal(new int[] {
             2,
@@ -894,7 +991,7 @@
             0,
             0});
             this.TXT_RECT_WINDOW_SIZE.Name = "TXT_RECT_WINDOW_SIZE";
-            this.TXT_RECT_WINDOW_SIZE.Size = new System.Drawing.Size(68, 22);
+            this.TXT_RECT_WINDOW_SIZE.Size = new System.Drawing.Size(43, 22);
             this.TXT_RECT_WINDOW_SIZE.TabIndex = 95;
             this.TXT_RECT_WINDOW_SIZE.Value = new decimal(new int[] {
             2,
@@ -905,7 +1002,7 @@
             // CHK_SAVE_RECT_SHOW_RAW_DATA
             // 
             this.CHK_SAVE_RECT_SHOW_RAW_DATA.AutoSize = true;
-            this.CHK_SAVE_RECT_SHOW_RAW_DATA.Location = new System.Drawing.Point(13, 513);
+            this.CHK_SAVE_RECT_SHOW_RAW_DATA.Location = new System.Drawing.Point(14, 479);
             this.CHK_SAVE_RECT_SHOW_RAW_DATA.Name = "CHK_SAVE_RECT_SHOW_RAW_DATA";
             this.CHK_SAVE_RECT_SHOW_RAW_DATA.Size = new System.Drawing.Size(15, 14);
             this.CHK_SAVE_RECT_SHOW_RAW_DATA.TabIndex = 101;
@@ -920,10 +1017,28 @@
             this.CHK_SAVE_RECT0__EDGE_DETECTION.TabIndex = 102;
             this.CHK_SAVE_RECT0__EDGE_DETECTION.UseVisualStyleBackColor = true;
             // 
+            // CHK_SAVE_RECT_SPC_ENHANCEMENT
+            // 
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.AutoSize = true;
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.Location = new System.Drawing.Point(373, 476);
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.Name = "CHK_SAVE_RECT_SPC_ENHANCEMENT";
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.Size = new System.Drawing.Size(15, 14);
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.TabIndex = 102;
+            this.CHK_SAVE_RECT_SPC_ENHANCEMENT.UseVisualStyleBackColor = true;
+            // 
+            // CHK_SAVE_RECT_REFINEMENT
+            // 
+            this.CHK_SAVE_RECT_REFINEMENT.AutoSize = true;
+            this.CHK_SAVE_RECT_REFINEMENT.Location = new System.Drawing.Point(373, 418);
+            this.CHK_SAVE_RECT_REFINEMENT.Name = "CHK_SAVE_RECT_REFINEMENT";
+            this.CHK_SAVE_RECT_REFINEMENT.Size = new System.Drawing.Size(15, 14);
+            this.CHK_SAVE_RECT_REFINEMENT.TabIndex = 102;
+            this.CHK_SAVE_RECT_REFINEMENT.UseVisualStyleBackColor = true;
+            // 
             // CHK_SAVE_RECT_COMPENSATION
             // 
             this.CHK_SAVE_RECT_COMPENSATION.AutoSize = true;
-            this.CHK_SAVE_RECT_COMPENSATION.Location = new System.Drawing.Point(13, 460);
+            this.CHK_SAVE_RECT_COMPENSATION.Location = new System.Drawing.Point(13, 418);
             this.CHK_SAVE_RECT_COMPENSATION.Name = "CHK_SAVE_RECT_COMPENSATION";
             this.CHK_SAVE_RECT_COMPENSATION.Size = new System.Drawing.Size(15, 14);
             this.CHK_SAVE_RECT_COMPENSATION.TabIndex = 102;
@@ -932,7 +1047,7 @@
             // CHK_SAVE_RECT_EDGE_POSITION
             // 
             this.CHK_SAVE_RECT_EDGE_POSITION.AutoSize = true;
-            this.CHK_SAVE_RECT_EDGE_POSITION.Location = new System.Drawing.Point(376, 457);
+            this.CHK_SAVE_RECT_EDGE_POSITION.Location = new System.Drawing.Point(565, 281);
             this.CHK_SAVE_RECT_EDGE_POSITION.Name = "CHK_SAVE_RECT_EDGE_POSITION";
             this.CHK_SAVE_RECT_EDGE_POSITION.Size = new System.Drawing.Size(15, 14);
             this.CHK_SAVE_RECT_EDGE_POSITION.TabIndex = 103;
@@ -941,15 +1056,14 @@
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.TXT_RECT_EDGE_POSITION_SCD);
-            this.groupBox13.Controls.Add(this.label25);
             this.groupBox13.Controls.Add(this.TXT_RECT_EDGE_POSITION_FST);
             this.groupBox13.Controls.Add(this.label20);
             this.groupBox13.Controls.Add(this.label19);
             this.groupBox13.Controls.Add(this.label22);
             this.groupBox13.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox13.Location = new System.Drawing.Point(397, 436);
+            this.groupBox13.Location = new System.Drawing.Point(586, 280);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(330, 104);
+            this.groupBox13.Size = new System.Drawing.Size(142, 114);
             this.groupBox13.TabIndex = 100;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "EDGE POSITION";
@@ -958,36 +1072,25 @@
             // 
             this.TXT_RECT_EDGE_POSITION_SCD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_RECT_EDGE_POSITION_SCD.ForeColor = System.Drawing.Color.White;
-            this.TXT_RECT_EDGE_POSITION_SCD.Location = new System.Drawing.Point(53, 46);
+            this.TXT_RECT_EDGE_POSITION_SCD.Location = new System.Drawing.Point(63, 54);
             this.TXT_RECT_EDGE_POSITION_SCD.Name = "TXT_RECT_EDGE_POSITION_SCD";
-            this.TXT_RECT_EDGE_POSITION_SCD.Size = new System.Drawing.Size(185, 22);
+            this.TXT_RECT_EDGE_POSITION_SCD.Size = new System.Drawing.Size(60, 22);
             this.TXT_RECT_EDGE_POSITION_SCD.TabIndex = 1;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.label25.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label25.Location = new System.Drawing.Point(244, 51);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(72, 12);
-            this.label25.TabIndex = 2;
-            this.label25.Text = "( 0.0 ~ 1.0 )";
             // 
             // TXT_RECT_EDGE_POSITION_FST
             // 
             this.TXT_RECT_EDGE_POSITION_FST.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_RECT_EDGE_POSITION_FST.ForeColor = System.Drawing.Color.White;
-            this.TXT_RECT_EDGE_POSITION_FST.Location = new System.Drawing.Point(53, 18);
+            this.TXT_RECT_EDGE_POSITION_FST.Location = new System.Drawing.Point(63, 26);
             this.TXT_RECT_EDGE_POSITION_FST.Name = "TXT_RECT_EDGE_POSITION_FST";
-            this.TXT_RECT_EDGE_POSITION_FST.Size = new System.Drawing.Size(185, 22);
+            this.TXT_RECT_EDGE_POSITION_FST.Size = new System.Drawing.Size(60, 22);
             this.TXT_RECT_EDGE_POSITION_FST.TabIndex = 1;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(6, 51);
+            this.label20.Location = new System.Drawing.Point(13, 58);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(44, 14);
             this.label20.TabIndex = 2;
@@ -998,7 +1101,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label19.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label19.Location = new System.Drawing.Point(244, 26);
+            this.label19.Location = new System.Drawing.Point(61, 90);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(72, 12);
             this.label19.TabIndex = 2;
@@ -1008,7 +1111,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(6, 23);
+            this.label22.Location = new System.Drawing.Point(16, 31);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(41, 14);
             this.label22.TabIndex = 2;
@@ -1018,7 +1121,6 @@
             // 
             this.groupBox17.Controls.Add(this.RDO_RECT_APD_SCD);
             this.groupBox17.Controls.Add(this.RDO_RECT_APD_FST);
-            this.groupBox17.Controls.Add(this.BTN_RECT_UPDATE_DETECTION_RELATED);
             this.groupBox17.Controls.Add(this.BTN_RECT_VERIFY_EDGE_REGION_SCD);
             this.groupBox17.Controls.Add(this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD);
             this.groupBox17.Controls.Add(this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST);
@@ -1031,7 +1133,7 @@
             this.groupBox17.ForeColor = System.Drawing.Color.Coral;
             this.groupBox17.Location = new System.Drawing.Point(34, 278);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(500, 124);
+            this.groupBox17.Size = new System.Drawing.Size(358, 116);
             this.groupBox17.TabIndex = 99;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "AUTO PEAK DETECTION";
@@ -1058,26 +1160,14 @@
             this.RDO_RECT_APD_FST.Text = "FIRST PEAK";
             this.RDO_RECT_APD_FST.UseVisualStyleBackColor = true;
             // 
-            // BTN_RECT_UPDATE_DETECTION_RELATED
-            // 
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Location = new System.Drawing.Point(271, 86);
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Name = "BTN_RECT_UPDATE_DETECTION_RELATED";
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Size = new System.Drawing.Size(216, 30);
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.TabIndex = 80;
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.Text = "Update";
-            this.BTN_RECT_UPDATE_DETECTION_RELATED.UseVisualStyleBackColor = true;
-            // 
             // BTN_RECT_VERIFY_EDGE_REGION_SCD
             // 
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Location = new System.Drawing.Point(416, 50);
+            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Location = new System.Drawing.Point(294, 74);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Name = "BTN_RECT_VERIFY_EDGE_REGION_SCD";
-            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Size = new System.Drawing.Size(71, 30);
+            this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Size = new System.Drawing.Size(61, 30);
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.TabIndex = 80;
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.Text = "CHECK";
             this.BTN_RECT_VERIFY_EDGE_REGION_SCD.UseVisualStyleBackColor = true;
@@ -1088,7 +1178,7 @@
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Location = new System.Drawing.Point(271, 50);
+            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Location = new System.Drawing.Point(201, 73);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Name = "BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD";
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.Size = new System.Drawing.Size(27, 30);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_SCD.TabIndex = 80;
@@ -1101,7 +1191,7 @@
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Location = new System.Drawing.Point(271, 19);
+            this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Location = new System.Drawing.Point(201, 42);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Name = "BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST";
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.Size = new System.Drawing.Size(27, 30);
             this.BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST.TabIndex = 80;
@@ -1114,9 +1204,9 @@
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Location = new System.Drawing.Point(416, 20);
+            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Location = new System.Drawing.Point(294, 44);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Name = "BTN_RECT_VERIFY_EDGE_REGION_FST";
-            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Size = new System.Drawing.Size(71, 30);
+            this.BTN_RECT_VERIFY_EDGE_REGION_FST.Size = new System.Drawing.Size(61, 30);
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.TabIndex = 80;
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.Text = "CHECK";
             this.BTN_RECT_VERIFY_EDGE_REGION_FST.UseVisualStyleBackColor = true;
@@ -1140,9 +1230,9 @@
             "7",
             "8",
             "9"});
-            this.CB_RECT_TARGET_INDEX_SCD.Location = new System.Drawing.Point(304, 55);
+            this.CB_RECT_TARGET_INDEX_SCD.Location = new System.Drawing.Point(234, 78);
             this.CB_RECT_TARGET_INDEX_SCD.Name = "CB_RECT_TARGET_INDEX_SCD";
-            this.CB_RECT_TARGET_INDEX_SCD.Size = new System.Drawing.Size(106, 22);
+            this.CB_RECT_TARGET_INDEX_SCD.Size = new System.Drawing.Size(54, 22);
             this.CB_RECT_TARGET_INDEX_SCD.TabIndex = 94;
             this.CB_RECT_TARGET_INDEX_SCD.Text = "0";
             // 
@@ -1164,9 +1254,9 @@
             "7",
             "8",
             "9"});
-            this.CB_RECT_TARGET_INDEX_FST.Location = new System.Drawing.Point(304, 23);
+            this.CB_RECT_TARGET_INDEX_FST.Location = new System.Drawing.Point(234, 46);
             this.CB_RECT_TARGET_INDEX_FST.Name = "CB_RECT_TARGET_INDEX_FST";
-            this.CB_RECT_TARGET_INDEX_FST.Size = new System.Drawing.Size(106, 22);
+            this.CB_RECT_TARGET_INDEX_FST.Size = new System.Drawing.Size(54, 22);
             this.CB_RECT_TARGET_INDEX_FST.TabIndex = 94;
             this.CB_RECT_TARGET_INDEX_FST.Text = "0";
             // 
@@ -1188,7 +1278,7 @@
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Location = new System.Drawing.Point(148, 78);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Name = "TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD";
-            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Size = new System.Drawing.Size(80, 22);
+            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Size = new System.Drawing.Size(44, 22);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.TabIndex = 3;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = "0";
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1199,10 +1289,91 @@
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Location = new System.Drawing.Point(148, 46);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Name = "TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST";
-            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Size = new System.Drawing.Size(80, 22);
+            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Size = new System.Drawing.Size(44, 22);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.TabIndex = 3;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = "0";
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.label29);
+            this.groupBox20.Controls.Add(this.CB_RECT_SPC_ENHANCEMENT);
+            this.groupBox20.Controls.Add(this.label25);
+            this.groupBox20.ForeColor = System.Drawing.Color.Coral;
+            this.groupBox20.Location = new System.Drawing.Point(394, 456);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(330, 50);
+            this.groupBox20.TabIndex = 99;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "SPC ENHANCEMENT";
+            // 
+            // CB_RECT_SPC_ENHANCEMENT
+            // 
+            this.CB_RECT_SPC_ENHANCEMENT.FormattingEnabled = true;
+            this.CB_RECT_SPC_ENHANCEMENT.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.CB_RECT_SPC_ENHANCEMENT.Location = new System.Drawing.Point(67, 19);
+            this.CB_RECT_SPC_ENHANCEMENT.Name = "CB_RECT_SPC_ENHANCEMENT";
+            this.CB_RECT_SPC_ENHANCEMENT.Size = new System.Drawing.Size(144, 22);
+            this.CB_RECT_SPC_ENHANCEMENT.TabIndex = 3;
+            this.CB_RECT_SPC_ENHANCEMENT.Text = "0";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(9, 22);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(42, 14);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "TYPE";
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.label26);
+            this.groupBox19.Controls.Add(this.TXT_RECT_EDGE_REFINEMENT);
+            this.groupBox19.Controls.Add(this.label28);
+            this.groupBox19.ForeColor = System.Drawing.Color.Coral;
+            this.groupBox19.Location = new System.Drawing.Point(394, 400);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(334, 50);
+            this.groupBox19.TabIndex = 99;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "REFINEMENT";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.White;
+            this.label26.Location = new System.Drawing.Point(9, 22);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(76, 14);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "DISTANCE";
+            // 
+            // TXT_RECT_EDGE_REFINEMENT
+            // 
+            this.TXT_RECT_EDGE_REFINEMENT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_RECT_EDGE_REFINEMENT.ForeColor = System.Drawing.Color.White;
+            this.TXT_RECT_EDGE_REFINEMENT.Location = new System.Drawing.Point(96, 16);
+            this.TXT_RECT_EDGE_REFINEMENT.Name = "TXT_RECT_EDGE_REFINEMENT";
+            this.TXT_RECT_EDGE_REFINEMENT.Size = new System.Drawing.Size(83, 22);
+            this.TXT_RECT_EDGE_REFINEMENT.TabIndex = 1;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label28.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label28.Location = new System.Drawing.Point(190, 24);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(64, 12);
+            this.label28.TabIndex = 2;
+            this.label28.Text = "(unit : pxl)";
             // 
             // groupBox14
             // 
@@ -1211,7 +1382,7 @@
             this.groupBox14.Controls.Add(this.TXT_RECT_COMPEN_B);
             this.groupBox14.Controls.Add(this.TXT_RECT_COMPEN_A);
             this.groupBox14.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox14.Location = new System.Drawing.Point(34, 436);
+            this.groupBox14.Location = new System.Drawing.Point(34, 398);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Size = new System.Drawing.Size(330, 50);
             this.groupBox14.TabIndex = 99;
@@ -1260,7 +1431,7 @@
             // 
             this.groupBox15.Controls.Add(this.CHK_RECT_SHOW_RAW_DATA);
             this.groupBox15.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox15.Location = new System.Drawing.Point(36, 490);
+            this.groupBox15.Location = new System.Drawing.Point(37, 456);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(330, 50);
             this.groupBox15.TabIndex = 98;
@@ -1417,7 +1588,6 @@
             this.groupBox12.Controls.Add(this.TXT_RECT_SELECTED_INDEX);
             this.groupBox12.Controls.Add(this.label17);
             this.groupBox12.Controls.Add(this.label18);
-            this.groupBox12.Controls.Add(this.PNL_RCRC_PEAK_INFO);
             this.groupBox12.ForeColor = System.Drawing.Color.Coral;
             this.groupBox12.Location = new System.Drawing.Point(35, 171);
             this.groupBox12.Name = "groupBox12";
@@ -1466,40 +1636,6 @@
             this.label18.TabIndex = 2;
             this.label18.Text = "SELECTED_TARGET : ";
             // 
-            // PNL_RCRC_PEAK_INFO
-            // 
-            this.PNL_RCRC_PEAK_INFO.Controls.Add(this.numericUpDown1);
-            this.PNL_RCRC_PEAK_INFO.ForeColor = System.Drawing.Color.White;
-            this.PNL_RCRC_PEAK_INFO.Location = new System.Drawing.Point(523, 18);
-            this.PNL_RCRC_PEAK_INFO.Name = "PNL_RCRC_PEAK_INFO";
-            this.PNL_RCRC_PEAK_INFO.Size = new System.Drawing.Size(150, 30);
-            this.PNL_RCRC_PEAK_INFO.TabIndex = 14;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Location = new System.Drawing.Point(530, 3);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(59, 22);
-            this.numericUpDown1.TabIndex = 95;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
             // uc_thumb_nail_rect
             // 
             this.uc_thumb_nail_rect.BackColor = System.Drawing.Color.Black;
@@ -1519,7 +1655,7 @@
             // 
             this.BTN_PARAM_WRITE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.quick_restart;
             this.BTN_PARAM_WRITE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PARAM_WRITE.Location = new System.Drawing.Point(1235, 616);
+            this.BTN_PARAM_WRITE.Location = new System.Drawing.Point(1235, 626);
             this.BTN_PARAM_WRITE.Name = "BTN_PARAM_WRITE";
             this.BTN_PARAM_WRITE.Size = new System.Drawing.Size(60, 60);
             this.BTN_PARAM_WRITE.TabIndex = 80;
@@ -1530,7 +1666,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(1235, 679);
+            this.label5.Location = new System.Drawing.Point(1235, 689);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 14);
             this.label5.TabIndex = 82;
@@ -1556,7 +1692,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(618, 679);
+            this.label1.Location = new System.Drawing.Point(618, 689);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 82;
@@ -1566,7 +1702,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(699, 677);
+            this.label13.Location = new System.Drawing.Point(699, 687);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 14);
             this.label13.TabIndex = 82;
@@ -1576,7 +1712,7 @@
             // 
             this.BTN_PTRN_APPLY.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_cancel;
             this.BTN_PTRN_APPLY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PTRN_APPLY.Location = new System.Drawing.Point(1301, 616);
+            this.BTN_PTRN_APPLY.Location = new System.Drawing.Point(1301, 626);
             this.BTN_PTRN_APPLY.Name = "BTN_PTRN_APPLY";
             this.BTN_PTRN_APPLY.Size = new System.Drawing.Size(60, 60);
             this.BTN_PTRN_APPLY.TabIndex = 79;
@@ -1588,7 +1724,7 @@
             // 
             this.BTN_RECOVER.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.openfile;
             this.BTN_RECOVER.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_RECOVER.Location = new System.Drawing.Point(622, 616);
+            this.BTN_RECOVER.Location = new System.Drawing.Point(622, 626);
             this.BTN_RECOVER.Name = "BTN_RECOVER";
             this.BTN_RECOVER.Size = new System.Drawing.Size(60, 60);
             this.BTN_RECOVER.TabIndex = 80;
@@ -1599,12 +1735,42 @@
             // 
             this.BTN_PARAM_WRITE_ALL.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.unify;
             this.BTN_PARAM_WRITE_ALL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PARAM_WRITE_ALL.Location = new System.Drawing.Point(696, 616);
+            this.BTN_PARAM_WRITE_ALL.Location = new System.Drawing.Point(696, 626);
             this.BTN_PARAM_WRITE_ALL.Name = "BTN_PARAM_WRITE_ALL";
             this.BTN_PARAM_WRITE_ALL.Size = new System.Drawing.Size(60, 60);
             this.BTN_PARAM_WRITE_ALL.TabIndex = 80;
             this.BTN_PARAM_WRITE_ALL.UseVisualStyleBackColor = true;
             this.BTN_PARAM_WRITE_ALL.Click += new System.EventHandler(this.BTN_PARAM_WRITE_ALL_Click);
+            // 
+            // TXT_CIR_COVERAGE
+            // 
+            this.TXT_CIR_COVERAGE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_CIR_COVERAGE.ForeColor = System.Drawing.Color.White;
+            this.TXT_CIR_COVERAGE.Location = new System.Drawing.Point(137, 519);
+            this.TXT_CIR_COVERAGE.Name = "TXT_CIR_COVERAGE";
+            this.TXT_CIR_COVERAGE.Size = new System.Drawing.Size(227, 22);
+            this.TXT_CIR_COVERAGE.TabIndex = 1;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(51, 524);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(80, 14);
+            this.label33.TabIndex = 2;
+            this.label33.Text = "COVERAGE";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label29.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label29.Location = new System.Drawing.Point(237, 23);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(64, 12);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "( 0, ... , 7 )";
             // 
             // Dlg_Tunning
             // 
@@ -1628,6 +1794,8 @@
             this.TAB_TUNNING_TARGET.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1659,6 +1827,10 @@
             this.groupBox13.PerformLayout();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.groupBox15.ResumeLayout(false);
@@ -1669,8 +1841,6 @@
             this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
-            this.PNL_RCRC_PEAK_INFO.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1687,15 +1857,12 @@
         private System.Windows.Forms.Button BTN_RECOVER;
         private System.Windows.Forms.Label label1;
         private NS_UC_THUMB_NAIL.UC_THUMB_NAIL uc_thumb_nail_circle;
-        private System.Windows.Forms.RadioButton RDO_CIR_DETEC_NEGA;
-        private System.Windows.Forms.RadioButton RDO_CIR_DETEC_PASS;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TXT_CIRCLE_SELECTED_INDEX;
         private System.Windows.Forms.TextBox TXT_CIRCLE_SELECTED_FIGURE;
-        private System.Windows.Forms.RadioButton RDO_CIR_DETEC_NONE;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BTN_PARAM_WRITE;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1767,12 +1934,10 @@
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.CheckBox CHK_RECT_SHOW_RAW_DATA;
         private System.Windows.Forms.CheckBox CHK_RECT_USE_AUTO_PEAK_DETECTION;
-        private System.Windows.Forms.Panel PNL_RCRC_PEAK_INFO;
         private System.Windows.Forms.ComboBox CB_RECT_TARGET_INDEX_FST;
         private System.Windows.Forms.NumericUpDown TXT_RECT_CANDIDATE_COUNT;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button BTN_CHECK_EDGE_DETECTION;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown TXT_RECT_WINDOW_SIZE;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.GroupBox groupBox16;
@@ -1782,11 +1947,9 @@
         private System.Windows.Forms.Button BTN_RECT_VERIFY_EDGE_REGION_FST;
         private System.Windows.Forms.GroupBox groupBox17;
         private System.Windows.Forms.TextBox TXT_RECT_EDGE_POSITION_SCD;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD;
         private System.Windows.Forms.TextBox TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST;
-        private System.Windows.Forms.Button BTN_RECT_UPDATE_DETECTION_RELATED;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.CheckBox CHK_SAVE_RECT0__EDGE_DETECTION;
         private System.Windows.Forms.CheckBox CHK_SAVE_RECT_ALGORITHM;
@@ -1796,5 +1959,26 @@
         private System.Windows.Forms.Button BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST;
         private System.Windows.Forms.RadioButton RDO_RECT_APD_SCD;
         private System.Windows.Forms.RadioButton RDO_RECT_APD_FST;
+        private System.Windows.Forms.CheckBox CHK_SAVE_RECT_SPC_ENHANCEMENT;
+        private System.Windows.Forms.CheckBox CHK_SAVE_RECT_REFINEMENT;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox TXT_RECT_EDGE_REFINEMENT;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ComboBox CB_RECT_SPC_ENHANCEMENT;
+        private System.Windows.Forms.ComboBox CB_CIRCLE_AUTO_DETECTION_TYPE;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Button BTN_CIRCLE_CHECK_AUTO_DETECTION;
+        private System.Windows.Forms.CheckBox CHK_SAVE_CIR_SPC_ENHANCEMENT;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.ComboBox CB_CIR_SPC_ENHANCEMENT;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.CheckBox CHK_SHOW_SECTOR;
+        private System.Windows.Forms.TextBox TXT_CIR_COVERAGE;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label29;
     }
 }

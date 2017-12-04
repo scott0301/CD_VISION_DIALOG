@@ -18,7 +18,7 @@ namespace CD_VISION_DIALOG
 {
     public partial class Dlg_HistoryP : Form
     {
-        PARAM_CONFIG config = new PARAM_CONFIG();
+        PARAM_PATH config = new PARAM_PATH();
 
         public Dlg_HistoryP()
         {
@@ -31,7 +31,7 @@ namespace CD_VISION_DIALOG
         private void fuck()
         {
         }
-        public bool SetParam(PARAM_CONFIG config)
+        public bool SetParam(PARAM_PATH config)
         {
             this.config = config;
 
@@ -186,6 +186,11 @@ namespace CD_VISION_DIALOG
         private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             WrapperUnion.WrapperLV.SortData(LV_HISTORY, e.Column);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -178,6 +178,9 @@
   <data name="setting1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setting1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Trash_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Trash empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -217,8 +220,8 @@
   <data name="zoom_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Posterious" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Posterious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="recipe right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\recipe right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="recpNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\recp New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -253,8 +256,14 @@
   <data name="measureVer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\measureVer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="record_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\record_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vxdlogo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vxdlogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="apiply2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apiply2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,8 +277,14 @@
   <data name="record_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\record_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="trends" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trends.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="dir_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dir bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="recipe left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\recipe left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="new_recp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new_recp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -310,10 +325,10 @@
   <data name="DrawFigure_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DrawFigure Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Posterious" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Posterious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="trends" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trends.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Iteration" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iteration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

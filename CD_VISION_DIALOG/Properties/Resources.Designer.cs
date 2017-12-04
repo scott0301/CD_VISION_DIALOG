@@ -283,6 +283,16 @@ namespace CD_VISION_DIALOG.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap excel {
+            get {
+                object obj = ResourceManager.GetObject("excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap history__1_ {
             get {
                 object obj = ResourceManager.GetObject("history (1)", resourceCulture);
@@ -346,6 +356,16 @@ namespace CD_VISION_DIALOG.Properties {
         internal static System.Drawing.Bitmap information {
             get {
                 object obj = ResourceManager.GetObject("information", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Iteration {
+            get {
+                object obj = ResourceManager.GetObject("Iteration", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -553,9 +573,29 @@ namespace CD_VISION_DIALOG.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap recipe_left {
+            get {
+                object obj = ResourceManager.GetObject("recipe left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap recipe_load {
             get {
                 object obj = ResourceManager.GetObject("recipe_load", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap recipe_right {
+            get {
+                object obj = ResourceManager.GetObject("recipe right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -686,6 +726,16 @@ namespace CD_VISION_DIALOG.Properties {
         internal static System.Drawing.Bitmap view_refresh {
             get {
                 object obj = ResourceManager.GetObject("view_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap vxdlogo1 {
+            get {
+                object obj = ResourceManager.GetObject("vxdlogo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

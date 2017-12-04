@@ -19,8 +19,9 @@ namespace CD_VISION_DIALOG
 {
     public partial class Dlg_Spc : Form
     {
-        PARAM_CONFIG config = new PARAM_CONFIG();
+        PARAM_PATH config = new PARAM_PATH();
         WrapperDGView m_dgview = new WrapperDGView();
+        Boolean m_bFolderStatus = true;
 
         public Dlg_Spc()
         {
@@ -38,9 +39,13 @@ namespace CD_VISION_DIALOG
                 listHeader.Add(i.ToString());
             }
             m_dgview.SetHeaderNames(listHeader.ToArray());
+
+            m_bFolderStatus = false;
+            // work reverse operation
+            _SetChange_WindowFolderStatus();
         }
 
-        public bool SetParam(PARAM_CONFIG config)
+        public bool SetParam(PARAM_PATH config)
         {
             this.config = config;
 
@@ -49,51 +54,33 @@ namespace CD_VISION_DIALOG
             return true;
         }
 
-        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
+       #region WINDOW FOLDER - DATAVIEW 
+        private void BTN_SHOW_AND_HIDE_Click(object sender, EventArgs e)
         {
-            LV_HISTORY.Items.Clear();
+            _SetChange_WindowFolderStatus();
+        }
 
-            string strPathHistory = config.i02_PATH_DATA_DUMP;
-            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
-
-            LV_HISTORY.BeginUpdate();
-
-            Array.Reverse(allfiles);
-
-            for (int i = 0; i < allfiles.Length; i++)
+        private void _SetChange_WindowFolderStatus()
+        {
+            if (m_bFolderStatus == true)
             {
-                string single = allfiles.ElementAt(i);
-
-                string strFileName = Path.GetFileName(single);
-                if (strFileName.Contains("$") == true) continue;
-
-                // Get File Name 
-                strFileName = WrapperUnion.WrapperFile.GetFileName(strFileName);
-                // Get Folder Name 
-                string strDate = Path.GetDirectoryName(single);
-                /****/ strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
- 
-                
-                ListViewItem lvi = new ListViewItem();
-
-                int nCount = LV_HISTORY.Items.Count;
-                lvi.Text = (nCount + 1).ToString();
-                lvi.SubItems.Add(strDate);
-                lvi.SubItems.Add(strFileName);
-
-                LV_HISTORY.Items.Add(lvi);
+                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_left;
+                this.Size = new Size(1490, 670);
+                BTN_SHOW_AND_HIDE.Location = new Point(this.Size.Width - 50, 6);
             }
-
-            LV_HISTORY.EndUpdate();
+            else if (m_bFolderStatus == false)
+            {
+                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_right;
+                this.Size = new Size(532, 670);
+                BTN_SHOW_AND_HIDE.Location = new Point(this.Size.Width - 50, 6);
+            }
+            
+            // reverse status 
+            m_bFolderStatus = !m_bFolderStatus;
         }
+        #endregion
 
-        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
-        {
-            Process.Start(config.i02_PATH_DATA_DUMP);
-
-        }
-
-        #region glass effect
+       #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
         private int padding_TOP = 5;
@@ -152,10 +139,95 @@ namespace CD_VISION_DIALOG
 
         #endregion
 
+       #region MAIN BUTTON EVENTS
+
+        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
+        {
+            LV_HISTORY.Items.Clear();
+
+            string strPathHistory = config.i02_PATH_DATA_DUMP;
+            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
+
+            LV_HISTORY.BeginUpdate();
+
+            Array.Reverse(allfiles);
+
+            for (int i = 0; i < allfiles.Length; i++)
+            {
+                string single = allfiles.ElementAt(i);
+
+                string strFileName = Path.GetFileName(single);
+                if (strFileName.Contains("$") == true) continue;
+
+                // Get File Name 
+                strFileName = WrapperUnion.WrapperFile.GetFileName(strFileName);
+                // Get Folder Name 
+                string strDate = Path.GetDirectoryName(single);
+                /****/
+                strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
+
+
+                ListViewItem lvi = new ListViewItem();
+
+                int nCount = LV_HISTORY.Items.Count;
+                lvi.Text = (nCount + 1).ToString();
+                lvi.SubItems.Add(strDate);
+                lvi.SubItems.Add(strFileName);
+
+                LV_HISTORY.Items.Add(lvi);
+            }
+
+            LV_HISTORY.EndUpdate();
+        }
+
+
+        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
+        {
+            Process.Start(config.i02_PATH_DATA_DUMP);
+
+        }
+
+        private void BTN_OPEN_FILE_Click(object sender, EventArgs e)
+        {
+            if (LV_HISTORY.FocusedItem == null)
+            {
+                MessageBox.Show("Select The Target.", "EMPTY SELECTION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+
+            }
+
+            // Get Selected Item
+            int nIndex = LV_HISTORY.FocusedItem.Index;
+
+            string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
+            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
+
+            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
+
+            if (File.Exists(strFullPath) == true)
+            {
+                WrapperExcel.ExcuteExcel(strFullPath);
+            }
+            else
+            {
+                MessageBox.Show("File Not Found.", "FILE EXISTANCE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+        }
+       
         private void BTN_CLEAR_Click(object sender, EventArgs e)
         {
             m_dgview.Clear();
         }
+
+        private void BTN_CLOSE_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        #endregion 
+
+       #region LISTVIEW-RELATED
 
         private void LV_HISTORY_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -172,7 +244,13 @@ namespace CD_VISION_DIALOG
             string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
 
             WrapperCVS cvs = new WrapperCVS();
-            cvs.ReadCSVFile(strFullPath);
+            string msg = string.Empty;
+
+            if (cvs.ReadCSVFile(strFullPath, out msg) == false)
+            {
+                MessageBox.Show(string.Format("{0}\nUsed In Another Process.", strFullPath), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             m_dgview.Clear();
             List<string[]> list = cvs.GetAll();
@@ -181,8 +259,8 @@ namespace CD_VISION_DIALOG
 
             
             //// Parsing
-            //string PATH_DATE = Path.Combine(m_fm.config.i15_PATH_HIST_MEASURE, strDate);
-            //string PATH_IMAGE = Path.Combine(m_fm.config.i15_PATH_HIST_MEASURE, strDate, strImageFile);
+            //string PATH_DATE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate);
+            //string PATH_IMAGE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate, strImageFile);
             //
             //string strTimeCode = strImageFile.Substring(0, 12);
             //string strInspFile = strTimeCode + "_INSP.txt";
@@ -193,7 +271,7 @@ namespace CD_VISION_DIALOG
             //uc_view_history.Refresh();
             //
             //// Get Recp File Names
-            //String[] allfiles = System.IO.Directory.GetFiles(m_fm.config.i15_PATH_HIST_MEASURE, "*.*", System.IO.SearchOption.AllDirectories);
+            //String[] allfiles = System.IO.Directory.GetFiles(m_fm.param_path.i15_PATH_HIST_MEASURE, "*.*", System.IO.SearchOption.AllDirectories);
             //
             //string PATH_PREV_RECP = string.Empty;
             //
@@ -210,10 +288,16 @@ namespace CD_VISION_DIALOG
 
         }
 
-        private void BTN_CLOSE_Click(object sender, EventArgs e)
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            this.Hide();
+            WrapperLV.SortData(LV_HISTORY, e.Column);
         }
+
+        #endregion
+
+
+
+
 
     }
 }

@@ -66,12 +66,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UC_CD_PARAM">
-      <HintPath>UC_CD_PARAM\Lib\UC_CD_PARAM.dll</HintPath>
-    </Reference>
-    <Reference Include="UC_CD_View, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UC_CD_PARAM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>UC_CD_VIEW\Lib\UC_CD_View.dll</HintPath>
+      <HintPath>Library\UC_CD_PARAM.dll</HintPath>
+    </Reference>
+    <Reference Include="UC_CD_VIEW">
+      <HintPath>Library\UC_CD_VIEW.DLL</HintPath>
     </Reference>
     <Reference Include="UC_GRAPH">
       <HintPath>Library\UC_GRAPH.dll</HintPath>
@@ -239,9 +239,6 @@
     <None Include="Resources\camera info.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\camera info1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\dir bottom.png" />
   </ItemGroup>
   <ItemGroup>
@@ -323,18 +320,18 @@
     <None Include="Resources\zoom plus.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\zoom plus1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="alien male.ico" />
+    <None Include="Resources\Iteration.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\recipe right.png" />
+    <None Include="Resources\recipe left.png" />
+    <None Include="Resources\fst_logo.png" />
     <None Include="Resources\trends.png" />
     <None Include="Resources\matrix.png" />
     <None Include="Resources\alien male.png" />
     <None Include="Resources\unify.png" />
-    <None Include="Resources\camera info2.png" />
     <None Include="Resources\setting1.png" />
     <None Include="Resources\delete3.png" />
-    <None Include="Resources\logo.png" />
     <None Include="Resources\image2.png" />
     <None Include="Resources\setting.png" />
     <None Include="Resources\process.png" />
@@ -357,7 +354,6 @@
     <None Include="Resources\apiply2.png" />
     <None Include="Resources\apply.png" />
     <None Include="Resources\openfile.png" />
-    <None Include="Resources\Posterious1.png" />
     <None Include="Resources\quick restart.png" />
     <None Include="Resources\button_ok.png" />
     <None Include="Resources\button_cancel.png" />

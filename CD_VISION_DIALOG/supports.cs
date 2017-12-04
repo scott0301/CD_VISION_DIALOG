@@ -3,8 +3,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Timers;
+
 using System.IO;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+using System.Timers;
+using System.Collections.Generic;
 
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,7 +19,7 @@ using CD_Figure;
 using CD_Paramter;
 using CD_View;
 
-using System.Drawing;
+using WrapperUnion;
 
 namespace CD_VISION_DIALOG
 {
@@ -30,32 +36,43 @@ namespace CD_VISION_DIALOG
         // TIME RELATED 
         //*****************************************************************************************
 
-        
-
-        public static string GetBuildInfo()
+        public static void DumpPoints(List<PointF> list)
         {
-            string strinfo = System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName;
+            WrapperExcel ex = new WrapperExcel();
 
-            var parse = strinfo.Split(',');
-            string filename = parse[0] + ".exe";
+            for (int i = 0; i < list.Count; i++)
+            {
+                string[] data = new string[2];
 
-            string strCurPath = Application.StartupPath;
-            FileInfo fi = new FileInfo(strCurPath);
-            DateTime dt = fi.LastWriteTime;
+                data[0] = list.ElementAt(i).X.ToString();
+                data[1] = list.ElementAt(i).Y.ToString();
 
-            string[] t = { dt.Year.ToString(),                 string.Format("{0:00}", dt.Month),  string.Format("{0:00}", dt.Day  ), 
-                                      string.Format("{0:00}", dt.Hour  ), string.Format("{0:00}", dt.Minute), string.Format("{0:00}", dt.Second) };
+                ex.data.Add(data);
+            }
 
-            string strDateTime = t[0] + t[1] + t[2] + "_" + t[3] + t[4] + t[5];
+            ex.Dump_Data("c:\\" + WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM() + "_COORD.xlsx");
 
-            return "BUILD INFORMATION : " + strDateTime;
         }
-        
-         
+    }
+    public class CIterativeStaticRun
+    {
+        private bool bStaticRun = false; // static repeatability test
+        public bool IS_STATIC_RUN { get { return bStaticRun; } set { bStaticRun = value; } }
+        public int STACK_SIZE { get { return listSequence.Count(); } } 
 
-        
+        public Stack<CInspectionUnit> listSequence = new Stack<CInspectionUnit>();
 
+        public void SetInit()
+        {
+            listSequence.Clear();
+            IS_STATIC_RUN = false;
+        }
 
+        public void AppendItem(byte[] rawImage, int imageW, int imageH, int nCamNo, CFigureManager fm)
+        {
+            CInspectionUnit iu = new CInspectionUnit(rawImage, imageW, imageH, nCamNo, fm);
+            listSequence.Push(iu);
+        }
        
     }
 }

@@ -51,7 +51,7 @@ namespace CD_VISION_DIALOG
 
            
             helperBaseRecp = new CHelper_BaseRecp(LV_BASE_RECP, RDO_TYPE_ADI, RDO_TYPE_ACI);
-            helperBaseRecp.SetBasePath(m_fm.config.i03_PATH_RECP_BASE);
+            helperBaseRecp.SetBasePath(m_fm.param_path.i03_PATH_RECP_BASE);
             this.Padding = new Padding(10);
         }
         private void FormBaseRecp_FormClosing(object sender, FormClosingEventArgs e)
@@ -70,7 +70,7 @@ namespace CD_VISION_DIALOG
 
         private void _UpdateBaseRecpFiles()
         {
-            string[] files = Directory.GetFiles(m_fm.config.i03_PATH_RECP_BASE, "*.INI");
+            string[] files = Directory.GetFiles(m_fm.param_path.i03_PATH_RECP_BASE, "*.INI");
 
             LV_BASE_RECP.Items.Clear();
 
@@ -252,7 +252,7 @@ namespace CD_VISION_DIALOG
             }
 
             INI_BASE_RECP.Clear();
-            INI_BASE_RECP.Load(Path.Combine(m_fm.config.i03_PATH_RECP_BASE, strFilePath));
+            INI_BASE_RECP.Load(Path.Combine(m_fm.param_path.i03_PATH_RECP_BASE, strFilePath));
 
 
             BASE_RECP recp = new BASE_RECP();
@@ -297,7 +297,7 @@ namespace CD_VISION_DIALOG
 
             string strSelectedBaseRecp = helperBaseRecp.GetSelectedBaseRecpFileName();
 
-            dlgGenerateRecp.SetBaseFilePath(m_fm.config.i03_PATH_RECP_BASE);
+            dlgGenerateRecp.SetBaseFilePath(m_fm.param_path.i03_PATH_RECP_BASE);
             dlgGenerateRecp._TriggerSetBaseRecp(strSelectedBaseRecp);
             dlgGenerateRecp.ShowDialog();
         }
@@ -320,7 +320,7 @@ namespace CD_VISION_DIALOG
                 // if this is fucking shit, proceed ~
                 else
                 {
-                    File.Delete(Path.Combine(m_fm.config.i03_PATH_RECP_BASE, strFileNameBaseRecp));
+                    File.Delete(Path.Combine(m_fm.param_path.i03_PATH_RECP_BASE, strFileNameBaseRecp));
                     _UpdateBaseRecpFiles();
                 }
 
@@ -337,7 +337,7 @@ namespace CD_VISION_DIALOG
 
             // step 01 : making full path
             string strCurrentRecp = helperBaseRecp.ExtensionAdd(TXT_TARGET_BASE_RECP.Text);
-            strCurrentRecp = Path.Combine(m_fm.config.i03_PATH_RECP_BASE, strCurrentRecp);
+            strCurrentRecp = Path.Combine(m_fm.param_path.i03_PATH_RECP_BASE, strCurrentRecp);
 
             // step 02 : Load base recp & ui update
             BASE_RECP single = _LoadRecpFromFS(strCurrentRecp);
@@ -388,7 +388,7 @@ namespace CD_VISION_DIALOG
 
                 if (MessageBox.Show(strDiff, "Changed Parameters", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    _SaveRecp(baseRecpUI, Path.Combine(m_fm.config.i03_PATH_RECP_BASE, strSelectedBaseRecp));
+                    _SaveRecp(baseRecpUI, Path.Combine(m_fm.param_path.i03_PATH_RECP_BASE, strSelectedBaseRecp));
                 }
             }
             

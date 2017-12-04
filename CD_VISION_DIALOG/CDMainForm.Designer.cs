@@ -34,7 +34,6 @@
             this.INDEX = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FILES = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CHK_MEASURE_DUMP = new System.Windows.Forms.CheckBox();
-            this.CHK_MEASURE_VIEW_ONLY = new System.Windows.Forms.CheckBox();
             this.CHK_BLEND = new System.Windows.Forms.CheckBox();
             this.TB_BLENDING_RATIO = new System.Windows.Forms.TrackBar();
             this.LB_BLEND_VALUE = new System.Windows.Forms.Label();
@@ -163,6 +162,7 @@
             this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.BTN_TEMP_TRANS_DESING = new System.Windows.Forms.Button();
             this.BTN_MENU_STATISTICS = new System.Windows.Forms.Button();
             this.BTN_MAIN_LOGO = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -178,7 +178,7 @@
             this.BTN_MENU_CREATE_RECP = new System.Windows.Forms.Button();
             this.BTN_MENU_IMAGE_PROCESSING = new System.Windows.Forms.Button();
             this.BTN_MENU_TUNNING = new System.Windows.Forms.Button();
-            this.BTN_HACKER = new System.Windows.Forms.Button();
+            this.BTN_MENU_ADVANCED = new System.Windows.Forms.Button();
             this.BTN_MENU_RECP = new System.Windows.Forms.Button();
             this.BTN_MENU_HISTORY_MATCHING = new System.Windows.Forms.Button();
             this.BTN_MENU_CONFIG = new System.Windows.Forms.Button();
@@ -207,12 +207,26 @@
             this.BTN_PTRN_MATCH = new System.Windows.Forms.Button();
             this.BTN_PTRN_RESULT = new System.Windows.Forms.Button();
             this.PNL_MEASURE_RESULT = new System.Windows.Forms.Panel();
+            this.RDO_SIMUL_STATIC = new System.Windows.Forms.RadioButton();
+            this.RDO_SIMUL_LOCAL_FILES = new System.Windows.Forms.RadioButton();
+            this.RDO_SIMUL_VIEW_ONLY = new System.Windows.Forms.RadioButton();
             this.BTN_PLAY = new System.Windows.Forms.Button();
             this.BTN_GET_IMAGE_FROM_SEQUENCE = new System.Windows.Forms.Button();
             this.BTN_MEASURE = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.process1 = new System.Diagnostics.Process();
+            this.PROG_RUN = new System.Windows.Forms.ProgressBar();
+            this.CHK_SIMUL_FOR_MULTI_POINT = new System.Windows.Forms.CheckBox();
+            this.LB_SIMUL_FOR_MULTI_POINT = new System.Windows.Forms.Label();
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE = new System.Windows.Forms.TextBox();
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET = new System.Windows.Forms.TextBox();
+            this.LB_TIME_EXECUTION = new System.Windows.Forms.Label();
+            this.LB_CYCLE_INFO = new System.Windows.Forms.Label();
+            this.LB_TIME_PREDICTION = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LB_LIFE_TIME = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
             this.TAB_FIGURE.SuspendLayout();
             this.draw_Rect.SuspendLayout();
@@ -239,6 +253,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PIC_FOCUS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_PTRN)).BeginInit();
             this.PNL_MEASURE_RESULT.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // LV_FILE_LIST
@@ -254,7 +269,7 @@
             this.LV_FILE_LIST.Location = new System.Drawing.Point(673, 799);
             this.LV_FILE_LIST.MultiSelect = false;
             this.LV_FILE_LIST.Name = "LV_FILE_LIST";
-            this.LV_FILE_LIST.Size = new System.Drawing.Size(604, 237);
+            this.LV_FILE_LIST.Size = new System.Drawing.Size(604, 180);
             this.LV_FILE_LIST.TabIndex = 10;
             this.LV_FILE_LIST.UseCompatibleStateImageBehavior = false;
             this.LV_FILE_LIST.View = System.Windows.Forms.View.Details;
@@ -275,26 +290,14 @@
             // CHK_MEASURE_DUMP
             // 
             this.CHK_MEASURE_DUMP.AutoSize = true;
+            this.CHK_MEASURE_DUMP.BackColor = System.Drawing.Color.Honeydew;
             this.CHK_MEASURE_DUMP.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CHK_MEASURE_DUMP.Location = new System.Drawing.Point(490, 136);
+            this.CHK_MEASURE_DUMP.Location = new System.Drawing.Point(346, 7);
             this.CHK_MEASURE_DUMP.Name = "CHK_MEASURE_DUMP";
-            this.CHK_MEASURE_DUMP.Size = new System.Drawing.Size(106, 18);
+            this.CHK_MEASURE_DUMP.Size = new System.Drawing.Size(114, 18);
             this.CHK_MEASURE_DUMP.TabIndex = 11;
-            this.CHK_MEASURE_DUMP.Text = "DUMP DATA";
-            this.CHK_MEASURE_DUMP.UseVisualStyleBackColor = true;
-            // 
-            // CHK_MEASURE_VIEW_ONLY
-            // 
-            this.CHK_MEASURE_VIEW_ONLY.AutoSize = true;
-            this.CHK_MEASURE_VIEW_ONLY.Checked = true;
-            this.CHK_MEASURE_VIEW_ONLY.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_MEASURE_VIEW_ONLY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CHK_MEASURE_VIEW_ONLY.Location = new System.Drawing.Point(490, 112);
-            this.CHK_MEASURE_VIEW_ONLY.Name = "CHK_MEASURE_VIEW_ONLY";
-            this.CHK_MEASURE_VIEW_ONLY.Size = new System.Drawing.Size(106, 18);
-            this.CHK_MEASURE_VIEW_ONLY.TabIndex = 12;
-            this.CHK_MEASURE_VIEW_ONLY.Text = "VIEW ONLY";
-            this.CHK_MEASURE_VIEW_ONLY.UseVisualStyleBackColor = true;
+            this.CHK_MEASURE_DUMP.Text = "SHOW DUMP";
+            this.CHK_MEASURE_DUMP.UseVisualStyleBackColor = false;
             // 
             // CHK_BLEND
             // 
@@ -535,6 +538,7 @@
             this.TXT_PARAM_DIA_ANGLE.ForeColor = System.Drawing.Color.Black;
             this.TXT_PARAM_DIA_ANGLE.Location = new System.Drawing.Point(51, 81);
             this.TXT_PARAM_DIA_ANGLE.Name = "TXT_PARAM_DIA_ANGLE";
+            this.TXT_PARAM_DIA_ANGLE.ReadOnly = true;
             this.TXT_PARAM_DIA_ANGLE.Size = new System.Drawing.Size(37, 15);
             this.TXT_PARAM_DIA_ANGLE.TabIndex = 8;
             this.TXT_PARAM_DIA_ANGLE.Text = "0";
@@ -1259,7 +1263,7 @@
             // 
             // BTN_UPDATE_FIGURE_LIST
             // 
-            this.BTN_UPDATE_FIGURE_LIST.Location = new System.Drawing.Point(383, 256);
+            this.BTN_UPDATE_FIGURE_LIST.Location = new System.Drawing.Point(15, 338);
             this.BTN_UPDATE_FIGURE_LIST.Name = "BTN_UPDATE_FIGURE_LIST";
             this.BTN_UPDATE_FIGURE_LIST.Size = new System.Drawing.Size(189, 50);
             this.BTN_UPDATE_FIGURE_LIST.TabIndex = 13;
@@ -1302,7 +1306,7 @@
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label52.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label52.Location = new System.Drawing.Point(401, 92);
+            this.label52.Location = new System.Drawing.Point(370, 92);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(21, 13);
             this.label52.TabIndex = 0;
@@ -1327,7 +1331,7 @@
             this.TXT_PTRN_ACC_RATIO.ForeColor = System.Drawing.Color.Black;
             this.TXT_PTRN_ACC_RATIO.Location = new System.Drawing.Point(308, 88);
             this.TXT_PTRN_ACC_RATIO.Name = "TXT_PTRN_ACC_RATIO";
-            this.TXT_PTRN_ACC_RATIO.Size = new System.Drawing.Size(83, 20);
+            this.TXT_PTRN_ACC_RATIO.Size = new System.Drawing.Size(56, 20);
             this.TXT_PTRN_ACC_RATIO.TabIndex = 1;
             // 
             // TXT_PATH_PTRN_FILE
@@ -1425,7 +1429,7 @@
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label31.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label31.Location = new System.Drawing.Point(534, 70);
+            this.label31.Location = new System.Drawing.Point(534, 96);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(67, 13);
             this.label31.TabIndex = 41;
@@ -1436,9 +1440,9 @@
             this.msg.BackColor = System.Drawing.Color.White;
             this.msg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.msg.ForeColor = System.Drawing.Color.Black;
-            this.msg.Location = new System.Drawing.Point(4, 7);
+            this.msg.Location = new System.Drawing.Point(3, 34);
             this.msg.Name = "msg";
-            this.msg.Size = new System.Drawing.Size(425, 155);
+            this.msg.Size = new System.Drawing.Size(460, 132);
             this.msg.TabIndex = 39;
             this.msg.Text = "";
             // 
@@ -1469,7 +1473,7 @@
             this.BTN_FIGURE_MODIF_SCALE_PLUS.TabIndex = 8;
             this.BTN_FIGURE_MODIF_SCALE_PLUS.Text = "▶";
             this.BTN_FIGURE_MODIF_SCALE_PLUS.UseVisualStyleBackColor = true;
-            this.BTN_FIGURE_MODIF_SCALE_PLUS.Click += new System.EventHandler(this.BTN_FIGURE_MODIFY_SCALE_Click);
+            this.BTN_FIGURE_MODIF_SCALE_PLUS.Click += new System.EventHandler(this.BTN_FIGURE_MANIPULATION_SCALE_Click);
             // 
             // BTN_FIGURE_MODIF_SCALE_MINUS
             // 
@@ -1479,7 +1483,7 @@
             this.BTN_FIGURE_MODIF_SCALE_MINUS.TabIndex = 8;
             this.BTN_FIGURE_MODIF_SCALE_MINUS.Text = "◀";
             this.BTN_FIGURE_MODIF_SCALE_MINUS.UseVisualStyleBackColor = true;
-            this.BTN_FIGURE_MODIF_SCALE_MINUS.Click += new System.EventHandler(this.BTN_FIGURE_MODIFY_SCALE_Click);
+            this.BTN_FIGURE_MODIF_SCALE_MINUS.Click += new System.EventHandler(this.BTN_FIGURE_MANIPULATION_SCALE_Click);
             // 
             // RDO_ROI_ASYM
             // 
@@ -1672,7 +1676,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 25;
+            this.UC_LOG_VIEWER.m_workIndexer = 10;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1814,8 +1818,9 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.BTN_TEMP_TRANS_DESING);
             this.panel3.Controls.Add(this.BTN_MENU_STATISTICS);
             this.panel3.Controls.Add(this.BTN_MAIN_LOGO);
             this.panel3.Controls.Add(this.label9);
@@ -1831,7 +1836,7 @@
             this.panel3.Controls.Add(this.BTN_MENU_CREATE_RECP);
             this.panel3.Controls.Add(this.BTN_MENU_IMAGE_PROCESSING);
             this.panel3.Controls.Add(this.BTN_MENU_TUNNING);
-            this.panel3.Controls.Add(this.BTN_HACKER);
+            this.panel3.Controls.Add(this.BTN_MENU_ADVANCED);
             this.panel3.Controls.Add(this.BTN_MENU_RECP);
             this.panel3.Controls.Add(this.BTN_MENU_HISTORY_MATCHING);
             this.panel3.Controls.Add(this.BTN_MENU_CONFIG);
@@ -1841,13 +1846,23 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1225, 86);
             this.panel3.TabIndex = 57;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // BTN_TEMP_TRANS_DESING
+            // 
+            this.BTN_TEMP_TRANS_DESING.Location = new System.Drawing.Point(564, 4);
+            this.BTN_TEMP_TRANS_DESING.Name = "BTN_TEMP_TRANS_DESING";
+            this.BTN_TEMP_TRANS_DESING.Size = new System.Drawing.Size(153, 23);
+            this.BTN_TEMP_TRANS_DESING.TabIndex = 45;
+            this.BTN_TEMP_TRANS_DESING.Text = "TRANS_DESIGN";
+            this.BTN_TEMP_TRANS_DESING.UseVisualStyleBackColor = true;
+            this.BTN_TEMP_TRANS_DESING.Visible = false;
+            this.BTN_TEMP_TRANS_DESING.Click += new System.EventHandler(this.BTN_TEMP_TRANS_DESING_Click);
             // 
             // BTN_MENU_STATISTICS
             // 
             this.BTN_MENU_STATISTICS.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.trends;
             this.BTN_MENU_STATISTICS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_STATISTICS.Location = new System.Drawing.Point(564, 7);
+            this.BTN_MENU_STATISTICS.Location = new System.Drawing.Point(497, 7);
             this.BTN_MENU_STATISTICS.Name = "BTN_MENU_STATISTICS";
             this.BTN_MENU_STATISTICS.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_STATISTICS.TabIndex = 44;
@@ -1856,13 +1871,13 @@
             // 
             // BTN_MAIN_LOGO
             // 
-            this.BTN_MAIN_LOGO.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.logo;
+            this.BTN_MAIN_LOGO.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.vxdlogo1;
             this.BTN_MAIN_LOGO.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_MAIN_LOGO.FlatAppearance.BorderSize = 0;
-            this.BTN_MAIN_LOGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_MAIN_LOGO.Location = new System.Drawing.Point(8, 17);
+            this.BTN_MAIN_LOGO.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTN_MAIN_LOGO.Location = new System.Drawing.Point(8, 6);
             this.BTN_MAIN_LOGO.Name = "BTN_MAIN_LOGO";
-            this.BTN_MAIN_LOGO.Size = new System.Drawing.Size(200, 50);
+            this.BTN_MAIN_LOGO.Size = new System.Drawing.Size(117, 72);
             this.BTN_MAIN_LOGO.TabIndex = 43;
             this.BTN_MAIN_LOGO.UseVisualStyleBackColor = true;
             this.BTN_MAIN_LOGO.Click += new System.EventHandler(this.BTN_MAIN_LOGO_Click);
@@ -1884,11 +1899,11 @@
             this.LB_HACKER.AutoSize = true;
             this.LB_HACKER.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.LB_HACKER.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LB_HACKER.Location = new System.Drawing.Point(873, 67);
+            this.LB_HACKER.Location = new System.Drawing.Point(720, 65);
             this.LB_HACKER.Name = "LB_HACKER";
-            this.LB_HACKER.Size = new System.Drawing.Size(91, 13);
+            this.LB_HACKER.Size = new System.Drawing.Size(71, 13);
             this.LB_HACKER.TabIndex = 42;
-            this.LB_HACKER.Text = "Hacker Mode";
+            this.LB_HACKER.Text = "Advanced";
             this.LB_HACKER.Visible = false;
             // 
             // label26
@@ -1896,7 +1911,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label26.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label26.Location = new System.Drawing.Point(582, 67);
+            this.label26.Location = new System.Drawing.Point(515, 67);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(31, 13);
             this.label26.TabIndex = 42;
@@ -1907,7 +1922,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label23.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label23.Location = new System.Drawing.Point(502, 67);
+            this.label23.Location = new System.Drawing.Point(435, 67);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(56, 13);
             this.label23.TabIndex = 42;
@@ -1918,7 +1933,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label24.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label24.Location = new System.Drawing.Point(434, 69);
+            this.label24.Location = new System.Drawing.Point(367, 69);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(59, 13);
             this.label24.TabIndex = 42;
@@ -1929,7 +1944,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label21.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label21.Location = new System.Drawing.Point(363, 69);
+            this.label21.Location = new System.Drawing.Point(296, 69);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(62, 13);
             this.label21.TabIndex = 42;
@@ -1940,7 +1955,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label19.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label19.Location = new System.Drawing.Point(307, 69);
+            this.label19.Location = new System.Drawing.Point(240, 69);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(40, 13);
             this.label19.TabIndex = 42;
@@ -1951,7 +1966,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label18.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label18.Location = new System.Drawing.Point(217, 69);
+            this.label18.Location = new System.Drawing.Point(150, 69);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(72, 13);
             this.label18.TabIndex = 42;
@@ -1983,7 +1998,7 @@
             // 
             this.BTN_MENU_CREATE_RECP.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
             this.BTN_MENU_CREATE_RECP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_CREATE_RECP.Location = new System.Drawing.Point(225, 5);
+            this.BTN_MENU_CREATE_RECP.Location = new System.Drawing.Point(158, 5);
             this.BTN_MENU_CREATE_RECP.Name = "BTN_MENU_CREATE_RECP";
             this.BTN_MENU_CREATE_RECP.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_CREATE_RECP.TabIndex = 0;
@@ -1994,7 +2009,7 @@
             // 
             this.BTN_MENU_IMAGE_PROCESSING.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.image2;
             this.BTN_MENU_IMAGE_PROCESSING.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_IMAGE_PROCESSING.Location = new System.Drawing.Point(365, 7);
+            this.BTN_MENU_IMAGE_PROCESSING.Location = new System.Drawing.Point(298, 7);
             this.BTN_MENU_IMAGE_PROCESSING.Name = "BTN_MENU_IMAGE_PROCESSING";
             this.BTN_MENU_IMAGE_PROCESSING.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_IMAGE_PROCESSING.TabIndex = 0;
@@ -2005,30 +2020,30 @@
             // 
             this.BTN_MENU_TUNNING.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.camera_info;
             this.BTN_MENU_TUNNING.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_TUNNING.Location = new System.Drawing.Point(431, 7);
+            this.BTN_MENU_TUNNING.Location = new System.Drawing.Point(364, 7);
             this.BTN_MENU_TUNNING.Name = "BTN_MENU_TUNNING";
             this.BTN_MENU_TUNNING.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_TUNNING.TabIndex = 0;
             this.BTN_MENU_TUNNING.UseVisualStyleBackColor = true;
             this.BTN_MENU_TUNNING.Click += new System.EventHandler(this.BTN_MENU_TUNNING_Click);
             // 
-            // BTN_HACKER
+            // BTN_MENU_ADVANCED
             // 
-            this.BTN_HACKER.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.matrix;
-            this.BTN_HACKER.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_HACKER.Location = new System.Drawing.Point(882, 6);
-            this.BTN_HACKER.Name = "BTN_HACKER";
-            this.BTN_HACKER.Size = new System.Drawing.Size(60, 60);
-            this.BTN_HACKER.TabIndex = 0;
-            this.BTN_HACKER.UseVisualStyleBackColor = true;
-            this.BTN_HACKER.Visible = false;
-            this.BTN_HACKER.Click += new System.EventHandler(this.BTN_HACKER_Click);
+            this.BTN_MENU_ADVANCED.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.matrix;
+            this.BTN_MENU_ADVANCED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_MENU_ADVANCED.Location = new System.Drawing.Point(723, 4);
+            this.BTN_MENU_ADVANCED.Name = "BTN_MENU_ADVANCED";
+            this.BTN_MENU_ADVANCED.Size = new System.Drawing.Size(60, 60);
+            this.BTN_MENU_ADVANCED.TabIndex = 0;
+            this.BTN_MENU_ADVANCED.UseVisualStyleBackColor = true;
+            this.BTN_MENU_ADVANCED.Visible = false;
+            this.BTN_MENU_ADVANCED.Click += new System.EventHandler(this.BTN_MENU_ADVENCED_Click);
             // 
             // BTN_MENU_RECP
             // 
             this.BTN_MENU_RECP.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.setting;
             this.BTN_MENU_RECP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_RECP.Location = new System.Drawing.Point(498, 6);
+            this.BTN_MENU_RECP.Location = new System.Drawing.Point(431, 6);
             this.BTN_MENU_RECP.Name = "BTN_MENU_RECP";
             this.BTN_MENU_RECP.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_RECP.TabIndex = 0;
@@ -2072,7 +2087,7 @@
             // 
             this.BTN_MENU_PTRN.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.patching;
             this.BTN_MENU_PTRN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_MENU_PTRN.Location = new System.Drawing.Point(296, 7);
+            this.BTN_MENU_PTRN.Location = new System.Drawing.Point(229, 7);
             this.BTN_MENU_PTRN.Name = "BTN_MENU_PTRN";
             this.BTN_MENU_PTRN.Size = new System.Drawing.Size(60, 60);
             this.BTN_MENU_PTRN.TabIndex = 0;
@@ -2101,7 +2116,6 @@
             this.PNL_DRAW_FIGURE.Name = "PNL_DRAW_FIGURE";
             this.PNL_DRAW_FIGURE.Size = new System.Drawing.Size(610, 760);
             this.PNL_DRAW_FIGURE.TabIndex = 58;
-            this.PNL_DRAW_FIGURE.Paint += new System.Windows.Forms.PaintEventHandler(this.PNL_DRAW_FIGURE_Paint);
             // 
             // label25
             // 
@@ -2133,12 +2147,12 @@
             this.BTN_UPDATE_PARAMETER.FlatAppearance.BorderSize = 3;
             this.BTN_UPDATE_PARAMETER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.BTN_UPDATE_PARAMETER.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_UPDATE_PARAMETER.Location = new System.Drawing.Point(169, 581);
+            this.BTN_UPDATE_PARAMETER.Location = new System.Drawing.Point(168, 581);
             this.BTN_UPDATE_PARAMETER.Name = "BTN_UPDATE_PARAMETER";
             this.BTN_UPDATE_PARAMETER.Size = new System.Drawing.Size(60, 60);
             this.BTN_UPDATE_PARAMETER.TabIndex = 0;
             this.BTN_UPDATE_PARAMETER.UseVisualStyleBackColor = true;
-            this.BTN_UPDATE_PARAMETER.Click += new System.EventHandler(this.BTN_UPDATE_PARAMETER_Click);
+            this.BTN_UPDATE_PARAMETER.Click += new System.EventHandler(this.BTN_FIGURE_INVALIDATE_Click);
             // 
             // BTN_RELOAD_PARAM_FIGURES
             // 
@@ -2193,7 +2207,7 @@
             // UC_Parameter
             // 
             this.UC_Parameter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UC_Parameter.Location = new System.Drawing.Point(235, 310);
+            this.UC_Parameter.Location = new System.Drawing.Point(236, 312);
             this.UC_Parameter.Name = "UC_Parameter";
             this.UC_Parameter.Size = new System.Drawing.Size(370, 340);
             this.UC_Parameter.TabIndex = 1;
@@ -2314,7 +2328,7 @@
             this.BTN_RECIPE_SAVE.Size = new System.Drawing.Size(60, 60);
             this.BTN_RECIPE_SAVE.TabIndex = 12;
             this.BTN_RECIPE_SAVE.UseVisualStyleBackColor = true;
-            this.BTN_RECIPE_SAVE.Click += new System.EventHandler(this.BTN_RECIPE_SAVE_Click);
+            this.BTN_RECIPE_SAVE.Click += new System.EventHandler(this.BTN_RECP_SAVE_Click);
             // 
             // BTN_RECP_SAVE_AS
             // 
@@ -2379,12 +2393,14 @@
             // 
             this.PNL_MEASURE_RESULT.BackColor = System.Drawing.SystemColors.Control;
             this.PNL_MEASURE_RESULT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PNL_MEASURE_RESULT.Controls.Add(this.RDO_SIMUL_STATIC);
+            this.PNL_MEASURE_RESULT.Controls.Add(this.RDO_SIMUL_LOCAL_FILES);
+            this.PNL_MEASURE_RESULT.Controls.Add(this.RDO_SIMUL_VIEW_ONLY);
             this.PNL_MEASURE_RESULT.Controls.Add(this.BTN_PLAY);
             this.PNL_MEASURE_RESULT.Controls.Add(this.BTN_GET_IMAGE_FROM_SEQUENCE);
             this.PNL_MEASURE_RESULT.Controls.Add(this.BTN_MEASURE);
             this.PNL_MEASURE_RESULT.Controls.Add(this.msg);
             this.PNL_MEASURE_RESULT.Controls.Add(this.CHK_MEASURE_DUMP);
-            this.PNL_MEASURE_RESULT.Controls.Add(this.CHK_MEASURE_VIEW_ONLY);
             this.PNL_MEASURE_RESULT.Controls.Add(this.label1);
             this.PNL_MEASURE_RESULT.Controls.Add(this.label31);
             this.PNL_MEASURE_RESULT.Location = new System.Drawing.Point(1288, 863);
@@ -2392,11 +2408,44 @@
             this.PNL_MEASURE_RESULT.Size = new System.Drawing.Size(610, 173);
             this.PNL_MEASURE_RESULT.TabIndex = 60;
             // 
+            // RDO_SIMUL_STATIC
+            // 
+            this.RDO_SIMUL_STATIC.AutoSize = true;
+            this.RDO_SIMUL_STATIC.Location = new System.Drawing.Point(228, 6);
+            this.RDO_SIMUL_STATIC.Name = "RDO_SIMUL_STATIC";
+            this.RDO_SIMUL_STATIC.Size = new System.Drawing.Size(111, 18);
+            this.RDO_SIMUL_STATIC.TabIndex = 43;
+            this.RDO_SIMUL_STATIC.Text = "STATIC TEST";
+            this.RDO_SIMUL_STATIC.UseVisualStyleBackColor = true;
+            // 
+            // RDO_SIMUL_LOCAL_FILES
+            // 
+            this.RDO_SIMUL_LOCAL_FILES.AutoSize = true;
+            this.RDO_SIMUL_LOCAL_FILES.Location = new System.Drawing.Point(113, 6);
+            this.RDO_SIMUL_LOCAL_FILES.Name = "RDO_SIMUL_LOCAL_FILES";
+            this.RDO_SIMUL_LOCAL_FILES.Size = new System.Drawing.Size(113, 18);
+            this.RDO_SIMUL_LOCAL_FILES.TabIndex = 43;
+            this.RDO_SIMUL_LOCAL_FILES.Text = "LOCAL FILES";
+            this.RDO_SIMUL_LOCAL_FILES.UseVisualStyleBackColor = true;
+            // 
+            // RDO_SIMUL_VIEW_ONLY
+            // 
+            this.RDO_SIMUL_VIEW_ONLY.AutoSize = true;
+            this.RDO_SIMUL_VIEW_ONLY.BackColor = System.Drawing.Color.White;
+            this.RDO_SIMUL_VIEW_ONLY.Checked = true;
+            this.RDO_SIMUL_VIEW_ONLY.Location = new System.Drawing.Point(8, 7);
+            this.RDO_SIMUL_VIEW_ONLY.Name = "RDO_SIMUL_VIEW_ONLY";
+            this.RDO_SIMUL_VIEW_ONLY.Size = new System.Drawing.Size(105, 18);
+            this.RDO_SIMUL_VIEW_ONLY.TabIndex = 43;
+            this.RDO_SIMUL_VIEW_ONLY.TabStop = true;
+            this.RDO_SIMUL_VIEW_ONLY.Text = "VIEW ONLY";
+            this.RDO_SIMUL_VIEW_ONLY.UseVisualStyleBackColor = false;
+            // 
             // BTN_PLAY
             // 
-            this.BTN_PLAY.Location = new System.Drawing.Point(435, 86);
+            this.BTN_PLAY.Location = new System.Drawing.Point(469, 4);
             this.BTN_PLAY.Name = "BTN_PLAY";
-            this.BTN_PLAY.Size = new System.Drawing.Size(75, 23);
+            this.BTN_PLAY.Size = new System.Drawing.Size(127, 23);
             this.BTN_PLAY.TabIndex = 42;
             this.BTN_PLAY.Text = "Play";
             this.BTN_PLAY.UseVisualStyleBackColor = true;
@@ -2407,12 +2456,12 @@
             this.BTN_GET_IMAGE_FROM_SEQUENCE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.camera_info;
             this.BTN_GET_IMAGE_FROM_SEQUENCE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_GET_IMAGE_FROM_SEQUENCE.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BTN_GET_IMAGE_FROM_SEQUENCE.Location = new System.Drawing.Point(470, 7);
+            this.BTN_GET_IMAGE_FROM_SEQUENCE.Location = new System.Drawing.Point(469, 34);
             this.BTN_GET_IMAGE_FROM_SEQUENCE.Name = "BTN_GET_IMAGE_FROM_SEQUENCE";
             this.BTN_GET_IMAGE_FROM_SEQUENCE.Size = new System.Drawing.Size(60, 60);
             this.BTN_GET_IMAGE_FROM_SEQUENCE.TabIndex = 39;
             this.BTN_GET_IMAGE_FROM_SEQUENCE.UseVisualStyleBackColor = true;
-            this.BTN_GET_IMAGE_FROM_SEQUENCE.Click += new System.EventHandler(this.COMMON_BTN_GET_OPTICS_INFO_Click);
+            this.BTN_GET_IMAGE_FROM_SEQUENCE.Click += new System.EventHandler(this.COMMON_BTN_GRAB_FROM_SEQUENCE_Click);
             // 
             // BTN_MEASURE
             // 
@@ -2421,7 +2470,7 @@
             this.BTN_MEASURE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.BTN_MEASURE.Font = new System.Drawing.Font("Verdana", 9F);
             this.BTN_MEASURE.ForeColor = System.Drawing.Color.Cornsilk;
-            this.BTN_MEASURE.Location = new System.Drawing.Point(536, 7);
+            this.BTN_MEASURE.Location = new System.Drawing.Point(536, 33);
             this.BTN_MEASURE.Name = "BTN_MEASURE";
             this.BTN_MEASURE.Size = new System.Drawing.Size(60, 60);
             this.BTN_MEASURE.TabIndex = 40;
@@ -2433,7 +2482,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(481, 70);
+            this.label1.Location = new System.Drawing.Point(481, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 41;
@@ -2441,9 +2490,8 @@
             // 
             // label16
             // 
-            this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label16.Location = new System.Drawing.Point(673, 770);
+            this.label16.Location = new System.Drawing.Point(670, 778);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(152, 14);
             this.label16.TabIndex = 0;
@@ -2459,12 +2507,124 @@
             this.label17.TabIndex = 0;
             this.label17.Text = ":- OPERATIONAL LOG";
             // 
+            // process1
+            // 
+            this.process1.StartInfo.Domain = "";
+            this.process1.StartInfo.LoadUserProfile = false;
+            this.process1.StartInfo.Password = null;
+            this.process1.StartInfo.StandardErrorEncoding = null;
+            this.process1.StartInfo.StandardOutputEncoding = null;
+            this.process1.StartInfo.UserName = "";
+            this.process1.SynchronizingObject = this;
+            // 
+            // PROG_RUN
+            // 
+            this.PROG_RUN.Location = new System.Drawing.Point(12, 24);
+            this.PROG_RUN.Name = "PROG_RUN";
+            this.PROG_RUN.Size = new System.Drawing.Size(589, 27);
+            this.PROG_RUN.TabIndex = 30;
+            // 
+            // CHK_SIMUL_FOR_MULTI_POINT
+            // 
+            this.CHK_SIMUL_FOR_MULTI_POINT.BackColor = System.Drawing.Color.YellowGreen;
+            this.CHK_SIMUL_FOR_MULTI_POINT.Location = new System.Drawing.Point(862, 774);
+            this.CHK_SIMUL_FOR_MULTI_POINT.Name = "CHK_SIMUL_FOR_MULTI_POINT";
+            this.CHK_SIMUL_FOR_MULTI_POINT.Size = new System.Drawing.Size(158, 18);
+            this.CHK_SIMUL_FOR_MULTI_POINT.TabIndex = 61;
+            this.CHK_SIMUL_FOR_MULTI_POINT.Text = "FOR MULTI POINTS";
+            this.CHK_SIMUL_FOR_MULTI_POINT.UseVisualStyleBackColor = false;
+            this.CHK_SIMUL_FOR_MULTI_POINT.CheckedChanged += new System.EventHandler(this.CHK_SIMUL_FOR_MULTI_POINTS_CheckedChanged);
+            // 
+            // LB_SIMUL_FOR_MULTI_POINT
+            // 
+            this.LB_SIMUL_FOR_MULTI_POINT.BackColor = System.Drawing.Color.Yellow;
+            this.LB_SIMUL_FOR_MULTI_POINT.Location = new System.Drawing.Point(1036, 774);
+            this.LB_SIMUL_FOR_MULTI_POINT.Name = "LB_SIMUL_FOR_MULTI_POINT";
+            this.LB_SIMUL_FOR_MULTI_POINT.Size = new System.Drawing.Size(111, 14);
+            this.LB_SIMUL_FOR_MULTI_POINT.TabIndex = 62;
+            this.LB_SIMUL_FOR_MULTI_POINT.Text = "[CYCLE,POINT]";
+            this.LB_SIMUL_FOR_MULTI_POINT.Visible = false;
+            // 
+            // TXT_SIMUL_FOR_MULTI_POINT_CYCLE
+            // 
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.BackColor = System.Drawing.Color.Yellow;
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Location = new System.Drawing.Point(1154, 771);
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Name = "TXT_SIMUL_FOR_MULTI_POINT_CYCLE";
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Size = new System.Drawing.Size(52, 22);
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.TabIndex = 63;
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Text = "0";
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Visible = false;
+            // 
+            // TXT_SIMUL_FOR_MULTI_POINT_TARGET
+            // 
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.BackColor = System.Drawing.Color.Yellow;
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Location = new System.Drawing.Point(1212, 771);
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Name = "TXT_SIMUL_FOR_MULTI_POINT_TARGET";
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Size = new System.Drawing.Size(52, 22);
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.TabIndex = 63;
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Text = "0";
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Visible = false;
+            // 
+            // LB_TIME_EXECUTION
+            // 
+            this.LB_TIME_EXECUTION.AutoSize = true;
+            this.LB_TIME_EXECUTION.Location = new System.Drawing.Point(9, 6);
+            this.LB_TIME_EXECUTION.Name = "LB_TIME_EXECUTION";
+            this.LB_TIME_EXECUTION.Size = new System.Drawing.Size(95, 14);
+            this.LB_TIME_EXECUTION.TabIndex = 64;
+            this.LB_TIME_EXECUTION.Text = "EXECUTION :";
+            // 
+            // LB_CYCLE_INFO
+            // 
+            this.LB_CYCLE_INFO.AutoSize = true;
+            this.LB_CYCLE_INFO.BackColor = System.Drawing.Color.Transparent;
+            this.LB_CYCLE_INFO.Location = new System.Drawing.Point(441, 6);
+            this.LB_CYCLE_INFO.Name = "LB_CYCLE_INFO";
+            this.LB_CYCLE_INFO.Size = new System.Drawing.Size(47, 14);
+            this.LB_CYCLE_INFO.TabIndex = 64;
+            this.LB_CYCLE_INFO.Text = "[N/N]";
+            // 
+            // LB_TIME_PREDICTION
+            // 
+            this.LB_TIME_PREDICTION.AutoSize = true;
+            this.LB_TIME_PREDICTION.Location = new System.Drawing.Point(203, 5);
+            this.LB_TIME_PREDICTION.Name = "LB_TIME_PREDICTION";
+            this.LB_TIME_PREDICTION.Size = new System.Drawing.Size(102, 14);
+            this.LB_TIME_PREDICTION.TabIndex = 64;
+            this.LB_TIME_PREDICTION.Text = "PREDICTION :";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.LB_TIME_EXECUTION);
+            this.panel1.Controls.Add(this.PROG_RUN);
+            this.panel1.Controls.Add(this.LB_CYCLE_INFO);
+            this.panel1.Controls.Add(this.LB_TIME_PREDICTION);
+            this.panel1.Location = new System.Drawing.Point(673, 985);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(604, 55);
+            this.panel1.TabIndex = 65;
+            // 
+            // LB_LIFE_TIME
+            // 
+            this.LB_LIFE_TIME.AutoSize = true;
+            this.LB_LIFE_TIME.Location = new System.Drawing.Point(457, 773);
+            this.LB_LIFE_TIME.Name = "LB_LIFE_TIME";
+            this.LB_LIFE_TIME.Size = new System.Drawing.Size(88, 14);
+            this.LB_LIFE_TIME.TabIndex = 64;
+            this.LB_LIFE_TIME.Text = "LIFE_TIME :";
+            // 
             // CDMainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
+            this.Controls.Add(this.LB_LIFE_TIME);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.TXT_SIMUL_FOR_MULTI_POINT_TARGET);
+            this.Controls.Add(this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE);
+            this.Controls.Add(this.LB_SIMUL_FOR_MULTI_POINT);
+            this.Controls.Add(this.CHK_SIMUL_FOR_MULTI_POINT);
             this.Controls.Add(this.UC_LOG_VIEWER);
             this.Controls.Add(this.LV_FILE_LIST);
             this.Controls.Add(this.PNL_MEASURE_RESULT);
@@ -2517,6 +2677,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PIC_PTRN)).EndInit();
             this.PNL_MEASURE_RESULT.ResumeLayout(false);
             this.PNL_MEASURE_RESULT.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2526,7 +2688,6 @@
 
         private CD_View.UC_CD_VIEWER imageView2;
         private System.Windows.Forms.CheckBox CHK_MEASURE_DUMP;
-        private System.Windows.Forms.CheckBox CHK_MEASURE_VIEW_ONLY;
         private System.Windows.Forms.ListView LV_FILE_LIST;
         private System.Windows.Forms.ColumnHeader INDEX;
         private System.Windows.Forms.ColumnHeader FILES;
@@ -2702,11 +2863,26 @@
         private System.Windows.Forms.Button BTN_MENU_TUNNING;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label LB_HACKER;
-        private System.Windows.Forms.Button BTN_HACKER;
+        private System.Windows.Forms.Button BTN_MENU_ADVANCED;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button BTN_PLAY;
         private System.Windows.Forms.Button BTN_MENU_STATISTICS;
         private System.Windows.Forms.Label label26;
+        private System.Diagnostics.Process process1;
+        private System.Windows.Forms.ProgressBar PROG_RUN;
+        private System.Windows.Forms.Button BTN_TEMP_TRANS_DESING;
+        private System.Windows.Forms.CheckBox CHK_SIMUL_FOR_MULTI_POINT;
+        private System.Windows.Forms.TextBox TXT_SIMUL_FOR_MULTI_POINT_TARGET;
+        private System.Windows.Forms.TextBox TXT_SIMUL_FOR_MULTI_POINT_CYCLE;
+        private System.Windows.Forms.Label LB_SIMUL_FOR_MULTI_POINT;
+        private System.Windows.Forms.Label LB_CYCLE_INFO;
+        private System.Windows.Forms.Label LB_TIME_EXECUTION;
+        private System.Windows.Forms.Label LB_TIME_PREDICTION;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label LB_LIFE_TIME;
+        private System.Windows.Forms.RadioButton RDO_SIMUL_STATIC;
+        private System.Windows.Forms.RadioButton RDO_SIMUL_LOCAL_FILES;
+        private System.Windows.Forms.RadioButton RDO_SIMUL_VIEW_ONLY;
 
 
 

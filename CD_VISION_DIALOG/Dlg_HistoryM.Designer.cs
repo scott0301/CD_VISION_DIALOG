@@ -31,10 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dlg_HistoryM));
             this.TXT_HISTORY_PREV_RECP = new System.Windows.Forms.TextBox();
             this.TXT_HISTORY_PREV_IMAGE = new System.Windows.Forms.TextBox();
-            this.TXT_HISTORY_CURR_RECP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.LV_HISTORY = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,6 +53,10 @@
             this.BTN_CLOSE = new System.Windows.Forms.Button();
             this.BTN_UPDATE_HISTORY = new System.Windows.Forms.Button();
             this.BTN_OPEN_HISTORY_FOLDER = new System.Windows.Forms.Button();
+            this.BTN_RECP_DUMP_OUT = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.BTN_RECP_DUMP_IN = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +65,7 @@
             // 
             this.TXT_HISTORY_PREV_RECP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_HISTORY_PREV_RECP.ForeColor = System.Drawing.Color.White;
-            this.TXT_HISTORY_PREV_RECP.Location = new System.Drawing.Point(108, 86);
+            this.TXT_HISTORY_PREV_RECP.Location = new System.Drawing.Point(108, 50);
             this.TXT_HISTORY_PREV_RECP.Name = "TXT_HISTORY_PREV_RECP";
             this.TXT_HISTORY_PREV_RECP.Size = new System.Drawing.Size(372, 22);
             this.TXT_HISTORY_PREV_RECP.TabIndex = 51;
@@ -77,20 +79,11 @@
             this.TXT_HISTORY_PREV_IMAGE.Size = new System.Drawing.Size(372, 22);
             this.TXT_HISTORY_PREV_IMAGE.TabIndex = 52;
             // 
-            // TXT_HISTORY_CURR_RECP
-            // 
-            this.TXT_HISTORY_CURR_RECP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_HISTORY_CURR_RECP.ForeColor = System.Drawing.Color.White;
-            this.TXT_HISTORY_CURR_RECP.Location = new System.Drawing.Point(108, 53);
-            this.TXT_HISTORY_CURR_RECP.Name = "TXT_HISTORY_CURR_RECP";
-            this.TXT_HISTORY_CURR_RECP.Size = new System.Drawing.Size(372, 22);
-            this.TXT_HISTORY_CURR_RECP.TabIndex = 53;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(7, 87);
+            this.label2.Location = new System.Drawing.Point(7, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 14);
             this.label2.TabIndex = 48;
@@ -105,16 +98,6 @@
             this.label3.Size = new System.Drawing.Size(95, 14);
             this.label3.TabIndex = 49;
             this.label3.Text = "PREV_IMG   :";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 14);
-            this.label1.TabIndex = 50;
-            this.label1.Text = "CURR_RECP :";
             // 
             // LV_HISTORY
             // 
@@ -182,6 +165,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label17);
@@ -189,6 +174,8 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.BTN_RECP_DUMP_IN);
+            this.panel1.Controls.Add(this.BTN_RECP_DUMP_OUT);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.uc_view_history);
             this.panel1.Controls.Add(this.BTN_CLOSE);
@@ -200,7 +187,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1217, 752);
             this.panel1.TabIndex = 58;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label7
             // 
@@ -238,13 +224,11 @@
             this.groupBox1.Controls.Add(this.TXT_HISTORY_PREV_IMAGE);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.TXT_HISTORY_CURR_RECP);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.TXT_HISTORY_PREV_RECP);
             this.groupBox1.Controls.Add(this.BTN_HISTORY_EXPERIMENT_SET);
             this.groupBox1.Location = new System.Drawing.Point(629, 533);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(578, 124);
+            this.groupBox1.Size = new System.Drawing.Size(578, 99);
             this.groupBox1.TabIndex = 72;
             this.groupBox1.TabStop = false;
             // 
@@ -252,7 +236,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(495, 94);
+            this.label8.Location = new System.Drawing.Point(495, 75);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 14);
             this.label8.TabIndex = 77;
@@ -262,7 +246,7 @@
             // 
             this.BTN_HISTORY_EXPERIMENT_SET.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.replace;
             this.BTN_HISTORY_EXPERIMENT_SET.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_HISTORY_EXPERIMENT_SET.Location = new System.Drawing.Point(500, 25);
+            this.BTN_HISTORY_EXPERIMENT_SET.Location = new System.Drawing.Point(498, 12);
             this.BTN_HISTORY_EXPERIMENT_SET.Name = "BTN_HISTORY_EXPERIMENT_SET";
             this.BTN_HISTORY_EXPERIMENT_SET.Size = new System.Drawing.Size(60, 60);
             this.BTN_HISTORY_EXPERIMENT_SET.TabIndex = 55;
@@ -342,6 +326,48 @@
             this.BTN_OPEN_HISTORY_FOLDER.UseVisualStyleBackColor = true;
             this.BTN_OPEN_HISTORY_FOLDER.Click += new System.EventHandler(this.BTN_OPEN_HISTORY_FOLDER_Click);
             // 
+            // BTN_RECP_DUMP_OUT
+            // 
+            this.BTN_RECP_DUMP_OUT.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.recipe_save;
+            this.BTN_RECP_DUMP_OUT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_RECP_DUMP_OUT.Location = new System.Drawing.Point(639, 662);
+            this.BTN_RECP_DUMP_OUT.Name = "BTN_RECP_DUMP_OUT";
+            this.BTN_RECP_DUMP_OUT.Size = new System.Drawing.Size(60, 60);
+            this.BTN_RECP_DUMP_OUT.TabIndex = 55;
+            this.BTN_RECP_DUMP_OUT.UseVisualStyleBackColor = true;
+            this.BTN_RECP_DUMP_OUT.Click += new System.EventHandler(this.BTN_RECP_DUMP_OUT_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(628, 725);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(75, 14);
+            this.label10.TabIndex = 77;
+            this.label10.Text = "Dump-Out";
+            // 
+            // BTN_RECP_DUMP_IN
+            // 
+            this.BTN_RECP_DUMP_IN.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.recipe_load;
+            this.BTN_RECP_DUMP_IN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_RECP_DUMP_IN.Location = new System.Drawing.Point(710, 663);
+            this.BTN_RECP_DUMP_IN.Name = "BTN_RECP_DUMP_IN";
+            this.BTN_RECP_DUMP_IN.Size = new System.Drawing.Size(60, 60);
+            this.BTN_RECP_DUMP_IN.TabIndex = 55;
+            this.BTN_RECP_DUMP_IN.UseVisualStyleBackColor = true;
+            this.BTN_RECP_DUMP_IN.Click += new System.EventHandler(this.BTN_RECP_DUMP_IN_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(707, 725);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 14);
+            this.label1.TabIndex = 77;
+            this.label1.Text = "Dump-IN";
+            // 
             // Dlg_HistoryM
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -365,10 +391,8 @@
         private System.Windows.Forms.Button BTN_HISTORY_EXPERIMENT_SET;
         private System.Windows.Forms.TextBox TXT_HISTORY_PREV_RECP;
         private System.Windows.Forms.TextBox TXT_HISTORY_PREV_IMAGE;
-        private System.Windows.Forms.TextBox TXT_HISTORY_CURR_RECP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BTN_OPEN_HISTORY_FOLDER;
         private System.Windows.Forms.Button BTN_UPDATE_HISTORY;
         private System.Windows.Forms.ListView LV_HISTORY;
@@ -388,5 +412,9 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button BTN_RECP_DUMP_IN;
+        private System.Windows.Forms.Button BTN_RECP_DUMP_OUT;
     }
 }

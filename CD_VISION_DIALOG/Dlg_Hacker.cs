@@ -138,7 +138,7 @@ namespace CD_VISION_DIALOG
 
         private void BTN_SET_SAVE_IMAGE_SET_Click(object sender, EventArgs e)
         {
-            string strPath =WrapperUnion.WrapperFile.SelectFolder();
+            string strPath = WrapperUnion.WrapperFile.SelectFolderAndGetName();
             TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
 
             hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;

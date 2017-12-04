@@ -39,24 +39,36 @@
     <Reference Include="GeneralMatrix">
       <HintPath>..\Library\GeneralMatrix.dll</HintPath>
     </Reference>
+    <Reference Include="ReinlessView">
+      <HintPath>..\..\..\..\Library\ReinlessView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WrapperUnion">
-      <HintPath>..\..\..\..\Library\WrapperUnion.dll</HintPath>
+    <Reference Include="WrapperUnion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\WrapperUnion.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CD_Figure.cs" />
-    <Compile Include="CD_Measure.cs" />
+    <Compile Include="CD_Measure.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CLabelWorker.cs" />
     <Compile Include="CPeakMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CD_Measure.resx">
+      <DependentUpon>CD_Measure.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

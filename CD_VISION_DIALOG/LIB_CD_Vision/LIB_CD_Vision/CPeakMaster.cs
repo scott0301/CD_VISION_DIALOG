@@ -281,7 +281,7 @@ namespace CD_Measure
             else if (bDirHor == false) { proj = GetProjection_VER(); PRJ_LENGTH = m_imageH; }
 
             proj = CPeakMaster.HC_HISTO_MovingAverageFilter(proj, nMV_AGVF);
-            proj = CPeakMaster.HC_EDGE_Get2ndDerivativeArrayFromLineBuff_FIXEDLENGTH(proj);
+            proj = CPeakMaster.HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(proj);
             proj = CPeakMaster.HC_EDGE_EnsurePossitiveScale(proj);
             proj = CPeakMaster.HC_HISTO_Normalization(proj, PRJ_LENGTH);
 
@@ -645,8 +645,148 @@ namespace CD_Measure
 
             return arr2nd;
         }
+        public static double[] HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(double[] fLineBuff)
+        {
+            double[] arr1st = new double[fLineBuff.Length - 1];
 
-       
+            for (int i = 0; i < fLineBuff.Length - 1; i++)
+            {
+                arr1st[i] = fLineBuff[i + 1] - fLineBuff[i];
+            }
+
+            double[] FixedArr = new double[fLineBuff.Length];
+
+            // Fill the first empty value
+            FixedArr[fLineBuff.Length-1] = arr1st[arr1st.Length-1];
+
+            // copy body
+            for (int i = 0; i < arr1st.Length; i++)
+            {
+                FixedArr[i + 1] = arr1st[i];
+            }
+
+            return arr1st;
+        }
+
+        //171129 get min or max value index;
+        public static void GetPeaks(double[] fArray, ref List<int> maxtab, ref List<int> mintab, double delta = 1)
+        {
+            double mx = 0;
+            double mn = 9999;
+            int mxpos = 0;
+            int mnpos = 0;
+            int lookformax = 1;
+
+            for (int i = 0; i < fArray.Length; i++)
+            {
+                double value = fArray[i];
+
+                if (value > mx)
+                {
+                    mx = value;
+                    mxpos = i;
+                }
+                if (value < mn)
+                {
+                    mn = value;
+                    mnpos = i;
+                }
+
+                if (lookformax == 1)
+                {
+                    if (value < mx - delta)
+                    {
+                        maxtab.Add(i);
+                        mn = value;
+                        mnpos = i;
+                        lookformax = 0;
+                    }
+                }
+                else
+                {
+                    if (value > mn + delta)
+                    {
+                        mintab.Add(i);
+                        mx = value;
+                        mxpos = i;
+                        lookformax = 1;
+                    }
+                }
+            }
+        }
+        //171129 get min or max value index;
+        public static PointF GetPeaks_bySequence(double[] fArray, int nIndex, bool bMaxTarget, double delta = 1)
+        {
+            double mx = 0;
+            double mn = 9999;
+            int mxpos = 0;
+            int mnpos = 0;
+            int lookformax = 1;
+
+            List<PointF> listMax = new List<PointF>();
+            List<PointF> listMin = new List<PointF>();
+
+            for (int i = 0; i < fArray.Length; i++)
+            {
+                double value = fArray[i];
+
+                if (value > mx)
+                {
+                    mx = value;
+                    mxpos = i;
+                }
+                if (value < mn)
+                {
+                    mn = value;
+                    mnpos = i;
+                }
+
+                if (lookformax == 1)
+                {
+                    if (value < mx - delta)
+                    {
+                        listMax.Add(new PointF((float)value, i));
+                        mn = value;
+                        mnpos = i;
+                        lookformax = 0;
+                    }
+                }
+                else
+                {
+                    if (value > mn + delta)
+                    {
+                        listMin.Add(new PointF((float)value, i));
+                        mx = value;
+                        mxpos = i;
+                        lookformax = 1;
+                    }
+                }
+            }
+            listMax.Sort((p1, p2) => (p1.X.CompareTo(p2.X))); //Sort by X
+            listMax.Reverse();
+            listMin.Sort((p1, p2) => (p1.X.CompareTo(p2.X))); //Sort by X
+
+            
+            PointF ptTarget = new PointF();
+
+            
+            if (bMaxTarget == true)
+            {
+                if (nIndex < listMax.Count)
+                {
+                    ptTarget = listMax.ElementAt(nIndex);
+                }
+            }
+            else
+            {
+                if (nIndex < listMin.Count)
+                {
+                    ptTarget = listMin.ElementAt(nIndex);
+                }
+            }
+
+            return ptTarget;
+        }
 
         // sliding window averaging approach 170825 
         public static double[] HC_HISTO_MovingAverageFilter(double[] arr, int nWindow)

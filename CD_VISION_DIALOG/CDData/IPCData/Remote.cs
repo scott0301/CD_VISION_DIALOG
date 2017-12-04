@@ -149,6 +149,7 @@ namespace Remote
         public double CamRes = 0.0;
         public int IllNo = 0;
         public int IllValue = 0;
+        public long Exposure = 100; 
         public int IsCentering = 0; // on-> 1,off -> 0
         public FocusInfo FI = null;
     }
@@ -256,6 +257,7 @@ namespace Remote
         public int Result = 0;
         public int No = 0;
         public string Macro = "";
+        public double Focus = 0;
         public List<RES_DATA> list = new List<RES_DATA>();
     }
 }
