@@ -38,80 +38,6 @@
             this.TB_BLENDING_RATIO = new System.Windows.Forms.TrackBar();
             this.LB_BLEND_VALUE = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.TAB_FIGURE = new System.Windows.Forms.TabControl();
-            this.draw_Rect = new System.Windows.Forms.TabPage();
-            this.LV_PAIR_DIG = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.RDO_TYPE_DIA = new System.Windows.Forms.RadioButton();
-            this.RDO_TYPE_VER = new System.Windows.Forms.RadioButton();
-            this.RDO_TYPE_HOR = new System.Windows.Forms.RadioButton();
-            this.BTN_DIG_COPY = new System.Windows.Forms.Button();
-            this.BTN_DIG_ADD = new System.Windows.Forms.Button();
-            this.BTN_DIG_MODIFY = new System.Windows.Forms.Button();
-            this.BTN_DIG_REMOVE = new System.Windows.Forms.Button();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.TXT_PARAM_DIA_ANGLE = new System.Windows.Forms.TextBox();
-            this.LB_PARAM_DIA_ANGLE = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.TXT_RCD_H = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.BTN_DIA_ANGLE_DW = new System.Windows.Forms.Button();
-            this.BTN_DIA_ANGLE_RV = new System.Windows.Forms.Button();
-            this.label46 = new System.Windows.Forms.Label();
-            this.TXT_RCD_W = new System.Windows.Forms.TextBox();
-            this.BTN_DIA_ANGLE_UP = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.TXT_PARAM_DIG_NICK = new System.Windows.Forms.TextBox();
-            this.draw_circle = new System.Windows.Forms.TabPage();
-            this.LV_PAIR_CIR = new System.Windows.Forms.ListView();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.BTN_CIR_ADD = new System.Windows.Forms.Button();
-            this.BTN_CIR_COPY = new System.Windows.Forms.Button();
-            this.BTN_CIR_MODIFY = new System.Windows.Forms.Button();
-            this.BTN_CIR_REMOVE = new System.Windows.Forms.Button();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.TXT_CIRCLE_H = new System.Windows.Forms.TextBox();
-            this.TXT_CIRCLE_W = new System.Windows.Forms.TextBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.TXT_PARAM_CIR_NICK = new System.Windows.Forms.TextBox();
-            this.draw_ovl = new System.Windows.Forms.TabPage();
-            this.LV_PAIR_OVL = new System.Windows.Forms.ListView();
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel28 = new System.Windows.Forms.Panel();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.TXT_OVL_EX_H = new System.Windows.Forms.TextBox();
-            this.TXT_OVL_IN_H = new System.Windows.Forms.TextBox();
-            this.TXT_OVL_EX_W = new System.Windows.Forms.TextBox();
-            this.TXT_OVL_IN_W = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.TXT_PARAM_OVL_NICK = new System.Windows.Forms.TextBox();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.RDO_ROI_OVL_EX = new System.Windows.Forms.RadioButton();
-            this.RDO_ROI_OVL_ENTIRE = new System.Windows.Forms.RadioButton();
-            this.RDO_ROI_OVL_IN = new System.Windows.Forms.RadioButton();
-            this.BTN_OL_ADD = new System.Windows.Forms.Button();
-            this.BTN_OL_COPY = new System.Windows.Forms.Button();
-            this.BTN_OL_REMOVE = new System.Windows.Forms.Button();
-            this.draw_matching = new System.Windows.Forms.TabPage();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.BTN_SET_FOCUS_ROI = new System.Windows.Forms.Button();
-            this.BTN_DRAW_FOCUS_ROI = new System.Windows.Forms.Button();
-            this.BTN_REMOVE_FOCUS_ROI = new System.Windows.Forms.Button();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.BTN_UPDATE_FIGURE_LIST = new System.Windows.Forms.Button();
             this.LV_RECP = new System.Windows.Forms.ListView();
             this.IDX = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FIELS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -150,7 +76,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.TXT_BASE_RECP = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.TXT_FOCUS_POS_Y = new System.Windows.Forms.TextBox();
             this.TXT_PTRN_POS_ORG_Y = new System.Windows.Forms.TextBox();
@@ -162,7 +87,7 @@
             this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BTN_TEMP_TRANS_DESING = new System.Windows.Forms.Button();
+            this.BTN_TEMP_TRANS_DESIGN = new System.Windows.Forms.Button();
             this.BTN_MENU_STATISTICS = new System.Windows.Forms.Button();
             this.BTN_MAIN_LOGO = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -185,16 +110,181 @@
             this.BTN_MENU_HISTORY_MEASURE = new System.Windows.Forms.Button();
             this.BTN_MENU_PTRN = new System.Windows.Forms.Button();
             this.PNL_DRAW_FIGURE = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.BTN_FIGURE_REFRESH = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.BTN_UPDATE_PARAMETER = new System.Windows.Forms.Button();
-            this.BTN_RELOAD_PARAM_FIGURES = new System.Windows.Forms.Button();
             this.BTN_FIGURE_REMOVE_ALL = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.UC_Parameter = new CD_Paramter.pnl_parameter();
+            this.BTN_FIGURE_DELETE = new System.Windows.Forms.Button();
+            this.BTN_FIGURE_UPDATE = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.TAB_FIGURE = new System.Windows.Forms.TabControl();
+            this.draw_Rect = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.BTN_RECT_DRAW = new System.Windows.Forms.Button();
+            this.BTN_RECT_REMOVE = new System.Windows.Forms.Button();
+            this.BTN_RECT_SET_REGION = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LB_PARAM_DIA_ANGLE = new System.Windows.Forms.Label();
+            this.BTN_DIA_ANGLE_RV = new System.Windows.Forms.Button();
+            this.BTN_DIA_ANGLE_UP = new System.Windows.Forms.Button();
+            this.BTN_DIA_ANGLE_DW = new System.Windows.Forms.Button();
+            this.TXT_PARAM_DIA_ANGLE = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label42 = new System.Windows.Forms.Label();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label41 = new System.Windows.Forms.Label();
+            this.TXT_RECT_SCD_POS_Y = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.TXT_RECT_FST_POS_Y = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.TXT_INDEX_OF_RECT = new System.Windows.Forms.TextBox();
+            this.TXT_PARAM_DIG_NICK = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_SCD_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_FST_SZ_W = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_FST_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_SCD_SZ_W = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_FST_SZ_H = new System.Windows.Forms.TextBox();
+            this.TXT_RECT_SCD_SZ_H = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RDO_TYPE_HOR = new System.Windows.Forms.RadioButton();
+            this.RDO_TYPE_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_TYPE_DIA = new System.Windows.Forms.RadioButton();
+            this.BTN_RECT_COPY = new System.Windows.Forms.Button();
+            this.BTN_RECT_ADD = new System.Windows.Forms.Button();
+            this.BTN_RECT_MODIFY = new System.Windows.Forms.Button();
+            this.BTN_DIG_REMOVE = new System.Windows.Forms.Button();
+            this.draw_circle = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.BTN_CIRCLE_DRAW = new System.Windows.Forms.Button();
+            this.BTN_CIRCLE_REMOVE = new System.Windows.Forms.Button();
+            this.BTN_CIRCLE_SET_REGION = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.TXT_INDEX_OF_CIRCLE = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.TXT_PARAM_CIR_NICK = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.TXT_CIRCLE_POS_Y = new System.Windows.Forms.TextBox();
+            this.TXT_CIRCLE_POS_X = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.TXT_CIRCLE_SZ_H = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.TXT_CIRCLE_SZ_W = new System.Windows.Forms.TextBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.BTN_CIR_ADD = new System.Windows.Forms.Button();
+            this.BTN_CIR_COPY = new System.Windows.Forms.Button();
+            this.BTN_CIR_MODIFY = new System.Windows.Forms.Button();
+            this.BTN_CIR_REMOVE = new System.Windows.Forms.Button();
+            this.draw_ovl = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.RDO_ROI_OVL_ENTIRE = new System.Windows.Forms.RadioButton();
+            this.RDO_ROI_OVL_IN = new System.Windows.Forms.RadioButton();
+            this.RDO_ROI_OVL_EX = new System.Windows.Forms.RadioButton();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.CHK_ROI_OVL_MODE_H = new System.Windows.Forms.CheckBox();
+            this.CHK_ROI_OVL_MODE_V = new System.Windows.Forms.CheckBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.TXT_PARAM_OVL_NICK = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.TXT_INDEX_OF_OVL = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.TXT_OVL_EX_W = new System.Windows.Forms.TextBox();
+            this.TXT_OVL_IN_W = new System.Windows.Forms.TextBox();
+            this.TXT_OVL_EX_H = new System.Windows.Forms.TextBox();
+            this.TXT_OVL_IN_H = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.BTN_OVERLAY_DRAW = new System.Windows.Forms.Button();
+            this.BTN_OVERLAY_REMOVE = new System.Windows.Forms.Button();
+            this.BTN_OVERLAY_SET_REGION = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.BTN_OL_ADD = new System.Windows.Forms.Button();
+            this.BTN_OL_COPY = new System.Windows.Forms.Button();
+            this.BTN_OL_REMOVE = new System.Windows.Forms.Button();
+            this.draw_focus = new System.Windows.Forms.TabPage();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.TXT_FOCUS_SZ_H = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.TXT_FOCUS_SZ_W = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.BTN_DRAW_REGION_FOCUS = new System.Windows.Forms.Button();
+            this.BTN_SET_REGION_FOCUS = new System.Windows.Forms.Button();
+            this.BTN_REMOVE_REGION_FOCUS = new System.Windows.Forms.Button();
+            this.draw_mix_rc = new System.Windows.Forms.TabPage();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.BTN_DRAW_MIXED_RC = new System.Windows.Forms.Button();
+            this.BTN_REMOVE_MIXED_RC = new System.Windows.Forms.Button();
+            this.BTN_SET_MIXED_RC = new System.Windows.Forms.Button();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.RDO_MIXED_RC_METRIC_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RC_METRIC_HOR = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RC_METRIC_P2P = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_RC_SCD_DIR_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RC_SCD_DIR_HOR = new System.Windows.Forms.RadioButton();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_RC_FST_DIR_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RC_FST_DIR_HOR = new System.Windows.Forms.RadioButton();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.TXT_INDEX_OF_MIXED_RC = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.RDO_MIXED_RC_SCD = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RC_FST = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_RC_SCD_SZ_H = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_NICK = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_FST_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_FST_SZ_H = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_SCD_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_SCD_POS_Y = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_FST_SZ_W = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_SCD_SZ_W = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RC_FST_POS_Y = new System.Windows.Forms.TextBox();
+            this.BTN_MIXED_RC_COPY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RC_ADD = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RC_MODIFY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RC_REMOVE = new System.Windows.Forms.Button();
+            this.draw_mix_cc = new System.Windows.Forms.TabPage();
+            this.BTN_MIXED_CC_COPY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_CC_ADD = new System.Windows.Forms.Button();
+            this.BTN_MIXED_CC_MODIFY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_CC_REMOVE = new System.Windows.Forms.Button();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.BTN_DRAW_MIXED_CC = new System.Windows.Forms.Button();
+            this.BTN_REMOVE_MIXED_CC = new System.Windows.Forms.Button();
+            this.BTN_SET_MIXED_CC = new System.Windows.Forms.Button();
+            this.draw_mixc_rcc = new System.Windows.Forms.TabPage();
+            this.BTN_MIXED_RCC_COPY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RCC_ADD = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RCC_MODIFY = new System.Windows.Forms.Button();
+            this.BTN_MIXED_RCC_REMOVE = new System.Windows.Forms.Button();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.BTN_DRAW_MIXED_RCC = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.PNL_MAIN = new System.Windows.Forms.Panel();
             this.CHK_USE_SAVE_PTRN_ERR = new System.Windows.Forms.CheckBox();
             this.CHK_USE_SAVE_INPUT = new System.Windows.Forms.CheckBox();
@@ -203,6 +293,8 @@
             this.BTN_RECIPE_SAVE = new System.Windows.Forms.Button();
             this.BTN_RECP_SAVE_AS = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.LB_MAIN_FOCUS_PARAM = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BTN_PTRN_MATCH = new System.Windows.Forms.Button();
             this.BTN_PTRN_RESULT = new System.Windows.Forms.Button();
@@ -228,19 +320,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_LIFE_TIME = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
-            this.TAB_FIGURE.SuspendLayout();
-            this.draw_Rect.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel21.SuspendLayout();
-            this.draw_circle.SuspendLayout();
-            this.panel22.SuspendLayout();
-            this.panel24.SuspendLayout();
-            this.draw_ovl.SuspendLayout();
-            this.panel28.SuspendLayout();
-            this.panel23.SuspendLayout();
-            this.draw_matching.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).BeginInit();
             this.TAB_VIEW.SuspendLayout();
@@ -249,6 +328,33 @@
             this.contextMenuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.PNL_DRAW_FIGURE.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.TAB_FIGURE.SuspendLayout();
+            this.draw_Rect.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.draw_circle.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.draw_ovl.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.draw_focus.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.draw_mix_rc.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.draw_mix_cc.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            this.draw_mixc_rcc.SuspendLayout();
+            this.groupBox16.SuspendLayout();
             this.PNL_MAIN.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_FOCUS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_PTRN)).BeginInit();
@@ -290,7 +396,7 @@
             // CHK_MEASURE_DUMP
             // 
             this.CHK_MEASURE_DUMP.AutoSize = true;
-            this.CHK_MEASURE_DUMP.BackColor = System.Drawing.Color.Honeydew;
+            this.CHK_MEASURE_DUMP.BackColor = System.Drawing.Color.HotPink;
             this.CHK_MEASURE_DUMP.ForeColor = System.Drawing.SystemColors.Desktop;
             this.CHK_MEASURE_DUMP.Location = new System.Drawing.Point(346, 7);
             this.CHK_MEASURE_DUMP.Name = "CHK_MEASURE_DUMP";
@@ -341,936 +447,6 @@
             this.label30.Size = new System.Drawing.Size(67, 14);
             this.label30.TabIndex = 0;
             this.label30.Text = "Blender :";
-            // 
-            // TAB_FIGURE
-            // 
-            this.TAB_FIGURE.Controls.Add(this.draw_Rect);
-            this.TAB_FIGURE.Controls.Add(this.draw_circle);
-            this.TAB_FIGURE.Controls.Add(this.draw_ovl);
-            this.TAB_FIGURE.Controls.Add(this.draw_matching);
-            this.TAB_FIGURE.ItemSize = new System.Drawing.Size(90, 35);
-            this.TAB_FIGURE.Location = new System.Drawing.Point(3, 3);
-            this.TAB_FIGURE.Multiline = true;
-            this.TAB_FIGURE.Name = "TAB_FIGURE";
-            this.TAB_FIGURE.SelectedIndex = 0;
-            this.TAB_FIGURE.Size = new System.Drawing.Size(602, 275);
-            this.TAB_FIGURE.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.TAB_FIGURE.TabIndex = 37;
-            this.TAB_FIGURE.SelectedIndexChanged += new System.EventHandler(this.TAB_FIGURE_SelectedIndexChanged);
-            // 
-            // draw_Rect
-            // 
-            this.draw_Rect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.draw_Rect.Controls.Add(this.LV_PAIR_DIG);
-            this.draw_Rect.Controls.Add(this.panel19);
-            this.draw_Rect.Controls.Add(this.panel21);
-            this.draw_Rect.ImageIndex = 5;
-            this.draw_Rect.Location = new System.Drawing.Point(4, 39);
-            this.draw_Rect.Name = "draw_Rect";
-            this.draw_Rect.Padding = new System.Windows.Forms.Padding(3);
-            this.draw_Rect.Size = new System.Drawing.Size(594, 232);
-            this.draw_Rect.TabIndex = 1;
-            this.draw_Rect.Text = "RECT";
-            // 
-            // LV_PAIR_DIG
-            // 
-            this.LV_PAIR_DIG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.LV_PAIR_DIG.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8});
-            this.LV_PAIR_DIG.ForeColor = System.Drawing.Color.Black;
-            this.LV_PAIR_DIG.FullRowSelect = true;
-            this.LV_PAIR_DIG.GridLines = true;
-            this.LV_PAIR_DIG.Location = new System.Drawing.Point(245, 5);
-            this.LV_PAIR_DIG.MultiSelect = false;
-            this.LV_PAIR_DIG.Name = "LV_PAIR_DIG";
-            this.LV_PAIR_DIG.Size = new System.Drawing.Size(343, 220);
-            this.LV_PAIR_DIG.TabIndex = 18;
-            this.LV_PAIR_DIG.UseCompatibleStateImageBehavior = false;
-            this.LV_PAIR_DIG.View = System.Windows.Forms.View.Details;
-            this.LV_PAIR_DIG.SelectedIndexChanged += new System.EventHandler(this.LV_PAIR_DIG_SelectedIndexChanged);
-            this.LV_PAIR_DIG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LV_Figure_KeyDown);
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "IDX";
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "FIGURE";
-            this.columnHeader8.Width = 230;
-            // 
-            // panel19
-            // 
-            this.panel19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel19.Controls.Add(this.RDO_TYPE_DIA);
-            this.panel19.Controls.Add(this.RDO_TYPE_VER);
-            this.panel19.Controls.Add(this.RDO_TYPE_HOR);
-            this.panel19.Controls.Add(this.BTN_DIG_COPY);
-            this.panel19.Controls.Add(this.BTN_DIG_ADD);
-            this.panel19.Controls.Add(this.BTN_DIG_MODIFY);
-            this.panel19.Controls.Add(this.BTN_DIG_REMOVE);
-            this.panel19.Location = new System.Drawing.Point(125, 5);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(115, 220);
-            this.panel19.TabIndex = 20;
-            // 
-            // RDO_TYPE_DIA
-            // 
-            this.RDO_TYPE_DIA.AutoSize = true;
-            this.RDO_TYPE_DIA.Location = new System.Drawing.Point(4, 192);
-            this.RDO_TYPE_DIA.Name = "RDO_TYPE_DIA";
-            this.RDO_TYPE_DIA.Size = new System.Drawing.Size(83, 18);
-            this.RDO_TYPE_DIA.TabIndex = 5;
-            this.RDO_TYPE_DIA.Text = "Diagonal";
-            this.RDO_TYPE_DIA.UseVisualStyleBackColor = true;
-            this.RDO_TYPE_DIA.CheckedChanged += new System.EventHandler(this.RDO_TYPE_DIA_CheckedChanged);
-            // 
-            // RDO_TYPE_VER
-            // 
-            this.RDO_TYPE_VER.AutoSize = true;
-            this.RDO_TYPE_VER.Location = new System.Drawing.Point(4, 169);
-            this.RDO_TYPE_VER.Name = "RDO_TYPE_VER";
-            this.RDO_TYPE_VER.Size = new System.Drawing.Size(76, 18);
-            this.RDO_TYPE_VER.TabIndex = 5;
-            this.RDO_TYPE_VER.Text = "Vertical";
-            this.RDO_TYPE_VER.UseVisualStyleBackColor = true;
-            this.RDO_TYPE_VER.CheckedChanged += new System.EventHandler(this.RDO_TYPE_VER_CheckedChanged);
-            // 
-            // RDO_TYPE_HOR
-            // 
-            this.RDO_TYPE_HOR.AutoSize = true;
-            this.RDO_TYPE_HOR.Checked = true;
-            this.RDO_TYPE_HOR.Location = new System.Drawing.Point(4, 147);
-            this.RDO_TYPE_HOR.Name = "RDO_TYPE_HOR";
-            this.RDO_TYPE_HOR.Size = new System.Drawing.Size(93, 18);
-            this.RDO_TYPE_HOR.TabIndex = 5;
-            this.RDO_TYPE_HOR.TabStop = true;
-            this.RDO_TYPE_HOR.Text = "Horizontal";
-            this.RDO_TYPE_HOR.UseVisualStyleBackColor = true;
-            this.RDO_TYPE_HOR.CheckedChanged += new System.EventHandler(this.RDO_TYPE_HOR_CheckedChanged);
-            // 
-            // BTN_DIG_COPY
-            // 
-            this.BTN_DIG_COPY.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BTN_DIG_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_COPY.FlatAppearance.BorderSize = 3;
-            this.BTN_DIG_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIG_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_COPY.Location = new System.Drawing.Point(2, 40);
-            this.BTN_DIG_COPY.Name = "BTN_DIG_COPY";
-            this.BTN_DIG_COPY.Size = new System.Drawing.Size(110, 30);
-            this.BTN_DIG_COPY.TabIndex = 4;
-            this.BTN_DIG_COPY.Text = "COPY";
-            this.BTN_DIG_COPY.UseVisualStyleBackColor = false;
-            this.BTN_DIG_COPY.Click += new System.EventHandler(this.BTN_DIG_COPY_Click);
-            // 
-            // BTN_DIG_ADD
-            // 
-            this.BTN_DIG_ADD.BackColor = System.Drawing.Color.White;
-            this.BTN_DIG_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_ADD.FlatAppearance.BorderSize = 3;
-            this.BTN_DIG_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIG_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_ADD.Location = new System.Drawing.Point(2, 5);
-            this.BTN_DIG_ADD.Name = "BTN_DIG_ADD";
-            this.BTN_DIG_ADD.Size = new System.Drawing.Size(110, 30);
-            this.BTN_DIG_ADD.TabIndex = 2;
-            this.BTN_DIG_ADD.Text = "ADD";
-            this.BTN_DIG_ADD.UseVisualStyleBackColor = false;
-            this.BTN_DIG_ADD.Click += new System.EventHandler(this.BTN_DIG_ADD_Click);
-            // 
-            // BTN_DIG_MODIFY
-            // 
-            this.BTN_DIG_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_MODIFY.FlatAppearance.BorderSize = 3;
-            this.BTN_DIG_MODIFY.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIG_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_MODIFY.Location = new System.Drawing.Point(2, 75);
-            this.BTN_DIG_MODIFY.Name = "BTN_DIG_MODIFY";
-            this.BTN_DIG_MODIFY.Size = new System.Drawing.Size(110, 30);
-            this.BTN_DIG_MODIFY.TabIndex = 2;
-            this.BTN_DIG_MODIFY.Text = "MODIFY";
-            this.BTN_DIG_MODIFY.UseVisualStyleBackColor = true;
-            this.BTN_DIG_MODIFY.Click += new System.EventHandler(this.BTN_DIG_MODIFY_Click);
-            // 
-            // BTN_DIG_REMOVE
-            // 
-            this.BTN_DIG_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_REMOVE.FlatAppearance.BorderSize = 3;
-            this.BTN_DIG_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIG_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DIG_REMOVE.Location = new System.Drawing.Point(2, 111);
-            this.BTN_DIG_REMOVE.Name = "BTN_DIG_REMOVE";
-            this.BTN_DIG_REMOVE.Size = new System.Drawing.Size(110, 30);
-            this.BTN_DIG_REMOVE.TabIndex = 2;
-            this.BTN_DIG_REMOVE.TabStop = false;
-            this.BTN_DIG_REMOVE.Text = "REMOVE";
-            this.BTN_DIG_REMOVE.UseVisualStyleBackColor = true;
-            this.BTN_DIG_REMOVE.Click += new System.EventHandler(this.BTN_DIG_REMOVE_Click);
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel21.Controls.Add(this.TXT_PARAM_DIA_ANGLE);
-            this.panel21.Controls.Add(this.LB_PARAM_DIA_ANGLE);
-            this.panel21.Controls.Add(this.label44);
-            this.panel21.Controls.Add(this.TXT_RCD_H);
-            this.panel21.Controls.Add(this.label45);
-            this.panel21.Controls.Add(this.BTN_DIA_ANGLE_DW);
-            this.panel21.Controls.Add(this.BTN_DIA_ANGLE_RV);
-            this.panel21.Controls.Add(this.label46);
-            this.panel21.Controls.Add(this.TXT_RCD_W);
-            this.panel21.Controls.Add(this.BTN_DIA_ANGLE_UP);
-            this.panel21.Controls.Add(this.button5);
-            this.panel21.Controls.Add(this.TXT_PARAM_DIG_NICK);
-            this.panel21.Location = new System.Drawing.Point(5, 5);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(115, 220);
-            this.panel21.TabIndex = 19;
-            // 
-            // TXT_PARAM_DIA_ANGLE
-            // 
-            this.TXT_PARAM_DIA_ANGLE.BackColor = System.Drawing.Color.White;
-            this.TXT_PARAM_DIA_ANGLE.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TXT_PARAM_DIA_ANGLE.ForeColor = System.Drawing.Color.Black;
-            this.TXT_PARAM_DIA_ANGLE.Location = new System.Drawing.Point(51, 81);
-            this.TXT_PARAM_DIA_ANGLE.Name = "TXT_PARAM_DIA_ANGLE";
-            this.TXT_PARAM_DIA_ANGLE.ReadOnly = true;
-            this.TXT_PARAM_DIA_ANGLE.Size = new System.Drawing.Size(37, 15);
-            this.TXT_PARAM_DIA_ANGLE.TabIndex = 8;
-            this.TXT_PARAM_DIA_ANGLE.Text = "0";
-            this.TXT_PARAM_DIA_ANGLE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_PARAM_DIA_ANGLE.Visible = false;
-            // 
-            // LB_PARAM_DIA_ANGLE
-            // 
-            this.LB_PARAM_DIA_ANGLE.AutoSize = true;
-            this.LB_PARAM_DIA_ANGLE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LB_PARAM_DIA_ANGLE.Location = new System.Drawing.Point(23, 82);
-            this.LB_PARAM_DIA_ANGLE.Name = "LB_PARAM_DIA_ANGLE";
-            this.LB_PARAM_DIA_ANGLE.Size = new System.Drawing.Size(24, 14);
-            this.LB_PARAM_DIA_ANGLE.TabIndex = 0;
-            this.LB_PARAM_DIA_ANGLE.Text = "θ :";
-            this.LB_PARAM_DIA_ANGLE.Visible = false;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.BackColor = System.Drawing.Color.Transparent;
-            this.label44.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label44.Location = new System.Drawing.Point(5, 140);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(50, 14);
-            this.label44.TabIndex = 7;
-            this.label44.Text = "NICK :";
-            // 
-            // TXT_RCD_H
-            // 
-            this.TXT_RCD_H.BackColor = System.Drawing.Color.White;
-            this.TXT_RCD_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_RCD_H.ForeColor = System.Drawing.Color.Black;
-            this.TXT_RCD_H.Location = new System.Drawing.Point(58, 192);
-            this.TXT_RCD_H.Name = "TXT_RCD_H";
-            this.TXT_RCD_H.Size = new System.Drawing.Size(54, 22);
-            this.TXT_RCD_H.TabIndex = 26;
-            this.TXT_RCD_H.Text = "0";
-            this.TXT_RCD_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label45.Location = new System.Drawing.Point(5, 167);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(51, 14);
-            this.label45.TabIndex = 8;
-            this.label45.Text = "SZ_X :";
-            // 
-            // BTN_DIA_ANGLE_DW
-            // 
-            this.BTN_DIA_ANGLE_DW.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIA_ANGLE_DW.Location = new System.Drawing.Point(77, 111);
-            this.BTN_DIA_ANGLE_DW.Name = "BTN_DIA_ANGLE_DW";
-            this.BTN_DIA_ANGLE_DW.Size = new System.Drawing.Size(35, 23);
-            this.BTN_DIA_ANGLE_DW.TabIndex = 9;
-            this.BTN_DIA_ANGLE_DW.Text = "↓";
-            this.BTN_DIA_ANGLE_DW.UseVisualStyleBackColor = true;
-            this.BTN_DIA_ANGLE_DW.Visible = false;
-            this.BTN_DIA_ANGLE_DW.Click += new System.EventHandler(this.BTN_DIG_ANGLE_DW_Click);
-            // 
-            // BTN_DIA_ANGLE_RV
-            // 
-            this.BTN_DIA_ANGLE_RV.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIA_ANGLE_RV.Location = new System.Drawing.Point(40, 111);
-            this.BTN_DIA_ANGLE_RV.Name = "BTN_DIA_ANGLE_RV";
-            this.BTN_DIA_ANGLE_RV.Size = new System.Drawing.Size(35, 23);
-            this.BTN_DIA_ANGLE_RV.TabIndex = 9;
-            this.BTN_DIA_ANGLE_RV.Text = "↔";
-            this.BTN_DIA_ANGLE_RV.UseVisualStyleBackColor = true;
-            this.BTN_DIA_ANGLE_RV.Visible = false;
-            this.BTN_DIA_ANGLE_RV.Click += new System.EventHandler(this.BTN_DIG_ANGLE_RV_Click);
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label46.Location = new System.Drawing.Point(5, 194);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(52, 14);
-            this.label46.TabIndex = 9;
-            this.label46.Text = "SZ_Y :";
-            // 
-            // TXT_RCD_W
-            // 
-            this.TXT_RCD_W.BackColor = System.Drawing.Color.White;
-            this.TXT_RCD_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_RCD_W.ForeColor = System.Drawing.Color.Black;
-            this.TXT_RCD_W.Location = new System.Drawing.Point(58, 165);
-            this.TXT_RCD_W.Name = "TXT_RCD_W";
-            this.TXT_RCD_W.Size = new System.Drawing.Size(54, 22);
-            this.TXT_RCD_W.TabIndex = 27;
-            this.TXT_RCD_W.Text = "0";
-            this.TXT_RCD_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // BTN_DIA_ANGLE_UP
-            // 
-            this.BTN_DIA_ANGLE_UP.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_DIA_ANGLE_UP.Location = new System.Drawing.Point(2, 111);
-            this.BTN_DIA_ANGLE_UP.Name = "BTN_DIA_ANGLE_UP";
-            this.BTN_DIA_ANGLE_UP.Size = new System.Drawing.Size(35, 23);
-            this.BTN_DIA_ANGLE_UP.TabIndex = 9;
-            this.BTN_DIA_ANGLE_UP.Text = "↑";
-            this.BTN_DIA_ANGLE_UP.UseVisualStyleBackColor = true;
-            this.BTN_DIA_ANGLE_UP.Visible = false;
-            this.BTN_DIA_ANGLE_UP.Click += new System.EventHandler(this.BTN_DIG_ANGLE_UP_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.button5.Location = new System.Drawing.Point(5, 5);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 100);
-            this.button5.TabIndex = 8;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // TXT_PARAM_DIG_NICK
-            // 
-            this.TXT_PARAM_DIG_NICK.BackColor = System.Drawing.Color.White;
-            this.TXT_PARAM_DIG_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_PARAM_DIG_NICK.ForeColor = System.Drawing.Color.Black;
-            this.TXT_PARAM_DIG_NICK.Location = new System.Drawing.Point(58, 138);
-            this.TXT_PARAM_DIG_NICK.Name = "TXT_PARAM_DIG_NICK";
-            this.TXT_PARAM_DIG_NICK.Size = new System.Drawing.Size(54, 22);
-            this.TXT_PARAM_DIG_NICK.TabIndex = 7;
-            this.TXT_PARAM_DIG_NICK.Text = "RECT";
-            this.TXT_PARAM_DIG_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // draw_circle
-            // 
-            this.draw_circle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.draw_circle.Controls.Add(this.LV_PAIR_CIR);
-            this.draw_circle.Controls.Add(this.panel22);
-            this.draw_circle.Controls.Add(this.panel24);
-            this.draw_circle.ImageKey = "measureCir.png";
-            this.draw_circle.Location = new System.Drawing.Point(4, 39);
-            this.draw_circle.Name = "draw_circle";
-            this.draw_circle.Size = new System.Drawing.Size(594, 232);
-            this.draw_circle.TabIndex = 4;
-            this.draw_circle.Text = "CIRCLE";
-            // 
-            // LV_PAIR_CIR
-            // 
-            this.LV_PAIR_CIR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.LV_PAIR_CIR.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader9,
-            this.columnHeader10});
-            this.LV_PAIR_CIR.ForeColor = System.Drawing.Color.Black;
-            this.LV_PAIR_CIR.FullRowSelect = true;
-            this.LV_PAIR_CIR.GridLines = true;
-            this.LV_PAIR_CIR.Location = new System.Drawing.Point(245, 5);
-            this.LV_PAIR_CIR.MultiSelect = false;
-            this.LV_PAIR_CIR.Name = "LV_PAIR_CIR";
-            this.LV_PAIR_CIR.Size = new System.Drawing.Size(346, 220);
-            this.LV_PAIR_CIR.TabIndex = 25;
-            this.LV_PAIR_CIR.UseCompatibleStateImageBehavior = false;
-            this.LV_PAIR_CIR.View = System.Windows.Forms.View.Details;
-            this.LV_PAIR_CIR.SelectedIndexChanged += new System.EventHandler(this.LV_PAIR_CIR_SelectedIndexChanged);
-            this.LV_PAIR_CIR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LV_Figure_KeyDown);
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "IDX";
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "FIGURE";
-            this.columnHeader10.Width = 150;
-            // 
-            // panel22
-            // 
-            this.panel22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel22.Controls.Add(this.BTN_CIR_ADD);
-            this.panel22.Controls.Add(this.BTN_CIR_COPY);
-            this.panel22.Controls.Add(this.BTN_CIR_MODIFY);
-            this.panel22.Controls.Add(this.BTN_CIR_REMOVE);
-            this.panel22.Location = new System.Drawing.Point(125, 5);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(115, 220);
-            this.panel22.TabIndex = 27;
-            // 
-            // BTN_CIR_ADD
-            // 
-            this.BTN_CIR_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_ADD.FlatAppearance.BorderSize = 3;
-            this.BTN_CIR_ADD.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_CIR_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_ADD.Location = new System.Drawing.Point(2, 5);
-            this.BTN_CIR_ADD.Name = "BTN_CIR_ADD";
-            this.BTN_CIR_ADD.Size = new System.Drawing.Size(110, 30);
-            this.BTN_CIR_ADD.TabIndex = 2;
-            this.BTN_CIR_ADD.Text = "ADD";
-            this.BTN_CIR_ADD.UseVisualStyleBackColor = true;
-            this.BTN_CIR_ADD.Click += new System.EventHandler(this.BTN_CIR_ADD_Click);
-            // 
-            // BTN_CIR_COPY
-            // 
-            this.BTN_CIR_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_COPY.FlatAppearance.BorderSize = 3;
-            this.BTN_CIR_COPY.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_CIR_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_COPY.Location = new System.Drawing.Point(2, 40);
-            this.BTN_CIR_COPY.Name = "BTN_CIR_COPY";
-            this.BTN_CIR_COPY.Size = new System.Drawing.Size(110, 30);
-            this.BTN_CIR_COPY.TabIndex = 2;
-            this.BTN_CIR_COPY.Text = "COPY";
-            this.BTN_CIR_COPY.UseVisualStyleBackColor = true;
-            this.BTN_CIR_COPY.Click += new System.EventHandler(this.BTN_CIR_COPY_Click);
-            // 
-            // BTN_CIR_MODIFY
-            // 
-            this.BTN_CIR_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_MODIFY.FlatAppearance.BorderSize = 3;
-            this.BTN_CIR_MODIFY.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_CIR_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_MODIFY.Location = new System.Drawing.Point(2, 75);
-            this.BTN_CIR_MODIFY.Name = "BTN_CIR_MODIFY";
-            this.BTN_CIR_MODIFY.Size = new System.Drawing.Size(110, 30);
-            this.BTN_CIR_MODIFY.TabIndex = 2;
-            this.BTN_CIR_MODIFY.Text = "MODIFY";
-            this.BTN_CIR_MODIFY.UseVisualStyleBackColor = true;
-            this.BTN_CIR_MODIFY.Click += new System.EventHandler(this.BTN_CIR_MODIFY_Click);
-            // 
-            // BTN_CIR_REMOVE
-            // 
-            this.BTN_CIR_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_REMOVE.FlatAppearance.BorderSize = 3;
-            this.BTN_CIR_REMOVE.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_CIR_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_CIR_REMOVE.Location = new System.Drawing.Point(2, 111);
-            this.BTN_CIR_REMOVE.Name = "BTN_CIR_REMOVE";
-            this.BTN_CIR_REMOVE.Size = new System.Drawing.Size(110, 30);
-            this.BTN_CIR_REMOVE.TabIndex = 2;
-            this.BTN_CIR_REMOVE.TabStop = false;
-            this.BTN_CIR_REMOVE.Text = "REMOVE";
-            this.BTN_CIR_REMOVE.UseVisualStyleBackColor = true;
-            this.BTN_CIR_REMOVE.Click += new System.EventHandler(this.BTN_CIR_REMOVE_Click);
-            // 
-            // panel24
-            // 
-            this.panel24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel24.Controls.Add(this.label48);
-            this.panel24.Controls.Add(this.label49);
-            this.panel24.Controls.Add(this.label50);
-            this.panel24.Controls.Add(this.TXT_CIRCLE_H);
-            this.panel24.Controls.Add(this.TXT_CIRCLE_W);
-            this.panel24.Controls.Add(this.button9);
-            this.panel24.Controls.Add(this.TXT_PARAM_CIR_NICK);
-            this.panel24.Location = new System.Drawing.Point(5, 5);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(115, 220);
-            this.panel24.TabIndex = 26;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.BackColor = System.Drawing.Color.Transparent;
-            this.label48.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label48.Location = new System.Drawing.Point(5, 140);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(50, 14);
-            this.label48.TabIndex = 35;
-            this.label48.Text = "NICK :";
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label49.Location = new System.Drawing.Point(5, 167);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(51, 14);
-            this.label49.TabIndex = 36;
-            this.label49.Text = "SZ_X :";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label50.Location = new System.Drawing.Point(5, 194);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(52, 14);
-            this.label50.TabIndex = 37;
-            this.label50.Text = "SZ_Y :";
-            // 
-            // TXT_CIRCLE_H
-            // 
-            this.TXT_CIRCLE_H.BackColor = System.Drawing.Color.White;
-            this.TXT_CIRCLE_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_CIRCLE_H.ForeColor = System.Drawing.Color.Black;
-            this.TXT_CIRCLE_H.Location = new System.Drawing.Point(58, 192);
-            this.TXT_CIRCLE_H.Name = "TXT_CIRCLE_H";
-            this.TXT_CIRCLE_H.Size = new System.Drawing.Size(54, 22);
-            this.TXT_CIRCLE_H.TabIndex = 33;
-            this.TXT_CIRCLE_H.Text = "0";
-            this.TXT_CIRCLE_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TXT_CIRCLE_W
-            // 
-            this.TXT_CIRCLE_W.BackColor = System.Drawing.Color.White;
-            this.TXT_CIRCLE_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_CIRCLE_W.ForeColor = System.Drawing.Color.Black;
-            this.TXT_CIRCLE_W.Location = new System.Drawing.Point(58, 165);
-            this.TXT_CIRCLE_W.Name = "TXT_CIRCLE_W";
-            this.TXT_CIRCLE_W.Size = new System.Drawing.Size(54, 22);
-            this.TXT_CIRCLE_W.TabIndex = 34;
-            this.TXT_CIRCLE_W.Text = "0";
-            this.TXT_CIRCLE_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button9
-            // 
-            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.button9.Location = new System.Drawing.Point(5, 5);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 100);
-            this.button9.TabIndex = 8;
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // TXT_PARAM_CIR_NICK
-            // 
-            this.TXT_PARAM_CIR_NICK.BackColor = System.Drawing.Color.White;
-            this.TXT_PARAM_CIR_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_PARAM_CIR_NICK.ForeColor = System.Drawing.Color.Black;
-            this.TXT_PARAM_CIR_NICK.Location = new System.Drawing.Point(58, 138);
-            this.TXT_PARAM_CIR_NICK.Name = "TXT_PARAM_CIR_NICK";
-            this.TXT_PARAM_CIR_NICK.Size = new System.Drawing.Size(54, 22);
-            this.TXT_PARAM_CIR_NICK.TabIndex = 7;
-            this.TXT_PARAM_CIR_NICK.Text = "circle";
-            this.TXT_PARAM_CIR_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // draw_ovl
-            // 
-            this.draw_ovl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.draw_ovl.Controls.Add(this.LV_PAIR_OVL);
-            this.draw_ovl.Controls.Add(this.panel28);
-            this.draw_ovl.Controls.Add(this.panel23);
-            this.draw_ovl.Location = new System.Drawing.Point(4, 39);
-            this.draw_ovl.Name = "draw_ovl";
-            this.draw_ovl.Size = new System.Drawing.Size(594, 232);
-            this.draw_ovl.TabIndex = 3;
-            this.draw_ovl.Text = "OVL";
-            // 
-            // LV_PAIR_OVL
-            // 
-            this.LV_PAIR_OVL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.LV_PAIR_OVL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LV_PAIR_OVL.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader11,
-            this.columnHeader12});
-            this.LV_PAIR_OVL.ForeColor = System.Drawing.Color.Black;
-            this.LV_PAIR_OVL.FullRowSelect = true;
-            this.LV_PAIR_OVL.GridLines = true;
-            this.LV_PAIR_OVL.Location = new System.Drawing.Point(245, 5);
-            this.LV_PAIR_OVL.MultiSelect = false;
-            this.LV_PAIR_OVL.Name = "LV_PAIR_OVL";
-            this.LV_PAIR_OVL.Size = new System.Drawing.Size(346, 220);
-            this.LV_PAIR_OVL.TabIndex = 29;
-            this.LV_PAIR_OVL.UseCompatibleStateImageBehavior = false;
-            this.LV_PAIR_OVL.View = System.Windows.Forms.View.Details;
-            this.LV_PAIR_OVL.SelectedIndexChanged += new System.EventHandler(this.LV_PAIR_OVL_SelectedIndexChanged);
-            this.LV_PAIR_OVL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LV_Figure_KeyDown);
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "IDX";
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "FIGURE";
-            this.columnHeader12.Width = 150;
-            // 
-            // panel28
-            // 
-            this.panel28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel28.Controls.Add(this.label54);
-            this.panel28.Controls.Add(this.label58);
-            this.panel28.Controls.Add(this.label55);
-            this.panel28.Controls.Add(this.label57);
-            this.panel28.Controls.Add(this.label56);
-            this.panel28.Controls.Add(this.TXT_OVL_EX_H);
-            this.panel28.Controls.Add(this.TXT_OVL_IN_H);
-            this.panel28.Controls.Add(this.TXT_OVL_EX_W);
-            this.panel28.Controls.Add(this.TXT_OVL_IN_W);
-            this.panel28.Controls.Add(this.button3);
-            this.panel28.Controls.Add(this.TXT_PARAM_OVL_NICK);
-            this.panel28.Location = new System.Drawing.Point(5, 5);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(115, 220);
-            this.panel28.TabIndex = 30;
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.BackColor = System.Drawing.Color.Transparent;
-            this.label54.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label54.Location = new System.Drawing.Point(9, 114);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(50, 14);
-            this.label54.TabIndex = 35;
-            this.label54.Text = "NICK :";
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label58.Location = new System.Drawing.Point(3, 178);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(59, 14);
-            this.label58.TabIndex = 36;
-            this.label58.Text = "SZ_EX :";
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label55.Location = new System.Drawing.Point(3, 135);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(57, 14);
-            this.label55.TabIndex = 36;
-            this.label55.Text = "SZ_IX :";
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label57.Location = new System.Drawing.Point(3, 200);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(60, 14);
-            this.label57.TabIndex = 37;
-            this.label57.Text = "SZ_EY :";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label56.Location = new System.Drawing.Point(3, 157);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(58, 14);
-            this.label56.TabIndex = 37;
-            this.label56.Text = "SZ_IY :";
-            // 
-            // TXT_OVL_EX_H
-            // 
-            this.TXT_OVL_EX_H.BackColor = System.Drawing.Color.White;
-            this.TXT_OVL_EX_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_OVL_EX_H.ForeColor = System.Drawing.Color.Black;
-            this.TXT_OVL_EX_H.Location = new System.Drawing.Point(63, 195);
-            this.TXT_OVL_EX_H.Name = "TXT_OVL_EX_H";
-            this.TXT_OVL_EX_H.Size = new System.Drawing.Size(50, 22);
-            this.TXT_OVL_EX_H.TabIndex = 33;
-            this.TXT_OVL_EX_H.Text = "0";
-            this.TXT_OVL_EX_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TXT_OVL_IN_H
-            // 
-            this.TXT_OVL_IN_H.BackColor = System.Drawing.Color.White;
-            this.TXT_OVL_IN_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_OVL_IN_H.ForeColor = System.Drawing.Color.Black;
-            this.TXT_OVL_IN_H.Location = new System.Drawing.Point(63, 153);
-            this.TXT_OVL_IN_H.Name = "TXT_OVL_IN_H";
-            this.TXT_OVL_IN_H.Size = new System.Drawing.Size(50, 22);
-            this.TXT_OVL_IN_H.TabIndex = 33;
-            this.TXT_OVL_IN_H.Text = "0";
-            this.TXT_OVL_IN_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TXT_OVL_EX_W
-            // 
-            this.TXT_OVL_EX_W.BackColor = System.Drawing.Color.White;
-            this.TXT_OVL_EX_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_OVL_EX_W.ForeColor = System.Drawing.Color.Black;
-            this.TXT_OVL_EX_W.Location = new System.Drawing.Point(63, 174);
-            this.TXT_OVL_EX_W.Name = "TXT_OVL_EX_W";
-            this.TXT_OVL_EX_W.Size = new System.Drawing.Size(50, 22);
-            this.TXT_OVL_EX_W.TabIndex = 34;
-            this.TXT_OVL_EX_W.Text = "0";
-            this.TXT_OVL_EX_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TXT_OVL_IN_W
-            // 
-            this.TXT_OVL_IN_W.BackColor = System.Drawing.Color.White;
-            this.TXT_OVL_IN_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_OVL_IN_W.ForeColor = System.Drawing.Color.Black;
-            this.TXT_OVL_IN_W.Location = new System.Drawing.Point(63, 132);
-            this.TXT_OVL_IN_W.Name = "TXT_OVL_IN_W";
-            this.TXT_OVL_IN_W.Size = new System.Drawing.Size(50, 22);
-            this.TXT_OVL_IN_W.TabIndex = 34;
-            this.TXT_OVL_IN_W.Text = "0";
-            this.TXT_OVL_IN_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.button3.Location = new System.Drawing.Point(5, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 100);
-            this.button3.TabIndex = 8;
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // TXT_PARAM_OVL_NICK
-            // 
-            this.TXT_PARAM_OVL_NICK.BackColor = System.Drawing.Color.White;
-            this.TXT_PARAM_OVL_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_PARAM_OVL_NICK.ForeColor = System.Drawing.Color.Black;
-            this.TXT_PARAM_OVL_NICK.Location = new System.Drawing.Point(63, 111);
-            this.TXT_PARAM_OVL_NICK.Name = "TXT_PARAM_OVL_NICK";
-            this.TXT_PARAM_OVL_NICK.Size = new System.Drawing.Size(50, 22);
-            this.TXT_PARAM_OVL_NICK.TabIndex = 7;
-            this.TXT_PARAM_OVL_NICK.Text = "OVL";
-            this.TXT_PARAM_OVL_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // panel23
-            // 
-            this.panel23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel23.Controls.Add(this.RDO_ROI_OVL_EX);
-            this.panel23.Controls.Add(this.RDO_ROI_OVL_ENTIRE);
-            this.panel23.Controls.Add(this.RDO_ROI_OVL_IN);
-            this.panel23.Controls.Add(this.BTN_OL_ADD);
-            this.panel23.Controls.Add(this.BTN_OL_COPY);
-            this.panel23.Controls.Add(this.BTN_OL_REMOVE);
-            this.panel23.Location = new System.Drawing.Point(125, 5);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(115, 220);
-            this.panel23.TabIndex = 28;
-            // 
-            // RDO_ROI_OVL_EX
-            // 
-            this.RDO_ROI_OVL_EX.AutoSize = true;
-            this.RDO_ROI_OVL_EX.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_OVL_EX.Location = new System.Drawing.Point(10, 197);
-            this.RDO_ROI_OVL_EX.Name = "RDO_ROI_OVL_EX";
-            this.RDO_ROI_OVL_EX.Size = new System.Drawing.Size(94, 18);
-            this.RDO_ROI_OVL_EX.TabIndex = 2;
-            this.RDO_ROI_OVL_EX.Text = "EXTERNAL";
-            this.RDO_ROI_OVL_EX.UseVisualStyleBackColor = true;
-            // 
-            // RDO_ROI_OVL_ENTIRE
-            // 
-            this.RDO_ROI_OVL_ENTIRE.AutoSize = true;
-            this.RDO_ROI_OVL_ENTIRE.Checked = true;
-            this.RDO_ROI_OVL_ENTIRE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_OVL_ENTIRE.Location = new System.Drawing.Point(10, 151);
-            this.RDO_ROI_OVL_ENTIRE.Name = "RDO_ROI_OVL_ENTIRE";
-            this.RDO_ROI_OVL_ENTIRE.Size = new System.Drawing.Size(74, 18);
-            this.RDO_ROI_OVL_ENTIRE.TabIndex = 2;
-            this.RDO_ROI_OVL_ENTIRE.TabStop = true;
-            this.RDO_ROI_OVL_ENTIRE.Text = "ENTIRE";
-            this.RDO_ROI_OVL_ENTIRE.UseVisualStyleBackColor = true;
-            // 
-            // RDO_ROI_OVL_IN
-            // 
-            this.RDO_ROI_OVL_IN.AutoSize = true;
-            this.RDO_ROI_OVL_IN.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_OVL_IN.Location = new System.Drawing.Point(10, 173);
-            this.RDO_ROI_OVL_IN.Name = "RDO_ROI_OVL_IN";
-            this.RDO_ROI_OVL_IN.Size = new System.Drawing.Size(93, 18);
-            this.RDO_ROI_OVL_IN.TabIndex = 2;
-            this.RDO_ROI_OVL_IN.Text = "INTERNAL";
-            this.RDO_ROI_OVL_IN.UseVisualStyleBackColor = true;
-            // 
-            // BTN_OL_ADD
-            // 
-            this.BTN_OL_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_ADD.FlatAppearance.BorderSize = 3;
-            this.BTN_OL_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_OL_ADD.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_OL_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_ADD.Location = new System.Drawing.Point(2, 5);
-            this.BTN_OL_ADD.Name = "BTN_OL_ADD";
-            this.BTN_OL_ADD.Size = new System.Drawing.Size(110, 30);
-            this.BTN_OL_ADD.TabIndex = 2;
-            this.BTN_OL_ADD.TabStop = false;
-            this.BTN_OL_ADD.Text = "ADD";
-            this.BTN_OL_ADD.UseVisualStyleBackColor = true;
-            this.BTN_OL_ADD.Click += new System.EventHandler(this.BTN_OL_ADD_Click);
-            // 
-            // BTN_OL_COPY
-            // 
-            this.BTN_OL_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_COPY.FlatAppearance.BorderSize = 3;
-            this.BTN_OL_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_OL_COPY.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_OL_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_COPY.Location = new System.Drawing.Point(2, 40);
-            this.BTN_OL_COPY.Name = "BTN_OL_COPY";
-            this.BTN_OL_COPY.Size = new System.Drawing.Size(110, 30);
-            this.BTN_OL_COPY.TabIndex = 2;
-            this.BTN_OL_COPY.TabStop = false;
-            this.BTN_OL_COPY.Text = "COPY";
-            this.BTN_OL_COPY.UseVisualStyleBackColor = true;
-            this.BTN_OL_COPY.Click += new System.EventHandler(this.BTN_OL_COPY_Click);
-            // 
-            // BTN_OL_REMOVE
-            // 
-            this.BTN_OL_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_REMOVE.FlatAppearance.BorderSize = 3;
-            this.BTN_OL_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BTN_OL_REMOVE.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_OL_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_OL_REMOVE.Location = new System.Drawing.Point(2, 75);
-            this.BTN_OL_REMOVE.Name = "BTN_OL_REMOVE";
-            this.BTN_OL_REMOVE.Size = new System.Drawing.Size(110, 30);
-            this.BTN_OL_REMOVE.TabIndex = 2;
-            this.BTN_OL_REMOVE.TabStop = false;
-            this.BTN_OL_REMOVE.Text = "REMOVE";
-            this.BTN_OL_REMOVE.UseVisualStyleBackColor = true;
-            this.BTN_OL_REMOVE.Click += new System.EventHandler(this.BTN_OL_REMOVE_Click);
-            // 
-            // draw_matching
-            // 
-            this.draw_matching.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.draw_matching.Controls.Add(this.panel17);
-            this.draw_matching.Controls.Add(this.panel13);
-            this.draw_matching.Location = new System.Drawing.Point(4, 39);
-            this.draw_matching.Name = "draw_matching";
-            this.draw_matching.Size = new System.Drawing.Size(594, 232);
-            this.draw_matching.TabIndex = 5;
-            this.draw_matching.Text = "FOCUS ROI";
-            // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel17.Controls.Add(this.BTN_SET_FOCUS_ROI);
-            this.panel17.Controls.Add(this.BTN_DRAW_FOCUS_ROI);
-            this.panel17.Controls.Add(this.BTN_REMOVE_FOCUS_ROI);
-            this.panel17.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.panel17.Location = new System.Drawing.Point(125, 5);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(466, 220);
-            this.panel17.TabIndex = 30;
-            // 
-            // BTN_SET_FOCUS_ROI
-            // 
-            this.BTN_SET_FOCUS_ROI.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_SET_FOCUS_ROI.FlatAppearance.BorderSize = 3;
-            this.BTN_SET_FOCUS_ROI.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_SET_FOCUS_ROI.Location = new System.Drawing.Point(104, 5);
-            this.BTN_SET_FOCUS_ROI.Name = "BTN_SET_FOCUS_ROI";
-            this.BTN_SET_FOCUS_ROI.Size = new System.Drawing.Size(90, 45);
-            this.BTN_SET_FOCUS_ROI.TabIndex = 1;
-            this.BTN_SET_FOCUS_ROI.Text = "SET";
-            this.BTN_SET_FOCUS_ROI.UseVisualStyleBackColor = true;
-            this.BTN_SET_FOCUS_ROI.Click += new System.EventHandler(this.BTN_SET_FOCUS_ROI_Click);
-            // 
-            // BTN_DRAW_FOCUS_ROI
-            // 
-            this.BTN_DRAW_FOCUS_ROI.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DRAW_FOCUS_ROI.FlatAppearance.BorderSize = 3;
-            this.BTN_DRAW_FOCUS_ROI.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_DRAW_FOCUS_ROI.Location = new System.Drawing.Point(8, 5);
-            this.BTN_DRAW_FOCUS_ROI.Name = "BTN_DRAW_FOCUS_ROI";
-            this.BTN_DRAW_FOCUS_ROI.Size = new System.Drawing.Size(90, 45);
-            this.BTN_DRAW_FOCUS_ROI.TabIndex = 1;
-            this.BTN_DRAW_FOCUS_ROI.Text = "DRAW";
-            this.BTN_DRAW_FOCUS_ROI.UseVisualStyleBackColor = true;
-            this.BTN_DRAW_FOCUS_ROI.Click += new System.EventHandler(this.BTN_DRAW_FOCUS_ROI_Click);
-            // 
-            // BTN_REMOVE_FOCUS_ROI
-            // 
-            this.BTN_REMOVE_FOCUS_ROI.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_REMOVE_FOCUS_ROI.FlatAppearance.BorderSize = 3;
-            this.BTN_REMOVE_FOCUS_ROI.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_REMOVE_FOCUS_ROI.Location = new System.Drawing.Point(200, 5);
-            this.BTN_REMOVE_FOCUS_ROI.Name = "BTN_REMOVE_FOCUS_ROI";
-            this.BTN_REMOVE_FOCUS_ROI.Size = new System.Drawing.Size(91, 45);
-            this.BTN_REMOVE_FOCUS_ROI.TabIndex = 1;
-            this.BTN_REMOVE_FOCUS_ROI.Text = "REMOVE";
-            this.BTN_REMOVE_FOCUS_ROI.UseVisualStyleBackColor = true;
-            this.BTN_REMOVE_FOCUS_ROI.Click += new System.EventHandler(this.BTN_REMOVE_FOCUS_ROI_Click);
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel13.Controls.Add(this.button2);
-            this.panel13.Location = new System.Drawing.Point(5, 5);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(115, 220);
-            this.panel13.TabIndex = 29;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.button2.Location = new System.Drawing.Point(5, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 100);
-            this.button2.TabIndex = 9;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // BTN_UPDATE_FIGURE_LIST
-            // 
-            this.BTN_UPDATE_FIGURE_LIST.Location = new System.Drawing.Point(15, 338);
-            this.BTN_UPDATE_FIGURE_LIST.Name = "BTN_UPDATE_FIGURE_LIST";
-            this.BTN_UPDATE_FIGURE_LIST.Size = new System.Drawing.Size(189, 50);
-            this.BTN_UPDATE_FIGURE_LIST.TabIndex = 13;
-            this.BTN_UPDATE_FIGURE_LIST.Text = "Update Figure List";
-            this.BTN_UPDATE_FIGURE_LIST.UseVisualStyleBackColor = true;
-            this.BTN_UPDATE_FIGURE_LIST.Visible = false;
-            this.BTN_UPDATE_FIGURE_LIST.Click += new System.EventHandler(this.BTN_UPDATE_FIGURE_LIST_Click);
             // 
             // LV_RECP
             // 
@@ -1405,14 +581,16 @@
             this.LV_PARAMETER.ForeColor = System.Drawing.Color.Black;
             this.LV_PARAMETER.FullRowSelect = true;
             this.LV_PARAMETER.GridLines = true;
-            this.LV_PARAMETER.Location = new System.Drawing.Point(3, 312);
+            this.LV_PARAMETER.Location = new System.Drawing.Point(6, 17);
             this.LV_PARAMETER.Name = "LV_PARAMETER";
             this.LV_PARAMETER.Scrollable = false;
-            this.LV_PARAMETER.Size = new System.Drawing.Size(227, 263);
+            this.LV_PARAMETER.Size = new System.Drawing.Size(227, 272);
             this.LV_PARAMETER.TabIndex = 11;
             this.LV_PARAMETER.UseCompatibleStateImageBehavior = false;
             this.LV_PARAMETER.View = System.Windows.Forms.View.Details;
             this.LV_PARAMETER.SelectedIndexChanged += new System.EventHandler(this.LV_PARAMETER_SelectedIndexChanged);
+            this.LV_PARAMETER.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LV_PARAMETER_KeyDown);
+            this.LV_PARAMETER.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_PARAMETER_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -1488,27 +666,27 @@
             // RDO_ROI_ASYM
             // 
             this.RDO_ROI_ASYM.AutoSize = true;
+            this.RDO_ROI_ASYM.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.RDO_ROI_ASYM.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_ROI_ASYM.Location = new System.Drawing.Point(232, 66);
             this.RDO_ROI_ASYM.Name = "RDO_ROI_ASYM";
-            this.RDO_ROI_ASYM.Size = new System.Drawing.Size(69, 18);
+            this.RDO_ROI_ASYM.Size = new System.Drawing.Size(68, 16);
             this.RDO_ROI_ASYM.TabIndex = 2;
-            this.RDO_ROI_ASYM.Text = "ZigZag";
+            this.RDO_ROI_ASYM.Text = "ZIGZAG";
             this.RDO_ROI_ASYM.UseVisualStyleBackColor = true;
             this.RDO_ROI_ASYM.Visible = false;
-            this.RDO_ROI_ASYM.CheckedChanged += new System.EventHandler(this.RDO_ROI_ASYM_CheckedChanged);
             // 
             // RDO_ROI_SIZE
             // 
             this.RDO_ROI_SIZE.AutoSize = true;
+            this.RDO_ROI_SIZE.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.RDO_ROI_SIZE.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_ROI_SIZE.Location = new System.Drawing.Point(170, 66);
             this.RDO_ROI_SIZE.Name = "RDO_ROI_SIZE";
-            this.RDO_ROI_SIZE.Size = new System.Drawing.Size(56, 18);
+            this.RDO_ROI_SIZE.Size = new System.Drawing.Size(50, 16);
             this.RDO_ROI_SIZE.TabIndex = 2;
             this.RDO_ROI_SIZE.Text = "SIZE";
             this.RDO_ROI_SIZE.UseVisualStyleBackColor = true;
-            this.RDO_ROI_SIZE.CheckedChanged += new System.EventHandler(this.RDO_ROI_FIGURE_CheckedChanged);
             // 
             // TXT_FIGURE_CONTROL_SCALE
             // 
@@ -1540,27 +718,27 @@
             // 
             this.RDO_ROI_POSITION.AutoSize = true;
             this.RDO_ROI_POSITION.Checked = true;
+            this.RDO_ROI_POSITION.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.RDO_ROI_POSITION.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_ROI_POSITION.Location = new System.Drawing.Point(57, 65);
             this.RDO_ROI_POSITION.Name = "RDO_ROI_POSITION";
-            this.RDO_ROI_POSITION.Size = new System.Drawing.Size(54, 18);
+            this.RDO_ROI_POSITION.Size = new System.Drawing.Size(47, 16);
             this.RDO_ROI_POSITION.TabIndex = 2;
             this.RDO_ROI_POSITION.TabStop = true;
             this.RDO_ROI_POSITION.Text = "POS";
             this.RDO_ROI_POSITION.UseVisualStyleBackColor = true;
-            this.RDO_ROI_POSITION.CheckedChanged += new System.EventHandler(this.RDO_ROI_FIGURE_CheckedChanged);
             // 
             // RDO_ROI_GAP
             // 
             this.RDO_ROI_GAP.AutoSize = true;
+            this.RDO_ROI_GAP.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.RDO_ROI_GAP.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_ROI_GAP.Location = new System.Drawing.Point(116, 66);
             this.RDO_ROI_GAP.Name = "RDO_ROI_GAP";
-            this.RDO_ROI_GAP.Size = new System.Drawing.Size(53, 18);
+            this.RDO_ROI_GAP.Size = new System.Drawing.Size(48, 16);
             this.RDO_ROI_GAP.TabIndex = 2;
             this.RDO_ROI_GAP.Text = "GAP";
             this.RDO_ROI_GAP.UseVisualStyleBackColor = true;
-            this.RDO_ROI_GAP.CheckedChanged += new System.EventHandler(this.RDO_ROI_FIGURE_CheckedChanged);
             // 
             // label47
             // 
@@ -1676,7 +854,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 10;
+            this.UC_LOG_VIEWER.m_workIndexer = 299;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1712,16 +890,6 @@
             this.TXT_BASE_RECP.Size = new System.Drawing.Size(277, 22);
             this.TXT_BASE_RECP.TabIndex = 1;
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label15.Location = new System.Drawing.Point(340, 338);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(96, 14);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "POS FOCUS :";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -1738,10 +906,12 @@
             this.TXT_FOCUS_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_FOCUS_POS_Y.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.TXT_FOCUS_POS_Y.ForeColor = System.Drawing.Color.Black;
-            this.TXT_FOCUS_POS_Y.Location = new System.Drawing.Point(516, 334);
+            this.TXT_FOCUS_POS_Y.Location = new System.Drawing.Point(184, 16);
             this.TXT_FOCUS_POS_Y.Name = "TXT_FOCUS_POS_Y";
-            this.TXT_FOCUS_POS_Y.Size = new System.Drawing.Size(70, 20);
+            this.TXT_FOCUS_POS_Y.Size = new System.Drawing.Size(54, 20);
             this.TXT_FOCUS_POS_Y.TabIndex = 1;
+            this.TXT_FOCUS_POS_Y.Text = "0";
+            this.TXT_FOCUS_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TXT_PTRN_POS_ORG_Y
             // 
@@ -1760,10 +930,12 @@
             this.TXT_FOCUS_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_FOCUS_POS_X.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.TXT_FOCUS_POS_X.ForeColor = System.Drawing.Color.Black;
-            this.TXT_FOCUS_POS_X.Location = new System.Drawing.Point(440, 334);
+            this.TXT_FOCUS_POS_X.Location = new System.Drawing.Point(67, 17);
             this.TXT_FOCUS_POS_X.Name = "TXT_FOCUS_POS_X";
-            this.TXT_FOCUS_POS_X.Size = new System.Drawing.Size(70, 20);
+            this.TXT_FOCUS_POS_X.Size = new System.Drawing.Size(54, 20);
             this.TXT_FOCUS_POS_X.TabIndex = 1;
+            this.TXT_FOCUS_POS_X.Text = "0";
+            this.TXT_FOCUS_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TXT_PTRN_POS_ORG_X
             // 
@@ -1820,7 +992,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.BTN_TEMP_TRANS_DESING);
+            this.panel3.Controls.Add(this.BTN_TEMP_TRANS_DESIGN);
             this.panel3.Controls.Add(this.BTN_MENU_STATISTICS);
             this.panel3.Controls.Add(this.BTN_MAIN_LOGO);
             this.panel3.Controls.Add(this.label9);
@@ -1847,16 +1019,16 @@
             this.panel3.Size = new System.Drawing.Size(1225, 86);
             this.panel3.TabIndex = 57;
             // 
-            // BTN_TEMP_TRANS_DESING
+            // BTN_TEMP_TRANS_DESIGN
             // 
-            this.BTN_TEMP_TRANS_DESING.Location = new System.Drawing.Point(564, 4);
-            this.BTN_TEMP_TRANS_DESING.Name = "BTN_TEMP_TRANS_DESING";
-            this.BTN_TEMP_TRANS_DESING.Size = new System.Drawing.Size(153, 23);
-            this.BTN_TEMP_TRANS_DESING.TabIndex = 45;
-            this.BTN_TEMP_TRANS_DESING.Text = "TRANS_DESIGN";
-            this.BTN_TEMP_TRANS_DESING.UseVisualStyleBackColor = true;
-            this.BTN_TEMP_TRANS_DESING.Visible = false;
-            this.BTN_TEMP_TRANS_DESING.Click += new System.EventHandler(this.BTN_TEMP_TRANS_DESING_Click);
+            this.BTN_TEMP_TRANS_DESIGN.Location = new System.Drawing.Point(564, 4);
+            this.BTN_TEMP_TRANS_DESIGN.Name = "BTN_TEMP_TRANS_DESIGN";
+            this.BTN_TEMP_TRANS_DESIGN.Size = new System.Drawing.Size(153, 23);
+            this.BTN_TEMP_TRANS_DESIGN.TabIndex = 45;
+            this.BTN_TEMP_TRANS_DESIGN.Text = "TRANS_DESIGN";
+            this.BTN_TEMP_TRANS_DESIGN.UseVisualStyleBackColor = true;
+            this.BTN_TEMP_TRANS_DESIGN.Visible = false;
+            this.BTN_TEMP_TRANS_DESIGN.Click += new System.EventHandler(this.BTN_TEMP_TRANS_DESIGN_Click);
             // 
             // BTN_MENU_STATISTICS
             // 
@@ -2098,75 +1270,58 @@
             // 
             this.PNL_DRAW_FIGURE.BackColor = System.Drawing.SystemColors.Control;
             this.PNL_DRAW_FIGURE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label25);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.BTN_UPDATE_FIGURE_LIST);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label4);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.BTN_UPDATE_PARAMETER);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.BTN_RELOAD_PARAM_FIGURES);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.LV_PARAMETER);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.BTN_FIGURE_REMOVE_ALL);
+            this.PNL_DRAW_FIGURE.Controls.Add(this.panel2);
             this.PNL_DRAW_FIGURE.Controls.Add(this.TAB_FIGURE);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label5);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label6);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.UC_Parameter);
             this.PNL_DRAW_FIGURE.Controls.Add(this.panel27);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label13);
-            this.PNL_DRAW_FIGURE.Controls.Add(this.label12);
             this.PNL_DRAW_FIGURE.Location = new System.Drawing.Point(1289, 97);
             this.PNL_DRAW_FIGURE.Name = "PNL_DRAW_FIGURE";
             this.PNL_DRAW_FIGURE.Size = new System.Drawing.Size(610, 760);
             this.PNL_DRAW_FIGURE.TabIndex = 58;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BTN_FIGURE_REFRESH);
+            this.panel2.Controls.Add(this.label25);
+            this.panel2.Controls.Add(this.BTN_FIGURE_REMOVE_ALL);
+            this.panel2.Controls.Add(this.UC_Parameter);
+            this.panel2.Controls.Add(this.BTN_FIGURE_DELETE);
+            this.panel2.Controls.Add(this.BTN_FIGURE_UPDATE);
+            this.panel2.Controls.Add(this.LV_PARAMETER);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label73);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Location = new System.Drawing.Point(3, 8);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(609, 370);
+            this.panel2.TabIndex = 43;
+            // 
+            // BTN_FIGURE_REFRESH
+            // 
+            this.BTN_FIGURE_REFRESH.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.quick_restart;
+            this.BTN_FIGURE_REFRESH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_REFRESH.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_REFRESH.FlatAppearance.BorderSize = 3;
+            this.BTN_FIGURE_REFRESH.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_REFRESH.Location = new System.Drawing.Point(6, 295);
+            this.BTN_FIGURE_REFRESH.Name = "BTN_FIGURE_REFRESH";
+            this.BTN_FIGURE_REFRESH.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_REFRESH.TabIndex = 12;
+            this.BTN_FIGURE_REFRESH.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_REFRESH.Click += new System.EventHandler(this.BTN_FIGURE_REFRESH_Click);
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label25.Location = new System.Drawing.Point(450, 569);
+            this.label25.Location = new System.Drawing.Point(450, 262);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(151, 14);
             this.label25.TabIndex = 0;
             this.label25.Text = "235, 310 / 370 , 340";
             this.label25.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(12, 645);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 41;
-            this.label4.Text = "REFRESH";
-            // 
-            // BTN_UPDATE_PARAMETER
-            // 
-            this.BTN_UPDATE_PARAMETER.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.view_refresh;
-            this.BTN_UPDATE_PARAMETER.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_UPDATE_PARAMETER.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_UPDATE_PARAMETER.FlatAppearance.BorderSize = 3;
-            this.BTN_UPDATE_PARAMETER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
-            this.BTN_UPDATE_PARAMETER.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_UPDATE_PARAMETER.Location = new System.Drawing.Point(168, 581);
-            this.BTN_UPDATE_PARAMETER.Name = "BTN_UPDATE_PARAMETER";
-            this.BTN_UPDATE_PARAMETER.Size = new System.Drawing.Size(60, 60);
-            this.BTN_UPDATE_PARAMETER.TabIndex = 0;
-            this.BTN_UPDATE_PARAMETER.UseVisualStyleBackColor = true;
-            this.BTN_UPDATE_PARAMETER.Click += new System.EventHandler(this.BTN_FIGURE_INVALIDATE_Click);
-            // 
-            // BTN_RELOAD_PARAM_FIGURES
-            // 
-            this.BTN_RELOAD_PARAM_FIGURES.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.quick_restart;
-            this.BTN_RELOAD_PARAM_FIGURES.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_RELOAD_PARAM_FIGURES.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_RELOAD_PARAM_FIGURES.FlatAppearance.BorderSize = 3;
-            this.BTN_RELOAD_PARAM_FIGURES.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_RELOAD_PARAM_FIGURES.Location = new System.Drawing.Point(12, 581);
-            this.BTN_RELOAD_PARAM_FIGURES.Name = "BTN_RELOAD_PARAM_FIGURES";
-            this.BTN_RELOAD_PARAM_FIGURES.Size = new System.Drawing.Size(60, 60);
-            this.BTN_RELOAD_PARAM_FIGURES.TabIndex = 12;
-            this.BTN_RELOAD_PARAM_FIGURES.UseVisualStyleBackColor = true;
-            this.BTN_RELOAD_PARAM_FIGURES.Click += new System.EventHandler(this.BTN_RELOAD_PARAM_FIGURES_Click);
             // 
             // BTN_FIGURE_REMOVE_ALL
             // 
@@ -2175,62 +1330,2154 @@
             this.BTN_FIGURE_REMOVE_ALL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.BTN_FIGURE_REMOVE_ALL.FlatAppearance.BorderSize = 3;
             this.BTN_FIGURE_REMOVE_ALL.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_FIGURE_REMOVE_ALL.Location = new System.Drawing.Point(104, 581);
+            this.BTN_FIGURE_REMOVE_ALL.Location = new System.Drawing.Point(121, 298);
             this.BTN_FIGURE_REMOVE_ALL.Name = "BTN_FIGURE_REMOVE_ALL";
-            this.BTN_FIGURE_REMOVE_ALL.Size = new System.Drawing.Size(60, 60);
+            this.BTN_FIGURE_REMOVE_ALL.Size = new System.Drawing.Size(50, 50);
             this.BTN_FIGURE_REMOVE_ALL.TabIndex = 12;
             this.BTN_FIGURE_REMOVE_ALL.UseVisualStyleBackColor = true;
             this.BTN_FIGURE_REMOVE_ALL.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_ALL_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label5.Location = new System.Drawing.Point(108, 644);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "RESET";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label6.Location = new System.Drawing.Point(171, 644);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
-            this.label6.TabIndex = 41;
-            this.label6.Text = "MODIFY";
-            // 
             // UC_Parameter
             // 
             this.UC_Parameter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UC_Parameter.Location = new System.Drawing.Point(236, 312);
+            this.UC_Parameter.Location = new System.Drawing.Point(239, 17);
             this.UC_Parameter.Name = "UC_Parameter";
-            this.UC_Parameter.Size = new System.Drawing.Size(370, 340);
+            this.UC_Parameter.Size = new System.Drawing.Size(363, 328);
             this.UC_Parameter.TabIndex = 1;
+            // 
+            // BTN_FIGURE_DELETE
+            // 
+            this.BTN_FIGURE_DELETE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_cancel;
+            this.BTN_FIGURE_DELETE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_DELETE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_DELETE.FlatAppearance.BorderSize = 3;
+            this.BTN_FIGURE_DELETE.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_FIGURE_DELETE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_DELETE.Location = new System.Drawing.Point(65, 298);
+            this.BTN_FIGURE_DELETE.Name = "BTN_FIGURE_DELETE";
+            this.BTN_FIGURE_DELETE.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_DELETE.TabIndex = 0;
+            this.BTN_FIGURE_DELETE.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_DELETE.Click += new System.EventHandler(this.BTN_FIGURE_DELETE_Click);
+            // 
+            // BTN_FIGURE_UPDATE
+            // 
+            this.BTN_FIGURE_UPDATE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.view_refresh;
+            this.BTN_FIGURE_UPDATE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_UPDATE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_UPDATE.FlatAppearance.BorderSize = 3;
+            this.BTN_FIGURE_UPDATE.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_FIGURE_UPDATE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_FIGURE_UPDATE.Location = new System.Drawing.Point(177, 298);
+            this.BTN_FIGURE_UPDATE.Name = "BTN_FIGURE_UPDATE";
+            this.BTN_FIGURE_UPDATE.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_UPDATE.TabIndex = 0;
+            this.BTN_FIGURE_UPDATE.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_UPDATE.Click += new System.EventHandler(this.BTN_FIGURE_UPDATE_Click);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label13.Location = new System.Drawing.Point(233, 286);
+            this.label13.Location = new System.Drawing.Point(245, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(115, 14);
             this.label13.TabIndex = 0;
             this.label13.Text = ":- PARAMETERS ";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label4.Location = new System.Drawing.Point(12, 351);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 10);
+            this.label4.TabIndex = 41;
+            this.label4.Text = "RELOAD";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label6.Location = new System.Drawing.Point(183, 351);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 10);
+            this.label6.TabIndex = 41;
+            this.label6.Text = "MODIFY";
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.label73.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label73.Location = new System.Drawing.Point(126, 351);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(33, 10);
+            this.label73.TabIndex = 41;
+            this.label73.Text = "CLEAR";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label5.Location = new System.Drawing.Point(70, 351);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 10);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "REMOVE";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label12.Location = new System.Drawing.Point(12, 286);
+            this.label12.Location = new System.Drawing.Point(3, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(82, 14);
             this.label12.TabIndex = 0;
             this.label12.Text = ":- FIGURES";
+            // 
+            // TAB_FIGURE
+            // 
+            this.TAB_FIGURE.Controls.Add(this.draw_Rect);
+            this.TAB_FIGURE.Controls.Add(this.draw_circle);
+            this.TAB_FIGURE.Controls.Add(this.draw_ovl);
+            this.TAB_FIGURE.Controls.Add(this.draw_focus);
+            this.TAB_FIGURE.Controls.Add(this.draw_mix_rc);
+            this.TAB_FIGURE.Controls.Add(this.draw_mix_cc);
+            this.TAB_FIGURE.Controls.Add(this.draw_mixc_rcc);
+            this.TAB_FIGURE.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.TAB_FIGURE.ItemSize = new System.Drawing.Size(70, 30);
+            this.TAB_FIGURE.Location = new System.Drawing.Point(2, 388);
+            this.TAB_FIGURE.Multiline = true;
+            this.TAB_FIGURE.Name = "TAB_FIGURE";
+            this.TAB_FIGURE.SelectedIndex = 0;
+            this.TAB_FIGURE.Size = new System.Drawing.Size(602, 272);
+            this.TAB_FIGURE.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.TAB_FIGURE.TabIndex = 37;
+            this.TAB_FIGURE.SelectedIndexChanged += new System.EventHandler(this.TAB_FIGURE_SelectedIndexChanged);
+            // 
+            // draw_Rect
+            // 
+            this.draw_Rect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_Rect.Controls.Add(this.groupBox4);
+            this.draw_Rect.Controls.Add(this.groupBox3);
+            this.draw_Rect.Controls.Add(this.groupBox2);
+            this.draw_Rect.Controls.Add(this.groupBox1);
+            this.draw_Rect.Controls.Add(this.BTN_RECT_COPY);
+            this.draw_Rect.Controls.Add(this.BTN_RECT_ADD);
+            this.draw_Rect.Controls.Add(this.BTN_RECT_MODIFY);
+            this.draw_Rect.Controls.Add(this.BTN_DIG_REMOVE);
+            this.draw_Rect.ImageIndex = 5;
+            this.draw_Rect.Location = new System.Drawing.Point(4, 34);
+            this.draw_Rect.Name = "draw_Rect";
+            this.draw_Rect.Padding = new System.Windows.Forms.Padding(3);
+            this.draw_Rect.Size = new System.Drawing.Size(594, 234);
+            this.draw_Rect.TabIndex = 1;
+            this.draw_Rect.Text = "RECT";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.BTN_RECT_DRAW);
+            this.groupBox4.Controls.Add(this.BTN_RECT_REMOVE);
+            this.groupBox4.Controls.Add(this.BTN_RECT_SET_REGION);
+            this.groupBox4.Location = new System.Drawing.Point(5, 147);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(583, 45);
+            this.groupBox4.TabIndex = 47;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "FOR DRAWING";
+            // 
+            // BTN_RECT_DRAW
+            // 
+            this.BTN_RECT_DRAW.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_DRAW.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_DRAW.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_DRAW.Location = new System.Drawing.Point(17, 14);
+            this.BTN_RECT_DRAW.Name = "BTN_RECT_DRAW";
+            this.BTN_RECT_DRAW.Size = new System.Drawing.Size(127, 25);
+            this.BTN_RECT_DRAW.TabIndex = 42;
+            this.BTN_RECT_DRAW.Text = "DRAW REGION";
+            this.BTN_RECT_DRAW.UseVisualStyleBackColor = true;
+            this.BTN_RECT_DRAW.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
+            // 
+            // BTN_RECT_REMOVE
+            // 
+            this.BTN_RECT_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_REMOVE.Location = new System.Drawing.Point(155, 14);
+            this.BTN_RECT_REMOVE.Name = "BTN_RECT_REMOVE";
+            this.BTN_RECT_REMOVE.Size = new System.Drawing.Size(127, 25);
+            this.BTN_RECT_REMOVE.TabIndex = 43;
+            this.BTN_RECT_REMOVE.Text = "REMOVE REGION";
+            this.BTN_RECT_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_RECT_REMOVE.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
+            // 
+            // BTN_RECT_SET_REGION
+            // 
+            this.BTN_RECT_SET_REGION.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_SET_REGION.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_SET_REGION.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_SET_REGION.Location = new System.Drawing.Point(288, 14);
+            this.BTN_RECT_SET_REGION.Name = "BTN_RECT_SET_REGION";
+            this.BTN_RECT_SET_REGION.Size = new System.Drawing.Size(127, 25);
+            this.BTN_RECT_SET_REGION.TabIndex = 41;
+            this.BTN_RECT_SET_REGION.Text = "SET REGION";
+            this.BTN_RECT_SET_REGION.UseVisualStyleBackColor = true;
+            this.BTN_RECT_SET_REGION.Click += new System.EventHandler(this.BTN_FIGURE_SET_REGION_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.LB_PARAM_DIA_ANGLE);
+            this.groupBox3.Controls.Add(this.BTN_DIA_ANGLE_RV);
+            this.groupBox3.Controls.Add(this.BTN_DIA_ANGLE_UP);
+            this.groupBox3.Controls.Add(this.BTN_DIA_ANGLE_DW);
+            this.groupBox3.Controls.Add(this.TXT_PARAM_DIA_ANGLE);
+            this.groupBox3.Location = new System.Drawing.Point(288, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(302, 40);
+            this.groupBox3.TabIndex = 46;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "DIGONAL";
+            // 
+            // LB_PARAM_DIA_ANGLE
+            // 
+            this.LB_PARAM_DIA_ANGLE.AutoSize = true;
+            this.LB_PARAM_DIA_ANGLE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LB_PARAM_DIA_ANGLE.Location = new System.Drawing.Point(17, 19);
+            this.LB_PARAM_DIA_ANGLE.Name = "LB_PARAM_DIA_ANGLE";
+            this.LB_PARAM_DIA_ANGLE.Size = new System.Drawing.Size(19, 12);
+            this.LB_PARAM_DIA_ANGLE.TabIndex = 0;
+            this.LB_PARAM_DIA_ANGLE.Text = "θ :";
+            this.LB_PARAM_DIA_ANGLE.Visible = false;
+            // 
+            // BTN_DIA_ANGLE_RV
+            // 
+            this.BTN_DIA_ANGLE_RV.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_DIA_ANGLE_RV.Location = new System.Drawing.Point(218, 10);
+            this.BTN_DIA_ANGLE_RV.Name = "BTN_DIA_ANGLE_RV";
+            this.BTN_DIA_ANGLE_RV.Size = new System.Drawing.Size(35, 23);
+            this.BTN_DIA_ANGLE_RV.TabIndex = 9;
+            this.BTN_DIA_ANGLE_RV.Text = "↔";
+            this.BTN_DIA_ANGLE_RV.UseVisualStyleBackColor = true;
+            this.BTN_DIA_ANGLE_RV.Visible = false;
+            this.BTN_DIA_ANGLE_RV.Click += new System.EventHandler(this.BTN_DIG_ANGLE_RV_Click);
+            // 
+            // BTN_DIA_ANGLE_UP
+            // 
+            this.BTN_DIA_ANGLE_UP.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_DIA_ANGLE_UP.Location = new System.Drawing.Point(178, 9);
+            this.BTN_DIA_ANGLE_UP.Name = "BTN_DIA_ANGLE_UP";
+            this.BTN_DIA_ANGLE_UP.Size = new System.Drawing.Size(35, 23);
+            this.BTN_DIA_ANGLE_UP.TabIndex = 9;
+            this.BTN_DIA_ANGLE_UP.Text = "↑";
+            this.BTN_DIA_ANGLE_UP.UseVisualStyleBackColor = true;
+            this.BTN_DIA_ANGLE_UP.Visible = false;
+            this.BTN_DIA_ANGLE_UP.Click += new System.EventHandler(this.BTN_DIG_ANGLE_UP_Click);
+            // 
+            // BTN_DIA_ANGLE_DW
+            // 
+            this.BTN_DIA_ANGLE_DW.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_DIA_ANGLE_DW.Location = new System.Drawing.Point(258, 11);
+            this.BTN_DIA_ANGLE_DW.Name = "BTN_DIA_ANGLE_DW";
+            this.BTN_DIA_ANGLE_DW.Size = new System.Drawing.Size(35, 23);
+            this.BTN_DIA_ANGLE_DW.TabIndex = 9;
+            this.BTN_DIA_ANGLE_DW.Text = "↓";
+            this.BTN_DIA_ANGLE_DW.UseVisualStyleBackColor = true;
+            this.BTN_DIA_ANGLE_DW.Visible = false;
+            this.BTN_DIA_ANGLE_DW.Click += new System.EventHandler(this.BTN_DIG_ANGLE_DW_Click);
+            // 
+            // TXT_PARAM_DIA_ANGLE
+            // 
+            this.TXT_PARAM_DIA_ANGLE.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_DIA_ANGLE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TXT_PARAM_DIA_ANGLE.ForeColor = System.Drawing.Color.Black;
+            this.TXT_PARAM_DIA_ANGLE.Location = new System.Drawing.Point(45, 18);
+            this.TXT_PARAM_DIA_ANGLE.Name = "TXT_PARAM_DIA_ANGLE";
+            this.TXT_PARAM_DIA_ANGLE.ReadOnly = true;
+            this.TXT_PARAM_DIA_ANGLE.Size = new System.Drawing.Size(37, 12);
+            this.TXT_PARAM_DIA_ANGLE.TabIndex = 8;
+            this.TXT_PARAM_DIA_ANGLE.Text = "0";
+            this.TXT_PARAM_DIA_ANGLE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_PARAM_DIA_ANGLE.Visible = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label71);
+            this.groupBox2.Controls.Add(this.label46);
+            this.groupBox2.Controls.Add(this.label59);
+            this.groupBox2.Controls.Add(this.label44);
+            this.groupBox2.Controls.Add(this.label45);
+            this.groupBox2.Controls.Add(this.label60);
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.label42);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.label41);
+            this.groupBox2.Controls.Add(this.TXT_RECT_SCD_POS_Y);
+            this.groupBox2.Controls.Add(this.label53);
+            this.groupBox2.Controls.Add(this.TXT_RECT_FST_POS_Y);
+            this.groupBox2.Controls.Add(this.label43);
+            this.groupBox2.Controls.Add(this.TXT_INDEX_OF_RECT);
+            this.groupBox2.Controls.Add(this.TXT_PARAM_DIG_NICK);
+            this.groupBox2.Controls.Add(this.TXT_RECT_SCD_POS_X);
+            this.groupBox2.Controls.Add(this.TXT_RECT_FST_SZ_W);
+            this.groupBox2.Controls.Add(this.TXT_RECT_FST_POS_X);
+            this.groupBox2.Controls.Add(this.TXT_RECT_SCD_SZ_W);
+            this.groupBox2.Controls.Add(this.TXT_RECT_FST_SZ_H);
+            this.groupBox2.Controls.Add(this.TXT_RECT_SCD_SZ_H);
+            this.groupBox2.Location = new System.Drawing.Point(5, 43);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(589, 100);
+            this.groupBox2.TabIndex = 45;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "REGION INFO";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(15, 21);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(50, 12);
+            this.label71.TabIndex = 40;
+            this.label71.Text = "INDEX :";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label46.Location = new System.Drawing.Point(452, 50);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(42, 12);
+            this.label46.TabIndex = 9;
+            this.label46.Text = "RC_H :";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label59.Location = new System.Drawing.Point(452, 73);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(42, 12);
+            this.label59.TabIndex = 9;
+            this.label59.Text = "RC_H :";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label44.Location = new System.Drawing.Point(160, 21);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(41, 12);
+            this.label44.TabIndex = 7;
+            this.label44.Text = "NICK :";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(335, 50);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(46, 12);
+            this.label45.TabIndex = 8;
+            this.label45.Text = "RC_W :";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(335, 75);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(46, 12);
+            this.label60.TabIndex = 8;
+            this.label60.Text = "RC_W :";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Enabled = false;
+            this.radioButton1.Location = new System.Drawing.Point(18, 71);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(79, 16);
+            this.radioButton1.TabIndex = 38;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "SECON RC";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(107, 45);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(42, 12);
+            this.label42.TabIndex = 30;
+            this.label42.Text = "RC_X :";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Enabled = false;
+            this.radioButton2.Location = new System.Drawing.Point(18, 46);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(75, 16);
+            this.radioButton2.TabIndex = 39;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "FIRST RC";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(111, 73);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(42, 12);
+            this.label41.TabIndex = 29;
+            this.label41.Text = "RC_X :";
+            // 
+            // TXT_RECT_SCD_POS_Y
+            // 
+            this.TXT_RECT_SCD_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_SCD_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_SCD_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_SCD_POS_Y.Location = new System.Drawing.Point(271, 70);
+            this.TXT_RECT_SCD_POS_Y.Name = "TXT_RECT_SCD_POS_Y";
+            this.TXT_RECT_SCD_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_SCD_POS_Y.TabIndex = 34;
+            this.TXT_RECT_SCD_POS_Y.Text = "0";
+            this.TXT_RECT_SCD_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label53.Location = new System.Drawing.Point(223, 48);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(42, 12);
+            this.label53.TabIndex = 33;
+            this.label53.Text = "RC_Y :";
+            // 
+            // TXT_RECT_FST_POS_Y
+            // 
+            this.TXT_RECT_FST_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_FST_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_FST_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_FST_POS_Y.Location = new System.Drawing.Point(271, 46);
+            this.TXT_RECT_FST_POS_Y.Name = "TXT_RECT_FST_POS_Y";
+            this.TXT_RECT_FST_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_FST_POS_Y.TabIndex = 35;
+            this.TXT_RECT_FST_POS_Y.Text = "0";
+            this.TXT_RECT_FST_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label43.Location = new System.Drawing.Point(223, 73);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(42, 12);
+            this.label43.TabIndex = 32;
+            this.label43.Text = "RC_Y :";
+            // 
+            // TXT_INDEX_OF_RECT
+            // 
+            this.TXT_INDEX_OF_RECT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_RECT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_RECT.ForeColor = System.Drawing.Color.Black;
+            this.TXT_INDEX_OF_RECT.Location = new System.Drawing.Point(95, 18);
+            this.TXT_INDEX_OF_RECT.Name = "TXT_INDEX_OF_RECT";
+            this.TXT_INDEX_OF_RECT.ReadOnly = true;
+            this.TXT_INDEX_OF_RECT.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_RECT.TabIndex = 36;
+            this.TXT_INDEX_OF_RECT.Text = "0";
+            this.TXT_INDEX_OF_RECT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_PARAM_DIG_NICK
+            // 
+            this.TXT_PARAM_DIG_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_DIG_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_DIG_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_PARAM_DIG_NICK.Location = new System.Drawing.Point(207, 18);
+            this.TXT_PARAM_DIG_NICK.Name = "TXT_PARAM_DIG_NICK";
+            this.TXT_PARAM_DIG_NICK.Size = new System.Drawing.Size(150, 19);
+            this.TXT_PARAM_DIG_NICK.TabIndex = 7;
+            this.TXT_PARAM_DIG_NICK.Text = "RECT";
+            this.TXT_PARAM_DIG_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_SCD_POS_X
+            // 
+            this.TXT_RECT_SCD_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_SCD_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_SCD_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_SCD_POS_X.Location = new System.Drawing.Point(155, 70);
+            this.TXT_RECT_SCD_POS_X.Name = "TXT_RECT_SCD_POS_X";
+            this.TXT_RECT_SCD_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_SCD_POS_X.TabIndex = 36;
+            this.TXT_RECT_SCD_POS_X.Text = "0";
+            this.TXT_RECT_SCD_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_FST_SZ_W
+            // 
+            this.TXT_RECT_FST_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_FST_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_FST_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_FST_SZ_W.Location = new System.Drawing.Point(387, 48);
+            this.TXT_RECT_FST_SZ_W.Name = "TXT_RECT_FST_SZ_W";
+            this.TXT_RECT_FST_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_FST_SZ_W.TabIndex = 27;
+            this.TXT_RECT_FST_SZ_W.Text = "0";
+            this.TXT_RECT_FST_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_FST_POS_X
+            // 
+            this.TXT_RECT_FST_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_FST_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_FST_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_FST_POS_X.Location = new System.Drawing.Point(155, 43);
+            this.TXT_RECT_FST_POS_X.Name = "TXT_RECT_FST_POS_X";
+            this.TXT_RECT_FST_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_FST_POS_X.TabIndex = 37;
+            this.TXT_RECT_FST_POS_X.Text = "0";
+            this.TXT_RECT_FST_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_SCD_SZ_W
+            // 
+            this.TXT_RECT_SCD_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_SCD_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_SCD_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_SCD_SZ_W.Location = new System.Drawing.Point(387, 70);
+            this.TXT_RECT_SCD_SZ_W.Name = "TXT_RECT_SCD_SZ_W";
+            this.TXT_RECT_SCD_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_SCD_SZ_W.TabIndex = 27;
+            this.TXT_RECT_SCD_SZ_W.Text = "0";
+            this.TXT_RECT_SCD_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_FST_SZ_H
+            // 
+            this.TXT_RECT_FST_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_FST_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_FST_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_FST_SZ_H.Location = new System.Drawing.Point(499, 48);
+            this.TXT_RECT_FST_SZ_H.Name = "TXT_RECT_FST_SZ_H";
+            this.TXT_RECT_FST_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_FST_SZ_H.TabIndex = 26;
+            this.TXT_RECT_FST_SZ_H.Text = "0";
+            this.TXT_RECT_FST_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_RECT_SCD_SZ_H
+            // 
+            this.TXT_RECT_SCD_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_RECT_SCD_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_RECT_SCD_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_RECT_SCD_SZ_H.Location = new System.Drawing.Point(499, 71);
+            this.TXT_RECT_SCD_SZ_H.Name = "TXT_RECT_SCD_SZ_H";
+            this.TXT_RECT_SCD_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_RECT_SCD_SZ_H.TabIndex = 26;
+            this.TXT_RECT_SCD_SZ_H.Text = "0";
+            this.TXT_RECT_SCD_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.RDO_TYPE_HOR);
+            this.groupBox1.Controls.Add(this.RDO_TYPE_VER);
+            this.groupBox1.Controls.Add(this.RDO_TYPE_DIA);
+            this.groupBox1.Location = new System.Drawing.Point(6, 1);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(279, 40);
+            this.groupBox1.TabIndex = 44;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "RECT TYPE";
+            // 
+            // RDO_TYPE_HOR
+            // 
+            this.RDO_TYPE_HOR.AutoSize = true;
+            this.RDO_TYPE_HOR.Checked = true;
+            this.RDO_TYPE_HOR.Location = new System.Drawing.Point(13, 16);
+            this.RDO_TYPE_HOR.Name = "RDO_TYPE_HOR";
+            this.RDO_TYPE_HOR.Size = new System.Drawing.Size(81, 16);
+            this.RDO_TYPE_HOR.TabIndex = 5;
+            this.RDO_TYPE_HOR.TabStop = true;
+            this.RDO_TYPE_HOR.Text = "Horizontal";
+            this.RDO_TYPE_HOR.UseVisualStyleBackColor = true;
+            this.RDO_TYPE_HOR.CheckedChanged += new System.EventHandler(this.RDO_TYPE_HOR_CheckedChanged);
+            // 
+            // RDO_TYPE_VER
+            // 
+            this.RDO_TYPE_VER.AutoSize = true;
+            this.RDO_TYPE_VER.Location = new System.Drawing.Point(112, 15);
+            this.RDO_TYPE_VER.Name = "RDO_TYPE_VER";
+            this.RDO_TYPE_VER.Size = new System.Drawing.Size(67, 16);
+            this.RDO_TYPE_VER.TabIndex = 5;
+            this.RDO_TYPE_VER.Text = "Vertical";
+            this.RDO_TYPE_VER.UseVisualStyleBackColor = true;
+            this.RDO_TYPE_VER.CheckedChanged += new System.EventHandler(this.RDO_TYPE_VER_CheckedChanged);
+            // 
+            // RDO_TYPE_DIA
+            // 
+            this.RDO_TYPE_DIA.AutoSize = true;
+            this.RDO_TYPE_DIA.Location = new System.Drawing.Point(194, 15);
+            this.RDO_TYPE_DIA.Name = "RDO_TYPE_DIA";
+            this.RDO_TYPE_DIA.Size = new System.Drawing.Size(73, 16);
+            this.RDO_TYPE_DIA.TabIndex = 5;
+            this.RDO_TYPE_DIA.Text = "Diagonal";
+            this.RDO_TYPE_DIA.UseVisualStyleBackColor = true;
+            this.RDO_TYPE_DIA.CheckedChanged += new System.EventHandler(this.RDO_TYPE_DIA_CheckedChanged);
+            // 
+            // BTN_RECT_COPY
+            // 
+            this.BTN_RECT_COPY.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BTN_RECT_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_RECT_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_COPY.Location = new System.Drawing.Point(151, 198);
+            this.BTN_RECT_COPY.Name = "BTN_RECT_COPY";
+            this.BTN_RECT_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_RECT_COPY.TabIndex = 4;
+            this.BTN_RECT_COPY.Text = "COPY";
+            this.BTN_RECT_COPY.UseVisualStyleBackColor = false;
+            this.BTN_RECT_COPY.Click += new System.EventHandler(this.BTN_DIG_COPY_Click);
+            // 
+            // BTN_RECT_ADD
+            // 
+            this.BTN_RECT_ADD.BackColor = System.Drawing.Color.White;
+            this.BTN_RECT_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_RECT_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_ADD.Location = new System.Drawing.Point(3, 198);
+            this.BTN_RECT_ADD.Name = "BTN_RECT_ADD";
+            this.BTN_RECT_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_RECT_ADD.TabIndex = 2;
+            this.BTN_RECT_ADD.Text = "ADD";
+            this.BTN_RECT_ADD.UseVisualStyleBackColor = false;
+            this.BTN_RECT_ADD.Click += new System.EventHandler(this.BTN_DIG_ADD_Click);
+            // 
+            // BTN_RECT_MODIFY
+            // 
+            this.BTN_RECT_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_MODIFY.FlatAppearance.BorderSize = 3;
+            this.BTN_RECT_MODIFY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_RECT_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_RECT_MODIFY.Location = new System.Drawing.Point(299, 198);
+            this.BTN_RECT_MODIFY.Name = "BTN_RECT_MODIFY";
+            this.BTN_RECT_MODIFY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_RECT_MODIFY.TabIndex = 2;
+            this.BTN_RECT_MODIFY.Text = "MODIFY";
+            this.BTN_RECT_MODIFY.UseVisualStyleBackColor = true;
+            this.BTN_RECT_MODIFY.Click += new System.EventHandler(this.BTN_DIG_MODIFY_Click);
+            // 
+            // BTN_DIG_REMOVE
+            // 
+            this.BTN_DIG_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DIG_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_DIG_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_DIG_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DIG_REMOVE.Location = new System.Drawing.Point(447, 198);
+            this.BTN_DIG_REMOVE.Name = "BTN_DIG_REMOVE";
+            this.BTN_DIG_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_DIG_REMOVE.TabIndex = 2;
+            this.BTN_DIG_REMOVE.TabStop = false;
+            this.BTN_DIG_REMOVE.Text = "REMOVE";
+            this.BTN_DIG_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_DIG_REMOVE.Click += new System.EventHandler(this.BTN_DIG_REMOVE_Click);
+            // 
+            // draw_circle
+            // 
+            this.draw_circle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_circle.Controls.Add(this.groupBox6);
+            this.draw_circle.Controls.Add(this.groupBox5);
+            this.draw_circle.Controls.Add(this.BTN_CIR_ADD);
+            this.draw_circle.Controls.Add(this.BTN_CIR_COPY);
+            this.draw_circle.Controls.Add(this.BTN_CIR_MODIFY);
+            this.draw_circle.Controls.Add(this.BTN_CIR_REMOVE);
+            this.draw_circle.ImageKey = "measureCir.png";
+            this.draw_circle.Location = new System.Drawing.Point(4, 34);
+            this.draw_circle.Name = "draw_circle";
+            this.draw_circle.Size = new System.Drawing.Size(594, 234);
+            this.draw_circle.TabIndex = 4;
+            this.draw_circle.Text = "CIRCLE";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.BTN_CIRCLE_DRAW);
+            this.groupBox6.Controls.Add(this.BTN_CIRCLE_REMOVE);
+            this.groupBox6.Controls.Add(this.BTN_CIRCLE_SET_REGION);
+            this.groupBox6.Location = new System.Drawing.Point(6, 89);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(583, 52);
+            this.groupBox6.TabIndex = 48;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "FOR DRAWING";
+            // 
+            // BTN_CIRCLE_DRAW
+            // 
+            this.BTN_CIRCLE_DRAW.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_DRAW.FlatAppearance.BorderSize = 3;
+            this.BTN_CIRCLE_DRAW.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CIRCLE_DRAW.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_DRAW.Location = new System.Drawing.Point(6, 14);
+            this.BTN_CIRCLE_DRAW.Name = "BTN_CIRCLE_DRAW";
+            this.BTN_CIRCLE_DRAW.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIRCLE_DRAW.TabIndex = 45;
+            this.BTN_CIRCLE_DRAW.Text = "DRAW REGION";
+            this.BTN_CIRCLE_DRAW.UseVisualStyleBackColor = true;
+            this.BTN_CIRCLE_DRAW.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
+            // 
+            // BTN_CIRCLE_REMOVE
+            // 
+            this.BTN_CIRCLE_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_CIRCLE_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_REMOVE.Location = new System.Drawing.Point(157, 14);
+            this.BTN_CIRCLE_REMOVE.Name = "BTN_CIRCLE_REMOVE";
+            this.BTN_CIRCLE_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIRCLE_REMOVE.TabIndex = 46;
+            this.BTN_CIRCLE_REMOVE.Text = "REMOVE REGION";
+            this.BTN_CIRCLE_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_CIRCLE_REMOVE.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
+            // 
+            // BTN_CIRCLE_SET_REGION
+            // 
+            this.BTN_CIRCLE_SET_REGION.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_SET_REGION.FlatAppearance.BorderSize = 3;
+            this.BTN_CIRCLE_SET_REGION.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIRCLE_SET_REGION.Location = new System.Drawing.Point(308, 14);
+            this.BTN_CIRCLE_SET_REGION.Name = "BTN_CIRCLE_SET_REGION";
+            this.BTN_CIRCLE_SET_REGION.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIRCLE_SET_REGION.TabIndex = 44;
+            this.BTN_CIRCLE_SET_REGION.Text = "SET REGION";
+            this.BTN_CIRCLE_SET_REGION.UseVisualStyleBackColor = true;
+            this.BTN_CIRCLE_SET_REGION.Click += new System.EventHandler(this.BTN_FIGURE_SET_REGION_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.TXT_INDEX_OF_CIRCLE);
+            this.groupBox5.Controls.Add(this.label72);
+            this.groupBox5.Controls.Add(this.TXT_PARAM_CIR_NICK);
+            this.groupBox5.Controls.Add(this.label48);
+            this.groupBox5.Controls.Add(this.TXT_CIRCLE_POS_Y);
+            this.groupBox5.Controls.Add(this.TXT_CIRCLE_POS_X);
+            this.groupBox5.Controls.Add(this.label50);
+            this.groupBox5.Controls.Add(this.TXT_CIRCLE_SZ_H);
+            this.groupBox5.Controls.Add(this.label49);
+            this.groupBox5.Controls.Add(this.TXT_CIRCLE_SZ_W);
+            this.groupBox5.Controls.Add(this.label62);
+            this.groupBox5.Controls.Add(this.label61);
+            this.groupBox5.Location = new System.Drawing.Point(6, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(580, 80);
+            this.groupBox5.TabIndex = 47;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "REGION INFO";
+            // 
+            // TXT_INDEX_OF_CIRCLE
+            // 
+            this.TXT_INDEX_OF_CIRCLE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_CIRCLE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_CIRCLE.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.TXT_INDEX_OF_CIRCLE.Location = new System.Drawing.Point(66, 18);
+            this.TXT_INDEX_OF_CIRCLE.Name = "TXT_INDEX_OF_CIRCLE";
+            this.TXT_INDEX_OF_CIRCLE.ReadOnly = true;
+            this.TXT_INDEX_OF_CIRCLE.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_CIRCLE.TabIndex = 42;
+            this.TXT_INDEX_OF_CIRCLE.Text = "0";
+            this.TXT_INDEX_OF_CIRCLE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(10, 20);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(50, 12);
+            this.label72.TabIndex = 43;
+            this.label72.Text = "INDEX :";
+            // 
+            // TXT_PARAM_CIR_NICK
+            // 
+            this.TXT_PARAM_CIR_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_CIR_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_CIR_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_PARAM_CIR_NICK.Location = new System.Drawing.Point(177, 20);
+            this.TXT_PARAM_CIR_NICK.Name = "TXT_PARAM_CIR_NICK";
+            this.TXT_PARAM_CIR_NICK.Size = new System.Drawing.Size(97, 19);
+            this.TXT_PARAM_CIR_NICK.TabIndex = 7;
+            this.TXT_PARAM_CIR_NICK.Text = "CIRCLE";
+            this.TXT_PARAM_CIR_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.BackColor = System.Drawing.Color.Transparent;
+            this.label48.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label48.Location = new System.Drawing.Point(130, 22);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(41, 12);
+            this.label48.TabIndex = 35;
+            this.label48.Text = "NICK :";
+            // 
+            // TXT_CIRCLE_POS_Y
+            // 
+            this.TXT_CIRCLE_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_CIRCLE_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CIRCLE_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_CIRCLE_POS_Y.Location = new System.Drawing.Point(183, 43);
+            this.TXT_CIRCLE_POS_Y.Name = "TXT_CIRCLE_POS_Y";
+            this.TXT_CIRCLE_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_CIRCLE_POS_Y.TabIndex = 40;
+            this.TXT_CIRCLE_POS_Y.Text = "0";
+            this.TXT_CIRCLE_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_CIRCLE_POS_X
+            // 
+            this.TXT_CIRCLE_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_CIRCLE_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CIRCLE_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_CIRCLE_POS_X.Location = new System.Drawing.Point(66, 43);
+            this.TXT_CIRCLE_POS_X.Name = "TXT_CIRCLE_POS_X";
+            this.TXT_CIRCLE_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_CIRCLE_POS_X.TabIndex = 41;
+            this.TXT_CIRCLE_POS_X.Text = "0";
+            this.TXT_CIRCLE_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label50.Location = new System.Drawing.Point(369, 45);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(41, 12);
+            this.label50.TabIndex = 37;
+            this.label50.Text = "SZ_H :";
+            // 
+            // TXT_CIRCLE_SZ_H
+            // 
+            this.TXT_CIRCLE_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_CIRCLE_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CIRCLE_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_CIRCLE_SZ_H.Location = new System.Drawing.Point(421, 43);
+            this.TXT_CIRCLE_SZ_H.Name = "TXT_CIRCLE_SZ_H";
+            this.TXT_CIRCLE_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_CIRCLE_SZ_H.TabIndex = 33;
+            this.TXT_CIRCLE_SZ_H.Text = "0";
+            this.TXT_CIRCLE_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label49.Location = new System.Drawing.Point(248, 45);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(45, 12);
+            this.label49.TabIndex = 36;
+            this.label49.Text = "SZ_W :";
+            // 
+            // TXT_CIRCLE_SZ_W
+            // 
+            this.TXT_CIRCLE_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_CIRCLE_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CIRCLE_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_CIRCLE_SZ_W.Location = new System.Drawing.Point(305, 43);
+            this.TXT_CIRCLE_SZ_W.Name = "TXT_CIRCLE_SZ_W";
+            this.TXT_CIRCLE_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_CIRCLE_SZ_W.TabIndex = 34;
+            this.TXT_CIRCLE_SZ_W.Text = "0";
+            this.TXT_CIRCLE_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(14, 45);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(41, 12);
+            this.label62.TabIndex = 38;
+            this.label62.Text = "CC_X :";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label61.Location = new System.Drawing.Point(131, 45);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(41, 12);
+            this.label61.TabIndex = 39;
+            this.label61.Text = "CC_Y :";
+            // 
+            // BTN_CIR_ADD
+            // 
+            this.BTN_CIR_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_CIR_ADD.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CIR_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_ADD.Location = new System.Drawing.Point(3, 201);
+            this.BTN_CIR_ADD.Name = "BTN_CIR_ADD";
+            this.BTN_CIR_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIR_ADD.TabIndex = 2;
+            this.BTN_CIR_ADD.Text = "ADD";
+            this.BTN_CIR_ADD.UseVisualStyleBackColor = true;
+            this.BTN_CIR_ADD.Click += new System.EventHandler(this.BTN_CIR_ADD_Click);
+            // 
+            // BTN_CIR_COPY
+            // 
+            this.BTN_CIR_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_CIR_COPY.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CIR_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_COPY.Location = new System.Drawing.Point(150, 201);
+            this.BTN_CIR_COPY.Name = "BTN_CIR_COPY";
+            this.BTN_CIR_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIR_COPY.TabIndex = 2;
+            this.BTN_CIR_COPY.Text = "COPY";
+            this.BTN_CIR_COPY.UseVisualStyleBackColor = true;
+            this.BTN_CIR_COPY.Click += new System.EventHandler(this.BTN_CIR_COPY_Click);
+            // 
+            // BTN_CIR_MODIFY
+            // 
+            this.BTN_CIR_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_MODIFY.FlatAppearance.BorderSize = 3;
+            this.BTN_CIR_MODIFY.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CIR_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_MODIFY.Location = new System.Drawing.Point(297, 201);
+            this.BTN_CIR_MODIFY.Name = "BTN_CIR_MODIFY";
+            this.BTN_CIR_MODIFY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIR_MODIFY.TabIndex = 2;
+            this.BTN_CIR_MODIFY.Text = "MODIFY";
+            this.BTN_CIR_MODIFY.UseVisualStyleBackColor = true;
+            this.BTN_CIR_MODIFY.Click += new System.EventHandler(this.BTN_CIR_MODIFY_Click);
+            // 
+            // BTN_CIR_REMOVE
+            // 
+            this.BTN_CIR_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_CIR_REMOVE.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CIR_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_CIR_REMOVE.Location = new System.Drawing.Point(444, 201);
+            this.BTN_CIR_REMOVE.Name = "BTN_CIR_REMOVE";
+            this.BTN_CIR_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_CIR_REMOVE.TabIndex = 2;
+            this.BTN_CIR_REMOVE.TabStop = false;
+            this.BTN_CIR_REMOVE.Text = "REMOVE";
+            this.BTN_CIR_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_CIR_REMOVE.Click += new System.EventHandler(this.BTN_CIR_REMOVE_Click);
+            // 
+            // draw_ovl
+            // 
+            this.draw_ovl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_ovl.Controls.Add(this.groupBox10);
+            this.draw_ovl.Controls.Add(this.groupBox9);
+            this.draw_ovl.Controls.Add(this.groupBox7);
+            this.draw_ovl.Controls.Add(this.button2);
+            this.draw_ovl.Controls.Add(this.BTN_OL_ADD);
+            this.draw_ovl.Controls.Add(this.BTN_OL_COPY);
+            this.draw_ovl.Controls.Add(this.BTN_OL_REMOVE);
+            this.draw_ovl.Location = new System.Drawing.Point(4, 34);
+            this.draw_ovl.Name = "draw_ovl";
+            this.draw_ovl.Size = new System.Drawing.Size(594, 234);
+            this.draw_ovl.TabIndex = 3;
+            this.draw_ovl.Text = "OVL";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.RDO_ROI_OVL_ENTIRE);
+            this.groupBox10.Controls.Add(this.RDO_ROI_OVL_IN);
+            this.groupBox10.Controls.Add(this.RDO_ROI_OVL_EX);
+            this.groupBox10.Controls.Add(this.label15);
+            this.groupBox10.Controls.Add(this.label63);
+            this.groupBox10.Controls.Add(this.CHK_ROI_OVL_MODE_H);
+            this.groupBox10.Controls.Add(this.CHK_ROI_OVL_MODE_V);
+            this.groupBox10.Location = new System.Drawing.Point(3, 68);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(582, 70);
+            this.groupBox10.TabIndex = 51;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "CONTROL";
+            // 
+            // RDO_ROI_OVL_ENTIRE
+            // 
+            this.RDO_ROI_OVL_ENTIRE.AutoSize = true;
+            this.RDO_ROI_OVL_ENTIRE.Checked = true;
+            this.RDO_ROI_OVL_ENTIRE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_ROI_OVL_ENTIRE.Location = new System.Drawing.Point(76, 20);
+            this.RDO_ROI_OVL_ENTIRE.Name = "RDO_ROI_OVL_ENTIRE";
+            this.RDO_ROI_OVL_ENTIRE.Size = new System.Drawing.Size(65, 16);
+            this.RDO_ROI_OVL_ENTIRE.TabIndex = 2;
+            this.RDO_ROI_OVL_ENTIRE.TabStop = true;
+            this.RDO_ROI_OVL_ENTIRE.Text = "ENTIRE";
+            this.RDO_ROI_OVL_ENTIRE.UseVisualStyleBackColor = true;
+            // 
+            // RDO_ROI_OVL_IN
+            // 
+            this.RDO_ROI_OVL_IN.AutoSize = true;
+            this.RDO_ROI_OVL_IN.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_ROI_OVL_IN.Location = new System.Drawing.Point(156, 20);
+            this.RDO_ROI_OVL_IN.Name = "RDO_ROI_OVL_IN";
+            this.RDO_ROI_OVL_IN.Size = new System.Drawing.Size(81, 16);
+            this.RDO_ROI_OVL_IN.TabIndex = 2;
+            this.RDO_ROI_OVL_IN.Text = "INTERNAL";
+            this.RDO_ROI_OVL_IN.UseVisualStyleBackColor = true;
+            // 
+            // RDO_ROI_OVL_EX
+            // 
+            this.RDO_ROI_OVL_EX.AutoSize = true;
+            this.RDO_ROI_OVL_EX.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_ROI_OVL_EX.Location = new System.Drawing.Point(255, 20);
+            this.RDO_ROI_OVL_EX.Name = "RDO_ROI_OVL_EX";
+            this.RDO_ROI_OVL_EX.Size = new System.Drawing.Size(82, 16);
+            this.RDO_ROI_OVL_EX.TabIndex = 2;
+            this.RDO_ROI_OVL_EX.Text = "EXTERNAL";
+            this.RDO_ROI_OVL_EX.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 47);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 12);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "AXIS :";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(10, 22);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(56, 12);
+            this.label63.TabIndex = 38;
+            this.label63.Text = "TARGET :";
+            // 
+            // CHK_ROI_OVL_MODE_H
+            // 
+            this.CHK_ROI_OVL_MODE_H.AutoSize = true;
+            this.CHK_ROI_OVL_MODE_H.Checked = true;
+            this.CHK_ROI_OVL_MODE_H.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_ROI_OVL_MODE_H.Location = new System.Drawing.Point(76, 46);
+            this.CHK_ROI_OVL_MODE_H.Name = "CHK_ROI_OVL_MODE_H";
+            this.CHK_ROI_OVL_MODE_H.Size = new System.Drawing.Size(53, 16);
+            this.CHK_ROI_OVL_MODE_H.TabIndex = 3;
+            this.CHK_ROI_OVL_MODE_H.Text = "SZ_H";
+            this.CHK_ROI_OVL_MODE_H.UseVisualStyleBackColor = true;
+            // 
+            // CHK_ROI_OVL_MODE_V
+            // 
+            this.CHK_ROI_OVL_MODE_V.AutoSize = true;
+            this.CHK_ROI_OVL_MODE_V.Checked = true;
+            this.CHK_ROI_OVL_MODE_V.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_ROI_OVL_MODE_V.Location = new System.Drawing.Point(135, 46);
+            this.CHK_ROI_OVL_MODE_V.Name = "CHK_ROI_OVL_MODE_V";
+            this.CHK_ROI_OVL_MODE_V.Size = new System.Drawing.Size(53, 16);
+            this.CHK_ROI_OVL_MODE_V.TabIndex = 3;
+            this.CHK_ROI_OVL_MODE_V.Text = "SZ_V";
+            this.CHK_ROI_OVL_MODE_V.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label70);
+            this.groupBox9.Controls.Add(this.TXT_PARAM_OVL_NICK);
+            this.groupBox9.Controls.Add(this.label54);
+            this.groupBox9.Controls.Add(this.TXT_INDEX_OF_OVL);
+            this.groupBox9.Controls.Add(this.label58);
+            this.groupBox9.Controls.Add(this.label56);
+            this.groupBox9.Controls.Add(this.TXT_OVL_EX_W);
+            this.groupBox9.Controls.Add(this.TXT_OVL_IN_W);
+            this.groupBox9.Controls.Add(this.TXT_OVL_EX_H);
+            this.groupBox9.Controls.Add(this.TXT_OVL_IN_H);
+            this.groupBox9.Controls.Add(this.label57);
+            this.groupBox9.Controls.Add(this.label55);
+            this.groupBox9.Location = new System.Drawing.Point(6, 5);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(583, 62);
+            this.groupBox9.TabIndex = 50;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "REGION INFO";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(17, 22);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(50, 12);
+            this.label70.TabIndex = 38;
+            this.label70.Text = "INDEX :";
+            // 
+            // TXT_PARAM_OVL_NICK
+            // 
+            this.TXT_PARAM_OVL_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_OVL_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_OVL_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_PARAM_OVL_NICK.Location = new System.Drawing.Point(180, 20);
+            this.TXT_PARAM_OVL_NICK.Name = "TXT_PARAM_OVL_NICK";
+            this.TXT_PARAM_OVL_NICK.Size = new System.Drawing.Size(50, 19);
+            this.TXT_PARAM_OVL_NICK.TabIndex = 7;
+            this.TXT_PARAM_OVL_NICK.Text = "OVL";
+            this.TXT_PARAM_OVL_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Transparent;
+            this.label54.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label54.Location = new System.Drawing.Point(133, 22);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(41, 12);
+            this.label54.TabIndex = 35;
+            this.label54.Text = "NICK :";
+            // 
+            // TXT_INDEX_OF_OVL
+            // 
+            this.TXT_INDEX_OF_OVL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_OVL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_OVL.ForeColor = System.Drawing.Color.Black;
+            this.TXT_INDEX_OF_OVL.Location = new System.Drawing.Point(73, 20);
+            this.TXT_INDEX_OF_OVL.Name = "TXT_INDEX_OF_OVL";
+            this.TXT_INDEX_OF_OVL.ReadOnly = true;
+            this.TXT_INDEX_OF_OVL.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_OVL.TabIndex = 39;
+            this.TXT_INDEX_OF_OVL.Text = "0";
+            this.TXT_INDEX_OF_OVL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label58.Location = new System.Drawing.Point(257, 42);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(52, 12);
+            this.label58.TabIndex = 36;
+            this.label58.Text = "SZ_EW :";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label56.Location = new System.Drawing.Point(378, 20);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(47, 12);
+            this.label56.TabIndex = 37;
+            this.label56.Text = "SZ_IH :";
+            // 
+            // TXT_OVL_EX_W
+            // 
+            this.TXT_OVL_EX_W.BackColor = System.Drawing.Color.White;
+            this.TXT_OVL_EX_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_OVL_EX_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_OVL_EX_W.Location = new System.Drawing.Point(315, 40);
+            this.TXT_OVL_EX_W.Name = "TXT_OVL_EX_W";
+            this.TXT_OVL_EX_W.Size = new System.Drawing.Size(50, 19);
+            this.TXT_OVL_EX_W.TabIndex = 34;
+            this.TXT_OVL_EX_W.Text = "0";
+            this.TXT_OVL_EX_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_OVL_IN_W
+            // 
+            this.TXT_OVL_IN_W.BackColor = System.Drawing.Color.White;
+            this.TXT_OVL_IN_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_OVL_IN_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_OVL_IN_W.Location = new System.Drawing.Point(315, 18);
+            this.TXT_OVL_IN_W.Name = "TXT_OVL_IN_W";
+            this.TXT_OVL_IN_W.Size = new System.Drawing.Size(50, 19);
+            this.TXT_OVL_IN_W.TabIndex = 34;
+            this.TXT_OVL_IN_W.Text = "0";
+            this.TXT_OVL_IN_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_OVL_EX_H
+            // 
+            this.TXT_OVL_EX_H.BackColor = System.Drawing.Color.White;
+            this.TXT_OVL_EX_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_OVL_EX_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_OVL_EX_H.Location = new System.Drawing.Point(431, 40);
+            this.TXT_OVL_EX_H.Name = "TXT_OVL_EX_H";
+            this.TXT_OVL_EX_H.Size = new System.Drawing.Size(50, 19);
+            this.TXT_OVL_EX_H.TabIndex = 33;
+            this.TXT_OVL_EX_H.Text = "0";
+            this.TXT_OVL_EX_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_OVL_IN_H
+            // 
+            this.TXT_OVL_IN_H.BackColor = System.Drawing.Color.White;
+            this.TXT_OVL_IN_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_OVL_IN_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_OVL_IN_H.Location = new System.Drawing.Point(431, 18);
+            this.TXT_OVL_IN_H.Name = "TXT_OVL_IN_H";
+            this.TXT_OVL_IN_H.Size = new System.Drawing.Size(50, 19);
+            this.TXT_OVL_IN_H.TabIndex = 33;
+            this.TXT_OVL_IN_H.Text = "0";
+            this.TXT_OVL_IN_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label57.Location = new System.Drawing.Point(377, 42);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(48, 12);
+            this.label57.TabIndex = 37;
+            this.label57.Text = "SZ_EH :";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label55.Location = new System.Drawing.Point(258, 20);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(51, 12);
+            this.label55.TabIndex = 36;
+            this.label55.Text = "SZ_IW :";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.BTN_OVERLAY_DRAW);
+            this.groupBox7.Controls.Add(this.BTN_OVERLAY_REMOVE);
+            this.groupBox7.Controls.Add(this.BTN_OVERLAY_SET_REGION);
+            this.groupBox7.Location = new System.Drawing.Point(1, 140);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(588, 52);
+            this.groupBox7.TabIndex = 49;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "FOR DRAWING";
+            // 
+            // BTN_OVERLAY_DRAW
+            // 
+            this.BTN_OVERLAY_DRAW.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_DRAW.FlatAppearance.BorderSize = 3;
+            this.BTN_OVERLAY_DRAW.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_DRAW.Location = new System.Drawing.Point(7, 18);
+            this.BTN_OVERLAY_DRAW.Name = "BTN_OVERLAY_DRAW";
+            this.BTN_OVERLAY_DRAW.Size = new System.Drawing.Size(127, 25);
+            this.BTN_OVERLAY_DRAW.TabIndex = 45;
+            this.BTN_OVERLAY_DRAW.Text = "DRAW REGION";
+            this.BTN_OVERLAY_DRAW.UseVisualStyleBackColor = true;
+            this.BTN_OVERLAY_DRAW.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
+            // 
+            // BTN_OVERLAY_REMOVE
+            // 
+            this.BTN_OVERLAY_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_OVERLAY_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_REMOVE.Location = new System.Drawing.Point(147, 18);
+            this.BTN_OVERLAY_REMOVE.Name = "BTN_OVERLAY_REMOVE";
+            this.BTN_OVERLAY_REMOVE.Size = new System.Drawing.Size(127, 25);
+            this.BTN_OVERLAY_REMOVE.TabIndex = 46;
+            this.BTN_OVERLAY_REMOVE.Text = "REMOVE REGION";
+            this.BTN_OVERLAY_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_OVERLAY_REMOVE.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
+            // 
+            // BTN_OVERLAY_SET_REGION
+            // 
+            this.BTN_OVERLAY_SET_REGION.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_SET_REGION.FlatAppearance.BorderSize = 3;
+            this.BTN_OVERLAY_SET_REGION.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OVERLAY_SET_REGION.Location = new System.Drawing.Point(288, 18);
+            this.BTN_OVERLAY_SET_REGION.Name = "BTN_OVERLAY_SET_REGION";
+            this.BTN_OVERLAY_SET_REGION.Size = new System.Drawing.Size(127, 25);
+            this.BTN_OVERLAY_SET_REGION.TabIndex = 44;
+            this.BTN_OVERLAY_SET_REGION.Text = "SET REGION";
+            this.BTN_OVERLAY_SET_REGION.UseVisualStyleBackColor = true;
+            this.BTN_OVERLAY_SET_REGION.Click += new System.EventHandler(this.BTN_FIGURE_SET_REGION_Click);
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.button2.FlatAppearance.BorderSize = 3;
+            this.button2.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.button2.Location = new System.Drawing.Point(297, 201);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(145, 30);
+            this.button2.TabIndex = 47;
+            this.button2.Text = "MODIFY";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // BTN_OL_ADD
+            // 
+            this.BTN_OL_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_OL_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_OL_ADD.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.BTN_OL_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_ADD.Location = new System.Drawing.Point(3, 201);
+            this.BTN_OL_ADD.Name = "BTN_OL_ADD";
+            this.BTN_OL_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_OL_ADD.TabIndex = 2;
+            this.BTN_OL_ADD.TabStop = false;
+            this.BTN_OL_ADD.Text = "ADD";
+            this.BTN_OL_ADD.UseVisualStyleBackColor = true;
+            this.BTN_OL_ADD.Click += new System.EventHandler(this.BTN_OL_ADD_Click);
+            // 
+            // BTN_OL_COPY
+            // 
+            this.BTN_OL_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_OL_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_OL_COPY.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.BTN_OL_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_COPY.Location = new System.Drawing.Point(150, 201);
+            this.BTN_OL_COPY.Name = "BTN_OL_COPY";
+            this.BTN_OL_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_OL_COPY.TabIndex = 2;
+            this.BTN_OL_COPY.TabStop = false;
+            this.BTN_OL_COPY.Text = "COPY";
+            this.BTN_OL_COPY.UseVisualStyleBackColor = true;
+            this.BTN_OL_COPY.Click += new System.EventHandler(this.BTN_OL_COPY_Click);
+            // 
+            // BTN_OL_REMOVE
+            // 
+            this.BTN_OL_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_OL_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_OL_REMOVE.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.BTN_OL_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_OL_REMOVE.Location = new System.Drawing.Point(446, 201);
+            this.BTN_OL_REMOVE.Name = "BTN_OL_REMOVE";
+            this.BTN_OL_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_OL_REMOVE.TabIndex = 2;
+            this.BTN_OL_REMOVE.TabStop = false;
+            this.BTN_OL_REMOVE.Text = "REMOVE";
+            this.BTN_OL_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_OL_REMOVE.Click += new System.EventHandler(this.BTN_OL_REMOVE_Click);
+            // 
+            // draw_focus
+            // 
+            this.draw_focus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_focus.Controls.Add(this.groupBox11);
+            this.draw_focus.Controls.Add(this.groupBox8);
+            this.draw_focus.Location = new System.Drawing.Point(4, 34);
+            this.draw_focus.Name = "draw_focus";
+            this.draw_focus.Size = new System.Drawing.Size(594, 234);
+            this.draw_focus.TabIndex = 9;
+            this.draw_focus.Text = "FOCUS";
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.TXT_FOCUS_POS_X);
+            this.groupBox11.Controls.Add(this.TXT_FOCUS_POS_Y);
+            this.groupBox11.Controls.Add(this.TXT_FOCUS_SZ_H);
+            this.groupBox11.Controls.Add(this.label69);
+            this.groupBox11.Controls.Add(this.TXT_FOCUS_SZ_W);
+            this.groupBox11.Controls.Add(this.label68);
+            this.groupBox11.Controls.Add(this.label65);
+            this.groupBox11.Controls.Add(this.label66);
+            this.groupBox11.Location = new System.Drawing.Point(7, 3);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(583, 43);
+            this.groupBox11.TabIndex = 56;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "REGION INFO";
+            // 
+            // TXT_FOCUS_SZ_H
+            // 
+            this.TXT_FOCUS_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_FOCUS_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_FOCUS_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_FOCUS_SZ_H.Location = new System.Drawing.Point(432, 17);
+            this.TXT_FOCUS_SZ_H.Name = "TXT_FOCUS_SZ_H";
+            this.TXT_FOCUS_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_FOCUS_SZ_H.TabIndex = 50;
+            this.TXT_FOCUS_SZ_H.Text = "0";
+            this.TXT_FOCUS_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label69.Location = new System.Drawing.Point(375, 19);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(41, 12);
+            this.label69.TabIndex = 47;
+            this.label69.Text = "SZ_H :";
+            // 
+            // TXT_FOCUS_SZ_W
+            // 
+            this.TXT_FOCUS_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_FOCUS_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_FOCUS_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_FOCUS_SZ_W.Location = new System.Drawing.Point(305, 17);
+            this.TXT_FOCUS_SZ_W.Name = "TXT_FOCUS_SZ_W";
+            this.TXT_FOCUS_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_FOCUS_SZ_W.TabIndex = 51;
+            this.TXT_FOCUS_SZ_W.Text = "0";
+            this.TXT_FOCUS_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label68.Location = new System.Drawing.Point(254, 19);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(45, 12);
+            this.label68.TabIndex = 46;
+            this.label68.Text = "SZ_W :";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label65.Location = new System.Drawing.Point(127, 19);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(51, 12);
+            this.label65.TabIndex = 49;
+            this.label65.Text = "POS_Y :";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(10, 20);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(51, 12);
+            this.label66.TabIndex = 48;
+            this.label66.Text = "POS_X :";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.BTN_DRAW_REGION_FOCUS);
+            this.groupBox8.Controls.Add(this.BTN_SET_REGION_FOCUS);
+            this.groupBox8.Controls.Add(this.BTN_REMOVE_REGION_FOCUS);
+            this.groupBox8.Location = new System.Drawing.Point(8, 52);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(583, 55);
+            this.groupBox8.TabIndex = 55;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "FOR DRAWING";
+            // 
+            // BTN_DRAW_REGION_FOCUS
+            // 
+            this.BTN_DRAW_REGION_FOCUS.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_REGION_FOCUS.FlatAppearance.BorderSize = 3;
+            this.BTN_DRAW_REGION_FOCUS.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_REGION_FOCUS.Location = new System.Drawing.Point(7, 18);
+            this.BTN_DRAW_REGION_FOCUS.Name = "BTN_DRAW_REGION_FOCUS";
+            this.BTN_DRAW_REGION_FOCUS.Size = new System.Drawing.Size(145, 30);
+            this.BTN_DRAW_REGION_FOCUS.TabIndex = 53;
+            this.BTN_DRAW_REGION_FOCUS.Text = "DRAW REGION";
+            this.BTN_DRAW_REGION_FOCUS.UseVisualStyleBackColor = true;
+            this.BTN_DRAW_REGION_FOCUS.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
+            // 
+            // BTN_SET_REGION_FOCUS
+            // 
+            this.BTN_SET_REGION_FOCUS.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_REGION_FOCUS.FlatAppearance.BorderSize = 3;
+            this.BTN_SET_REGION_FOCUS.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_REGION_FOCUS.Location = new System.Drawing.Point(306, 18);
+            this.BTN_SET_REGION_FOCUS.Name = "BTN_SET_REGION_FOCUS";
+            this.BTN_SET_REGION_FOCUS.Size = new System.Drawing.Size(145, 30);
+            this.BTN_SET_REGION_FOCUS.TabIndex = 52;
+            this.BTN_SET_REGION_FOCUS.Text = "SET REGION";
+            this.BTN_SET_REGION_FOCUS.UseVisualStyleBackColor = true;
+            this.BTN_SET_REGION_FOCUS.Click += new System.EventHandler(this.BTN_FIGURE_SET_REGION_Click);
+            // 
+            // BTN_REMOVE_REGION_FOCUS
+            // 
+            this.BTN_REMOVE_REGION_FOCUS.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_REGION_FOCUS.FlatAppearance.BorderSize = 3;
+            this.BTN_REMOVE_REGION_FOCUS.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_REGION_FOCUS.Location = new System.Drawing.Point(158, 18);
+            this.BTN_REMOVE_REGION_FOCUS.Name = "BTN_REMOVE_REGION_FOCUS";
+            this.BTN_REMOVE_REGION_FOCUS.Size = new System.Drawing.Size(145, 30);
+            this.BTN_REMOVE_REGION_FOCUS.TabIndex = 54;
+            this.BTN_REMOVE_REGION_FOCUS.Text = "REMOVE REGION";
+            this.BTN_REMOVE_REGION_FOCUS.UseVisualStyleBackColor = true;
+            this.BTN_REMOVE_REGION_FOCUS.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
+            // 
+            // draw_mix_rc
+            // 
+            this.draw_mix_rc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_mix_rc.Controls.Add(this.groupBox13);
+            this.draw_mix_rc.Controls.Add(this.groupBox12);
+            this.draw_mix_rc.Controls.Add(this.BTN_MIXED_RC_COPY);
+            this.draw_mix_rc.Controls.Add(this.BTN_MIXED_RC_ADD);
+            this.draw_mix_rc.Controls.Add(this.BTN_MIXED_RC_MODIFY);
+            this.draw_mix_rc.Controls.Add(this.BTN_MIXED_RC_REMOVE);
+            this.draw_mix_rc.Location = new System.Drawing.Point(4, 34);
+            this.draw_mix_rc.Name = "draw_mix_rc";
+            this.draw_mix_rc.Size = new System.Drawing.Size(594, 234);
+            this.draw_mix_rc.TabIndex = 6;
+            this.draw_mix_rc.Text = "MIX_RC";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.BTN_DRAW_MIXED_RC);
+            this.groupBox13.Controls.Add(this.BTN_REMOVE_MIXED_RC);
+            this.groupBox13.Controls.Add(this.BTN_SET_MIXED_RC);
+            this.groupBox13.Location = new System.Drawing.Point(4, 137);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(588, 52);
+            this.groupBox13.TabIndex = 58;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "FOR DRAWING";
+            // 
+            // BTN_DRAW_MIXED_RC
+            // 
+            this.BTN_DRAW_MIXED_RC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_RC.FlatAppearance.BorderSize = 3;
+            this.BTN_DRAW_MIXED_RC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_RC.Location = new System.Drawing.Point(8, 16);
+            this.BTN_DRAW_MIXED_RC.Name = "BTN_DRAW_MIXED_RC";
+            this.BTN_DRAW_MIXED_RC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_DRAW_MIXED_RC.TabIndex = 1;
+            this.BTN_DRAW_MIXED_RC.Text = "DRAW RGN";
+            this.BTN_DRAW_MIXED_RC.UseVisualStyleBackColor = true;
+            this.BTN_DRAW_MIXED_RC.Click += new System.EventHandler(this.BTN_DRAW_FIGURES_Click);
+            // 
+            // BTN_REMOVE_MIXED_RC
+            // 
+            this.BTN_REMOVE_MIXED_RC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_MIXED_RC.FlatAppearance.BorderSize = 3;
+            this.BTN_REMOVE_MIXED_RC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_MIXED_RC.Location = new System.Drawing.Point(148, 16);
+            this.BTN_REMOVE_MIXED_RC.Name = "BTN_REMOVE_MIXED_RC";
+            this.BTN_REMOVE_MIXED_RC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_REMOVE_MIXED_RC.TabIndex = 1;
+            this.BTN_REMOVE_MIXED_RC.Text = "REMOVE RGN";
+            this.BTN_REMOVE_MIXED_RC.UseVisualStyleBackColor = true;
+            this.BTN_REMOVE_MIXED_RC.Click += new System.EventHandler(this.BTN_REMOVE_FIGURES_Click);
+            // 
+            // BTN_SET_MIXED_RC
+            // 
+            this.BTN_SET_MIXED_RC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_MIXED_RC.FlatAppearance.BorderSize = 3;
+            this.BTN_SET_MIXED_RC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_MIXED_RC.Location = new System.Drawing.Point(289, 16);
+            this.BTN_SET_MIXED_RC.Name = "BTN_SET_MIXED_RC";
+            this.BTN_SET_MIXED_RC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_SET_MIXED_RC.TabIndex = 1;
+            this.BTN_SET_MIXED_RC.Text = "SET REGION TYPE";
+            this.BTN_SET_MIXED_RC.UseVisualStyleBackColor = true;
+            this.BTN_SET_MIXED_RC.Click += new System.EventHandler(this.BTN_SET_FIGURES_Click);
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.groupBox14);
+            this.groupBox12.Controls.Add(this.panel5);
+            this.groupBox12.Controls.Add(this.panel4);
+            this.groupBox12.Controls.Add(this.label32);
+            this.groupBox12.Controls.Add(this.label34);
+            this.groupBox12.Controls.Add(this.label27);
+            this.groupBox12.Controls.Add(this.label29);
+            this.groupBox12.Controls.Add(this.TXT_INDEX_OF_MIXED_RC);
+            this.groupBox12.Controls.Add(this.label28);
+            this.groupBox12.Controls.Add(this.RDO_MIXED_RC_SCD);
+            this.groupBox12.Controls.Add(this.RDO_MIXED_RC_FST);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_SCD_SZ_H);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_NICK);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_FST_POS_X);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_FST_SZ_H);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_SCD_POS_X);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_SCD_POS_Y);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_FST_SZ_W);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_SCD_SZ_W);
+            this.groupBox12.Controls.Add(this.TXT_MIXED_RC_FST_POS_Y);
+            this.groupBox12.Location = new System.Drawing.Point(3, 1);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(589, 117);
+            this.groupBox12.TabIndex = 57;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "REGION INFO";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.RDO_MIXED_RC_METRIC_VER);
+            this.groupBox14.Controls.Add(this.RDO_MIXED_RC_METRIC_HOR);
+            this.groupBox14.Controls.Add(this.RDO_MIXED_RC_METRIC_P2P);
+            this.groupBox14.Location = new System.Drawing.Point(456, 8);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(127, 100);
+            this.groupBox14.TabIndex = 43;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "METRIC";
+            // 
+            // RDO_MIXED_RC_METRIC_VER
+            // 
+            this.RDO_MIXED_RC_METRIC_VER.AutoSize = true;
+            this.RDO_MIXED_RC_METRIC_VER.Location = new System.Drawing.Point(18, 66);
+            this.RDO_MIXED_RC_METRIC_VER.Name = "RDO_MIXED_RC_METRIC_VER";
+            this.RDO_MIXED_RC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_RC_METRIC_VER.TabIndex = 34;
+            this.RDO_MIXED_RC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_RC_METRIC_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RC_METRIC_HOR
+            // 
+            this.RDO_MIXED_RC_METRIC_HOR.AutoSize = true;
+            this.RDO_MIXED_RC_METRIC_HOR.Location = new System.Drawing.Point(18, 41);
+            this.RDO_MIXED_RC_METRIC_HOR.Name = "RDO_MIXED_RC_METRIC_HOR";
+            this.RDO_MIXED_RC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RC_METRIC_HOR.TabIndex = 34;
+            this.RDO_MIXED_RC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_RC_METRIC_HOR.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RC_METRIC_P2P
+            // 
+            this.RDO_MIXED_RC_METRIC_P2P.AutoSize = true;
+            this.RDO_MIXED_RC_METRIC_P2P.Checked = true;
+            this.RDO_MIXED_RC_METRIC_P2P.Location = new System.Drawing.Point(18, 19);
+            this.RDO_MIXED_RC_METRIC_P2P.Name = "RDO_MIXED_RC_METRIC_P2P";
+            this.RDO_MIXED_RC_METRIC_P2P.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RC_METRIC_P2P.TabIndex = 34;
+            this.RDO_MIXED_RC_METRIC_P2P.TabStop = true;
+            this.RDO_MIXED_RC_METRIC_P2P.Text = "P2P";
+            this.RDO_MIXED_RC_METRIC_P2P.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.RDO_MIXED_RC_SCD_DIR_VER);
+            this.panel5.Controls.Add(this.RDO_MIXED_RC_SCD_DIR_HOR);
+            this.panel5.Location = new System.Drawing.Point(373, 72);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(79, 24);
+            this.panel5.TabIndex = 42;
+            // 
+            // RDO_MIXED_RC_SCD_DIR_VER
+            // 
+            this.RDO_MIXED_RC_SCD_DIR_VER.AutoSize = true;
+            this.RDO_MIXED_RC_SCD_DIR_VER.Location = new System.Drawing.Point(46, 4);
+            this.RDO_MIXED_RC_SCD_DIR_VER.Name = "RDO_MIXED_RC_SCD_DIR_VER";
+            this.RDO_MIXED_RC_SCD_DIR_VER.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RC_SCD_DIR_VER.TabIndex = 34;
+            this.RDO_MIXED_RC_SCD_DIR_VER.Text = "│";
+            this.RDO_MIXED_RC_SCD_DIR_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RC_SCD_DIR_HOR
+            // 
+            this.RDO_MIXED_RC_SCD_DIR_HOR.AutoSize = true;
+            this.RDO_MIXED_RC_SCD_DIR_HOR.Checked = true;
+            this.RDO_MIXED_RC_SCD_DIR_HOR.Location = new System.Drawing.Point(4, 4);
+            this.RDO_MIXED_RC_SCD_DIR_HOR.Name = "RDO_MIXED_RC_SCD_DIR_HOR";
+            this.RDO_MIXED_RC_SCD_DIR_HOR.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RC_SCD_DIR_HOR.TabIndex = 34;
+            this.RDO_MIXED_RC_SCD_DIR_HOR.TabStop = true;
+            this.RDO_MIXED_RC_SCD_DIR_HOR.Text = "─";
+            this.RDO_MIXED_RC_SCD_DIR_HOR.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.RDO_MIXED_RC_FST_DIR_VER);
+            this.panel4.Controls.Add(this.RDO_MIXED_RC_FST_DIR_HOR);
+            this.panel4.Location = new System.Drawing.Point(373, 46);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(79, 24);
+            this.panel4.TabIndex = 42;
+            // 
+            // RDO_MIXED_RC_FST_DIR_VER
+            // 
+            this.RDO_MIXED_RC_FST_DIR_VER.AutoSize = true;
+            this.RDO_MIXED_RC_FST_DIR_VER.Location = new System.Drawing.Point(46, 4);
+            this.RDO_MIXED_RC_FST_DIR_VER.Name = "RDO_MIXED_RC_FST_DIR_VER";
+            this.RDO_MIXED_RC_FST_DIR_VER.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RC_FST_DIR_VER.TabIndex = 34;
+            this.RDO_MIXED_RC_FST_DIR_VER.Text = "│";
+            this.RDO_MIXED_RC_FST_DIR_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RC_FST_DIR_HOR
+            // 
+            this.RDO_MIXED_RC_FST_DIR_HOR.AutoSize = true;
+            this.RDO_MIXED_RC_FST_DIR_HOR.Checked = true;
+            this.RDO_MIXED_RC_FST_DIR_HOR.Location = new System.Drawing.Point(4, 4);
+            this.RDO_MIXED_RC_FST_DIR_HOR.Name = "RDO_MIXED_RC_FST_DIR_HOR";
+            this.RDO_MIXED_RC_FST_DIR_HOR.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RC_FST_DIR_HOR.TabIndex = 34;
+            this.RDO_MIXED_RC_FST_DIR_HOR.TabStop = true;
+            this.RDO_MIXED_RC_FST_DIR_HOR.Text = "─";
+            this.RDO_MIXED_RC_FST_DIR_HOR.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Transparent;
+            this.label32.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label32.Location = new System.Drawing.Point(131, 27);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(41, 12);
+            this.label32.TabIndex = 32;
+            this.label32.Text = "NICK :";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(389, 101);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(44, 12);
+            this.label34.TabIndex = 28;
+            this.label34.Text = "[ DIR ]";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(270, 96);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(84, 12);
+            this.label27.TabIndex = 28;
+            this.label27.Text = "[ W      ,      H ] ";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(9, 26);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(50, 12);
+            this.label29.TabIndex = 40;
+            this.label29.Text = "INDEX :";
+            // 
+            // TXT_INDEX_OF_MIXED_RC
+            // 
+            this.TXT_INDEX_OF_MIXED_RC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_MIXED_RC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_MIXED_RC.ForeColor = System.Drawing.Color.Black;
+            this.TXT_INDEX_OF_MIXED_RC.Location = new System.Drawing.Point(65, 24);
+            this.TXT_INDEX_OF_MIXED_RC.Name = "TXT_INDEX_OF_MIXED_RC";
+            this.TXT_INDEX_OF_MIXED_RC.ReadOnly = true;
+            this.TXT_INDEX_OF_MIXED_RC.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_MIXED_RC.TabIndex = 41;
+            this.TXT_INDEX_OF_MIXED_RC.Text = "0";
+            this.TXT_INDEX_OF_MIXED_RC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(151, 95);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(80, 12);
+            this.label28.TabIndex = 28;
+            this.label28.Text = "[ X      ,      Y ] ";
+            // 
+            // RDO_MIXED_RC_SCD
+            // 
+            this.RDO_MIXED_RC_SCD.AutoSize = true;
+            this.RDO_MIXED_RC_SCD.Location = new System.Drawing.Point(7, 75);
+            this.RDO_MIXED_RC_SCD.Name = "RDO_MIXED_RC_SCD";
+            this.RDO_MIXED_RC_SCD.Size = new System.Drawing.Size(79, 16);
+            this.RDO_MIXED_RC_SCD.TabIndex = 34;
+            this.RDO_MIXED_RC_SCD.TabStop = true;
+            this.RDO_MIXED_RC_SCD.Text = "SECON RC";
+            this.RDO_MIXED_RC_SCD.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RC_FST
+            // 
+            this.RDO_MIXED_RC_FST.AutoSize = true;
+            this.RDO_MIXED_RC_FST.Location = new System.Drawing.Point(7, 50);
+            this.RDO_MIXED_RC_FST.Name = "RDO_MIXED_RC_FST";
+            this.RDO_MIXED_RC_FST.Size = new System.Drawing.Size(75, 16);
+            this.RDO_MIXED_RC_FST.TabIndex = 34;
+            this.RDO_MIXED_RC_FST.TabStop = true;
+            this.RDO_MIXED_RC_FST.Text = "FIRST RC";
+            this.RDO_MIXED_RC_FST.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_RC_SCD_SZ_H
+            // 
+            this.TXT_MIXED_RC_SCD_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_SCD_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_SCD_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_SCD_SZ_H.Location = new System.Drawing.Point(314, 74);
+            this.TXT_MIXED_RC_SCD_SZ_H.Name = "TXT_MIXED_RC_SCD_SZ_H";
+            this.TXT_MIXED_RC_SCD_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_SCD_SZ_H.TabIndex = 30;
+            this.TXT_MIXED_RC_SCD_SZ_H.Text = "0";
+            this.TXT_MIXED_RC_SCD_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_NICK
+            // 
+            this.TXT_MIXED_RC_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_NICK.Location = new System.Drawing.Point(177, 24);
+            this.TXT_MIXED_RC_NICK.Name = "TXT_MIXED_RC_NICK";
+            this.TXT_MIXED_RC_NICK.Size = new System.Drawing.Size(83, 19);
+            this.TXT_MIXED_RC_NICK.TabIndex = 33;
+            this.TXT_MIXED_RC_NICK.Text = "MIX_RC";
+            this.TXT_MIXED_RC_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_FST_POS_X
+            // 
+            this.TXT_MIXED_RC_FST_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_FST_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_FST_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_FST_POS_X.Location = new System.Drawing.Point(133, 49);
+            this.TXT_MIXED_RC_FST_POS_X.Name = "TXT_MIXED_RC_FST_POS_X";
+            this.TXT_MIXED_RC_FST_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_FST_POS_X.TabIndex = 31;
+            this.TXT_MIXED_RC_FST_POS_X.Text = "0";
+            this.TXT_MIXED_RC_FST_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_FST_SZ_H
+            // 
+            this.TXT_MIXED_RC_FST_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_FST_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_FST_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_FST_SZ_H.Location = new System.Drawing.Point(314, 49);
+            this.TXT_MIXED_RC_FST_SZ_H.Name = "TXT_MIXED_RC_FST_SZ_H";
+            this.TXT_MIXED_RC_FST_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_FST_SZ_H.TabIndex = 30;
+            this.TXT_MIXED_RC_FST_SZ_H.Text = "0";
+            this.TXT_MIXED_RC_FST_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_SCD_POS_X
+            // 
+            this.TXT_MIXED_RC_SCD_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_SCD_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_SCD_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_SCD_POS_X.Location = new System.Drawing.Point(133, 75);
+            this.TXT_MIXED_RC_SCD_POS_X.Name = "TXT_MIXED_RC_SCD_POS_X";
+            this.TXT_MIXED_RC_SCD_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_SCD_POS_X.TabIndex = 31;
+            this.TXT_MIXED_RC_SCD_POS_X.Text = "0";
+            this.TXT_MIXED_RC_SCD_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_SCD_POS_Y
+            // 
+            this.TXT_MIXED_RC_SCD_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_SCD_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_SCD_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_SCD_POS_Y.Location = new System.Drawing.Point(193, 75);
+            this.TXT_MIXED_RC_SCD_POS_Y.Name = "TXT_MIXED_RC_SCD_POS_Y";
+            this.TXT_MIXED_RC_SCD_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_SCD_POS_Y.TabIndex = 30;
+            this.TXT_MIXED_RC_SCD_POS_Y.Text = "0";
+            this.TXT_MIXED_RC_SCD_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_FST_SZ_W
+            // 
+            this.TXT_MIXED_RC_FST_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_FST_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_FST_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_FST_SZ_W.Location = new System.Drawing.Point(254, 49);
+            this.TXT_MIXED_RC_FST_SZ_W.Name = "TXT_MIXED_RC_FST_SZ_W";
+            this.TXT_MIXED_RC_FST_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_FST_SZ_W.TabIndex = 31;
+            this.TXT_MIXED_RC_FST_SZ_W.Text = "0";
+            this.TXT_MIXED_RC_FST_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_SCD_SZ_W
+            // 
+            this.TXT_MIXED_RC_SCD_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_SCD_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_SCD_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_SCD_SZ_W.Location = new System.Drawing.Point(254, 74);
+            this.TXT_MIXED_RC_SCD_SZ_W.Name = "TXT_MIXED_RC_SCD_SZ_W";
+            this.TXT_MIXED_RC_SCD_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_SCD_SZ_W.TabIndex = 31;
+            this.TXT_MIXED_RC_SCD_SZ_W.Text = "0";
+            this.TXT_MIXED_RC_SCD_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RC_FST_POS_Y
+            // 
+            this.TXT_MIXED_RC_FST_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_FST_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_FST_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RC_FST_POS_Y.Location = new System.Drawing.Point(193, 49);
+            this.TXT_MIXED_RC_FST_POS_Y.Name = "TXT_MIXED_RC_FST_POS_Y";
+            this.TXT_MIXED_RC_FST_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RC_FST_POS_Y.TabIndex = 30;
+            this.TXT_MIXED_RC_FST_POS_Y.Text = "0";
+            this.TXT_MIXED_RC_FST_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // BTN_MIXED_RC_COPY
+            // 
+            this.BTN_MIXED_RC_COPY.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BTN_MIXED_RC_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RC_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RC_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_COPY.Location = new System.Drawing.Point(150, 195);
+            this.BTN_MIXED_RC_COPY.Name = "BTN_MIXED_RC_COPY";
+            this.BTN_MIXED_RC_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RC_COPY.TabIndex = 38;
+            this.BTN_MIXED_RC_COPY.Text = "COPY";
+            this.BTN_MIXED_RC_COPY.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_RC_COPY.Click += new System.EventHandler(this.BTN_MIXED_RC_COPY_Click);
+            // 
+            // BTN_MIXED_RC_ADD
+            // 
+            this.BTN_MIXED_RC_ADD.BackColor = System.Drawing.Color.White;
+            this.BTN_MIXED_RC_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RC_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RC_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_ADD.Location = new System.Drawing.Point(4, 195);
+            this.BTN_MIXED_RC_ADD.Name = "BTN_MIXED_RC_ADD";
+            this.BTN_MIXED_RC_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RC_ADD.TabIndex = 35;
+            this.BTN_MIXED_RC_ADD.Text = "ADD";
+            this.BTN_MIXED_RC_ADD.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_RC_ADD.Click += new System.EventHandler(this.BTN_MIX_RC_ADD_Click);
+            // 
+            // BTN_MIXED_RC_MODIFY
+            // 
+            this.BTN_MIXED_RC_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_MODIFY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RC_MODIFY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RC_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_MODIFY.Location = new System.Drawing.Point(296, 195);
+            this.BTN_MIXED_RC_MODIFY.Name = "BTN_MIXED_RC_MODIFY";
+            this.BTN_MIXED_RC_MODIFY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RC_MODIFY.TabIndex = 36;
+            this.BTN_MIXED_RC_MODIFY.Text = "MODIFY";
+            this.BTN_MIXED_RC_MODIFY.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_RC_MODIFY.Click += new System.EventHandler(this.BTN_MIXED_RC_MODIFY_Click);
+            // 
+            // BTN_MIXED_RC_REMOVE
+            // 
+            this.BTN_MIXED_RC_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RC_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RC_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RC_REMOVE.Location = new System.Drawing.Point(442, 195);
+            this.BTN_MIXED_RC_REMOVE.Name = "BTN_MIXED_RC_REMOVE";
+            this.BTN_MIXED_RC_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RC_REMOVE.TabIndex = 37;
+            this.BTN_MIXED_RC_REMOVE.TabStop = false;
+            this.BTN_MIXED_RC_REMOVE.Text = "REMOVE";
+            this.BTN_MIXED_RC_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_RC_REMOVE.Click += new System.EventHandler(this.BTN_MIXED_RC_REMOVE_Click);
+            // 
+            // draw_mix_cc
+            // 
+            this.draw_mix_cc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_COPY);
+            this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_ADD);
+            this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_MODIFY);
+            this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_REMOVE);
+            this.draw_mix_cc.Controls.Add(this.groupBox15);
+            this.draw_mix_cc.Location = new System.Drawing.Point(4, 34);
+            this.draw_mix_cc.Name = "draw_mix_cc";
+            this.draw_mix_cc.Size = new System.Drawing.Size(594, 234);
+            this.draw_mix_cc.TabIndex = 7;
+            this.draw_mix_cc.Text = "MIX_CC";
+            // 
+            // BTN_MIXED_CC_COPY
+            // 
+            this.BTN_MIXED_CC_COPY.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BTN_MIXED_CC_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_CC_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_CC_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_COPY.Location = new System.Drawing.Point(153, 195);
+            this.BTN_MIXED_CC_COPY.Name = "BTN_MIXED_CC_COPY";
+            this.BTN_MIXED_CC_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_CC_COPY.TabIndex = 63;
+            this.BTN_MIXED_CC_COPY.Text = "COPY";
+            this.BTN_MIXED_CC_COPY.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_CC_COPY.Visible = false;
+            // 
+            // BTN_MIXED_CC_ADD
+            // 
+            this.BTN_MIXED_CC_ADD.BackColor = System.Drawing.Color.White;
+            this.BTN_MIXED_CC_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_CC_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_CC_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_ADD.Location = new System.Drawing.Point(7, 195);
+            this.BTN_MIXED_CC_ADD.Name = "BTN_MIXED_CC_ADD";
+            this.BTN_MIXED_CC_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_CC_ADD.TabIndex = 60;
+            this.BTN_MIXED_CC_ADD.Text = "ADD";
+            this.BTN_MIXED_CC_ADD.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_CC_ADD.Visible = false;
+            // 
+            // BTN_MIXED_CC_MODIFY
+            // 
+            this.BTN_MIXED_CC_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_MODIFY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_CC_MODIFY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_CC_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_MODIFY.Location = new System.Drawing.Point(299, 195);
+            this.BTN_MIXED_CC_MODIFY.Name = "BTN_MIXED_CC_MODIFY";
+            this.BTN_MIXED_CC_MODIFY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_CC_MODIFY.TabIndex = 61;
+            this.BTN_MIXED_CC_MODIFY.Text = "MODIFY";
+            this.BTN_MIXED_CC_MODIFY.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_CC_MODIFY.Visible = false;
+            // 
+            // BTN_MIXED_CC_REMOVE
+            // 
+            this.BTN_MIXED_CC_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_CC_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_CC_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_CC_REMOVE.Location = new System.Drawing.Point(445, 195);
+            this.BTN_MIXED_CC_REMOVE.Name = "BTN_MIXED_CC_REMOVE";
+            this.BTN_MIXED_CC_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_CC_REMOVE.TabIndex = 62;
+            this.BTN_MIXED_CC_REMOVE.TabStop = false;
+            this.BTN_MIXED_CC_REMOVE.Text = "REMOVE";
+            this.BTN_MIXED_CC_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_CC_REMOVE.Visible = false;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.BTN_DRAW_MIXED_CC);
+            this.groupBox15.Controls.Add(this.BTN_REMOVE_MIXED_CC);
+            this.groupBox15.Controls.Add(this.BTN_SET_MIXED_CC);
+            this.groupBox15.Location = new System.Drawing.Point(3, 139);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(588, 52);
+            this.groupBox15.TabIndex = 59;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "FOR DRAWING";
+            // 
+            // BTN_DRAW_MIXED_CC
+            // 
+            this.BTN_DRAW_MIXED_CC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_CC.FlatAppearance.BorderSize = 3;
+            this.BTN_DRAW_MIXED_CC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_CC.Location = new System.Drawing.Point(8, 16);
+            this.BTN_DRAW_MIXED_CC.Name = "BTN_DRAW_MIXED_CC";
+            this.BTN_DRAW_MIXED_CC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_DRAW_MIXED_CC.TabIndex = 1;
+            this.BTN_DRAW_MIXED_CC.Text = "DRAW RGN";
+            this.BTN_DRAW_MIXED_CC.UseVisualStyleBackColor = true;
+            this.BTN_DRAW_MIXED_CC.Visible = false;
+            this.BTN_DRAW_MIXED_CC.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
+            // 
+            // BTN_REMOVE_MIXED_CC
+            // 
+            this.BTN_REMOVE_MIXED_CC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_MIXED_CC.FlatAppearance.BorderSize = 3;
+            this.BTN_REMOVE_MIXED_CC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_REMOVE_MIXED_CC.Location = new System.Drawing.Point(148, 16);
+            this.BTN_REMOVE_MIXED_CC.Name = "BTN_REMOVE_MIXED_CC";
+            this.BTN_REMOVE_MIXED_CC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_REMOVE_MIXED_CC.TabIndex = 1;
+            this.BTN_REMOVE_MIXED_CC.Text = "REMOVE RGN";
+            this.BTN_REMOVE_MIXED_CC.UseVisualStyleBackColor = true;
+            this.BTN_REMOVE_MIXED_CC.Visible = false;
+            // 
+            // BTN_SET_MIXED_CC
+            // 
+            this.BTN_SET_MIXED_CC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_MIXED_CC.FlatAppearance.BorderSize = 3;
+            this.BTN_SET_MIXED_CC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_SET_MIXED_CC.Location = new System.Drawing.Point(289, 16);
+            this.BTN_SET_MIXED_CC.Name = "BTN_SET_MIXED_CC";
+            this.BTN_SET_MIXED_CC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_SET_MIXED_CC.TabIndex = 1;
+            this.BTN_SET_MIXED_CC.Text = "SET REGION TYPE";
+            this.BTN_SET_MIXED_CC.UseVisualStyleBackColor = true;
+            this.BTN_SET_MIXED_CC.Visible = false;
+            // 
+            // draw_mixc_rcc
+            // 
+            this.draw_mixc_rcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_COPY);
+            this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_ADD);
+            this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_MODIFY);
+            this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_REMOVE);
+            this.draw_mixc_rcc.Controls.Add(this.groupBox16);
+            this.draw_mixc_rcc.Location = new System.Drawing.Point(4, 34);
+            this.draw_mixc_rcc.Name = "draw_mixc_rcc";
+            this.draw_mixc_rcc.Size = new System.Drawing.Size(594, 234);
+            this.draw_mixc_rcc.TabIndex = 8;
+            this.draw_mixc_rcc.Text = "MIX_RCC";
+            // 
+            // BTN_MIXED_RCC_COPY
+            // 
+            this.BTN_MIXED_RCC_COPY.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BTN_MIXED_RCC_COPY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_COPY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RCC_COPY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RCC_COPY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_COPY.Location = new System.Drawing.Point(153, 198);
+            this.BTN_MIXED_RCC_COPY.Name = "BTN_MIXED_RCC_COPY";
+            this.BTN_MIXED_RCC_COPY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RCC_COPY.TabIndex = 67;
+            this.BTN_MIXED_RCC_COPY.Text = "COPY";
+            this.BTN_MIXED_RCC_COPY.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_RCC_COPY.Visible = false;
+            // 
+            // BTN_MIXED_RCC_ADD
+            // 
+            this.BTN_MIXED_RCC_ADD.BackColor = System.Drawing.Color.White;
+            this.BTN_MIXED_RCC_ADD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_ADD.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RCC_ADD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RCC_ADD.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_ADD.Location = new System.Drawing.Point(7, 198);
+            this.BTN_MIXED_RCC_ADD.Name = "BTN_MIXED_RCC_ADD";
+            this.BTN_MIXED_RCC_ADD.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RCC_ADD.TabIndex = 64;
+            this.BTN_MIXED_RCC_ADD.Text = "ADD";
+            this.BTN_MIXED_RCC_ADD.UseVisualStyleBackColor = false;
+            this.BTN_MIXED_RCC_ADD.Visible = false;
+            // 
+            // BTN_MIXED_RCC_MODIFY
+            // 
+            this.BTN_MIXED_RCC_MODIFY.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_MODIFY.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RCC_MODIFY.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RCC_MODIFY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_MODIFY.Location = new System.Drawing.Point(299, 198);
+            this.BTN_MIXED_RCC_MODIFY.Name = "BTN_MIXED_RCC_MODIFY";
+            this.BTN_MIXED_RCC_MODIFY.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RCC_MODIFY.TabIndex = 65;
+            this.BTN_MIXED_RCC_MODIFY.Text = "MODIFY";
+            this.BTN_MIXED_RCC_MODIFY.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_RCC_MODIFY.Visible = false;
+            // 
+            // BTN_MIXED_RCC_REMOVE
+            // 
+            this.BTN_MIXED_RCC_REMOVE.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_REMOVE.FlatAppearance.BorderSize = 3;
+            this.BTN_MIXED_RCC_REMOVE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_MIXED_RCC_REMOVE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_MIXED_RCC_REMOVE.Location = new System.Drawing.Point(445, 198);
+            this.BTN_MIXED_RCC_REMOVE.Name = "BTN_MIXED_RCC_REMOVE";
+            this.BTN_MIXED_RCC_REMOVE.Size = new System.Drawing.Size(145, 30);
+            this.BTN_MIXED_RCC_REMOVE.TabIndex = 66;
+            this.BTN_MIXED_RCC_REMOVE.TabStop = false;
+            this.BTN_MIXED_RCC_REMOVE.Text = "REMOVE";
+            this.BTN_MIXED_RCC_REMOVE.UseVisualStyleBackColor = true;
+            this.BTN_MIXED_RCC_REMOVE.Visible = false;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.BTN_DRAW_MIXED_RCC);
+            this.groupBox16.Controls.Add(this.button3);
+            this.groupBox16.Controls.Add(this.button4);
+            this.groupBox16.Location = new System.Drawing.Point(3, 143);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(588, 52);
+            this.groupBox16.TabIndex = 60;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "FOR DRAWING";
+            // 
+            // BTN_DRAW_MIXED_RCC
+            // 
+            this.BTN_DRAW_MIXED_RCC.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_RCC.FlatAppearance.BorderSize = 3;
+            this.BTN_DRAW_MIXED_RCC.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_DRAW_MIXED_RCC.Location = new System.Drawing.Point(8, 16);
+            this.BTN_DRAW_MIXED_RCC.Name = "BTN_DRAW_MIXED_RCC";
+            this.BTN_DRAW_MIXED_RCC.Size = new System.Drawing.Size(127, 25);
+            this.BTN_DRAW_MIXED_RCC.TabIndex = 1;
+            this.BTN_DRAW_MIXED_RCC.Text = "DRAW RGN";
+            this.BTN_DRAW_MIXED_RCC.UseVisualStyleBackColor = true;
+            this.BTN_DRAW_MIXED_RCC.Visible = false;
+            this.BTN_DRAW_MIXED_RCC.Click += new System.EventHandler(this.BTN_DRAW_FIGURES_Click);
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.button3.FlatAppearance.BorderSize = 3;
+            this.button3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.button3.Location = new System.Drawing.Point(148, 16);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(127, 25);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "REMOVE RGN";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
+            // 
+            // button4
+            // 
+            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.button4.FlatAppearance.BorderSize = 3;
+            this.button4.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.button4.Location = new System.Drawing.Point(289, 16);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(127, 25);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "SET REGION TYPE";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.BTN_SET_FIGURES_Click);
             // 
             // PNL_MAIN
             // 
@@ -2252,17 +3499,16 @@
             this.PNL_MAIN.Controls.Add(this.label33);
             this.PNL_MAIN.Controls.Add(this.TXT_PTRN_POS_ORG_X);
             this.PNL_MAIN.Controls.Add(this.label11);
-            this.PNL_MAIN.Controls.Add(this.TXT_FOCUS_POS_X);
             this.PNL_MAIN.Controls.Add(this.label22);
             this.PNL_MAIN.Controls.Add(this.TXT_PTRN_POS_ORG_Y);
             this.PNL_MAIN.Controls.Add(this.TXT_BASE_RECP);
-            this.PNL_MAIN.Controls.Add(this.TXT_FOCUS_POS_Y);
             this.PNL_MAIN.Controls.Add(this.TXT_PATH_RECP_FILE);
             this.PNL_MAIN.Controls.Add(this.label51);
             this.PNL_MAIN.Controls.Add(this.label3);
             this.PNL_MAIN.Controls.Add(this.label10);
+            this.PNL_MAIN.Controls.Add(this.LB_MAIN_FOCUS_PARAM);
+            this.PNL_MAIN.Controls.Add(this.label35);
             this.PNL_MAIN.Controls.Add(this.label2);
-            this.PNL_MAIN.Controls.Add(this.label15);
             this.PNL_MAIN.Controls.Add(this.label38);
             this.PNL_MAIN.Controls.Add(this.BTN_PTRN_MATCH);
             this.PNL_MAIN.Controls.Add(this.BTN_PTRN_RESULT);
@@ -2299,7 +3545,7 @@
             this.PIC_FOCUS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PIC_FOCUS.Location = new System.Drawing.Point(8, 360);
             this.PIC_FOCUS.Name = "PIC_FOCUS";
-            this.PIC_FOCUS.Size = new System.Drawing.Size(580, 300);
+            this.PIC_FOCUS.Size = new System.Drawing.Size(578, 300);
             this.PIC_FOCUS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PIC_FOCUS.TabIndex = 28;
             this.PIC_FOCUS.TabStop = false;
@@ -2353,6 +3599,26 @@
             this.label3.Size = new System.Drawing.Size(110, 14);
             this.label3.TabIndex = 0;
             this.label3.Text = "SAVE OPTION :";
+            // 
+            // LB_MAIN_FOCUS_PARAM
+            // 
+            this.LB_MAIN_FOCUS_PARAM.AutoSize = true;
+            this.LB_MAIN_FOCUS_PARAM.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LB_MAIN_FOCUS_PARAM.Location = new System.Drawing.Point(382, 338);
+            this.LB_MAIN_FOCUS_PARAM.Name = "LB_MAIN_FOCUS_PARAM";
+            this.LB_MAIN_FOCUS_PARAM.Size = new System.Drawing.Size(46, 14);
+            this.LB_MAIN_FOCUS_PARAM.TabIndex = 0;
+            this.LB_MAIN_FOCUS_PARAM.Text = "NONE";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label35.Location = new System.Drawing.Point(256, 338);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(114, 14);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "FOCUS PARAM :";
             // 
             // label2
             // 
@@ -2431,7 +3697,7 @@
             // RDO_SIMUL_VIEW_ONLY
             // 
             this.RDO_SIMUL_VIEW_ONLY.AutoSize = true;
-            this.RDO_SIMUL_VIEW_ONLY.BackColor = System.Drawing.Color.White;
+            this.RDO_SIMUL_VIEW_ONLY.BackColor = System.Drawing.Color.Aqua;
             this.RDO_SIMUL_VIEW_ONLY.Checked = true;
             this.RDO_SIMUL_VIEW_ONLY.Location = new System.Drawing.Point(8, 7);
             this.RDO_SIMUL_VIEW_ONLY.Name = "RDO_SIMUL_VIEW_ONLY";
@@ -2553,6 +3819,7 @@
             this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Size = new System.Drawing.Size(52, 22);
             this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.TabIndex = 63;
             this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Text = "0";
+            this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TXT_SIMUL_FOR_MULTI_POINT_CYCLE.Visible = false;
             // 
             // TXT_SIMUL_FOR_MULTI_POINT_TARGET
@@ -2563,6 +3830,7 @@
             this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Size = new System.Drawing.Size(52, 22);
             this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.TabIndex = 63;
             this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Text = "0";
+            this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TXT_SIMUL_FOR_MULTI_POINT_TARGET.Visible = false;
             // 
             // LB_TIME_EXECUTION
@@ -2639,26 +3907,8 @@
             this.Name = "CDMainForm";
             this.Text = "AUROS - CRITICAL DEMENSION MEASURE SYSTEM";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).EndInit();
-            this.TAB_FIGURE.ResumeLayout(false);
-            this.draw_Rect.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
-            this.panel21.ResumeLayout(false);
-            this.panel21.PerformLayout();
-            this.draw_circle.ResumeLayout(false);
-            this.panel22.ResumeLayout(false);
-            this.panel24.ResumeLayout(false);
-            this.panel24.PerformLayout();
-            this.draw_ovl.ResumeLayout(false);
-            this.panel28.ResumeLayout(false);
-            this.panel28.PerformLayout();
-            this.panel23.ResumeLayout(false);
-            this.panel23.PerformLayout();
-            this.draw_matching.ResumeLayout(false);
-            this.panel17.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
             this.panel27.ResumeLayout(false);
             this.panel27.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).EndInit();
@@ -2670,7 +3920,45 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.PNL_DRAW_FIGURE.ResumeLayout(false);
-            this.PNL_DRAW_FIGURE.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.TAB_FIGURE.ResumeLayout(false);
+            this.draw_Rect.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.draw_circle.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.draw_ovl.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.draw_focus.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.draw_mix_rc.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.draw_mix_cc.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.draw_mixc_rcc.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
             this.PNL_MAIN.ResumeLayout(false);
             this.PNL_MAIN.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_FOCUS)).EndInit();
@@ -2695,7 +3983,6 @@
         private System.Windows.Forms.TrackBar TB_BLENDING_RATIO;
         private System.Windows.Forms.Label LB_BLEND_VALUE;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TabControl TAB_FIGURE;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button BTN_PTRN_MATCH;
@@ -2707,87 +3994,15 @@
         private System.Windows.Forms.TextBox TXT_PATH_RECP_FILE;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TabPage draw_Rect;
-        private System.Windows.Forms.ListView LV_PAIR_DIG;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.RadioButton RDO_TYPE_DIA;
-        private System.Windows.Forms.RadioButton RDO_TYPE_VER;
-        private System.Windows.Forms.RadioButton RDO_TYPE_HOR;
-        private System.Windows.Forms.Button BTN_DIG_COPY;
-        private System.Windows.Forms.Button BTN_DIG_ADD;
-        private System.Windows.Forms.Button BTN_DIG_MODIFY;
-        private System.Windows.Forms.Button BTN_DIG_REMOVE;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.TextBox TXT_PARAM_DIA_ANGLE;
-        private System.Windows.Forms.Label LB_PARAM_DIA_ANGLE;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.TextBox TXT_RCD_H;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Button BTN_DIA_ANGLE_DW;
-        private System.Windows.Forms.Button BTN_DIA_ANGLE_RV;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.TextBox TXT_RCD_W;
-        private System.Windows.Forms.Button BTN_DIA_ANGLE_UP;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox TXT_PARAM_DIG_NICK;
-        private System.Windows.Forms.TabPage draw_circle;
-        private System.Windows.Forms.ListView LV_PAIR_CIR;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Button BTN_CIR_ADD;
-        private System.Windows.Forms.Button BTN_CIR_COPY;
-        private System.Windows.Forms.Button BTN_CIR_MODIFY;
-        private System.Windows.Forms.Button BTN_CIR_REMOVE;
-        private System.Windows.Forms.Panel panel24;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.TextBox TXT_CIRCLE_H;
-        private System.Windows.Forms.TextBox TXT_CIRCLE_W;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.TextBox TXT_PARAM_CIR_NICK;
-        private System.Windows.Forms.TabPage draw_ovl;
-        private System.Windows.Forms.ListView LV_PAIR_OVL;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.TextBox TXT_OVL_EX_H;
-        private System.Windows.Forms.TextBox TXT_OVL_IN_H;
-        private System.Windows.Forms.TextBox TXT_OVL_EX_W;
-        private System.Windows.Forms.TextBox TXT_OVL_IN_W;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox TXT_PARAM_OVL_NICK;
-        private System.Windows.Forms.Panel panel23;
-        private System.Windows.Forms.RadioButton RDO_ROI_OVL_EX;
-        private System.Windows.Forms.RadioButton RDO_ROI_OVL_ENTIRE;
-        private System.Windows.Forms.RadioButton RDO_ROI_OVL_IN;
-        private System.Windows.Forms.Button BTN_OL_ADD;
-        private System.Windows.Forms.Button BTN_OL_COPY;
-        private System.Windows.Forms.Button BTN_OL_REMOVE;
-        private System.Windows.Forms.TabPage draw_matching;
         private System.Windows.Forms.PictureBox PIC_PTRN;
         private System.Windows.Forms.ListView LV_RECP;
         private System.Windows.Forms.ColumnHeader IDX;
         private System.Windows.Forms.ColumnHeader FIELS;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Button BTN_REMOVE_FOCUS_ROI;
-        private System.Windows.Forms.Button BTN_DRAW_FOCUS_ROI;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button BTN_UPDATE_FIGURE_LIST;
-        private System.Windows.Forms.Button BTN_RELOAD_PARAM_FIGURES;
+        private System.Windows.Forms.Button BTN_FIGURE_REFRESH;
         private System.Windows.Forms.ListView LV_PARAMETER;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button BTN_UPDATE_PARAMETER;
+        private System.Windows.Forms.Button BTN_FIGURE_UPDATE;
         private UC_LogView.UC_LOG_VIEWER UC_LOG_VIEWER;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button BTN_MEASURE;
@@ -2820,10 +4035,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox TXT_BASE_RECP;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox TXT_FOCUS_POS_Y;
         private System.Windows.Forms.TextBox TXT_FOCUS_POS_X;
-        private System.Windows.Forms.Button BTN_SET_FOCUS_ROI;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button BTN_MENU_PTRN;
         private System.Windows.Forms.Button BTN_MENU_RECP;
@@ -2870,7 +4083,7 @@
         private System.Windows.Forms.Label label26;
         private System.Diagnostics.Process process1;
         private System.Windows.Forms.ProgressBar PROG_RUN;
-        private System.Windows.Forms.Button BTN_TEMP_TRANS_DESING;
+        private System.Windows.Forms.Button BTN_TEMP_TRANS_DESIGN;
         private System.Windows.Forms.CheckBox CHK_SIMUL_FOR_MULTI_POINT;
         private System.Windows.Forms.TextBox TXT_SIMUL_FOR_MULTI_POINT_TARGET;
         private System.Windows.Forms.TextBox TXT_SIMUL_FOR_MULTI_POINT_CYCLE;
@@ -2883,6 +4096,173 @@
         private System.Windows.Forms.RadioButton RDO_SIMUL_STATIC;
         private System.Windows.Forms.RadioButton RDO_SIMUL_LOCAL_FILES;
         private System.Windows.Forms.RadioButton RDO_SIMUL_VIEW_ONLY;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TabControl TAB_FIGURE;
+        private System.Windows.Forms.TabPage draw_Rect;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.TextBox TXT_RECT_SCD_POS_Y;
+        private System.Windows.Forms.TextBox TXT_RECT_FST_POS_Y;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_RECT;
+        private System.Windows.Forms.TextBox TXT_RECT_SCD_POS_X;
+        private System.Windows.Forms.TextBox TXT_RECT_FST_POS_X;
+        private System.Windows.Forms.TextBox TXT_PARAM_DIA_ANGLE;
+        private System.Windows.Forms.TextBox TXT_RECT_SCD_SZ_H;
+        private System.Windows.Forms.TextBox TXT_RECT_FST_SZ_H;
+        private System.Windows.Forms.TextBox TXT_RECT_SCD_SZ_W;
+        private System.Windows.Forms.TextBox TXT_RECT_FST_SZ_W;
+        private System.Windows.Forms.TextBox TXT_PARAM_DIG_NICK;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.RadioButton RDO_TYPE_DIA;
+        private System.Windows.Forms.RadioButton RDO_TYPE_VER;
+        private System.Windows.Forms.RadioButton RDO_TYPE_HOR;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label LB_PARAM_DIA_ANGLE;
+        private System.Windows.Forms.Button BTN_RECT_COPY;
+        private System.Windows.Forms.Button BTN_RECT_ADD;
+        private System.Windows.Forms.Button BTN_RECT_MODIFY;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Button BTN_DIG_REMOVE;
+        private System.Windows.Forms.Button BTN_DIA_ANGLE_DW;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Button BTN_DIA_ANGLE_UP;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Button BTN_DIA_ANGLE_RV;
+        private System.Windows.Forms.TabPage draw_circle;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_CIRCLE;
+        private System.Windows.Forms.TextBox TXT_CIRCLE_POS_Y;
+        private System.Windows.Forms.TextBox TXT_CIRCLE_POS_X;
+        private System.Windows.Forms.TextBox TXT_CIRCLE_SZ_H;
+        private System.Windows.Forms.TextBox TXT_PARAM_CIR_NICK;
+        private System.Windows.Forms.TextBox TXT_CIRCLE_SZ_W;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Button BTN_CIR_ADD;
+        private System.Windows.Forms.Button BTN_CIR_COPY;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Button BTN_CIR_MODIFY;
+        private System.Windows.Forms.Button BTN_CIR_REMOVE;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TabPage draw_ovl;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_OVL;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.RadioButton RDO_ROI_OVL_EX;
+        private System.Windows.Forms.CheckBox CHK_ROI_OVL_MODE_V;
+        private System.Windows.Forms.RadioButton RDO_ROI_OVL_ENTIRE;
+        private System.Windows.Forms.RadioButton RDO_ROI_OVL_IN;
+        private System.Windows.Forms.CheckBox CHK_ROI_OVL_MODE_H;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button BTN_OL_ADD;
+        private System.Windows.Forms.Button BTN_OL_COPY;
+        private System.Windows.Forms.TextBox TXT_OVL_IN_H;
+        private System.Windows.Forms.TextBox TXT_PARAM_OVL_NICK;
+        private System.Windows.Forms.TextBox TXT_OVL_EX_H;
+        private System.Windows.Forms.TextBox TXT_OVL_IN_W;
+        private System.Windows.Forms.TextBox TXT_OVL_EX_W;
+        private System.Windows.Forms.Button BTN_OL_REMOVE;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TabPage draw_focus;
+        private System.Windows.Forms.Button BTN_SET_REGION_FOCUS;
+        private System.Windows.Forms.Button BTN_DRAW_REGION_FOCUS;
+        private System.Windows.Forms.Button BTN_REMOVE_REGION_FOCUS;
+        private System.Windows.Forms.TextBox TXT_FOCUS_SZ_H;
+        private System.Windows.Forms.TextBox TXT_FOCUS_SZ_W;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TabPage draw_mix_rc;
+        private System.Windows.Forms.Button BTN_MIXED_RC_COPY;
+        private System.Windows.Forms.Button BTN_MIXED_RC_ADD;
+        private System.Windows.Forms.Button BTN_MIXED_RC_MODIFY;
+        private System.Windows.Forms.Button BTN_MIXED_RC_REMOVE;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_SCD;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_FST;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_NICK;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_SCD_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_FST_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_SCD_POS_Y;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_SCD_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_FST_POS_Y;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_FST_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_SCD_POS_X;
+        private System.Windows.Forms.TextBox TXT_MIXED_RC_FST_POS_X;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button BTN_SET_MIXED_RC;
+        private System.Windows.Forms.Button BTN_DRAW_MIXED_RC;
+        private System.Windows.Forms.Button BTN_REMOVE_MIXED_RC;
+        private System.Windows.Forms.TabPage draw_mix_cc;
+        private System.Windows.Forms.TabPage draw_mixc_rcc;
+        private System.Windows.Forms.Button BTN_FIGURE_DELETE;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Button BTN_RECT_SET_REGION;
+        private System.Windows.Forms.Button BTN_RECT_DRAW;
+        private System.Windows.Forms.Button BTN_RECT_REMOVE;
+        private System.Windows.Forms.Button BTN_CIRCLE_SET_REGION;
+        private System.Windows.Forms.Button BTN_CIRCLE_DRAW;
+        private System.Windows.Forms.Button BTN_CIRCLE_REMOVE;
+        private System.Windows.Forms.Button BTN_OVERLAY_SET_REGION;
+        private System.Windows.Forms.Button BTN_OVERLAY_DRAW;
+        private System.Windows.Forms.Button BTN_OVERLAY_REMOVE;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_METRIC_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_METRIC_HOR;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_METRIC_P2P;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_SCD_DIR_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_SCD_DIR_HOR;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_FST_DIR_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RC_FST_DIR_HOR;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_MIXED_RC;
+        private System.Windows.Forms.Label LB_MAIN_FOCUS_PARAM;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button BTN_MIXED_CC_COPY;
+        private System.Windows.Forms.Button BTN_MIXED_CC_ADD;
+        private System.Windows.Forms.Button BTN_MIXED_CC_MODIFY;
+        private System.Windows.Forms.Button BTN_MIXED_CC_REMOVE;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.Button BTN_DRAW_MIXED_CC;
+        private System.Windows.Forms.Button BTN_REMOVE_MIXED_CC;
+        private System.Windows.Forms.Button BTN_SET_MIXED_CC;
+        private System.Windows.Forms.Button BTN_MIXED_RCC_COPY;
+        private System.Windows.Forms.Button BTN_MIXED_RCC_ADD;
+        private System.Windows.Forms.Button BTN_MIXED_RCC_MODIFY;
+        private System.Windows.Forms.Button BTN_MIXED_RCC_REMOVE;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.Button BTN_DRAW_MIXED_RCC;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
 
 
 

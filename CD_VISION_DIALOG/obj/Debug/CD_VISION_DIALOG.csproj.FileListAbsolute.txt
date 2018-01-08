@@ -21,7 +21,6 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.PMAlign
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.Core.xml
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.xml
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Cognex.VisionPro.ImageFile.xml
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.csprojResolveAssemblyReference.cache
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Properties.Resources.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.csproj.GenerateResource.Cache
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.exe
@@ -201,7 +200,6 @@ D:\Develope\CD_VISION_DIALOG - MERGE - SEND\CD_VISION_DIALOG\bin\Debug\LIB_CD_VI
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.FormBaseRecpCopy.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.CDMainForm.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Config.resources
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Hacker.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_HistoryM.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_HistoryP.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.DLg_Processing.resources
@@ -209,13 +207,11 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.DLG_Ptr
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Recp.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Tunning.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.FormBaseRecp.resources
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\DEF_PARAMS.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\IPCData.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\IPCUtility.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\PylonC.NET.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\uc_thumb_nail_viewer.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\EPPlus.dll
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\DEF_PARAMS.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\IPCData.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\uc_thumb_nail_viewer.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\CD_VISION_DIALOG.exe.config
@@ -276,9 +272,7 @@ C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
 C:\Windows\addins\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Spc.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.xml
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\WrapperUnion.pdb
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\Ionic.Zip.pdb
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.csprojResolveAssemblyReference.cache
+D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\obj\Debug\CD_VISION_DIALOG.Dlg_Advanced.resources
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\UC_CD_PARAM.dll
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\ReinlessView.dll
-D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\ReinlessView.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\bin\Debug\LIB_CD_VISION.dll

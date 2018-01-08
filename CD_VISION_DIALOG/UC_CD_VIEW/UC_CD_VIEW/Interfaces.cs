@@ -57,7 +57,7 @@ namespace CD_View
 
         void /********/iMod_Figure(object single, int nIndex);
         void /********/iAdj_Figure(int nFigureType, int nIndex, int nAction, int x, int y);
-        void /********/iAdj_Overlay(int nAction, int nTarget, int nIndex,  int nDir, int nScale);
+        void /********/iAdj_Overlay(int nAction, int nTarget, int nIndex,  int nDir, int nScale, bool bHorizontal, bool bVertical);
         void /********/iAdd_Figure(object figure);
         void /********/iDel_Figure(int nFigureType, int nIndex);
         object /******/iGet_Figure(int nFigureType, int nIndex);

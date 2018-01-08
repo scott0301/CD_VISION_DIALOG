@@ -36,9 +36,6 @@
     <ApplicationIcon>alien male.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DEF_PARAMS">
-      <HintPath>Library\DEF_PARAMS.dll</HintPath>
-    </Reference>
     <Reference Include="DispObject, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\DispObject.dll</HintPath>
@@ -51,7 +48,7 @@
     </Reference>
     <Reference Include="LIB_CD_VISION, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>LIB_CD_Vision\Lib\LIB_CD_VISION.dll</HintPath>
+      <HintPath>Library\LIB_CD_VISION.dll</HintPath>
     </Reference>
     <Reference Include="PylonC.NET">
       <HintPath>CDData\IPCData\Library\PylonC.NET.dll</HintPath>
@@ -66,8 +63,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UC_CD_PARAM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="UC_CD_PARAM">
       <HintPath>Library\UC_CD_PARAM.dll</HintPath>
     </Reference>
     <Reference Include="UC_CD_VIEW">
@@ -86,10 +82,6 @@
     <Reference Include="WrapperCognex, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\WrapperCognex.dll</HintPath>
-    </Reference>
-    <Reference Include="WrapperUnion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\WrapperUnion.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -111,11 +103,11 @@
     <Compile Include="Dlg_Config.Designer.cs">
       <DependentUpon>Dlg_Config.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dlg_Hacker.cs">
+    <Compile Include="Dlg_Advanced.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dlg_Hacker.Designer.cs">
-      <DependentUpon>Dlg_Hacker.cs</DependentUpon>
+    <Compile Include="Dlg_Advanced.Designer.cs">
+      <DependentUpon>Dlg_Advanced.cs</DependentUpon>
     </Compile>
     <Compile Include="Dlg_HistoryP.cs">
       <SubType>Form</SubType>
@@ -179,8 +171,8 @@
     <EmbeddedResource Include="Dlg_Config.resx">
       <DependentUpon>Dlg_Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DLG_HACKER.resx">
-      <DependentUpon>Dlg_Hacker.cs</DependentUpon>
+    <EmbeddedResource Include="Dlg_Advanced.resx">
+      <DependentUpon>Dlg_Advanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dlg_HistoryM.resx">
       <DependentUpon>Dlg_HistoryM.cs</DependentUpon>

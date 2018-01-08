@@ -360,23 +360,34 @@ namespace CD_View
 
         public void iMod_Figure(object single, int nIndex)
         {
+            CMeasurePairRct measureRC = new CMeasurePairRct();
+            CMeasurePairCir measureCC = new CMeasurePairCir();
+            CMeasurePairOvl measureOVL = new CMeasurePairOvl();
+            CMeasureMixedRC measureMRC = new CMeasureMixedRC();
+
  
-            if (single.GetType().Name == "CMeasurePairRct")
+            if (single.GetType() ==  measureRC.GetType())
             {
                 CMeasurePairRct[] array = fm.ToArray_PairRct();
                 array[nIndex] = (CMeasurePairRct)single;
                 fm.Figure_Replace(array);
             }
-            else if(single.GetType().Name == "CMeasurePairCir")
+            else if(single.GetType() == measureCC.GetType())
             {
                 CMeasurePairCir[] array = fm.ToArray_PairCir();
                 array[nIndex] = (CMeasurePairCir)single;
                 fm.Figure_Replace(array);
             }
-            else if (single.GetType().Name == "CMeasurePairOvl")
+            else if (single.GetType()== measureOVL.GetType())
             {
                 CMeasurePairOvl[] array = fm.ToArray_PairOvl();
                 array[nIndex] = (CMeasurePairOvl)single;
+                fm.Figure_Replace(array);
+            }
+            else if (single.GetType() == measureMRC.GetType())
+            {
+                CMeasureMixedRC[] array = fm.ToArray_MixedRc();
+                array[nIndex] = (CMeasureMixedRC)single;
                 fm.Figure_Replace(array);
             }
             Refresh();
@@ -389,6 +400,7 @@ namespace CD_View
             /***/if (nFigureType == IFX_FIGURE.PAIR_RCT) { if (fm.COUNT_PAIR_RCT >= nIndex) { objReturn = fm.ElementAt_PairRct(nIndex); } }
             else if (nFigureType == IFX_FIGURE.PAIR_CIR) { if (fm.COUNT_PAIR_CIR >= nIndex) { objReturn = fm.ElementAt_PairCir(nIndex); } }
             else if (nFigureType == IFX_FIGURE.PAIR_OVL) { if (fm.COUNT_PAIR_OVL >= nIndex) { objReturn = fm.ElementAt_PairOvl(nIndex); } }
+            else if (nFigureType == IFX_FIGURE.MIXED_RC) { if (fm.COUNT_MIXED_RC >= nIndex) { objReturn = fm.ElementAt_MixedRect(nIndex); } }
             return objReturn;
         }
 
@@ -482,10 +494,30 @@ namespace CD_View
                 else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
                 else if (nAction == IFX_ADJ_ACTION.SIZE) { single.AdjustSize(x, y); }
             }
+            else if (nFigureType == IFX_FIGURE.RC_FOCUS)
+            {
+                /***/if (nAction == IFX_ADJ_ACTION.POS) { fm._rc_focus.Offset(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.SIZE) 
+                {
+                    RectangleF rcFocus = fm._rc_focus;
+                    rcFocus.Inflate(x, y);
+                    fm._rc_focus = CRect.CopyTo(rcFocus);
+                }
+            }
+            else if (nFigureType == IFX_FIGURE.MIXED_RC)
+            {
+                CMeasureMixedRC[] array = fm.ToArray_MixedRc();
+                CMeasureMixedRC single = fm.ElementAt_MixedRect(nIndex);
+
+                /***/if (nAction == IFX_ADJ_ACTION.POS) { single.AdjustPos(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.SIZE) { single.AdjustSize(x, y); }
+            }
+
          
             Refresh();
         }
-        public void iAdj_Overlay(int nAction, int nTarget, int nIndex, int nDir, int nScale)
+        public void iAdj_Overlay(int nAction, int nTarget, int nIndex, int nDir, int nScale, bool bHorizontal, bool bVertical)
         {
             CMeasurePairOvl[] array = fm.ToArray_PairOvl();
             CMeasurePairOvl single = fm.ElementAt_PairOvl(nIndex);
@@ -495,23 +527,23 @@ namespace CD_View
              
             if (nAction == IFX_ADJ_ACTION.GAP)
             {
-                /***/if (nTarget == TARGET_IN) { single.AdjustGap_IN(nDir, nScale); }
-                else if (nTarget == TARGET_EX) { single.AdjustGap_EX(nDir, nScale); }
+                /***/if (nTarget == TARGET_IN) { single.AdjustGap_IN(nDir, nScale, bHorizontal, bVertical); }
+                else if (nTarget == TARGET_EX) { single.AdjustGap_EX(nDir, nScale, bHorizontal, bVertical); }
             }
             else if (nAction == IFX_ADJ_ACTION.POS)
             {
-                /***/if (nTarget == TARGET_IN) { single.AdjustPos_IN(nDir, nScale); }
-                else if (nTarget == TARGET_EX) { single.AdjustPos_EX(nDir, nScale); }
+                /***/if (nTarget == TARGET_IN) { single.AdjustPos_IN(nDir, nScale, bHorizontal, bVertical); }
+                else if (nTarget == TARGET_EX) { single.AdjustPos_EX(nDir, nScale, bHorizontal, bVertical); }
             }
             else if (nAction == IFX_ADJ_ACTION.SIZE)
             {
-                /***/if (nTarget == TARGET_IN) { single.AdjustSize_IN(nDir, nScale); }
-                else if (nTarget == TARGET_EX) { single.AdjustSize_EX(nDir, nScale); }
+                /***/if (nTarget == TARGET_IN) { single.AdjustSize_IN(nDir, nScale, bHorizontal, bVertical); }
+                else if (nTarget == TARGET_EX) { single.AdjustSize_EX(nDir, nScale, bHorizontal, bVertical); }
             }
             else if (nAction == IFX_ADJ_ACTION.ASYM)
             {
-                /***/if (nTarget == TARGET_IN) { single.AdjustAsym_IN(nDir, nScale); }
-                else if (nTarget == TARGET_EX) { single.AdjustAsym_EX(nDir, nScale); }
+                /***/if (nTarget == TARGET_IN) { single.AdjustAsym_IN(nDir, nScale, bHorizontal, bVertical); }
+                else if (nTarget == TARGET_EX) { single.AdjustAsym_EX(nDir, nScale, bHorizontal, bVertical); }
             }
             Refresh();
         }
@@ -1390,11 +1422,21 @@ namespace CD_View
             if (listPt != null)
             {
                 if (size == 1) size++;// size 2 is unvisible 170105
-                for (int i = 0; i < listPt.Count; i++)
+
+                Parallel.For(0, listPt.Count, i =>
+                //for (int i = 0; i < listPt.Count; i++)
                 {
                     m_dispObj.InsertPoint(listPt.ElementAt(i).X, listPt.ElementAt(i).Y, size, thick, c);
-                }
+                });
             }
+        }
+        public void DrawPoint(DPoint pt)
+        {
+            m_dispObj.dispPoint.Add(pt);
+        }
+        public void DrawPoints(List<DPoint> list)
+        {
+            m_dispObj.dispPoint.AddRange(list);
         }
         public void DrawString(string msg, int x, int y, int size, Color c)
         {
@@ -1481,18 +1523,18 @@ namespace CD_View
 
                     if (BOOL_DRAW_PTRN_ROI == true)
                     {
-                        Pen penCyan = new Pen(Brushes.Cyan, 5);
+                        Pen penOrange = new Pen(Brushes.Orange, 5);
                         if (ROI_PTRN.Width == ROI_PTRN.Height && ROI_PTRN.Width == 0)
                         {
-                            e.Graphics.DrawRectangle(penCyan, new Rectangle((int)fTransX, (int)fTransY, imageW, imageH));
+                            e.Graphics.DrawRectangle(penOrange, new Rectangle((int)fTransX, (int)fTransY, imageW, imageH));
                         }
                         else
                         {
                             RectangleF rcPtrn = ROI_PTRN;
                             rcPtrn.Offset(fTransX, fTransY);
-                            e.Graphics.DrawRectangle(penCyan, Rectangle.Round(rcPtrn));
+                            e.Graphics.DrawRectangle(penOrange, Rectangle.Round(rcPtrn));
                         }
-                        penCyan.Dispose();
+                        penOrange.Dispose();
                     }
                 }
 
@@ -1528,15 +1570,10 @@ namespace CD_View
                         }
                     }
 
-                    // fixed real rois --> modified to Fined single rectangle 170714
-                    //if (list_ROI.Count > 0)
-                    {
-                        //foreach (Rectangle rc in list_ROI)
-                        {
-                            Rectangle rc = ROI_FOCUS;
-                            e.Graphics.DrawRectangle(penOrange, rc.X + (int)fTransX, rc.Y + (int)fTransY, rc.Width, rc.Height);
-                        }
-                    }
+
+                    Rectangle rcF = ROI_FOCUS;
+                    e.Graphics.DrawRectangle(penOrange, rcF.X + (int)fTransX, rcF.Y + (int)fTransY, rcF.Width, rcF.Height);
+
                     penYellow.Dispose();
                     penBlue.Dispose();
                     penOrange.Dispose();
@@ -1583,23 +1620,43 @@ namespace CD_View
         private void DrawMeasures(PaintEventArgs e, float fTransX, float fTransY)
         {
             Pen penBlue = new Pen(Color.Blue, (float) 0.3);
-            Pen penLime = new Pen(Color.LimeGreen, (float) 0.3);
+            Pen penLimeG = new Pen(Color.LimeGreen, (float) 0.3);
+            Pen penLime = new Pen(Color.Lime, (float)0.3);
             Pen penOrange = new Pen(Color.Orange, (float)3);
             Pen penCyan = new Pen(Color.Cyan, 3);
             Pen penRed=new Pen(Color.Red, (float) 3);
 
             //penYellow.StartCap = LineCap.RoundAnchor;
-            penRed.EndCap = LineCap.ArrowAnchor;
+            //penRed.EndCap = LineCap.ArrowAnchor;
 
-            Brush brush = new SolidBrush(Color.LimeGreen);
+            Brush brush = new SolidBrush(Color.LightCyan);
+
+           #region FONT SIZE AND GAP SETTING  180103
+
+            int nFontSize = 10;
+            int nFontGap = 20;
+
+            if (m_INFO_fMagnification > 1.8) 
+            {
+                nFontSize = 5;
+                nFontGap = 10;
+            }
+            if (m_INFO_fMagnification > 2.5)
+            {
+                nFontSize = 3;
+                nFontGap = 5;
+            }
+            #endregion
+
+            Font font = new Font("verdana", nFontSize);
             
-            Font font = new Font("verdana", 10);
             //*************************************************************************************
-            // Horizontal rectangle 
+            // DRAWING POINT DRAWING!!! ?? -_-'
             //*************************************************************************************
 
             if( BOOL_TEACHING_ACTIVATION == true)
             {
+              #region DRAW DRAWING POINT CROSS 
                 PointF[] arrFigureDrawingPoints = CPoint.GetCrossPointsOfLine(PT_FIGURE_TO_DRAW, 10);
 
                 List<PointF> list = CPoint.OffsetPoints(arrFigureDrawingPoints.ToList(), fTransX, fTransY);
@@ -1619,7 +1676,7 @@ namespace CD_View
                         e.Graphics.DrawLine(penSubLine, p3, p4);
                     }
                 }
-
+              #endregion
             }
             
             //*************************************************************************************
@@ -1628,50 +1685,77 @@ namespace CD_View
 
             if (BOOL_DRAW_FOCUS_ROI == true)
             {
+                #region DRAW FOCUS ROI
                 fm.SetRelativeMovemntFocusRect();
                 RectangleF rcFocus = fm.RC_FOCUS;
-                e.Graphics.DrawRectangle(penCyan, rcFocus.X + (int)fTransX, rcFocus.Y + (int)fTransY, rcFocus.Width, rcFocus.Height);
+                rcFocus.Offset(fTransX, fTransY);
+
+                e.Graphics.DrawRectangle(penCyan, rcFocus.X, rcFocus.Y, rcFocus.Width, rcFocus.Height);
+                e.Graphics.DrawString("FOCUS", font, brush, rcFocus.X, rcFocus.Y - nFontGap);
 
                 if (rcFocus.Width == 0 || rcFocus.Height == 0)
                 {
-                    e.Graphics.DrawRectangle(penCyan, fTransX - 10, fTransY - 10, 20, 20);
+                    rcFocus = new RectangleF(fTransX - 10, fTransY - 10, 20, 20);
+
+                    e.Graphics.DrawString("FOCUS", font, brush, rcFocus.X, rcFocus.Y - nFontGap);
+                    e.Graphics.DrawRectangle(penCyan, Rectangle.Round(rcFocus));
                 }
+                #endregion
             }
 
             for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
             {
+                #region DRAW PAIR RECTANGLE
                 CMeasurePairRct single = fm.ElementAt_PairRct(i);
+                
+                RectangleF rcFirst = single.rc_FST.ToRectangleF();
+                RectangleF rcSecon = single.rc_SCD.ToRectangleF();
 
-                parseRect rcFirst = single.rc_FST;
-                parseRect rcSecon = single.rc_SCD;
+                rcFirst.Offset(fTransX, fTransY);
+                rcSecon.Offset(fTransX, fTransY);
 
-                List<PointF> listFirst = rcFirst.ToArray();
-                List<PointF> listSecon = rcSecon.ToArray();
+                e.Graphics.DrawRectangle(penLimeG, rcFirst.X, rcFirst.Y, rcFirst.Width, rcFirst.Height);
+                e.Graphics.DrawRectangle(penLimeG, rcSecon.X, rcSecon.Y, rcSecon.Width, rcSecon.Height);
 
-                listFirst = CPoint.OffsetPoints(listFirst, fTransX, fTransY);
-                listSecon = CPoint.OffsetPoints(listSecon, fTransX, fTransY);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
 
-                //e.Graphics.DrawLine(new Pen(Color.Yellow, 5), rcFirst.LT.off, rcFirst.RT);
+              #region un...usefull not efficient kill.. !! sometime 
+                // parseRect rcFirst = single.rc_FST;
+                // parseRect rcSecon = single.rc_SCD;
+                //
+                //List<PointF> listFirst = rcFirst.ToArray();
+                //List<PointF> listSecon = rcSecon.ToArray();
+                //
+                //listFirst = CPoint.OffsetPoints(listFirst, fTransX, fTransY);
+                //listSecon = CPoint.OffsetPoints(listSecon, fTransX, fTransY);
 
-                if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR)
-                {
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.LB, fTransX, fTransY));
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.LB, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
-                }
-                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER)
-                {
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
-                }
-                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA)
-                {
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
-                    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
-                }
-                e.Graphics.DrawPolygon(penLime, listFirst.ToArray());
-                e.Graphics.DrawPolygon(penLime, listSecon.ToArray());
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, single.NICKNAME), font, brush, listFirst.ElementAt(0).X, listFirst.ElementAt(0).Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, single.NICKNAME), font, brush, listSecon.ElementAt(0).X, listSecon.ElementAt(0).Y - 10);
+
+                //if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR)
+                //{
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.LB, fTransX, fTransY));
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.LB, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
+                //}
+                //else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER)
+                //{
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
+                //}
+                //else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA)
+                //{
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
+                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
+                //}
+
+                //e.Graphics.DrawPolygon(penLimeG, listFirst.ToArray());
+                //e.Graphics.DrawPolygon(penLimeG, listSecon.ToArray());
+                //
+                //e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, listFirst.ElementAt(0).X, listFirst.ElementAt(0).Y - nFontGap);
+                //e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, listSecon.ElementAt(0).X, listSecon.ElementAt(0).Y - nFontGap);
+                #endregion kill 
+
+
+              #endregion
             }
 
             //*************************************************************************************
@@ -1679,10 +1763,9 @@ namespace CD_View
             //*************************************************************************************
             for( int i = 0; i <fm.COUNT_PAIR_CIR; i++ )
             {
+                #region DRAW PAIR_CIRCLE
                 CMeasurePairCir single = fm.ElementAt_PairCir(i);
 
-                //RectangleF rcEX = single.GetCompensatedRect(single.rc_EX);
-                //RectangleF rcIN = single.GetCompensatedRect(single.rc_IN);
                 RectangleF rcEX = single.rc_EX;
                 RectangleF rcIN = single.rc_IN;
 
@@ -1696,11 +1779,36 @@ namespace CD_View
                 }
                 else
                 {
-                    e.Graphics.DrawEllipse(penLime, rcEX);
-                    e.Graphics.DrawEllipse(penLime, rcIN);
+                    e.Graphics.DrawEllipse(penLimeG, rcEX);
+                    e.Graphics.DrawEllipse(penLimeG, rcIN);
                 }
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, single.NICKNAME), font, brush, rcEX.X, rcEX.Y - 10);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcEX.X, rcEX.Y - nFontGap);
+                #endregion
             }
+
+            //*************************************************************************************
+            // MIXED RC
+            //*************************************************************************************
+            for (int i = 0; i < fm.COUNT_MIXED_RC; i++)
+            {
+              #region DRAW MIXED RECTANGLE
+
+                CMeasureMixedRC single = fm.ElementAt_MixedRect(i);
+
+                RectangleF rcFirst = single.rc_FST.ToRectangleF();
+                RectangleF rcSecon = single.rc_SCD.ToRectangleF();
+
+                rcFirst.Offset(fTransX, fTransY);
+                rcSecon.Offset(fTransX, fTransY);
+
+                e.Graphics.DrawRectangle(penLimeG, rcFirst.X, rcFirst.Y, rcFirst.Width, rcFirst.Height);
+                e.Graphics.DrawRectangle(penLimeG, rcSecon.X, rcSecon.Y, rcSecon.Width, rcSecon.Height);
+
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
+                #endregion
+            }
+
 
             //*************************************************************************************
             // Over Lay
@@ -1708,49 +1816,57 @@ namespace CD_View
 
             for (int i = 0; i < fm.COUNT_PAIR_OVL; i++)
             {
+              #region DRAW OVERLAY
+
                 CMeasurePairOvl single = fm.ElementAt_PairOvl(i);
 
-                RectangleF rcHOR_IN_L = single.RC_HOR_IN.rc_FST.ToRectangleF();
-                RectangleF rcHOR_IN_R = single.RC_HOR_IN.rc_SCD.ToRectangleF();
-                RectangleF rcHOR_EX_L = single.RC_HOR_EX.rc_FST.ToRectangleF();
-                RectangleF rcHOR_EX_R = single.RC_HOR_EX.rc_SCD.ToRectangleF();
+                RectangleF rcHOR_EX_TOP = single.RC_HOR_EX.rc_FST.ToRectangleF();
+                RectangleF rcHOR_EX_BTM = single.RC_HOR_EX.rc_SCD.ToRectangleF();
+                RectangleF rcVER_EX_LFT = single.RC_VER_EX.rc_FST.ToRectangleF();
+                RectangleF rcVER_EX_RHT = single.RC_VER_EX.rc_SCD.ToRectangleF();
 
-                RectangleF rcVER_IN_T = single.RC_VER_IN.rc_FST.ToRectangleF();
-                RectangleF rcVER_IN_B = single.RC_VER_IN.rc_SCD.ToRectangleF();
-                RectangleF rcVER_EX_T = single.RC_VER_EX.rc_FST.ToRectangleF();
-                RectangleF rcVER_EX_B = single.RC_VER_EX.rc_SCD.ToRectangleF();
-
-                rcHOR_IN_L.Offset(fTransX, fTransY);rcHOR_IN_R.Offset(fTransX, fTransY);
-                rcHOR_EX_L.Offset(fTransX, fTransY);rcHOR_EX_R.Offset(fTransX, fTransY);
-
-                rcVER_IN_T.Offset(fTransX, fTransY);rcVER_IN_B.Offset(fTransX, fTransY);
-                rcVER_EX_T.Offset(fTransX, fTransY);rcVER_EX_B.Offset(fTransX, fTransY);
+                
+                rcHOR_EX_TOP.Offset(fTransX, fTransY); rcHOR_EX_BTM.Offset(fTransX, fTransY);
+                rcVER_EX_LFT.Offset(fTransX, fTransY);rcVER_EX_RHT.Offset(fTransX, fTransY);
 
 
-                e.Graphics.DrawRectangle(penLime, rcHOR_IN_L.X, rcHOR_IN_L.Y, rcHOR_IN_L.Width, rcHOR_IN_L.Height);
-                e.Graphics.DrawRectangle(penLime, rcHOR_IN_R.X, rcHOR_IN_R.Y, rcHOR_IN_R.Width, rcHOR_IN_R.Height);
-                e.Graphics.DrawRectangle(penLime, rcHOR_EX_L.X, rcHOR_EX_L.Y, rcHOR_EX_L.Width, rcHOR_EX_L.Height);
-                e.Graphics.DrawRectangle(penLime, rcHOR_EX_R.X, rcHOR_EX_R.Y, rcHOR_EX_R.Width, rcHOR_EX_R.Height);
+                e.Graphics.DrawRectangle(penLimeG, rcHOR_EX_TOP.X, rcHOR_EX_TOP.Y, rcHOR_EX_TOP.Width, rcHOR_EX_TOP.Height);
+                e.Graphics.DrawRectangle(penLimeG, rcHOR_EX_BTM.X, rcHOR_EX_BTM.Y, rcHOR_EX_BTM.Width, rcHOR_EX_BTM.Height); 
+                e.Graphics.DrawRectangle(penLimeG, rcVER_EX_LFT.X, rcVER_EX_LFT.Y, rcVER_EX_LFT.Width, rcVER_EX_LFT.Height);
+                e.Graphics.DrawRectangle(penLimeG, rcVER_EX_RHT.X, rcVER_EX_RHT.Y, rcVER_EX_RHT.Width, rcVER_EX_RHT.Height);
 
-                e.Graphics.DrawRectangle(penLime, rcVER_IN_T.X, rcVER_IN_T.Y, rcVER_IN_T.Width, rcVER_IN_T.Height);
-                e.Graphics.DrawRectangle(penLime, rcVER_IN_B.X, rcVER_IN_B.Y, rcVER_IN_B.Width, rcVER_IN_B.Height);
-                e.Graphics.DrawRectangle(penLime, rcVER_EX_T.X, rcVER_EX_T.Y, rcVER_EX_T.Width, rcVER_EX_T.Height);
-                e.Graphics.DrawRectangle(penLime, rcVER_EX_B.X, rcVER_EX_B.Y, rcVER_EX_B.Width, rcVER_EX_B.Height);
+                e.Graphics.DrawString(string.Format("{0}", "HOR_EX_T"), font, brush, rcHOR_EX_TOP.X, rcHOR_EX_TOP.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", "HOR_EX_B"), font, brush, rcHOR_EX_BTM.X, rcHOR_EX_BTM.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", "VER_EX_L"), font, brush, rcVER_EX_LFT.X, rcVER_EX_LFT.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", "VER_EX_R"), font, brush, rcVER_EX_RHT.X, rcVER_EX_RHT.Y - nFontGap);
 
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "HOR_IN_L"), font, brush, rcHOR_IN_L.X, rcHOR_IN_L.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "HOR_IN_R"), font, brush, rcHOR_IN_R.X, rcHOR_IN_R.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "HOR_EX_L"), font, brush, rcHOR_EX_L.X, rcHOR_EX_L.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "HOR_EX_R"), font, brush, rcHOR_EX_R.X, rcHOR_EX_R.Y - 10);
+                if (single.param_05_shape_of_measure == 0)
+                {
+                    RectangleF rcHOR_IN_TOP = single.RC_HOR_IN.rc_FST.ToRectangleF();
+                    RectangleF rcHOR_IN_BTM = single.RC_HOR_IN.rc_SCD.ToRectangleF();
+                    RectangleF rcVER_IN_LFT = single.RC_VER_IN.rc_FST.ToRectangleF();
+                    RectangleF rcVER_IN_RHT = single.RC_VER_IN.rc_SCD.ToRectangleF();
 
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "VER_IN_T"), font, brush, rcVER_IN_T.X, rcVER_IN_T.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "VER_IN_B"), font, brush, rcVER_IN_B.X, rcVER_IN_B.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "VER_EX_T"), font, brush, rcVER_EX_T.X, rcVER_EX_T.Y - 10);
-                e.Graphics.DrawString(string.Format("{0}_{1}", i, "VER_EX_B"), font, brush, rcVER_EX_B.X, rcVER_EX_B.Y - 10);
+                    rcHOR_IN_TOP.Offset(fTransX, fTransY); rcHOR_IN_BTM.Offset(fTransX, fTransY);
+                    rcVER_IN_LFT.Offset(fTransX, fTransY); rcVER_IN_RHT.Offset(fTransX, fTransY);
+
+                    e.Graphics.DrawRectangle(penLime, rcHOR_IN_TOP.X, rcHOR_IN_TOP.Y, rcHOR_IN_TOP.Width, rcHOR_IN_TOP.Height);
+                    e.Graphics.DrawRectangle(penLime, rcHOR_IN_BTM.X, rcHOR_IN_BTM.Y, rcHOR_IN_BTM.Width, rcHOR_IN_BTM.Height);
+                    e.Graphics.DrawRectangle(penLime, rcVER_IN_LFT.X, rcVER_IN_LFT.Y, rcVER_IN_LFT.Width, rcVER_IN_LFT.Height);
+                    e.Graphics.DrawRectangle(penLime, rcVER_IN_RHT.X, rcVER_IN_RHT.Y, rcVER_IN_RHT.Width, rcVER_IN_RHT.Height);
+
+                    e.Graphics.DrawString(string.Format("{0}", "HOR_IN_T"), font, brush, rcHOR_IN_TOP.X, rcHOR_IN_TOP.Y - nFontGap);
+                    e.Graphics.DrawString(string.Format("{0}", "HOR_IN_B"), font, brush, rcHOR_IN_BTM.X, rcHOR_IN_BTM.Y - nFontGap);
+                    e.Graphics.DrawString(string.Format("{0}", "VER_IN_L"), font, brush, rcVER_IN_LFT.X, rcVER_IN_LFT.Y - nFontGap);
+                    e.Graphics.DrawString(string.Format("{0}", "VER_IN_R"), font, brush, rcVER_IN_RHT.X, rcVER_IN_RHT.Y - nFontGap);
+                }
+                #endregion
             }
 
             brush.Dispose();
             font.Dispose();
             penBlue.Dispose();
+            penLimeG.Dispose();
             penLime.Dispose();
             penOrange.Dispose();
             penCyan.Dispose();

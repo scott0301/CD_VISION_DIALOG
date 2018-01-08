@@ -11,6 +11,8 @@ using System.Diagnostics;
 
 using System.IO;
 using CD_View;
+using CD_Measure;
+
 using DEF_PARAMS;
 using CodeKing.Native;
 
@@ -74,7 +76,6 @@ namespace CD_VISION_DIALOG
         private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
         {
             Process.Start(@config.i16_PATH_HIST_PTRN);
-
         }
 
         private void Dlg_HistoryP_Load(object sender, EventArgs e)
@@ -88,8 +89,7 @@ namespace CD_VISION_DIALOG
             if (LV_HISTORY.FocusedItem == null) return;
 
             LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
-
-       
+                   
             // Get Selected Item
             int nIndex = LV_HISTORY.FocusedItem.Index;
 
@@ -107,9 +107,7 @@ namespace CD_VISION_DIALOG
             // Load Image 
             uc_view_history.ThreadCall_LoadImage(PATH_IMAGE);
             System.Threading.Thread.Sleep(100);
-
      
-
             LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
         }
 
@@ -118,8 +116,12 @@ namespace CD_VISION_DIALOG
             this.Hide();
         }
 
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            WrapperLV.SortData(LV_HISTORY, e.Column);
+        }
 
-        #region glass effect
+       #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
         private int padding_TOP = 5;
@@ -177,21 +179,6 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperUnion.WrapperLV.SortData(LV_HISTORY, e.Column);
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

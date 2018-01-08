@@ -591,7 +591,9 @@ namespace CD_VISION_DIALOG
             CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_02_peakTargetIndex_fst;
             CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_03_peakTargetIndex_scd;
             // update UI from the first line data 
- 
+
+            TXT_RECT_WINDOW_SIZE.Text = single.param_05_windowSize.ToString("NO");
+
             // 03 compensation value            
            TXT_RECT_COMPEN_A.Text= single.param_comm_01_compen_A.ToString("F2");
            TXT_RECT_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
@@ -599,6 +601,8 @@ namespace CD_VISION_DIALOG
             // 04 edge position for the line 
            TXT_RECT_EDGE_POSITION_FST.Text = single.param_06_edge_position_fst.ToString("F2");
            TXT_RECT_EDGE_POSITION_SCD.Text = single.param_07_edge_position_scd.ToString("F2");
+
+           TXT_RECT_EDGE_REFINEMENT.Text = single.param_comm_04_refinement.ToString("N0");
 
             // 05 show raw data 
             CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
@@ -620,82 +624,78 @@ namespace CD_VISION_DIALOG
 
                 uc_tunning_view.VIEW_Set_Clear_DispObject();
 
+                CMeasurePairRct rcProc = new CMeasurePairRct();
+
+                
                 int param_00_FilterSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
                 int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
   
                 Bitmap bmp = uc_tunning_view.GetDisplay_Bmp();
                 pm.SetImage(bmp);
 
-                CPeakPair peakData = pm.GenAutoPeakData(true, bool_horizontal_dir, param_00_FilterSize, param_01_PeakCandidate);
+                List<PointF> listPeak = pm.GetPeakListSorted(param_01_PeakCandidate, bool_horizontal_dir);
 
-                 _ToUI_DrawPeakAnalysis(peakData);
-
- 
+                _ToUI_DrawPeakAnalysis(listPeak, bool_horizontal_dir);
 
                 uc_tunning_view.Refresh();
             }
         }
         private void BTN_RECT_VERIFY_EDGE_REGION_FST_Click(object sender, EventArgs e)
         {
-            // Region Corection Code composition
-            // param 0 : total target peak count
-            // param 1 : actual target peak index
-            // param 3 : command in detail 
-            //  0 := do not use rcc
-            //  1 := peak-orient negative
-            //  2 := peak-orient positive
+            uc_tunning_view.VIEW_Set_Clear_DispObject();
 
-            // null exception 
-            if (CB_RECT_TARGET_INDEX_FST.SelectedItem == null) return;
-
-
-            int param_00_FilterSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
+            int param_00_WindowSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
             int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
-            
+            int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_FST.Text);            
 
             RDO_RECT_APD_FST.Checked = true;
-
-            int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_FST.Text);
-
-
-            uc_tunning_view.VIEW_Set_Clear_DispObject();
 
             Bitmap bmp = uc_tunning_view.GetDisplay_Bmp();
             pm.SetImage(bmp);
 
             bool bool_horizontal_dir = RDO_RECT_TYPE_HOR.Checked == true ? true : false;
 
-            CPeakPair peakData = pm.GenAutoPeakData(true, bool_horizontal_dir, param_00_FilterSize, param_01_PeakCandidate);
+            // draw entire set
+            List<PointF> listPeak = pm.GetPeakListSorted(param_01_PeakCandidate, bool_horizontal_dir);
+            _ToUI_DrawPeakAnalysis(listPeak, bool_horizontal_dir);
 
-            _ToUI_DrawPeakAnalysis(peakData);
+            // get the selected peak and region
+            PointF ptCurrent = pm.GetPeakDesinated(param_01_PeakCandidate, bool_horizontal_dir, param_02_target_peak_index);
 
-            CPeakPair.PeakPair single = peakData.GetElement(param_02_target_peak_index);
+            int nParse = Convert.ToInt32(param_00_WindowSize / 2.0);
 
-            RectangleF rectFST = pm.GetRegionByPeakAnalysis(single, 1, bool_horizontal_dir);
-            RectangleF rectSCD = pm.GetRegionByPeakAnalysis(single, 2, bool_horizontal_dir);
-            RectangleF rcMerged = CRect.GetMergedRect(rectFST, rectSCD);
+            if( bool_horizontal_dir == true)
+            {
+                CLine line = new CLine(new PointF(0, ptCurrent.Y), new PointF(bmp.Width, ptCurrent.Y));
 
-            uc_tunning_view.DrawRect(rcMerged.X, rcMerged.Y, rcMerged.Width, rcMerged.Height, Color.Coral, (float)0.5);
+                CLine lineM = line.ShiftLine(0, -nParse);
+                CLine lineP = line.ShiftLine(0, +nParse);
+
+                uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+            }
+            else if (bool_horizontal_dir == false)
+            {
+                CLine line = new CLine(new PointF(ptCurrent.X, 0), new PointF(ptCurrent.X, bmp.Height));
+
+                CLine lineM = line.ShiftLine(-nParse, 0);
+                CLine lineP = line.ShiftLine(+nParse, 0);
+
+                uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+            }
+
              uc_tunning_view.Refresh();
         }
         private void BTN_RECT_VERIFY_EDGE_REGION_SCD_Click(object sender, EventArgs e)
         {
-            // Region Corection Code composition
-            // param 0 : total target peak count
-            // param 1 : actual target peak index
-            // param 3 : command in detail 
-            //  0 := do not use rcc
-            //  1 := peak-orient negative
-            //  2 := peak-orient positive
-
-            // null exception 
-            if (CB_RECT_TARGET_INDEX_FST.SelectedItem == null) return;
-
-            int param_00_FilterSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
+            int param_00_WindowSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
             int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
+            int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_SCD.Text);
 
             RDO_RECT_APD_SCD.Checked = true;
-            int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_SCD.Text);
  
             uc_tunning_view.VIEW_Set_Clear_DispObject();
 
@@ -704,18 +704,39 @@ namespace CD_VISION_DIALOG
 
             bool bool_horizontal_dir = RDO_RECT_TYPE_HOR.Checked == true ? true : false;
 
-            CPeakPair peakData = pm.GenAutoPeakData(true, bool_horizontal_dir, param_00_FilterSize, param_01_PeakCandidate);
+            // draw entire set
+            List<PointF> listPeak = pm.GetPeakListSorted(param_01_PeakCandidate, bool_horizontal_dir);
+            _ToUI_DrawPeakAnalysis(listPeak, bool_horizontal_dir);
 
-            _ToUI_DrawPeakAnalysis(peakData);
+            // get the selected peak and region
+            PointF ptCurrent = pm.GetPeakDesinated(param_01_PeakCandidate, bool_horizontal_dir, param_02_target_peak_index);
 
-            CPeakPair.PeakPair single = peakData.GetElement(param_02_target_peak_index);
+            int nParse = Convert.ToInt32(param_00_WindowSize / 2.0);
 
-            RectangleF rectFST = pm.GetRegionByPeakAnalysis(single, 1, bool_horizontal_dir);
-            RectangleF rectSCD = pm.GetRegionByPeakAnalysis(single, 2, bool_horizontal_dir);
-            RectangleF rcMerged = CRect.GetMergedRect(rectFST, rectSCD);
+            if (bool_horizontal_dir == true)
+            {
+                CLine line = new CLine(new PointF(0, ptCurrent.Y), new PointF(bmp.Width, ptCurrent.Y));
 
-            uc_tunning_view.DrawRect(rcMerged.X, rcMerged.Y, rcMerged.Width, rcMerged.Height, Color.Coral, (float)0.5);
+                CLine lineM = line.ShiftLine(0, -nParse);
+                CLine lineP = line.ShiftLine(0, +nParse);
+
+                uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+            }
+            else if (bool_horizontal_dir == false)
+            {
+                CLine line = new CLine(new PointF(ptCurrent.X, 0), new PointF(ptCurrent.X, bmp.Height));
+
+                CLine lineM = line.ShiftLine(-nParse, 0);
+                CLine lineP = line.ShiftLine(+nParse, 0);
+
+                uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+            }
             uc_tunning_view.Refresh();
+
         }
         
      
@@ -731,6 +752,33 @@ namespace CD_VISION_DIALOG
                 uc_tunning_view.DrawCircle(single.ptJoint, (float)1.5, (float)1.5, Color.LimeGreen, (float)0.5);
                 uc_tunning_view.DrawString(i.ToString("N0"), (int)single.ptJoint.X - 2, (int)single.ptJoint.Y - 4, 5, Color.Red);
             }
+        }
+
+        private void _ToUI_DrawPeakAnalysis(List<PointF> list, bool bHorizontal)
+        {
+            if (bHorizontal == true)
+            {
+                int nAxisPos = 10;
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    PointF ptCurrent = list.ElementAt(i);
+
+                    uc_tunning_view.DrawPoint(nAxisPos, ptCurrent.Y, 1, 1, Color.Red);
+                    uc_tunning_view.DrawString(i.ToString("N0"), nAxisPos, (int)ptCurrent.Y - 4, 5, Color.Red);
+                }
+            }
+            else
+            {
+                int nAxisPos = 10;
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    PointF ptCurrent = list.ElementAt(i);
+
+                    uc_tunning_view.DrawPoint(ptCurrent.X, nAxisPos, 1, 1, Color.Red);
+                    uc_tunning_view.DrawString(i.ToString("N0"), (int)ptCurrent.X-4, nAxisPos, 5, Color.Red);
+                }
+            }
+            
         }
 
         

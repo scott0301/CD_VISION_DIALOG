@@ -1,6 +1,6 @@
 ﻿namespace CD_VISION_DIALOG
 {
-    partial class Dlg_Hacker
+    partial class Dlg_Advanced
     {
         /// <summary>
         /// Required designer variable.
@@ -133,7 +133,7 @@
             this.BTN_SET_SAVE_IMAGE_SET.UseVisualStyleBackColor = true;
             this.BTN_SET_SAVE_IMAGE_SET.Click += new System.EventHandler(this.BTN_SET_SAVE_IMAGE_SET_Click);
             // 
-            // Dlg_Hacker
+            // Dlg_Advanced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -150,8 +150,8 @@
             this.Controls.Add(this.CHK_SHOW_IMAGE_PROCESSING);
             this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.Name = "Dlg_Hacker";
-            this.Text = "DLG_HACKER";
+            this.Name = "Dlg_Advanced";
+            this.Text = "         ";
             this.Load += new System.EventHandler(this.Dlg_Hacker_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using DEF_PARAMS;
+using CD_Measure;
 using CodeKing.Native;
 
 
 namespace CD_VISION_DIALOG
 {
-    public partial class Dlg_Hacker : Form
+    public partial class Dlg_Advanced : Form
     {
         public CHacker hacker = new CHacker();
 
-        public Dlg_Hacker()
+        public Dlg_Advanced()
         {
             InitializeComponent();
         }
@@ -36,6 +37,45 @@ namespace CD_VISION_DIALOG
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void CHK_SHOW_IMAGE_PROCESSING_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
+        }
+
+        private void CHK_OFF_DETECT_CROSS_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_SHOW_DETECT_CROSS = CHK_OFF_DETECT_CROSS.Checked;
+        }
+
+        private void CHK_USE_GRAB_SAVE_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_USE_GRAB_SAVE = CHK_USE_GRAB_SAVE.Checked;
+        }
+
+        private void CHK_USE_FOCUS_IMAGE_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_USE_FOCUS_SAVE = CHK_USE_FOCUS_IMAGE_SAVE.Checked;
+        }
+
+        private void CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Checked;
+        }
+
+        private void BTN_SET_SAVE_IMAGE_SET_Click(object sender, EventArgs e)
+        {
+            string strPath = Computer.SelectFolderAndGetName();
+            TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
+
+            hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
+        }
+
         #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
@@ -94,54 +134,5 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-        
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void CHK_SHOW_IMAGE_PROCESSING_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
-        }
-
-        private void CHK_OFF_DETECT_CROSS_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_SHOW_DETECT_CROSS = CHK_OFF_DETECT_CROSS.Checked;
-        }
-
-        
-
-        
-
-        private void CHK_USE_GRAB_SAVE_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_GRAB_SAVE = CHK_USE_GRAB_SAVE.Checked;
-        }
-
-        private void CHK_USE_FOCUS_IMAGE_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_FOCUS_SAVE = CHK_USE_FOCUS_IMAGE_SAVE.Checked;
-        }
-
-        private void CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Checked;
-        }
-
-        private void BTN_SET_SAVE_IMAGE_SET_Click(object sender, EventArgs e)
-        {
-            string strPath = WrapperUnion.WrapperFile.SelectFolderAndGetName();
-            TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
-
-            hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
-        }
     }
 }

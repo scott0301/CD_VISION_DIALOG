@@ -31,17 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DEF_PARAMS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\DEF_PARAMS.dll</HintPath>
-    </Reference>
     <Reference Include="DispObject, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\DispObject.dll</HintPath>
     </Reference>
     <Reference Include="LIB_CD_VISION, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\LIB_CD_Vision\Lib\LIB_CD_VISION.dll</HintPath>
+      <HintPath>..\..\Library\LIB_CD_VISION.DLL</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -42,7 +42,7 @@ namespace CD_VISION_DIALOG
             uc_view_processing.BOOL_DRAW_FOCUS_ROI = false;
             uc_view_processing.BOOL_DRAW_PTRN_ROI = false; 
 
-         }
+        }
         
 
         private void fuck()
@@ -53,7 +53,6 @@ namespace CD_VISION_DIALOG
         {
             m_bStatus_Record = false;
             _SetRecordStatus(m_bStatus_Record);
-
         }
 
         public bool SetParam(CFigureManager fm, Bitmap bmp)
@@ -79,7 +78,6 @@ namespace CD_VISION_DIALOG
             // pre defined pre-processing elements updates 170809
             listCommand = fm.listCommand.ToList();
             classUI.LV_DisplayProcedure();
-            
 
             return true;
         }
@@ -242,7 +240,7 @@ namespace CD_VISION_DIALOG
             int imageW =  0; int imageH =  0;
             byte[] rawImage = classUI.GetInputImage(out imageW, out imageH);
 
-            rawImage = Computer.TriggerProcess(rawImage, imageW, imageH, listCommand);
+            rawImage = CInspUnit.TriggerProcess(rawImage, imageW, imageH, listCommand);
             BTN_CALCULATE_IMAGE_QUALITY_Click(null, EventArgs.Empty);
 
             uc_view_processing.SetDisplay(rawImage, imageW, imageH);
@@ -375,7 +373,7 @@ namespace CD_VISION_DIALOG
 
         private void _PRINT_MSG(string msg)
         {
-            string s = WrapperUnion.WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM() +msg + System.Environment.NewLine;
+            string s = Computer.GetTimeCode4Save_HH_MM_SS_MMM() + " : " + msg + System.Environment.NewLine;
             RICH_MESSAGE_WINDOW.AppendText(s);
             RICH_MESSAGE_WINDOW.ScrollToCaret();
             

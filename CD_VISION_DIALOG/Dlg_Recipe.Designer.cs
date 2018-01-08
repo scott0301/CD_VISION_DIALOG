@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.TXT_DMG_TOLERANCE = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TXT_EDGE_POSITION = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.RDO_ALGORITHM_CARDIN = new System.Windows.Forms.RadioButton();
             this.RDO_ALGORITHM_DIR_EX = new System.Windows.Forms.RadioButton();
@@ -65,14 +60,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.BTN_PTRN_CANCEL = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
+            this.TXT_CAM_EXP = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.CHK_USE_CENTERING = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.TXT_CAM_EXP = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBox7.SuspendLayout();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.TXT_MULTI_FRAME_SHOT_COUNT = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.TXT_MULTI_FRAME_SHOT_DELAY = new System.Windows.Forms.TextBox();
+            this.RDO_MULTI_FRAME_VALUE_AVG = new System.Windows.Forms.RadioButton();
+            this.RDO_MULTI_FRAME_MEDIAN = new System.Windows.Forms.RadioButton();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,59 +82,8 @@
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label7);
-            this.groupBox7.Controls.Add(this.TXT_DMG_TOLERANCE);
-            this.groupBox7.Controls.Add(this.label4);
-            this.groupBox7.Controls.Add(this.TXT_EDGE_POSITION);
-            this.groupBox7.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox7.Location = new System.Drawing.Point(8, 398);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(455, 57);
-            this.groupBox7.TabIndex = 36;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "ETC";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(234, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(115, 16);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "EDGE_POS(%)";
-            // 
-            // TXT_DMG_TOLERANCE
-            // 
-            this.TXT_DMG_TOLERANCE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_DMG_TOLERANCE.ForeColor = System.Drawing.Color.White;
-            this.TXT_DMG_TOLERANCE.Location = new System.Drawing.Point(106, 21);
-            this.TXT_DMG_TOLERANCE.Name = "TXT_DMG_TOLERANCE";
-            this.TXT_DMG_TOLERANCE.Size = new System.Drawing.Size(83, 23);
-            this.TXT_DMG_TOLERANCE.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(18, 24);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "DMG_TOL";
-            // 
-            // TXT_EDGE_POSITION
-            // 
-            this.TXT_EDGE_POSITION.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_EDGE_POSITION.ForeColor = System.Drawing.Color.White;
-            this.TXT_EDGE_POSITION.Location = new System.Drawing.Point(352, 21);
-            this.TXT_EDGE_POSITION.Name = "TXT_EDGE_POSITION";
-            this.TXT_EDGE_POSITION.Size = new System.Drawing.Size(83, 23);
-            this.TXT_EDGE_POSITION.TabIndex = 1;
             // 
             // groupBox6
             // 
@@ -141,7 +92,7 @@
             this.groupBox6.Controls.Add(this.RDO_ALGORITHM_DIR_IN);
             this.groupBox6.Controls.Add(this.RDO_ALGORITHM_MAXHAT);
             this.groupBox6.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox6.Location = new System.Drawing.Point(8, 334);
+            this.groupBox6.Location = new System.Drawing.Point(7, 386);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(455, 57);
             this.groupBox6.TabIndex = 37;
@@ -203,7 +154,7 @@
             this.groupBox4.Controls.Add(this.TXT_COMPEN_B);
             this.groupBox4.Controls.Add(this.TXT_COMPEN_A);
             this.groupBox4.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox4.Location = new System.Drawing.Point(8, 267);
+            this.groupBox4.Location = new System.Drawing.Point(7, 319);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(455, 57);
             this.groupBox4.TabIndex = 39;
@@ -255,7 +206,7 @@
             this.groupBox3.Controls.Add(this.CHK_FOCUS_NONE);
             this.groupBox3.Controls.Add(this.CHK_FOCUS_ZAF);
             this.groupBox3.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox3.Location = new System.Drawing.Point(8, 136);
+            this.groupBox3.Location = new System.Drawing.Point(7, 197);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(455, 57);
             this.groupBox3.TabIndex = 40;
@@ -493,18 +444,18 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.TXT_PIXEL_RES);
-            this.panel1.Controls.Add(this.groupBox7);
+            this.panel1.Controls.Add(this.groupBox8);
             this.panel1.Controls.Add(this.groupBox6);
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(472, 558);
+            this.panel1.Size = new System.Drawing.Size(472, 540);
             this.panel1.TabIndex = 49;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(409, 528);
+            this.label16.Location = new System.Drawing.Point(409, 514);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(54, 16);
             this.label16.TabIndex = 75;
@@ -514,17 +465,28 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(338, 528);
+            this.label17.Location = new System.Drawing.Point(338, 514);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(65, 16);
             this.label17.TabIndex = 76;
             this.label17.Text = "CANCEL";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(431, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 12);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "(val)";
+            // 
             // BTN_PTRN_CANCEL
             // 
             this.BTN_PTRN_CANCEL.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_cancel;
             this.BTN_PTRN_CANCEL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PTRN_CANCEL.Location = new System.Drawing.Point(341, 464);
+            this.BTN_PTRN_CANCEL.Location = new System.Drawing.Point(341, 450);
             this.BTN_PTRN_CANCEL.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_PTRN_CANCEL.Name = "BTN_PTRN_CANCEL";
             this.BTN_PTRN_CANCEL.Size = new System.Drawing.Size(60, 60);
@@ -532,11 +494,21 @@
             this.BTN_PTRN_CANCEL.UseVisualStyleBackColor = true;
             this.BTN_PTRN_CANCEL.Click += new System.EventHandler(this.BTN_PTRN_CANCEL_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Coral;
+            this.label5.Location = new System.Drawing.Point(301, 97);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 16);
+            this.label5.TabIndex = 47;
+            this.label5.Text = "EXP";
+            // 
             // BTN_PTRN_APPLY
             // 
             this.BTN_PTRN_APPLY.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_ok;
             this.BTN_PTRN_APPLY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_PTRN_APPLY.Location = new System.Drawing.Point(403, 464);
+            this.BTN_PTRN_APPLY.Location = new System.Drawing.Point(403, 450);
             this.BTN_PTRN_APPLY.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_PTRN_APPLY.Name = "BTN_PTRN_APPLY";
             this.BTN_PTRN_APPLY.Size = new System.Drawing.Size(60, 60);
@@ -544,11 +516,22 @@
             this.BTN_PTRN_APPLY.UseVisualStyleBackColor = true;
             this.BTN_PTRN_APPLY.Click += new System.EventHandler(this.BTN_PTRN_APPLY_Click);
             // 
+            // TXT_CAM_EXP
+            // 
+            this.TXT_CAM_EXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_CAM_EXP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_CAM_EXP.ForeColor = System.Drawing.Color.White;
+            this.TXT_CAM_EXP.Location = new System.Drawing.Point(368, 95);
+            this.TXT_CAM_EXP.Name = "TXT_CAM_EXP";
+            this.TXT_CAM_EXP.Size = new System.Drawing.Size(95, 23);
+            this.TXT_CAM_EXP.TabIndex = 46;
+            this.TXT_CAM_EXP.Text = "0";
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.CHK_USE_CENTERING);
             this.groupBox5.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox5.Location = new System.Drawing.Point(8, 204);
+            this.groupBox5.Location = new System.Drawing.Point(7, 256);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(455, 57);
             this.groupBox5.TabIndex = 40;
@@ -567,52 +550,110 @@
             this.CHK_USE_CENTERING.UseVisualStyleBackColor = true;
             this.CHK_USE_CENTERING.CheckedChanged += new System.EventHandler(this.CHK_FOCUS_NONE_CheckedChanged);
             // 
-            // label5
+            // groupBox8
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Coral;
-            this.label5.Location = new System.Drawing.Point(301, 97);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 16);
-            this.label5.TabIndex = 47;
-            this.label5.Text = "EXP";
+            this.groupBox8.Controls.Add(this.RDO_MULTI_FRAME_MEDIAN);
+            this.groupBox8.Controls.Add(this.RDO_MULTI_FRAME_VALUE_AVG);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Controls.Add(this.TXT_MULTI_FRAME_SHOT_COUNT);
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Controls.Add(this.label12);
+            this.groupBox8.Controls.Add(this.TXT_MULTI_FRAME_SHOT_DELAY);
+            this.groupBox8.ForeColor = System.Drawing.Color.Coral;
+            this.groupBox8.Location = new System.Drawing.Point(7, 136);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(455, 57);
+            this.groupBox8.TabIndex = 36;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "MULTI-FRAME";
             // 
-            // TXT_CAM_EXP
+            // label10
             // 
-            this.TXT_CAM_EXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_CAM_EXP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TXT_CAM_EXP.ForeColor = System.Drawing.Color.White;
-            this.TXT_CAM_EXP.Location = new System.Drawing.Point(368, 95);
-            this.TXT_CAM_EXP.Name = "TXT_CAM_EXP";
-            this.TXT_CAM_EXP.Size = new System.Drawing.Size(95, 23);
-            this.TXT_CAM_EXP.TabIndex = 46;
-            this.TXT_CAM_EXP.Text = "0";
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(134, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(103, 16);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "SHOT_DELAY";
             // 
-            // label6
+            // TXT_MULTI_FRAME_SHOT_COUNT
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(431, 121);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 12);
-            this.label6.TabIndex = 48;
-            this.label6.Text = "(val)";
+            this.TXT_MULTI_FRAME_SHOT_COUNT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_MULTI_FRAME_SHOT_COUNT.ForeColor = System.Drawing.Color.White;
+            this.TXT_MULTI_FRAME_SHOT_COUNT.Location = new System.Drawing.Point(87, 21);
+            this.TXT_MULTI_FRAME_SHOT_COUNT.Name = "TXT_MULTI_FRAME_SHOT_COUNT";
+            this.TXT_MULTI_FRAME_SHOT_COUNT.Size = new System.Drawing.Size(41, 23);
+            this.TXT_MULTI_FRAME_SHOT_COUNT.TabIndex = 1;
+            this.TXT_MULTI_FRAME_SHOT_COUNT.Text = "1";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(6, 24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 16);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "SHOT CNT ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(332, 28);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 12);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "(ms)";
+            // 
+            // TXT_MULTI_FRAME_SHOT_DELAY
+            // 
+            this.TXT_MULTI_FRAME_SHOT_DELAY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_MULTI_FRAME_SHOT_DELAY.ForeColor = System.Drawing.Color.White;
+            this.TXT_MULTI_FRAME_SHOT_DELAY.Location = new System.Drawing.Point(243, 21);
+            this.TXT_MULTI_FRAME_SHOT_DELAY.Name = "TXT_MULTI_FRAME_SHOT_DELAY";
+            this.TXT_MULTI_FRAME_SHOT_DELAY.Size = new System.Drawing.Size(83, 23);
+            this.TXT_MULTI_FRAME_SHOT_DELAY.TabIndex = 1;
+            this.TXT_MULTI_FRAME_SHOT_DELAY.Text = "100";
+            // 
+            // RDO_MULTI_FRAME_VALUE_AVG
+            // 
+            this.RDO_MULTI_FRAME_VALUE_AVG.AutoSize = true;
+            this.RDO_MULTI_FRAME_VALUE_AVG.Checked = true;
+            this.RDO_MULTI_FRAME_VALUE_AVG.ForeColor = System.Drawing.Color.White;
+            this.RDO_MULTI_FRAME_VALUE_AVG.Location = new System.Drawing.Point(379, 11);
+            this.RDO_MULTI_FRAME_VALUE_AVG.Name = "RDO_MULTI_FRAME_VALUE_AVG";
+            this.RDO_MULTI_FRAME_VALUE_AVG.Size = new System.Drawing.Size(56, 20);
+            this.RDO_MULTI_FRAME_VALUE_AVG.TabIndex = 0;
+            this.RDO_MULTI_FRAME_VALUE_AVG.TabStop = true;
+            this.RDO_MULTI_FRAME_VALUE_AVG.Text = "AVG";
+            this.RDO_MULTI_FRAME_VALUE_AVG.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MULTI_FRAME_MEDIAN
+            // 
+            this.RDO_MULTI_FRAME_MEDIAN.AutoSize = true;
+            this.RDO_MULTI_FRAME_MEDIAN.ForeColor = System.Drawing.Color.White;
+            this.RDO_MULTI_FRAME_MEDIAN.Location = new System.Drawing.Point(379, 31);
+            this.RDO_MULTI_FRAME_MEDIAN.Name = "RDO_MULTI_FRAME_MEDIAN";
+            this.RDO_MULTI_FRAME_MEDIAN.Size = new System.Drawing.Size(57, 20);
+            this.RDO_MULTI_FRAME_MEDIAN.TabIndex = 0;
+            this.RDO_MULTI_FRAME_MEDIAN.Text = "MED";
+            this.RDO_MULTI_FRAME_MEDIAN.UseVisualStyleBackColor = true;
             // 
             // Dlg_Recp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(484, 572);
+            this.ClientSize = new System.Drawing.Size(484, 559);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Dlg_Recp";
             this.Text = "RECIPE PARAMETERS";
             this.Load += new System.EventHandler(this.Dlg_Recp_Load);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -627,6 +668,8 @@
             this.panel1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -635,11 +678,6 @@
 
         private System.Windows.Forms.Button BTN_PTRN_APPLY;
         private System.Windows.Forms.Button BTN_PTRN_CANCEL;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TXT_DMG_TOLERANCE;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TXT_EDGE_POSITION;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton RDO_ALGORITHM_CARDIN;
         private System.Windows.Forms.RadioButton RDO_ALGORITHM_DIR_EX;
@@ -677,5 +715,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox TXT_CAM_EXP;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox TXT_MULTI_FRAME_SHOT_COUNT;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox TXT_MULTI_FRAME_SHOT_DELAY;
+        private System.Windows.Forms.RadioButton RDO_MULTI_FRAME_MEDIAN;
+        private System.Windows.Forms.RadioButton RDO_MULTI_FRAME_VALUE_AVG;
     }
 }

@@ -12,9 +12,9 @@ using System.IO;
 using System.Diagnostics;
 
 using DEF_PARAMS;
+using CD_Measure;
 using CodeKing.Native;
-using WrapperUnion;
- 
+  
 namespace CD_VISION_DIALOG
 {
     public partial class Dlg_Spc : Form
@@ -160,7 +160,7 @@ namespace CD_VISION_DIALOG
                 if (strFileName.Contains("$") == true) continue;
 
                 // Get File Name 
-                strFileName = WrapperUnion.WrapperFile.GetFileName(strFileName);
+                strFileName = Computer.GetFileName(strFileName);
                 // Get Folder Name 
                 string strDate = Path.GetDirectoryName(single);
                 /****/
@@ -206,7 +206,7 @@ namespace CD_VISION_DIALOG
 
             if (File.Exists(strFullPath) == true)
             {
-                WrapperExcel.ExcuteExcel(strFullPath);
+                Computer.ExcuteExcel(strFullPath);
             }
             else
             {

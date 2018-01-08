@@ -261,7 +261,19 @@ namespace CD_Paramter
         public double PEAK_CANDIDATE { get { return param_04_peak_candidate; } set { param_04_peak_candidate = value; } }
 
         [CategoryAttribute("08 Window Size"), DescriptionAttribute("0 & 2 ~ ∞")]
-        public double WINDOW_SIZE { get { return param_05_window_size; } set { param_05_window_size= value; } }
+        public double WINDOW_SIZE 
+        {
+            get 
+            {
+                if (param_05_window_size <= 10) param_05_window_size = 10;
+                return param_05_window_size; 
+            } 
+            set 
+            {
+                param_05_window_size= value;
+                if (param_05_window_size <= 10) param_05_window_size = 10;
+            }
+        }
 
 
         [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
@@ -302,6 +314,8 @@ namespace CD_Paramter
             single.param_02_peakTargetIndex_fst /*****/= Convert.ToInt32(this.param_02_peak_target_index_fst);
             single.param_03_peakTargetIndex_scd/******/= Convert.ToInt32(this.param_03_peak_target_index_scd);
             single.param_04_peakCandidate/************/= Convert.ToInt32(this.param_04_peak_candidate);
+            
+            if (param_05_window_size <= 10) param_05_window_size = 10;
             single.param_05_windowSize/***************/= Convert.ToInt32(this.param_05_window_size);
             single.param_06_edge_position_fst/********/= this.param_06_edge_pos_fst;
             single.param_07_edge_position_scd/********/= this.param_07_edge_pos_scd;
@@ -346,6 +360,9 @@ namespace CD_Paramter
             this.param_03_peak_target_index_scd/**********/= single.param_03_peakTargetIndex_scd;
             this.param_04_peak_candidate/*****************/= single.param_04_peakCandidate;
             this.param_05_window_size/********************/= single.param_05_windowSize;
+
+            if (this.param_05_window_size <= 10) this.param_05_window_size = 10;
+
             this.param_06_edge_pos_fst/*******************/= single.param_06_edge_position_fst;
             this.param_07_edge_pos_scd/*******************/= single.param_07_edge_position_scd;
 
@@ -358,7 +375,6 @@ namespace CD_Paramter
             this.param_comm_05_BOOL_SHOW_RAW_DATA /**/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
         }
     }
-
     public class PROPERTY_PairOvl
     {
         private double param_comm_01_compen_A { get; set; }
@@ -551,14 +567,16 @@ namespace CD_Paramter
 
         //*****************************************************************************************
 
-        [CategoryAttribute("31 COMPENSATION A "), DescriptionAttribute("True or False")]
+        [CategoryAttribute("20 COMPENSATION A "), DescriptionAttribute("True or False")]
         public double COMPEN_A {get{return param_comm_01_compen_A;} set{param_comm_01_compen_A =value;}}
-        [CategoryAttribute("31 COMPENSATION B"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("21 COMPENSATION B"), DescriptionAttribute("True or False")]
         public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
-        [CategoryAttribute("31 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("22 Show Raw Data"), DescriptionAttribute("True or False")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-        [CategoryAttribute("32 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
+        [CategoryAttribute("23 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
         public int REFINEMENT { get { return param_comm_04_refinement; } set { param_comm_04_refinement = value; } }
+        [CategoryAttribute("24 Shape Of Measure"), DescriptionAttribute("Default- OVL(0), Rectangle(1)")]
+        public int SHAPE_OF_MEASURE { get; set; }
         [CategoryAttribute("33 Show Raw Data"), DescriptionAttribute("True or False")]
         public bool SHOW_RAW_DATA { get{return param_comm_05_show_raw_data;} set{param_comm_05_show_raw_data = value;}}
 
@@ -598,10 +616,10 @@ namespace CD_Paramter
             single.RC_VER_EX._rc_SCD = new parseRect(rc_VER_EX_SCD);
             
             single.param_01_edge_position_hor_in = Convert.ToInt32(EDGE_POS_HOR_IN);
-            single.param_02_edge_position_hor_ex = Convert.ToInt32(EDGE_POS_HOR_IN);
-            single.param_03_edge_position_ver_in = Convert.ToInt32(EDGE_POS_HOR_EX);
-            single.param_04_edge_position_ver_ex = Convert.ToInt32(EDGE_POS_HOR_EX);
-
+            single.param_02_edge_position_hor_ex = Convert.ToInt32(EDGE_POS_HOR_EX);
+            single.param_03_edge_position_ver_in = Convert.ToInt32(EDGE_POS_VER_IN);
+            single.param_04_edge_position_ver_ex = Convert.ToInt32(EDGE_POS_VER_EX);
+            single.param_05_shape_of_measure = Convert.ToInt32(SHAPE_OF_MEASURE);
 
             single.param_comm_01_compen_A = this.param_comm_01_compen_A;
             single.param_comm_02_compen_B = this.param_comm_02_compen_B;
@@ -646,6 +664,7 @@ namespace CD_Paramter
 
             this.EDGE_POS_VER_IN= single.param_03_edge_position_ver_in;
             this.EDGE_POS_VER_EX = single.param_04_edge_position_ver_ex;
+            this.SHAPE_OF_MEASURE = single.param_05_shape_of_measure;
 
             this.param_comm_01_compen_A = single.param_comm_01_compen_A;
             this.param_comm_02_compen_B = single.param_comm_02_compen_B;
@@ -818,6 +837,229 @@ namespace CD_Paramter
             this.param_comm_05_show_raw_data /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
         }
 
+    }
+    public class PROPERTY_MixedRC
+    {
+        public PROPERTY_MixedRC()
+        {
+            param_00_algorithm_fst = string.Empty;
+            param_01_algorithm_scd = string.Empty;
+            param_02_dist_metric = 0;
+            param_06_edge_pos_fst = 0;
+            param_07_edge_pos_scd = 0;
+
+            param_comm_01_compen_A = 1;
+            param_comm_02_compen_B = 0;
+            param_comm_03_spc_enhance = 0;
+            param_comm_04_refinement = 3;
+            param_comm_05_BOOL_SHOW_RAW_DATA = false;
+
+
+        }
+        private double param_comm_01_compen_A;
+        private double param_comm_02_compen_B;
+        private int param_comm_03_spc_enhance;
+        private int param_comm_04_refinement;
+        private bool param_comm_05_BOOL_SHOW_RAW_DATA;
+
+        private string param_00_algorithm_fst;
+        private string param_01_algorithm_scd;
+        private int/**/param_02_dist_metric;
+        private double param_06_edge_pos_fst;
+        private double param_07_edge_pos_scd;
+
+        private string rect_type_fst;
+        private string rect_type_scd;
+
+        // surface position croodinate
+        private CustomPointD pt_FST_LT = new CustomPointD();
+        private CustomPointD pt_FST_RT = new CustomPointD();
+        private CustomPointD pt_FST_LB = new CustomPointD();
+        private CustomPointD pt_FST_RB = new CustomPointD();
+
+        // hidden position croodinate
+        private CustomPointD _pt_fst_lt = new CustomPointD();
+        private CustomPointD _pt_fst_rt = new CustomPointD();
+        private CustomPointD _pt_fst_lb = new CustomPointD();
+        private CustomPointD _pt_fst_rb = new CustomPointD();
+
+        // surface position croodinate
+        private CustomPointD pt_SCD_LT = new CustomPointD();
+        private CustomPointD pt_SCD_RT = new CustomPointD();
+        private CustomPointD pt_SCD_LB = new CustomPointD();
+        private CustomPointD pt_SCD_RB = new CustomPointD();
+
+        // hidden position croodinate
+        private CustomPointD _pt_scd_lt = new CustomPointD();
+        private CustomPointD _pt_scd_rt = new CustomPointD();
+        private CustomPointD _pt_scd_lb = new CustomPointD();
+        private CustomPointD _pt_scd_rb = new CustomPointD();
+
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        public string NICKNAME { get; set; }
+
+        [CategoryAttribute("01 Rectangle Type FST"), DescriptionAttribute("Rectangle Type : HOR | VER")]
+        public string RC_TYPE_FST { get { return rect_type_fst; } set { rect_type_fst = value; } }
+
+        [CategoryAttribute("01 Rectangle Type FST"), DescriptionAttribute("Rectangle Type : HOR | VER")]
+        public string RC_TYPE_SCD { get { return rect_type_scd; } set { rect_type_scd = value; } }
+
+        //[CategoryAttribute("04 First Region - Point LT"), DescriptionAttribute("Region Croodinates For Each Rectagle Points"), ReadOnly(true)]
+        private CustomPointD PT_FST_LT { get { return pt_FST_LT; } set { pt_FST_LT = value; } }
+        //[CategoryAttribute("04 First Region - point RT"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_FST_RT { get { return pt_FST_RT; } set { pt_FST_RT = value; } }
+        //[CategoryAttribute("04 First Region - Point LB"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_FST_LB { get { return pt_FST_LB; } set { pt_FST_LB = value; } }
+        //[CategoryAttribute("04 First Region - Point RB"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_FST_RB { get { return pt_FST_RB; } set { pt_FST_RB = value; } }
+
+        //[CategoryAttribute("05 Second Region - Point LT"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_SCD_LT { get { return pt_SCD_LT; } set { pt_SCD_LT = value; } }
+        //[CategoryAttribute("05 Second Region - Point RT"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_SCD_RT { get { return pt_SCD_RT; } set { pt_SCD_RT = value; } }
+        //[CategoryAttribute("05 Second Region - Point LB"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_SCD_LB { get { return pt_SCD_LB; } set { pt_SCD_LB = value; } }
+        //[CategoryAttribute("05 Second Region - Point RB"), DescriptionAttribute("Region Croodinates For Each Rectangle Points"), ReadOnly(true)]
+        private CustomPointD PT_SCD_RB { get { return pt_SCD_RB; } set { pt_SCD_RB = value; } }
+
+        [CategoryAttribute("03 Measure Algorithm FST"), DescriptionAttribute("Measure Algorithm { MEXHAT | DIR_IN | DIR_EX | CARDIN")]
+        [Browsable(true)]
+        [TypeConverter(typeof(ConverterMeasureTyes))]
+        public string ALGORITHM_FST
+        {
+            get
+            {
+                string str = "";
+
+                if (param_00_algorithm_fst != null)
+                {
+                    str = param_00_algorithm_fst;
+                }
+                else
+                {
+                    str = IFX_ALGORITHM.ToStringType(0);
+                }
+                return str;
+            }
+
+            set { param_00_algorithm_fst = value; }
+
+        }
+
+        [CategoryAttribute("03 Measure Algorithm SCD"), DescriptionAttribute("Measure Algorithm { MEXHAT | DIR_IN | DIR_EX | CARDIN")]
+        [Browsable(true)]
+        [TypeConverter(typeof(ConverterMeasureTyes))]
+        public string ALGORITHM_SCD
+        {
+            get
+            {
+                string str = "";
+
+                if (param_01_algorithm_scd != null)
+                {
+                    str = param_01_algorithm_scd;
+                }
+                else
+                {
+                    str = IFX_ALGORITHM.ToStringType(0);
+                }
+                return str;
+            }
+
+            set { param_01_algorithm_scd = value; }
+
+        }
+
+        [CategoryAttribute("04 DISTANCE METRIC"), DescriptionAttribute("P2P(0) HOR(1), VER(2)")]
+        public int DIST_METRIC { get { return param_02_dist_metric; } set { param_02_dist_metric = value; } }
+
+        [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        public double EDGE_POS_FST { get { return param_06_edge_pos_fst; } set { param_06_edge_pos_fst = value; } }
+        [CategoryAttribute("10 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        public double EDGE_POS_SCD { get { return param_07_edge_pos_scd; } set { param_07_edge_pos_scd = value; } }
+
+        [CategoryAttribute("11 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
+        [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
+
+        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6)")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+
+        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
+        public int REFINEMENT { get { return param_comm_04_refinement; } set { param_comm_04_refinement = value; } }
+
+        [CategoryAttribute("15 Show Raw Data"), DescriptionAttribute("True or False")]
+        public bool SHOW_RAW_DATA { get { return param_comm_05_BOOL_SHOW_RAW_DATA; } set { param_comm_05_BOOL_SHOW_RAW_DATA = value; } }
+
+        public CMeasureMixedRC ToFigure()
+        {
+            CMeasureMixedRC single = new CMeasureMixedRC();
+
+            single.NICKNAME = NICKNAME;
+
+            single.RC_TYPE_FST = IFX_RECT_TYPE.ToNumericType(RC_TYPE_FST);
+            single.RC_TYPE_SCD = IFX_RECT_TYPE.ToNumericType(RC_TYPE_SCD);
+
+            single.rc_FST = CustomPointD.ToParseRect(pt_FST_LT, pt_FST_RT, pt_FST_LB, pt_FST_RB);
+            single.rc_SCD = CustomPointD.ToParseRect(pt_SCD_LT, pt_SCD_RT, PT_SCD_LB, pt_SCD_RB);
+
+            single._rc_FST = CustomPointD.ToParseRect(_pt_fst_lt, _pt_fst_rt, _pt_fst_lb, _pt_fst_rb);
+            single._rc_SCD = CustomPointD.ToParseRect(_pt_scd_lt, _pt_scd_rt, _pt_scd_lb, _pt_scd_rb);
+
+            single.param_00_algorithm_fst/****************/= IFX_ALGORITHM.ToNumericType(this.param_00_algorithm_fst);
+            single.param_01_algorithm_scd/****************/= IFX_ALGORITHM.ToNumericType(this.param_01_algorithm_scd);
+            single.METRIC_TYPE /**************************/= this.DIST_METRIC;
+            single.param_02_edge_position_fst/********/= this.param_06_edge_pos_fst;
+            single.param_03_edge_position_scd/********/= this.param_07_edge_pos_scd;
+
+            single.param_comm_01_compen_A/************/= this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B/************/= this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance /*********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_refinement /**********/= this.param_comm_04_refinement;
+            single.param_comm_05_BOOL_SHOW_RAW_DATA/**/= this.param_comm_05_BOOL_SHOW_RAW_DATA;
+
+            return single;
+        }
+        public void FromFigure(CMeasureMixedRC single)
+        {
+            this.NICKNAME = single.NICKNAME;
+
+            this.pt_FST_LT.SetValue(single.rc_FST.LT);
+            this.pt_FST_RT.SetValue(single.rc_FST.RT);
+            this.pt_FST_LB.SetValue(single.rc_FST.LB);
+            this.pt_FST_RB.SetValue(single.rc_FST.RB);
+
+            this.pt_SCD_LT.SetValue(single.rc_SCD.LT);
+            this.pt_SCD_RT.SetValue(single.rc_SCD.RT);
+            this.pt_SCD_LB.SetValue(single.rc_SCD.LB);
+            this.pt_SCD_RB.SetValue(single.rc_SCD.RB);
+
+            this._pt_fst_lt.SetValue(single._rc_FST.LT);
+            this._pt_fst_rt.SetValue(single._rc_FST.RT);
+            this._pt_fst_lb.SetValue(single._rc_FST.LB);
+            this._pt_fst_rb.SetValue(single._rc_FST.RB);
+
+            this._pt_scd_lt.SetValue(single._rc_SCD.LT);
+            this._pt_scd_rt.SetValue(single._rc_SCD.RT);
+            this._pt_scd_lb.SetValue(single._rc_SCD.LB);
+            this._pt_scd_rb.SetValue(single._rc_SCD.RB);
+
+            this.param_00_algorithm_fst/**********************/= IFX_ALGORITHM.ToStringType(single.param_00_algorithm_fst);
+            this.param_01_algorithm_scd/**********************/= IFX_ALGORITHM.ToStringType(single.param_01_algorithm_scd);
+            this.DIST_METRIC /********************************/= single.METRIC_TYPE;
+            this.param_06_edge_pos_fst/*******************/= single.param_02_edge_position_fst;
+            this.param_07_edge_pos_scd/*******************/= single.param_03_edge_position_scd;
+
+            this.RC_TYPE_FST = IFX_RECT_TYPE.ToStringType(single.RC_TYPE_FST);
+            this.RC_TYPE_SCD = IFX_RECT_TYPE.ToStringType(single.RC_TYPE_SCD);
+
+            this.param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
+            this.param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
+            this.param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
+            this.param_comm_04_refinement/***********/= single.param_comm_04_refinement;
+            this.param_comm_05_BOOL_SHOW_RAW_DATA /**/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
+        }
     }
 
 }

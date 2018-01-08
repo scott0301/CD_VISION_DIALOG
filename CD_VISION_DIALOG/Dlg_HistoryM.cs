@@ -18,8 +18,7 @@ using CD_Measure;
 using DEF_PARAMS;
 
 using CodeKing.Native;
-using WrapperUnion;
-
+ 
 
 namespace CD_VISION_DIALOG
 {
@@ -230,7 +229,7 @@ namespace CD_VISION_DIALOG
         {
             System.Threading.Thread thr = new System.Threading.Thread(delegate()
             {
-                string strTimeCode = WrapperDateTime.GetTimeCode4Save_HH_MM_SS_MMM();
+                string strTimeCode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
 
                 string strPathImageView = strTimeCode + "_DCIM.BMP";
                 string strPathImageTemplate = strTimeCode + "_" + m_fm.param_ptrn.PTRN_FILE;
@@ -238,8 +237,8 @@ namespace CD_VISION_DIALOG
                 string strPathInspRes = strTimeCode + "_INSP.txt";
 
                 // Setup Daily Directory
-                string strPathDaily = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, WrapperDateTime.GetTimeCode4Save_YYYY_MM_DD());
-                WrapperFile.EnsureFolderExsistance(strPathDaily);
+                string strPathDaily = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, Computer.GetTimeCode4Save_YYYY_MM_DD());
+                Computer.EnsureFolderExsistance(strPathDaily);
 
                 // Backup Recp File
                 string strRecipeSource = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, m_fm.RECP_FILE);
@@ -267,7 +266,131 @@ namespace CD_VISION_DIALOG
             thr.Start();
         }
 
-        #region glass effect
+       #region RECP DUMPING 
+        private void BTN_RECP_DUMP_OUT_Click(object sender, EventArgs e)
+        {
+            // get the recp file and ptrn file path 
+            string strCurrentRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, m_fm.RECP_FILE);
+            string strCurrentPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, m_fm.param_ptrn.PTRN_FILE);
+
+            bool bSuccess = true;
+
+            if (File.Exists(strCurrentRecp) == true)
+            {
+                if (File.Exists(strCurrentPtrn) == true)
+                {
+                    // if all pass for checking path validity
+                    // getnerate zip list
+                    List<string> list = new List<string>();
+                    list.Add( strCurrentPtrn);
+                    list.Add(strCurrentRecp);
+
+                    // do it!!!
+                    string strTimeCode = Computer.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
+                    string strFileName = string.Format("{0}_RecpDump.zip", strTimeCode);
+                    string strDest = Path.Combine(Computer.getPath_Desktop(), strFileName);
+
+                    bSuccess = WrapperZip.CreateZipFiles(list, strDest);
+                }
+            }
+            MessageBox.Show(string.Format("Dump Recp Process Finished. {0}", bSuccess == true ? "SUCESS" : "FAILED"));
+        }
+
+        private void BTN_RECP_DUMP_IN_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Zip Files|*.zip";
+            openFileDialog1.Title = "Select a Zip File";
+
+            string strFileNmae = string.Empty;
+
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // Assign the cursor in the Stream to the Form's Cursor property.
+                strFileNmae = openFileDialog1.FileName;
+            }
+
+            // cancel  & empty path exception
+            if (strFileNmae == "") return;
+
+            string strFolder = Computer.GetFolderPath(strFileNmae);
+
+            List<string> list = WrapperZip.GetFileList_Without_unzip(strFileNmae);
+
+            string strPathTemp = "c:\\Temp";
+
+            // dump file must have two types of  files : ptrn + recp
+            if (list.Count == 2)
+            {
+                string[] items = new string[2];
+
+                // i don't know which one is recp or ptrn 
+                items[0] = list.ElementAt(0).ToUpper();
+                items[1] = list.ElementAt(1).ToUpper();
+
+                string strPtrn = string.Empty;
+                string strRecp = string.Empty;
+
+                // check ? who is it.  A or B 
+                if (items[0].Contains("BMP") == true) { strPtrn = items[0]; } else if (items[1].Contains("BMP") == true) { strPtrn = items[1]; }
+                if (items[0].Contains("XML") == true) { strRecp = items[0]; } else if (items[1].Contains("XML") == true) { strRecp = items[1]; }
+
+                if (strPtrn != string.Empty && strRecp != string.Empty)
+                {
+                    string destPtrn = strPtrn;
+                    string destRecp = strRecp;
+
+                    // unzip ptrn file and recp file 
+                    WrapperZip.ExtractDirect(strFileNmae, destPtrn, strPathTemp);
+                    WrapperZip.ExtractDirect(strFileNmae, destRecp, strPathTemp);
+
+                    // path process 
+                    destPtrn = Path.Combine(strPathTemp, destPtrn).Replace("/","\\");
+                    destRecp = Path.Combine(strPathTemp, destRecp).Replace("/", "\\");
+
+                    // generate appropriate full path 
+                    string strAbsolutePtrn = Computer.GetFileName(destPtrn);
+                    string strAbsoluteRecp = Computer.GetFileName(destRecp);
+                    string strDestPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strAbsolutePtrn);
+                    string strDestRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, strAbsoluteRecp);
+
+                    // is there any duplicate?
+                    if (File.Exists(strDestPtrn) == true || File.Exists(strDestRecp) == true)
+                    {
+                        // do you want to overwrite??
+                        if (MessageBox.Show("File Existance Detected.\nDo You Want To Overwrite?", "File Duplication Warrning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            // delete first
+                            Computer.DeleteFile(strAbsolutePtrn);
+                            Computer.DeleteFile(strAbsoluteRecp);
+
+                            // and copy
+                            Computer.FileCopy(destPtrn, strDestPtrn);
+                            Computer.FileCopy(destRecp, strDestRecp);
+
+                            // recp change
+                            eventDele_ChangeRecp(strDestRecp, "");
+                        }
+                    }
+                    else // just do it.
+                    {
+                        // just copy 
+                        Computer.FileCopy(destPtrn, strDestPtrn);
+                        Computer.FileCopy(destRecp, strDestRecp);
+                        // and change
+                        eventDele_ChangeRecp(strDestRecp, "");
+                    }
+                    MessageBox.Show("Recp Changed", "Dump Automation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                }
+
+            }
+        }
+
+        #endregion
+
+       #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
         private int padding_TOP = 5;
@@ -325,122 +448,6 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-        #region RECP DUMPING 
-        private void BTN_RECP_DUMP_OUT_Click(object sender, EventArgs e)
-        {
-            // get the recp file and ptrn file path 
-            string strCurrentRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, m_fm.RECP_FILE);
-            string strCurrentPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, m_fm.param_ptrn.PTRN_FILE);
-
-            bool bSuccess = true;
-
-            if (File.Exists(strCurrentRecp) == true)
-            {
-                if (File.Exists(strCurrentPtrn) == true)
-                {
-                    // if all pass for checking path validity
-                    // getnerate zip list
-                    List<string> list = new List<string>();
-                    list.Add( strCurrentPtrn);
-                    list.Add(strCurrentRecp);
-
-                    // do it!!!
-                    string strTimeCode = WrapperDateTime.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
-                    string strFileName = string.Format("{0}_RecpDump.zip", strTimeCode);
-                    string strDest = Path.Combine(WrapperFile.getPath_Desktop(), strFileName);
-
-                    bSuccess = nsWrapperZip.WrapperZip.CreateZipFiles(list, strDest);
-                }
-            }
-            MessageBox.Show(string.Format("Dump Recp Process Finished. {0}", bSuccess == true ? "SUCESS" : "FAILED"));
-        }
-
-        private void BTN_RECP_DUMP_IN_Click(object sender, EventArgs e)
-        {
-            string strFileNmae = WrapperFile.FileSelectDialog_Zip();
-
-            // cancel  & empty path exception
-            if (strFileNmae == "") return;
-
-            string strFolder = WrapperFile.GetFolderPath(strFileNmae);
-
-            List<string> list = nsWrapperZip.WrapperZip.GetFileList_Without_unzip(strFileNmae);
-
-            string strPathTemp = "c:\\Temp";
-
-            // dump file must have two types of  files : ptrn + recp
-            if (list.Count == 2)
-            {
-                string[] items = new string[2];
-
-                // i don't know which one is recp or ptrn 
-                items[0] = list.ElementAt(0).ToUpper();
-                items[1] = list.ElementAt(1).ToUpper();
-
-                string strPtrn = string.Empty;
-                string strRecp = string.Empty;
-
-                // check ? who is it.  A or B 
-                if (items[0].Contains("BMP") == true) { strPtrn = items[0]; } else if (items[1].Contains("BMP") == true) { strPtrn = items[1]; }
-                if (items[0].Contains("XML") == true) { strRecp = items[0]; } else if (items[1].Contains("XML") == true) { strRecp = items[1]; }
-
-                if (strPtrn != string.Empty && strRecp != string.Empty)
-                {
-                    string destPtrn = strPtrn;
-                    string destRecp = strRecp;
-
-                    // unzip ptrn file and recp file 
-                    nsWrapperZip.WrapperZip.ExtractDirect(strFileNmae, destPtrn, strPathTemp);
-                    nsWrapperZip.WrapperZip.ExtractDirect(strFileNmae, destRecp, strPathTemp);
-
-                    // path process 
-                    destPtrn = Path.Combine(strPathTemp, destPtrn).Replace("/","\\");
-                    destRecp = Path.Combine(strPathTemp, destRecp).Replace("/", "\\");
-
-                    // generate appropriate full path 
-                    string strAbsolutePtrn = WrapperFile.GetFileName(destPtrn);
-                    string strAbsoluteRecp = WrapperFile.GetFileName(destRecp);
-                    string strDestPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strAbsolutePtrn);
-                    string strDestRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, strAbsoluteRecp);
-
-                    // is there any duplicate?
-                    if (File.Exists(strDestPtrn) == true || File.Exists(strDestRecp) == true)
-                    {
-                        // do you want to overwrite??
-                        if (MessageBox.Show("File Existance Detected.\nDo You Want To Overwrite?", "File Duplication Warrning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            // delete first
-                            WrapperFile.DeleteFile(strAbsolutePtrn);
-                            WrapperFile.DeleteFile(strAbsoluteRecp);
-
-                            // and copy
-                            WrapperFile.FileCopy(destPtrn, strDestPtrn);
-                            WrapperFile.FileCopy(destRecp, strDestRecp);
-
-                            // recp change
-                            eventDele_ChangeRecp(strDestRecp, "");
-                        }
-                    }
-                    else // just do it.
-                    {
-                        // just copy 
-                        WrapperFile.FileCopy(destPtrn, strDestPtrn);
-                        WrapperFile.FileCopy(destRecp, strDestRecp);
-                        // and change
-                        eventDele_ChangeRecp(strDestRecp, "");
-                    }
-                    MessageBox.Show("Recp Changed", "Dump Automation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                }
-
-            }
-        }
-
-        #endregion
-
-
-
 
     }
 }

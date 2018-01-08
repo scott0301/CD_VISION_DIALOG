@@ -1,6 +1,0 @@
-D:\Develope\CD_Simulator\CD_Simulator\Library\ParameterSetting.dll
-D:\Develope\CD_Simulator\CD_Simulator\Library\ParameterSetting.pdb
-D:\Develope\CD_ParameterSetting\ParameterSetting\obj\Debug\ParameterSetting.ParameterSetting.resources
-D:\Develope\CD_ParameterSetting\ParameterSetting\obj\Debug\ParameterSetting.csproj.GenerateResource.Cache
-D:\Develope\CD_ParameterSetting\ParameterSetting\obj\Debug\ParameterSetting.dll
-D:\Develope\CD_ParameterSetting\ParameterSetting\obj\Debug\ParameterSetting.pdb

@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 
 using DEF_PARAMS;
+using CD_Measure;
 using CD_Figure;
 
-using WrapperUnion;
-using CodeKing.Native;
+ using CodeKing.Native;
 
 namespace CD_VISION_DIALOG
 {
@@ -394,6 +394,7 @@ namespace CD_VISION_DIALOG
             
         }
 
+    #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
 
@@ -448,6 +449,7 @@ namespace CD_VISION_DIALOG
         }
        
     }
+        #endregion
 
     public class CHelper_BaseRecp
     {

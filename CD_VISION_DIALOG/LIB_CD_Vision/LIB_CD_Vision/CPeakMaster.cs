@@ -461,6 +461,7 @@ namespace CD_Measure
 
             return nSign;
         }
+
         public static int[] HC_ARRAY_CONV_Double2Int(double[] fArray) // 170825
         {
             int[] nArray = fArray.Select(element => (int)element).ToArray();
@@ -715,7 +716,7 @@ namespace CD_Measure
             }
         }
         //171129 get min or max value index;
-        public static PointF GetPeaks_bySequence(double[] fArray, int nIndex, bool bMaxTarget, double delta = 1)
+        public static PointF GetPeaks_bySequence_HOR(double[] fArray, int nIndex, bool bMaxTarget, double delta = 1)
         {
             double mx = 0;
             double mn = 9999;
@@ -787,27 +788,250 @@ namespace CD_Measure
 
             return ptTarget;
         }
+        public static PointF GetPeaks_bySequence_VER(double[] fArray, int nIndex, bool bMaxTarget, double delta = 1)
+        {
+            double mx = 0;
+            double mn = 9999;
+            int mxpos = 0;
+            int mnpos = 0;
+            int lookformax = 1;
 
+            List<PointF> listMax = new List<PointF>();
+            List<PointF> listMin = new List<PointF>();
+
+            for (int i = 0; i < fArray.Length; i++)
+            {
+                double value = fArray[i];
+
+                if (value > mx)
+                {
+                    mx = value;
+                    mxpos = i;
+                }
+                if (value < mn)
+                {
+                    mn = value;
+                    mnpos = i;
+                }
+
+                if (lookformax == 1)
+                {
+                    if (value < mx - delta)
+                    {
+                        listMax.Add(new PointF(i,(float)value));
+                        mn = value;
+                        mnpos = i;
+                        lookformax = 0;
+                    }
+                }
+                else
+                {
+                    if (value > mn + delta)
+                    {
+                        listMin.Add(new PointF(i,(float)value));
+                        mx = value;
+                        mxpos = i;
+                        lookformax = 1;
+                    }
+                }
+            }
+            listMax.Sort((p1, p2) => (p1.Y.CompareTo(p2.Y))); //Sort by Y
+            listMax.Reverse();
+            listMin.Sort((p1, p2) => (p1.Y.CompareTo(p2.Y))); //Sort by Y
+
+
+            PointF ptTarget = new PointF();
+
+
+            if (bMaxTarget == true)
+            {
+                if (nIndex < listMax.Count)
+                {
+                    ptTarget = listMax.ElementAt(nIndex);
+                }
+            }
+            else
+            {
+                if (nIndex < listMin.Count)
+                {
+                    ptTarget = listMin.ElementAt(nIndex);
+                }
+            }
+
+            return ptTarget;
+        }
+
+        public List<PointF> GetPeakListSorted(int nTarget, bool bHorizontal)
+        {
+            double[] fArray = null;
+
+            List<PointF> listMax = new List<PointF>();
+
+            /***/if (bHorizontal == true) 
+            {
+                fArray = GetNormalizedProjection_HOR();
+                fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+                fArray = HC_HISTO_Normalization(fArray, m_imageH);
+
+                for (int i = 0; i < fArray.Length; i++)
+                {
+                    if (fArray[i] < 0)
+                    {
+                        fArray[i] *= -1;
+                    }
+                }
+                for (int i = 0; i < nTarget; i++)
+                {
+                    PointF pt = GetPeaks_bySequence_HOR(fArray, i, true, 0.5);
+                    listMax.Add(pt);
+                }
+            }
+            else if (bHorizontal == false)
+            {
+                fArray = GetNormalizedProjection_VER();
+                fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+                fArray = HC_HISTO_Normalization(fArray, m_imageW);
+
+                for (int i = 0; i < fArray.Length; i++)
+                {
+                    if (fArray[i] < 0)
+                    {
+                        fArray[i] *= -1;
+                    }
+                }
+                for (int i = 0; i < nTarget; i++)
+                {
+                    PointF pt = GetPeaks_bySequence_VER(fArray, i, true, 0.5);
+                    listMax.Add(pt);
+                }
+             
+            }
+
+            if (bHorizontal == true)
+            {
+                listMax.Sort((p1, p2) => (p1.Y.CompareTo(p2.Y))); //Sort by Y
+            }
+            else
+            {
+                listMax.Sort((p1, p2) => (p1.X.CompareTo(p2.X))); //Sort by X
+            }
+
+            return listMax;
+        }
+        public List<PointF> GetPeakListSorted(double[] fArray, int nTarget, bool bHorizontal )
+        {
+            List<PointF> listMax = new List<PointF>();
+
+            if (bHorizontal == true)
+            {
+                fArray = GetNormalizedProjection_HOR();
+                fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+                fArray = HC_HISTO_Normalization(fArray, m_imageH);
+
+                for (int i = 0; i < fArray.Length; i++)
+                {
+                    if (fArray[i] < 0)
+                    {
+                        fArray[i] *= -1;
+                    }
+                }
+                for (int i = 0; i < nTarget; i++)
+                {
+                    PointF pt = GetPeaks_bySequence_HOR(fArray, i, true, 0.5);
+                    listMax.Add(pt);
+                }
+            }
+            else if (bHorizontal == false)
+            {
+                fArray = GetNormalizedProjection_VER();
+                fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+                fArray = HC_HISTO_Normalization(fArray, m_imageW);
+
+                for (int i = 0; i < fArray.Length; i++)
+                {
+                    if (fArray[i] < 0)
+                    {
+                        fArray[i] *= -1;
+                    }
+                }
+                for (int i = 0; i < nTarget; i++)
+                {
+                    PointF pt = GetPeaks_bySequence_VER(fArray, i, true, 0.5);
+                    listMax.Add(pt);
+                }
+            }
+
+
+            if (bHorizontal == true)
+            {
+                listMax.Sort((p1, p2) => (p1.Y.CompareTo(p2.Y))); //Sort by Y
+            }
+            else
+            {
+                listMax.Sort((p1, p2) => (p1.X.CompareTo(p2.X))); //Sort by X
+            }
+ 
+           
+
+            return listMax;
+        }
+        public PointF GetPeakDesinated( int nTarget, bool bHorizontal, int nIndex)
+        {
+            double[] fArray = null;
+
+            fArray = GetNormalizedProjection_HOR();
+            fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+            fArray = HC_HISTO_Normalization(fArray, 255);
+
+            List<PointF> list = GetPeakListSorted(fArray, nTarget, bHorizontal);
+
+            PointF pt = new PointF();
+
+            if (list.Count >= nIndex)
+            {
+                pt = list.ElementAt(nIndex);
+            }
+            return pt;
+        }
+        public static PointF GetPeakDesinated(double[] fArray, int nTarget, bool bHorizontal, int nIndex)
+        {
+            fArray = HC_EDGE_Get1stDerivativeArrayFromLineBuff_FIXEDLENGTH(fArray);
+            fArray = HC_HISTO_Normalization(fArray, 255);
+
+            CPeakMaster pm = new CPeakMaster();
+
+            List<PointF> list = pm.GetPeakListSorted(fArray, nTarget, bHorizontal);
+
+            PointF pt = new PointF();
+
+            if (list.Count >= nIndex)
+            {
+                pt = list.ElementAt(nIndex);
+            }
+            return pt;
+        }
+        
+       
         // sliding window averaging approach 170825 
-        public static double[] HC_HISTO_MovingAverageFilter(double[] arr, int nWindow)
+        public static double[] HC_HISTO_MovingAverageFilter(double[] fArray, int nWindow)
         {
             // empty window size is now allowed
             if (nWindow == 0) nWindow = 3;
 
-            double[] arrCopy = new double[arr.Length];
+            double[] arrCopy = new double[fArray.Length];
             double[] arrWindow = new double[nWindow];
 
             // get the window gravity 
             int nHalf = nWindow / 2;
 
-            for (int index = nHalf; index < arr.Length - nHalf; index++)
+            for (int index = nHalf; index < fArray.Length - nHalf; index++)
             {
                 Array.Clear(arrWindow, 0, nWindow);
 
                 // get the window list
                 for (int i = index - nHalf, winPos = 0; i < index + nHalf; i++)
                 {
-                    arrWindow[winPos++] = arr[i];
+                    arrWindow[winPos++] = fArray[i];
                 }
                 // fill the average value 
                 arrCopy[index] = (int)arrWindow.Average();

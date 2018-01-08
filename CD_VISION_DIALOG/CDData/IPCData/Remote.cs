@@ -20,7 +20,7 @@ namespace Remote
 
         public const int MC_IMAGE_GRAB_REQ = 501;
         public const int CM_IMAGE_GRAB_REP = 502;
-        
+
         //MEASURE START - MESSAGE => "CYCLE,POINTS"
         public const int CM_MEASURE_START = 503;
         //MEASURE END - MESSAGE => ""
@@ -34,9 +34,17 @@ namespace Remote
         public const int MC_IMAGE_MATCHING_REP = 802;
         public const int CM_IMAGE_MEASURE_REQ = 901;
         public const int MC_IMAGE_MEASURE_REP = 902;
+        public const int MC_IMAGE_MEASURE_RESULT = 1000;
+
     }
-    
-    public class IpcBuffer : MarshalByRefObject
+
+    public class IpcBuffer1 : MarshalByRefObject
+    {
+        private static byte[] buffer = null;
+        public byte[] Buffer { get { return buffer; } set { buffer = value; } }
+    }
+
+    public class IpcBuffer2 : MarshalByRefObject
     {
         private static byte[] buffer = null;
         public byte[] Buffer { get { return buffer; } set { buffer = value; } }
@@ -54,6 +62,14 @@ namespace Remote
         public double H = 0;
     }
 
+    [Serializable]
+    public class AlignInfo
+    {
+        public double CX = 0.0;
+        public double CY = 0.0;
+        public double Rot = 0.0;
+        public double Hit = 0.0;
+    }
 
     [Serializable]
     public class PosInfo
@@ -109,24 +125,33 @@ namespace Remote
         public int Width; /* The width of the image. */
         public int Height; /* The height of the image. */
         public Byte[] Buffer; /* The raw image data. */
-        
+
         public ImageInfo(byte[] img, int w, int h)
         {
             Width = w;
             Height = h;
-            Buffer = new Byte[w*h];
-            
+            Buffer = new Byte[w * h];
+
             img.CopyTo(Buffer, 0);
         }
     }
-
+    [Serializable]
+    public class LAFInfo
+    {
+        public string Make0Name = "";
+        public LAFInfo(string name)
+        {
+            Make0Name = name;
+        }
+    }
     [Serializable]
     public class GrabInfo
     {
         public PosInfo POS = null;
         public IllInfo ILL = null;
         public CamInfo CAM = null;
-        public ImageInfo IMG = null;
+        public LAFInfo LAF = null;
+        public List<ImageInfo> IMGs = new List<ImageInfo>();
     }
 
 
@@ -149,11 +174,15 @@ namespace Remote
         public double CamRes = 0.0;
         public int IllNo = 0;
         public int IllValue = 0;
-        public long Exposure = 100; 
+        public long Exposure = 100;
         public int IsCentering = 0; // on-> 1,off -> 0
+
+        public int GrabCount = 1;   // count
+        public int GrabTime = 100;  //ms 
+
         public FocusInfo FI = null;
+        public LAFInfo LAF = null;
     }
-    
     [Serializable]
     public class MatcingInfo
     {
@@ -180,6 +209,17 @@ namespace Remote
         public PointF OVL = new PointF();
     }
 
+    [Serializable]
+    public class MeasureInfo
+    {
+        //No -> 1,2,3,4,5...., PosInfo에서 받은 그대로 .. 
+        public int Result = 0;
+        public int No = 0;
+        public string Macro = "";
+        public double Focus = 0.0;
+        public List<RES_DATA> list = new List<RES_DATA>();
+    }
+
     public class StaticResult
     {
         public int m_nCycleTarget { get; set; }
@@ -194,19 +234,19 @@ namespace Remote
             ClearMap();
         }
 
-        public void SetInit( int nDataCount)
+        public void SetInit(int nDataCount)
         {
             for (int nData = 0; nData < nDataCount; nData++)
             {
-                RES_DATA[,] singlemap = new RES_DATA[m_nPointTarget,m_nCycleTarget];
+                RES_DATA[,] singlemap = new RES_DATA[m_nPointTarget, m_nCycleTarget];
                 mapData.Add(singlemap);
             }
-         }
+        }
         public bool InsertData(int nPointCurrent, int dataindex, RES_DATA res, out string strResult)
         {
             strResult = string.Empty;
 
-          
+
 
             try
             {
@@ -215,7 +255,7 @@ namespace Remote
                 int nPoint = nPointCurrent - 1;
                 int nCycle = m_nCycleCurrent;
 
-                if( nPoint > this.m_nPointTarget || 
+                if (nPoint > this.m_nPointTarget ||
                     nCycle > this.m_nCycleTarget)
                 {
                     strResult = string.Format("SEQ-TWISTED. CYCLE{0:00}-POINT{1:00}", nPoint, nCycle);
@@ -226,11 +266,12 @@ namespace Remote
                     single[nPoint, nCycle] = res;
                 }
 
-               
-               
+
+
             }
             catch (System.Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
             return true;
@@ -246,18 +287,9 @@ namespace Remote
             {
                 mapData.Clear();
             }
-            
+
         }
 
     }
-    [Serializable]
-    public class MeasureInfo
-    {
-        //No -> 1,2,3,4,5...., PosInfo에서 받은 그대로 .. 
-        public int Result = 0;
-        public int No = 0;
-        public string Macro = "";
-        public double Focus = 0;
-        public List<RES_DATA> list = new List<RES_DATA>();
-    }
+
 }

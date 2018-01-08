@@ -22,9 +22,9 @@ namespace CD_Paramter
             InitializeComponent();
 
             listMeasurement = IFX_ALGORITHM.ToList();
-
         }
 
+        public void SetParam_RC_Mixed(PROPERTY_MixedRC single) { property.SelectedObject = single; }
         public void SetParam_RC_PAIR_DIG(PROPERTY_PairRct single){property.SelectedObject = single;}
         public void SetParam_Circle/***/(PROPERTY_PairCir single){property.SelectedObject = single;}
         public void SetParam_Overlay/**/(PROPERTY_PairOvl single) { property.SelectedObject = single; }
@@ -37,8 +37,6 @@ namespace CD_Paramter
             object objCurr = pg.SelectedObjects[0];
 
             property.SelectedObject = objCurr;
-          
-
         }
         public object GetCurrentData()
         {
@@ -53,7 +51,6 @@ namespace CD_Paramter
         public void SetSize(int width, int height)
         {
             this.Size = new Size(width, height);
-
         }
         
     }

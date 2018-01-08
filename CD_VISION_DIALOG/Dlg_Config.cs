@@ -97,6 +97,19 @@ namespace CD_VISION_DIALOG
             this.Hide();
         }
 
+        private void BTN_OPEN_PATH_i01_MAIN_Click(object sender, EventArgs e) { Process.Start(param_path.i01_PATH_MAIN); }
+        private void BTN_OPEN_PATH_i02_DATA_DUMP_Click(object sender, EventArgs e) { Process.Start(param_path.i02_PATH_DATA_DUMP); }
+        private void BTN_OPEN_PATH_i03_BASE_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i03_PATH_RECP_BASE); }
+        private void BTN_OPEN_PATH_i04_REAL_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i04_PATH_RECP_REAL); }
+        private void BTN_OPEN_PATH_i11_IMAGE_TAECHING_Click(object sender, EventArgs e) { Process.Start(param_path.i11_PATH_IMG_PTRN); }
+
+        private void BTN_OPEN_PATH_i10_IMAGE_ORG_Click(object sender, EventArgs e) { Process.Start(param_path.i10_PATH_IMG_ORG); }
+        private void BTN_OPEN_PATH_i15_HISTORY_MEASURE_Click(object sender, EventArgs e) { Process.Start(param_path.i15_PATH_HIST_MEASURE); }
+        private void BTN_OPEN_PATH_i16_HISTORY_PTRN_Click(object sender, EventArgs e) { Process.Start(param_path.i16_PATH_HIST_PTRN); }
+        private void BTN_OPEN_PATH_i20_INI_Click(object sender, EventArgs e) { Process.Start(param_path.i20_PATH_INI); }
+        private void BTN_OPEN_PATH_i21_LOG_Click(object sender, EventArgs e) { Process.Start(param_path.i21_PATH_LOG); }
+
+
         #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
@@ -155,23 +168,5 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-        private void BTN_OPEN_PATH_i01_MAIN_Click(object sender, EventArgs e) { Process.Start(param_path.i01_PATH_MAIN); }
-        private void BTN_OPEN_PATH_i02_DATA_DUMP_Click(object sender, EventArgs e) { Process.Start(param_path.i02_PATH_DATA_DUMP); }
-        private void BTN_OPEN_PATH_i03_BASE_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i03_PATH_RECP_BASE); }
-        private void BTN_OPEN_PATH_i04_REAL_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i04_PATH_RECP_REAL); }
-        private void BTN_OPEN_PATH_i11_IMAGE_TAECHING_Click(object sender, EventArgs e) { Process.Start(param_path.i11_PATH_IMG_PTRN); }
-
-        private void BTN_OPEN_PATH_i10_IMAGE_ORG_Click(object sender, EventArgs e) { Process.Start(param_path.i10_PATH_IMG_ORG); }
-        private void BTN_OPEN_PATH_i15_HISTORY_MEASURE_Click(object sender, EventArgs e) { Process.Start(param_path.i15_PATH_HIST_MEASURE); }
-        private void BTN_OPEN_PATH_i16_HISTORY_PTRN_Click(object sender, EventArgs e) { Process.Start(param_path.i16_PATH_HIST_PTRN); }
-        private void BTN_OPEN_PATH_i20_INI_Click(object sender, EventArgs e) { Process.Start(param_path.i20_PATH_INI); }
-        private void BTN_OPEN_PATH_i21_LOG_Click(object sender, EventArgs e) { Process.Start(param_path.i21_PATH_LOG); }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
     }
 }

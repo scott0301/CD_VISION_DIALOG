@@ -24,7 +24,7 @@ namespace CD_VISION_DIALOG
         public delegate void dele_ApplyParamPtrn(PARAM_PTRN param_ptrn);
         public event dele_ApplyParamPtrn eventDele_ApplyParamPtrn;
 
-        public Bitmap MAIN_IMAGE = new Bitmap(100,100);
+        public Bitmap MAIN_IMAGE = new Bitmap(100, 100);
         public Bitmap MAIN_TEACH = new Bitmap(100, 100);
 
         iPtrn m_pHandle = null;
@@ -589,7 +589,7 @@ namespace CD_VISION_DIALOG
 
         private void LV_PTRN_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            WrapperUnion.WrapperLV.SortData(LV_PTRN, e.Column);
+            WrapperLV.SortData(LV_PTRN, e.Column);
         }
 
          
@@ -699,6 +699,39 @@ namespace CD_VISION_DIALOG
             LV_HISTORY_PTRN_ERROR.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_PTRN_ERROR_SelectedIndexChanged);
 
             
+        }
+
+        private void BTN_RGN_INFO_PTRN_Click(object sender, EventArgs e)
+        {
+            RectangleF rcMatching = new RectangleF();
+
+            float px = 0; float py = 0; float pw = 0; float ph = 0;
+            float.TryParse(TXT_PTRN_TEACH_ROI_X.Text, out px);
+            float.TryParse(TXT_PTRN_TEACH_ROI_Y.Text, out py);
+            float.TryParse(TXT_PTRN_TEACH_ROI_W.Text, out pw);
+            float.TryParse(TXT_PTRN_TEACH_ROI_H.Text, out ph);
+
+            rcMatching = new RectangleF(px, py, pw, ph);
+
+            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcMatching));
+            uc_view_ptrn.Refresh();
+            
+            
+        }
+
+        private void BTN_RGN_INFO_SEARCH_Click(object sender, EventArgs e)
+        {
+            RectangleF rcSearching = new RectangleF();
+
+            float px = 0; float py = 0; float pw = 0; float ph = 0;
+            float.TryParse(TXT_LOCAL_SEARCH_RGN_X.Text, out px);
+            float.TryParse(TXT_LOCAL_SEARCH_RGN_Y.Text, out py);
+            float.TryParse(TXT_LOCAL_SEARCH_RGN_W.Text, out pw);
+            float.TryParse(TXT_LOCAL_SEARCH_RGN_H.Text, out ph);
+
+            rcSearching = new RectangleF(px, py, pw, ph);
+            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcSearching));
+            uc_view_ptrn.Refresh();
         }
 
          

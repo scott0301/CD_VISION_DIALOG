@@ -33,7 +33,9 @@
             this.label16 = new System.Windows.Forms.Label();
             this.TAB_TUNNING_TARGET = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TXT_CIR_COVERAGE = new System.Windows.Forms.TextBox();
             this.CHK_SHOW_SECTOR = new System.Windows.Forms.CheckBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.CHK_SAVE_CIR_SPC_ENHANCEMENT = new System.Windows.Forms.CheckBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.CB_CIR_SPC_ENHANCEMENT = new System.Windows.Forms.ComboBox();
@@ -121,6 +123,7 @@
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD = new System.Windows.Forms.TextBox();
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST = new System.Windows.Forms.TextBox();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.CB_RECT_SPC_ENHANCEMENT = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
@@ -159,9 +162,6 @@
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.BTN_RECOVER = new System.Windows.Forms.Button();
             this.BTN_PARAM_WRITE_ALL = new System.Windows.Forms.Button();
-            this.TXT_CIR_COVERAGE = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.TAB_TUNNING_TARGET.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox21.SuspendLayout();
@@ -250,6 +250,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "CIRCLE";
             // 
+            // TXT_CIR_COVERAGE
+            // 
+            this.TXT_CIR_COVERAGE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.TXT_CIR_COVERAGE.ForeColor = System.Drawing.Color.White;
+            this.TXT_CIR_COVERAGE.Location = new System.Drawing.Point(137, 519);
+            this.TXT_CIR_COVERAGE.Name = "TXT_CIR_COVERAGE";
+            this.TXT_CIR_COVERAGE.Size = new System.Drawing.Size(227, 22);
+            this.TXT_CIR_COVERAGE.TabIndex = 1;
+            // 
             // CHK_SHOW_SECTOR
             // 
             this.CHK_SHOW_SECTOR.AutoSize = true;
@@ -261,6 +270,16 @@
             this.CHK_SHOW_SECTOR.Text = "SHOW_SECTOR";
             this.CHK_SHOW_SECTOR.UseVisualStyleBackColor = true;
             this.CHK_SHOW_SECTOR.CheckedChanged += new System.EventHandler(this.CHK_SHOW_SECTOR_DRAWING_CheckedChanged);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(51, 524);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(80, 14);
+            this.label33.TabIndex = 2;
+            this.label33.Text = "COVERAGE";
             // 
             // CHK_SAVE_CIR_SPC_ENHANCEMENT
             // 
@@ -994,7 +1013,7 @@
             this.TXT_RECT_WINDOW_SIZE.Size = new System.Drawing.Size(43, 22);
             this.TXT_RECT_WINDOW_SIZE.TabIndex = 95;
             this.TXT_RECT_WINDOW_SIZE.Value = new decimal(new int[] {
-            2,
+            10,
             0,
             0,
             0});
@@ -1307,6 +1326,17 @@
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "SPC ENHANCEMENT";
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.label29.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label29.Location = new System.Drawing.Point(237, 23);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(64, 12);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "( 0, ... , 7 )";
+            // 
             // CB_RECT_SPC_ENHANCEMENT
             // 
             this.CB_RECT_SPC_ENHANCEMENT.FormattingEnabled = true;
@@ -1315,7 +1345,10 @@
             "1",
             "2",
             "3",
-            "4"});
+            "4",
+            "5",
+            "6",
+            "7"});
             this.CB_RECT_SPC_ENHANCEMENT.Location = new System.Drawing.Point(67, 19);
             this.CB_RECT_SPC_ENHANCEMENT.Name = "CB_RECT_SPC_ENHANCEMENT";
             this.CB_RECT_SPC_ENHANCEMENT.Size = new System.Drawing.Size(144, 22);
@@ -1741,36 +1774,6 @@
             this.BTN_PARAM_WRITE_ALL.TabIndex = 80;
             this.BTN_PARAM_WRITE_ALL.UseVisualStyleBackColor = true;
             this.BTN_PARAM_WRITE_ALL.Click += new System.EventHandler(this.BTN_PARAM_WRITE_ALL_Click);
-            // 
-            // TXT_CIR_COVERAGE
-            // 
-            this.TXT_CIR_COVERAGE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_CIR_COVERAGE.ForeColor = System.Drawing.Color.White;
-            this.TXT_CIR_COVERAGE.Location = new System.Drawing.Point(137, 519);
-            this.TXT_CIR_COVERAGE.Name = "TXT_CIR_COVERAGE";
-            this.TXT_CIR_COVERAGE.Size = new System.Drawing.Size(227, 22);
-            this.TXT_CIR_COVERAGE.TabIndex = 1;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(51, 524);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(80, 14);
-            this.label33.TabIndex = 2;
-            this.label33.Text = "COVERAGE";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.label29.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label29.Location = new System.Drawing.Point(237, 23);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(64, 12);
-            this.label29.TabIndex = 4;
-            this.label29.Text = "( 0, ... , 7 )";
             // 
             // Dlg_Tunning
             // 

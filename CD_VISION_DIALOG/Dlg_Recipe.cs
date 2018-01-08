@@ -63,6 +63,9 @@ namespace CD_VISION_DIALOG
             CHK_FOCUS_NONE.Checked = true;
             CHK_FOCUS_NONE.Checked = false;
 
+            TXT_MULTI_FRAME_SHOT_COUNT.Text = param_optic.MULTI_SHOT_COUNT.ToString("N0");
+            TXT_MULTI_FRAME_SHOT_DELAY.Text = param_optic.MULTI_SHOT_DELAY.ToString("N0");
+
             /***/if (baseRecp.PARAM_04_FOCUS_TYPE == 0) { CHK_FOCUS_NONE.Checked = true; }
             else if (baseRecp.PARAM_04_FOCUS_TYPE == 1) { CHK_FOCUS_ZAF.Checked = true; }
             else if (baseRecp.PARAM_04_FOCUS_TYPE == 2) { CHK_FOCUS_LAF.Checked = true; }
@@ -81,9 +84,6 @@ namespace CD_VISION_DIALOG
             else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 1) { RDO_ALGORITHM_CARDIN.Checked = true; }
             else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 2) { RDO_ALGORITHM_DIR_IN.Checked = true; }
             else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 3) { RDO_ALGORITHM_DIR_EX.Checked = true; }
-
-            TXT_DMG_TOLERANCE.Text = baseRecp.PARAM_08_DMG_TOLERANCE.ToString("F4");
-            TXT_EDGE_POSITION.Text = baseRecp.PARAM_09_EDGE_POSITION.ToString("F4");
 
             return true;
         }
@@ -121,7 +121,7 @@ namespace CD_VISION_DIALOG
                 int.TryParse(TXT_LIGHT_GAIN.Text, out nLightGain);
 
                 int nCamExp = 0;
-                int.TryParse(TXT_CAM_EXP.Text, out nCamExp);
+                int.TryParse(TXT_CAM_EXP.Text.Replace(",",""), out nCamExp);
 
                 fm.param_optics.EXPOSURE = nCamExp;
 
@@ -129,6 +129,22 @@ namespace CD_VISION_DIALOG
 
                 fm.baseRecp.PARAM_04_FOCUS_TYPE = _GetFocusStatus();
 
+                int nMultiShotCount = 0;
+                int.TryParse(TXT_MULTI_FRAME_SHOT_COUNT.Text.Replace(",",""), out nMultiShotCount);
+                fm.param_optics.MULTI_SHOT_COUNT = nMultiShotCount;
+
+                int nMultiShotDelay = 0;
+                int.TryParse(TXT_MULTI_FRAME_SHOT_DELAY.Text.Replace(",",""), out nMultiShotDelay);
+                fm.param_optics.MULTI_SHOT_DELAY = nMultiShotDelay;
+
+                if (RDO_MULTI_FRAME_VALUE_AVG.Checked == true)
+                {
+                    fm.param_optics.MULTI_SHOT_VALUE_AVG = true;
+                }
+                else if ( RDO_MULTI_FRAME_MEDIAN.Checked == true)
+                {
+                    fm.param_optics.MULTI_SHOT_VALUE_AVG = false;
+                }
 
                 double fCompenA = -1; double fCompenB = -1;
                 double.TryParse(TXT_COMPEN_A.Text, out fCompenA);
@@ -140,14 +156,6 @@ namespace CD_VISION_DIALOG
                 fm.baseRecp.PARAM_06_COMPEN_A = fCompenA;
                 fm.baseRecp.PARAM_06_COMPEN_B = fCompenB;
 
-                double fDmgTol = -1;
-                double fEdgePos = -1;
-
-                double.TryParse(TXT_DMG_TOLERANCE.Text, out fDmgTol);
-                double.TryParse(TXT_EDGE_POSITION.Text, out fEdgePos);
-
-                fm.baseRecp.PARAM_08_DMG_TOLERANCE = fDmgTol;
-                fm.baseRecp.PARAM_09_EDGE_POSITION = fEdgePos;
             }
             this.Hide();
         }

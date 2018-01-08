@@ -48,7 +48,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label51 = new System.Windows.Forms.Label();
             this.CHK_PTRN_SEARCH_GLOBAL = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.TXT_PTRN_TEACH_ROI_W = new System.Windows.Forms.TextBox();
             this.label52 = new System.Windows.Forms.Label();
             this.TXT_PTRN_TEACH_ROI_H = new System.Windows.Forms.TextBox();
@@ -61,7 +60,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BTN_PTRN_GET_LOCAL_SEARCHING_RGN = new System.Windows.Forms.Button();
             this.BTN_PTRN_SET_LOCAL_SEARCHING_RGN = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.TXT_LOCAL_SEARCH_RGN_X = new System.Windows.Forms.TextBox();
             this.TXT_LOCAL_SEARCH_RGN_H = new System.Windows.Forms.TextBox();
             this.TXT_LOCAL_SEARCH_RGN_Y = new System.Windows.Forms.TextBox();
@@ -88,6 +86,8 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BTN_RGN_INFO_PTRN = new System.Windows.Forms.Button();
+            this.BTN_RGN_INFO_SEARCH = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_PTRN_NORMAL)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -289,9 +289,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.BTN_RGN_INFO_PTRN);
             this.groupBox3.Controls.Add(this.label51);
             this.groupBox3.Controls.Add(this.CHK_PTRN_SEARCH_GLOBAL);
-            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.TXT_PTRN_TEACH_ROI_W);
             this.groupBox3.Controls.Add(this.label52);
             this.groupBox3.Controls.Add(this.TXT_PTRN_TEACH_ROI_H);
@@ -327,16 +327,6 @@
             this.CHK_PTRN_SEARCH_GLOBAL.Text = "Apply Global Searching";
             this.CHK_PTRN_SEARCH_GLOBAL.UseVisualStyleBackColor = true;
             this.CHK_PTRN_SEARCH_GLOBAL.CheckedChanged += new System.EventHandler(this.CHK_PTRN_SEARCH_GLOBAL_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 16);
-            this.label1.TabIndex = 36;
-            this.label1.Text = "TEACH INFO :";
             // 
             // TXT_PTRN_TEACH_ROI_W
             // 
@@ -411,12 +401,12 @@
             // 
             // GB_PTRN_SEARCH_RGN
             // 
+            this.GB_PTRN_SEARCH_RGN.Controls.Add(this.BTN_RGN_INFO_SEARCH);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.label9);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.label8);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.label11);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.BTN_PTRN_GET_LOCAL_SEARCHING_RGN);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.BTN_PTRN_SET_LOCAL_SEARCHING_RGN);
-            this.GB_PTRN_SEARCH_RGN.Controls.Add(this.label3);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.TXT_LOCAL_SEARCH_RGN_X);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.TXT_LOCAL_SEARCH_RGN_H);
             this.GB_PTRN_SEARCH_RGN.Controls.Add(this.TXT_LOCAL_SEARCH_RGN_Y);
@@ -483,16 +473,6 @@
             this.BTN_PTRN_SET_LOCAL_SEARCHING_RGN.TabIndex = 39;
             this.BTN_PTRN_SET_LOCAL_SEARCHING_RGN.UseVisualStyleBackColor = true;
             this.BTN_PTRN_SET_LOCAL_SEARCHING_RGN.Click += new System.EventHandler(this.BTN_SET_SEARCHING_RGN_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 106);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 16);
-            this.label3.TabIndex = 36;
-            this.label3.Text = "RGN INFO :";
             // 
             // TXT_LOCAL_SEARCH_RGN_X
             // 
@@ -790,6 +770,28 @@
             this.columnHeader4.Text = "DATA";
             this.columnHeader4.Width = 225;
             // 
+            // BTN_RGN_INFO_PTRN
+            // 
+            this.BTN_RGN_INFO_PTRN.ForeColor = System.Drawing.Color.Black;
+            this.BTN_RGN_INFO_PTRN.Location = new System.Drawing.Point(8, 23);
+            this.BTN_RGN_INFO_PTRN.Name = "BTN_RGN_INFO_PTRN";
+            this.BTN_RGN_INFO_PTRN.Size = new System.Drawing.Size(113, 23);
+            this.BTN_RGN_INFO_PTRN.TabIndex = 39;
+            this.BTN_RGN_INFO_PTRN.Text = "RGN INFO";
+            this.BTN_RGN_INFO_PTRN.UseVisualStyleBackColor = true;
+            this.BTN_RGN_INFO_PTRN.Click += new System.EventHandler(this.BTN_RGN_INFO_PTRN_Click);
+            // 
+            // BTN_RGN_INFO_SEARCH
+            // 
+            this.BTN_RGN_INFO_SEARCH.ForeColor = System.Drawing.Color.Black;
+            this.BTN_RGN_INFO_SEARCH.Location = new System.Drawing.Point(8, 102);
+            this.BTN_RGN_INFO_SEARCH.Name = "BTN_RGN_INFO_SEARCH";
+            this.BTN_RGN_INFO_SEARCH.Size = new System.Drawing.Size(113, 23);
+            this.BTN_RGN_INFO_SEARCH.TabIndex = 39;
+            this.BTN_RGN_INFO_SEARCH.Text = "RGN INFO";
+            this.BTN_RGN_INFO_SEARCH.UseVisualStyleBackColor = true;
+            this.BTN_RGN_INFO_SEARCH.Click += new System.EventHandler(this.BTN_RGN_INFO_SEARCH_Click);
+            // 
             // DLG_Ptrn
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -841,7 +843,6 @@
         private System.Windows.Forms.RichTextBox RICH_MESSAGE;
         private System.Windows.Forms.Button BTN_PTRN_DRAW;
         private System.Windows.Forms.Button BTN_PTRN_TEACH_NEW;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox CHK_PTRN_SEARCH_GLOBAL;
         private System.Windows.Forms.TextBox TXT_PTRN_TEACH_ROI_H;
@@ -850,7 +851,6 @@
         private System.Windows.Forms.TextBox TXT_PTRN_TEACH_ROI_X;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox GB_PTRN_SEARCH_RGN;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TXT_LOCAL_SEARCH_RGN_X;
         private System.Windows.Forms.TextBox TXT_LOCAL_SEARCH_RGN_H;
         private System.Windows.Forms.TextBox TXT_LOCAL_SEARCH_RGN_Y;
@@ -882,5 +882,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button BTN_RGN_INFO_PTRN;
+        private System.Windows.Forms.Button BTN_RGN_INFO_SEARCH;
     }
 }

@@ -35,8 +35,6 @@ namespace CD_Paramter
 
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            
-
             return new StandardValuesCollection(this.list);
         }
     }
@@ -60,8 +58,6 @@ namespace CD_Paramter
 
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-
-
             return new StandardValuesCollection(this.list);
         }
     }
