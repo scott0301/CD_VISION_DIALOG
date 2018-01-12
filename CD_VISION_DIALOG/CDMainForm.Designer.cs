@@ -236,6 +236,7 @@
             this.BTN_REMOVE_MIXED_RC = new System.Windows.Forms.Button();
             this.BTN_SET_MIXED_RC = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.CHK_MIXED_RC_USE_CENTROID = new System.Windows.Forms.CheckBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.RDO_MIXED_RC_METRIC_VER = new System.Windows.Forms.RadioButton();
             this.RDO_MIXED_RC_METRIC_HOR = new System.Windows.Forms.RadioButton();
@@ -268,6 +269,38 @@
             this.BTN_MIXED_RC_MODIFY = new System.Windows.Forms.Button();
             this.BTN_MIXED_RC_REMOVE = new System.Windows.Forms.Button();
             this.draw_mix_cc = new System.Windows.Forms.TabPage();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.RDO_MIXED_CC_METRIC_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_METRIC_HOR = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_METRIC_P2P = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_CC_FST_POS_Y = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_CC_SCD_DIR_BTM = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_SCD_DIR_RHT = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_SCD_DIR_TOP = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_SCD_DIR_LFT = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_CC_SCD_SZ_W = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_CC_FST_DIR_TOP = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_FST_DIR_BTM = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_FST_DIR_LFT = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_FST_DIR_RHT = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_CC_FST_SZ_W = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_CC_SCD_POS_Y = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_CC_SCD_POS_X = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_CC_FST_SZ_H = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_CC_FST_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_INDEX_OF_MIXED_CC = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_CC_NICK = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_CC_SCD_SZ_H = new System.Windows.Forms.TextBox();
+            this.RDO_MIXED_CC_SCD = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_CC_FST = new System.Windows.Forms.RadioButton();
+            this.label37 = new System.Windows.Forms.Label();
             this.BTN_MIXED_CC_COPY = new System.Windows.Forms.Button();
             this.BTN_MIXED_CC_ADD = new System.Windows.Forms.Button();
             this.BTN_MIXED_CC_MODIFY = new System.Windows.Forms.Button();
@@ -277,6 +310,37 @@
             this.BTN_REMOVE_MIXED_CC = new System.Windows.Forms.Button();
             this.BTN_SET_MIXED_CC = new System.Windows.Forms.Button();
             this.draw_mixc_rcc = new System.Windows.Forms.TabPage();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.label76 = new System.Windows.Forms.Label();
+            this.CHK_MIXED_RCC_USE_CENTROID = new System.Windows.Forms.CheckBox();
+            this.TXT_MIXED_RCC_FST_POS_Y = new System.Windows.Forms.TextBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_RCC_FST_DIR_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_FST_DIR_HOR = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_RCC_SCD_SZ_W = new System.Windows.Forms.TextBox();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.RDO_MIXED_RCC_METRIC_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_METRIC_HOR = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_METRIC_P2P = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_RCC_FST_SZ_W = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.RDO_MIXED_RCC_SCD_DIR_BTM = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_SCD_DIR_RHT = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_SCD_DIR_TOP = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_SCD_DIR_LFT = new System.Windows.Forms.RadioButton();
+            this.TXT_MIXED_RCC_SCD_POS_Y = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_RCC_SCD_POS_X = new System.Windows.Forms.TextBox();
+            this.label74 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_RCC_FST_SZ_H = new System.Windows.Forms.TextBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.TXT_MIXED_RCC_FST_POS_X = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RCC_NICK = new System.Windows.Forms.TextBox();
+            this.TXT_INDEX_OF_MIXED_RCC = new System.Windows.Forms.TextBox();
+            this.TXT_MIXED_RCC_SCD_SZ_H = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.RDO_MIXED_RCC_FST = new System.Windows.Forms.RadioButton();
+            this.RDO_MIXED_RCC_SCD = new System.Windows.Forms.RadioButton();
             this.BTN_MIXED_RCC_COPY = new System.Windows.Forms.Button();
             this.BTN_MIXED_RCC_ADD = new System.Windows.Forms.Button();
             this.BTN_MIXED_RCC_MODIFY = new System.Windows.Forms.Button();
@@ -286,6 +350,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.PNL_MAIN = new System.Windows.Forms.Panel();
+            this.PROG_THREAD_POOL = new System.Windows.Forms.ProgressBar();
             this.CHK_USE_SAVE_PTRN_ERR = new System.Windows.Forms.CheckBox();
             this.CHK_USE_SAVE_INPUT = new System.Windows.Forms.CheckBox();
             this.PIC_FOCUS = new System.Windows.Forms.PictureBox();
@@ -294,7 +359,6 @@
             this.BTN_RECP_SAVE_AS = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.LB_MAIN_FOCUS_PARAM = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BTN_PTRN_MATCH = new System.Windows.Forms.Button();
             this.BTN_PTRN_RESULT = new System.Windows.Forms.Button();
@@ -319,6 +383,7 @@
             this.LB_TIME_PREDICTION = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_LIFE_TIME = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).BeginInit();
@@ -352,8 +417,16 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.draw_mix_cc.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.groupBox17.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.draw_mixc_rcc.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.PNL_MAIN.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_FOCUS)).BeginInit();
@@ -457,9 +530,9 @@
             this.LV_RECP.ForeColor = System.Drawing.Color.Black;
             this.LV_RECP.FullRowSelect = true;
             this.LV_RECP.GridLines = true;
-            this.LV_RECP.Location = new System.Drawing.Point(208, 157);
+            this.LV_RECP.Location = new System.Drawing.Point(11, 157);
             this.LV_RECP.Name = "LV_RECP";
-            this.LV_RECP.Size = new System.Drawing.Size(380, 170);
+            this.LV_RECP.Size = new System.Drawing.Size(577, 196);
             this.LV_RECP.TabIndex = 27;
             this.LV_RECP.UseCompatibleStateImageBehavior = false;
             this.LV_RECP.View = System.Windows.Forms.View.Details;
@@ -470,12 +543,12 @@
             // IDX
             // 
             this.IDX.Text = "IDX";
-            this.IDX.Width = 40;
+            this.IDX.Width = 55;
             // 
             // FIELS
             // 
             this.FIELS.Text = "FILES";
-            this.FIELS.Width = 325;
+            this.FIELS.Width = 503;
             // 
             // label52
             // 
@@ -854,7 +927,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 299;
+            this.UC_LOG_VIEWER.m_workIndexer = 62;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1316,7 +1389,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label25.Location = new System.Drawing.Point(450, 262);
+            this.label25.Location = new System.Drawing.Point(442, 275);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(151, 14);
             this.label25.TabIndex = 0;
@@ -1342,7 +1415,7 @@
             this.UC_Parameter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.UC_Parameter.Location = new System.Drawing.Point(239, 17);
             this.UC_Parameter.Name = "UC_Parameter";
-            this.UC_Parameter.Size = new System.Drawing.Size(363, 328);
+            this.UC_Parameter.Size = new System.Drawing.Size(363, 344);
             this.UC_Parameter.TabIndex = 1;
             // 
             // BTN_FIGURE_DELETE
@@ -1794,8 +1867,9 @@
             // 
             // TXT_PARAM_DIG_NICK
             // 
-            this.TXT_PARAM_DIG_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_DIG_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TXT_PARAM_DIG_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_DIG_NICK.Enabled = false;
             this.TXT_PARAM_DIG_NICK.ForeColor = System.Drawing.Color.Black;
             this.TXT_PARAM_DIG_NICK.Location = new System.Drawing.Point(207, 18);
             this.TXT_PARAM_DIG_NICK.Name = "TXT_PARAM_DIG_NICK";
@@ -2095,8 +2169,9 @@
             // 
             // TXT_PARAM_CIR_NICK
             // 
-            this.TXT_PARAM_CIR_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_CIR_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TXT_PARAM_CIR_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_CIR_NICK.Enabled = false;
             this.TXT_PARAM_CIR_NICK.ForeColor = System.Drawing.Color.Black;
             this.TXT_PARAM_CIR_NICK.Location = new System.Drawing.Point(177, 20);
             this.TXT_PARAM_CIR_NICK.Name = "TXT_PARAM_CIR_NICK";
@@ -2401,12 +2476,13 @@
             // 
             // TXT_PARAM_OVL_NICK
             // 
-            this.TXT_PARAM_OVL_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_PARAM_OVL_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TXT_PARAM_OVL_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_PARAM_OVL_NICK.Enabled = false;
             this.TXT_PARAM_OVL_NICK.ForeColor = System.Drawing.Color.Black;
             this.TXT_PARAM_OVL_NICK.Location = new System.Drawing.Point(180, 20);
             this.TXT_PARAM_OVL_NICK.Name = "TXT_PARAM_OVL_NICK";
-            this.TXT_PARAM_OVL_NICK.Size = new System.Drawing.Size(50, 19);
+            this.TXT_PARAM_OVL_NICK.Size = new System.Drawing.Size(72, 19);
             this.TXT_PARAM_OVL_NICK.TabIndex = 7;
             this.TXT_PARAM_OVL_NICK.Text = "OVL";
             this.TXT_PARAM_OVL_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -2586,6 +2662,7 @@
             this.button2.TabIndex = 47;
             this.button2.Text = "MODIFY";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BTN_OL_ADD
             // 
@@ -2841,10 +2918,11 @@
             this.BTN_SET_MIXED_RC.TabIndex = 1;
             this.BTN_SET_MIXED_RC.Text = "SET REGION TYPE";
             this.BTN_SET_MIXED_RC.UseVisualStyleBackColor = true;
-            this.BTN_SET_MIXED_RC.Click += new System.EventHandler(this.BTN_SET_FIGURES_Click);
+            this.BTN_SET_MIXED_RC.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
             // groupBox12
             // 
+            this.groupBox12.Controls.Add(this.CHK_MIXED_RC_USE_CENTROID);
             this.groupBox12.Controls.Add(this.groupBox14);
             this.groupBox12.Controls.Add(this.panel5);
             this.groupBox12.Controls.Add(this.panel4);
@@ -2867,10 +2945,22 @@
             this.groupBox12.Controls.Add(this.TXT_MIXED_RC_FST_POS_Y);
             this.groupBox12.Location = new System.Drawing.Point(3, 1);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(589, 117);
+            this.groupBox12.Size = new System.Drawing.Size(589, 130);
             this.groupBox12.TabIndex = 57;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "REGION INFO";
+            // 
+            // CHK_MIXED_RC_USE_CENTROID
+            // 
+            this.CHK_MIXED_RC_USE_CENTROID.AutoSize = true;
+            this.CHK_MIXED_RC_USE_CENTROID.Checked = true;
+            this.CHK_MIXED_RC_USE_CENTROID.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_MIXED_RC_USE_CENTROID.Location = new System.Drawing.Point(10, 107);
+            this.CHK_MIXED_RC_USE_CENTROID.Name = "CHK_MIXED_RC_USE_CENTROID";
+            this.CHK_MIXED_RC_USE_CENTROID.Size = new System.Drawing.Size(113, 16);
+            this.CHK_MIXED_RC_USE_CENTROID.TabIndex = 44;
+            this.CHK_MIXED_RC_USE_CENTROID.Text = "USE_CENTROID";
+            this.CHK_MIXED_RC_USE_CENTROID.UseVisualStyleBackColor = true;
             // 
             // groupBox14
             // 
@@ -3074,14 +3164,15 @@
             // 
             // TXT_MIXED_RC_NICK
             // 
-            this.TXT_MIXED_RC_NICK.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RC_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TXT_MIXED_RC_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RC_NICK.Enabled = false;
             this.TXT_MIXED_RC_NICK.ForeColor = System.Drawing.Color.Black;
             this.TXT_MIXED_RC_NICK.Location = new System.Drawing.Point(177, 24);
             this.TXT_MIXED_RC_NICK.Name = "TXT_MIXED_RC_NICK";
             this.TXT_MIXED_RC_NICK.Size = new System.Drawing.Size(83, 19);
             this.TXT_MIXED_RC_NICK.TabIndex = 33;
-            this.TXT_MIXED_RC_NICK.Text = "MIX_RC";
+            this.TXT_MIXED_RC_NICK.Text = "MRC";
             this.TXT_MIXED_RC_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TXT_MIXED_RC_FST_POS_X
@@ -3230,6 +3321,8 @@
             // draw_mix_cc
             // 
             this.draw_mix_cc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_mix_cc.Controls.Add(this.groupBox19);
+            this.draw_mix_cc.Controls.Add(this.label37);
             this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_COPY);
             this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_ADD);
             this.draw_mix_cc.Controls.Add(this.BTN_MIXED_CC_MODIFY);
@@ -3240,6 +3333,375 @@
             this.draw_mix_cc.Size = new System.Drawing.Size(594, 234);
             this.draw_mix_cc.TabIndex = 7;
             this.draw_mix_cc.Text = "MIX_CC";
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.label40);
+            this.groupBox19.Controls.Add(this.groupBox17);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_FST_POS_Y);
+            this.groupBox19.Controls.Add(this.panel6);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_SCD_SZ_W);
+            this.groupBox19.Controls.Add(this.panel7);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_FST_SZ_W);
+            this.groupBox19.Controls.Add(this.label36);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_SCD_POS_Y);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_SCD_POS_X);
+            this.groupBox19.Controls.Add(this.label39);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_FST_SZ_H);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_FST_POS_X);
+            this.groupBox19.Controls.Add(this.TXT_INDEX_OF_MIXED_CC);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_NICK);
+            this.groupBox19.Controls.Add(this.label64);
+            this.groupBox19.Controls.Add(this.TXT_MIXED_CC_SCD_SZ_H);
+            this.groupBox19.Controls.Add(this.RDO_MIXED_CC_SCD);
+            this.groupBox19.Controls.Add(this.RDO_MIXED_CC_FST);
+            this.groupBox19.Location = new System.Drawing.Point(2, 3);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(589, 130);
+            this.groupBox19.TabIndex = 84;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "REGION INFO";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(12, 26);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(50, 12);
+            this.label40.TabIndex = 79;
+            this.label40.Text = "INDEX :";
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.RDO_MIXED_CC_METRIC_VER);
+            this.groupBox17.Controls.Add(this.RDO_MIXED_CC_METRIC_HOR);
+            this.groupBox17.Controls.Add(this.RDO_MIXED_CC_METRIC_P2P);
+            this.groupBox17.Location = new System.Drawing.Point(513, 12);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(66, 100);
+            this.groupBox17.TabIndex = 83;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "METRIC";
+            // 
+            // RDO_MIXED_CC_METRIC_VER
+            // 
+            this.RDO_MIXED_CC_METRIC_VER.AutoSize = true;
+            this.RDO_MIXED_CC_METRIC_VER.Location = new System.Drawing.Point(10, 66);
+            this.RDO_MIXED_CC_METRIC_VER.Name = "RDO_MIXED_CC_METRIC_VER";
+            this.RDO_MIXED_CC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_CC_METRIC_VER.TabIndex = 34;
+            this.RDO_MIXED_CC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_CC_METRIC_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_METRIC_HOR
+            // 
+            this.RDO_MIXED_CC_METRIC_HOR.AutoSize = true;
+            this.RDO_MIXED_CC_METRIC_HOR.Location = new System.Drawing.Point(10, 41);
+            this.RDO_MIXED_CC_METRIC_HOR.Name = "RDO_MIXED_CC_METRIC_HOR";
+            this.RDO_MIXED_CC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_CC_METRIC_HOR.TabIndex = 34;
+            this.RDO_MIXED_CC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_CC_METRIC_HOR.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_METRIC_P2P
+            // 
+            this.RDO_MIXED_CC_METRIC_P2P.AutoSize = true;
+            this.RDO_MIXED_CC_METRIC_P2P.Checked = true;
+            this.RDO_MIXED_CC_METRIC_P2P.Location = new System.Drawing.Point(10, 19);
+            this.RDO_MIXED_CC_METRIC_P2P.Name = "RDO_MIXED_CC_METRIC_P2P";
+            this.RDO_MIXED_CC_METRIC_P2P.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_CC_METRIC_P2P.TabIndex = 34;
+            this.RDO_MIXED_CC_METRIC_P2P.TabStop = true;
+            this.RDO_MIXED_CC_METRIC_P2P.Text = "P2P";
+            this.RDO_MIXED_CC_METRIC_P2P.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_CC_FST_POS_Y
+            // 
+            this.TXT_MIXED_CC_FST_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_FST_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_FST_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_FST_POS_Y.Location = new System.Drawing.Point(158, 49);
+            this.TXT_MIXED_CC_FST_POS_Y.Name = "TXT_MIXED_CC_FST_POS_Y";
+            this.TXT_MIXED_CC_FST_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_FST_POS_Y.TabIndex = 67;
+            this.TXT_MIXED_CC_FST_POS_Y.Text = "0";
+            this.TXT_MIXED_CC_FST_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.RDO_MIXED_CC_SCD_DIR_BTM);
+            this.panel6.Controls.Add(this.RDO_MIXED_CC_SCD_DIR_RHT);
+            this.panel6.Controls.Add(this.RDO_MIXED_CC_SCD_DIR_TOP);
+            this.panel6.Controls.Add(this.RDO_MIXED_CC_SCD_DIR_LFT);
+            this.panel6.Location = new System.Drawing.Point(345, 72);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(161, 24);
+            this.panel6.TabIndex = 82;
+            // 
+            // RDO_MIXED_CC_SCD_DIR_BTM
+            // 
+            this.RDO_MIXED_CC_SCD_DIR_BTM.AutoSize = true;
+            this.RDO_MIXED_CC_SCD_DIR_BTM.Location = new System.Drawing.Point(123, 5);
+            this.RDO_MIXED_CC_SCD_DIR_BTM.Name = "RDO_MIXED_CC_SCD_DIR_BTM";
+            this.RDO_MIXED_CC_SCD_DIR_BTM.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_CC_SCD_DIR_BTM.TabIndex = 35;
+            this.RDO_MIXED_CC_SCD_DIR_BTM.Text = "B";
+            this.RDO_MIXED_CC_SCD_DIR_BTM.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_SCD_DIR_RHT
+            // 
+            this.RDO_MIXED_CC_SCD_DIR_RHT.AutoSize = true;
+            this.RDO_MIXED_CC_SCD_DIR_RHT.Location = new System.Drawing.Point(86, 4);
+            this.RDO_MIXED_CC_SCD_DIR_RHT.Name = "RDO_MIXED_CC_SCD_DIR_RHT";
+            this.RDO_MIXED_CC_SCD_DIR_RHT.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_CC_SCD_DIR_RHT.TabIndex = 36;
+            this.RDO_MIXED_CC_SCD_DIR_RHT.Text = "R";
+            this.RDO_MIXED_CC_SCD_DIR_RHT.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_SCD_DIR_TOP
+            // 
+            this.RDO_MIXED_CC_SCD_DIR_TOP.AutoSize = true;
+            this.RDO_MIXED_CC_SCD_DIR_TOP.Location = new System.Drawing.Point(47, 5);
+            this.RDO_MIXED_CC_SCD_DIR_TOP.Name = "RDO_MIXED_CC_SCD_DIR_TOP";
+            this.RDO_MIXED_CC_SCD_DIR_TOP.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_CC_SCD_DIR_TOP.TabIndex = 37;
+            this.RDO_MIXED_CC_SCD_DIR_TOP.Text = "T";
+            this.RDO_MIXED_CC_SCD_DIR_TOP.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_SCD_DIR_LFT
+            // 
+            this.RDO_MIXED_CC_SCD_DIR_LFT.AutoSize = true;
+            this.RDO_MIXED_CC_SCD_DIR_LFT.Checked = true;
+            this.RDO_MIXED_CC_SCD_DIR_LFT.Location = new System.Drawing.Point(4, 5);
+            this.RDO_MIXED_CC_SCD_DIR_LFT.Name = "RDO_MIXED_CC_SCD_DIR_LFT";
+            this.RDO_MIXED_CC_SCD_DIR_LFT.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_CC_SCD_DIR_LFT.TabIndex = 38;
+            this.RDO_MIXED_CC_SCD_DIR_LFT.TabStop = true;
+            this.RDO_MIXED_CC_SCD_DIR_LFT.Text = "L";
+            this.RDO_MIXED_CC_SCD_DIR_LFT.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_CC_SCD_SZ_W
+            // 
+            this.TXT_MIXED_CC_SCD_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_SCD_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_SCD_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_SCD_SZ_W.Location = new System.Drawing.Point(219, 74);
+            this.TXT_MIXED_CC_SCD_SZ_W.Name = "TXT_MIXED_CC_SCD_SZ_W";
+            this.TXT_MIXED_CC_SCD_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_SCD_SZ_W.TabIndex = 73;
+            this.TXT_MIXED_CC_SCD_SZ_W.Text = "0";
+            this.TXT_MIXED_CC_SCD_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.RDO_MIXED_CC_FST_DIR_TOP);
+            this.panel7.Controls.Add(this.RDO_MIXED_CC_FST_DIR_BTM);
+            this.panel7.Controls.Add(this.RDO_MIXED_CC_FST_DIR_LFT);
+            this.panel7.Controls.Add(this.RDO_MIXED_CC_FST_DIR_RHT);
+            this.panel7.Location = new System.Drawing.Point(345, 46);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(161, 24);
+            this.panel7.TabIndex = 81;
+            // 
+            // RDO_MIXED_CC_FST_DIR_TOP
+            // 
+            this.RDO_MIXED_CC_FST_DIR_TOP.AutoSize = true;
+            this.RDO_MIXED_CC_FST_DIR_TOP.Location = new System.Drawing.Point(47, 3);
+            this.RDO_MIXED_CC_FST_DIR_TOP.Name = "RDO_MIXED_CC_FST_DIR_TOP";
+            this.RDO_MIXED_CC_FST_DIR_TOP.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_CC_FST_DIR_TOP.TabIndex = 34;
+            this.RDO_MIXED_CC_FST_DIR_TOP.Text = "T";
+            this.RDO_MIXED_CC_FST_DIR_TOP.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_FST_DIR_BTM
+            // 
+            this.RDO_MIXED_CC_FST_DIR_BTM.AutoSize = true;
+            this.RDO_MIXED_CC_FST_DIR_BTM.Location = new System.Drawing.Point(123, 5);
+            this.RDO_MIXED_CC_FST_DIR_BTM.Name = "RDO_MIXED_CC_FST_DIR_BTM";
+            this.RDO_MIXED_CC_FST_DIR_BTM.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_CC_FST_DIR_BTM.TabIndex = 34;
+            this.RDO_MIXED_CC_FST_DIR_BTM.Text = "B";
+            this.RDO_MIXED_CC_FST_DIR_BTM.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_FST_DIR_LFT
+            // 
+            this.RDO_MIXED_CC_FST_DIR_LFT.AutoSize = true;
+            this.RDO_MIXED_CC_FST_DIR_LFT.Checked = true;
+            this.RDO_MIXED_CC_FST_DIR_LFT.Location = new System.Drawing.Point(4, 3);
+            this.RDO_MIXED_CC_FST_DIR_LFT.Name = "RDO_MIXED_CC_FST_DIR_LFT";
+            this.RDO_MIXED_CC_FST_DIR_LFT.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_CC_FST_DIR_LFT.TabIndex = 34;
+            this.RDO_MIXED_CC_FST_DIR_LFT.TabStop = true;
+            this.RDO_MIXED_CC_FST_DIR_LFT.Text = "L";
+            this.RDO_MIXED_CC_FST_DIR_LFT.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_FST_DIR_RHT
+            // 
+            this.RDO_MIXED_CC_FST_DIR_RHT.AutoSize = true;
+            this.RDO_MIXED_CC_FST_DIR_RHT.Location = new System.Drawing.Point(84, 3);
+            this.RDO_MIXED_CC_FST_DIR_RHT.Name = "RDO_MIXED_CC_FST_DIR_RHT";
+            this.RDO_MIXED_CC_FST_DIR_RHT.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_CC_FST_DIR_RHT.TabIndex = 34;
+            this.RDO_MIXED_CC_FST_DIR_RHT.Text = "R";
+            this.RDO_MIXED_CC_FST_DIR_RHT.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_CC_FST_SZ_W
+            // 
+            this.TXT_MIXED_CC_FST_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_FST_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_FST_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_FST_SZ_W.Location = new System.Drawing.Point(219, 49);
+            this.TXT_MIXED_CC_FST_SZ_W.Name = "TXT_MIXED_CC_FST_SZ_W";
+            this.TXT_MIXED_CC_FST_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_FST_SZ_W.TabIndex = 71;
+            this.TXT_MIXED_CC_FST_SZ_W.Text = "0";
+            this.TXT_MIXED_CC_FST_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Transparent;
+            this.label36.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label36.Location = new System.Drawing.Point(134, 27);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(41, 12);
+            this.label36.TabIndex = 75;
+            this.label36.Text = "NICK :";
+            // 
+            // TXT_MIXED_CC_SCD_POS_Y
+            // 
+            this.TXT_MIXED_CC_SCD_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_SCD_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_SCD_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_SCD_POS_Y.Location = new System.Drawing.Point(158, 75);
+            this.TXT_MIXED_CC_SCD_POS_Y.Name = "TXT_MIXED_CC_SCD_POS_Y";
+            this.TXT_MIXED_CC_SCD_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_SCD_POS_Y.TabIndex = 68;
+            this.TXT_MIXED_CC_SCD_POS_Y.Text = "0";
+            this.TXT_MIXED_CC_SCD_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_CC_SCD_POS_X
+            // 
+            this.TXT_MIXED_CC_SCD_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_SCD_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_SCD_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_SCD_POS_X.Location = new System.Drawing.Point(98, 75);
+            this.TXT_MIXED_CC_SCD_POS_X.Name = "TXT_MIXED_CC_SCD_POS_X";
+            this.TXT_MIXED_CC_SCD_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_SCD_POS_X.TabIndex = 72;
+            this.TXT_MIXED_CC_SCD_POS_X.Text = "0";
+            this.TXT_MIXED_CC_SCD_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(235, 96);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(84, 12);
+            this.label39.TabIndex = 65;
+            this.label39.Text = "[ W      ,      H ] ";
+            // 
+            // TXT_MIXED_CC_FST_SZ_H
+            // 
+            this.TXT_MIXED_CC_FST_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_FST_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_FST_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_FST_SZ_H.Location = new System.Drawing.Point(279, 49);
+            this.TXT_MIXED_CC_FST_SZ_H.Name = "TXT_MIXED_CC_FST_SZ_H";
+            this.TXT_MIXED_CC_FST_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_FST_SZ_H.TabIndex = 69;
+            this.TXT_MIXED_CC_FST_SZ_H.Text = "0";
+            this.TXT_MIXED_CC_FST_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_CC_FST_POS_X
+            // 
+            this.TXT_MIXED_CC_FST_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_FST_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_FST_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_FST_POS_X.Location = new System.Drawing.Point(98, 49);
+            this.TXT_MIXED_CC_FST_POS_X.Name = "TXT_MIXED_CC_FST_POS_X";
+            this.TXT_MIXED_CC_FST_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_FST_POS_X.TabIndex = 74;
+            this.TXT_MIXED_CC_FST_POS_X.Text = "0";
+            this.TXT_MIXED_CC_FST_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_INDEX_OF_MIXED_CC
+            // 
+            this.TXT_INDEX_OF_MIXED_CC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_MIXED_CC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_MIXED_CC.ForeColor = System.Drawing.Color.Black;
+            this.TXT_INDEX_OF_MIXED_CC.Location = new System.Drawing.Point(68, 24);
+            this.TXT_INDEX_OF_MIXED_CC.Name = "TXT_INDEX_OF_MIXED_CC";
+            this.TXT_INDEX_OF_MIXED_CC.ReadOnly = true;
+            this.TXT_INDEX_OF_MIXED_CC.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_MIXED_CC.TabIndex = 80;
+            this.TXT_INDEX_OF_MIXED_CC.Text = "0";
+            this.TXT_INDEX_OF_MIXED_CC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_CC_NICK
+            // 
+            this.TXT_MIXED_CC_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_MIXED_CC_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_NICK.Enabled = false;
+            this.TXT_MIXED_CC_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_NICK.Location = new System.Drawing.Point(180, 24);
+            this.TXT_MIXED_CC_NICK.Name = "TXT_MIXED_CC_NICK";
+            this.TXT_MIXED_CC_NICK.Size = new System.Drawing.Size(83, 19);
+            this.TXT_MIXED_CC_NICK.TabIndex = 76;
+            this.TXT_MIXED_CC_NICK.Text = "MCC";
+            this.TXT_MIXED_CC_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(116, 95);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(80, 12);
+            this.label64.TabIndex = 66;
+            this.label64.Text = "[ X      ,      Y ] ";
+            // 
+            // TXT_MIXED_CC_SCD_SZ_H
+            // 
+            this.TXT_MIXED_CC_SCD_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_CC_SCD_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_CC_SCD_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_CC_SCD_SZ_H.Location = new System.Drawing.Point(279, 74);
+            this.TXT_MIXED_CC_SCD_SZ_H.Name = "TXT_MIXED_CC_SCD_SZ_H";
+            this.TXT_MIXED_CC_SCD_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_CC_SCD_SZ_H.TabIndex = 70;
+            this.TXT_MIXED_CC_SCD_SZ_H.Text = "0";
+            this.TXT_MIXED_CC_SCD_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // RDO_MIXED_CC_SCD
+            // 
+            this.RDO_MIXED_CC_SCD.AutoSize = true;
+            this.RDO_MIXED_CC_SCD.Location = new System.Drawing.Point(10, 75);
+            this.RDO_MIXED_CC_SCD.Name = "RDO_MIXED_CC_SCD";
+            this.RDO_MIXED_CC_SCD.Size = new System.Drawing.Size(78, 16);
+            this.RDO_MIXED_CC_SCD.TabIndex = 77;
+            this.RDO_MIXED_CC_SCD.TabStop = true;
+            this.RDO_MIXED_CC_SCD.Text = "SECON CC";
+            this.RDO_MIXED_CC_SCD.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_CC_FST
+            // 
+            this.RDO_MIXED_CC_FST.AutoSize = true;
+            this.RDO_MIXED_CC_FST.Location = new System.Drawing.Point(10, 50);
+            this.RDO_MIXED_CC_FST.Name = "RDO_MIXED_CC_FST";
+            this.RDO_MIXED_CC_FST.Size = new System.Drawing.Size(74, 16);
+            this.RDO_MIXED_CC_FST.TabIndex = 78;
+            this.RDO_MIXED_CC_FST.TabStop = true;
+            this.RDO_MIXED_CC_FST.Text = "FIRST CC";
+            this.RDO_MIXED_CC_FST.UseVisualStyleBackColor = true;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(378, 104);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(44, 12);
+            this.label37.TabIndex = 64;
+            this.label37.Text = "[ DIR ]";
             // 
             // BTN_MIXED_CC_COPY
             // 
@@ -3254,7 +3716,7 @@
             this.BTN_MIXED_CC_COPY.TabIndex = 63;
             this.BTN_MIXED_CC_COPY.Text = "COPY";
             this.BTN_MIXED_CC_COPY.UseVisualStyleBackColor = false;
-            this.BTN_MIXED_CC_COPY.Visible = false;
+            this.BTN_MIXED_CC_COPY.Click += new System.EventHandler(this.BTN_MIXED_CC_COPY_Click);
             // 
             // BTN_MIXED_CC_ADD
             // 
@@ -3269,7 +3731,7 @@
             this.BTN_MIXED_CC_ADD.TabIndex = 60;
             this.BTN_MIXED_CC_ADD.Text = "ADD";
             this.BTN_MIXED_CC_ADD.UseVisualStyleBackColor = false;
-            this.BTN_MIXED_CC_ADD.Visible = false;
+            this.BTN_MIXED_CC_ADD.Click += new System.EventHandler(this.BTN_MIXED_CC_ADD_Click);
             // 
             // BTN_MIXED_CC_MODIFY
             // 
@@ -3283,7 +3745,7 @@
             this.BTN_MIXED_CC_MODIFY.TabIndex = 61;
             this.BTN_MIXED_CC_MODIFY.Text = "MODIFY";
             this.BTN_MIXED_CC_MODIFY.UseVisualStyleBackColor = true;
-            this.BTN_MIXED_CC_MODIFY.Visible = false;
+            this.BTN_MIXED_CC_MODIFY.Click += new System.EventHandler(this.BTN_MIXED_CC_MODIFY_Click);
             // 
             // BTN_MIXED_CC_REMOVE
             // 
@@ -3298,7 +3760,7 @@
             this.BTN_MIXED_CC_REMOVE.TabStop = false;
             this.BTN_MIXED_CC_REMOVE.Text = "REMOVE";
             this.BTN_MIXED_CC_REMOVE.UseVisualStyleBackColor = true;
-            this.BTN_MIXED_CC_REMOVE.Visible = false;
+            this.BTN_MIXED_CC_REMOVE.Click += new System.EventHandler(this.BTN_MIXED_CC_REMOVE_Click);
             // 
             // groupBox15
             // 
@@ -3323,7 +3785,6 @@
             this.BTN_DRAW_MIXED_CC.TabIndex = 1;
             this.BTN_DRAW_MIXED_CC.Text = "DRAW RGN";
             this.BTN_DRAW_MIXED_CC.UseVisualStyleBackColor = true;
-            this.BTN_DRAW_MIXED_CC.Visible = false;
             this.BTN_DRAW_MIXED_CC.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
             // 
             // BTN_REMOVE_MIXED_CC
@@ -3337,7 +3798,7 @@
             this.BTN_REMOVE_MIXED_CC.TabIndex = 1;
             this.BTN_REMOVE_MIXED_CC.Text = "REMOVE RGN";
             this.BTN_REMOVE_MIXED_CC.UseVisualStyleBackColor = true;
-            this.BTN_REMOVE_MIXED_CC.Visible = false;
+            this.BTN_REMOVE_MIXED_CC.Click += new System.EventHandler(this.BTN_REMOVE_FIGURES_Click);
             // 
             // BTN_SET_MIXED_CC
             // 
@@ -3350,11 +3811,12 @@
             this.BTN_SET_MIXED_CC.TabIndex = 1;
             this.BTN_SET_MIXED_CC.Text = "SET REGION TYPE";
             this.BTN_SET_MIXED_CC.UseVisualStyleBackColor = true;
-            this.BTN_SET_MIXED_CC.Visible = false;
+            this.BTN_SET_MIXED_CC.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
             // draw_mixc_rcc
             // 
             this.draw_mixc_rcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.draw_mixc_rcc.Controls.Add(this.groupBox20);
             this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_COPY);
             this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_ADD);
             this.draw_mixc_rcc.Controls.Add(this.BTN_MIXED_RCC_MODIFY);
@@ -3365,6 +3827,367 @@
             this.draw_mixc_rcc.Size = new System.Drawing.Size(594, 234);
             this.draw_mixc_rcc.TabIndex = 8;
             this.draw_mixc_rcc.Text = "MIX_RCC";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.label76);
+            this.groupBox20.Controls.Add(this.CHK_MIXED_RCC_USE_CENTROID);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_FST_POS_Y);
+            this.groupBox20.Controls.Add(this.panel9);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_SCD_SZ_W);
+            this.groupBox20.Controls.Add(this.groupBox18);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_FST_SZ_W);
+            this.groupBox20.Controls.Add(this.panel8);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_SCD_POS_Y);
+            this.groupBox20.Controls.Add(this.label67);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_SCD_POS_X);
+            this.groupBox20.Controls.Add(this.label74);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_FST_SZ_H);
+            this.groupBox20.Controls.Add(this.label75);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_FST_POS_X);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_NICK);
+            this.groupBox20.Controls.Add(this.TXT_INDEX_OF_MIXED_RCC);
+            this.groupBox20.Controls.Add(this.TXT_MIXED_RCC_SCD_SZ_H);
+            this.groupBox20.Controls.Add(this.label77);
+            this.groupBox20.Controls.Add(this.RDO_MIXED_RCC_FST);
+            this.groupBox20.Controls.Add(this.RDO_MIXED_RCC_SCD);
+            this.groupBox20.Location = new System.Drawing.Point(1, 3);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(589, 130);
+            this.groupBox20.TabIndex = 106;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "REGION INFO";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(10, 20);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(50, 12);
+            this.label76.TabIndex = 99;
+            this.label76.Text = "INDEX :";
+            // 
+            // CHK_MIXED_RCC_USE_CENTROID
+            // 
+            this.CHK_MIXED_RCC_USE_CENTROID.AutoSize = true;
+            this.CHK_MIXED_RCC_USE_CENTROID.Checked = true;
+            this.CHK_MIXED_RCC_USE_CENTROID.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_MIXED_RCC_USE_CENTROID.Location = new System.Drawing.Point(342, 20);
+            this.CHK_MIXED_RCC_USE_CENTROID.Name = "CHK_MIXED_RCC_USE_CENTROID";
+            this.CHK_MIXED_RCC_USE_CENTROID.Size = new System.Drawing.Size(113, 16);
+            this.CHK_MIXED_RCC_USE_CENTROID.TabIndex = 105;
+            this.CHK_MIXED_RCC_USE_CENTROID.Text = "USE_CENTROID";
+            this.CHK_MIXED_RCC_USE_CENTROID.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_RCC_FST_POS_Y
+            // 
+            this.TXT_MIXED_RCC_FST_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_FST_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_FST_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_FST_POS_Y.Location = new System.Drawing.Point(160, 43);
+            this.TXT_MIXED_RCC_FST_POS_Y.Name = "TXT_MIXED_RCC_FST_POS_Y";
+            this.TXT_MIXED_RCC_FST_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_FST_POS_Y.TabIndex = 87;
+            this.TXT_MIXED_RCC_FST_POS_Y.Text = "0";
+            this.TXT_MIXED_RCC_FST_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.RDO_MIXED_RCC_FST_DIR_VER);
+            this.panel9.Controls.Add(this.RDO_MIXED_RCC_FST_DIR_HOR);
+            this.panel9.Location = new System.Drawing.Point(342, 40);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(79, 24);
+            this.panel9.TabIndex = 104;
+            // 
+            // RDO_MIXED_RCC_FST_DIR_VER
+            // 
+            this.RDO_MIXED_RCC_FST_DIR_VER.AutoSize = true;
+            this.RDO_MIXED_RCC_FST_DIR_VER.Location = new System.Drawing.Point(46, 4);
+            this.RDO_MIXED_RCC_FST_DIR_VER.Name = "RDO_MIXED_RCC_FST_DIR_VER";
+            this.RDO_MIXED_RCC_FST_DIR_VER.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RCC_FST_DIR_VER.TabIndex = 34;
+            this.RDO_MIXED_RCC_FST_DIR_VER.Text = "│";
+            this.RDO_MIXED_RCC_FST_DIR_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_FST_DIR_HOR
+            // 
+            this.RDO_MIXED_RCC_FST_DIR_HOR.AutoSize = true;
+            this.RDO_MIXED_RCC_FST_DIR_HOR.Checked = true;
+            this.RDO_MIXED_RCC_FST_DIR_HOR.Location = new System.Drawing.Point(4, 4);
+            this.RDO_MIXED_RCC_FST_DIR_HOR.Name = "RDO_MIXED_RCC_FST_DIR_HOR";
+            this.RDO_MIXED_RCC_FST_DIR_HOR.Size = new System.Drawing.Size(30, 16);
+            this.RDO_MIXED_RCC_FST_DIR_HOR.TabIndex = 34;
+            this.RDO_MIXED_RCC_FST_DIR_HOR.TabStop = true;
+            this.RDO_MIXED_RCC_FST_DIR_HOR.Text = "─";
+            this.RDO_MIXED_RCC_FST_DIR_HOR.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_RCC_SCD_SZ_W
+            // 
+            this.TXT_MIXED_RCC_SCD_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_SCD_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_SCD_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_SCD_SZ_W.Location = new System.Drawing.Point(221, 68);
+            this.TXT_MIXED_RCC_SCD_SZ_W.Name = "TXT_MIXED_RCC_SCD_SZ_W";
+            this.TXT_MIXED_RCC_SCD_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_SCD_SZ_W.TabIndex = 93;
+            this.TXT_MIXED_RCC_SCD_SZ_W.Text = "0";
+            this.TXT_MIXED_RCC_SCD_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.RDO_MIXED_RCC_METRIC_VER);
+            this.groupBox18.Controls.Add(this.RDO_MIXED_RCC_METRIC_HOR);
+            this.groupBox18.Controls.Add(this.RDO_MIXED_RCC_METRIC_P2P);
+            this.groupBox18.Location = new System.Drawing.Point(517, 7);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(66, 100);
+            this.groupBox18.TabIndex = 103;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "METRIC";
+            // 
+            // RDO_MIXED_RCC_METRIC_VER
+            // 
+            this.RDO_MIXED_RCC_METRIC_VER.AutoSize = true;
+            this.RDO_MIXED_RCC_METRIC_VER.Location = new System.Drawing.Point(10, 66);
+            this.RDO_MIXED_RCC_METRIC_VER.Name = "RDO_MIXED_RCC_METRIC_VER";
+            this.RDO_MIXED_RCC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_RCC_METRIC_VER.TabIndex = 34;
+            this.RDO_MIXED_RCC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_RCC_METRIC_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_METRIC_HOR
+            // 
+            this.RDO_MIXED_RCC_METRIC_HOR.AutoSize = true;
+            this.RDO_MIXED_RCC_METRIC_HOR.Location = new System.Drawing.Point(10, 41);
+            this.RDO_MIXED_RCC_METRIC_HOR.Name = "RDO_MIXED_RCC_METRIC_HOR";
+            this.RDO_MIXED_RCC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RCC_METRIC_HOR.TabIndex = 34;
+            this.RDO_MIXED_RCC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_RCC_METRIC_HOR.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_METRIC_P2P
+            // 
+            this.RDO_MIXED_RCC_METRIC_P2P.AutoSize = true;
+            this.RDO_MIXED_RCC_METRIC_P2P.Checked = true;
+            this.RDO_MIXED_RCC_METRIC_P2P.Location = new System.Drawing.Point(10, 19);
+            this.RDO_MIXED_RCC_METRIC_P2P.Name = "RDO_MIXED_RCC_METRIC_P2P";
+            this.RDO_MIXED_RCC_METRIC_P2P.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RCC_METRIC_P2P.TabIndex = 34;
+            this.RDO_MIXED_RCC_METRIC_P2P.TabStop = true;
+            this.RDO_MIXED_RCC_METRIC_P2P.Text = "P2P";
+            this.RDO_MIXED_RCC_METRIC_P2P.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_RCC_FST_SZ_W
+            // 
+            this.TXT_MIXED_RCC_FST_SZ_W.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_FST_SZ_W.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_FST_SZ_W.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_FST_SZ_W.Location = new System.Drawing.Point(221, 43);
+            this.TXT_MIXED_RCC_FST_SZ_W.Name = "TXT_MIXED_RCC_FST_SZ_W";
+            this.TXT_MIXED_RCC_FST_SZ_W.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_FST_SZ_W.TabIndex = 91;
+            this.TXT_MIXED_RCC_FST_SZ_W.Text = "0";
+            this.TXT_MIXED_RCC_FST_SZ_W.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.RDO_MIXED_RCC_SCD_DIR_BTM);
+            this.panel8.Controls.Add(this.RDO_MIXED_RCC_SCD_DIR_RHT);
+            this.panel8.Controls.Add(this.RDO_MIXED_RCC_SCD_DIR_TOP);
+            this.panel8.Controls.Add(this.RDO_MIXED_RCC_SCD_DIR_LFT);
+            this.panel8.Location = new System.Drawing.Point(342, 66);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(161, 24);
+            this.panel8.TabIndex = 102;
+            // 
+            // RDO_MIXED_RCC_SCD_DIR_BTM
+            // 
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.AutoSize = true;
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.Location = new System.Drawing.Point(127, 4);
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.Name = "RDO_MIXED_RCC_SCD_DIR_BTM";
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.TabIndex = 35;
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.Text = "B";
+            this.RDO_MIXED_RCC_SCD_DIR_BTM.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_SCD_DIR_RHT
+            // 
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.AutoSize = true;
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.Location = new System.Drawing.Point(87, 4);
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.Name = "RDO_MIXED_RCC_SCD_DIR_RHT";
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.Size = new System.Drawing.Size(31, 16);
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.TabIndex = 36;
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.Text = "R";
+            this.RDO_MIXED_RCC_SCD_DIR_RHT.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_SCD_DIR_TOP
+            // 
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.AutoSize = true;
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.Location = new System.Drawing.Point(47, 4);
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.Name = "RDO_MIXED_RCC_SCD_DIR_TOP";
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.TabIndex = 37;
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.Text = "T";
+            this.RDO_MIXED_RCC_SCD_DIR_TOP.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_SCD_DIR_LFT
+            // 
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.AutoSize = true;
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.Checked = true;
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.Location = new System.Drawing.Point(4, 4);
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.Name = "RDO_MIXED_RCC_SCD_DIR_LFT";
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.Size = new System.Drawing.Size(29, 16);
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.TabIndex = 38;
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.TabStop = true;
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.Text = "L";
+            this.RDO_MIXED_RCC_SCD_DIR_LFT.UseVisualStyleBackColor = true;
+            // 
+            // TXT_MIXED_RCC_SCD_POS_Y
+            // 
+            this.TXT_MIXED_RCC_SCD_POS_Y.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_SCD_POS_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_SCD_POS_Y.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_SCD_POS_Y.Location = new System.Drawing.Point(160, 69);
+            this.TXT_MIXED_RCC_SCD_POS_Y.Name = "TXT_MIXED_RCC_SCD_POS_Y";
+            this.TXT_MIXED_RCC_SCD_POS_Y.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_SCD_POS_Y.TabIndex = 88;
+            this.TXT_MIXED_RCC_SCD_POS_Y.Text = "0";
+            this.TXT_MIXED_RCC_SCD_POS_Y.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.Transparent;
+            this.label67.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label67.Location = new System.Drawing.Point(132, 21);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(41, 12);
+            this.label67.TabIndex = 95;
+            this.label67.Text = "NICK :";
+            // 
+            // TXT_MIXED_RCC_SCD_POS_X
+            // 
+            this.TXT_MIXED_RCC_SCD_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_SCD_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_SCD_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_SCD_POS_X.Location = new System.Drawing.Point(100, 69);
+            this.TXT_MIXED_RCC_SCD_POS_X.Name = "TXT_MIXED_RCC_SCD_POS_X";
+            this.TXT_MIXED_RCC_SCD_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_SCD_POS_X.TabIndex = 92;
+            this.TXT_MIXED_RCC_SCD_POS_X.Text = "0";
+            this.TXT_MIXED_RCC_SCD_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(358, 95);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(44, 12);
+            this.label74.TabIndex = 84;
+            this.label74.Text = "[ DIR ]";
+            // 
+            // TXT_MIXED_RCC_FST_SZ_H
+            // 
+            this.TXT_MIXED_RCC_FST_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_FST_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_FST_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_FST_SZ_H.Location = new System.Drawing.Point(281, 43);
+            this.TXT_MIXED_RCC_FST_SZ_H.Name = "TXT_MIXED_RCC_FST_SZ_H";
+            this.TXT_MIXED_RCC_FST_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_FST_SZ_H.TabIndex = 89;
+            this.TXT_MIXED_RCC_FST_SZ_H.Text = "0";
+            this.TXT_MIXED_RCC_FST_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(237, 90);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(84, 12);
+            this.label75.TabIndex = 85;
+            this.label75.Text = "[ W      ,      H ] ";
+            // 
+            // TXT_MIXED_RCC_FST_POS_X
+            // 
+            this.TXT_MIXED_RCC_FST_POS_X.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_FST_POS_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_FST_POS_X.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_FST_POS_X.Location = new System.Drawing.Point(100, 43);
+            this.TXT_MIXED_RCC_FST_POS_X.Name = "TXT_MIXED_RCC_FST_POS_X";
+            this.TXT_MIXED_RCC_FST_POS_X.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_FST_POS_X.TabIndex = 94;
+            this.TXT_MIXED_RCC_FST_POS_X.Text = "0";
+            this.TXT_MIXED_RCC_FST_POS_X.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RCC_NICK
+            // 
+            this.TXT_MIXED_RCC_NICK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_MIXED_RCC_NICK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_NICK.Enabled = false;
+            this.TXT_MIXED_RCC_NICK.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_NICK.Location = new System.Drawing.Point(178, 18);
+            this.TXT_MIXED_RCC_NICK.Name = "TXT_MIXED_RCC_NICK";
+            this.TXT_MIXED_RCC_NICK.Size = new System.Drawing.Size(83, 19);
+            this.TXT_MIXED_RCC_NICK.TabIndex = 96;
+            this.TXT_MIXED_RCC_NICK.Text = "MRCC";
+            this.TXT_MIXED_RCC_NICK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_INDEX_OF_MIXED_RCC
+            // 
+            this.TXT_INDEX_OF_MIXED_RCC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TXT_INDEX_OF_MIXED_RCC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_INDEX_OF_MIXED_RCC.ForeColor = System.Drawing.Color.Black;
+            this.TXT_INDEX_OF_MIXED_RCC.Location = new System.Drawing.Point(66, 18);
+            this.TXT_INDEX_OF_MIXED_RCC.Name = "TXT_INDEX_OF_MIXED_RCC";
+            this.TXT_INDEX_OF_MIXED_RCC.ReadOnly = true;
+            this.TXT_INDEX_OF_MIXED_RCC.Size = new System.Drawing.Size(54, 19);
+            this.TXT_INDEX_OF_MIXED_RCC.TabIndex = 100;
+            this.TXT_INDEX_OF_MIXED_RCC.Text = "0";
+            this.TXT_INDEX_OF_MIXED_RCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TXT_MIXED_RCC_SCD_SZ_H
+            // 
+            this.TXT_MIXED_RCC_SCD_SZ_H.BackColor = System.Drawing.Color.White;
+            this.TXT_MIXED_RCC_SCD_SZ_H.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TXT_MIXED_RCC_SCD_SZ_H.ForeColor = System.Drawing.Color.Black;
+            this.TXT_MIXED_RCC_SCD_SZ_H.Location = new System.Drawing.Point(281, 68);
+            this.TXT_MIXED_RCC_SCD_SZ_H.Name = "TXT_MIXED_RCC_SCD_SZ_H";
+            this.TXT_MIXED_RCC_SCD_SZ_H.Size = new System.Drawing.Size(54, 19);
+            this.TXT_MIXED_RCC_SCD_SZ_H.TabIndex = 90;
+            this.TXT_MIXED_RCC_SCD_SZ_H.Text = "0";
+            this.TXT_MIXED_RCC_SCD_SZ_H.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(118, 89);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(80, 12);
+            this.label77.TabIndex = 86;
+            this.label77.Text = "[ X      ,      Y ] ";
+            // 
+            // RDO_MIXED_RCC_FST
+            // 
+            this.RDO_MIXED_RCC_FST.AutoSize = true;
+            this.RDO_MIXED_RCC_FST.Location = new System.Drawing.Point(8, 44);
+            this.RDO_MIXED_RCC_FST.Name = "RDO_MIXED_RCC_FST";
+            this.RDO_MIXED_RCC_FST.Size = new System.Drawing.Size(75, 16);
+            this.RDO_MIXED_RCC_FST.TabIndex = 98;
+            this.RDO_MIXED_RCC_FST.TabStop = true;
+            this.RDO_MIXED_RCC_FST.Text = "FIRST RC";
+            this.RDO_MIXED_RCC_FST.UseVisualStyleBackColor = true;
+            // 
+            // RDO_MIXED_RCC_SCD
+            // 
+            this.RDO_MIXED_RCC_SCD.AutoSize = true;
+            this.RDO_MIXED_RCC_SCD.Location = new System.Drawing.Point(8, 69);
+            this.RDO_MIXED_RCC_SCD.Name = "RDO_MIXED_RCC_SCD";
+            this.RDO_MIXED_RCC_SCD.Size = new System.Drawing.Size(78, 16);
+            this.RDO_MIXED_RCC_SCD.TabIndex = 97;
+            this.RDO_MIXED_RCC_SCD.TabStop = true;
+            this.RDO_MIXED_RCC_SCD.Text = "SECON CC";
+            this.RDO_MIXED_RCC_SCD.UseVisualStyleBackColor = true;
             // 
             // BTN_MIXED_RCC_COPY
             // 
@@ -3379,7 +4202,7 @@
             this.BTN_MIXED_RCC_COPY.TabIndex = 67;
             this.BTN_MIXED_RCC_COPY.Text = "COPY";
             this.BTN_MIXED_RCC_COPY.UseVisualStyleBackColor = false;
-            this.BTN_MIXED_RCC_COPY.Visible = false;
+            this.BTN_MIXED_RCC_COPY.Click += new System.EventHandler(this.BTN_MIXED_RCC_COPY_Click);
             // 
             // BTN_MIXED_RCC_ADD
             // 
@@ -3394,7 +4217,7 @@
             this.BTN_MIXED_RCC_ADD.TabIndex = 64;
             this.BTN_MIXED_RCC_ADD.Text = "ADD";
             this.BTN_MIXED_RCC_ADD.UseVisualStyleBackColor = false;
-            this.BTN_MIXED_RCC_ADD.Visible = false;
+            this.BTN_MIXED_RCC_ADD.Click += new System.EventHandler(this.BTN_MIXED_RCC_ADD_Click);
             // 
             // BTN_MIXED_RCC_MODIFY
             // 
@@ -3408,7 +4231,7 @@
             this.BTN_MIXED_RCC_MODIFY.TabIndex = 65;
             this.BTN_MIXED_RCC_MODIFY.Text = "MODIFY";
             this.BTN_MIXED_RCC_MODIFY.UseVisualStyleBackColor = true;
-            this.BTN_MIXED_RCC_MODIFY.Visible = false;
+            this.BTN_MIXED_RCC_MODIFY.Click += new System.EventHandler(this.BTN_MIXED_RCC_MODIFY_Click);
             // 
             // BTN_MIXED_RCC_REMOVE
             // 
@@ -3423,7 +4246,7 @@
             this.BTN_MIXED_RCC_REMOVE.TabStop = false;
             this.BTN_MIXED_RCC_REMOVE.Text = "REMOVE";
             this.BTN_MIXED_RCC_REMOVE.UseVisualStyleBackColor = true;
-            this.BTN_MIXED_RCC_REMOVE.Visible = false;
+            this.BTN_MIXED_RCC_REMOVE.Click += new System.EventHandler(this.BTN_MIXED_RCC_REMOVE_Click);
             // 
             // groupBox16
             // 
@@ -3448,7 +4271,6 @@
             this.BTN_DRAW_MIXED_RCC.TabIndex = 1;
             this.BTN_DRAW_MIXED_RCC.Text = "DRAW RGN";
             this.BTN_DRAW_MIXED_RCC.UseVisualStyleBackColor = true;
-            this.BTN_DRAW_MIXED_RCC.Visible = false;
             this.BTN_DRAW_MIXED_RCC.Click += new System.EventHandler(this.BTN_DRAW_FIGURES_Click);
             // 
             // button3
@@ -3462,7 +4284,6 @@
             this.button3.TabIndex = 1;
             this.button3.Text = "REMOVE RGN";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
             // 
             // button4
@@ -3476,13 +4297,13 @@
             this.button4.TabIndex = 1;
             this.button4.Text = "SET REGION TYPE";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Visible = false;
-            this.button4.Click += new System.EventHandler(this.BTN_SET_FIGURES_Click);
+            this.button4.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
             // PNL_MAIN
             // 
             this.PNL_MAIN.BackColor = System.Drawing.SystemColors.Control;
             this.PNL_MAIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PNL_MAIN.Controls.Add(this.PROG_THREAD_POOL);
             this.PNL_MAIN.Controls.Add(this.CHK_USE_SAVE_PTRN_ERR);
             this.PNL_MAIN.Controls.Add(this.CHK_USE_SAVE_INPUT);
             this.PNL_MAIN.Controls.Add(this.LV_RECP);
@@ -3517,6 +4338,16 @@
             this.PNL_MAIN.Size = new System.Drawing.Size(604, 671);
             this.PNL_MAIN.TabIndex = 59;
             // 
+            // PROG_THREAD_POOL
+            // 
+            this.PROG_THREAD_POOL.Location = new System.Drawing.Point(13, 359);
+            this.PROG_THREAD_POOL.Maximum = 5;
+            this.PROG_THREAD_POOL.Name = "PROG_THREAD_POOL";
+            this.PROG_THREAD_POOL.Size = new System.Drawing.Size(577, 23);
+            this.PROG_THREAD_POOL.Step = 5;
+            this.PROG_THREAD_POOL.TabIndex = 30;
+            this.PROG_THREAD_POOL.Value = 5;
+            // 
             // CHK_USE_SAVE_PTRN_ERR
             // 
             this.CHK_USE_SAVE_PTRN_ERR.AutoSize = true;
@@ -3543,9 +4374,9 @@
             // 
             this.PIC_FOCUS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.PIC_FOCUS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PIC_FOCUS.Location = new System.Drawing.Point(8, 360);
+            this.PIC_FOCUS.Location = new System.Drawing.Point(267, 408);
             this.PIC_FOCUS.Name = "PIC_FOCUS";
-            this.PIC_FOCUS.Size = new System.Drawing.Size(578, 300);
+            this.PIC_FOCUS.Size = new System.Drawing.Size(327, 250);
             this.PIC_FOCUS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PIC_FOCUS.TabIndex = 28;
             this.PIC_FOCUS.TabStop = false;
@@ -3555,9 +4386,9 @@
             // 
             this.PIC_PTRN.BackColor = System.Drawing.Color.White;
             this.PIC_PTRN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PIC_PTRN.Location = new System.Drawing.Point(21, 165);
+            this.PIC_PTRN.Location = new System.Drawing.Point(17, 419);
             this.PIC_PTRN.Name = "PIC_PTRN";
-            this.PIC_PTRN.Size = new System.Drawing.Size(165, 150);
+            this.PIC_PTRN.Size = new System.Drawing.Size(230, 230);
             this.PIC_PTRN.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PIC_PTRN.TabIndex = 28;
             this.PIC_PTRN.TabStop = false;
@@ -3604,27 +4435,17 @@
             // 
             this.LB_MAIN_FOCUS_PARAM.AutoSize = true;
             this.LB_MAIN_FOCUS_PARAM.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LB_MAIN_FOCUS_PARAM.Location = new System.Drawing.Point(382, 338);
+            this.LB_MAIN_FOCUS_PARAM.Location = new System.Drawing.Point(542, 388);
             this.LB_MAIN_FOCUS_PARAM.Name = "LB_MAIN_FOCUS_PARAM";
             this.LB_MAIN_FOCUS_PARAM.Size = new System.Drawing.Size(46, 14);
             this.LB_MAIN_FOCUS_PARAM.TabIndex = 0;
             this.LB_MAIN_FOCUS_PARAM.Text = "NONE";
             // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label35.Location = new System.Drawing.Point(256, 338);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(114, 14);
-            this.label35.TabIndex = 0;
-            this.label35.Text = "FOCUS PARAM :";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(13, 338);
+            this.label2.Location = new System.Drawing.Point(266, 388);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 14);
             this.label2.TabIndex = 0;
@@ -3649,9 +4470,9 @@
             // 
             this.BTN_PTRN_RESULT.BackColor = System.Drawing.Color.DimGray;
             this.BTN_PTRN_RESULT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_PTRN_RESULT.Location = new System.Drawing.Point(8, 152);
+            this.BTN_PTRN_RESULT.Location = new System.Drawing.Point(7, 408);
             this.BTN_PTRN_RESULT.Name = "BTN_PTRN_RESULT";
-            this.BTN_PTRN_RESULT.Size = new System.Drawing.Size(191, 175);
+            this.BTN_PTRN_RESULT.Size = new System.Drawing.Size(250, 250);
             this.BTN_PTRN_RESULT.TabIndex = 29;
             this.BTN_PTRN_RESULT.UseVisualStyleBackColor = false;
             // 
@@ -3881,6 +4702,16 @@
             this.LB_LIFE_TIME.TabIndex = 64;
             this.LB_LIFE_TIME.Text = "LIFE_TIME :";
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label35.Location = new System.Drawing.Point(16, 388);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(160, 14);
+            this.label35.TabIndex = 0;
+            this.label35.Text = ":- PATTERN MATCHING";
+            // 
             // CDMainForm
             // 
             this.AllowDrop = true;
@@ -3956,8 +4787,25 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.draw_mix_cc.ResumeLayout(false);
+            this.draw_mix_cc.PerformLayout();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.groupBox15.ResumeLayout(false);
             this.draw_mixc_rcc.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.groupBox18.ResumeLayout(false);
+            this.groupBox18.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.groupBox16.ResumeLayout(false);
             this.PNL_MAIN.ResumeLayout(false);
             this.PNL_MAIN.PerformLayout();
@@ -4246,7 +5094,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox TXT_INDEX_OF_MIXED_RC;
         private System.Windows.Forms.Label LB_MAIN_FOCUS_PARAM;
-        private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button BTN_MIXED_CC_COPY;
         private System.Windows.Forms.Button BTN_MIXED_CC_ADD;
         private System.Windows.Forms.Button BTN_MIXED_CC_MODIFY;
@@ -4263,6 +5110,72 @@
         private System.Windows.Forms.Button BTN_DRAW_MIXED_RCC;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_METRIC_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_METRIC_HOR;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_METRIC_P2P;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_SCD_DIR_BTM;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_SCD_DIR_RHT;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_SCD_DIR_TOP;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_SCD_DIR_LFT;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_FST_DIR_TOP;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_FST_DIR_BTM;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_FST_DIR_LFT;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_FST_DIR_RHT;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_MIXED_CC;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_SCD;
+        private System.Windows.Forms.RadioButton RDO_MIXED_CC_FST;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_SCD_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_NICK;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_FST_POS_X;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_FST_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_SCD_POS_X;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_SCD_POS_Y;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_FST_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_SCD_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_CC_FST_POS_Y;
+        private System.Windows.Forms.CheckBox CHK_MIXED_RC_USE_CENTROID;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_FST_DIR_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_FST_DIR_HOR;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_METRIC_VER;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_METRIC_HOR;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_METRIC_P2P;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_SCD_DIR_BTM;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_SCD_DIR_RHT;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_SCD_DIR_TOP;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_SCD_DIR_LFT;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox TXT_INDEX_OF_MIXED_RCC;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_SCD;
+        private System.Windows.Forms.RadioButton RDO_MIXED_RCC_FST;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_SCD_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_NICK;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_FST_POS_X;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_FST_SZ_H;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_SCD_POS_X;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_SCD_POS_Y;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_FST_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_SCD_SZ_W;
+        private System.Windows.Forms.TextBox TXT_MIXED_RCC_FST_POS_Y;
+        private System.Windows.Forms.CheckBox CHK_MIXED_RCC_USE_CENTROID;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.ProgressBar PROG_THREAD_POOL;
+        private System.Windows.Forms.Label label35;
 
 
 

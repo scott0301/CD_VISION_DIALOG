@@ -411,6 +411,7 @@ namespace CD_VISION_DIALOG
 
             if (rc.Width != 0 && rc.Height != 0 && rc.X > 0 && rc.Y > 0)
             {
+                //DEF_PARAMS.PARAM_PTRN.set_PTRN_FILE
                 string strFileName = uc_view_ptrn.iSave_Roi_Ptrn(Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, fileName));
 
                 _PRINT_MESSAGE("PTRN Teaching Finished.");

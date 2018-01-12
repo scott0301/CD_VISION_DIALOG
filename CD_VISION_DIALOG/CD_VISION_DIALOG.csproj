@@ -41,17 +41,17 @@
       <HintPath>Library\DispObject.dll</HintPath>
     </Reference>
     <Reference Include="IPCData">
-      <HintPath>CDData\IPCData\Library\IPCData.dll</HintPath>
+      <HintPath>CDData\IPCData\Debug\IPCData.dll</HintPath>
     </Reference>
     <Reference Include="IPCUtility">
-      <HintPath>CDData\IPCData\Library\IPCUtility.dll</HintPath>
+      <HintPath>CDData\IPCData\Include\IPCUtility.dll</HintPath>
     </Reference>
     <Reference Include="LIB_CD_VISION, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\LIB_CD_VISION.dll</HintPath>
     </Reference>
     <Reference Include="PylonC.NET">
-      <HintPath>CDData\IPCData\Library\PylonC.NET.dll</HintPath>
+      <HintPath>CDData\IPCData\Include\PylonC.NET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,10 +63,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UC_CD_PARAM">
+    <Reference Include="UC_CD_PARAM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\UC_CD_PARAM.dll</HintPath>
     </Reference>
-    <Reference Include="UC_CD_VIEW">
+    <Reference Include="UC_CD_VIEW, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\UC_CD_VIEW.DLL</HintPath>
     </Reference>
     <Reference Include="UC_GRAPH">
@@ -82,6 +84,9 @@
     <Reference Include="WrapperCognex, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\WrapperCognex.dll</HintPath>
+    </Reference>
+    <Reference Include="WrapperUnion">
+      <HintPath>Library\WrapperUnion.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

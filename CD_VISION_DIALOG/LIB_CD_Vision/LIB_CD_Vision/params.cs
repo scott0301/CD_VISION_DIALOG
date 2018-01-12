@@ -13,7 +13,7 @@ namespace DEF_PARAMS
     //*****************************************************************************************
     // Actual Parameters 
 
-    public class CHacker
+    public class CAdvancedMode
     {
         public bool BOOL_SHOW_IMAGE_PROCESS { get; set; }
         public bool BOOL_SHOW_DETECT_CROSS { get; set; }
@@ -23,7 +23,7 @@ namespace DEF_PARAMS
         public string PATH_EXPERIMENTAL_IMAGE_SET { get; set; }
         public int INT_LOOP_COUNTER { get; set; }
 
-        public CHacker()
+        public CAdvancedMode()
         {
             BOOL_SHOW_IMAGE_PROCESS = false;
             BOOL_SHOW_DETECT_CROSS = true;
@@ -118,7 +118,7 @@ namespace DEF_PARAMS
             PARAM_03_LIGHT_VALUE = 0;
             PARAM_04_FOCUS_TYPE = 0;
             PARAM_05_USE_CENTERING = 0;
-            PARAM_06_COMPEN_A = 0;
+            PARAM_06_COMPEN_A = 1;
             PARAM_06_COMPEN_B = 0;
             PARAM_07_ALGORITHM_INDEX = 0;
             PARAM_08_DMG_TOLERANCE = 0;
@@ -260,21 +260,27 @@ namespace DEF_PARAMS
 
     public class PARAM_PTRN
     {
-        public string PTRN_FILE { get; set; }
-        public bool BOOL_EDGE_BASED { get; set; }
-        public bool BOOL_GLOBAL_SEARCHING { get; set; }
-        public double ACC_RATIO { get; set; }
-        public RectangleF RC_SEARCH_RGN { get; set; }
-        public RectangleF RC_TEMPLATE { get; set; }
+        public string PTRN_FILE = string.Empty;
+        public bool BOOL_EDGE_BASED = false;
+        public bool BOOL_GLOBAL_SEARCHING = true;
+        public double ACC_RATIO = 55; // acceptance ratio for pattern matching 
+        public RectangleF RC_SEARCH_RGN = new RectangleF();
+        public RectangleF RC_TEMPLATE = new RectangleF();
 
         public PARAM_PTRN()
         {
-            PTRN_FILE = string.Empty;
-            BOOL_EDGE_BASED = false;
-            BOOL_GLOBAL_SEARCHING = true;
-            ACC_RATIO = 55;
-            RC_SEARCH_RGN = new RectangleF();
-            RC_TEMPLATE = new RectangleF();
+        }
+        public PARAM_PTRN CopyTo()
+        {
+            PARAM_PTRN single = new PARAM_PTRN();
+
+            single.PTRN_FILE = this.PTRN_FILE;
+            single.BOOL_EDGE_BASED = this.BOOL_EDGE_BASED;
+            single.BOOL_GLOBAL_SEARCHING = this.BOOL_GLOBAL_SEARCHING;
+            single.ACC_RATIO = this.ACC_RATIO;
+            single.RC_SEARCH_RGN = this.RC_SEARCH_RGN;
+            single.RC_TEMPLATE = this.RC_TEMPLATE;
+            return single;
         }
 
     }
@@ -306,7 +312,8 @@ namespace DEF_PARAMS
         {
             CAM_INDEX = 0;
             PIXEL_RES = 0.000069;
-            LIGHT_INDEX = LIGHT_VALUE = 0;
+            LIGHT_INDEX = 0;
+            LIGHT_VALUE = 0;
             EXPOSURE = 100;
             MULTI_SHOT_COUNT = 1;
             MULTI_SHOT_DELAY = 100;

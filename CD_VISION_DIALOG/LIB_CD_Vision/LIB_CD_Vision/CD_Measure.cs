@@ -3898,6 +3898,7 @@ namespace CD_Measure
 
         public static double HC_EDGE_GetCARDINPos(byte[] rawImage, int imageW, int imageH, PointF[] arrPoints, int nSign, int nFilterType)
         {
+            
             double[] fKernel = null;
 
             if (nFilterType == 0)
@@ -3994,54 +3995,54 @@ namespace CD_Measure
 
             int KSIZE = (int)Math.Sqrt(fKernel.Length);
             int GAP = KSIZE / 2;
-
-            for (int i = 0; i < arrPoints.Length; i++)
-            //Parallel.For(0, arrPoints.Length, i =>
-            {
-                float x = arrPoints.ElementAt(i).X;
-                float y = arrPoints.ElementAt(i).Y;
-
-                double kernelSum = 0;
-
-                for (int j = -GAP; j <= GAP; j++)
-                {
-
-                    for (int k = -GAP; k <= GAP; k++)
-                    {
-                        float cy = y - j;
-                        float cx = x - k;
-
-                        int x1 = (int)Math.Floor(cx);
-                        int x2 = (int)Math.Ceiling(cx);
-                        int y1 = (int)Math.Floor(cy);
-                        int y2 = (int)Math.Ceiling(cy);
-
-                        int q11 = rawImage[y1 * imageW + x1];
-                        int q12 = rawImage[y2 * imageW + x1];
-                        int q21 = rawImage[y1 * imageW + x2];
-                        int q22 = rawImage[y2 * imageW + x2];
-
-                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
-
-                        if (fInterpolated == 0)
-                        {
-                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
-                        }
-
-                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * (double)fInterpolated);
-
-                    }
-                }
-                fImage[i] = kernelSum;
-
-            }//);
-
-            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
-
             double fSubPos = 0;
 
             try
             {
+                //for (int i = 0; i < arrPoints.Length; i++)
+                Parallel.For(0, arrPoints.Length, i =>
+                {
+                    float x = arrPoints.ElementAt(i).X;
+                    float y = arrPoints.ElementAt(i).Y;
+
+                    double kernelSum = 0;
+
+                    for (int j = -GAP; j <= GAP; j++)
+                    {
+
+                        for (int k = -GAP; k <= GAP; k++)
+                        {
+                            float cy = y - j;
+                            float cx = x - k;
+
+                            int x1 = (int)Math.Floor(cx);
+                            int x2 = (int)Math.Ceiling(cx);
+                            int y1 = (int)Math.Floor(cy);
+                            int y2 = (int)Math.Ceiling(cy);
+
+                        
+                            int q11 = rawImage[y1 * imageW + x1];
+                            int q12 = rawImage[y2 * imageW + x1];
+                            int q21 = rawImage[y1 * imageW + x2];
+                            int q22 = rawImage[y2 * imageW + x2];
+
+                            double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                            if (fInterpolated == 0)
+                            {
+                                fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                            }
+
+                            kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * (double)fInterpolated);
+
+                        }
+                    }
+                    fImage[i] = kernelSum;
+
+                });
+
+                double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+           
                 double fValue = fDerivative.Max();
                 int nPos = Array.IndexOf(fDerivative, fValue);
                 fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);

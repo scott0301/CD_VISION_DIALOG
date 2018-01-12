@@ -154,7 +154,8 @@ namespace CD_VISION_DIALOG
                 MsgIPC.Send(IPC_ID.MC_IMAGE_MEASURE_REP, "", 5510);
 
                 Remote.MeasureInfo mi = CDOL_OnReqMeasure(0, 0, iu);
-
+                mi.list = iu.listTransResult.ToList();
+ 
                 int nPoint = obj.POS.No;
                 /***/mi.No = obj.POS.No;
 
@@ -192,9 +193,9 @@ namespace CD_VISION_DIALOG
                     string timecode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
                     string savePath = Path.Combine(m_hacker.PATH_EXPERIMENTAL_IMAGE_SET, string.Format("ITER{0:00}_CYCLE{1:00}_{2}.bmp",staticManager.m_nCycleCurrent+1, nPoint, timecode));
 
-                    if (iu.listImage.Count != 0)
+                    if (iu.listImage_input.Count != 0)
                     {
-                        byte[] rawCopy = iu.listImage.ElementAt(0);
+                        byte[] rawCopy = iu.listImage_input.ElementAt(0);
                         imageView2.ThreadCall_SaveImage(savePath, rawCopy, iu.imageW, iu.imageH);
                     }
                 }
@@ -364,17 +365,70 @@ namespace CD_VISION_DIALOG
 
         public Remote.MeasureInfo CDOL_OnReqMeasure(int nCycle, int nPoint, CInspUnit iu)
         {
+            //*************************************************************************************
+            // figure copy
             CFigureManager fm = imageView1.fm.Clone() as CFigureManager;
-            Remote.MeasureInfo mi = _Do_Measurement(iu, false, 0, nCycle, nPoint);
+
+            //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+            // Do measurement
+            _Do_Measurement(iu, false, 0, nCycle, nPoint);
+            //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+
+            MeasureInfo mi = new MeasureInfo();
+            mi.Focus = iu.mi.Focus;
+            mi.list = iu.listTransResult.ToList();
+            mi.Result = mi.list.Count == 0 ? -1 : 1;
+
+            //*************************************************************************************
+            // Image Save
+            //*************************************************************************************
+
+            int imageW = 0;int imageH = 0;
+            byte[] rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+
+
+            //*************************************************************************************
+            if (CHK_USE_HISTORY_MEASURE.Checked == true)
+            {
+                Bitmap bmp = Computer.HC_CONV_Byte2Bmp(rawImage, iu.imageW, iu.imageH);
+                dlgHistM.AppedHistory(bmp, iu.listInspResult, imageView1.GetDispTextObjects());
+            }
+
+            //*************************************************************************************
+            if (CHK_USE_SAVE_INPUT.Checked == true)
+            {
+                string strPathDir = Path.Combine(fm.param_path.i10_PATH_IMG_ORG, Computer.GetTimeCode4Save_YYYY_MM_DD());
+                Computer.EnsureFolderExsistance(strPathDir);
+
+                string strTimecode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
+                byte[] rawInput4Save = iu.GetImage_Raw_First(out imageW, out imageH);
+                imageView2.ThreadCall_SaveImage(Path.Combine(strPathDir, strTimecode + "_MEASURE.BMP"), rawInput4Save, imageW, imageH);
+            }
+            //*************************************************************************************
+            // Display
+            //*************************************************************************************
+            imageView1.VIEW_Set_Clear_DispObject();
+
+            if (m_hacker.BOOL_SHOW_IMAGE_PROCESS == true && iu.IsPreprocessed() == true)
+            {
+                rawImage = iu.GetImage_prep_Last(out imageW, out imageH);
+            }
+            
+            imageView1.SetDisplay(rawImage, imageW, imageH);
             imageView1.DrawPoints(iu.listDispEdgePoints);
+            imageView1.Refresh();
+
+            // display data to the message window 
+            for (int i = 0; i < iu.listInspResult.Count; i++) { _PRINT_MSG(iu.listInspResult.ElementAt(i)); }
+
             return mi;
         }
 
 
         public Remote.MatcingInfo CDOL_OnReqMatching(CFigureManager fm, double x, double y, byte[] rawImage, int imageW, int imageH)
         {
-            imageView1.VIEW_Set_Clear_DispObject();
-            imageView1.SetDisplay(rawImage, imageW, imageH);
+            //imageView1.VIEW_Set_Clear_DispObject();
+            //imageView1.SetDisplay(rawImage, imageW, imageH);
 
             RectangleF rcTemplate/*****/ = new RectangleF();
             double fMatchingRatio = 0;
@@ -382,8 +436,8 @@ namespace CD_VISION_DIALOG
             Bitmap bmpView = Computer.HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
             PointF ptTemplateCenter = _DO_PTRN_And_Get_TemplatePos(fm, bmpView, out rcTemplate, out fMatchingRatio);
 
-             imageView1.DrawPatternMathcing(ptTemplateCenter, rcTemplate);
-            imageView1.Refresh();
+            //imageView1.DrawPatternMathcing(ptTemplateCenter, rcTemplate);
+            //imageView1.Refresh();
 
             // Modify
             Remote.MatcingInfo mi = new Remote.MatcingInfo();
@@ -570,7 +624,7 @@ namespace CD_VISION_DIALOG
         Dlg_Advanced dlgHacker = null;
         Dlg_Spc dlgSPC = null;
 
-        CHacker m_hacker = new CHacker();
+        CAdvancedMode m_hacker = new CAdvancedMode();
 
         CThrProc_FocusTool proc_FocusTool = new CThrProc_FocusTool();
         CIterativeStaticRun proc_IterativeRun = new CIterativeStaticRun();
@@ -1596,28 +1650,19 @@ namespace CD_VISION_DIALOG
         private void LV_FILE_LIST_DragDrop(object sender, DragEventArgs e){PNL_SIMULATION_DragDrop(sender, e);}
         private void LV_FILE_LIST_DragEnter(object sender, DragEventArgs e){PNL_SIMULATION_DragEnter(sender, e);}
         #endregion
-   
 
-        private void _InvalidateFigureSelection(int nDataIndex)
+        private void _UpdateUI_Figure(object obj, int nIndex)
         {
-            CFigureManager fm = imageView1.iGet_AllData();
-
-            //********************************************************************
-            // select figure type
-
-            int nFigureIndex = TAB_FIGURE.SelectedIndex;
-
-            if (nFigureIndex == IFX_FIGURE.PAIR_RCT)
+            if (obj.GetType() == new CMeasurePairRct().GetType())
             {
-                CMeasurePairRct single = fm.ElementAt_PairRct(nDataIndex);
-
-                TXT_INDEX_OF_RECT.Text = nDataIndex.ToString("N0");
+                CMeasurePairRct single = ((CMeasurePairRct)obj).CopyTo();
+                TXT_INDEX_OF_RECT.Text = nIndex.ToString("N0");
                 TXT_PARAM_DIG_NICK.Text = single.NICKNAME;
-                TXT_PARAM_DIA_ANGLE.Text = single.ANGLE.ToString("N0");
+                TXT_PARAM_DIA_ANGLE.Text = single.param_02_rect_angle.ToString("N0");
 
-                /***/if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR) RDO_TYPE_HOR.Checked = true;
-                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER) RDO_TYPE_VER.Checked = true;
-                else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA) RDO_TYPE_DIA.Checked = true;
+                /***/if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_HOR) RDO_TYPE_HOR.Checked = true;
+                else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_VER) RDO_TYPE_VER.Checked = true;
+                else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_DIA) RDO_TYPE_DIA.Checked = true;
 
                 TXT_RECT_FST_POS_X.Text = single.rc_FST.LT.X.ToString("N0");
                 TXT_RECT_FST_POS_Y.Text = single.rc_FST.LT.Y.ToString("N0");
@@ -1632,11 +1677,11 @@ namespace CD_VISION_DIALOG
                 TXT_RECT_FST_SZ_W.Text = single.rc_FST.Width.ToString("N0");
                 TXT_RECT_FST_SZ_H.Text = single.rc_FST.Height.ToString("N0");
             }
-            else if (nFigureIndex == IFX_FIGURE.PAIR_CIR)
+            else if (obj.GetType() == new CMeasurePairCir().GetType())
             {
-                CMeasurePairCir single = fm.ElementAt_PairCir(nDataIndex);
+                CMeasurePairCir single = ((CMeasurePairCir)obj).CopyTo();
 
-                TXT_INDEX_OF_CIRCLE.Text = nDataIndex.ToString("N0");
+                TXT_INDEX_OF_CIRCLE.Text = nIndex.ToString("N0");
                 TXT_PARAM_CIR_NICK.Text = single.NICKNAME;
 
                 TXT_CIRCLE_POS_X.Text = CRect.GetPos_LT(single.rc_EX).X.ToString("N0");
@@ -1645,18 +1690,123 @@ namespace CD_VISION_DIALOG
                 TXT_CIRCLE_SZ_W.Text = single.rc_EX.Width.ToString("N0");
                 TXT_CIRCLE_SZ_H.Text = single.rc_EX.Height.ToString("N0");
             }
-            else if (nFigureIndex == IFX_FIGURE.PAIR_OVL)
-            {
-                CMeasurePairOvl single = fm.ElementAt_PairOvl(nDataIndex);
 
-                TXT_INDEX_OF_OVL.Text = nDataIndex.ToString("N0");
+            else if (obj.GetType() == new CMeasurePairOvl().GetType())
+            {
+                CMeasurePairOvl single = ((CMeasurePairOvl)obj).CopyTo();
+
+                TXT_INDEX_OF_OVL.Text = nIndex.ToString("N0");
                 TXT_PARAM_OVL_NICK.Text = single.NICKNAME;
 
                 TXT_OVL_IN_W.Text = single.RC_HOR_IN.rc_FST.Width.ToString("N0");
                 TXT_OVL_IN_H.Text = single.RC_HOR_IN.rc_FST.Height.ToString("N0");
                 TXT_OVL_EX_W.Text = single.RC_HOR_EX.rc_FST.Width.ToString("N0");
                 TXT_OVL_EX_H.Text = single.RC_HOR_EX.rc_FST.Height.ToString("N0");
+            }
+            else if (obj.GetType() == new CMeasureMixedRC().GetType())
+            {
+                CMeasureMixedRC single = ((CMeasureMixedRC)obj).CopyTo();
 
+                TXT_INDEX_OF_MIXED_RC.Text = nIndex.ToString("N0");
+                TXT_MIXED_RC_NICK.Text = single.NICKNAME;
+
+                /***/if (single.param_04_rc_type_fst == IFX_RECT_TYPE.DIR_HOR) RDO_MIXED_RC_FST_DIR_HOR.Checked = true;
+                else if (single.param_04_rc_type_fst == IFX_RECT_TYPE.DIR_VER) RDO_MIXED_RC_FST_DIR_VER.Checked = true;
+
+                /***/if (single.param_05_rc_type_scd == IFX_RECT_TYPE.DIR_HOR) RDO_MIXED_RC_SCD_DIR_HOR.Checked = true;
+                else if (single.param_05_rc_type_scd == IFX_RECT_TYPE.DIR_VER) RDO_MIXED_RC_SCD_DIR_VER.Checked = true;
+
+                /***/if (single.param_07_metric_type == IFX_METRIC.P2P) RDO_MIXED_RC_METRIC_P2P.Checked = true;
+                else if (single.param_07_metric_type == IFX_METRIC.HOR) RDO_MIXED_RC_METRIC_HOR.Checked = true;
+                else if (single.param_07_metric_type == IFX_METRIC.VER) RDO_MIXED_RC_METRIC_VER.Checked = true;
+
+
+                TXT_MIXED_RC_FST_POS_X.Text = single.rc_FST.LT.X.ToString("N0");
+                TXT_MIXED_RC_FST_POS_Y.Text = single.rc_FST.LT.Y.ToString("N0");
+                TXT_MIXED_RC_FST_SZ_W.Text = single.rc_FST.Width.ToString("N0");
+                TXT_MIXED_RC_FST_SZ_H.Text = single.rc_FST.Height.ToString("N0");
+
+                TXT_MIXED_RC_SCD_POS_X.Text = single.rc_SCD.LT.X.ToString("N0");
+                TXT_MIXED_RC_SCD_POS_Y.Text = single.rc_SCD.LT.Y.ToString("N0");
+                TXT_MIXED_RC_SCD_SZ_W.Text = single.rc_SCD.Width.ToString("N0");
+                TXT_MIXED_RC_SCD_SZ_H.Text = single.rc_SCD.Height.ToString("N0");
+
+                CHK_MIXED_RC_USE_CENTROID.Checked = single.param_08_use_centroid;
+            }
+            else if (obj.GetType() == new CMeasureMixedCC().GetType())
+            {
+                CMeasureMixedCC single = ((CMeasureMixedCC)obj).CopyTo();
+
+                TXT_INDEX_OF_MIXED_CC.Text = nIndex.ToString("N0");
+                TXT_MIXED_CC_NICK.Text = single.NICKNAME;
+
+                /***/if (single.param_06_ms_pos_fst == IFX_DIR.DIR_LFT) RDO_MIXED_CC_FST_DIR_LFT.Checked = true;
+                else if (single.param_06_ms_pos_fst == IFX_DIR.DIR_TOP) RDO_MIXED_CC_FST_DIR_TOP.Checked = true;
+                else if (single.param_06_ms_pos_fst == IFX_DIR.DIR_RHT) RDO_MIXED_CC_FST_DIR_RHT.Checked = true;
+                else if (single.param_06_ms_pos_fst == IFX_DIR.DIR_BTM) RDO_MIXED_CC_FST_DIR_BTM.Checked = true;
+
+                /***/if (single.param_07_ms_pos_scd == IFX_DIR.DIR_LFT) RDO_MIXED_CC_SCD_DIR_LFT.Checked = true;
+                else if (single.param_07_ms_pos_scd == IFX_DIR.DIR_TOP) RDO_MIXED_CC_SCD_DIR_TOP.Checked = true;
+                else if (single.param_07_ms_pos_scd == IFX_DIR.DIR_RHT) RDO_MIXED_CC_SCD_DIR_RHT.Checked = true;
+                else if (single.param_07_ms_pos_scd == IFX_DIR.DIR_BTM) RDO_MIXED_CC_SCD_DIR_BTM.Checked = true;
+
+                /***/if (single.param_08_metric_type == IFX_METRIC.P2P) RDO_MIXED_CC_METRIC_P2P.Checked = true;
+                else if (single.param_08_metric_type == IFX_METRIC.HOR) RDO_MIXED_CC_METRIC_HOR.Checked = true;
+                else if (single.param_08_metric_type == IFX_METRIC.VER) RDO_MIXED_CC_METRIC_VER.Checked = true;
+
+                TXT_MIXED_CC_FST_POS_X.Text/***/= single.rc_FST_EX.X.ToString("N0");
+                TXT_MIXED_CC_FST_POS_Y.Text/***/= single.rc_FST_EX.Y.ToString("N0");
+                TXT_MIXED_CC_FST_SZ_W.Text/****/= single.rc_FST_EX.Width.ToString("N0");
+                TXT_MIXED_CC_FST_SZ_H.Text/****/= single.rc_FST_EX.Height.ToString("N0");
+
+                TXT_MIXED_CC_SCD_POS_X.Text/***/= single.rc_SCD_EX.X.ToString("N0");
+                TXT_MIXED_CC_SCD_POS_Y.Text/***/= single.rc_SCD_EX.Y.ToString("N0");
+                TXT_MIXED_CC_SCD_SZ_W.Text/****/= single.rc_SCD_EX.Width.ToString("N0");
+                TXT_MIXED_CC_SCD_SZ_H.Text/****/= single.rc_SCD_EX.Height.ToString("N0");
+            }
+            else if (obj.GetType() == new CMeasureMixedRCC().GetType())
+            {
+                CMeasureMixedRCC single = ((CMeasureMixedRCC)obj).CopyTo();
+
+                TXT_INDEX_OF_MIXED_RCC.Text = nIndex.ToString("N0");
+                TXT_MIXED_RCC_NICK.Text = single.NICKNAME;
+
+                /***/if (single.param_02_rc_type_fst == IFX_RECT_TYPE.DIR_HOR) RDO_MIXED_RCC_FST_DIR_HOR.Checked = true;
+                else if (single.param_02_rc_type_fst == IFX_RECT_TYPE.DIR_VER) RDO_MIXED_RCC_FST_DIR_VER.Checked = true;
+
+                /***/if (single.param_14_ms_pos_scd == IFX_DIR.DIR_LFT) RDO_MIXED_RCC_SCD_DIR_LFT.Checked = true;
+                else if (single.param_14_ms_pos_scd == IFX_DIR.DIR_TOP) RDO_MIXED_RCC_SCD_DIR_TOP.Checked = true;
+                else if (single.param_14_ms_pos_scd == IFX_DIR.DIR_RHT) RDO_MIXED_RCC_SCD_DIR_RHT.Checked = true;
+                else if (single.param_14_ms_pos_scd == IFX_DIR.DIR_BTM) RDO_MIXED_RCC_SCD_DIR_BTM.Checked = true;
+
+                /***/if (single.param_20_metric_type == IFX_METRIC.P2P) RDO_MIXED_RCC_METRIC_P2P.Checked = true;
+                else if (single.param_20_metric_type == IFX_METRIC.HOR) RDO_MIXED_RCC_METRIC_HOR.Checked = true;
+                else if (single.param_20_metric_type == IFX_METRIC.VER) RDO_MIXED_RCC_METRIC_VER.Checked = true;
+            }
+        }
+        private void _UpdateUI_FigureSelection(int nDataIndex)
+        {
+            CFigureManager fm = imageView1.iGet_AllData();
+
+            //********************************************************************
+            // select figure type
+
+            int nFigureIndex = TAB_FIGURE.SelectedIndex;
+
+            if (nFigureIndex == IFX_FIGURE.PAIR_RCT)
+            {
+                CMeasurePairRct single = fm.ElementAt_PairRct(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
+            }
+            else if (nFigureIndex == IFX_FIGURE.PAIR_CIR)
+            {
+                CMeasurePairCir single = fm.ElementAt_PairCir(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
+            }
+            else if (nFigureIndex == IFX_FIGURE.PAIR_OVL)
+            {
+                CMeasurePairOvl single = fm.ElementAt_PairOvl(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
             }
             else if (nFigureIndex == IFX_FIGURE.RC_FOCUS)
             {
@@ -1669,31 +1819,18 @@ namespace CD_VISION_DIALOG
             }
             else if (nFigureIndex == IFX_FIGURE.MIXED_RC)
             {
-                CMeasureMixedRC single = fm.ElementAt_MixedRect(nDataIndex);
-
-                TXT_INDEX_OF_MIXED_RC.Text = nDataIndex.ToString("N0");
-                TXT_MIXED_RC_NICK.Text = single.NICKNAME;
-
-                /***/if (single.RC_TYPE_FST == IFX_RECT_TYPE.DIR_HOR) RDO_MIXED_RC_FST_DIR_HOR.Checked = true;
-                else if (single.RC_TYPE_FST == IFX_RECT_TYPE.DIR_VER) RDO_MIXED_RC_FST_DIR_VER.Checked = true;
-
-                /***/if (single.RC_TYPE_SCD == IFX_RECT_TYPE.DIR_HOR) RDO_MIXED_RC_SCD_DIR_HOR.Checked = true;
-                else if (single.RC_TYPE_SCD == IFX_RECT_TYPE.DIR_VER) RDO_MIXED_RC_SCD_DIR_VER.Checked = true;
-
-                /***/if (single.METRIC_TYPE == IFX_METRIC.P2P) RDO_MIXED_RC_METRIC_P2P.Checked = true;
-                else if (single.METRIC_TYPE == IFX_METRIC.HOR) RDO_MIXED_RC_METRIC_HOR.Checked = true;
-                else if (single.METRIC_TYPE == IFX_METRIC.VER) RDO_MIXED_RC_METRIC_VER.Checked = true;
-
-
-                TXT_MIXED_RC_FST_POS_X.Text = single.rc_FST.LT.X.ToString("N0");
-                TXT_MIXED_RC_FST_POS_Y .Text = single.rc_FST.LT.Y.ToString("N0");
-                TXT_MIXED_RC_FST_SZ_W.Text = single.rc_FST.Width.ToString("N0");
-                TXT_MIXED_RC_FST_SZ_H.Text = single.rc_FST.Height.ToString("N0");
-
-                TXT_MIXED_RC_SCD_POS_X.Text = single.rc_SCD.LT.X.ToString("N0");
-                TXT_MIXED_RC_SCD_POS_Y.Text = single.rc_SCD.LT.Y.ToString("N0");
-                TXT_MIXED_RC_SCD_SZ_W.Text = single.rc_SCD.Width.ToString("N0");
-                TXT_MIXED_RC_SCD_SZ_H.Text = single.rc_SCD.Height.ToString("N0");
+                CMeasureMixedRC single = fm.ElementAt_MRC(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
+            }
+            else if (nFigureIndex == IFX_FIGURE.MIXED_CC)
+            {
+                CMeasureMixedCC single = fm.ElementAt_MCC(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
+            }
+            else if (nFigureIndex == IFX_FIGURE.MIXED_RCC)
+            {
+                CMeasureMixedRCC single = fm.ElementAt_MRCC(nDataIndex);
+                _UpdateUI_Figure(single, nDataIndex);
 
             }
         }
@@ -1709,8 +1846,8 @@ namespace CD_VISION_DIALOG
         #region RECTANGLE
         private void BTN_DIG_ADD_Click(object sender, EventArgs e)
         {
-            if (imageView1.BOOL_TEACHING_ACTIVATION == false) return;
-
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
+ 
             imageView1.VIEW_Set_Overlay(true);
             CMeasurePairRct single = new CMeasurePairRct();
 
@@ -1718,19 +1855,19 @@ namespace CD_VISION_DIALOG
 
             if (RDO_TYPE_HOR.Checked == true)
             {
-                single.RC_TYPE = IFX_RECT_TYPE.DIR_HOR;
+                single.param_01_rc_type = IFX_RECT_TYPE.DIR_HOR;
                 single.rc_FST = new parseRect(ptDraw.X, ptDraw.Y, 100, 30);
                 single.rc_SCD = new parseRect(ptDraw.X, ptDraw.Y + 50, 100, 30);
             }
             else if (RDO_TYPE_VER.Checked == true)
             {
-                single.RC_TYPE = IFX_RECT_TYPE.DIR_VER;
+                single.param_01_rc_type = IFX_RECT_TYPE.DIR_VER;
                 single.rc_FST = new parseRect(ptDraw.X + 00, ptDraw.Y, 30, 100);
                 single.rc_SCD = new parseRect(ptDraw.X + 50, ptDraw.Y, 30, 100);
             }
             else if (RDO_TYPE_DIA.Checked == true)
             {
-                single.RC_TYPE = IFX_RECT_TYPE.DIR_DIA;
+                single.param_01_rc_type = IFX_RECT_TYPE.DIR_DIA;
                 // set rectangle as vertical 
                 single.rc_FST = new parseRect(ptDraw.X + 00, ptDraw.Y, 30, 100);
                 single.rc_SCD = new parseRect(ptDraw.X + 50, ptDraw.Y, 30, 100);
@@ -1745,14 +1882,14 @@ namespace CD_VISION_DIALOG
             int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.PAIR_RCT);
             single.NICKNAME = "RECT_" + nLastIndex.ToString("N0");
 
-            single.param_06_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
-            single.param_07_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
+            single.param_08_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
+            single.param_09_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
 
             single.param_comm_01_compen_A = baseRecp.PARAM_06_COMPEN_A;
             single.param_comm_02_compen_B = baseRecp.PARAM_06_COMPEN_B;
 
             imageView1.fm.Figure_Add(single);
-            UC_LOG_VIEWER.WRITE_LOG(string.Format("{0} Added.", IFX_FIGURE.ToStringType(single.RC_TYPE)), DEF_OPERATION.OPER_03_PARAM);
+            UC_LOG_VIEWER.WRITE_LOG(string.Format("{0} Added.", IFX_FIGURE.ToStringType(single.param_01_rc_type)), DEF_OPERATION.OPER_03_PARAM);
 
             BTN_REMOVE_FIGURES_Click(null, EventArgs.Empty);
             BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
@@ -1770,6 +1907,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_DIG_COPY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_RECT.Text);
 
             CMeasurePairRct temp = (CMeasurePairRct)imageView1.fm.ElementAt_PairRct(nIndex);
@@ -1788,6 +1926,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_DIG_MODIFY_Click(object sender, EventArgs e)
         {
+            if ( CMessagebox.Figure_Modify()== DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_RECT.Text);
 
             //// read  for latest roi croodinates
@@ -1799,15 +1938,15 @@ namespace CD_VISION_DIALOG
 
             //-------------------------------------------
             // Change Rectangle type
-            int nRC_TypePrev = single.RC_TYPE; //for default 
-            int nRC_TypeCurr = single.RC_TYPE; //for new 
+            int nRC_TypePrev = single.param_01_rc_type; //for default 
+            int nRC_TypeCurr = single.param_01_rc_type; //for new 
 
             /***/
             if (RDO_TYPE_HOR.Checked == true) nRC_TypeCurr = IFX_RECT_TYPE.DIR_HOR;
             else if (RDO_TYPE_VER.Checked == true) nRC_TypeCurr = IFX_RECT_TYPE.DIR_VER;
             else if (RDO_TYPE_DIA.Checked == true) nRC_TypeCurr = IFX_RECT_TYPE.DIR_DIA;
 
-            single.RC_TYPE = nRC_TypeCurr;
+            single.param_01_rc_type = nRC_TypeCurr;
             single.ConvertRectangleType(nRC_TypePrev, nRC_TypeCurr);
 
             //-------------------------------------------
@@ -1816,17 +1955,19 @@ namespace CD_VISION_DIALOG
             array[nIndex] = (CMeasurePairRct)single;
             imageView1.fm.Figure_Replace(array);
 
-            TXT_PARAM_DIA_ANGLE.Text = single.ANGLE.ToString();
+            TXT_PARAM_DIA_ANGLE.Text = single.param_02_rect_angle.ToString();
             //-------------------------------------------
             // Write log 
             UC_LOG_VIEWER.WRITE_LOG("RECT Modified.", DEF_OPERATION.OPER_03_PARAM);
-            MessageBox.Show("Data Modification has finished.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CMessagebox.Finished_Parameter_Change();
 
             BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
         }
         private void BTN_DIG_REMOVE_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_RECT.Text);
+
             imageView1.fm.Figure_Remove(IFX_FIGURE.PAIR_RCT, nIndex);
             UC_LOG_VIEWER.WRITE_LOG("FIG-RECT Removed.", DEF_OPERATION.OPER_03_PARAM);
 
@@ -1839,8 +1980,8 @@ namespace CD_VISION_DIALOG
         #region CIRCLE
         private void BTN_CIR_ADD_Click(object sender, EventArgs e)
         {
-            if (imageView1.BOOL_TEACHING_ACTIVATION == false) return;
-
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
+            
             imageView1.VIEW_Set_Overlay(true);
             CMeasurePairCir single = new CMeasurePairCir();
 
@@ -1873,6 +2014,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_CIR_COPY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_CIRCLE.Text);
 
             CMeasurePairCir temp = (CMeasurePairCir)imageView1.fm.ElementAt_PairCir(nIndex);
@@ -1889,6 +2031,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_CIR_MODIFY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Modify() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_CIRCLE.Text);
 
             //// read  for latest roi croodinates
@@ -1900,12 +2043,14 @@ namespace CD_VISION_DIALOG
             imageView1.fm.Figure_Replace(array);
 
             UC_LOG_VIEWER.WRITE_LOG("FIG-CIR Modified.", DEF_OPERATION.OPER_03_PARAM);
-            MessageBox.Show("Data Modification has finished.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CMessagebox.Finished_Parameter_Change();
 
         }
         private void BTN_CIR_REMOVE_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_CIRCLE.Text);
+
             imageView1.fm.Figure_Remove(IFX_FIGURE.PAIR_CIR, nIndex);
             UC_LOG_VIEWER.WRITE_LOG("FIG-CIR Removed.", DEF_OPERATION.OPER_03_PARAM);
         }
@@ -1914,6 +2059,8 @@ namespace CD_VISION_DIALOG
         #region MIXED_RECTANGLE
         private void BTN_MIX_RC_ADD_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
+
             CMeasureMixedRC single = new CMeasureMixedRC();
 
            #region GET RECTANGLE FIRST AND SECOND
@@ -1933,50 +2080,53 @@ namespace CD_VISION_DIALOG
 
             single.rc_SCD = new parseRect(px, py, rw, rh);
 
+            //*****************************************************************************
+            // Size Exception 
+            //*****************************************************************************
+
             int imageW = imageView1.VIEW_GetImageW();
             int imageH = imageView1.VIEW_GetImageH();
 
+            if (CMessagebox.Figure_is_invalid(single.rc_FST.ToRectangleF(), imageW, imageH) == true) return;
+            if (CMessagebox.Figure_is_invalid(single.rc_SCD.ToRectangleF(), imageW, imageH) == true) return;
 
-            bool isValid = CRect.isValid(single.rc_FST.ToRectangleF(), imageW, imageH);
-            /***/
-            isValid |= CRect.isValid(single.rc_SCD.ToRectangleF(), imageW, imageH);
-            if (isValid == false) return;
-
+            //*****************************************************************************
             #endregion
 
             #region SET RECTANGLE DIRECTION
             if (RDO_MIXED_RC_FST_DIR_HOR.Checked == true)
             {
-                single.RC_TYPE_FST = IFX_RECT_TYPE.DIR_HOR;
+                single.param_04_rc_type_fst = IFX_RECT_TYPE.DIR_HOR;
             }
             else if (RDO_MIXED_RC_FST_DIR_VER.Checked == true)
             {
-                single.RC_TYPE_FST = IFX_RECT_TYPE.DIR_VER;
+                single.param_04_rc_type_fst = IFX_RECT_TYPE.DIR_VER;
             }
 
             if (RDO_MIXED_RC_SCD_DIR_HOR.Checked == true)
             {
-                single.RC_TYPE_SCD = IFX_RECT_TYPE.DIR_HOR;
+                single.param_05_rc_type_scd = IFX_RECT_TYPE.DIR_HOR;
             }
             else if (RDO_MIXED_RC_SCD_DIR_VER.Checked == true)
             {
-                single.RC_TYPE_SCD = IFX_RECT_TYPE.DIR_VER;
+                single.param_05_rc_type_scd = IFX_RECT_TYPE.DIR_VER;
             }
             #endregion
 
             #region SET METRIC TYPE
-            /***/
-            if (RDO_MIXED_RC_METRIC_P2P.Checked == true) { single.METRIC_TYPE = IFX_METRIC.P2P; }
-            else if (RDO_MIXED_RC_METRIC_HOR.Checked == true) { single.METRIC_TYPE = IFX_METRIC.HOR; }
-            else if (RDO_MIXED_RC_METRIC_VER.Checked == true) { single.METRIC_TYPE = IFX_METRIC.VER; }
+            /***/if (RDO_MIXED_RC_METRIC_P2P.Checked == true) { single.param_07_metric_type = IFX_METRIC.P2P; }
+            else if (RDO_MIXED_RC_METRIC_HOR.Checked == true) { single.param_07_metric_type = IFX_METRIC.HOR; }
+            else if (RDO_MIXED_RC_METRIC_VER.Checked == true) { single.param_07_metric_type = IFX_METRIC.VER; }
             #endregion
+
+            if (CHK_MIXED_RC_USE_CENTROID.Checked) single.param_08_use_centroid = true;
 
             single.CroodinateBackup();
 
             BASE_RECP baseRecp = imageView1.fm.baseRecp;
 
             int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.MIXED_RC);
-            single.NICKNAME = "MRC" + nLastIndex.ToString("N0");
+            single.NICKNAME = "MRC_" + nLastIndex.ToString("N0");
 
             single.param_02_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
             single.param_03_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
@@ -1995,9 +2145,11 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_MIXED_RC_COPY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
+
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RC.Text);
 
-            CMeasureMixedRC temp = (CMeasureMixedRC)imageView1.fm.ElementAt_MixedRect(nIndex);
+            CMeasureMixedRC temp = (CMeasureMixedRC)imageView1.fm.ElementAt_MRC(nIndex);
             CMeasureMixedRC single = temp.CopyTo();
 
             // update last index
@@ -2011,10 +2163,11 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_MIXED_RC_MODIFY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Modify() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RC.Text);
             
             //// read  for latest roi croodinates
-            CMeasureMixedRC single = (CMeasureMixedRC)imageView1.fm.ElementAt_MixedRect(nIndex);
+            CMeasureMixedRC single = (CMeasureMixedRC)imageView1.fm.ElementAt_MRC(nIndex);
 
             //-------------------------------------------
             // Change Nick Name
@@ -2024,16 +2177,21 @@ namespace CD_VISION_DIALOG
             int nRC_TYPE_SCD = IFX_RECT_TYPE.DIR_HOR;
 
             if (RDO_MIXED_RC_FST_DIR_HOR.Checked == true) nRC_TYPE_FST = IFX_RECT_TYPE.DIR_HOR;
-            if (RDO_MIXED_RC_FST_DIR_VER.Checked == true) nRC_TYPE_SCD = IFX_RECT_TYPE.DIR_VER;
+            if (RDO_MIXED_RC_FST_DIR_VER.Checked == true) nRC_TYPE_FST = IFX_RECT_TYPE.DIR_VER;
 
             if( RDO_MIXED_RC_SCD_DIR_HOR.Checked == true) nRC_TYPE_SCD = IFX_RECT_TYPE.DIR_HOR;
             if( RDO_MIXED_RC_SCD_DIR_VER.Checked == true) nRC_TYPE_SCD = IFX_RECT_TYPE.DIR_VER;
+
+            single.param_04_rc_type_fst = nRC_TYPE_FST;
+            single.param_05_rc_type_scd = nRC_TYPE_SCD;
 
             int nMetric = IFX_METRIC.P2P;
 
             if (RDO_MIXED_RC_METRIC_P2P.Checked == true) nMetric = IFX_METRIC.P2P;
             if (RDO_MIXED_RC_METRIC_HOR.Checked == true) nMetric = IFX_METRIC.HOR;
             if (RDO_MIXED_RC_METRIC_VER.Checked == true) nMetric = IFX_METRIC.VER;
+
+            single.param_07_metric_type = nMetric;
 
             float px = Convert.ToInt32(TXT_MIXED_RC_FST_POS_X.Text.Replace(",", ""));
             float py = Convert.ToInt32(TXT_MIXED_RC_FST_POS_Y.Text.Replace(",", ""));
@@ -2043,40 +2201,400 @@ namespace CD_VISION_DIALOG
             single.rc_FST = new parseRect(px, py, sw, sh);
 
             px = Convert.ToInt32(TXT_MIXED_RC_SCD_POS_X.Text.Replace(",",""));
-            py = Convert.ToInt32(TXT_MIXED_RC_FST_POS_Y.Text.Replace(",", ""));
-            sw = Convert.ToInt32(TXT_MIXED_RC_FST_SZ_W.Text.Replace(",", ""));
-            sh = Convert.ToInt32(TXT_MIXED_RC_FST_SZ_H.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_RC_SCD_POS_Y.Text.Replace(",", ""));
+            sw = Convert.ToInt32(TXT_MIXED_RC_SCD_SZ_W.Text.Replace(",", ""));
+            sh = Convert.ToInt32(TXT_MIXED_RC_SCD_SZ_H.Text.Replace(",", ""));
 
-            single.METRIC_TYPE = nMetric;
-            
+            single.rc_SCD= new parseRect(px, py, sw, sh);
+
+
+            single.param_08_use_centroid = CHK_MIXED_RC_USE_CENTROID.Checked;
 
             //-------------------------------------------
             // replace !! updated data
-            CMeasureMixedRC[] array = imageView1.fm.ToArray_MixedRc();
+            CMeasureMixedRC[] array = imageView1.fm.ToArray_Mixed_RC();
             array[nIndex] = (CMeasureMixedRC)single;
             imageView1.fm.Figure_Replace(array);
                         
             //-------------------------------------------
             // Write log 
             UC_LOG_VIEWER.WRITE_LOG("MIXED RECT Modified.", DEF_OPERATION.OPER_03_PARAM);
-            MessageBox.Show("Data Modification has finished.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            CMessagebox.Finished_Parameter_Change();
+ 
+            imageView1.Refresh();
             BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
         }
         private void BTN_MIXED_RC_REMOVE_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RC.Text);
+
             imageView1.fm.Figure_Remove(IFX_FIGURE.MIXED_RC, nIndex);
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
             UC_LOG_VIEWER.WRITE_LOG("FIG-MRC Removed.", DEF_OPERATION.OPER_03_PARAM);
         }
 
         #endregion
 
+        #region MIXED CIRCLE
+
+        private void BTN_MIXED_CC_ADD_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
+
+            CMeasureMixedCC single = new CMeasureMixedCC();
+
+            #region GET RECTANGLE FIRST AND SECOND
+            float px = 0; float py = 0; float rw = 0; float rh = 0;
+
+            px = Convert.ToInt32(TXT_MIXED_CC_FST_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_CC_FST_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_CC_FST_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_CC_FST_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST_EX = new RectangleF(px, py, rw, rh);
+            single.rc_FST_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_FST_EX);
+
+            px = Convert.ToInt32(TXT_MIXED_CC_SCD_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_CC_SCD_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_CC_SCD_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_CC_SCD_SZ_H.Text.Replace(",", ""));
+
+            single.rc_SCD_EX = new RectangleF(px, py, rw, rh);
+            single.rc_SCD_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_SCD_EX);
+
+            //*****************************************************************************
+            // Size Exception 
+            //*****************************************************************************
+
+            int imageW = imageView1.VIEW_GetImageW();
+            int imageH = imageView1.VIEW_GetImageH();
+
+            if (CMessagebox.Figure_is_invalid(single.rc_FST_EX, imageW, imageH) == true) return;
+            if (CMessagebox.Figure_is_invalid(single.rc_SCD_EX, imageW, imageH) == true) return;
+
+            //*****************************************************************************
+
+            #endregion
+
+            #region SET MEASUREMENT DIRECTION
+            /***/if (RDO_MIXED_CC_FST_DIR_LFT.Checked == true) { single.param_06_ms_pos_fst = IFX_DIR.DIR_LFT; }
+            else if (RDO_MIXED_CC_FST_DIR_TOP.Checked == true) { single.param_06_ms_pos_fst = IFX_DIR.DIR_TOP; }
+            else if (RDO_MIXED_CC_FST_DIR_RHT.Checked == true) { single.param_06_ms_pos_fst = IFX_DIR.DIR_RHT; }
+            else if (RDO_MIXED_CC_FST_DIR_BTM.Checked == true) { single.param_06_ms_pos_fst = IFX_DIR.DIR_BTM; }
+
+            /***/if (RDO_MIXED_CC_SCD_DIR_LFT.Checked == true) { single.param_07_ms_pos_scd = IFX_DIR.DIR_LFT; }
+            else if (RDO_MIXED_CC_SCD_DIR_TOP.Checked == true) { single.param_07_ms_pos_scd = IFX_DIR.DIR_TOP; }
+            else if (RDO_MIXED_CC_SCD_DIR_RHT.Checked == true) { single.param_07_ms_pos_scd = IFX_DIR.DIR_RHT; }
+            else if (RDO_MIXED_CC_SCD_DIR_BTM.Checked == true) { single.param_07_ms_pos_scd = IFX_DIR.DIR_BTM; }
+
+            #endregion
+
+            #region SET METRIC TYPE
+            /***/
+            if (RDO_MIXED_CC_METRIC_P2P.Checked == true) { single.param_08_metric_type = IFX_METRIC.P2P; }
+            else if (RDO_MIXED_CC_METRIC_HOR.Checked == true) { single.param_08_metric_type = IFX_METRIC.HOR; }
+            else if (RDO_MIXED_CC_METRIC_VER.Checked == true) { single.param_08_metric_type = IFX_METRIC.VER; }
+            #endregion
+
+            single.CroodinateBackup();
+
+            BASE_RECP baseRecp = imageView1.fm.baseRecp;
+
+            int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.MIXED_CC);
+            single.NICKNAME = "MCC_" + nLastIndex.ToString("N0");
+
+            single.param_02_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
+            single.param_03_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
+
+            single.param_comm_01_compen_A = baseRecp.PARAM_06_COMPEN_A;
+            single.param_comm_02_compen_B = baseRecp.PARAM_06_COMPEN_B;
+
+            imageView1.fm.Figure_Add(single);
+            imageView1.Refresh();
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+            BTN_REMOVE_FIGURES_Click(null, EventArgs.Empty);
+
+            UC_LOG_VIEWER.WRITE_LOG(string.Format("{0} Added.", IFX_FIGURE.ToStringType(IFX_FIGURE.MIXED_CC)), DEF_OPERATION.OPER_03_PARAM);
+        }
+
+        private void BTN_MIXED_CC_COPY_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_CC.Text);
+
+            CMeasureMixedCC temp = (CMeasureMixedCC)imageView1.fm.ElementAt_MCC(nIndex);
+            CMeasureMixedCC single = temp.CopyTo();
+
+            // update last index
+            int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.MIXED_CC);
+            single.NICKNAME = "MCC_" + nLastIndex.ToString("N0");
+
+            imageView1.fm.Figure_Add(single);
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MCC Copied.", DEF_OPERATION.OPER_03_PARAM);
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+
+        }
+        private void BTN_MIXED_CC_MODIFY_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Modify() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_CC.Text);
+
+            //// read  for latest roi croodinates
+            CMeasureMixedCC single = (CMeasureMixedCC)imageView1.fm.ElementAt_MCC(nIndex);
+
+            //-------------------------------------------
+            // Change Nick Name
+            single.NICKNAME = TXT_MIXED_CC_NICK.Text;
+
+            int nMS_POS_FST = IFX_DIR.DIR_LFT;
+            int nMS_POS_SCD = IFX_DIR.DIR_LFT;
+
+            if (RDO_MIXED_CC_FST_DIR_LFT.Checked) nMS_POS_FST = IFX_DIR.DIR_LFT;
+            if (RDO_MIXED_CC_FST_DIR_TOP.Checked) nMS_POS_FST = IFX_DIR.DIR_TOP;
+            if (RDO_MIXED_CC_FST_DIR_RHT.Checked) nMS_POS_FST = IFX_DIR.DIR_RHT;
+            if (RDO_MIXED_CC_FST_DIR_BTM.Checked) nMS_POS_FST = IFX_DIR.DIR_BTM;
+
+            if (RDO_MIXED_CC_SCD_DIR_LFT.Checked) nMS_POS_SCD = IFX_DIR.DIR_LFT;
+            if (RDO_MIXED_CC_SCD_DIR_TOP.Checked) nMS_POS_SCD = IFX_DIR.DIR_TOP;
+            if (RDO_MIXED_CC_SCD_DIR_RHT.Checked) nMS_POS_SCD = IFX_DIR.DIR_RHT;
+            if (RDO_MIXED_CC_SCD_DIR_BTM.Checked) nMS_POS_SCD = IFX_DIR.DIR_BTM;
+
+            single.param_06_ms_pos_fst = nMS_POS_FST;
+            single.param_07_ms_pos_scd = nMS_POS_SCD;
+
+            int nMetric = IFX_METRIC.P2P;
+            if (RDO_MIXED_CC_METRIC_P2P.Checked) nMetric = IFX_METRIC.P2P;
+            if (RDO_MIXED_CC_METRIC_HOR.Checked) nMetric = IFX_METRIC.HOR;
+            if (RDO_MIXED_CC_METRIC_VER.Checked) nMetric = IFX_METRIC.VER;
+            single.param_08_metric_type = nMetric;
+
+            float px = Convert.ToInt32(TXT_MIXED_CC_FST_POS_X.Text.Replace(",", ""));
+            float py = Convert.ToInt32(TXT_MIXED_CC_FST_POS_Y.Text.Replace(",", ""));
+            float sw = Convert.ToInt32(TXT_MIXED_CC_FST_SZ_W.Text.Replace(",", ""));
+            float sh = Convert.ToInt32(TXT_MIXED_CC_FST_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST_EX = new RectangleF(px, py, sw, sh);
+            single.rc_FST_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_FST_EX);
+
+            px = Convert.ToInt32(TXT_MIXED_CC_SCD_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_CC_SCD_POS_Y.Text.Replace(",", ""));
+            sw = Convert.ToInt32(TXT_MIXED_CC_SCD_SZ_W.Text.Replace(",", ""));
+            sh = Convert.ToInt32(TXT_MIXED_CC_SCD_SZ_H.Text.Replace(",", ""));
+
+            single.rc_SCD_EX = new RectangleF(px, py, sw, sh);
+            single.rc_FST_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_SCD_EX);
+
+            //-------------------------------------------
+            // replace !! updated data
+            CMeasureMixedCC[] array = imageView1.fm.ToArray_Mixed_CC();
+            array[nIndex] = (CMeasureMixedCC)single;
+            imageView1.fm.Figure_Replace(array);
+
+            //-------------------------------------------
+            // Write log 
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MCC Modified.", DEF_OPERATION.OPER_03_PARAM);
+            CMessagebox.Finished_Parameter_Change();
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+        }
+
+        private void BTN_MIXED_CC_REMOVE_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RC.Text);
+
+            imageView1.fm.Figure_Remove(IFX_FIGURE.MIXED_CC, nIndex);
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MCC Removed.", DEF_OPERATION.OPER_03_PARAM);
+        }
+
+        #endregion
+        #region MIXED RECTANGLE AND CIRCLE
+
+
+        private void BTN_MIXED_RCC_ADD_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
+
+            CMeasureMixedRCC single = new CMeasureMixedRCC();
+
+            #region GET RECTANGLE FIRST AND SECOND
+            float px = 0; float py = 0; float rw = 0; float rh = 0;
+
+            px = Convert.ToInt32(TXT_MIXED_RCC_FST_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_RCC_FST_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_RCC_FST_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_RCC_FST_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST = new parseRect(px, py, rw, rh);
+
+            px = Convert.ToInt32(TXT_MIXED_RCC_SCD_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_RCC_SCD_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_RCC_SCD_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_RCC_SCD_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST_EX = new RectangleF(px, py, rw, rh);
+            single.rc_FST_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_FST_EX);
+
+            //*****************************************************************************
+            // Size Exception 
+            //*****************************************************************************
+
+            int imageW = imageView1.VIEW_GetImageW();
+            int imageH = imageView1.VIEW_GetImageH();
+
+            if (CMessagebox.Figure_is_invalid(single.rc_FST.ToRectangleF(), imageW, imageH) == true) return;
+            if (CMessagebox.Figure_is_invalid(single.rc_FST_EX, imageW, imageH) == true) return;
+
+            //*****************************************************************************
+
+            #endregion
+
+            #region SET RECTANGLE DIRECTION & MEASUREMENT POSITION
+            /***/
+            if (RDO_MIXED_RCC_FST_DIR_HOR.Checked) { single.param_02_rc_type_fst = IFX_RECT_TYPE.DIR_HOR; }
+            else if (RDO_MIXED_RCC_FST_DIR_VER.Checked) { single.param_02_rc_type_fst = IFX_RECT_TYPE.DIR_VER; }
+
+            /***/
+            if (RDO_MIXED_RCC_SCD_DIR_LFT.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_LFT; }
+            else if (RDO_MIXED_RCC_SCD_DIR_TOP.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_TOP; }
+            else if (RDO_MIXED_RCC_SCD_DIR_RHT.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_RHT; }
+            else if (RDO_MIXED_RCC_SCD_DIR_BTM.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_BTM; }
+            #endregion
+
+            #region SET METRIC TYPE
+            /***/
+            if (RDO_MIXED_RCC_METRIC_P2P.Checked == true) { single.param_20_metric_type = IFX_METRIC.P2P; }
+            else if (RDO_MIXED_RCC_METRIC_HOR.Checked == true) { single.param_20_metric_type = IFX_METRIC.HOR; }
+            else if (RDO_MIXED_RCC_METRIC_VER.Checked == true) { single.param_20_metric_type = IFX_METRIC.VER; }
+            #endregion
+
+            if (CHK_MIXED_RCC_USE_CENTROID.Checked == true) single.param_04_use_centroid = true;
+
+            single.CroodinateBackup();
+
+            BASE_RECP baseRecp = imageView1.fm.baseRecp;
+
+            int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.MIXED_RCC);
+            single.NICKNAME = "MRCC_" + nLastIndex.ToString("N0");
+
+            single.param_01_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
+            single.param_12_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
+
+            single.param_comm_01_compen_A = baseRecp.PARAM_06_COMPEN_A;
+            single.param_comm_02_compen_B = baseRecp.PARAM_06_COMPEN_B;
+
+            imageView1.fm.Figure_Add(single);
+            imageView1.Refresh();
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+            BTN_REMOVE_FIGURES_Click(null, EventArgs.Empty);
+
+            UC_LOG_VIEWER.WRITE_LOG(string.Format("{0} Added.", IFX_FIGURE.ToStringType(IFX_FIGURE.MIXED_RCC)), DEF_OPERATION.OPER_03_PARAM);
+        }
+
+        private void BTN_MIXED_RCC_COPY_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RCC.Text);
+
+            CMeasureMixedRCC temp = (CMeasureMixedRCC)imageView1.fm.ElementAt_MRCC(nIndex);
+            CMeasureMixedRCC single = temp.CopyTo();
+
+            // update last index
+            int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.MIXED_RCC);
+            single.NICKNAME = "MRCC_" + nLastIndex.ToString("N0");
+
+            imageView1.fm.Figure_Add(single);
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MRCC Copied.", DEF_OPERATION.OPER_03_PARAM);
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+        }
+
+        private void BTN_MIXED_RCC_MODIFY_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Modify() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RCC.Text);
+
+            //// read  for latest roi croodinates
+            CMeasureMixedRCC single = (CMeasureMixedRCC)imageView1.fm.ElementAt_MRCC(nIndex);
+
+            //-------------------------------------------
+            // Change Nick Name
+            single.NICKNAME = TXT_MIXED_RCC_NICK.Text;
+
+            float px = 0; float py = 0; float rw = 0; float rh = 0;
+
+            px = Convert.ToInt32(TXT_MIXED_RCC_FST_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_RCC_FST_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_RCC_FST_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_RCC_FST_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST = new parseRect(px, py, rw, rh);
+
+            px = Convert.ToInt32(TXT_MIXED_RCC_SCD_POS_X.Text.Replace(",", ""));
+            py = Convert.ToInt32(TXT_MIXED_RCC_SCD_POS_Y.Text.Replace(",", ""));
+            rw = Convert.ToInt32(TXT_MIXED_RCC_SCD_SZ_W.Text.Replace(",", ""));
+            rh = Convert.ToInt32(TXT_MIXED_RCC_SCD_SZ_H.Text.Replace(",", ""));
+
+            single.rc_FST_EX = new RectangleF(px, py, rw, rh);
+            single.rc_FST_IN = CRect.SetCenter(new RectangleF(px, py, 5, 5), single.rc_FST_EX);
+
+            #region SET RECTANGLE DIRECTION & MEASUREMENT POSITION
+            /***/if (RDO_MIXED_RCC_FST_DIR_HOR.Checked) { single.param_02_rc_type_fst = IFX_RECT_TYPE.DIR_HOR; }
+            else if (RDO_MIXED_RCC_FST_DIR_VER.Checked) { single.param_02_rc_type_fst = IFX_RECT_TYPE.DIR_VER; }
+
+            /***/
+            if (RDO_MIXED_RCC_SCD_DIR_LFT.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_LFT; }
+            else if (RDO_MIXED_RCC_SCD_DIR_TOP.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_TOP; }
+            else if (RDO_MIXED_RCC_SCD_DIR_RHT.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_RHT; }
+            else if (RDO_MIXED_RCC_SCD_DIR_BTM.Checked == true) { single.param_14_ms_pos_scd = IFX_DIR.DIR_BTM; }
+            #endregion
+
+            #region SET METRIC TYPE
+            /***/if (RDO_MIXED_RCC_METRIC_P2P.Checked == true) { single.param_20_metric_type = IFX_METRIC.P2P; }
+            else if (RDO_MIXED_RCC_METRIC_HOR.Checked == true) { single.param_20_metric_type = IFX_METRIC.HOR; }
+            else if (RDO_MIXED_RCC_METRIC_VER.Checked == true) { single.param_20_metric_type = IFX_METRIC.VER; }
+            #endregion
+
+            if (CHK_MIXED_RCC_USE_CENTROID.Checked == true) single.param_04_use_centroid = true;
+
+            //-------------------------------------------
+            // replace !! updated data
+            CMeasureMixedRCC[] array = imageView1.fm.ToArray_Mixed_RCC();
+            array[nIndex] = (CMeasureMixedRCC)single;
+            imageView1.fm.Figure_Replace(array);
+
+            //-------------------------------------------
+            // Write log  
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MRCC Modified.", DEF_OPERATION.OPER_03_PARAM);
+            CMessagebox.Finished_Parameter_Change();
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+        }
+
+        private void BTN_MIXED_RCC_REMOVE_Click(object sender, EventArgs e)
+        {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
+            int nIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RCC.Text);
+            imageView1.fm.Figure_Remove(IFX_FIGURE.MIXED_RCC, nIndex);
+            UC_LOG_VIEWER.WRITE_LOG("FIG-MRCC Removed.", DEF_OPERATION.OPER_03_PARAM);
+
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+        }
+
+        
+
+
+        #endregion 
 
         #region OVERALY
         private void BTN_OL_ADD_Click(object sender, EventArgs e)
         {
-            if (imageView1.BOOL_TEACHING_ACTIVATION == false) return;
+            if (CMessagebox.Figure_Add() == DialogResult.No) { return; }
 
             imageView1.VIEW_Set_Overlay(true);
             CMeasurePairOvl single = new CMeasurePairOvl();
@@ -2085,7 +2603,6 @@ namespace CD_VISION_DIALOG
 
             int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.PAIR_OVL);
             single.NICKNAME = "OVERLAY_" + nLastIndex.ToString("N0");
-
 
             single.RC_VER_EX.rc_FST = new parseRect(ptDraw.X - 300, ptDraw.Y - 50, 50, 100);
             single.RC_VER_EX.rc_SCD = new parseRect(ptDraw.X + 250, ptDraw.Y - 50, 50, 100);
@@ -2111,6 +2628,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_OL_COPY_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Copy() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_OVL.Text);
 
             CMeasurePairOvl temp = (CMeasurePairOvl)imageView1.fm.ElementAt_PairOvl(nIndex);
@@ -2127,7 +2645,9 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_OL_REMOVE_Click(object sender, EventArgs e)
         {
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return; }
             int nIndex = Convert.ToInt32(TXT_INDEX_OF_OVL.Text);
+
             imageView1.fm.Figure_Remove(IFX_FIGURE.PAIR_OVL, nIndex);
             UC_LOG_VIEWER.WRITE_LOG("FIG-OVL Removed.", DEF_OPERATION.OPER_03_PARAM);
 
@@ -2217,10 +2737,6 @@ namespace CD_VISION_DIALOG
             // set visibility : according to tab selection only for OVL
             RDO_ROI_ASYM.Visible = nFigureIndex == IFX_FIGURE.PAIR_OVL ? true : false;
         }
-        private void LV_Figure_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
 
         //----------------------------------------------------------------------------------------
         #region FIGURE MANIPULATION Scale
@@ -2264,7 +2780,6 @@ namespace CD_VISION_DIALOG
         private async void BTN_PLAY_Click(object sender, EventArgs e)
         {
             int nCount = LV_FILE_LIST.Items.Count;
-
 
             for (int nIndex = 0; nIndex < nCount; nIndex++)
             {
@@ -2334,16 +2849,26 @@ namespace CD_VISION_DIALOG
 
             if (RDO_SIMUL_VIEW_ONLY.Checked == true) // image view measurement
             {
-                #region VIEW ONLY
+               #region VIEW ONLY
                 Bitmap bmp = imageView1.GetDisplay_Bmp();
                 byte[] rawImage = Computer.HC_CONV_Bmp2Raw(bmp, ref imageW, ref imageH);
 
                 CInspUnit iu = new CInspUnit();
                 iu.AppendItem_Single(rawImage, imageW, imageH, imageView1.fm.Clone() as CFigureManager, 0);
 
+                //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
                 _Do_Measurement(iu, true,  0, 0, 0);
+                //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+                
+                rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+                imageView1.SetDisplay(rawImage, imageW, imageH);
                 imageView1.DrawPoints(iu.listDispEdgePoints);
                 imageView1.Refresh();
+
+                // display data to the message window 
+                for (int i = 0; i < iu.listInspResult.Count; i++) { _PRINT_MSG(iu.listInspResult.ElementAt(i)); }
+
+
                 nInterruptCount = 0;
                 #endregion
             }
@@ -2408,9 +2933,29 @@ namespace CD_VISION_DIALOG
 
                             CInspUnit iu = new CInspUnit();
                             iu.AppendItem_Single(rawImage, imageW, imageH, imageView1.fm.Clone() as CFigureManager, 0);
+
+                            //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
                             _Do_Measurement(iu, true,  0, 0, 0);
-                            imageView1.DrawPoints(iu.listDispEdgePoints);
-                            imageView1.Refresh();
+                            //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+
+                            this.UIThread(delegate 
+                            {
+                                rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+
+                                if (iu.IsPreprocessed() == true && m_hacker.BOOL_SHOW_IMAGE_PROCESS == true)
+                                {
+                                    rawImage = iu.GetImage_prep_Last(out imageW, out imageH);
+                                }
+
+                                imageView1.SetDisplay(rawImage, imageW, imageH);
+                                imageView1.DrawPoints(iu.listDispEdgePoints);
+                                imageView1.Refresh();
+
+                                // display data to the message window 
+                                for (int i = 0; i < iu.listInspResult.Count; i++) { _PRINT_MSG(iu.listInspResult.ElementAt(i)); }
+
+                            });
+                            
                             System.Threading.Thread.Sleep(100);
 
                         }
@@ -2472,13 +3017,30 @@ namespace CD_VISION_DIALOG
                 {
                     this.UIThread(delegate  { _PRINT_MSG("SEQUENTIAL IMAGE " + string.Format(" [{0}/{1}]", 1 + i, nTOTAL_REPEAT)); });
 
+                    //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
                     _Do_Measurement(iu, true, 0, 0, 0);
+                    //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+
+                    int imageW = 0; int imageH = 0;
+                    byte[] rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+
+                    if (m_hacker.BOOL_SHOW_IMAGE_PROCESS == true && iu.IsPreprocessed() == true)
+                    {
+                        rawImage = iu.GetImage_prep_Last(out imageW, out imageH);
+                    }
+
+                    imageView1.SetDisplay(rawImage, imageW, imageH);
                     imageView1.DrawPoints(iu.listDispEdgePoints);
                     imageView1.Refresh();
 
+                    // display data to the message window 
+                    for (int nItem = 0; nItem < iu.listInspResult.Count; nItem++) 
+                    {
+                        _PRINT_MSG(iu.listInspResult.ElementAt(nItem)); 
+                    }
+
                     System.Threading.Thread.Sleep(20);
 
-                    this.UIThread(delegate { imageView1.Refresh(); });
 
                     _ctrlProgressBarUpdate(i);
                 }
@@ -2571,37 +3133,15 @@ namespace CD_VISION_DIALOG
             
             return fFocusValue;
         }
-        private MeasureInfo _Do_Measurement(CInspUnit iu, bool bSimulation, int nCamNo, int nIdxCycle, int nIdxPoint)
+        private void _Do_Measurement(CInspUnit iu, bool bSimulation, int nCamNo, int nIdxCycle, int nIdxPoint)
         {
             CFigureManager fm = iu.fm.Clone() as CFigureManager;
 
-            // set display original image and init variables  171204
-
             int imageW = 0;int imageH = 0;
-            byte[] rawView = iu.GetFirstRaw(out imageW, out imageH);
-            Bitmap bmpView = iu.GetFirstBitmap();
-
-            imageView1.VIEW_Set_Clear_DispObject();
-            imageView1.SetDisplay(rawView, imageW, imageH);
-
+            byte[] rawView = iu.GetImage_Raw_First(out imageW, out imageH);
+            Bitmap bmpView = iu.GetImage_Bitmap_First();
 
             report.IncreseSequenceIndex();
-
-
-            //*************************************************************************************
-            // INPUT IMAGE SAVE
-            //*************************************************************************************
-
-            if (CHK_USE_SAVE_INPUT.Checked == true)
-            {
-                string strPathDir = Path.Combine(fm.param_path.i10_PATH_IMG_ORG, Computer.GetTimeCode4Save_YYYY_MM_DD());
-                Computer.EnsureFolderExsistance(strPathDir);
-
-                string strTimecode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
-                byte[] rawInput4Save = iu.GetFirstRaw(out imageW, out imageH);
-                imageView2.ThreadCall_SaveImage(Path.Combine(strPathDir, strTimecode + "_MEASURE.BMP"), rawInput4Save, imageW, imageH);
-            }
-           
 
             //*************************************************************************************
             // Pattern matching
@@ -2619,9 +3159,6 @@ namespace CD_VISION_DIALOG
             report.m_listMatchPoint.Add(ptTemplateCenter);
             if (fMatchingRatio == 0) { _SetColor_PtrnResul(0); } else { _SetColor_PtrnResul(1); }
 
-            MeasureInfo mi = new MeasureInfo();
-
-
             //*************************************************************************************
             // Focus Region Processing
             //*************************************************************************************
@@ -2630,21 +3167,13 @@ namespace CD_VISION_DIALOG
             double fFocusValue = ThrProc_01_FocusRegionProcess(ptTemplateCenter, rawView, imageW, imageH, out nHisto);
             report.AddFocusMag(fFocusValue);
             report.AddHistogram(nHisto);
-            mi.Focus = fFocusValue;
+            iu.mi.Focus = fFocusValue;
 
             //*************************************************************************************
             // user defined pre-processing 170809
             //*************************************************************************************
 
             iu.Proc_00_DoPreProcess();
-
-            if (m_hacker.BOOL_SHOW_IMAGE_PROCESS == true)
-            {
-                imageView1.VIEW_Set_Clear_DispObject();
-                imageView1.SetDisplay(iu.GetTargetImage_ByIndex(0), imageW, imageH);
-            }
-
-            List<string> listMeasureResult = new List<string>();
 
             PointF P1 = new PointF(0, 0);
             PointF P2 = new PointF(0, 0);
@@ -2657,11 +3186,162 @@ namespace CD_VISION_DIALOG
             //*************************************************************************************
             // CIRCLE 
             //*************************************************************************************
+
+            _INSP_RC(fm, ptDelta, iu);
+            _INSP_CIR(fm, ptDelta, iu);
+            _INSP_OL(fm, ptDelta, iu);
+            _INSP_MRC(fm, ptDelta, iu);
+            _INSP_MCC(fm, ptDelta, iu);
+            _INSP_MRCC(fm, ptDelta, iu);
+
+            return ;
+        }
+       
+        private void _INSP_MCC(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        {
+            List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
+            List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
+
            #region CIRCLE - NOrmal case
+            for (int i = 0; i < fm.COUNT_MIXED_CC; i++)
+            {
+                // get element ( to modify name w/h , make duplica)
+                CMeasureMixedCC single = fm.ElementAt_MCC(i).CopyTo();
+                string strOwnName = single.NICKNAME;
+
+                // set relative croodinate
+                single.SetRelativeMovement(ptDelta);
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES;
+
+                List<double> listDistance = new List<double>();
+                RectangleF rcVoid = new RectangleF();
+
+                double fDistance = 0;
+
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
+                {
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
+
+                    // get measure data
+                    fDistance = single.MeasureData(rawTargetImage, imageW, imageH, 
+                        ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN, 
+                        ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN,
+                        out P1, out P2, out rcVoid, out rcVoid);
+                    
+                    listDistance.Add(fDistance);
+                }
+
+                if (fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listDistance.Count < 3)
+                {
+                    fDistance = listDistance.Average();
+                }
+                else
+                {
+                    fDistance = listDistance.ElementAt((int)Math.Floor(listDistance.Count / 2.0));
+                }
+
+                // take inspection result 
+
+                string strInspRes = string.Empty;
+
+                report.AddResult_FIG(IFX_FIGURE.MIXED_CC, single, fDistance);
+
+                iu.InsertTransResultData(fDistance);
+                iu.InsertDispResult_Circle(single.NICKNAME, fDistance);
+                iu.Insert_DispEdgePoints(listEdges_FEX, listEdges_FMD, listEdges_FIN);
+                iu.Insert_DispEdgePoints(listEdges_SEX, listEdges_SMD, listEdges_SIN);
+
+                iu.Insert_DispMeasurePoint(P1, P2);
+
+
+
+            }
+            #endregion
+        }
+        private void _INSP_MRCC(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        {
+            List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
+            List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
+
+            #region CIRCLE - NOrmal case
+            for (int i = 0; i < fm.COUNT_MIXED_RCC; i++)
+            {
+                // get element ( to modify name w/h , make duplica)
+                CMeasureMixedRCC single = fm.ElementAt_MRCC(i).CopyTo();
+                string strOwnName = single.NICKNAME;
+
+                // set relative croodinate
+                single.SetRelativeMovement(ptDelta);
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES;
+
+                List<double> listDistance = new List<double>();
+                RectangleF rcVoid = new RectangleF();
+
+                double fDistance = 0;
+
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
+                {
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
+
+                    // get measure data
+                    fDistance = single.MeasureData(rawTargetImage, imageW, imageH,
+                        ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,
+                        ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN,
+                        out P1, out P2, out rcVoid, out rcVoid);
+
+                    listDistance.Add(fDistance);
+                }
+
+                if (fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listDistance.Count < 3)
+                {
+                    fDistance = listDistance.Average();
+                }
+                else
+                {
+                    fDistance = listDistance.ElementAt((int)Math.Floor(listDistance.Count / 2.0));
+                }
+
+                // take inspection result 
+
+                string strInspRes = string.Empty;
+
+                report.AddResult_FIG(IFX_FIGURE.MIXED_RCC, single, fDistance);
+
+                iu.InsertTransResultData(fDistance);
+                iu.InsertDispResult_Circle(single.NICKNAME, fDistance);
+                iu.Insert_DispEdgePoints(listEdges_FEX, listEdges_FMD, listEdges_FIN);
+                iu.Insert_DispEdgePoints(listEdges_SEX, listEdges_SMD, listEdges_SIN);
+
+                iu.Insert_DispMeasurePoint(P1, P2);
+            }
+            #endregion
+        }
+        private void _INSP_CIR(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        {
+            List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
+            List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
+
+            #region CIRCLE - NOrmal case
             for (int i = 0; i < fm.COUNT_PAIR_CIR; i++)
             {
-                List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
-                List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
 
                 // get element ( to modify name w/h , make duplica)
                 CMeasurePairCir single = fm.ElementAt_PairCir(i).CopyTo();
@@ -2669,7 +3349,7 @@ namespace CD_VISION_DIALOG
 
                 // set relative croodinate
                 single.SetRelativeMovement(ptDelta);
-                single.PIXEL_RES = PIXEL_RES;
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES; 
 
                 RectangleF rcEstimated = new RectangleF();
                 RectangleF rcMeasured = new RectangleF();
@@ -2680,26 +3360,26 @@ namespace CD_VISION_DIALOG
                 double fDistanceW = 0;
                 double fDistanceH = 0;
 
-                for( int nImage = 0; nImage < iu.listTarget.Count; nImage++)
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
                 {
-                    byte[] rawTargetImage = iu.GetTargetImage_ByIndex(nImage);
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
 
                     // get measure data
-                    single.MeasureData(rawTargetImage, imageW, imageH, ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN,
+                    single.MeasureData(rawTargetImage, imageW, imageH, ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN, ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN,
                         out P1, out P2, out rcEstimated, out rcMeasured);
 
                     if (single.param_02_BOOL_TREAT_AS_ELLIPSE == false)
                     {
-                        listW.Add(rcMeasured.Width * PIXEL_RES);
+                        listW.Add(rcMeasured.Width * single.PIXEL_RES);
                     }
                     else if (single.param_02_BOOL_TREAT_AS_ELLIPSE == true)
                     {
-                        listW.Add(rcMeasured.Width * PIXEL_RES);
-                        listH.Add(rcMeasured.Height * PIXEL_RES);
+                        listW.Add(rcMeasured.Width * single.PIXEL_RES);
+                        listH.Add(rcMeasured.Height * single.PIXEL_RES);
                     }
                 }
 
-                if(fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listW.Count < 3)
+                if (fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listW.Count < 3)
                 {
                     fDistanceW = listW.Average();
                     if (single.param_02_BOOL_TREAT_AS_ELLIPSE == true) { fDistanceH = listH.Average(); }
@@ -2744,91 +3424,46 @@ namespace CD_VISION_DIALOG
                 iu.Insert_DispDirectionalEdgePointsForCircle(single.param_06_EdgePos, listEdges_FEX, listEdges_FMD, listEdges_FIN);
 
             }
-           #endregion
+            #endregion
+        }
+        private void _INSP_OL(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        {
 
             //*************************************************************************************
             // Rectangle
             //*************************************************************************************
 
-           #region Rectangle - Normal Case
+            List<PointF> listEdgesHOR_EX = new List<PointF>(); List<PointF> listEdgesHOR_MD = new List<PointF>(); List<PointF> listEdgesHOR_IN = new List<PointF>();
+            List<PointF> listEdgesVER_EX = new List<PointF>(); List<PointF> listEdgesVER_MD = new List<PointF>(); List<PointF> listEdgesVER_IN = new List<PointF>();
 
-            for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
-            {
-                List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
-                List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
 
-                // get element 
-                CMeasurePairRct single = fm.ElementAt_PairRct(i);
+            List<double> list_Distance = new List<double>();
 
-                single.PIXEL_RES = PIXEL_RES;
-                single.SetRelativeMovement(ptDelta);
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
 
-                RectangleF rcEstimaged = new RectangleF();
-                RectangleF rcMeasured = new RectangleF();
-
-                List<double> listD = new List<double>();
-                double fDistance = 0;
-
-                for (int nImage = 0; nImage < iu.listTarget.Count; nImage++)
-                {
-                    byte[] rawTargetImage = iu.GetTargetImage_ByIndex(nImage);
-
-                    // get measure data 
-                    fDistance = single.MeasureData(rawTargetImage, imageW, imageH, 
-                        ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN, 
-                        ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN, out P1, out P2, out rcEstimaged, out rcMeasured);
-
-                    listD.Add(fDistance);
-                }
-
-                if (fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listD.Count < 3)
-                {
-                    fDistance = listD.Average();
-                }
-                else
-                {
-                    fDistance = listD.ElementAt((int)Math.Floor(listD.Count / 2.0));
-                }
-
-                iu.InsertDispResult_Rectangle(single.NICKNAME, fDistance);
-                iu.InsertTransResultData(fDistance);
-                report.AddResult_FIG(IFX_FIGURE.PAIR_RCT, single, fDistance);
-
-
-                iu.Insert_DispEdgePoints(listEdges_FEX, listEdges_FMD, listEdges_FIN);
-                iu.Insert_DispEdgePoints(listEdges_SEX, listEdges_SMD, listEdges_SIN);
-                iu.Insert_DispMeasurePoint(P1);
-                iu.Insert_DispMeasurePoint(P2);
-
-            }
-            #endregion
-
-            //*************************************************************************************
-            // OVERLAY
-            //*************************************************************************************
-
-           #region OVL - Normal Case
+            #region OVL - Normal Case
             for (int i = 0; i < fm.COUNT_PAIR_OVL; i++)
             {
-                List<PointF> listEdgesHOR_EX = new List<PointF>(); List<PointF> listEdgesHOR_MD = new List<PointF>(); List<PointF> listEdgesHOR_IN = new List<PointF>();
-                List<PointF> listEdgesVER_EX = new List<PointF>(); List<PointF> listEdgesVER_MD = new List<PointF>(); List<PointF> listEdgesVER_IN = new List<PointF>();
                 List<PointF> listPoints = new List<PointF>();
 
                 // get element 
                 CMeasurePairOvl single = fm.ElementAt_PairOvl(i);
 
-                single.PIXEL_RES = PIXEL_RES;
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES;
                 single.SetRelativeMovement(ptDelta);
 
                 // take measurement result 
-                double fOL_X = 0;double fOL_Y = 0;
+                double fOL_X = 0; double fOL_Y = 0;
 
                 List<double> listX = new List<double>();
                 List<double> listY = new List<double>();
 
-                for (int nImage = 0; nImage < iu.listTarget.Count; nImage++)
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
                 {
-                    byte[] rawTargetImage = iu.GetTargetImage_ByIndex(nImage);
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
 
                     single.rape_MotherFucker(rawTargetImage, imageW, imageH,
                         ref listEdgesHOR_EX, ref listEdgesHOR_MD, ref listEdgesHOR_IN,
@@ -2860,29 +3495,8 @@ namespace CD_VISION_DIALOG
                 iu.Insert_DispMeasurePoint(listPoints);
             }
             #endregion
-
-            _INSP_MIXED_RC(fm, ptDelta, iu);
-
-            // display data to the message window 
-            for (int i = 0; i < iu.listInspResult.Count; i++)  { _PRINT_MSG(iu.listInspResult.ElementAt(i)); }
-
-            this.UIThread(delegate { imageView1.Refresh(); });
-            System.Threading.Thread.Sleep(20);
-
-            //*************************************************************************************
-            if (CHK_USE_HISTORY_MEASURE.Checked == true)
-            //*************************************************************************************
-            {
-                Bitmap bmp = Computer.HC_CONV_Byte2Bmp(rawView, iu.imageW, iu.imageH);
-                dlgHistM.AppedHistory(bmp, listMeasureResult, imageView1.GetDispTextObjects());
-            }
-
-            mi.Result = mi.list.Count == 0 ? -1 : 1;
-            mi.list = iu.listTransResult.ToList();
- 
-            return mi;
         }
-        private void _INSP_MIXED_RC(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        private void _INSP_RC(CFigureManager fm, PointF ptDelta, CInspUnit iu)
         {
             //*************************************************************************************
             // Rectangle
@@ -2896,12 +3510,82 @@ namespace CD_VISION_DIALOG
 
             List<double> list_Distance = new List<double>();
 
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            //*************************************************************************************
+            // Rectangle
+            //*************************************************************************************
+
+            #region Rectangle - Normal Case
+
+            for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
+            {
+                // get element 
+                CMeasurePairRct single = fm.ElementAt_PairRct(i);
+
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES; 
+                single.SetRelativeMovement(ptDelta);
+
+                RectangleF rcEstimaged = new RectangleF();
+                RectangleF rcMeasured = new RectangleF();
+
+                List<double> listD = new List<double>();
+                double fDistance = 0;
+
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
+                {
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
+
+                    // get measure data 
+                    fDistance = single.MeasureData(rawTargetImage, imageW, imageH,
+                        ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,
+                        ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN, out P1, out P2, out rcEstimaged, out rcMeasured);
+
+                    listD.Add(fDistance);
+                }
+
+                if (fm.param_optics.MULTI_SHOT_VALUE_AVG == true || listD.Count < 3)
+                {
+                    fDistance = listD.Average();
+                }
+                else
+                {
+                    fDistance = listD.ElementAt((int)Math.Floor(listD.Count / 2.0));
+                }
+
+                iu.InsertDispResult_Rectangle(single.NICKNAME, fDistance);
+                iu.InsertTransResultData(fDistance);
+                report.AddResult_FIG(IFX_FIGURE.PAIR_RCT, single, fDistance);
+
+
+                iu.Insert_DispEdgePoints(listEdges_FEX, listEdges_FMD, listEdges_FIN);
+                iu.Insert_DispEdgePoints(listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                iu.Insert_DispMeasurePoint(P1);
+                iu.Insert_DispMeasurePoint(P2);
+
+            }
+            #endregion
+        }
+        private void _INSP_MRC(CFigureManager fm, PointF ptDelta, CInspUnit iu)
+        {
+            //*************************************************************************************
+            // Rectangle
+            //*************************************************************************************
+
+            List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
+            List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
+
+            List<double> list_Distance = new List<double>();
 
            #region Rectangle - Normal Case
 
             for (int i = 0; i < fm.COUNT_MIXED_RC; i++)
             {
-                CMeasureMixedRC single = fm.ElementAt_MixedRect(i);
+                CMeasureMixedRC single = fm.ElementAt_MRC(i);
                 single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES;
                 single.SetRelativeMovement(ptDelta);
 
@@ -2915,9 +3599,9 @@ namespace CD_VISION_DIALOG
 
                 double fDistance = 0;
 
-                for (int nImage = 0; nImage < iu.listTarget.Count; nImage++)
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
                 {
-                    byte[] rawTargetImage = iu.GetTargetImage_ByIndex(nImage);
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
 
                     fDistance = single.MeasureData(rawTargetImage, imageW, imageH,
                         ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,
@@ -2944,7 +3628,7 @@ namespace CD_VISION_DIALOG
                 iu.Insert_DispMeasurePoint(P1, P2);
 
             }
-            #endregion
+           #endregion
         }
 
        #region WORKING TRAY - TOOL STRIP RELATED
@@ -3021,27 +3705,25 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_MENU_CREATE_RECP_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Current Recp Will Be Initialized.\nDo You Want To Proceed?", "Create New Recp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+            if (MessageBox.Show("Current Recp Will Be Initialized.\nDo You Want To Proceed?", "Create New Recp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
-                // reset windows control 
-                TXT_BASE_RECP.Text = string.Empty;
-                TXT_PATH_PTRN_FILE.Text = string.Empty;
-                TXT_PATH_RECP_FILE.Text = string.Empty;
-                TXT_PTRN_POS_ORG_X.Text = TXT_PTRN_POS_ORG_Y.Text = string.Empty;
-                TXT_PTRN_ACC_RATIO.Text = "0";
+            // reset windows control 
+            TXT_BASE_RECP.Text = string.Empty;
+            TXT_PATH_PTRN_FILE.Text = string.Empty;
+            TXT_PATH_RECP_FILE.Text = string.Empty;
+            TXT_PTRN_POS_ORG_X.Text = TXT_PTRN_POS_ORG_Y.Text = string.Empty;
+            TXT_PTRN_ACC_RATIO.Text = "0";
 
-                // rest data 
-                imageView1.VIEW_Set_Clear_DispObject();
-                imageView1.fm.baseRecp.RemoveAll();
-                imageView1.fm.RemoveAll();
-                imageView1.Refresh();
-                imageView1.VIEW_SET_Mag_Origin();
+            // rest data 
+            imageView1.VIEW_Set_Clear_DispObject();
+            imageView1.fm.baseRecp.RemoveAll();
+            imageView1.fm.RemoveAll();
+            imageView1.Refresh();
+            imageView1.VIEW_SET_Mag_Origin();
 
-                BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
 
-                formBaseRecp.ShowDialog();
-            }
+            formBaseRecp.ShowDialog();
         }
         private void BTN_MENU_ADVENCED_Click(object sender, EventArgs e)
         {
@@ -3167,7 +3849,22 @@ namespace CD_VISION_DIALOG
                 for (int i = 0; i < fmCopy.COUNT_MIXED_RC; i++)
                 {
                     string strTye = "MRC";
-
+                    ListViewItem lvi = new ListViewItem(i.ToString());
+                    lvi.SubItems.Add(strTye + "-" + (i + 1).ToString("N0"));
+                    LV_PARAMETER.Items.Add(lvi);
+                }
+                // for mixed circle
+                for (int i = 0; i < fmCopy.COUNT_MIXED_CC; i++)
+                {
+                    string strTye = "MCC";
+                    ListViewItem lvi = new ListViewItem(i.ToString());
+                    lvi.SubItems.Add(strTye + "-" + (i + 1).ToString("N0"));
+                    LV_PARAMETER.Items.Add(lvi);
+                }
+                // for mixed rect
+                for (int i = 0; i < fmCopy.COUNT_MIXED_RCC; i++)
+                {
+                    string strTye = "MRCC";
                     ListViewItem lvi = new ListViewItem(i.ToString());
                     lvi.SubItems.Add(strTye + "-" + (i + 1).ToString("N0"));
                     LV_PARAMETER.Items.Add(lvi);
@@ -3185,7 +3882,16 @@ namespace CD_VISION_DIALOG
             }
 
             LV_PARAMETER.EndUpdate();
+
+            _UpdateUI_Figure(new CMeasurePairRct(), 0);
+            _UpdateUI_Figure(new CMeasurePairCir(), 0);
+            _UpdateUI_Figure(new CMeasurePairOvl(), 0);
+            _UpdateUI_Figure(new CMeasureMixedRC(), 0);
+            _UpdateUI_Figure(new CMeasureMixedCC(), 0);
+            _UpdateUI_Figure(new CMeasureMixedRCC(), 0);
         }
+        
+
         private void BTN_FIGURE_DELETE_Click(object sender, EventArgs e)
         {
             // exception
@@ -3202,30 +3908,18 @@ namespace CD_VISION_DIALOG
             if (nSelectedIndex == -1) { MessageBox.Show("Invalid Index"); return;}
 
             // final delete check 180102
-            if (MessageBox.Show("Do You Want To Delete Selected Figure?", "DELETE FIGURE", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes) { return;  }
+            if (CMessagebox.Figure_Remove() == DialogResult.No) { return;  }
 
             object objectSelected = UC_Parameter.GetCurrentData();
 
-            if (strHeader == "RC")
-            {
-                imageView1.iDel_Figure(IFX_FIGURE.PAIR_RCT, nSelectedIndex);
-            }
-            else if (strHeader == "CC")
-            {
-                imageView1.iDel_Figure(IFX_FIGURE.PAIR_CIR, nSelectedIndex);
-            }
-            else if (strHeader == "OVL")
-            {
-                imageView1.iDel_Figure(IFX_FIGURE.PAIR_OVL, nSelectedIndex);
-            }
-            else if (strHeader == "FOCUS")
-            {
-                imageView1.fm.RC_FOCUS = new RectangleF(0, 0, 0, 0);
-            }
-            else if (strHeader == "MRC")
-            {
-                imageView1.iDel_Figure(IFX_FIGURE.MIXED_RC, nSelectedIndex);
-            }
+            /***/if (strHeader == "RC"/******/) {imageView1.iDel_Figure(IFX_FIGURE.PAIR_RCT, nSelectedIndex); }
+            else if (strHeader == "CC"/******/) {imageView1.iDel_Figure(IFX_FIGURE.PAIR_CIR, nSelectedIndex); }
+            else if (strHeader == "OVL"/*****/) {imageView1.iDel_Figure(IFX_FIGURE.PAIR_OVL, nSelectedIndex);}
+            else if (strHeader == "FOCUS"/***/) {imageView1.fm.RC_FOCUS = new RectangleF(0, 0, 0, 0);}
+            else if (strHeader == "MRC"/*****/) {imageView1.iDel_Figure(IFX_FIGURE.MIXED_RC, nSelectedIndex);}
+            else if (strHeader == "MCC"/*****/) {imageView1.iDel_Figure(IFX_FIGURE.MIXED_CC, nSelectedIndex); }
+            else if (strHeader == "MRCC"/****/) {imageView1.iDel_Figure(IFX_FIGURE.MIXED_RCC, nSelectedIndex); }
+
             imageView1.Refresh();
             BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
 
@@ -3268,14 +3962,12 @@ namespace CD_VISION_DIALOG
                 if (org.NICKNAME == obj.NICKNAME)
                 {
                     // backup and Recovery
-                    obj.ANGLE = org.ANGLE;
-
+                    obj.param_02_rect_angle = org.param_02_rect_angle;
                     org = obj.CopyTo();
-
  
                     imageView1.iMod_Figure(org, nSelectedIndex);
                     UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-DIG", DEF_OPERATION.OPER_03_PARAM);
-                    MessageBox.Show("Parameters has modified.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CMessagebox.Finished_Parameter_Change();
                 }
             }
             else  if (strHeader == "CC")
@@ -3286,11 +3978,10 @@ namespace CD_VISION_DIALOG
                 if (org.NICKNAME == obj.NICKNAME)
                 {
                     org = obj.CopyTo();
-
  
                     imageView1.iMod_Figure(org, nSelectedIndex);
                     UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-CIR", DEF_OPERATION.OPER_03_PARAM);
-                    MessageBox.Show("Parameters has modified.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CMessagebox.Finished_Parameter_Change();
                 }
             }
             else if (strHeader == "MRC")
@@ -3304,7 +3995,35 @@ namespace CD_VISION_DIALOG
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
                     UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-MRC", DEF_OPERATION.OPER_03_PARAM);
-                    MessageBox.Show("Parameters has modified.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CMessagebox.Finished_Parameter_Change();
+                }
+            }
+            else if (strHeader == "MCC")
+            {
+                CMeasureMixedCC org = (CMeasureMixedCC)imageView1.iGet_Figure(IFX_FIGURE.MIXED_CC, nSelectedIndex);
+                CMeasureMixedCC obj = ((PROPERTY_MixedCC)objectSelected).ToFigure();
+
+                if (org.NICKNAME == obj.NICKNAME)
+                {
+                    org = obj.CopyTo();
+
+                    imageView1.iMod_Figure(org, nSelectedIndex);
+                    UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-MCC", DEF_OPERATION.OPER_03_PARAM);
+                    CMessagebox.Finished_Parameter_Change();
+                }
+            }
+            else if (strHeader == "MRCC")
+            {
+                CMeasureMixedRCC org = (CMeasureMixedRCC)imageView1.iGet_Figure(IFX_FIGURE.MIXED_RCC, nSelectedIndex);
+                CMeasureMixedRCC obj = ((PROPERTY_MixedRCC)objectSelected).ToFigure();
+
+                if (org.NICKNAME == obj.NICKNAME)
+                {
+                    org = obj.CopyTo();
+
+                    imageView1.iMod_Figure(org, nSelectedIndex);
+                    UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-MRCC", DEF_OPERATION.OPER_03_PARAM);
+                    CMessagebox.Finished_Parameter_Change();
                 }
             }
             else if (strHeader == "OVL")
@@ -3328,7 +4047,7 @@ namespace CD_VISION_DIALOG
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
                     UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-OVL", DEF_OPERATION.OPER_03_PARAM);
-                    MessageBox.Show("Parameters has modified.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CMessagebox.Finished_Parameter_Change();
                 }
             }
             imageView1.Refresh();
@@ -3337,99 +4056,92 @@ namespace CD_VISION_DIALOG
         private void LV_PARAMETER_MouseDoubleClick(object sender, MouseEventArgs e) {  }
         private void LV_PARAMETER_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //LV_PARAMETER.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_PARAMETER_SelectedIndexChanged);
+            #region
+            if (LV_PARAMETER.FocusedItem == null) return;
 
-            bool use = true;
+            int nIndex = LV_PARAMETER.FocusedItem.Index;
 
-            if (use )
+
+            string strSelected = LV_PARAMETER.Items[nIndex].SubItems[1].Text;
+
+            string[] parse = strSelected.Split('-');
+
+            string strHeader = parse[0];
+            int nItemIndex = Convert.ToInt32(parse[1]) - 1;
+
+            if (nItemIndex == -1)
             {
-                #region
-                if (LV_PARAMETER.FocusedItem == null) return;
-
-                int nIndex = LV_PARAMETER.FocusedItem.Index;
-
-
-                string strSelected = LV_PARAMETER.Items[nIndex].SubItems[1].Text;
-
-                string[] parse = strSelected.Split('-');
-
-                string strHeader = parse[0];
-                int nItemIndex = Convert.ToInt32(parse[1]) - 1;
-
-                if (nItemIndex == -1)
-                {
-                    MessageBox.Show("Invalid Index Underflow.");
-                    return;
-                }
-                //*****************************************************************************************
-                // value assignment
-
-                CFigureManager fmCopy = imageView1.fm;
-
-                if (strHeader == "RC")
-                {
-                    TAB_FIGURE.SelectedIndex = 0;
-
-                    CMeasurePairRct single = fmCopy.ElementAt_PairRct(nItemIndex);
-
-                    PROPERTY_PairRct propertySingle = new PROPERTY_PairRct();
-
-                    propertySingle.FromFigure(single);
-
-
-                    UC_Parameter.SetParam_RC_PAIR_DIG(propertySingle);
-                }
-                else if (strHeader == "CC")
-                {
-                    TAB_FIGURE.SelectedIndex = 1;
-
-                    CMeasurePairCir single = fmCopy.ElementAt_PairCir(nItemIndex);
-
-                    PROPERTY_PairCir propertySingle = new PROPERTY_PairCir();
-
-                    propertySingle.FromFigure(single);
-
-
-                    UC_Parameter.SetParam_Circle(propertySingle);
-                }
-                else if (strHeader == "OVL")
-                {
-                    TAB_FIGURE.SelectedIndex = 2;
-
-                    CMeasurePairOvl single = fmCopy.ElementAt_PairOvl(nItemIndex);
-
-                    PROPERTY_PairOvl propertySingle = new PROPERTY_PairOvl();
-
-                    propertySingle.FromFigure(single);
-
-                    UC_Parameter.SetParam_Overlay(propertySingle);
-                }
-                else if (strHeader == "FOCUS")
-                {
-                    TAB_FIGURE.SelectedIndex = 3;
-
-                    UC_Parameter.ClearData();
-                }
-                else if (strHeader == "MRC")
-                {
-                    TAB_FIGURE.SelectedIndex = 4;
-
-                    CMeasureMixedRC single = fmCopy.ElementAt_MixedRect(nItemIndex);
-
-                    PROPERTY_MixedRC propertySingle = new PROPERTY_MixedRC();
-
-                    propertySingle.FromFigure(single);
-
-                    UC_Parameter.SetParam_RC_Mixed(propertySingle);
-
-                }
-
-                _InvalidateFigureSelection(nItemIndex);
-                #endregion
+                MessageBox.Show("Invalid Index Underflow.");
+                return;
             }
-            
-            //LV_PARAMETER.ItemSelectionChanged += new ListViewItemSelectionChangedEventHandler(LV_PARAMETER_SelectedIndexChanged);
+            //*****************************************************************************************
+            // value assignment
 
+            CFigureManager fmCopy = imageView1.fm;
+
+            if (strHeader == "RC")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.PAIR_RCT;
+                CMeasurePairRct single = fmCopy.ElementAt_PairRct(nItemIndex);
+
+                PROPERTY_PairRct propertySingle = new PROPERTY_PairRct();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+            }
+            else if (strHeader == "CC")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.PAIR_CIR;
+                CMeasurePairCir single = fmCopy.ElementAt_PairCir(nItemIndex);
+
+                PROPERTY_PairCir propertySingle = new PROPERTY_PairCir();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+            }
+            else if (strHeader == "OVL")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.PAIR_OVL;
+                CMeasurePairOvl single = fmCopy.ElementAt_PairOvl(nItemIndex);
+
+                PROPERTY_PairOvl propertySingle = new PROPERTY_PairOvl();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+            }
+            else if (strHeader == "FOCUS")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.RC_FOCUS;
+                UC_Parameter.ClearData();
+            }
+            else if (strHeader == "MRC")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.MIXED_RC;
+                CMeasureMixedRC single = fmCopy.ElementAt_MRC(nItemIndex);
+
+                PROPERTY_MixedRC propertySingle = new PROPERTY_MixedRC();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+            }
+            else if (strHeader == "MCC")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.MIXED_CC; 
+                CMeasureMixedCC single = fmCopy.ElementAt_MCC(nItemIndex);
+
+                PROPERTY_MixedCC propertySingle = new PROPERTY_MixedCC();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+            }
+            else if (strHeader == "MRCC")
+            {
+                TAB_FIGURE.SelectedIndex = IFX_FIGURE.MIXED_RCC; 
+                CMeasureMixedRCC single = fmCopy.ElementAt_MRCC(nItemIndex);
+
+                PROPERTY_MixedRCC propertySingle = new PROPERTY_MixedRCC();
+                propertySingle.FromFigure(single);
+                UC_Parameter.SetParam(propertySingle);
+
+            }
+
+            _UpdateUI_FigureSelection(nItemIndex);
+            #endregion
         }
        #endregion
 
@@ -3463,32 +4175,71 @@ namespace CD_VISION_DIALOG
             imageView1.Refresh();
         }
 
-        private void BTN_SET_FIGURES_Click(object sender, EventArgs e)
+        private void BTN_SET_MIXED_FIGURES_Click(object sender, EventArgs e)
         {
             Rectangle rc = imageView1.iGet_Roi_Focus();
 
             int imageW = imageView1.VIEW_GetImageW();
             int imageH = imageView2.VIEW_GetImageH();
 
-            if (RDO_MIXED_RC_FST.Checked == true)
+            if (TAB_FIGURE.SelectedIndex == IFX_FIGURE.MIXED_RC)
             {
-                TXT_MIXED_RC_FST_POS_X.Text = rc.X.ToString("N0");
-                TXT_MIXED_RC_FST_POS_Y.Text = rc.Y.ToString("N0");
-                TXT_MIXED_RC_FST_SZ_W.Text = rc.Width.ToString("N0");
-                TXT_MIXED_RC_FST_SZ_H.Text = rc.Height.ToString("N0");
+                if (RDO_MIXED_RC_FST.Checked == true)
+                {
+                    TXT_MIXED_RC_FST_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_RC_FST_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_RC_FST_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_RC_FST_SZ_H.Text = rc.Height.ToString("N0");
+                }
+                else if (RDO_MIXED_RC_SCD.Checked == true)
+                {
+                    TXT_MIXED_RC_SCD_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_RC_SCD_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_RC_SCD_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_RC_SCD_SZ_H.Text = rc.Height.ToString("N0");
+                }
             }
-            else if (RDO_MIXED_RC_SCD.Checked == true)
+            else if (TAB_FIGURE.SelectedIndex == IFX_FIGURE.MIXED_CC)
             {
-                TXT_MIXED_RC_SCD_POS_X.Text = rc.X.ToString("N0");
-                TXT_MIXED_RC_SCD_POS_Y.Text = rc.Y.ToString("N0");
-                TXT_MIXED_RC_SCD_SZ_W.Text = rc.Width.ToString("N0");
-                TXT_MIXED_RC_SCD_SZ_H.Text = rc.Height.ToString("N0");
+                if (RDO_MIXED_CC_FST.Checked == true)
+                {
+                    TXT_MIXED_CC_FST_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_CC_FST_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_CC_FST_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_CC_FST_SZ_H.Text = rc.Height.ToString("N0");
+                }
+                else if (RDO_MIXED_CC_SCD.Checked == true)
+                {
+                    TXT_MIXED_CC_SCD_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_CC_SCD_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_CC_SCD_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_CC_SCD_SZ_H.Text = rc.Height.ToString("N0");
+                }
+            }
+            else if (TAB_FIGURE.SelectedIndex == IFX_FIGURE.MIXED_RCC)
+            {
+                if (RDO_MIXED_RCC_FST.Checked == true)
+                {
+                    TXT_MIXED_RCC_FST_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_RCC_FST_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_RCC_FST_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_RCC_FST_SZ_H.Text = rc.Height.ToString("N0");
+                }
+                else if (RDO_MIXED_RCC_SCD.Checked == true)
+                {
+                    TXT_MIXED_RCC_SCD_POS_X.Text = rc.X.ToString("N0");
+                    TXT_MIXED_RCC_SCD_POS_Y.Text = rc.Y.ToString("N0");
+                    TXT_MIXED_RCC_SCD_SZ_W.Text = rc.Width.ToString("N0");
+                    TXT_MIXED_RCC_SCD_SZ_H.Text = rc.Height.ToString("N0");
+                }
             }
 
-            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+
+           // BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
 
             imageView1.Refresh();
         }
+      
 
         private void LV_PARAMETER_KeyDown(object sender, KeyEventArgs e)
         {
@@ -3498,7 +4249,7 @@ namespace CD_VISION_DIALOG
             int tx = TB_FIGURE_CTRL_SCALE.Value;
             int ty = TB_FIGURE_CTRL_SCALE.Value; ;
 
-            int nDataIndex = -1;
+             int nDataIndex = -1;
 
             //********************************************************************
            
@@ -3527,6 +4278,16 @@ namespace CD_VISION_DIALOG
             {
                 nDataIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RC.Text);
                 nFigureIndex = IFX_FIGURE.MIXED_RC;
+            }
+            else if (nFigureIndex == IFX_FIGURE.MIXED_CC)
+            {
+                nDataIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_CC.Text);
+                nFigureIndex = IFX_FIGURE.MIXED_CC;
+            }
+            else if( nFigureIndex == IFX_FIGURE.MIXED_RCC)
+            {
+                nDataIndex = Convert.ToInt32(TXT_INDEX_OF_MIXED_RCC.Text);
+                nFigureIndex = IFX_FIGURE.MIXED_RCC;
             }
             #endregion
 
@@ -3634,10 +4395,10 @@ namespace CD_VISION_DIALOG
                         else if (m_nAction == IFX_ADJ_ACTION.SIZE/*****/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.SIZE, 0, ty);
                     }
                 }
-                _InvalidateFigureSelection(nDataIndex);
+                _UpdateUI_FigureSelection(nDataIndex);
             }
 
-            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
+            //BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
             // to prevent envet duplication
             e.Handled = true;
         }
@@ -3680,14 +4441,14 @@ namespace CD_VISION_DIALOG
 
                 if ( RDO_TYPE_HOR.Checked == true)
                 {
-                    single.RC_TYPE = IFX_RECT_TYPE.DIR_HOR;
+                    single.param_01_rc_type = IFX_RECT_TYPE.DIR_HOR;
                     single.rc_FST = new parseRect(rc.X, rc.Y - 5/********/, rc.Width, 10);
                     single.rc_SCD = new parseRect(rc.X, rc.Y + rc.Height - 5, rc.Width, 10);
                 }
 
                 if (RDO_TYPE_VER.Checked == true)
                 {
-                    single.RC_TYPE = IFX_RECT_TYPE.DIR_VER;
+                    single.param_01_rc_type = IFX_RECT_TYPE.DIR_VER;
                     single.rc_FST = new parseRect(rc.X - 5/*******/, rc.Y, 10, rc.Height);
                     single.rc_SCD = new parseRect(rc.X + rc.Width - 5, rc.Y, 10, rc.Height);
                 }
@@ -3699,8 +4460,8 @@ namespace CD_VISION_DIALOG
                 int nLastIndex = imageView1.fm.GetFigureEmptyIndex(IFX_FIGURE.PAIR_RCT);
                 single.NICKNAME = "RECT_" + nLastIndex.ToString("N0");
 
-                single.param_06_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
-                single.param_07_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
+                single.param_08_edge_position_fst = baseRecp.PARAM_09_EDGE_POSITION;
+                single.param_09_edge_position_scd = baseRecp.PARAM_09_EDGE_POSITION;
 
                 single.param_comm_01_compen_A = baseRecp.PARAM_06_COMPEN_A;
                 single.param_comm_02_compen_B = baseRecp.PARAM_06_COMPEN_B;
@@ -3727,9 +4488,8 @@ namespace CD_VISION_DIALOG
 
                 single.param_comm_01_compen_A = baseRecp.PARAM_06_COMPEN_A;
                 single.param_comm_02_compen_B = baseRecp.PARAM_06_COMPEN_B;
-
-                single.param_06_EdgePos = baseRecp.PARAM_09_EDGE_POSITION;
                 single.param_01_DMG_Tol = baseRecp.PARAM_08_DMG_TOLERANCE;
+                single.param_06_EdgePos = baseRecp.PARAM_09_EDGE_POSITION;
 
                 imageView1.fm.Figure_Add(single);
             }
@@ -3747,7 +4507,6 @@ namespace CD_VISION_DIALOG
                 single.RC_VER_EX.rc_FST = new parseRect(rc.X /*********/- 5, rc.Y, 10, rcH);
                 single.RC_VER_EX.rc_SCD = new parseRect(rc.X + rc.Width - 5, rc.Y, 10, rcH);
 
-
                 single.RC_HOR_IN.rc_FST = new parseRect((float)(rc.X + rcW * 0.2), (float)(rc.Y /**********/+ rcH * 0.2 - 5), (float)(rcW * 0.6), 10);
                 single.RC_HOR_IN.rc_SCD = new parseRect((float)(rc.X + rcW * 0.2), (float)(rc.Y + rc.Height - rcH * 0.2 - 5), (float)(rcW * 0.6), 10);
 
@@ -3759,30 +4518,16 @@ namespace CD_VISION_DIALOG
                 imageView1.fm.Figure_Add(single);
             }
 
-            BTN_FIGURE_REFRESH_Click(null, EventArgs.Empty);
-
-            imageView1.iRemove_Roi_All();
+             imageView1.iRemove_Roi_All();
             imageView1.iRemove_Roi_Focus();
             imageView1.Refresh();
         }
         #endregion
 
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
 
-        
-
-
-
-      
-      
-
-        
-
-        
-
-
-
-
+        }
 
     }
 

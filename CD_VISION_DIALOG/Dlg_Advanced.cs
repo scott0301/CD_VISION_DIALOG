@@ -17,13 +17,13 @@ namespace CD_VISION_DIALOG
 {
     public partial class Dlg_Advanced : Form
     {
-        public CHacker hacker = new CHacker();
+        public CAdvancedMode hacker = new CAdvancedMode();
 
         public Dlg_Advanced()
         {
             InitializeComponent();
         }
-        public void SetParam(CHacker handle)
+        public void SetParam(CAdvancedMode handle)
         {
             hacker = handle;
         }

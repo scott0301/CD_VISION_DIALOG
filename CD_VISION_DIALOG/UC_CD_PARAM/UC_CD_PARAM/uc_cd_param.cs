@@ -24,10 +24,33 @@ namespace CD_Paramter
             listMeasurement = IFX_ALGORITHM.ToList();
         }
 
-        public void SetParam_RC_Mixed(PROPERTY_MixedRC single) { property.SelectedObject = single; }
-        public void SetParam_RC_PAIR_DIG(PROPERTY_PairRct single){property.SelectedObject = single;}
-        public void SetParam_Circle/***/(PROPERTY_PairCir single){property.SelectedObject = single;}
-        public void SetParam_Overlay/**/(PROPERTY_PairOvl single) { property.SelectedObject = single; }
+        public void SetParam(object obj)
+        {
+            if (obj.GetType() == new PROPERTY_PairRct().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_PairRct)obj);
+            }
+            else if (obj.GetType() == new PROPERTY_PairCir().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_PairCir)obj);
+            }
+            else if (obj.GetType() == new PROPERTY_PairOvl().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_PairOvl)obj);
+            }
+            else if (obj.GetType() == new PROPERTY_MixedRC().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_MixedRC)obj);
+            }
+            else if (obj.GetType() == new PROPERTY_MixedCC().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_MixedCC)obj);
+            }
+            else if (obj.GetType() == new PROPERTY_MixedRCC().GetType())
+            {
+                property.SelectedObject = ((PROPERTY_MixedRCC)obj);
+            }
+        }
 
         private void property_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {

@@ -360,34 +360,40 @@ namespace CD_View
 
         public void iMod_Figure(object single, int nIndex)
         {
-            CMeasurePairRct measureRC = new CMeasurePairRct();
-            CMeasurePairCir measureCC = new CMeasurePairCir();
-            CMeasurePairOvl measureOVL = new CMeasurePairOvl();
-            CMeasureMixedRC measureMRC = new CMeasureMixedRC();
-
- 
-            if (single.GetType() ==  measureRC.GetType())
+            if (single.GetType() ==  new CMeasurePairRct().GetType())
             {
                 CMeasurePairRct[] array = fm.ToArray_PairRct();
                 array[nIndex] = (CMeasurePairRct)single;
                 fm.Figure_Replace(array);
             }
-            else if(single.GetType() == measureCC.GetType())
+            else if(single.GetType() == new CMeasurePairCir().GetType())
             {
                 CMeasurePairCir[] array = fm.ToArray_PairCir();
                 array[nIndex] = (CMeasurePairCir)single;
                 fm.Figure_Replace(array);
             }
-            else if (single.GetType()== measureOVL.GetType())
+            else if (single.GetType()== new CMeasurePairOvl().GetType())
             {
                 CMeasurePairOvl[] array = fm.ToArray_PairOvl();
                 array[nIndex] = (CMeasurePairOvl)single;
                 fm.Figure_Replace(array);
             }
-            else if (single.GetType() == measureMRC.GetType())
+            else if (single.GetType() == new CMeasureMixedRC().GetType())
             {
-                CMeasureMixedRC[] array = fm.ToArray_MixedRc();
+                CMeasureMixedRC[] array = fm.ToArray_Mixed_RC();
                 array[nIndex] = (CMeasureMixedRC)single;
+                fm.Figure_Replace(array);
+            }
+            else if (single.GetType() == new CMeasureMixedCC().GetType())
+            {
+                CMeasureMixedCC[] array = fm.ToArray_Mixed_CC();
+                array[nIndex] = (CMeasureMixedCC)single;
+                fm.Figure_Replace(array);
+            }
+            else if (single.GetType() == new  CMeasureMixedRCC().GetType())
+            {
+                CMeasureMixedRCC[] array = fm.ToArray_Mixed_RCC();
+                array[nIndex] = (CMeasureMixedRCC)single;
                 fm.Figure_Replace(array);
             }
             Refresh();
@@ -400,7 +406,10 @@ namespace CD_View
             /***/if (nFigureType == IFX_FIGURE.PAIR_RCT) { if (fm.COUNT_PAIR_RCT >= nIndex) { objReturn = fm.ElementAt_PairRct(nIndex); } }
             else if (nFigureType == IFX_FIGURE.PAIR_CIR) { if (fm.COUNT_PAIR_CIR >= nIndex) { objReturn = fm.ElementAt_PairCir(nIndex); } }
             else if (nFigureType == IFX_FIGURE.PAIR_OVL) { if (fm.COUNT_PAIR_OVL >= nIndex) { objReturn = fm.ElementAt_PairOvl(nIndex); } }
-            else if (nFigureType == IFX_FIGURE.MIXED_RC) { if (fm.COUNT_MIXED_RC >= nIndex) { objReturn = fm.ElementAt_MixedRect(nIndex); } }
+            else if (nFigureType == IFX_FIGURE.MIXED_RC) { if (fm.COUNT_MIXED_RC >= nIndex) { objReturn = fm.ElementAt_MRC(nIndex); } }
+            else if (nFigureType == IFX_FIGURE.MIXED_CC) { if (fm.COUNT_MIXED_CC >= nIndex) { objReturn = fm.ElementAt_MCC(nIndex); } }
+            else if (nFigureType == IFX_FIGURE.MIXED_RCC) { if (fm.COUNT_MIXED_RCC >= nIndex) { objReturn = fm.ElementAt_MRCC(nIndex); } }
+
             return objReturn;
         }
 
@@ -464,8 +473,8 @@ namespace CD_View
             RectangleF rc2 = single.GetRectOrigin_SCD();
 
 
-            crop1 = HELPER_IMAGE_IO.HC_CropImage_Rotate(rawImgae, imageW, imageH, rc1, single.GetCenter(), single.ANGLE);
-            crop2 = HELPER_IMAGE_IO.HC_CropImage_Rotate(rawImgae, imageW, imageH, rc2, single.GetCenter(), single.ANGLE);
+            crop1 = HELPER_IMAGE_IO.HC_CropImage_Rotate(rawImgae, imageW, imageH, rc1, single.GetCenter(), single.param_02_rect_angle);
+            crop2 = HELPER_IMAGE_IO.HC_CropImage_Rotate(rawImgae, imageW, imageH, rc2, single.GetCenter(), single.param_02_rect_angle);
 
         }
         public void iAdj_Figure(int nFigureType, int nIndex, int nAction, int x, int y)
@@ -506,8 +515,26 @@ namespace CD_View
             }
             else if (nFigureType == IFX_FIGURE.MIXED_RC)
             {
-                CMeasureMixedRC[] array = fm.ToArray_MixedRc();
-                CMeasureMixedRC single = fm.ElementAt_MixedRect(nIndex);
+                CMeasureMixedRC[] array = fm.ToArray_Mixed_RC();
+                CMeasureMixedRC single = fm.ElementAt_MRC(nIndex);
+
+                /***/if (nAction == IFX_ADJ_ACTION.POS) { single.AdjustPos(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.SIZE) { single.AdjustSize(x, y); }
+            }
+            else if (nFigureType == IFX_FIGURE.MIXED_CC)
+            {
+                CMeasureMixedCC[] array = fm.ToArray_Mixed_CC();
+                CMeasureMixedCC single = fm.ElementAt_MCC(nIndex);
+
+                /***/if (nAction == IFX_ADJ_ACTION.POS) { single.AdjustPos(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
+                else if (nAction == IFX_ADJ_ACTION.SIZE) { single.AdjustSize(x, y); }
+            }
+            else if (nFigureType == IFX_FIGURE.MIXED_RCC)
+            {
+                CMeasureMixedRCC[] array = fm.ToArray_Mixed_RCC();
+                CMeasureMixedRCC single = fm.ElementAt_MRCC(nIndex);
 
                 /***/if (nAction == IFX_ADJ_ACTION.POS) { single.AdjustPos(x, y); }
                 else if (nAction == IFX_ADJ_ACTION.GAP) { single.AdjustGap(x, y); }
@@ -1793,7 +1820,7 @@ namespace CD_View
             {
               #region DRAW MIXED RECTANGLE
 
-                CMeasureMixedRC single = fm.ElementAt_MixedRect(i);
+                CMeasureMixedRC single = fm.ElementAt_MRC(i);
 
                 RectangleF rcFirst = single.rc_FST.ToRectangleF();
                 RectangleF rcSecon = single.rc_SCD.ToRectangleF();
@@ -1806,6 +1833,67 @@ namespace CD_View
 
                 e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
                 e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
+                #endregion
+            }
+            //*************************************************************************************
+            // MIXED Cilrcle
+            //*************************************************************************************
+
+            for (int i = 0; i < fm.COUNT_MIXED_CC; i++)
+            {
+              #region DRAW MIXED CIRCLE
+                CMeasureMixedCC single = fm.ElementAt_MCC(i);
+
+                RectangleF rc_FST_EX = single.rc_FST_EX; RectangleF rc_FST_IN = single.rc_FST_IN;
+                RectangleF rc_SCD_EX = single.rc_SCD_EX; RectangleF rc_SCD_IN = single.rc_SCD_IN;
+
+                rc_FST_EX.Offset(fTransX, fTransY); rc_FST_IN.Offset(fTransX, fTransY);
+                rc_SCD_EX.Offset(fTransX, fTransY); rc_SCD_IN.Offset(fTransX, fTransY);
+
+                if (single.UI_SELECTED == true)
+                {
+                    e.Graphics.DrawEllipse(penOrange, rc_FST_EX);e.Graphics.DrawEllipse(penOrange, rc_FST_IN);
+                    e.Graphics.DrawEllipse(penOrange, rc_SCD_EX);e.Graphics.DrawEllipse(penOrange, rc_SCD_IN);
+                }
+                else
+                {
+                    e.Graphics.DrawEllipse(penLimeG, rc_FST_EX);e.Graphics.DrawEllipse(penLimeG, rc_FST_IN);
+                    e.Graphics.DrawEllipse(penLimeG, rc_SCD_EX);e.Graphics.DrawEllipse(penLimeG, rc_SCD_IN);
+                }
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_FST_EX.X, rc_FST_EX.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_SCD_EX.X, rc_SCD_EX.Y - nFontGap);
+                #endregion
+            }
+            //*************************************************************************************
+            // MIXED Rectangle And Circle
+            //*************************************************************************************
+            for (int i = 0; i < fm.COUNT_MIXED_RCC; i++)
+            {
+                #region DRAW MIXED CIRCLE
+                CMeasureMixedRCC single = fm.ElementAt_MRCC(i);
+
+                RectangleF rc_Rectangle = single.rc_FST.ToRectangleF();
+                rc_Rectangle.Offset(fTransX, fTransY);
+
+                RectangleF rc_Circle_EX = single.rc_FST_EX; RectangleF rcCircleIN = single.rc_FST_IN;
+                rc_Circle_EX.Offset(fTransX, fTransY); rcCircleIN.Offset(fTransX, fTransY);
+
+                if (single.UI_SELECTED == true)
+                {
+                    e.Graphics.DrawRectangle(penOrange, rc_Rectangle.X, rc_Rectangle.Y, rc_Rectangle.Width, rc_Rectangle.Height);
+                    e.Graphics.DrawEllipse(penOrange, rc_Circle_EX);
+                    e.Graphics.DrawEllipse(penOrange, rcCircleIN);
+                }
+                else
+                {
+                    e.Graphics.DrawRectangle(penLimeG, rc_Rectangle.X, rc_Rectangle.Y, rc_Rectangle.Width, rc_Rectangle.Height);
+                    e.Graphics.DrawEllipse(penLimeG, rc_Circle_EX);
+                    e.Graphics.DrawEllipse(penLimeG, rcCircleIN);
+                }
+
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_Rectangle.X, rc_Rectangle.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_Circle_EX.X, rc_Circle_EX.Y - nFontGap);
+
                 #endregion
             }
 
@@ -1840,7 +1928,7 @@ namespace CD_View
                 e.Graphics.DrawString(string.Format("{0}", "VER_EX_L"), font, brush, rcVER_EX_LFT.X, rcVER_EX_LFT.Y - nFontGap);
                 e.Graphics.DrawString(string.Format("{0}", "VER_EX_R"), font, brush, rcVER_EX_RHT.X, rcVER_EX_RHT.Y - nFontGap);
 
-                if (single.param_05_shape_of_measure == 0)
+                if (single.param_10_shape_of_measure == 0)
                 {
                     RectangleF rcHOR_IN_TOP = single.RC_HOR_IN.rc_FST.ToRectangleF();
                     RectangleF rcHOR_IN_BTM = single.RC_HOR_IN.rc_SCD.ToRectangleF();

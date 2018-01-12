@@ -254,7 +254,7 @@ namespace CD_VISION_DIALOG
             TXT_CIR_COVERAGE.Text = single.param_07_Coverage;
 
             // 03 Show Raw Data
-            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
+            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_04_show_raw_data;
 
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
@@ -295,7 +295,7 @@ namespace CD_VISION_DIALOG
             int.TryParse(CB_CIR_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
 
             // show raw data
-            single.param_comm_05_BOOL_SHOW_RAW_DATA = CHK_CIR_SHOW_RAW_DATA.Checked;
+            single.param_comm_04_show_raw_data = CHK_CIR_SHOW_RAW_DATA.Checked;
 
             return single;
         }
@@ -308,24 +308,24 @@ namespace CD_VISION_DIALOG
             // algorithm 
             single.param_00_algorithm = _FromUI_GetMeasureAlgorithm(TARGEt_FIGURE_TYPE_REC);
 
-            single.param_01_bool_Use_AutoDetection = CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked;
+            single.param_03_bool_Use_AutoDetection = CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked;
 
             // edge detection target for each rectangles
-            int.TryParse(TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text, out nValue); single.param_02_peakTargetIndex_fst = nValue;
-            int.TryParse(TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text, out nValue); single.param_03_peakTargetIndex_scd = nValue;
+            int.TryParse(TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text, out nValue); single.param_04_peakTargetIndex_fst = nValue;
+            int.TryParse(TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text, out nValue); single.param_05_peakTargetIndex_scd = nValue;
 
             // candidate count 
-            int.TryParse(TXT_RECT_CANDIDATE_COUNT.Text, out nValue); single.param_04_peakCandidate = nValue;
+            int.TryParse(TXT_RECT_CANDIDATE_COUNT.Text, out nValue); single.param_06_peakCandidate = nValue;
 
             // profile filtering window size 
-            int.TryParse(TXT_RECT_WINDOW_SIZE.Text, out nValue); single.param_05_windowSize = nValue;
+            int.TryParse(TXT_RECT_WINDOW_SIZE.Text, out nValue); single.param_07_windowSize = nValue;
 
             // edge positions for each rectangles
-            int.TryParse(TXT_RECT_EDGE_POSITION_FST.Text, out nValue); single.param_06_edge_position_fst = nValue;
-            int.TryParse(TXT_RECT_EDGE_POSITION_SCD.Text, out nValue); single.param_07_edge_position_scd = nValue;
+            int.TryParse(TXT_RECT_EDGE_POSITION_FST.Text, out nValue); single.param_08_edge_position_fst = nValue;
+            int.TryParse(TXT_RECT_EDGE_POSITION_SCD.Text, out nValue); single.param_09_edge_position_scd = nValue;
 
             // outlier filtering refinement value 
-            int.TryParse(TXT_RECT_EDGE_REFINEMENT.Text, out nValue); single.param_comm_04_refinement = nValue;
+            int.TryParse(TXT_RECT_EDGE_REFINEMENT.Text, out nValue); single.param_10_refinement = nValue;
 
             // spc enhancement value 
             int.TryParse(CB_RECT_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
@@ -334,7 +334,7 @@ namespace CD_VISION_DIALOG
             double.TryParse(TXT_RECT_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
             double.TryParse(TXT_RECT_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
             
-            single.param_comm_05_BOOL_SHOW_RAW_DATA = CHK_RECT_SHOW_RAW_DATA.Checked;
+            single.param_comm_04_show_raw_data = CHK_RECT_SHOW_RAW_DATA.Checked;
  
 
 
@@ -422,19 +422,7 @@ namespace CD_VISION_DIALOG
 
                 if (arrCircle[element].NICKNAME == strTarget)
                 {
-                    arrCircle[element].param_00_algorithm_CIR/*************/= single.param_00_algorithm_CIR;
-                    arrCircle[element].param_01_DMG_Tol /******************/= single.param_01_DMG_Tol;
-                    arrCircle[element].param_02_BOOL_TREAT_AS_ELLIPSE /****/= single.param_02_BOOL_TREAT_AS_ELLIPSE;
-                    arrCircle[element].param_03_CircleDetecType/***********/= single.param_03_CircleDetecType;
-                    arrCircle[element].param_04_Shrinkage/*****************/= single.param_04_Shrinkage;
-                    arrCircle[element].param_05_Outlier_Filter/************/= single.param_05_Outlier_Filter;
-                    arrCircle[element].param_06_EdgePos/*******************/= single.param_06_EdgePos;
-                    arrCircle[element].param_07_Coverage /*****************/= single.param_07_Coverage;
-                    arrCircle[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
-                    arrCircle[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
-                    arrCircle[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
-                    arrCircle[element].param_comm_04_refinement /**********/= single.param_comm_04_refinement;
-                    arrCircle[element].param_comm_05_BOOL_SHOW_RAW_DATA/***/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
+                    arrCircle[element] = single.CopyTo();
                 }
 
                 this.fm.list_pair_Cir = arrCircle.ToList();
@@ -458,19 +446,7 @@ namespace CD_VISION_DIALOG
 
                 if (arrRect[element].NICKNAME == strTarget)
                 {
-                    arrRect[element].param_00_algorithm/*****************/= single.param_00_algorithm;
-                    arrRect[element].param_01_bool_Use_AutoDetection/****/= single.param_01_bool_Use_AutoDetection;
-                    arrRect[element].param_02_peakTargetIndex_fst/*******/= single.param_02_peakTargetIndex_fst;
-                    arrRect[element].param_03_peakTargetIndex_scd/*******/= single.param_03_peakTargetIndex_scd;
-                    arrRect[element].param_04_peakCandidate/*************/= single.param_04_peakCandidate;
-                    arrRect[element].param_05_windowSize/****************/= single.param_05_windowSize;
-                    arrRect[element].param_06_edge_position_fst/*********/= single.param_06_edge_position_fst;
-                    arrRect[element].param_07_edge_position_scd/*********/= single.param_07_edge_position_scd;
-                    arrRect[element].param_comm_01_compen_A/*************/= single.param_comm_01_compen_A;
-                    arrRect[element].param_comm_02_compen_B/*************/= single.param_comm_02_compen_B;
-                    arrRect[element].param_comm_03_spc_enhance/**********/= single.param_comm_03_spc_enhance;
-                    arrRect[element].param_comm_04_refinement /**********/= single.param_comm_04_refinement;
-                    arrRect[element].param_comm_05_BOOL_SHOW_RAW_DATA /**/= single.param_comm_05_BOOL_SHOW_RAW_DATA;
+                    arrRect[element] = single.CopyTo();
                 }
                 this.fm.list_pair_Rct = arrRect.ToList();
             }
@@ -509,7 +485,7 @@ namespace CD_VISION_DIALOG
                     if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
                     if (CHK_SAVE_CIR_SPC_ENHANCEMENT.Checked/****/) { arrCircle[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
                     //arrCircle[i].param_comm_04_refinement = single.param_comm_04_refinement;
-                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
+                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_04_show_raw_data /********/= single.param_comm_04_show_raw_data; }
                     
                 }
 
@@ -528,18 +504,18 @@ namespace CD_VISION_DIALOG
                 for (int i = 0; i < arrRect.Length; i++)
                 {
                     if (CHK_SAVE_RECT_ALGORITHM.Checked/**********/) { arrRect[i].param_00_algorithm /*****************/= single.param_00_algorithm; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_01_bool_Use_AutoDetection /****/= single.param_01_bool_Use_AutoDetection; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_02_peakTargetIndex_fst /*******/= single.param_02_peakTargetIndex_fst; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_03_peakTargetIndex_scd /*******/= single.param_03_peakTargetIndex_scd; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_04_peakCandidate /*************/= single.param_04_peakCandidate; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_05_windowSize /****************/= single.param_05_windowSize; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_06_edge_position_fst /*********/= single.param_06_edge_position_fst; }
-                    if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_07_edge_position_scd /*********/= single.param_07_edge_position_scd; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_03_bool_Use_AutoDetection /****/= single.param_03_bool_Use_AutoDetection; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_04_peakTargetIndex_fst /*******/= single.param_04_peakTargetIndex_fst; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_05_peakTargetIndex_scd /*******/= single.param_05_peakTargetIndex_scd; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_06_peakCandidate /*************/= single.param_06_peakCandidate; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_07_windowSize /****************/= single.param_07_windowSize; }
+                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_08_edge_position_fst /*********/= single.param_08_edge_position_fst; }
+                    if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_09_edge_position_scd /*********/= single.param_09_edge_position_scd; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
                     if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
                     if (CHK_SAVE_RECT_SPC_ENHANCEMENT.Checked/****/) { arrRect[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
-                    if (CHK_SAVE_RECT_REFINEMENT.Checked/*********/) { arrRect[i].param_comm_04_refinement/************/= single.param_comm_04_refinement; }
-                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_05_BOOL_SHOW_RAW_DATA /***/= single.param_comm_05_BOOL_SHOW_RAW_DATA; }
+                    if (CHK_SAVE_RECT_REFINEMENT.Checked/*********/) { arrRect[i].param_10_refinement/*****************/= single.param_10_refinement; }
+                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_04_show_raw_data /********/= single.param_comm_04_show_raw_data; }
                 }
 
                 this.fm.list_pair_Rct = arrRect.ToList();
@@ -566,6 +542,7 @@ namespace CD_VISION_DIALOG
 
             CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
+            
             // 01 Target Info
             TXT_RECT_SELECTED_INDEX.Text = nIndex.ToString("N0");
             TXT_RECT_SELECTED_FIGURE.Text = single.NICKNAME;
@@ -577,35 +554,35 @@ namespace CD_VISION_DIALOG
             if (single.param_00_algorithm == IFX_ALGORITHM.DIR_IN) { RDO_RECT_ALGO_DIR_IN.Checked = true; }
 
             // 01 Rectangle Type { HOR | VER | DIA }
-            /***/if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR) RDO_RECT_TYPE_HOR.Checked = true;
-            else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_VER) RDO_RECT_TYPE_VER.Checked = true;
-            else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA) RDO_RECT_TYPE_DIA.Checked = true;
+            /***/if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_HOR) RDO_RECT_TYPE_HOR.Checked = true;
+            else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_VER) RDO_RECT_TYPE_VER.Checked = true;
+            else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_DIA) RDO_RECT_TYPE_DIA.Checked = true;
 
-            CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked = single.param_01_bool_Use_AutoDetection;
+            CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked = single.param_03_bool_Use_AutoDetection;
             CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(null, EventArgs.Empty);
 
             // 02 edge detection type { 0 ~ 6 }
-            TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_02_peakTargetIndex_fst.ToString("N0");
-            TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_03_peakTargetIndex_scd.ToString("N0");
+            TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_04_peakTargetIndex_fst.ToString("N0");
+            TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_05_peakTargetIndex_scd.ToString("N0");
 
-            CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_02_peakTargetIndex_fst;
-            CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_03_peakTargetIndex_scd;
+            CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_04_peakTargetIndex_fst;
+            CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_05_peakTargetIndex_scd;
             // update UI from the first line data 
 
-            TXT_RECT_WINDOW_SIZE.Text = single.param_05_windowSize.ToString("NO");
+            TXT_RECT_WINDOW_SIZE.Text = single.param_07_windowSize.ToString("NO");
 
             // 03 compensation value            
            TXT_RECT_COMPEN_A.Text= single.param_comm_01_compen_A.ToString("F2");
            TXT_RECT_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
 
             // 04 edge position for the line 
-           TXT_RECT_EDGE_POSITION_FST.Text = single.param_06_edge_position_fst.ToString("F2");
-           TXT_RECT_EDGE_POSITION_SCD.Text = single.param_07_edge_position_scd.ToString("F2");
+           TXT_RECT_EDGE_POSITION_FST.Text = single.param_08_edge_position_fst.ToString("F2");
+           TXT_RECT_EDGE_POSITION_SCD.Text = single.param_09_edge_position_scd.ToString("F2");
 
-           TXT_RECT_EDGE_REFINEMENT.Text = single.param_comm_04_refinement.ToString("N0");
+           TXT_RECT_EDGE_REFINEMENT.Text = single.param_10_refinement.ToString("N0");
 
             // 05 show raw data 
-            CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_05_BOOL_SHOW_RAW_DATA;
+           CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_04_show_raw_data;
             
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
@@ -796,8 +773,8 @@ namespace CD_VISION_DIALOG
                 Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
 
                 CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
-                TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_02_peakTargetIndex_fst.ToString("N0");
-                CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_02_peakTargetIndex_fst;
+                TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_04_peakTargetIndex_fst.ToString("N0");
+                CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_04_peakTargetIndex_fst;
             }
         }
 
@@ -812,8 +789,8 @@ namespace CD_VISION_DIALOG
 
                 CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
-                TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_03_peakTargetIndex_scd.ToString("N0");
-                CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_03_peakTargetIndex_scd;
+                TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_05_peakTargetIndex_scd.ToString("N0");
+                CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_05_peakTargetIndex_scd;
             }
         }
 
