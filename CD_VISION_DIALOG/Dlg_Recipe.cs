@@ -42,29 +42,29 @@ namespace CD_VISION_DIALOG
             }
 
             // only for  [LENS + PIXEL VALUE] & [LIGHT INDEX + VALUE]
-            int nCurCamm = param_optic.CAM_INDEX;
+            int nCurCamm = param_optic.i01_CAM_INDEX;
 
             /***/if (nCurCamm == 1) RDO_CAM_ALIGN.Checked = true;
             else if (nCurCamm == 2) RDO_CAM_25X.Checked = true;
             else if (nCurCamm == 3) RDO_CAM_50X.Checked = true;
 
-            TXT_PIXEL_RES.Text = param_optic.PIXEL_RES.ToString("F6");
+            TXT_PIXEL_RES.Text = param_optic.i02_PIXEL_RES.ToString("F6");
 
-            int nLightIndex = param_optic.LIGHT_INDEX;
+            int nLightIndex = param_optic.i03_LIGHT_INDEX;
 
             /***/if (nLightIndex == 1) RDO_LIGHT_ALIGN.Checked = true;
             else if (nLightIndex == 2) RDO_LIGHT_BF.Checked = true;
             else if (nLightIndex == 3) RDO_LIGHT_DF.Checked = true;
 
-            TXT_LIGHT_GAIN.Text = param_optic.LIGHT_VALUE.ToString("N0");
+            TXT_LIGHT_VALUE.Text = param_optic.i04_LIGHT_VALUE.ToString("N0");
 
-            TXT_CAM_EXP.Text = param_optic.EXPOSURE.ToString("N0");
+            TXT_CAM_EXP.Text = param_optic.i05_EXPOSURE.ToString("N0");
 
             CHK_FOCUS_NONE.Checked = true;
             CHK_FOCUS_NONE.Checked = false;
 
-            TXT_MULTI_FRAME_SHOT_COUNT.Text = param_optic.MULTI_SHOT_COUNT.ToString("N0");
-            TXT_MULTI_FRAME_SHOT_DELAY.Text = param_optic.MULTI_SHOT_DELAY.ToString("N0");
+            TXT_MULTI_FRAME_SHOT_COUNT.Text = param_optic.i06_MULTI_SHOT_COUNT.ToString("N0");
+            TXT_MULTI_FRAME_SHOT_DELAY.Text = param_optic.i07_MULTI_SHOT_DELAY.ToString("N0");
 
             /***/if (baseRecp.PARAM_04_FOCUS_TYPE == 0) { CHK_FOCUS_NONE.Checked = true; }
             else if (baseRecp.PARAM_04_FOCUS_TYPE == 1) { CHK_FOCUS_ZAF.Checked = true; }
@@ -77,13 +77,6 @@ namespace CD_VISION_DIALOG
             /***/if (baseRecp.PARAM_05_USE_CENTERING == 0) CHK_USE_CENTERING.Checked = false;
             else if (baseRecp.PARAM_05_USE_CENTERING == 1) CHK_USE_CENTERING.Checked = true;
 
-            TXT_COMPEN_A.Text = baseRecp.PARAM_06_COMPEN_A.ToString("F4");
-            TXT_COMPEN_B.Text = baseRecp.PARAM_06_COMPEN_B.ToString("F4");
-
-            /***/if (baseRecp.PARAM_07_ALGORITHM_INDEX == 0){RDO_ALGORITHM_MAXHAT.Checked = true;}
-            else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 1) { RDO_ALGORITHM_CARDIN.Checked = true; }
-            else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 2) { RDO_ALGORITHM_DIR_IN.Checked = true; }
-            else if (baseRecp.PARAM_07_ALGORITHM_INDEX == 3) { RDO_ALGORITHM_DIR_EX.Checked = true; }
 
             return true;
         }
@@ -92,9 +85,9 @@ namespace CD_VISION_DIALOG
         {
         }
 
-        private void BTN_PTRN_CANCEL_Click(object sender, EventArgs e){this.Hide();}
+        private void BTN_RECP_PARAM_CANCEL_Click(object sender, EventArgs e){this.Hide();}
 
-        private void BTN_PTRN_APPLY_Click(object sender, EventArgs e)
+        private void BTN_RECP_PARAM_APPLY_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do You Want To Update Parameter Values?", "Parameter Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -104,57 +97,52 @@ namespace CD_VISION_DIALOG
                 else if (RDO_CAM_25X.Checked == true) nCurCam = PARAM_OPTICS.CAM_25X;
                 else if (RDO_CAM_50X.Checked == true) nCurCam = PARAM_OPTICS.CAM_50X;
 
-                fm.param_optics.CAM_INDEX = nCurCam;
+                fm.param_optics.i01_CAM_INDEX = nCurCam;
 
                 double fPixelRes = 0;
                 double.TryParse(TXT_PIXEL_RES.Text, out fPixelRes);
-                fm.param_optics.PIXEL_RES = fPixelRes;
+                fm.param_optics.i02_PIXEL_RES = fPixelRes;
 
                 int nLightIndex = -1;
                 /***/if (RDO_LIGHT_ALIGN.Checked == true) nLightIndex = PARAM_OPTICS.LIGHT_ALIGN;
                 else if (RDO_LIGHT_BF.Checked == true) nLightIndex = PARAM_OPTICS.LIGHT_BF;
                 else if (RDO_LIGHT_DF.Checked == true) nLightIndex = PARAM_OPTICS.LIGHT_DF;
 
-                fm.param_optics.LIGHT_INDEX = nLightIndex;
+                fm.param_optics.i03_LIGHT_INDEX = nLightIndex;
 
-                int nLightGain = -1;
-                int.TryParse(TXT_LIGHT_GAIN.Text, out nLightGain);
+                int nLightValue = 0;
+                int.TryParse(TXT_LIGHT_VALUE.Text, out nLightValue);
+                fm.param_optics.i04_LIGHT_VALUE = nLightValue;
+
 
                 int nCamExp = 0;
                 int.TryParse(TXT_CAM_EXP.Text.Replace(",",""), out nCamExp);
 
-                fm.param_optics.EXPOSURE = nCamExp;
 
-                fm.param_optics.LIGHT_VALUE = nLightGain;
+                fm.param_optics.i05_EXPOSURE = nCamExp;
 
                 fm.baseRecp.PARAM_04_FOCUS_TYPE = _GetFocusStatus();
 
                 int nMultiShotCount = 0;
                 int.TryParse(TXT_MULTI_FRAME_SHOT_COUNT.Text.Replace(",",""), out nMultiShotCount);
-                fm.param_optics.MULTI_SHOT_COUNT = nMultiShotCount;
+                fm.param_optics.i06_MULTI_SHOT_COUNT = nMultiShotCount;
 
                 int nMultiShotDelay = 0;
                 int.TryParse(TXT_MULTI_FRAME_SHOT_DELAY.Text.Replace(",",""), out nMultiShotDelay);
-                fm.param_optics.MULTI_SHOT_DELAY = nMultiShotDelay;
+                fm.param_optics.i07_MULTI_SHOT_DELAY = nMultiShotDelay;
 
                 if (RDO_MULTI_FRAME_VALUE_AVG.Checked == true)
                 {
-                    fm.param_optics.MULTI_SHOT_VALUE_AVG = true;
+                    fm.param_optics.i08_MULTI_SHOT_VALUE_AVG = true;
                 }
                 else if ( RDO_MULTI_FRAME_MEDIAN.Checked == true)
                 {
-                    fm.param_optics.MULTI_SHOT_VALUE_AVG = false;
+                    fm.param_optics.i08_MULTI_SHOT_VALUE_AVG = false;
                 }
-
-                double fCompenA = -1; double fCompenB = -1;
-                double.TryParse(TXT_COMPEN_A.Text, out fCompenA);
-                double.TryParse(TXT_COMPEN_B.Text, out fCompenB);
 
                 /***/if (CHK_USE_CENTERING.Checked == false) fm.baseRecp.PARAM_05_USE_CENTERING = 0;
                 else if (CHK_USE_CENTERING.Checked == true) fm.baseRecp.PARAM_05_USE_CENTERING = 1;
 
-                fm.baseRecp.PARAM_06_COMPEN_A = fCompenA;
-                fm.baseRecp.PARAM_06_COMPEN_B = fCompenB;
 
             }
             this.Hide();

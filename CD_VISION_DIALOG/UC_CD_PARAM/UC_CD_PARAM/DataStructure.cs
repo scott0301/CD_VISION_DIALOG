@@ -233,45 +233,17 @@ namespace CD_Paramter
 
         }
 
-        [CategoryAttribute("04 Auto Peak detection"), DescriptionAttribute("true | false")]
-        public bool USE_AUTO_PEAK_DETECTION{ get{return param_03_bool_use_auto_peak_detection;} set{param_03_bool_use_auto_peak_detection = value;} }
-
-        [CategoryAttribute("05 Peak Target Index For FST "), DescriptionAttribute("If Use Auto Peak Detection,   0 ~  Peak Candidate count")]
-        public double PEAK_TARGET_IDX_FST{ get { return param_04_peak_target_index_fst; } set { param_04_peak_target_index_fst= value; } }
-
-        [CategoryAttribute("06 Peak Target Index For SCD"), DescriptionAttribute("If Use Auto Peak Detection 0 ~ Peak Candidate ")]
-        public double PEAK_TARGET_IDX_SCD { get { return param_05_peak_target_index_scd; } set { param_05_peak_target_index_scd = value; } }
-
-        [CategoryAttribute("07 Peak Candidate Count"), DescriptionAttribute("2 ~ ∞")]
-        public double PEAK_CANDIDATE { get { return param_06_peak_candidate; } set { param_06_peak_candidate = value; } }
-
-        [CategoryAttribute("08 Window Size"), DescriptionAttribute("0 & 2 ~ ∞")]
-        public double WINDOW_SIZE 
-        {
-            get 
-            {
-                if (param_07_window_size <= 10) param_07_window_size = 10;
-                return param_07_window_size; 
-            } 
-            set 
-            {
-                param_07_window_size= value;
-                if (param_07_window_size <= 10) param_07_window_size = 10;
-            }
-        }
-
-
-        [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        [CategoryAttribute("04 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_FST { get{return param_08_edge_pos_fst;} set{param_08_edge_pos_fst=value;} }
-        [CategoryAttribute("10 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        [CategoryAttribute("05 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_SCD { get { return param_09_edge_pos_scd; } set { param_09_edge_pos_scd = value; } }
 
-        [CategoryAttribute("11 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        [CategoryAttribute("06 Compensation A"), DescriptionAttribute("A of Ax + B")]
         public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        [CategoryAttribute("07 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get{ return param_comm_02_compen_B;} set{param_comm_02_compen_B=value;} }
 
-        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6)")]
+        [CategoryAttribute("08 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
         [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
@@ -536,12 +508,12 @@ namespace CD_Paramter
         [CategoryAttribute("15 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
         public double EDGE_POS_HOR_IN { get { return param_05_edge_pos_hor_in;} set { param_05_edge_pos_hor_in = value;} }
         [CategoryAttribute("16 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_VER_IN { get { return param_06_edge_pos_hor_ex;} set {param_06_edge_pos_hor_ex = value;} }
+        public double EDGE_POS_VER_IN { get { return param_07_edge_pos_ver_in; } set { param_07_edge_pos_ver_in = value; } }
 
         //*****************************************************************************************
 
         [CategoryAttribute("17 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_EX { get{return param_07_edge_pos_ver_in;} set{param_07_edge_pos_ver_in = value;} }
+        public double EDGE_POS_HOR_EX { get { return param_06_edge_pos_hor_ex; } set { param_06_edge_pos_hor_ex = value; } }
         [CategoryAttribute("18 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
         public double EDGE_POS_VER_EX { get{return param_08_edge_pos_ver_ex;} set{param_08_edge_pos_ver_ex = value;} }
 
@@ -551,7 +523,7 @@ namespace CD_Paramter
         public double COMPEN_A {get{return param_comm_01_compen_A;} set{param_comm_01_compen_A =value;}}
         [CategoryAttribute("21 COMPENSATION B"), DescriptionAttribute("True or False")]
         public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
-        [CategoryAttribute("22 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("22 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
         [CategoryAttribute("23 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
         public int REFINEMENT { get { return param_09_refinement; } set { param_09_refinement = value; } }
@@ -595,10 +567,10 @@ namespace CD_Paramter
             single.param_03_algorithm_VER_IN = IFX_ALGORITHM.ToNumericType(param_03_algorithm_ver_in);
             single.param_04_algorithm_VER_EX = IFX_ALGORITHM.ToNumericType(param_04_algorithm_ver_ex);
 
-            single.param_05_edge_position_hor_in = Convert.ToInt32(param_05_edge_pos_hor_in);
-            single.param_06_edge_position_hor_ex = Convert.ToInt32(this.param_06_edge_pos_hor_ex);
-            single.param_07_edge_position_ver_in = Convert.ToInt32(this.param_07_edge_pos_ver_in);
-            single.param_08_edge_position_ver_ex = Convert.ToInt32(this.param_08_edge_pos_ver_ex);
+            single.param_05_edge_position_hor_in = Convert.ToDouble(param_05_edge_pos_hor_in);
+            single.param_06_edge_position_hor_ex = Convert.ToDouble(this.param_06_edge_pos_hor_ex);
+            single.param_07_edge_position_ver_in = Convert.ToDouble(this.param_07_edge_pos_ver_in);
+            single.param_08_edge_position_ver_ex = Convert.ToDouble(this.param_08_edge_pos_ver_ex);
             single.param_09_refinement /********/= this.param_09_refinement;
             single.param_10_shape_of_measure/***/= Convert.ToInt32(this.param_10_shape_of_measure);
 
@@ -737,7 +709,7 @@ namespace CD_Paramter
         [CategoryAttribute("09 Ellipse Process"), DescriptionAttribute("Treat As Ellipse\nTrue or False")]
         public bool TREAT_AS_ELLIPSE { get{return param_02_bool_treat_as_ellipse;} set{param_02_bool_treat_as_ellipse = value;} }
 
-        [CategoryAttribute("10 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6) RVSGRD(7)")]
+        [CategoryAttribute("10 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE{ get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
         [CategoryAttribute("11 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
@@ -939,7 +911,7 @@ namespace CD_Paramter
         [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
 
-        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6)")]
+        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
         [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
@@ -1022,7 +994,6 @@ namespace CD_Paramter
             this.param_comm_04_show_raw_data /*******/= single.param_comm_04_show_raw_data;
         }
     }
-
     public class PROPERTY_MixedCC
     {
         private string param_00_algorithm_fst = IFX_ALGORITHM.ToStringType(IFX_ALGORITHM.CARDIN);
@@ -1119,7 +1090,7 @@ namespace CD_Paramter
         [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
 
-        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6) RVSGRD(7)")]
+        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
         [CategoryAttribute("06 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
@@ -1204,7 +1175,6 @@ namespace CD_Paramter
         }
 
     }
-
     public class PROPERTY_MixedRCC
     {
         private double/***/param_comm_01_compen_A = 1;
@@ -1330,7 +1300,7 @@ namespace CD_Paramter
         [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
 
-        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVS(5), GRD(6) RVSGRD(7)")]
+        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
 

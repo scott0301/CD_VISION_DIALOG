@@ -220,18 +220,6 @@ namespace CD_VISION_DIALOG
             TXT_CIRCLE_SELECTED_FIGURE.Text = single.NICKNAME;
             TXT_CIRCLE_SELECTED_INDEX.Text = nIndex.ToString("N0");
 
-            // 00 Algorithm 
-            if (single.param_00_algorithm_CIR == IFX_ALGORITHM.MEXHAT) { RDO_CIR_ALGO_MEXHAT.Checked = true; }
-            if (single.param_00_algorithm_CIR == IFX_ALGORITHM.CARDIN) { RDO_CIR_ALGO_CARDIN.Checked = true; }
-            if (single.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_EX) { RDO_CIR_ALGO_DIR_EX.Checked = true; }
-            if (single.param_00_algorithm_CIR == IFX_ALGORITHM.DIR_IN) { RDO_CIR_ALGO_DIR_IN.Checked = true; }
-
-            // 01 Damage Tolerance 
-            TXT_CIR_DMG_TOLERANCE.Text = single.param_01_DMG_Tol.ToString("F2");
-
-            // 02 Circle Shape
-            CHK_CIR_TREAT_AS_ELLIPSE.Checked = single.param_02_BOOL_TREAT_AS_ELLIPSE;
-
             // 03 Auto Circle Detection
 
             int nValue = _FromUI_GetCircleDetectionType();
@@ -240,22 +228,6 @@ namespace CD_VISION_DIALOG
             // 04 Shrinkage 
             TXT_CIR_SHRINKAGE.Text = single.param_04_Shrinkage.ToString("F2");
 
-            // 05 outlier filter
-            TXT_CIR_OUTLIER_FILTER.Text = single.param_05_Outlier_Filter.ToString("N0");
-
-
-            // 00 Edge Position
-            TXT_CIR_EDGE_POSITION.Text = single.param_06_EdgePos.ToString("N0");
-
-            // 0102 Compensation
-            TXT_CIR_COMPEN_A.Text = single.param_comm_01_compen_A.ToString("F2");
-            TXT_CIR_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
-
-            TXT_CIR_COVERAGE.Text = single.param_07_Coverage;
-
-            // 03 Show Raw Data
-            CHK_CIR_SHOW_RAW_DATA.Checked = single.param_comm_04_show_raw_data;
-
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
             uc_tunning_view.VIEW_SET_Mag_Origin();
@@ -263,18 +235,7 @@ namespace CD_VISION_DIALOG
 
         private CMeasurePairCir _FromUI_GetParameters_Circle()
         {
-            double fValue = 0; int nValue = 0;
-
             CMeasurePairCir single = new CMeasurePairCir();
-
-            // algorithm 
-            single.param_00_algorithm_CIR = _FromUI_GetMeasureAlgorithm(TARGET_FIGURE_TYPE_CIR);
-
-            // damge tolerance
-            double.TryParse(TXT_CIR_DMG_TOLERANCE.Text, out fValue); single.param_01_DMG_Tol = fValue;
-
-            // ellipse or circle
-            single.param_02_BOOL_TREAT_AS_ELLIPSE = CHK_CIR_TREAT_AS_ELLIPSE.Checked;
 
             // auto circle detection
             single.param_03_CircleDetecType = _FromUI_GetCircleDetectionType();
@@ -282,31 +243,13 @@ namespace CD_VISION_DIALOG
             // shrinkage
             single.param_04_Shrinkage = Convert.ToDouble(TXT_CIR_SHRINKAGE.Value);
 
-            // outlier filter
-            int.TryParse(TXT_CIR_OUTLIER_FILTER.Text, out nValue); single.param_05_Outlier_Filter = nValue;
-
-            // edge position
-            double.TryParse(TXT_CIR_EDGE_POSITION.Text, out fValue); single.param_06_EdgePos = fValue;
-
-            // compensation
-            double.TryParse(TXT_CIR_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
-            double.TryParse(TXT_CIR_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
-
-            int.TryParse(CB_CIR_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
-
-            // show raw data
-            single.param_comm_04_show_raw_data = CHK_CIR_SHOW_RAW_DATA.Checked;
-
             return single;
         }
         private CMeasurePairRct _FromUI_GetParameters_Rect()
         {
-            double fValue = 0; int nValue = 0;
+            int nValue = 0;
 
             CMeasurePairRct single = new CMeasurePairRct();
-
-            // algorithm 
-            single.param_00_algorithm = _FromUI_GetMeasureAlgorithm(TARGEt_FIGURE_TYPE_REC);
 
             single.param_03_bool_Use_AutoDetection = CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked;
 
@@ -320,46 +263,7 @@ namespace CD_VISION_DIALOG
             // profile filtering window size 
             int.TryParse(TXT_RECT_WINDOW_SIZE.Text, out nValue); single.param_07_windowSize = nValue;
 
-            // edge positions for each rectangles
-            int.TryParse(TXT_RECT_EDGE_POSITION_FST.Text, out nValue); single.param_08_edge_position_fst = nValue;
-            int.TryParse(TXT_RECT_EDGE_POSITION_SCD.Text, out nValue); single.param_09_edge_position_scd = nValue;
-
-            // outlier filtering refinement value 
-            int.TryParse(TXT_RECT_EDGE_REFINEMENT.Text, out nValue); single.param_10_refinement = nValue;
-
-            // spc enhancement value 
-            int.TryParse(CB_RECT_SPC_ENHANCEMENT.Text, out nValue); single.param_comm_03_spc_enhance = nValue;
-
-            // compensation 
-            double.TryParse(TXT_RECT_COMPEN_A.Text, out fValue); single.param_comm_01_compen_A = fValue;
-            double.TryParse(TXT_RECT_COMPEN_B.Text, out fValue); single.param_comm_02_compen_B = fValue;
-            
-            single.param_comm_04_show_raw_data = CHK_RECT_SHOW_RAW_DATA.Checked;
- 
-
-
             return single;
-        }
-         
-        private int _FromUI_GetMeasureAlgorithm(int nTargetFigureType)
-        {
-            int nAlgorithm = 0;
-
-            if (nTargetFigureType == TARGET_FIGURE_TYPE_CIR)
-            {
-                if (RDO_CIR_ALGO_MEXHAT.Checked == true) nAlgorithm = IFX_ALGORITHM.MEXHAT;
-                if (RDO_CIR_ALGO_CARDIN.Checked == true) nAlgorithm = IFX_ALGORITHM.CARDIN;
-                if (RDO_CIR_ALGO_DIR_EX.Checked == true) nAlgorithm = IFX_ALGORITHM.DIR_EX;
-                if (RDO_CIR_ALGO_DIR_IN.Checked == true) nAlgorithm = IFX_ALGORITHM.DIR_IN;
-            }
-            else if (nTargetFigureType == TARGEt_FIGURE_TYPE_REC)
-            {
-                if (RDO_RECT_ALGO_MEXHAT.Checked == true) nAlgorithm = IFX_ALGORITHM.MEXHAT;
-                if (RDO_RECT_ALGO_CARDIN.Checked == true) nAlgorithm = IFX_ALGORITHM.CARDIN;
-                if (RDO_RECT_ALGO_DIR_EX.Checked == true) nAlgorithm = IFX_ALGORITHM.DIR_EX;
-                if (RDO_RECT_ALGO_DIR_IN.Checked == true) nAlgorithm = IFX_ALGORITHM.DIR_IN;
-            }
-            return nAlgorithm;
         }
 
         private int _FromUI_GetCircleDetectionType()
@@ -422,6 +326,8 @@ namespace CD_VISION_DIALOG
 
                 if (arrCircle[element].NICKNAME == strTarget)
                 {
+                    arrCircle[element].param_03_CircleDetecType = single.param_03_CircleDetecType;
+                    arrCircle[element].param_04_Shrinkage = single.param_04_Shrinkage;
                     arrCircle[element] = single.CopyTo();
                 }
 
@@ -446,7 +352,11 @@ namespace CD_VISION_DIALOG
 
                 if (arrRect[element].NICKNAME == strTarget)
                 {
-                    arrRect[element] = single.CopyTo();
+                    arrRect[element].param_03_bool_Use_AutoDetection = single.param_03_bool_Use_AutoDetection;
+                    arrRect[element].param_04_peakTargetIndex_fst = single.param_04_peakTargetIndex_fst;
+                    arrRect[element].param_05_peakTargetIndex_scd = single.param_05_peakTargetIndex_scd;
+                    arrRect[element].param_06_peakCandidate = single.param_06_peakCandidate;
+                    arrRect[element].param_07_windowSize = single.param_07_windowSize;
                 }
                 this.fm.list_pair_Rct = arrRect.ToList();
             }
@@ -456,76 +366,7 @@ namespace CD_VISION_DIALOG
 
         
 
-        private void BTN_PARAM_WRITE_ALL_Click(object sender, EventArgs e)
-        {
-            const int TYPE_CIR = 0;
-            const int TYPE_REC = 1;
-
-            if (MessageBox.Show("Every Data Will Be Syncronized According To User Selection.\n Do You Want To Proceed?", "OPERATION CONFIRM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
-
-            if (TAB_TUNNING_TARGET.SelectedIndex == TYPE_CIR)
-            {
-                CMeasurePairCir single = _FromUI_GetParameters_Circle();
-
-                CMeasurePairCir[] arrCircle = fm.ToArray_PairCir();
-
-                for (int i = 0; i < arrCircle.Length; i++)
-                {
-                    if (CHK_SAVE_CIR_ALGORITHM.Checked/**********/) { arrCircle[i].param_00_algorithm_CIR /*************/= single.param_00_algorithm_CIR; }
-                    if (CHK_SAVE_CIR_DAMAGE_TOLERANCE.Checked/***/) { arrCircle[i].param_01_DMG_Tol /*******************/= single.param_01_DMG_Tol; }
-                    if (CHK_SAVE_CIR_TREAT_AS_ELLIPSE.Checked/***/) { arrCircle[i].param_02_BOOL_TREAT_AS_ELLIPSE /*****/= single.param_02_BOOL_TREAT_AS_ELLIPSE; }
-                    if (CHK_SAVE_CIR_AUTO_CIRCLE_DETECTION.Checked) { arrCircle[i].param_03_CircleDetecType /***********/= single.param_03_CircleDetecType; }
-                    if (CHK_SAVE_CIR_SHRINKAGE.Checked/**********/) { arrCircle[i].param_04_Shrinkage /*****************/= single.param_04_Shrinkage; }
-                    if (CHK_SAVE_CIR_OUTLIER_FILTER.Checked/*****/) { arrCircle[i].param_05_Outlier_Filter /************/= single.param_05_Outlier_Filter; }
-                    if (CHK_SAVE_CIR_EDGE_POSITION.Checked/******/) { arrCircle[i].param_06_EdgePos /*******************/= single.param_06_EdgePos; }
-                    if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
-                    if (CHK_SAVE_CIR_COMPENSATION.Checked/*******/) { arrCircle[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    if (CHK_SAVE_CIR_SPC_ENHANCEMENT.Checked/****/) { arrCircle[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
-                    //arrCircle[i].param_comm_04_refinement = single.param_comm_04_refinement;
-                    if (CHK_SAVE_CIR_SHOW_RAW_DATA.Checked/******/) { arrCircle[i].param_comm_04_show_raw_data /********/= single.param_comm_04_show_raw_data; }
-                    
-                }
-
-                this.fm.list_pair_Cir = arrCircle.ToList();
-
-                CHK_SAVE_CIR_ALGORITHM.Checked = CHK_SAVE_CIR_AUTO_CIRCLE_DETECTION.Checked = CHK_SAVE_CIR_COMPENSATION.Checked = CHK_SAVE_CIR_DAMAGE_TOLERANCE.Checked = CHK_SAVE_CIR_EDGE_POSITION.Checked =
-                CHK_SAVE_CIR_OUTLIER_FILTER.Checked = CHK_SAVE_CIR_SHOW_RAW_DATA.Checked = CHK_SAVE_CIR_SHRINKAGE.Checked = CHK_SAVE_CIR_TREAT_AS_ELLIPSE.Checked = false;
-
-            }
-            else if (TAB_TUNNING_TARGET.SelectedIndex == TYPE_REC)
-            {
-                CMeasurePairRct single = _FromUI_GetParameters_Rect();
-
-                CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
-
-                for (int i = 0; i < arrRect.Length; i++)
-                {
-                    if (CHK_SAVE_RECT_ALGORITHM.Checked/**********/) { arrRect[i].param_00_algorithm /*****************/= single.param_00_algorithm; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_03_bool_Use_AutoDetection /****/= single.param_03_bool_Use_AutoDetection; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_04_peakTargetIndex_fst /*******/= single.param_04_peakTargetIndex_fst; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_05_peakTargetIndex_scd /*******/= single.param_05_peakTargetIndex_scd; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_06_peakCandidate /*************/= single.param_06_peakCandidate; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_07_windowSize /****************/= single.param_07_windowSize; }
-                    if (CHK_SAVE_RECT0__EDGE_DETECTION.Checked/***/) { arrRect[i].param_08_edge_position_fst /*********/= single.param_08_edge_position_fst; }
-                    if (CHK_SAVE_RECT_EDGE_POSITION.Checked/******/) { arrRect[i].param_09_edge_position_scd /*********/= single.param_09_edge_position_scd; }
-                    if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_01_compen_A /*************/= single.param_comm_01_compen_A; }
-                    if (CHK_SAVE_RECT_COMPENSATION.Checked/*******/) { arrRect[i].param_comm_02_compen_B /*************/= single.param_comm_02_compen_B; }
-                    if (CHK_SAVE_RECT_SPC_ENHANCEMENT.Checked/****/) { arrRect[i].param_comm_03_spc_enhance/***********/= single.param_comm_03_spc_enhance; }
-                    if (CHK_SAVE_RECT_REFINEMENT.Checked/*********/) { arrRect[i].param_10_refinement/*****************/= single.param_10_refinement; }
-                    if (CHK_SAVE_RECT_SHOW_RAW_DATA.Checked/******/) { arrRect[i].param_comm_04_show_raw_data /********/= single.param_comm_04_show_raw_data; }
-                }
-
-                this.fm.list_pair_Rct = arrRect.ToList();
-
-                CHK_SAVE_RECT_ALGORITHM.Checked = CHK_SAVE_RECT_COMPENSATION.Checked = CHK_SAVE_RECT_EDGE_POSITION.Checked = CHK_SAVE_RECT_SHOW_RAW_DATA.Checked = CHK_SAVE_RECT0__EDGE_DETECTION.Checked = false;
-            }
-
-
-        }
-
+ 
         private void TXT_CIR_SHRINKAGE_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -542,21 +383,13 @@ namespace CD_VISION_DIALOG
 
             CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
 
-            
+            /***/if( single.param_01_rc_type == IFX_RECT_TYPE.DIR_HOR){RDO_RECT_TYPE_HOR.Checked = true;}
+            else if( single.param_01_rc_type == IFX_RECT_TYPE.DIR_VER){RDO_RECT_TYPE_VER.Checked = true;}
+            else if( single.param_01_rc_type == IFX_RECT_TYPE.DIR_DIA){RDO_RECT_TYPE_DIA.Checked = true;}
+
             // 01 Target Info
             TXT_RECT_SELECTED_INDEX.Text = nIndex.ToString("N0");
             TXT_RECT_SELECTED_FIGURE.Text = single.NICKNAME;
-
-            //00 Algorithm 
-            if (single.param_00_algorithm == IFX_ALGORITHM.MEXHAT) { RDO_RECT_ALGO_MEXHAT.Checked = true; }
-            if (single.param_00_algorithm == IFX_ALGORITHM.CARDIN) { RDO_RECT_ALGO_CARDIN.Checked = true; }
-            if (single.param_00_algorithm == IFX_ALGORITHM.DIR_EX) { RDO_RECT_ALGO_DIR_EX.Checked = true; }
-            if (single.param_00_algorithm == IFX_ALGORITHM.DIR_IN) { RDO_RECT_ALGO_DIR_IN.Checked = true; }
-
-            // 01 Rectangle Type { HOR | VER | DIA }
-            /***/if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_HOR) RDO_RECT_TYPE_HOR.Checked = true;
-            else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_VER) RDO_RECT_TYPE_VER.Checked = true;
-            else if (single.param_01_rc_type == IFX_RECT_TYPE.DIR_DIA) RDO_RECT_TYPE_DIA.Checked = true;
 
             CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked = single.param_03_bool_Use_AutoDetection;
             CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(null, EventArgs.Empty);
@@ -571,19 +404,6 @@ namespace CD_VISION_DIALOG
 
             TXT_RECT_WINDOW_SIZE.Text = single.param_07_windowSize.ToString("NO");
 
-            // 03 compensation value            
-           TXT_RECT_COMPEN_A.Text= single.param_comm_01_compen_A.ToString("F2");
-           TXT_RECT_COMPEN_B.Text = single.param_comm_02_compen_B.ToString("F2");
-
-            // 04 edge position for the line 
-           TXT_RECT_EDGE_POSITION_FST.Text = single.param_08_edge_position_fst.ToString("F2");
-           TXT_RECT_EDGE_POSITION_SCD.Text = single.param_09_edge_position_scd.ToString("F2");
-
-           TXT_RECT_EDGE_REFINEMENT.Text = single.param_10_refinement.ToString("N0");
-
-            // 05 show raw data 
-           CHK_RECT_SHOW_RAW_DATA.Checked = single.param_comm_04_show_raw_data;
-            
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
             uc_tunning_view.VIEW_SET_Mag_Origin();
@@ -758,43 +578,6 @@ namespace CD_VISION_DIALOG
             
         }
 
-        
-
-        
-
-        private void CHK_RECT_DETECT_FST_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (RDO_RECT_APD_FST.Checked == true)
-            {
-                if (uc_thumb_nail_rect.FocusedItem == null) return;
-
-                int nIndex = uc_thumb_nail_rect.FocusedItem.Index;
-                Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
-
-                CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
-                TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = single.param_04_peakTargetIndex_fst.ToString("N0");
-                CB_RECT_TARGET_INDEX_FST.SelectedIndex = single.param_04_peakTargetIndex_fst;
-            }
-        }
-
-        private void CHK_RECT_DETECT_SCD_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RDO_RECT_APD_SCD.Checked == true)
-            {
-                if (uc_thumb_nail_rect.FocusedItem == null) return;
-
-                int nIndex = uc_thumb_nail_rect.FocusedItem.Index;
-                Bitmap bmp = uc_thumb_nail_rect.GetImageOriginal(nIndex);
-
-                CMeasurePairRct single = fm.ElementAt_PairRct(nIndex);
-
-                TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = single.param_05_peakTargetIndex_scd.ToString("N0");
-                CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_05_peakTargetIndex_scd;
-            }
-        }
-
-
         private void CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(object sender, EventArgs e)
         {
             RDO_RECT_APD_FST.Enabled = RDO_RECT_APD_SCD.Enabled = CHK_RECT_USE_AUTO_PEAK_DETECTION.Checked;
@@ -818,59 +601,7 @@ namespace CD_VISION_DIALOG
             _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nType);
         }
 
-        private void CHK_SHOW_SECTOR_DRAWING_CheckedChanged(object sender, EventArgs e)
-        {
-            uc_tunning_view.VIEW_Set_Clear_DispObject();
-
-            if (CHK_SHOW_SECTOR.Checked == true)
-            {
-                int imageW = uc_tunning_view.VIEW_GetImageW();
-                int imageH = uc_tunning_view.VIEW_GetImageH();
-
-                PointF ptCenter = new PointF(imageW / 2, imageH / 2);
-
-                uc_tunning_view.DrawCircle(ptCenter, (float)3, (float)3, Color.LimeGreen, 1);
-
-                double[] arrayCos = Computer.GetArray_COS();
-                double[] arraySin = Computer.GetArray_SIN();
-
-                double radius = Math.Sqrt((imageW * imageW) + (imageH * imageH)) / 2.0;
-
-                for (int nAngle = 0; nAngle < 360; nAngle += 30)
-                {
-                    PointF ptEdge = new PointF();
-
-                    for (int nPos = 0; nPos < (int)radius; nPos++)
-                    {
-                        double x = ptCenter.X + (nPos * arrayCos[nAngle]);
-                        double y = ptCenter.Y + (nPos * arraySin[nAngle]);
-
-                        if (x < 0 || y < 0 || x >= imageW || y >= imageH) { continue; }
-
-                        ptEdge = new PointF((float)x, (float)y);
-                    }
-
-                    uc_tunning_view.DrawLine(ptCenter, ptEdge, 1, Color.LimeGreen);
-                    uc_tunning_view.DrawCircle(ptEdge, (float)3, (float)3, Color.LimeGreen, 1);
-                }//);
-
-                int nSector = 1;
-                for (int nAngle = 15; nAngle < 360; nAngle += 30)
-                {
-                    double x = ptCenter.X + ((radius*0.5) * arrayCos[nAngle]);
-                    double y = ptCenter.Y + ((radius*0.5) * arraySin[nAngle]);
-
-                    PointF ptMid = new PointF((float)x, (float)y);
-
-                    uc_tunning_view.DrawString(string.Format("{0}", nSector++), (int)ptMid.X, (int)ptMid.Y, 5, Color.Yellow);
-
-                }
-
-                uc_tunning_view.Refresh();
-            }
-
-        }
-
+ 
          
 
       

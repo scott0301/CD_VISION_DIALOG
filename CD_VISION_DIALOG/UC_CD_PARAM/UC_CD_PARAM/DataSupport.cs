@@ -19,65 +19,31 @@ namespace CD_Paramter
     {
         private string[] list = null;
 
-        public ConverterMeasureTyes()
-        {
-            list = IFX_ALGORITHM.ToStringArray();
-        }
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-        {
-            return new StandardValuesCollection(this.list);
-        }
+        public ConverterMeasureTyes() { list = IFX_ALGORITHM.ToStringArray();  }
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) { return new StandardValuesCollection(this.list); }
     }
     public class ConverterRectangleTyes : StringConverter
     {
         private string[] list = null;
 
-        public ConverterRectangleTyes()
-        {
-            list = IFX_FIGURE.ToStringArray();
-        }
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-        {
-            return new StandardValuesCollection(this.list);
-        }
+        public ConverterRectangleTyes() { list = IFX_FIGURE.ToStringArray(); }
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) { return new StandardValuesCollection(this.list); }
     }
-        
     public class CustomPoinDConverter : ExpandableObjectConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, System.Type destinationType)
         {
-            if (destinationType == typeof(CustomPointD))
-            {
-                return true;
-            }
+            if (destinationType == typeof(CustomPointD)){ return true; }
             return base.CanConvertTo(context, destinationType);
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            if (sourceType == typeof(string))
-                return true;
-
+            if (sourceType == typeof(string)) return true;
             return base.CanConvertFrom(context, sourceType);
         }
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, System.Type destinationType)
@@ -109,23 +75,17 @@ namespace CD_Paramter
             return base.ConvertFrom(context, culture, value);
         }
     }
-
     public class CustomRectangleDConverter : ExpandableObjectConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, System.Type destinationType)
         {
-            if (destinationType == typeof(CustomRectangleD))
-            {
-                return true;
-            }
+            if (destinationType == typeof(CustomRectangleD)) { return true; }
             return base.CanConvertTo(context, destinationType);
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            if (sourceType == typeof(string))
-                return true;
-
+            if (sourceType == typeof(string)) return true;
             return base.CanConvertFrom(context, sourceType);
         }
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, System.Type destinationType)

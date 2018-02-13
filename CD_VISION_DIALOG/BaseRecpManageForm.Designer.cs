@@ -44,21 +44,6 @@
             this.RDO_LIGHT_DF = new System.Windows.Forms.RadioButton();
             this.RDO_LIGHT_BF = new System.Windows.Forms.RadioButton();
             this.RDO_LIGHT_ALIGN = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TXT_COMPEN_B = new System.Windows.Forms.TextBox();
-            this.TXT_COMPEN_A = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.RDO_ALGORITHM_CARDIN = new System.Windows.Forms.RadioButton();
-            this.RDO_ALGORITHM_DIR_EX = new System.Windows.Forms.RadioButton();
-            this.RDO_ALGORITHM_DIR_IN = new System.Windows.Forms.RadioButton();
-            this.RDO_ALGORITHM_MAXHAT = new System.Windows.Forms.RadioButton();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.TXT_DMG_TOLERANCE = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TXT_EDGE_POSITION = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.TXT_TARGET_BASE_RECP = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -83,9 +68,6 @@
             this.BTN_BASE_RECP_COPY = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -274,172 +256,6 @@
             this.RDO_LIGHT_ALIGN.Text = "ALIGN";
             this.RDO_LIGHT_ALIGN.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.TXT_COMPEN_B);
-            this.groupBox4.Controls.Add(this.TXT_COMPEN_A);
-            this.groupBox4.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox4.Location = new System.Drawing.Point(356, 295);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(455, 57);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "COMPENSATION ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(343, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 14);
-            this.label3.TabIndex = 2;
-            this.label3.Text = ",";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(18, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 14);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "(Ax + B)";
-            // 
-            // TXT_COMPEN_B
-            // 
-            this.TXT_COMPEN_B.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_COMPEN_B.ForeColor = System.Drawing.Color.White;
-            this.TXT_COMPEN_B.Location = new System.Drawing.Point(357, 19);
-            this.TXT_COMPEN_B.Name = "TXT_COMPEN_B";
-            this.TXT_COMPEN_B.Size = new System.Drawing.Size(83, 22);
-            this.TXT_COMPEN_B.TabIndex = 1;
-            // 
-            // TXT_COMPEN_A
-            // 
-            this.TXT_COMPEN_A.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_COMPEN_A.ForeColor = System.Drawing.Color.White;
-            this.TXT_COMPEN_A.Location = new System.Drawing.Point(253, 19);
-            this.TXT_COMPEN_A.Name = "TXT_COMPEN_A";
-            this.TXT_COMPEN_A.Size = new System.Drawing.Size(83, 22);
-            this.TXT_COMPEN_A.TabIndex = 1;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.RDO_ALGORITHM_CARDIN);
-            this.groupBox6.Controls.Add(this.RDO_ALGORITHM_DIR_EX);
-            this.groupBox6.Controls.Add(this.RDO_ALGORITHM_DIR_IN);
-            this.groupBox6.Controls.Add(this.RDO_ALGORITHM_MAXHAT);
-            this.groupBox6.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox6.Location = new System.Drawing.Point(356, 362);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(455, 57);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "ALGORITHM";
-            // 
-            // RDO_ALGORITHM_CARDIN
-            // 
-            this.RDO_ALGORITHM_CARDIN.AutoSize = true;
-            this.RDO_ALGORITHM_CARDIN.ForeColor = System.Drawing.Color.White;
-            this.RDO_ALGORITHM_CARDIN.Location = new System.Drawing.Point(357, 23);
-            this.RDO_ALGORITHM_CARDIN.Name = "RDO_ALGORITHM_CARDIN";
-            this.RDO_ALGORITHM_CARDIN.Size = new System.Drawing.Size(78, 18);
-            this.RDO_ALGORITHM_CARDIN.TabIndex = 0;
-            this.RDO_ALGORITHM_CARDIN.TabStop = true;
-            this.RDO_ALGORITHM_CARDIN.Text = "CARDIN";
-            this.RDO_ALGORITHM_CARDIN.UseVisualStyleBackColor = true;
-            // 
-            // RDO_ALGORITHM_DIR_EX
-            // 
-            this.RDO_ALGORITHM_DIR_EX.AutoSize = true;
-            this.RDO_ALGORITHM_DIR_EX.ForeColor = System.Drawing.Color.White;
-            this.RDO_ALGORITHM_DIR_EX.Location = new System.Drawing.Point(253, 23);
-            this.RDO_ALGORITHM_DIR_EX.Name = "RDO_ALGORITHM_DIR_EX";
-            this.RDO_ALGORITHM_DIR_EX.Size = new System.Drawing.Size(76, 18);
-            this.RDO_ALGORITHM_DIR_EX.TabIndex = 0;
-            this.RDO_ALGORITHM_DIR_EX.TabStop = true;
-            this.RDO_ALGORITHM_DIR_EX.Text = "DIR_EX";
-            this.RDO_ALGORITHM_DIR_EX.UseVisualStyleBackColor = true;
-            // 
-            // RDO_ALGORITHM_DIR_IN
-            // 
-            this.RDO_ALGORITHM_DIR_IN.AutoSize = true;
-            this.RDO_ALGORITHM_DIR_IN.ForeColor = System.Drawing.Color.White;
-            this.RDO_ALGORITHM_DIR_IN.Location = new System.Drawing.Point(144, 23);
-            this.RDO_ALGORITHM_DIR_IN.Name = "RDO_ALGORITHM_DIR_IN";
-            this.RDO_ALGORITHM_DIR_IN.Size = new System.Drawing.Size(75, 18);
-            this.RDO_ALGORITHM_DIR_IN.TabIndex = 0;
-            this.RDO_ALGORITHM_DIR_IN.TabStop = true;
-            this.RDO_ALGORITHM_DIR_IN.Text = "DIR_IN";
-            this.RDO_ALGORITHM_DIR_IN.UseVisualStyleBackColor = true;
-            // 
-            // RDO_ALGORITHM_MAXHAT
-            // 
-            this.RDO_ALGORITHM_MAXHAT.AutoSize = true;
-            this.RDO_ALGORITHM_MAXHAT.ForeColor = System.Drawing.Color.White;
-            this.RDO_ALGORITHM_MAXHAT.Location = new System.Drawing.Point(21, 23);
-            this.RDO_ALGORITHM_MAXHAT.Name = "RDO_ALGORITHM_MAXHAT";
-            this.RDO_ALGORITHM_MAXHAT.Size = new System.Drawing.Size(80, 18);
-            this.RDO_ALGORITHM_MAXHAT.TabIndex = 0;
-            this.RDO_ALGORITHM_MAXHAT.TabStop = true;
-            this.RDO_ALGORITHM_MAXHAT.Text = "MEXHAT";
-            this.RDO_ALGORITHM_MAXHAT.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label7);
-            this.groupBox7.Controls.Add(this.TXT_DMG_TOLERANCE);
-            this.groupBox7.Controls.Add(this.label4);
-            this.groupBox7.Controls.Add(this.TXT_EDGE_POSITION);
-            this.groupBox7.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox7.Location = new System.Drawing.Point(356, 426);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(455, 57);
-            this.groupBox7.TabIndex = 5;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "ETC";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(243, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 14);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "EDGE_POS(%)";
-            // 
-            // TXT_DMG_TOLERANCE
-            // 
-            this.TXT_DMG_TOLERANCE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_DMG_TOLERANCE.ForeColor = System.Drawing.Color.White;
-            this.TXT_DMG_TOLERANCE.Location = new System.Drawing.Point(106, 21);
-            this.TXT_DMG_TOLERANCE.Name = "TXT_DMG_TOLERANCE";
-            this.TXT_DMG_TOLERANCE.Size = new System.Drawing.Size(83, 22);
-            this.TXT_DMG_TOLERANCE.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(18, 24);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 14);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "DMG_TOL";
-            // 
-            // TXT_EDGE_POSITION
-            // 
-            this.TXT_EDGE_POSITION.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.TXT_EDGE_POSITION.ForeColor = System.Drawing.Color.White;
-            this.TXT_EDGE_POSITION.Location = new System.Drawing.Point(352, 21);
-            this.TXT_EDGE_POSITION.Name = "TXT_EDGE_POSITION";
-            this.TXT_EDGE_POSITION.Size = new System.Drawing.Size(83, 22);
-            this.TXT_EDGE_POSITION.TabIndex = 1;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -533,12 +349,9 @@
             this.panel1.Controls.Add(this.TXT_TARGET_BASE_RECP);
             this.panel1.Controls.Add(this.BTN_BASE_RECP_APPLY);
             this.panel1.Controls.Add(this.RDO_TYPE_ACI);
-            this.panel1.Controls.Add(this.groupBox7);
             this.panel1.Controls.Add(this.LV_BASE_RECP);
-            this.panel1.Controls.Add(this.groupBox6);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.BTN_BASE_RECP_REMOVE);
-            this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.BTN_BASE_RECP_REFRESH);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.BTN_BASE_RECP_MODIFY);
@@ -714,12 +527,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -747,21 +554,6 @@
         private System.Windows.Forms.RadioButton RDO_LIGHT_BF;
         private System.Windows.Forms.RadioButton RDO_LIGHT_ALIGN;
         private System.Windows.Forms.TextBox TXT_LIGHT_VALUE;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TXT_COMPEN_B;
-        private System.Windows.Forms.TextBox TXT_COMPEN_A;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.RadioButton RDO_ALGORITHM_CARDIN;
-        private System.Windows.Forms.RadioButton RDO_ALGORITHM_DIR_EX;
-        private System.Windows.Forms.RadioButton RDO_ALGORITHM_DIR_IN;
-        private System.Windows.Forms.RadioButton RDO_ALGORITHM_MAXHAT;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.TextBox TXT_DMG_TOLERANCE;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TXT_EDGE_POSITION;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button BTN_BASE_RECP_REFRESH;
         private System.Windows.Forms.Label label9;

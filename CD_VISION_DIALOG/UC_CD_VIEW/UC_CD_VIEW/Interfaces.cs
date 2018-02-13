@@ -24,22 +24,21 @@ namespace CD_View
         void iDrawFocus(bool bDraw);
         void iDrawPtrn(bool bDraw);
 
-        int iGet_Roi_Count();
-        int iGet_Roi_Index(Point pt);
+        int/*********/iGet_Roi_Count();
+        int/*********/iGet_Roi_Index(Point pt);
+        Rectangle/***/iGet_Roi_Focus();
+        Rectangle/***/iGet_Roi_Ptrn();
 
-        Rectangle iGet_Roi_Focus();
-        Rectangle iGet_Roi_Ptrn();
-        void iSet_Roi_Ptrn(Rectangle rc);
-        void iSet_Roi_Focus(Rectangle rc);
+        void/********/iSet_Roi_Ptrn(Rectangle rc);
+        void/********/iSet_Roi_Focus(Rectangle rc);
 
-        void iRemove_Roi_Focus();
-        void iRemove_Roi_Ptrn();
+        void/********/iRemove_Roi_Focus();
+        void/********/iRemove_Roi_Ptrn();
+        void/********/iRemove_Roi_At(int nIndex);
+        void/********/iRemove_Roi_All();
 
-        void iRemove_Roi_At(int nIndex);
-        void iRemove_Roi_All();
-
-        void iSave_Roi_At(int nIndex);
-        string iSave_Roi_Ptrn(string filename ="");
+        void/********/iSave_Roi_At(int nIndex);
+        string/******/iSave_Roi_Ptrn(string filename ="");
         
         //******************************************************************************************
         // for vertical rect pair

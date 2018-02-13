@@ -33,6 +33,8 @@ namespace CD_VISION_DIALOG
 
         private CFigureManager m_fm = new CFigureManager();
 
+        CLinguisticHelper m_speaker = new CLinguisticHelper();
+
         public DLG_Ptrn(iPtrn handle)
         {
             InitializeComponent();
@@ -59,36 +61,46 @@ namespace CD_VISION_DIALOG
 
         private void DLG_Ptrn_Load(object sender, EventArgs e)
         {
-            //CHK_PTRN_SEARCH_GLOBAL.Checked = true;
-
             // set main view image
             BTN_SET_INTERNAL_IMAGE_Click(null, EventArgs.Empty);
         }
 
         public bool SetParam(CFigureManager fm)
         {
+            uc_view_ptrn.VIEW_Set_Clear_DispObject();
+
             m_fm = fm;
 
+            // Set language type
+            m_speaker.LANGUAGE = fm.LANGUAGE;
+
+            // load ptrn setting
             PARAM_PTRN param_ptrn = fm.param_ptrn;
 
-            string strPtrnPath = param_ptrn.PTRN_FILE;
-            strPtrnPath = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strPtrnPath);
+            // Check current ptrn teaching file 
+            string strPtrnPath = Path.GetFileName(param_ptrn.PTRN_FILE);
+            /*****/strPtrnPath = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, strPtrnPath);
 
-            bool bPtrnMissing = false;
+            // check the status in case of empty ptrn teaching data info.
+            if (m_speaker.Check_Ptrn_Is_Error_Teaching_File_Validity(strPtrnPath) == true) { return false; }
 
-            if (File.Exists(strPtrnPath) == false)
+            //*************************************************************************************
+            // Set Draw Ptrn Image 
+
+            if (m_speaker.Check_Is_Error_File_Path_Validity(strPtrnPath) == false)
             {
-                bPtrnMissing = true;
-
-                if (MessageBox.Show("Pattern Matching File Not Found. Do You Want To Proceed?", "Parameter Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                {
-                    return false;
-                }
+                Bitmap bmpTemp = Bitmap.FromFile(strPtrnPath) as Bitmap;
+                PIC_PTRN_NORMAL.Image = new Bitmap(bmpTemp);
+                PIC_PTRN_EDGE.Image = _Ptrn_Preprocess_Edge(bmpTemp);
+                bmpTemp.Dispose();
             }
-            
-            // set main view image
-            BTN_SET_INTERNAL_IMAGE_Click(null, EventArgs.Empty);
-            BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
+            else 
+            {
+                param_ptrn.PTRN_FILE = string.Empty;
+            }
+
+            //*************************************************************************************
+            // Display parameter
 
             TXT_PTRN_FILE_NAME.Text = param_ptrn.PTRN_FILE;
             TXT_PTRN_ACC_RATIO.Text = param_ptrn.ACC_RATIO.ToString("F4");
@@ -96,91 +108,65 @@ namespace CD_VISION_DIALOG
             CHK_PTRN_APPLY_EDGE_BASED.Checked = param_ptrn.BOOL_EDGE_BASED;
             CHK_PTRN_SEARCH_GLOBAL.Checked = param_ptrn.BOOL_GLOBAL_SEARCHING;
 
-            TXT_LOCAL_SEARCH_RGN_X.Text = param_ptrn.RC_SEARCH_RGN.X.ToString("F4");
-            TXT_LOCAL_SEARCH_RGN_Y.Text = param_ptrn.RC_SEARCH_RGN.Y.ToString("F4");
-            TXT_LOCAL_SEARCH_RGN_W.Text = param_ptrn.RC_SEARCH_RGN.Width.ToString("F4");
-            TXT_LOCAL_SEARCH_RGN_H.Text = param_ptrn.RC_SEARCH_RGN.Height.ToString("F4");
+            CControl.SetTextBoxFrom_RectangleF(param_ptrn.RC_SEARCH_RGN, TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H);
+            CControl.SetTextBoxFrom_RectangleF(param_ptrn.RC_TEMPLATE, TXT_PTRN_TEACH_ROI_X, TXT_PTRN_TEACH_ROI_Y, TXT_PTRN_TEACH_ROI_W, TXT_PTRN_TEACH_ROI_H);
 
-            TXT_PTRN_TEACH_ROI_X.Text = param_ptrn.RC_TEMPLATE.X.ToString("F4");
-            TXT_PTRN_TEACH_ROI_Y.Text = param_ptrn.RC_TEMPLATE.Y.ToString("F4");
-            TXT_PTRN_TEACH_ROI_W.Text = param_ptrn.RC_TEMPLATE.Width.ToString("F4");
-            TXT_PTRN_TEACH_ROI_H.Text = param_ptrn.RC_TEMPLATE.Height.ToString("F4");
+            // set image on the view 
+            BTN_SET_INTERNAL_IMAGE_Click(null, EventArgs.Empty);
 
+            // update ptrn file list
+            BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
+
+            // draw searcing region
             if (param_ptrn.BOOL_GLOBAL_SEARCHING == false &&
                 param_ptrn.RC_SEARCH_RGN.Width != 0 &&
                 param_ptrn.RC_SEARCH_RGN.Height != 0)
             {
                 uc_view_ptrn.DrawRect(param_ptrn.RC_SEARCH_RGN, Color.Orange);
             }
-
-            // only for Ptrn File Existance.
-            if (bPtrnMissing == false)
-            {
-                Bitmap bmpPtrn = Bitmap.FromFile(strPtrnPath) as Bitmap;
-
-                PIC_PTRN_NORMAL.Image = new Bitmap(bmpPtrn);
-                PIC_PTRN_EDGE.Image = _Ptrn_Preprocess_Edge(bmpPtrn);
-
-                bmpPtrn.Dispose();
-            }
-
              return true;   
         }
 
-        private void _ToUI_SetPTRNView(string strFileName)
+        private void _ToUI_SetPTRNView(string strFileName, Rectangle rc)
         {
-            string strFullFilePath = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strFileName);
+            string strFullFilePath = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, strFileName);
 
-            if (File.Exists(strFullFilePath) == false)
+            // path verification
+            if (m_speaker.Check_Is_Error_File_Path_Validity(strFullFilePath) == true){return;}
+            
+            // just loading
+            using (Bitmap bmp = Bitmap.FromFile(strFullFilePath) as Bitmap)
             {
-                MessageBox.Show("PTRN FILE NOT FOUND.", "File Existance Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                Bitmap buff = new Bitmap(bmp);
+                // set display & backup 
+                PIC_PTRN_NORMAL.Image = buff.Clone() as Bitmap;
+                MAIN_TEACH = buff.Clone() as Bitmap;
+                PIC_PTRN_EDGE.Image = _Ptrn_Preprocess_Edge(buff.Clone() as Bitmap);
+
+                // update file name 
+                TXT_PTRN_FILE_NAME.Text = strFileName;
+
+                CControl.SetTextBoxFrom_RectangleF(rc, TXT_PTRN_TEACH_ROI_X, TXT_PTRN_TEACH_ROI_Y, TXT_PTRN_TEACH_ROI_W, TXT_PTRN_TEACH_ROI_H);
+
+                CHK_PTRN_APPLY_EDGE_BASED.Checked = false;
             }
-            else
-            {
-                // just loading
-                using (Bitmap bmp = Bitmap.FromFile(strFullFilePath) as Bitmap)
-                {
-                    Bitmap buff = new Bitmap(bmp);
-                    // set display & backup 
-                    PIC_PTRN_NORMAL.Image = buff.Clone() as Bitmap;
-                    MAIN_TEACH = buff.Clone() as Bitmap;
-                    PIC_PTRN_EDGE.Image = _Ptrn_Preprocess_Edge(buff.Clone() as Bitmap);
-
-                    // update file name 
-                    TXT_PTRN_FILE_NAME.Text = strFileName;
-
-                    TXT_PTRN_TEACH_ROI_W.Text = buff.Width.ToString("F4");
-                    TXT_PTRN_TEACH_ROI_H.Text = buff.Height.ToString("F4");
-
-                    CHK_PTRN_APPLY_EDGE_BASED.Checked = false;
-                }
-
-                // make coloring
-                //_LV_PTRN_Coloring();
-            }
-            //BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
         }
         private void LV_PTRN_SelectedIndexChanged(object sender, EventArgs e) 
         {
-            //_Update_PTRN_Files();
             if (LV_PTRN.FocusedItem == null) return;
 
             int nIndex = LV_PTRN.FocusedItem.Index;
-
             string strFileName = LV_PTRN.Items[nIndex].SubItems[1].Text;
 
-            _ToUI_SetPTRNView(strFileName);
-
-            
-        }
+            _ToUI_SetPTRNView(strFileName, new Rectangle());
+       }
 
         private void BTN_UPDATE_PTRN_LIST_Click(object sender, EventArgs e)
         {
             //************************************************************************************
             // Get PTRN Files
 
-            string[] arrRecpFiles = Directory.GetFiles(m_fm.param_path.i11_PATH_IMG_PTRN, "*.BMP");
+            string[] arrRecpFiles = Directory.GetFiles(m_fm.param_path.i06_PATH_IMG_PTRN, "*.BMP");
 
             LV_PTRN.Items.Clear();
 
@@ -193,7 +179,6 @@ namespace CD_VISION_DIALOG
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = (i + 1).ToString("N0");
                 lvi.SubItems.Add(strFile);
-
                 LV_PTRN.Items.Add(lvi);
             }
 
@@ -240,58 +225,55 @@ namespace CD_VISION_DIALOG
 
         private void BTN_PTRN_APPLY_Click(object sender, EventArgs e)
         {
-            string strCurrentPtrnFile = TXT_PTRN_FILE_NAME.Text;
-            if (strCurrentPtrnFile == string.Empty || File.Exists(Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strCurrentPtrnFile)) == false)
-            {
-                MessageBox.Show("Invalid Teaching File. \n Please Check Teaching File Again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            float fTeachOrgX = 0; float fTeachOrgY = 0;
-            float fTeachOrgW = 0; float fTeachOrgH = 0;
-
-            float.TryParse(TXT_PTRN_TEACH_ROI_X.Text, out fTeachOrgX);
-            float.TryParse(TXT_PTRN_TEACH_ROI_Y.Text, out fTeachOrgY);
-            float.TryParse(TXT_PTRN_TEACH_ROI_W.Text, out fTeachOrgW);
-            float.TryParse(TXT_PTRN_TEACH_ROI_H.Text, out fTeachOrgH);
-
-            RectangleF rcTeaching = new RectangleF(fTeachOrgX, fTeachOrgY, fTeachOrgW, fTeachOrgH);
-
-            if (fTeachOrgX < 0 || fTeachOrgY < 0 || fTeachOrgW <= 0 || fTeachOrgH <= 0)
-            {
-                MessageBox.Show("Invalid Teaching Data.\n Please Check Teaching Data Again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            
-            double fACCR = 0;
-            double.TryParse(TXT_PTRN_ACC_RATIO.Text, out fACCR);
-
-            if( fACCR <= 0 )
-            {
-                MessageBox.Show("Invalid Accept Ratio. \n Please Check Value Again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            Rectangle rcPtrnRgn = uc_view_ptrn.iGet_Roi_Ptrn();
-
             PARAM_PTRN ptrn = new PARAM_PTRN();
 
-            ptrn.BOOL_EDGE_BASED = CHK_PTRN_APPLY_EDGE_BASED.Checked;
-            ptrn.BOOL_GLOBAL_SEARCHING  = CHK_PTRN_SEARCH_GLOBAL.Checked;
-            ptrn.PTRN_FILE = strCurrentPtrnFile;
-            ptrn.RC_SEARCH_RGN = rcPtrnRgn;
+            ptrn.BOOL_EDGE_BASED/*********/= CHK_PTRN_APPLY_EDGE_BASED.Checked;
+            ptrn.BOOL_GLOBAL_SEARCHING/***/= CHK_PTRN_SEARCH_GLOBAL.Checked;
+
+            //*************************************************************************************
+            // Makesure Teaching File Existance 
+
+            string strCurrentPtrnFile = TXT_PTRN_FILE_NAME.Text;
+            /*****/strCurrentPtrnFile = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, strCurrentPtrnFile);
+
+            // path verification
+            if (m_speaker.Check_Is_Error_File_Path_Validity(strCurrentPtrnFile) == true) { return; }
+
+            ptrn.PTRN_FILE/***************/= Path.GetFileName(strCurrentPtrnFile);
+
+            //*************************************************************************************
+            // Set Template Teaching Region and Verification
+
+            RectangleF rcTeaching = CControl.GetRectangleFrom_TextBox_Set(TXT_PTRN_TEACH_ROI_X, TXT_PTRN_TEACH_ROI_Y, TXT_PTRN_TEACH_ROI_W, TXT_PTRN_TEACH_ROI_H);
+            
+            if (m_speaker.Check_Is_Invalid_Figure(rcTeaching, uc_view_ptrn.VIEW_GetImageW(), uc_view_ptrn.VIEW_GetImageH()) == true) { return; }
+
+            ptrn.RC_TEMPLATE = rcTeaching;
+           
+            //*************************************************************************************
+            // Set Searching Region  
 
             if( CHK_PTRN_SEARCH_GLOBAL.Checked == false)
             {
-                float rx = float.Parse(TXT_LOCAL_SEARCH_RGN_X.Text);
-                float ry = float.Parse(TXT_LOCAL_SEARCH_RGN_Y.Text);
-                float rw = float.Parse(TXT_LOCAL_SEARCH_RGN_W.Text);
-                float rh = float.Parse(TXT_LOCAL_SEARCH_RGN_H.Text);
-
-                ptrn.RC_SEARCH_RGN = new RectangleF(rx, ry, rw, rh);
+                ptrn.RC_SEARCH_RGN = CControl.GetRectangleFrom_TextBox_Set(TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H);
             }
-            ptrn.RC_TEMPLATE = rcTeaching;
+            else if (CHK_PTRN_SEARCH_GLOBAL.Checked == true)
+            {
+                ptrn.RC_SEARCH_RGN = new RectangleF(0, 0, uc_view_ptrn.VIEW_GetImageW(), uc_view_ptrn.VIEW_GetImageH());
+            }
+
+            //*************************************************************************************
+            // Set Acceptance Ration and Verification
+
+            double fACCR = CControl.GetDoubleFrom_TextBox(TXT_PTRN_ACC_RATIO);
+
+            if (m_speaker.Check_Ptrn_Is_Error_Acceptance_ratio(fACCR) == true)
+            {
+                return;
+            }
+
             ptrn.ACC_RATIO = fACCR;
+            //*************************************************************************************
 
             eventDele_ApplyParamPtrn(ptrn);
             this.Hide();
@@ -311,7 +293,6 @@ namespace CD_VISION_DIALOG
             else if (CHK_PTRN_APPLY_EDGE_BASED.Checked == false)
             {
                 uc_view_ptrn.SetDisplay(MAIN_IMAGE);
-
             }
             uc_view_ptrn.VIEW_SET_Mag_Origin();
         }
@@ -329,32 +310,36 @@ namespace CD_VISION_DIALOG
         {
             uc_view_ptrn.VIEW_Set_Clear_DispObject();
 
-            Bitmap bmpSource = null;
+            //*************************************************************************************
+            // get main image
+            Bitmap bmpSource = MAIN_IMAGE.Clone() as Bitmap;
+
+            //*************************************************************************************
+            // get template image path and do verification. copy template if it is valid.
+            string strPtrnFile = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, TXT_PTRN_FILE_NAME.Text);
+
             Bitmap bmpTemplate = null;
 
-            // get main image
-            bmpSource = MAIN_IMAGE.Clone() as Bitmap;
-
-            // get template image
-            string strPtrnFile = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, TXT_PTRN_FILE_NAME.Text);
-
-            if (File.Exists(strPtrnFile) == true) { bmpTemplate = Bitmap.FromFile(strPtrnFile).Clone() as Bitmap; }
-            else
+            if (m_speaker.Check_Is_Error_File_Path_Validity(strPtrnFile) == true)
             {
-                MessageBox.Show("Invalid Teaching File.\nPlease Check Teaching File Again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Error Case : empty path or non file existance
                 return;
             }
+            else if (m_speaker.Check_Is_Error_File_Path_Validity(strPtrnFile) == false)
+            {
+                bmpTemplate = Bitmap.FromFile(strPtrnFile).Clone() as Bitmap; 
+            }
 
-            // if edge based approach
+            //*************************************************************************************
+            // Set images if edge-based appraoches are required.
             if (CHK_PTRN_APPLY_EDGE_BASED.Checked == true)
             {
                 bmpSource = _Ptrn_Preprocess_Edge(bmpSource);
                 bmpTemplate = _Ptrn_Preprocess_Edge(bmpTemplate);
             }
 
-            // set essential variables
-            RectangleF rcTemplate = new RectangleF();
-            PointF ptTemplateCenter = new PointF();
+            //*************************************************************************************
+            // Get Searching Region
             RectangleF rcSearching = new RectangleF();
 
             // searching region setting
@@ -364,31 +349,33 @@ namespace CD_VISION_DIALOG
             }
             else if (CHK_PTRN_SEARCH_GLOBAL.Checked == false)
             {
-                float px = 0; float py = 0; float pw = 0; float ph = 0;
-                float.TryParse(TXT_LOCAL_SEARCH_RGN_X.Text, out px);
-                float.TryParse(TXT_LOCAL_SEARCH_RGN_Y.Text, out py);
-                float.TryParse(TXT_LOCAL_SEARCH_RGN_W.Text, out pw);
-                float.TryParse(TXT_LOCAL_SEARCH_RGN_H.Text, out ph);
-
-                rcSearching = new RectangleF(px, py, pw, ph);
+                rcSearching = CControl.GetRectangleFrom_TextBox_Set(TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H);
             }
+            //*************************************************************************************
+            // Set Base parameters & Do pattern matching 
 
+            RectangleF rcTemplate = new RectangleF();
+            PointF ptTemplateCenter = new PointF();
 
-            // get accept ratio 
             double fAccRatio = double.Parse(TXT_PTRN_ACC_RATIO.Text);
             double fMatchingRatio = m_pHandle.iPtrn_DoPtrn(bmpSource, bmpTemplate, fAccRatio, rcSearching, out rcTemplate, out ptTemplateCenter);
+
+            //*************************************************************************************
+            // Refreshes image view
+
             uc_view_ptrn.DrawPatternMathcing(ptTemplateCenter, rcTemplate);
             uc_view_ptrn.DrawRect(rcSearching, Color.Orange);
             uc_view_ptrn.Refresh();
 
-            // display result
-            _PRINT_MESSAGE(string.Format("MR  = {0} %", fMatchingRatio.ToString("F4")));
-            _PRINT_MESSAGE(string.Format("POS[X,Y] = [{0},{1}]", ptTemplateCenter.X.ToString("F4"), ptTemplateCenter.Y.ToString("F4")));
+            //*************************************************************************************
+            // print matching result 
 
-            TXT_PTRN_TEACH_ROI_X.Text = rcTemplate.X.ToString("F4");
-            TXT_PTRN_TEACH_ROI_Y.Text = rcTemplate.Y.ToString("F4");
-            TXT_PTRN_TEACH_ROI_W.Text = rcTemplate.Width.ToString("F4");
-            TXT_PTRN_TEACH_ROI_H.Text = rcTemplate.Height.ToString("F4");
+            _PRINT_MESSAGE(string.Format("MR  = {0} %", fMatchingRatio.ToString("F2")));
+            _PRINT_MESSAGE(string.Format("POS[X,Y] = [{0},{1}]", ptTemplateCenter.X.ToString("F2"), ptTemplateCenter.Y.ToString("F2")));
+
+            //*************************************************************************************
+            // write matching information to the region information text box
+            CControl.SetTextBoxFrom_RectangleF(rcTemplate, TXT_PTRN_TEACH_ROI_X, TXT_PTRN_TEACH_ROI_Y, TXT_PTRN_TEACH_ROI_W, TXT_PTRN_TEACH_ROI_H);
         }
 
         private void _PRINT_MESSAGE(string strMessage)
@@ -403,26 +390,24 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.iDrawPtrn(true);
             uc_view_ptrn.Refresh();
         }
+
         private void BTN_PTRN_TEACH_OVERWRITE_Click(object sender, EventArgs e)
         {
             string fileName = TXT_PTRN_FILE_NAME.Text;
 
             Rectangle rc = uc_view_ptrn.iGet_Roi_Ptrn();
 
-            if (rc.Width != 0 && rc.Height != 0 && rc.X > 0 && rc.Y > 0)
-            {
-                //DEF_PARAMS.PARAM_PTRN.set_PTRN_FILE
-                string strFileName = uc_view_ptrn.iSave_Roi_Ptrn(Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, fileName));
+            // region verification
+            if (m_speaker.Check_Is_Invalid_Figure(rc, uc_view_ptrn.VIEW_GetImageW(), uc_view_ptrn.VIEW_GetImageH()) == true){return; }
 
-                _PRINT_MESSAGE("PTRN Teaching Finished.");
+            //DEF_PARAMS.PARAM_PTRN.set_PTRN_FILE
+            string strFileName = uc_view_ptrn.iSave_Roi_Ptrn(Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, fileName));
 
-                _ToUI_SetPTRNView(Path.GetFileName(strFileName));
-                BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
-            }
-            else
-            {
-                MessageBox.Show("Invalid PTRN ROI.\nPlease Check ROI FOR PTRN Teaching.", "INVALID ROI DRAWING", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            _PRINT_MESSAGE("PTRN Teaching Finished.");
+
+            _ToUI_SetPTRNView(Path.GetFileName(strFileName), rc);
+            BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
+          
             uc_view_ptrn.iRemove_Roi_Ptrn();
             uc_view_ptrn.Refresh();
         }
@@ -430,19 +415,16 @@ namespace CD_VISION_DIALOG
         {
             Rectangle rc = uc_view_ptrn.iGet_Roi_Ptrn();
 
-            if (rc.Width != 0 && rc.Height != 0 && rc.X > 0 && rc.Y > 0)
-            {
-                string strFileName = uc_view_ptrn.iSave_Roi_Ptrn("");
+            // teaching region verification
+            if (m_speaker.Check_Is_Invalid_Figure(rc, uc_view_ptrn.VIEW_GetImageW(), uc_view_ptrn.VIEW_GetImageH()) == true) return;
 
-                _PRINT_MESSAGE("PTRN Teaching Finished.");
+            string strFileName = uc_view_ptrn.iSave_Roi_Ptrn("");
 
-                _ToUI_SetPTRNView(Path.GetFileName(strFileName));
-                BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
-            }
-            else
-            {
-                MessageBox.Show("Invalid PTRN ROI.\nPlease Check ROI FOR PTRN Teaching.", "INVALID ROI DRAWING", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            _PRINT_MESSAGE("PTRN Teaching Finished.");
+
+            _ToUI_SetPTRNView(Path.GetFileName(strFileName), rc);
+            BTN_UPDATE_PTRN_LIST_Click(null, EventArgs.Empty);
+
             uc_view_ptrn.iRemove_Roi_Ptrn();
             uc_view_ptrn.Refresh();
         }
@@ -474,30 +456,17 @@ namespace CD_VISION_DIALOG
                 // not the global searching but there is no new drawn rectangle.
                 if ( rc.Width <= 0 && rc.Height <=0)
                 {
-                    double x = double.Parse(TXT_LOCAL_SEARCH_RGN_X.Text);
-                    double y = double.Parse(TXT_LOCAL_SEARCH_RGN_Y.Text);
-                    double w = double.Parse(TXT_LOCAL_SEARCH_RGN_W.Text);
-                    double h = double.Parse(TXT_LOCAL_SEARCH_RGN_H.Text);
-
                     // get the previous records
-                    rc = new Rectangle((int)x, (int)y, (int)w, (int)h);
+                    rc = Rectangle.Round(CControl.GetRectangleFrom_TextBox_Set(TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H));
                 }
             }
 
             // validation check
-            if (rc.X < 0 || rc.Y < 0 || rc.Width < 0 || rc.Height < 0)
-            {
-                MessageBox.Show("Invalid Croodinates.", "Croodinate Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            else
-            {
-                TXT_LOCAL_SEARCH_RGN_X.Text = rc.X.ToString("N0").Replace(",", "");
-                TXT_LOCAL_SEARCH_RGN_Y.Text = rc.Y.ToString("N0").Replace(",", "");
-                TXT_LOCAL_SEARCH_RGN_W.Text = rc.Width.ToString("N0").Replace(",", "");
-                TXT_LOCAL_SEARCH_RGN_H.Text = rc.Height.ToString("N0").Replace(",", "");
-            }
+            if (m_speaker.Check_Is_Invalid_Figure(rc, uc_view_ptrn.VIEW_GetImageW(), uc_view_ptrn.VIEW_GetImageH()) == true) { return; }
+        
+            CControl.SetTextBoxFrom_RectangleF(rc, TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H);
 
+            uc_view_ptrn.VIEW_Set_Clear_DispObject();
             uc_view_ptrn.iSet_Roi_Ptrn(rc);
             uc_view_ptrn.Refresh();
         }
@@ -526,6 +495,129 @@ namespace CD_VISION_DIALOG
         {
             this.Padding = new Padding(10);
         }
+
+        private void LV_PTRN_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            WrapperLV.SortData(LV_PTRN, e.Column);
+        }
+
+        private void BTN_SYNC_WITH_RECP_NAME_Click(object sender, EventArgs e)
+        {
+            string strText = m_fm.RECP_FILE;
+
+            if (m_speaker.Check_Ptrn_Ask_teaching_name_syncronization() == true)
+            {
+                string strName = Path.GetFileName(strText).ToUpper();
+                strName = strName.Replace("XML", "BMP");
+                TXT_PTRN_FILE_NAME.Text = strName;
+            }
+        }
+
+        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
+        {
+            LV_HISTORY_PTRN_ERROR.Items.Clear();
+
+            string strPathHistory = m_fm.param_path.i08_PATH_HIST_PTRN;
+            String[] strArrAllFiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
+
+            LV_HISTORY_PTRN_ERROR.BeginUpdate();
+            {
+              #region
+                Array.Reverse(strArrAllFiles);
+
+                for (int i = 0; i < strArrAllFiles.Length; i++)
+                {
+                    string single = strArrAllFiles.ElementAt(i);
+                    string strFileName = Path.GetFileName(single);
+
+                    string strDate = single.Replace(m_fm.param_path.i08_PATH_HIST_PTRN + "\\", "");
+                    /*****/strDate = strDate.Replace(strFileName, "").Replace("\\", "");
+
+                    ListViewItem lvi = new ListViewItem();
+
+                    int nCount = LV_HISTORY_PTRN_ERROR.Items.Count;
+                    lvi.Text = (nCount + 1).ToString();
+                    lvi.SubItems.Add(strDate);
+                    lvi.SubItems.Add(strFileName);
+
+                    LV_HISTORY_PTRN_ERROR.Items.Add(lvi);
+                }
+            #endregion
+            }
+            LV_HISTORY_PTRN_ERROR.EndUpdate();
+        }
+
+        private void LV_HISTORY_PTRN_ERROR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LV_HISTORY_PTRN_ERROR.FocusedItem == null) return;
+
+            LV_HISTORY_PTRN_ERROR.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_PTRN_ERROR_SelectedIndexChanged);
+
+            #region
+            {
+                // Get Selected Item
+                int nIndex = LV_HISTORY_PTRN_ERROR.FocusedItem.Index;
+
+                string strDate = LV_HISTORY_PTRN_ERROR.Items[nIndex].SubItems[1].Text;
+                string strImageFile = LV_HISTORY_PTRN_ERROR.Items[nIndex].SubItems[2].Text;
+
+                // Parsing
+                string PATH_DATE = Path.Combine(m_fm.param_path.i08_PATH_HIST_PTRN, strDate);
+                string PATH_IMAGE = Path.Combine(m_fm.param_path.i08_PATH_HIST_PTRN, strDate, strImageFile);
+
+                // Load Image 
+                Bitmap bmpTemp = new Bitmap(PATH_IMAGE);
+                Bitmap bmp = new Bitmap(bmpTemp);
+                bmpTemp.Dispose();
+
+                uc_view_ptrn.SetDisplay(bmp);
+                System.Threading.Thread.Sleep(100);
+
+                BTN_SET_EXTERNAL_IMAGE_Click(null, EventArgs.Empty);
+            }
+
+            #endregion
+
+            LV_HISTORY_PTRN_ERROR.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_PTRN_ERROR_SelectedIndexChanged);
+        }
+
+        private void BTN_RGN_INFO_PTRN_Click(object sender, EventArgs e)
+        {
+            RectangleF rcMatching = CControl.GetRectangleFrom_TextBox_Set(TXT_PTRN_TEACH_ROI_X, TXT_PTRN_TEACH_ROI_Y, TXT_PTRN_TEACH_ROI_W, TXT_PTRN_TEACH_ROI_H);
+            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcMatching));
+            uc_view_ptrn.Refresh();
+        }
+
+        private void BTN_RGN_INFO_SEARCH_Click(object sender, EventArgs e)
+        {
+            RectangleF rcSearching = CControl.GetRectangleFrom_TextBox_Set(TXT_LOCAL_SEARCH_RGN_X, TXT_LOCAL_SEARCH_RGN_Y, TXT_LOCAL_SEARCH_RGN_W, TXT_LOCAL_SEARCH_RGN_H);
+            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcSearching));
+            uc_view_ptrn.Refresh();
+        }
+
+        #region WINDOW FOLDER - DATAVIEW
+        private void BTN_SHOW_AND_HIDE_Click(object sender, EventArgs e)
+        {
+            _SetChange_WindowFolderStatus();
+        }
+
+        private void _SetChange_WindowFolderStatus()
+        {
+            if (m_bFolderStatus == true)
+            {
+                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_left;
+                this.Size = new Size(1800, 800);
+            }
+            else if (m_bFolderStatus == false)
+            {
+                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_right;
+                this.Size = new Size(1310, 800);
+            }
+
+            // reverse status 
+            m_bFolderStatus = !m_bFolderStatus;
+        }
+        #endregion
 
         #region glass effect
         // defines how far we are extending the Glass margins
@@ -585,158 +677,5 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-        
-
-        private void LV_PTRN_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperLV.SortData(LV_PTRN, e.Column);
-        }
-
-         
-
-        private void BTN_SYNC_WITH_RECP_NAME_Click(object sender, EventArgs e)
-        {
-            string strText = m_fm.RECP_FILE;
-
-            if (MessageBox.Show(string.Format("Do You Want To Make Sync. Recp Name and PTRN Teaching Name?\nTo {0}", strText), "Naming Syncronization", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                string strName = Path.GetFileName(strText).ToUpper();
-                strName = strName.Replace("XML", "BMP");
-                TXT_PTRN_FILE_NAME.Text = strName;
-            }
-        }
-
-      
-
-        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
-        {
-            LV_HISTORY_PTRN_ERROR.Items.Clear();
-
-
-            string strPathHistory = m_fm.param_path.i16_PATH_HIST_PTRN;
-            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
-
-            LV_HISTORY_PTRN_ERROR.BeginUpdate();
-
-            Array.Reverse(allfiles);
-
-            for (int i = 0; i < allfiles.Length; i++)
-            {
-                string single = allfiles.ElementAt(i);
-
-                string strFileName = Path.GetFileName(single);
-
-                string strDate = single.Replace(m_fm.param_path.i16_PATH_HIST_PTRN + "\\", "");
-                strDate = strDate.Replace(strFileName, "").Replace("\\", "");
-
-                ListViewItem lvi = new ListViewItem();
-
-                int nCount = LV_HISTORY_PTRN_ERROR.Items.Count;
-                lvi.Text = (nCount + 1).ToString();
-                lvi.SubItems.Add(strDate);
-                lvi.SubItems.Add(strFileName);
-
-                LV_HISTORY_PTRN_ERROR.Items.Add(lvi);
-            }
-
-            LV_HISTORY_PTRN_ERROR.EndUpdate();
-        }
-
-        #region WINDOW FOLDER - DATAVIEW
-        private void BTN_SHOW_AND_HIDE_Click(object sender, EventArgs e)
-        {
-            _SetChange_WindowFolderStatus();
-        }
-
-        private void _SetChange_WindowFolderStatus()
-        {
-            if (m_bFolderStatus == true)
-            {
-                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_left;
-                this.Size = new Size(1800, 800);
-             }
-            else if (m_bFolderStatus == false)
-            {
-                BTN_SHOW_AND_HIDE.BackgroundImage = Properties.Resources.recipe_right;
-                this.Size = new Size(1310, 800);
-             }
-
-            // reverse status 
-            m_bFolderStatus = !m_bFolderStatus;
-        }
-        #endregion
-
-        private void LV_HISTORY_PTRN_ERROR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (LV_HISTORY_PTRN_ERROR.FocusedItem == null) return;
-
-            LV_HISTORY_PTRN_ERROR.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_PTRN_ERROR_SelectedIndexChanged);
-
-            // Get Selected Item
-            int nIndex = LV_HISTORY_PTRN_ERROR.FocusedItem.Index;
-
-            string strDate = LV_HISTORY_PTRN_ERROR.Items[nIndex].SubItems[1].Text;
-            string strImageFile = LV_HISTORY_PTRN_ERROR.Items[nIndex].SubItems[2].Text;
-
-            // Parsing
-            string PATH_DATE = Path.Combine(m_fm.param_path.i16_PATH_HIST_PTRN, strDate);
-            string PATH_IMAGE = Path.Combine(m_fm.param_path.i16_PATH_HIST_PTRN, strDate, strImageFile);
-
-            string strTimeCode = strImageFile.Substring(0, 12);
-            string strInspFile = strTimeCode + "_PTRN_ERR.BMP";
-            string PATH_INSP = Path.Combine(PATH_DATE, strInspFile);
-
-            // Load Image 
-            Bitmap bmpTemp = new Bitmap(PATH_IMAGE);
-            Bitmap bmp = new Bitmap(bmpTemp);
-            bmpTemp.Dispose();
-            uc_view_ptrn.SetDisplay(bmp);
-            System.Threading.Thread.Sleep(100);
-
-            BTN_SET_EXTERNAL_IMAGE_Click(null, EventArgs.Empty);
-
-
-            LV_HISTORY_PTRN_ERROR.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_PTRN_ERROR_SelectedIndexChanged);
-
-            
-        }
-
-        private void BTN_RGN_INFO_PTRN_Click(object sender, EventArgs e)
-        {
-            RectangleF rcMatching = new RectangleF();
-
-            float px = 0; float py = 0; float pw = 0; float ph = 0;
-            float.TryParse(TXT_PTRN_TEACH_ROI_X.Text, out px);
-            float.TryParse(TXT_PTRN_TEACH_ROI_Y.Text, out py);
-            float.TryParse(TXT_PTRN_TEACH_ROI_W.Text, out pw);
-            float.TryParse(TXT_PTRN_TEACH_ROI_H.Text, out ph);
-
-            rcMatching = new RectangleF(px, py, pw, ph);
-
-            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcMatching));
-            uc_view_ptrn.Refresh();
-            
-            
-        }
-
-        private void BTN_RGN_INFO_SEARCH_Click(object sender, EventArgs e)
-        {
-            RectangleF rcSearching = new RectangleF();
-
-            float px = 0; float py = 0; float pw = 0; float ph = 0;
-            float.TryParse(TXT_LOCAL_SEARCH_RGN_X.Text, out px);
-            float.TryParse(TXT_LOCAL_SEARCH_RGN_Y.Text, out py);
-            float.TryParse(TXT_LOCAL_SEARCH_RGN_W.Text, out pw);
-            float.TryParse(TXT_LOCAL_SEARCH_RGN_H.Text, out ph);
-
-            rcSearching = new RectangleF(px, py, pw, ph);
-            uc_view_ptrn.iSet_Roi_Ptrn(Rectangle.Round(rcSearching));
-            uc_view_ptrn.Refresh();
-        }
-
-         
-
-       
     }
 }

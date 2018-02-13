@@ -179,18 +179,6 @@ namespace CD_VISION_DIALOG
 
             /***/if (single.PARAM_05_USE_CENTERING == 0) CHK_USE_CENTERING.Checked = false;
             else if (single.PARAM_05_USE_CENTERING == 1) CHK_USE_CENTERING.Checked = true;
-            
-            TXT_COMPEN_A.Text = single.PARAM_06_COMPEN_A.ToString("F4");
-            TXT_COMPEN_B.Text = single.PARAM_06_COMPEN_B.ToString("F4");
-
-            /***/if (single.PARAM_07_ALGORITHM_INDEX == 0) { RDO_ALGORITHM_MAXHAT.Checked = true; }
-            else if (single.PARAM_07_ALGORITHM_INDEX == 1) { RDO_ALGORITHM_DIR_IN.Checked = true; }
-            else if (single.PARAM_07_ALGORITHM_INDEX == 2) { RDO_ALGORITHM_DIR_EX.Checked = true; }
-            else if (single.PARAM_07_ALGORITHM_INDEX == 3) { RDO_ALGORITHM_CARDIN.Checked = true; }
-            else { helperBaseRecp.MSG_INVALID_PARAM_ALGORITHM(); return; }
-
-            TXT_DMG_TOLERANCE.Text = single.PARAM_08_DMG_TOLERANCE.ToString("F4");
-            TXT_EDGE_POSITION.Text = single.PARAM_09_EDGE_POSITION.ToString("F4");
         }
 
         private BASE_RECP _LoadRecpFromUI()
@@ -211,17 +199,6 @@ namespace CD_VISION_DIALOG
 
             single.PARAM_05_USE_CENTERING = CHK_USE_CENTERING.Checked == false ? 0 : 1;
 
-            single.PARAM_06_COMPEN_A = double.Parse(TXT_COMPEN_A.Text);
-            single.PARAM_06_COMPEN_B = double.Parse(TXT_COMPEN_B.Text);
-
-            /***/if (RDO_ALGORITHM_MAXHAT.Checked == true) single.PARAM_07_ALGORITHM_INDEX = 0;
-            else if (RDO_ALGORITHM_DIR_IN.Checked == true) single.PARAM_07_ALGORITHM_INDEX = 1;
-            else if (RDO_ALGORITHM_DIR_EX.Checked == true) single.PARAM_07_ALGORITHM_INDEX = 2;
-            else if (RDO_ALGORITHM_CARDIN.Checked == true) single.PARAM_07_ALGORITHM_INDEX = 3;
-
-            single.PARAM_08_DMG_TOLERANCE = double.Parse(TXT_DMG_TOLERANCE.Text);
-            single.PARAM_09_EDGE_POSITION = double.Parse(TXT_EDGE_POSITION.Text);
-
             return single;
         }
         private void _SaveRecp(BASE_RECP recp, string strFilePath)
@@ -231,17 +208,11 @@ namespace CD_VISION_DIALOG
             string SECTION = "PARAM";
 
             INI_BASE_RECP.Add(SECTION);
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_01_LENS_INDEX, recp._param_lens_index, "ALIGN = 1 | 25X = 2 | 50X = 3");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_02_LIGHT_INDEX, recp._param_light_index, "ALIGN = 1 | BF = 2 | DF = 3");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_03_LIGHT_VALUE, recp.PARAM_03_LIGHT_VALUE, "VALUE : 0 ~ 255");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_04_FOCUS_TYPE, recp.PARAM_04_FOCUS_TYPE, " // NONE = 0 | ZAF = 1 | LAF = 2 | IAF = 4");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_05_USE_CENTERING, recp.PARAM_05_USE_CENTERING, " 0 = FALSE | 1 = TRUE");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_06_COMPEN_A, recp.PARAM_06_COMPEN_A, "Ax + B of A");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_06_COMPEN_B, recp.PARAM_06_COMPEN_B, "Ax + B of B");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_07_ALGORITHM_INDEX, recp._param_algoritm_index, "MAXHAT = 0 | DIR_IN = 1 | DIR_EX = 2 | CARDIN = 3");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_08_DMG_TOLERANCE, recp.PARAM_08_DMG_TOLERANCE, " Damage Tolerance(%) : 0.0 ~ 0.99");
-            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_09_EDGE_POSITION, recp.PARAM_09_EDGE_POSITION, "Edge Position(%) : 0.0 ~ 1");
-
+            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_01_LENS_INDEX/*******/, recp._param_01_lens_index/********/, "ALIGN = 1 | 25X = 2 | 50X = 3");
+            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_02_LIGHT_INDEX/******/, recp._param_02_light_index/*******/, "ALIGN = 1 | BF = 2 | DF = 3");
+            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_03_LIGHT_VALUE/******/, recp.PARAM_03_LIGHT_VALUE/********/, "VALUE : 0 ~ 255");
+            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_04_FOCUS_TYPE/*******/, recp.PARAM_04_FOCUS_TYPE/*********/, " // NONE = 0 | ZAF = 1 | LAF = 2 | IAF = 4");
+            INI_BASE_RECP.Add(SECTION, BASE_RECP.DEF_PARAM_05_USE_CENTERING/****/, recp.PARAM_05_USE_CENTERING/******/, " 0 = FALSE | 1 = TRUE");
             INI_BASE_RECP.Save(strFilePath);
         }
         private BASE_RECP _LoadRecpFromFS(string strFilePath)
@@ -259,25 +230,12 @@ namespace CD_VISION_DIALOG
 
             string strSection = "PARAM";
 
-            recp.PARAM_00_BASE_RECP_NAME = strFilePath;
-            //single.PARAM_01_LENS_INDEX = ??
-            recp._param_lens_index = INI_BASE_RECP.GetStringField(strSection, BASE_RECP.DEF_PARAM_01_LENS_INDEX);
-            //single.PARAM_02_LIGHT_INDEX = ??
-            recp._param_light_index = INI_BASE_RECP.GetStringField(strSection, BASE_RECP.DEF_PARAM_02_LIGHT_INDEX);
-
-            recp.PARAM_03_LIGHT_VALUE = INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_03_LIGHT_VALUE);
-            //single.PARAM_04_FOCUS_TYPE = ??
-            recp.PARAM_04_FOCUS_TYPE = INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_04_FOCUS_TYPE);
-
-            recp.PARAM_05_USE_CENTERING = INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_05_USE_CENTERING);
-
-            recp.PARAM_06_COMPEN_A = INI_BASE_RECP.GetDoubleField(strSection, BASE_RECP.DEF_PARAM_06_COMPEN_A);
-            recp.PARAM_06_COMPEN_B = INI_BASE_RECP.GetDoubleField(strSection, BASE_RECP.DEF_PARAM_06_COMPEN_B);
-            //single.PARAM_09_ALGORITHM_INDEX  = ??
-            recp._param_algoritm_index = INI_BASE_RECP.GetStringField(strSection, BASE_RECP.DEF_PARAM_07_ALGORITHM_INDEX);
-            recp.PARAM_08_DMG_TOLERANCE = INI_BASE_RECP.GetDoubleField(strSection, BASE_RECP.DEF_PARAM_08_DMG_TOLERANCE);
-            recp.PARAM_09_EDGE_POSITION = INI_BASE_RECP.GetDoubleField(strSection, BASE_RECP.DEF_PARAM_09_EDGE_POSITION);
-
+            recp.PARAM_00_BASE_RECP_NAME/*****/= strFilePath;
+            recp._param_01_lens_index/********/= INI_BASE_RECP.GetStringField(strSection, BASE_RECP.DEF_PARAM_01_LENS_INDEX);
+            recp._param_02_light_index/*******/= INI_BASE_RECP.GetStringField(strSection, BASE_RECP.DEF_PARAM_02_LIGHT_INDEX);
+            recp.PARAM_03_LIGHT_VALUE/********/= INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_03_LIGHT_VALUE);
+            recp.PARAM_04_FOCUS_TYPE/*********/= INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_04_FOCUS_TYPE);
+            recp.PARAM_05_USE_CENTERING/******/= INI_BASE_RECP.GetIntegerField(strSection, BASE_RECP.DEF_PARAM_05_USE_CENTERING);
             return recp;
         }
 

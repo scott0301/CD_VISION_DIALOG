@@ -163,8 +163,7 @@ namespace CD_VISION_DIALOG
                 strFileName = Computer.GetFileName(strFileName);
                 // Get Folder Name 
                 string strDate = Path.GetDirectoryName(single);
-                /****/
-                strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
+                /****/ strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
 
 
                 ListViewItem lvi = new ListViewItem();
@@ -257,31 +256,7 @@ namespace CD_VISION_DIALOG
 
             m_dgview.DisplayData(list);
 
-            
-            //// Parsing
-            //string PATH_DATE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate);
-            //string PATH_IMAGE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate, strImageFile);
-            //
-            //string strTimeCode = strImageFile.Substring(0, 12);
-            //string strInspFile = strTimeCode + "_INSP.txt";
-            //string PATH_INSP = Path.Combine(PATH_DATE, strInspFile);
-            //
-            //// Load Display Data and refresh
-            //if (File.Exists(PATH_INSP) == true) { uc_view_history.ThreadCall_LoadFile(fileIO, PATH_INSP); }
-            //uc_view_history.Refresh();
-            //
-            //// Get Recp File Names
-            //String[] allfiles = System.IO.Directory.GetFiles(m_fm.param_path.i15_PATH_HIST_MEASURE, "*.*", System.IO.SearchOption.AllDirectories);
-            //
-            //string PATH_PREV_RECP = string.Empty;
-            //
-            //for (int i = 0; i < allfiles.Length; i++)
-            //{
-            //    if (allfiles.ElementAt(i).Contains(strTimeCode) && allfiles.ElementAt(i).Contains(".xml"))
-            //    {
-            //        PATH_PREV_RECP = allfiles.ElementAt(i);
-            //    }
-            //}
+
 
             LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
 

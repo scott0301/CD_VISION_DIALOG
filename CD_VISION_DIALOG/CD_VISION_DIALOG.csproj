@@ -67,9 +67,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\UC_CD_PARAM.dll</HintPath>
     </Reference>
-    <Reference Include="UC_CD_VIEW, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UC_CD_View, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\UC_CD_VIEW.DLL</HintPath>
+      <HintPath>UC_CD_VIEW\UC_CD_VIEW\Debug\UC_CD_View.dll</HintPath>
     </Reference>
     <Reference Include="UC_GRAPH">
       <HintPath>Library\UC_GRAPH.dll</HintPath>

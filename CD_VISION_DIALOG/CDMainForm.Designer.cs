@@ -41,6 +41,7 @@
             this.LV_RECP = new System.Windows.Forms.ListView();
             this.IDX = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FIELS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LAST_ACC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label52 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.TXT_PTRN_ACC_RATIO = new System.Windows.Forms.TextBox();
@@ -49,7 +50,7 @@
             this.label38 = new System.Windows.Forms.Label();
             this.TXT_PATH_RECP_FILE = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.LB_RECP_NAME = new System.Windows.Forms.Label();
             this.LV_PARAMETER = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,7 +67,6 @@
             this.RDO_ROI_GAP = new System.Windows.Forms.RadioButton();
             this.label47 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
-            this.CHK_USE_HISTORY_MEASURE = new System.Windows.Forms.CheckBox();
             this.TAB_VIEW = new System.Windows.Forms.TabControl();
             this.tabpage33 = new System.Windows.Forms.TabPage();
             this.imageView1 = new CD_View.UC_CD_VIEWER();
@@ -351,14 +351,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.PNL_MAIN = new System.Windows.Forms.Panel();
             this.PROG_THREAD_POOL = new System.Windows.Forms.ProgressBar();
-            this.CHK_USE_SAVE_PTRN_ERR = new System.Windows.Forms.CheckBox();
-            this.CHK_USE_SAVE_INPUT = new System.Windows.Forms.CheckBox();
             this.PIC_FOCUS = new System.Windows.Forms.PictureBox();
             this.PIC_PTRN = new System.Windows.Forms.PictureBox();
             this.BTN_RECIPE_SAVE = new System.Windows.Forms.Button();
             this.BTN_RECP_SAVE_AS = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.LB_MAIN_FOCUS_PARAM = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BTN_PTRN_MATCH = new System.Windows.Forms.Button();
             this.BTN_PTRN_RESULT = new System.Windows.Forms.Button();
@@ -383,7 +382,6 @@
             this.LB_TIME_PREDICTION = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_LIFE_TIME = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).BeginInit();
@@ -526,13 +524,14 @@
             this.LV_RECP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.LV_RECP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.IDX,
-            this.FIELS});
+            this.FIELS,
+            this.LAST_ACC});
             this.LV_RECP.ForeColor = System.Drawing.Color.Black;
             this.LV_RECP.FullRowSelect = true;
             this.LV_RECP.GridLines = true;
-            this.LV_RECP.Location = new System.Drawing.Point(11, 157);
+            this.LV_RECP.Location = new System.Drawing.Point(11, 115);
             this.LV_RECP.Name = "LV_RECP";
-            this.LV_RECP.Size = new System.Drawing.Size(577, 196);
+            this.LV_RECP.Size = new System.Drawing.Size(577, 238);
             this.LV_RECP.TabIndex = 27;
             this.LV_RECP.UseCompatibleStateImageBehavior = false;
             this.LV_RECP.View = System.Windows.Forms.View.Details;
@@ -548,7 +547,12 @@
             // FIELS
             // 
             this.FIELS.Text = "FILES";
-            this.FIELS.Width = 503;
+            this.FIELS.Width = 280;
+            // 
+            // LAST_ACC
+            // 
+            this.LAST_ACC.Text = "LAST_ACCESS";
+            this.LAST_ACC.Width = 250;
             // 
             // label52
             // 
@@ -634,15 +638,16 @@
             this.label33.TabIndex = 0;
             this.label33.Text = "MATCH";
             // 
-            // label20
+            // LB_RECP_NAME
             // 
-            this.label20.AutoSize = true;
-            this.label20.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label20.Location = new System.Drawing.Point(14, 36);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(98, 14);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "NAME_RECP :";
+            this.LB_RECP_NAME.AutoSize = true;
+            this.LB_RECP_NAME.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LB_RECP_NAME.Location = new System.Drawing.Point(14, 36);
+            this.LB_RECP_NAME.Name = "LB_RECP_NAME";
+            this.LB_RECP_NAME.Size = new System.Drawing.Size(98, 14);
+            this.LB_RECP_NAME.TabIndex = 0;
+            this.LB_RECP_NAME.Text = "NAME_RECP :";
+            this.LB_RECP_NAME.DoubleClick += new System.EventHandler(this.LB_RECP_NAME_DoubleClick);
             // 
             // LV_PARAMETER
             // 
@@ -833,17 +838,6 @@
             this.label87.TabIndex = 0;
             this.label87.Text = "UNIT";
             // 
-            // CHK_USE_HISTORY_MEASURE
-            // 
-            this.CHK_USE_HISTORY_MEASURE.AutoSize = true;
-            this.CHK_USE_HISTORY_MEASURE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CHK_USE_HISTORY_MEASURE.Location = new System.Drawing.Point(131, 126);
-            this.CHK_USE_HISTORY_MEASURE.Name = "CHK_USE_HISTORY_MEASURE";
-            this.CHK_USE_HISTORY_MEASURE.Size = new System.Drawing.Size(97, 18);
-            this.CHK_USE_HISTORY_MEASURE.TabIndex = 12;
-            this.CHK_USE_HISTORY_MEASURE.Text = "MEAS RES.";
-            this.CHK_USE_HISTORY_MEASURE.UseVisualStyleBackColor = true;
-            // 
             // TAB_VIEW
             // 
             this.TAB_VIEW.Alignment = System.Windows.Forms.TabAlignment.Left;
@@ -927,7 +921,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 62;
+            this.UC_LOG_VIEWER.m_workIndexer = 3;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1446,7 +1440,7 @@
             this.BTN_FIGURE_UPDATE.Size = new System.Drawing.Size(50, 50);
             this.BTN_FIGURE_UPDATE.TabIndex = 0;
             this.BTN_FIGURE_UPDATE.UseVisualStyleBackColor = true;
-            this.BTN_FIGURE_UPDATE.Click += new System.EventHandler(this.BTN_FIGURE_UPDATE_Click);
+            this.BTN_FIGURE_UPDATE.Click += new System.EventHandler(this.BTN_FIGURE_Modify_Click);
             // 
             // label13
             // 
@@ -1637,7 +1631,7 @@
             this.BTN_DIA_ANGLE_RV.Text = "↔";
             this.BTN_DIA_ANGLE_RV.UseVisualStyleBackColor = true;
             this.BTN_DIA_ANGLE_RV.Visible = false;
-            this.BTN_DIA_ANGLE_RV.Click += new System.EventHandler(this.BTN_DIG_ANGLE_RV_Click);
+            this.BTN_DIA_ANGLE_RV.Click += new System.EventHandler(this.BTN_DIAGONAL_CHANGE_Click);
             // 
             // BTN_DIA_ANGLE_UP
             // 
@@ -1649,7 +1643,7 @@
             this.BTN_DIA_ANGLE_UP.Text = "↑";
             this.BTN_DIA_ANGLE_UP.UseVisualStyleBackColor = true;
             this.BTN_DIA_ANGLE_UP.Visible = false;
-            this.BTN_DIA_ANGLE_UP.Click += new System.EventHandler(this.BTN_DIG_ANGLE_UP_Click);
+            this.BTN_DIA_ANGLE_UP.Click += new System.EventHandler(this.BTN_DIAGONAL_CHANGE_Click);
             // 
             // BTN_DIA_ANGLE_DW
             // 
@@ -1661,7 +1655,7 @@
             this.BTN_DIA_ANGLE_DW.Text = "↓";
             this.BTN_DIA_ANGLE_DW.UseVisualStyleBackColor = true;
             this.BTN_DIA_ANGLE_DW.Visible = false;
-            this.BTN_DIA_ANGLE_DW.Click += new System.EventHandler(this.BTN_DIG_ANGLE_DW_Click);
+            this.BTN_DIA_ANGLE_DW.Click += new System.EventHandler(this.BTN_DIAGONAL_CHANGE_Click);
             // 
             // TXT_PARAM_DIA_ANGLE
             // 
@@ -2662,7 +2656,6 @@
             this.button2.TabIndex = 47;
             this.button2.Text = "MODIFY";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BTN_OL_ADD
             // 
@@ -2892,7 +2885,7 @@
             this.BTN_DRAW_MIXED_RC.TabIndex = 1;
             this.BTN_DRAW_MIXED_RC.Text = "DRAW RGN";
             this.BTN_DRAW_MIXED_RC.UseVisualStyleBackColor = true;
-            this.BTN_DRAW_MIXED_RC.Click += new System.EventHandler(this.BTN_DRAW_FIGURES_Click);
+            this.BTN_DRAW_MIXED_RC.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
             // 
             // BTN_REMOVE_MIXED_RC
             // 
@@ -2905,7 +2898,7 @@
             this.BTN_REMOVE_MIXED_RC.TabIndex = 1;
             this.BTN_REMOVE_MIXED_RC.Text = "REMOVE RGN";
             this.BTN_REMOVE_MIXED_RC.UseVisualStyleBackColor = true;
-            this.BTN_REMOVE_MIXED_RC.Click += new System.EventHandler(this.BTN_REMOVE_FIGURES_Click);
+            this.BTN_REMOVE_MIXED_RC.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
             // 
             // BTN_SET_MIXED_RC
             // 
@@ -2979,9 +2972,9 @@
             this.RDO_MIXED_RC_METRIC_VER.AutoSize = true;
             this.RDO_MIXED_RC_METRIC_VER.Location = new System.Drawing.Point(18, 66);
             this.RDO_MIXED_RC_METRIC_VER.Name = "RDO_MIXED_RC_METRIC_VER";
-            this.RDO_MIXED_RC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_RC_METRIC_VER.Size = new System.Drawing.Size(46, 16);
             this.RDO_MIXED_RC_METRIC_VER.TabIndex = 34;
-            this.RDO_MIXED_RC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_RC_METRIC_VER.Text = "VER";
             this.RDO_MIXED_RC_METRIC_VER.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_RC_METRIC_HOR
@@ -2989,9 +2982,9 @@
             this.RDO_MIXED_RC_METRIC_HOR.AutoSize = true;
             this.RDO_MIXED_RC_METRIC_HOR.Location = new System.Drawing.Point(18, 41);
             this.RDO_MIXED_RC_METRIC_HOR.Name = "RDO_MIXED_RC_METRIC_HOR";
-            this.RDO_MIXED_RC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RC_METRIC_HOR.Size = new System.Drawing.Size(48, 16);
             this.RDO_MIXED_RC_METRIC_HOR.TabIndex = 34;
-            this.RDO_MIXED_RC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_RC_METRIC_HOR.Text = "HOR";
             this.RDO_MIXED_RC_METRIC_HOR.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_RC_METRIC_P2P
@@ -3388,9 +3381,9 @@
             this.RDO_MIXED_CC_METRIC_VER.AutoSize = true;
             this.RDO_MIXED_CC_METRIC_VER.Location = new System.Drawing.Point(10, 66);
             this.RDO_MIXED_CC_METRIC_VER.Name = "RDO_MIXED_CC_METRIC_VER";
-            this.RDO_MIXED_CC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_CC_METRIC_VER.Size = new System.Drawing.Size(46, 16);
             this.RDO_MIXED_CC_METRIC_VER.TabIndex = 34;
-            this.RDO_MIXED_CC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_CC_METRIC_VER.Text = "VER";
             this.RDO_MIXED_CC_METRIC_VER.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_CC_METRIC_HOR
@@ -3398,9 +3391,9 @@
             this.RDO_MIXED_CC_METRIC_HOR.AutoSize = true;
             this.RDO_MIXED_CC_METRIC_HOR.Location = new System.Drawing.Point(10, 41);
             this.RDO_MIXED_CC_METRIC_HOR.Name = "RDO_MIXED_CC_METRIC_HOR";
-            this.RDO_MIXED_CC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_CC_METRIC_HOR.Size = new System.Drawing.Size(48, 16);
             this.RDO_MIXED_CC_METRIC_HOR.TabIndex = 34;
-            this.RDO_MIXED_CC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_CC_METRIC_HOR.Text = "HOR";
             this.RDO_MIXED_CC_METRIC_HOR.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_CC_METRIC_P2P
@@ -3798,7 +3791,7 @@
             this.BTN_REMOVE_MIXED_CC.TabIndex = 1;
             this.BTN_REMOVE_MIXED_CC.Text = "REMOVE RGN";
             this.BTN_REMOVE_MIXED_CC.UseVisualStyleBackColor = true;
-            this.BTN_REMOVE_MIXED_CC.Click += new System.EventHandler(this.BTN_REMOVE_FIGURES_Click);
+            this.BTN_REMOVE_MIXED_CC.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_Click);
             // 
             // BTN_SET_MIXED_CC
             // 
@@ -3951,9 +3944,9 @@
             this.RDO_MIXED_RCC_METRIC_VER.AutoSize = true;
             this.RDO_MIXED_RCC_METRIC_VER.Location = new System.Drawing.Point(10, 66);
             this.RDO_MIXED_RCC_METRIC_VER.Name = "RDO_MIXED_RCC_METRIC_VER";
-            this.RDO_MIXED_RCC_METRIC_VER.Size = new System.Drawing.Size(48, 16);
+            this.RDO_MIXED_RCC_METRIC_VER.Size = new System.Drawing.Size(46, 16);
             this.RDO_MIXED_RCC_METRIC_VER.TabIndex = 34;
-            this.RDO_MIXED_RCC_METRIC_VER.Text = "HOR";
+            this.RDO_MIXED_RCC_METRIC_VER.Text = "VER";
             this.RDO_MIXED_RCC_METRIC_VER.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_RCC_METRIC_HOR
@@ -3961,9 +3954,9 @@
             this.RDO_MIXED_RCC_METRIC_HOR.AutoSize = true;
             this.RDO_MIXED_RCC_METRIC_HOR.Location = new System.Drawing.Point(10, 41);
             this.RDO_MIXED_RCC_METRIC_HOR.Name = "RDO_MIXED_RCC_METRIC_HOR";
-            this.RDO_MIXED_RCC_METRIC_HOR.Size = new System.Drawing.Size(46, 16);
+            this.RDO_MIXED_RCC_METRIC_HOR.Size = new System.Drawing.Size(48, 16);
             this.RDO_MIXED_RCC_METRIC_HOR.TabIndex = 34;
-            this.RDO_MIXED_RCC_METRIC_HOR.Text = "VER";
+            this.RDO_MIXED_RCC_METRIC_HOR.Text = "HOR";
             this.RDO_MIXED_RCC_METRIC_HOR.UseVisualStyleBackColor = true;
             // 
             // RDO_MIXED_RCC_METRIC_P2P
@@ -4271,7 +4264,7 @@
             this.BTN_DRAW_MIXED_RCC.TabIndex = 1;
             this.BTN_DRAW_MIXED_RCC.Text = "DRAW RGN";
             this.BTN_DRAW_MIXED_RCC.UseVisualStyleBackColor = true;
-            this.BTN_DRAW_MIXED_RCC.Click += new System.EventHandler(this.BTN_DRAW_FIGURES_Click);
+            this.BTN_DRAW_MIXED_RCC.Click += new System.EventHandler(this.BTN_FIGURE_DRAW_Click);
             // 
             // button3
             // 
@@ -4304,16 +4297,13 @@
             this.PNL_MAIN.BackColor = System.Drawing.SystemColors.Control;
             this.PNL_MAIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PNL_MAIN.Controls.Add(this.PROG_THREAD_POOL);
-            this.PNL_MAIN.Controls.Add(this.CHK_USE_SAVE_PTRN_ERR);
-            this.PNL_MAIN.Controls.Add(this.CHK_USE_SAVE_INPUT);
             this.PNL_MAIN.Controls.Add(this.LV_RECP);
-            this.PNL_MAIN.Controls.Add(this.CHK_USE_HISTORY_MEASURE);
             this.PNL_MAIN.Controls.Add(this.label14);
             this.PNL_MAIN.Controls.Add(this.PIC_FOCUS);
             this.PNL_MAIN.Controls.Add(this.PIC_PTRN);
             this.PNL_MAIN.Controls.Add(this.TXT_PATH_PTRN_FILE);
             this.PNL_MAIN.Controls.Add(this.BTN_RECIPE_SAVE);
-            this.PNL_MAIN.Controls.Add(this.label20);
+            this.PNL_MAIN.Controls.Add(this.LB_RECP_NAME);
             this.PNL_MAIN.Controls.Add(this.BTN_RECP_SAVE_AS);
             this.PNL_MAIN.Controls.Add(this.label52);
             this.PNL_MAIN.Controls.Add(this.TXT_PTRN_ACC_RATIO);
@@ -4325,8 +4315,8 @@
             this.PNL_MAIN.Controls.Add(this.TXT_BASE_RECP);
             this.PNL_MAIN.Controls.Add(this.TXT_PATH_RECP_FILE);
             this.PNL_MAIN.Controls.Add(this.label51);
-            this.PNL_MAIN.Controls.Add(this.label3);
             this.PNL_MAIN.Controls.Add(this.label10);
+            this.PNL_MAIN.Controls.Add(this.label20);
             this.PNL_MAIN.Controls.Add(this.LB_MAIN_FOCUS_PARAM);
             this.PNL_MAIN.Controls.Add(this.label35);
             this.PNL_MAIN.Controls.Add(this.label2);
@@ -4348,35 +4338,13 @@
             this.PROG_THREAD_POOL.TabIndex = 30;
             this.PROG_THREAD_POOL.Value = 5;
             // 
-            // CHK_USE_SAVE_PTRN_ERR
-            // 
-            this.CHK_USE_SAVE_PTRN_ERR.AutoSize = true;
-            this.CHK_USE_SAVE_PTRN_ERR.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CHK_USE_SAVE_PTRN_ERR.Location = new System.Drawing.Point(357, 126);
-            this.CHK_USE_SAVE_PTRN_ERR.Name = "CHK_USE_SAVE_PTRN_ERR";
-            this.CHK_USE_SAVE_PTRN_ERR.Size = new System.Drawing.Size(134, 18);
-            this.CHK_USE_SAVE_PTRN_ERR.TabIndex = 12;
-            this.CHK_USE_SAVE_PTRN_ERR.Text = "MATCHING_ERR";
-            this.CHK_USE_SAVE_PTRN_ERR.UseVisualStyleBackColor = true;
-            // 
-            // CHK_USE_SAVE_INPUT
-            // 
-            this.CHK_USE_SAVE_INPUT.AutoSize = true;
-            this.CHK_USE_SAVE_INPUT.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CHK_USE_SAVE_INPUT.Location = new System.Drawing.Point(234, 126);
-            this.CHK_USE_SAVE_INPUT.Name = "CHK_USE_SAVE_INPUT";
-            this.CHK_USE_SAVE_INPUT.Size = new System.Drawing.Size(117, 18);
-            this.CHK_USE_SAVE_INPUT.TabIndex = 12;
-            this.CHK_USE_SAVE_INPUT.Text = "INPUT IMAGE";
-            this.CHK_USE_SAVE_INPUT.UseVisualStyleBackColor = true;
-            // 
             // PIC_FOCUS
             // 
             this.PIC_FOCUS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.PIC_FOCUS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PIC_FOCUS.Location = new System.Drawing.Point(267, 408);
             this.PIC_FOCUS.Name = "PIC_FOCUS";
-            this.PIC_FOCUS.Size = new System.Drawing.Size(327, 250);
+            this.PIC_FOCUS.Size = new System.Drawing.Size(327, 230);
             this.PIC_FOCUS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PIC_FOCUS.TabIndex = 28;
             this.PIC_FOCUS.TabStop = false;
@@ -4421,25 +4389,35 @@
             this.BTN_RECP_SAVE_AS.UseVisualStyleBackColor = true;
             this.BTN_RECP_SAVE_AS.Click += new System.EventHandler(this.BTN_RECP_SAVE_AS_Click);
             // 
-            // label3
+            // label20
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(15, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 14);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "SAVE OPTION :";
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label20.Location = new System.Drawing.Point(266, 641);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(98, 14);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "MAKE_ZERO :";
             // 
             // LB_MAIN_FOCUS_PARAM
             // 
             this.LB_MAIN_FOCUS_PARAM.AutoSize = true;
-            this.LB_MAIN_FOCUS_PARAM.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LB_MAIN_FOCUS_PARAM.Location = new System.Drawing.Point(542, 388);
+            this.LB_MAIN_FOCUS_PARAM.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.LB_MAIN_FOCUS_PARAM.Location = new System.Drawing.Point(370, 641);
             this.LB_MAIN_FOCUS_PARAM.Name = "LB_MAIN_FOCUS_PARAM";
             this.LB_MAIN_FOCUS_PARAM.Size = new System.Drawing.Size(46, 14);
             this.LB_MAIN_FOCUS_PARAM.TabIndex = 0;
             this.LB_MAIN_FOCUS_PARAM.Text = "NONE";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label35.Location = new System.Drawing.Point(16, 388);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(160, 14);
+            this.label35.TabIndex = 0;
+            this.label35.Text = ":- PATTERN MATCHING";
             // 
             // label2
             // 
@@ -4702,16 +4680,6 @@
             this.LB_LIFE_TIME.TabIndex = 64;
             this.LB_LIFE_TIME.Text = "LIFE_TIME :";
             // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label35.Location = new System.Drawing.Point(16, 388);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(160, 14);
-            this.label35.TabIndex = 0;
-            this.label35.Text = ":- PATTERN MATCHING";
-            // 
             // CDMainForm
             // 
             this.AllowDrop = true;
@@ -4841,7 +4809,7 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox TXT_PATH_RECP_FILE;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label LB_RECP_NAME;
         private System.Windows.Forms.PictureBox PIC_PTRN;
         private System.Windows.Forms.ListView LV_RECP;
         private System.Windows.Forms.ColumnHeader IDX;
@@ -4866,7 +4834,6 @@
         private System.Windows.Forms.RadioButton RDO_ROI_GAP;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label87;
-        private System.Windows.Forms.CheckBox CHK_USE_HISTORY_MEASURE;
         private System.Windows.Forms.TabControl TAB_VIEW;
         private System.Windows.Forms.TabPage tabpage33;
         private System.Windows.Forms.TabPage tabPage2;
@@ -4896,15 +4863,12 @@
         private System.Windows.Forms.Panel PNL_MEASURE_RESULT;
         private System.Windows.Forms.Button BTN_FIGURE_MODIF_SCALE_PLUS;
         private System.Windows.Forms.Button BTN_FIGURE_MODIF_SCALE_MINUS;
-        private System.Windows.Forms.CheckBox CHK_USE_SAVE_INPUT;
-        private System.Windows.Forms.CheckBox CHK_USE_SAVE_PTRN_ERR;
         private System.Windows.Forms.Button BTN_MENU_HISTORY_MATCHING;
         private System.Windows.Forms.Button BTN_PTRN_RESULT;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BTN_MENU_IMAGE_PROCESSING;
         private System.Windows.Forms.Button BTN_MENU_CONFIG;
         private System.Windows.Forms.PictureBox PIC_FOCUS;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -5176,6 +5140,8 @@
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.ProgressBar PROG_THREAD_POOL;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ColumnHeader LAST_ACC;
 
 
 

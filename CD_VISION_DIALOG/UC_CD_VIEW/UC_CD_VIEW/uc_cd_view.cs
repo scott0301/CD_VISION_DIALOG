@@ -263,9 +263,9 @@ namespace CD_View
             byte[] cropImage = HELPER_IMAGE_IO.HC_CropImage(rawImage, imageW, imageH, rc.X, rc.Y, rc.Width, rc.Height);
 
 
-            string strPath = _SelectSaveFile(fm.param_path.i11_PATH_IMG_PTRN);
+            string strPath = _SelectSaveFile(fm.param_path.i06_PATH_IMG_PTRN);
 
-            HELPER_IMAGE_IO.SaveImage(cropImage, rc.Width, rc.Height, strPath);
+            HELPER_IMAGE_IO.HC_IO_SaveImage(cropImage, rc.Width, rc.Height, strPath);
         }
         public string iSave_Roi_Ptrn(string filename)
         {
@@ -283,7 +283,7 @@ namespace CD_View
                 // selective file name
                 if (filename == "")
                 {
-                    strFileName = HELPER_IMAGE_IO._SelectAndSaveFileAsBitmap(fm.param_path.i11_PATH_IMG_PTRN);
+                    strFileName = HELPER_IMAGE_IO.HC_IO_SaveImage_widthSelection(fm.param_path.i06_PATH_IMG_PTRN);
                 }
                 // user defined file name  171017
                 else if ( filename != "")
@@ -299,7 +299,7 @@ namespace CD_View
                     {
                         if (MessageBox.Show("Target File is Already Exist.\nDo You Want To Overwrite??", "FILE EXISTANCE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            HELPER_IMAGE_IO.SaveImage(cropRC, rc.Width, rc.Height, strFileName);
+                            HELPER_IMAGE_IO.HC_IO_SaveImage(cropRC, rc.Width, rc.Height, strFileName);
                             if (File.Exists(strFileName) == true)
                             {
                                 MessageBox.Show("PTRN Teaching has Finished.", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -318,7 +318,7 @@ namespace CD_View
                     }
                     else
                     {
-                        HELPER_IMAGE_IO.SaveImage(cropRC, rc.Width, rc.Height, strFileName);
+                        HELPER_IMAGE_IO.HC_IO_SaveImage(cropRC, rc.Width, rc.Height, strFileName);
                         if (File.Exists(strFileName) == true)
                         {
                             MessageBox.Show("PTRN Teaching has Finished.", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -352,8 +352,8 @@ namespace CD_View
             CMeasurePairRct single = array[nIndex];
 
             single.ApplyAbsoluteRotation(nAngle);
-
             array[nIndex] = single;
+            single.CroodinateBackup();
             Refresh();
         }
     
@@ -1732,30 +1732,47 @@ namespace CD_View
 
             for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
             {
-                #region DRAW PAIR RECTANGLE
+              #region DRAW PAIR RECTANGLE
                 CMeasurePairRct single = fm.ElementAt_PairRct(i);
-                
-                RectangleF rcFirst = single.rc_FST.ToRectangleF();
-                RectangleF rcSecon = single.rc_SCD.ToRectangleF();
 
-                rcFirst.Offset(fTransX, fTransY);
-                rcSecon.Offset(fTransX, fTransY);
+                if (single.param_01_rc_type != IFX_RECT_TYPE.DIR_DIA)
+                {
+                    RectangleF rcFirst = single.rc_FST.ToRectangleF();
+                    RectangleF rcSecon = single.rc_SCD.ToRectangleF();
 
-                e.Graphics.DrawRectangle(penLimeG, rcFirst.X, rcFirst.Y, rcFirst.Width, rcFirst.Height);
-                e.Graphics.DrawRectangle(penLimeG, rcSecon.X, rcSecon.Y, rcSecon.Width, rcSecon.Height);
+                    rcFirst.Offset(fTransX, fTransY);
+                    rcSecon.Offset(fTransX, fTransY);
 
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
+                    e.Graphics.DrawRectangle(penLimeG, rcFirst.X, rcFirst.Y, rcFirst.Width, rcFirst.Height);
+                    e.Graphics.DrawRectangle(penLimeG, rcSecon.X, rcSecon.Y, rcSecon.Width, rcSecon.Height);
+
+                    e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
+                    e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
+                }
+                else if( single.param_01_rc_type == IFX_RECT_TYPE.DIR_DIA)
+                {
+                    parseRect rcFirst = single.rc_FST;
+                    parseRect rcSecon = single.rc_SCD;
+                    
+                    List<PointF> listFirst = rcFirst.ToArray();
+                    List<PointF> listSecon = rcSecon.ToArray();
+                    
+                    listFirst = CPoint.OffsetPoints(listFirst, fTransX, fTransY);
+                    listSecon = CPoint.OffsetPoints(listSecon, fTransX, fTransY);
+
+                    e.Graphics.DrawPolygon(penLimeG, listFirst.ToArray());
+                    e.Graphics.DrawPolygon(penLimeG, listSecon.ToArray());
+
+                    PointF p1 = listFirst.ElementAt(0);
+                    PointF p2 = listSecon.ElementAt(0);
+
+                    e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, p1.X, p1.Y- nFontGap);
+                    e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, p2.X, p2.Y- nFontGap);
+                }
 
               #region un...usefull not efficient kill.. !! sometime 
-                // parseRect rcFirst = single.rc_FST;
-                // parseRect rcSecon = single.rc_SCD;
-                //
-                //List<PointF> listFirst = rcFirst.ToArray();
-                //List<PointF> listSecon = rcSecon.ToArray();
-                //
-                //listFirst = CPoint.OffsetPoints(listFirst, fTransX, fTransY);
-                //listSecon = CPoint.OffsetPoints(listSecon, fTransX, fTransY);
+
+                
 
 
                 //if (single.RC_TYPE == IFX_RECT_TYPE.DIR_HOR)
@@ -1770,12 +1787,10 @@ namespace CD_View
                 //}
                 //else if (single.RC_TYPE == IFX_RECT_TYPE.DIR_DIA)
                 //{
-                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcFirst.LT, fTransX, fTransY), CPoint.OffsetPoint(rcFirst.RT, fTransX, fTransY));
-                //    e.Graphics.DrawLine(penRed, CPoint.OffsetPoint(rcSecon.RT, fTransX, fTransY), CPoint.OffsetPoint(rcSecon.LT, fTransX, fTransY));
+                
                 //}
 
-                //e.Graphics.DrawPolygon(penLimeG, listFirst.ToArray());
-                //e.Graphics.DrawPolygon(penLimeG, listSecon.ToArray());
+                
                 //
                 //e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, listFirst.ElementAt(0).X, listFirst.ElementAt(0).Y - nFontGap);
                 //e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, listSecon.ElementAt(0).X, listSecon.ElementAt(0).Y - nFontGap);
@@ -1831,8 +1846,8 @@ namespace CD_View
                 e.Graphics.DrawRectangle(penLimeG, rcFirst.X, rcFirst.Y, rcFirst.Width, rcFirst.Height);
                 e.Graphics.DrawRectangle(penLimeG, rcSecon.X, rcSecon.Y, rcSecon.Width, rcSecon.Height);
 
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(F)", single.NICKNAME), font, brush, rcFirst.X, rcFirst.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(S)", single.NICKNAME), font, brush, rcSecon.X, rcSecon.Y - nFontGap);
                 #endregion
             }
             //*************************************************************************************
@@ -1860,8 +1875,8 @@ namespace CD_View
                     e.Graphics.DrawEllipse(penLimeG, rc_FST_EX);e.Graphics.DrawEllipse(penLimeG, rc_FST_IN);
                     e.Graphics.DrawEllipse(penLimeG, rc_SCD_EX);e.Graphics.DrawEllipse(penLimeG, rc_SCD_IN);
                 }
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_FST_EX.X, rc_FST_EX.Y - nFontGap);
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_SCD_EX.X, rc_SCD_EX.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(F)", single.NICKNAME), font, brush, rc_FST_EX.X, rc_FST_EX.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(S)", single.NICKNAME), font, brush, rc_SCD_EX.X, rc_SCD_EX.Y - nFontGap);
                 #endregion
             }
             //*************************************************************************************
@@ -1891,8 +1906,8 @@ namespace CD_View
                     e.Graphics.DrawEllipse(penLimeG, rcCircleIN);
                 }
 
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_Rectangle.X, rc_Rectangle.Y - nFontGap);
-                e.Graphics.DrawString(string.Format("{0}", single.NICKNAME), font, brush, rc_Circle_EX.X, rc_Circle_EX.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(F)", single.NICKNAME), font, brush, rc_Rectangle.X, rc_Rectangle.Y - nFontGap);
+                e.Graphics.DrawString(string.Format("{0}(S)", single.NICKNAME), font, brush, rc_Circle_EX.X, rc_Circle_EX.Y - nFontGap);
 
                 #endregion
             }

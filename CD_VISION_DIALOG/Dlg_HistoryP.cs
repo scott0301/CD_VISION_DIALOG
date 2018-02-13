@@ -44,21 +44,21 @@ namespace CD_VISION_DIALOG
         {
             LV_HISTORY.Items.Clear();
 
-            string strPathHistory = config.i16_PATH_HIST_PTRN;
-            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
+            string strPathHistory = config.i08_PATH_HIST_PTRN;
+            String[] strArrAllFiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
 
             LV_HISTORY.BeginUpdate();
 
-            Array.Reverse(allfiles);
+            Array.Reverse(strArrAllFiles);
 
-            for (int i = 0; i < allfiles.Length; i++)
+            for (int i = 0; i < strArrAllFiles.Length; i++)
             {
-                string single = allfiles.ElementAt(i);
+                string single = strArrAllFiles.ElementAt(i);
 
                 string strFileName = Path.GetFileName(single);
 
-                string strDate = single.Replace(config.i16_PATH_HIST_PTRN + "\\", "");
-                strDate = strDate.Replace(strFileName, "").Replace("\\", "");
+                string strDate = single.Replace(config.i08_PATH_HIST_PTRN + "\\", "");
+                /*****/strDate = strDate.Replace(strFileName, "").Replace("\\", "");
 
                 ListViewItem lvi = new ListViewItem();
 
@@ -75,7 +75,7 @@ namespace CD_VISION_DIALOG
 
         private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
         {
-            Process.Start(@config.i16_PATH_HIST_PTRN);
+            Process.Start(@config.i08_PATH_HIST_PTRN);
         }
 
         private void Dlg_HistoryP_Load(object sender, EventArgs e)
@@ -97,8 +97,8 @@ namespace CD_VISION_DIALOG
             string strImageFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
 
             // Parsing
-            string PATH_DATE = Path.Combine(config.i16_PATH_HIST_PTRN, strDate);
-            string PATH_IMAGE = Path.Combine(config.i16_PATH_HIST_PTRN, strDate, strImageFile);
+            string PATH_DATE = Path.Combine(config.i08_PATH_HIST_PTRN, strDate);
+            string PATH_IMAGE = Path.Combine(config.i08_PATH_HIST_PTRN, strDate, strImageFile);
 
             string strTimeCode = strImageFile.Substring(0, 12);
             string strInspFile = strTimeCode + "_PTRN_ERR.BMP";

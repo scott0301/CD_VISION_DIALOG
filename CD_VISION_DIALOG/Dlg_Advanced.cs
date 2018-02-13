@@ -38,43 +38,46 @@ namespace CD_VISION_DIALOG
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BTN_APPLY_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
-        private void CHK_SHOW_IMAGE_PROCESSING_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
-        }
+        #region IMAGE SAVE OPTIONS
 
-        private void CHK_OFF_DETECT_CROSS_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_SHOW_DETECT_CROSS = CHK_OFF_DETECT_CROSS.Checked;
-        }
+        private void CHK_USE_SAVE_MANUAL_GRAB_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_MANUAL_GRAB = CHK_USE_SAVE_MANUAL_GRAB.Checked; }
+        private void CHK_USE_SAVE_FOCUS_REGION_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_FOCUS_REGION = CHK_USE_SAVE_FOCUS_REGION.Checked; }
+        private void CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_SEQUENTIAL_IMAGE_SET = CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Checked; }
+        private void CHK_USE_SAVE_INPUT_IMAGE_CheckedChanged(object sender, EventArgs e){hacker.BOOL_USE_SAVE_INPUT_IMAGE = CHK_USE_SAVE_INPUT_IMAGE.Checked;}
 
-        private void CHK_USE_GRAB_SAVE_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_GRAB_SAVE = CHK_USE_GRAB_SAVE.Checked;
-        }
-
-        private void CHK_USE_FOCUS_IMAGE_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_FOCUS_SAVE = CHK_USE_FOCUS_IMAGE_SAVE.Checked;
-        }
-
-        private void CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e)
-        {
-            hacker.BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = CHK_USE_SAVE_EXPERIMENTAL_IMAGE_SET.Checked;
-        }
-
-        private void BTN_SET_SAVE_IMAGE_SET_Click(object sender, EventArgs e)
+        private void BTN_SET_SAVE_IMAGE_PATH_Click(object sender, EventArgs e)
         {
             string strPath = Computer.SelectFolderAndGetName();
             TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
 
             hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
         }
+
+        #endregion
+
+        #region HISTORY RELATED OPTIONS
+
+        private void CHK_USE_LEAVE_HISTORY_ERROR_PTRN_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_LEAVE_HISTORY_ERROR_PTRN = CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Checked; }
+        private void CHK_USE_LEAVE_HISTORY_MEASUREMENT_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_LEAVE_HISTORY_MEASUREMENT = CHK_USE_LEAVE_HISTORY_MEASUREMENT.Checked; }
+
+        #endregion 
+
+        private void CHK_SHOW_IMAGE_PROCESSING_CheckedChanged(object sender, EventArgs e)
+        {
+            hacker.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
+        }
+
+        
+
+        
+
+        
+
 
         #region glass effect
         // defines how far we are extending the Glass margins
@@ -134,5 +137,7 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
+        
+        
     }
 }

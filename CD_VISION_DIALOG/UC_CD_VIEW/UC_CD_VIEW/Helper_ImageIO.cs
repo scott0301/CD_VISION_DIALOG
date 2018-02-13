@@ -13,7 +13,8 @@ namespace HP_Troops
 {
     public static class HELPER_IMAGE_IO
     {
-        public static Bitmap/***/HC_CONV_Byte2Bmp(byte[] rawImage, int imageW, int imageH)
+        #region IMAGE CONVERSION
+        public static Bitmap/*****/HC_CONV_Byte2Bmp(byte[] rawImage, int imageW, int imageH)
         {
             if (imageW == 0 || imageH == 0)
             {
@@ -56,7 +57,7 @@ namespace HP_Troops
 
             return bmpImage;
         }
-        public static double[]/**/HC_CONV_Byte2Double(byte[] byteArray)
+        public static double[]/***/HC_CONV_Byte2Double(byte[] byteArray)
         {
             double[] fArray = new double[byteArray.Length];
 
@@ -70,7 +71,7 @@ namespace HP_Troops
 
             return fArray;
         }
-        public static byte[] /**/HC_CONV_Double2Byte(double[] fArray)
+        public static byte[]/*****/HC_CONV_Double2Byte(double[] fArray)
         {
             byte[] rawImage = new byte[fArray.Length];
 
@@ -84,7 +85,7 @@ namespace HP_Troops
 
             return rawImage;
         }
-        public static byte[] /**/HC_CONV_Bmp2Raw(System.Drawing.Bitmap bmpImage, ref int imageW, ref int imageH)
+        public static byte[]/*****/HC_CONV_Bmp2Raw(System.Drawing.Bitmap bmpImage, ref int imageW, ref int imageH)
         {
             imageW = bmpImage.Width;
             imageH = bmpImage.Height;
@@ -120,7 +121,7 @@ namespace HP_Troops
             });
             return rawImage;
         }
-        public static byte[] /**/HC_CONV_BlendedImage(byte[] i1, byte[] i2, int imageW, int imageH, int nBlend)
+        public static byte[]/*****/HC_CONV_BlendedImage(byte[] i1, byte[] i2, int imageW, int imageH, int nBlend)
         {
             byte[] returnRaw = new byte[imageW * imageH];
 
@@ -134,20 +135,10 @@ namespace HP_Troops
 
             return returnRaw;
         }
-        public static void /*****/SaveImage(byte[] rawImage, int imageW, int imageH, string strPath)
-        {
-            try
-            {
+        #endregion
 
-                Bitmap bmp = (Bitmap)HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
-                bmp.Save(strPath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        public static byte[] HC_CropImage(byte[] rawInput, int imageW, int imageH, int ptX, int ptY, int cropW, int cropH)
+        #region IMAGE CROP - GENERAL
+        public static byte[]/*****/HC_CropImage(byte[] rawInput, int imageW, int imageH, int ptX, int ptY, int cropW, int cropH)
         {
             byte[] rawCrop = new byte[cropW * cropH];
 
@@ -161,7 +152,7 @@ namespace HP_Troops
 
             return rawCrop;
         }
-        public static byte[] HC_CropImage(byte[] rawInput, int imageW, int imageH, RectangleF rc)
+        public static byte[]/*****/HC_CropImage(byte[] rawInput, int imageW, int imageH, RectangleF rc)
         {
             int nLength = (int)rc.Width * (int)rc.Height;
             int toHeight = (int)rc.Y + (int)rc.Height;
@@ -180,7 +171,7 @@ namespace HP_Troops
             }
             return rawCrop;
         }
-        public static byte[] HC_CropImage_Center(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptCenter)
+        public static byte[]/*****/HC_CropImage_Center(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptCenter)
         {
             PointF ptDist = CPoint.GetDistancePoint(CRect.GetCenter(rc), ptCenter);
             rc.Offset(ptDist);
@@ -202,7 +193,10 @@ namespace HP_Troops
             }
             return rawCrop;
         }
-        public static byte[] HC_CropImage_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc)
+        #endregion
+
+        #region IMAGE CROP - SPECIAL ( POLAR & ROTATION )
+        public static byte[]/*****/HC_CropImage_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc)
         {
             int nCX = Convert.ToInt32(rc.Width / 2.0);
             int nCY = Convert.ToInt32(rc.Height / 2.0);
@@ -232,7 +226,7 @@ namespace HP_Troops
             }
             return rawPolar;
         }
-        public static byte[] HC_CropImage_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, out int nRadius)
+        public static byte[]/*****/HC_CropImage_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, out int nRadius)
         {
             int nCX = Convert.ToInt32(rc.Width / 2.0);
             int nCY = Convert.ToInt32(rc.Height / 2.0);
@@ -262,8 +256,8 @@ namespace HP_Troops
             }
             return rawPolar;
         }
-        // 임으의 센터를 기준으로 Interpolated Polar를 구해
-        public static byte[] HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptCenter)
+        // Perform Polar Transform by using center orient point
+        public static byte[]/*****/HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptCenter)
         {
             int hW = Convert.ToInt32(rc.Width / 2.0);
             int hh = Convert.ToInt32(rc.Height / 2.0);
@@ -316,8 +310,8 @@ namespace HP_Troops
             });
             return rawPolar;
         }
-        // 그냥 닥치는 대로 Interpolated Polar를 구해
-        public static byte[] HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc)
+        // perform polar transform based on rectangular center 
+        public static byte[]/*****/HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc)
         {
             int nCX = Convert.ToInt32(rc.Width / 2.0);
             int nCY = Convert.ToInt32(rc.Height / 2.0);
@@ -367,8 +361,9 @@ namespace HP_Troops
             }
             return rawPolar;
         }
+
         // 특정 영역을 Polar로 저장하고싶을때. radius를 알아야 이미지 싸이즈를 알지..
-        public static byte[] HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, out int nRadius)
+        public static byte[]/*****/HC_CropImage_Interpolated_Polar(byte[] rawInput, int imageW, int imageH, RectangleF rc, out int nRadius)
         {
             int nCX = Convert.ToInt32(rc.Width / 2.0);
             int nCY = Convert.ToInt32(rc.Height / 2.0);
@@ -418,7 +413,7 @@ namespace HP_Troops
             }
             return rawPolar;
         }
-        public static byte[] HC_CropImage_Rotate(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptGravity, float fAngle)
+        public static byte[]/*****/HC_CropImage_Rotate(byte[] rawInput, int imageW, int imageH, RectangleF rc, PointF ptGravity, float fAngle)
         {
             List<byte> listRot = new List<Byte>();
 
@@ -456,7 +451,7 @@ namespace HP_Troops
             byte[] rawOut = listRot.ToArray();
             return rawOut;
         }
-        public static double _GetInterPolatedValue(double cx, double cy, double x1, double x2, double y1, double y2, double q11, double q12, double q21, double q22)
+        public static double/*****/_GetInterPolatedValue(double cx, double cy, double x1, double x2, double y1, double y2, double q11, double q12, double q21, double q22)
         {
             double r1 = (((x2 - cx) / (x2 - x1)) * q11) + (((cx - x1) / (x2 - x1)) * q21);
             double r2 = (((x2 - cx) / (x2 - x1)) * q12) + (((cx - x1) / (x2 - x1)) * q22);
@@ -466,7 +461,7 @@ namespace HP_Troops
 
             return pvalue;
         }
-        private static PointF _RotatePointByGravity(PointF ptTarget, PointF ptGravity, double fAngle)
+        private static PointF/****/_RotatePointByGravity(PointF ptTarget, PointF ptGravity, double fAngle)
         {
             //x' = (x-a) * cosR - (y-b)sinR + a
             //y' = (x-a) * sinR + (y-b)cosR + b
@@ -479,8 +474,23 @@ namespace HP_Troops
 
             return ptRotated;
         }
+        #endregion
 
-        public static string _SelectAndSaveFileAsBitmap(string strDefaultPath)
+        #region iMAGE SAVE
+        public static void /******/HC_IO_SaveImage(byte[] rawImage, int imageW, int imageH, string strPath)
+        {
+            try
+            {
+
+                Bitmap bmp = (Bitmap)HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
+                bmp.Save(strPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        public static string/*****/HC_IO_SaveImage_widthSelection(string strDefaultPath)
         {
             System.Windows.Forms.SaveFileDialog dlg = new System.Windows.Forms.SaveFileDialog();
             dlg.Filter = "Bmp files (*.bmp)|*.*";
@@ -498,5 +508,6 @@ namespace HP_Troops
             }
             return strPath;
         }
+        #endregion
     }
 }

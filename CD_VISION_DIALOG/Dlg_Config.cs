@@ -18,9 +18,8 @@ namespace CD_VISION_DIALOG
     public partial class Dlg_Config : Form
     {
         PARAM_PATH param_path = new PARAM_PATH();
-
-        public delegate void dele_ChangeParamPath(PARAM_PATH param_path);
-        public event dele_ChangeParamPath eventDele_ChangeParamPath;
+        public delegate void/***/dele_ChangeParamPath(PARAM_PATH param_path);
+        public event/***********/dele_ChangeParamPath eventDele_ChangeParamPath;
 
         public Dlg_Config()
         {
@@ -29,25 +28,21 @@ namespace CD_VISION_DIALOG
 
         private void Dlg_Config_Load(object sender, EventArgs e)
         {
-            TXT_PATH_i01_MAIN.Text = param_path.i01_PATH_MAIN;
-            TXT_PATH_i02_DATA_DUMP.Text = param_path.i02_PATH_DATA_DUMP;
-            TXT_PATH_i03_RECP_BASE.Text = param_path.i03_PATH_RECP_BASE;
-            TXT_PATH_i04_RECP_REAL.Text = param_path.i04_PATH_RECP_REAL;
-
-            TXT_PATH_i10_IMAGE_ORG.Text = param_path.i10_PATH_IMG_ORG;
-            TXT_PATH_i11_IMAGE_PTRN.Text = param_path.i11_PATH_IMG_PTRN;
-
-            TXT_PATH_i15_HISTORY_MEASURE.Text = param_path.i15_PATH_HIST_MEASURE;
-            TXT_PATH_i16_HISTORY_PTRN.Text = param_path.i16_PATH_HIST_PTRN;
-
-            TXT_PATH_i21_LOG.Text = param_path.i21_PATH_LOG;
-            TXT_PATH_i20_INI.Text = param_path.i20_PATH_INI;
+            TXT_PATH_i01_MAIN.Text/**************/= param_path.i01_PATH_MAIN;
+            TXT_PATH_i02_DATA_DUMP.Text/*********/= param_path.i02_PATH_DATA_DUMP;
+            TXT_PATH_i03_RECP_BASE.Text/*********/= param_path.i03_PATH_RECP_BASE;
+            TXT_PATH_i04_RECP_REAL.Text/*********/= param_path.i04_PATH_RECP_REAL;
+            TXT_PATH_i05_IMAGE_ORG.Text/*********/= param_path.i05_PATH_IMG_ORG;
+            TXT_PATH_i06_IMAGE_PTRN.Text/********/= param_path.i06_PATH_IMG_PTRN;
+            TXT_PATH_i07_HISTORY_MEASURE.Text/***/= param_path.i07_PATH_HIST_MEASURE;
+            TXT_PATH_i08_HISTORY_PTRN.Text/******/= param_path.i08_PATH_HIST_PTRN;
+            TXT_PATH_i10_LOG.Text/***************/= param_path.i09_PATH_INI;
+            TXT_PATH_i09_INI.Text/***************/= param_path.i10_PATH_LOG;
                 
         }
         public bool SetParam(PARAM_PATH param_path)
         {
             this.param_path = param_path;
-
             return true;
         }
 
@@ -59,19 +54,16 @@ namespace CD_VISION_DIALOG
             return folderBrowser.SelectedPath;
 
         }
-        private void BTN_SET_PATH_i01_MAIN_Click(object sender, EventArgs e){TXT_PATH_i01_MAIN.Text = SelectFolder();}
-        private void BTN_SET_PATH_i02_DATA_DUMP_Click(object sender, EventArgs e){TXT_PATH_i02_DATA_DUMP.Text = SelectFolder();}
-        private void BTN_SET_PATH_i03_BASE_RECP_Click(object sender, EventArgs e){TXT_PATH_i03_RECP_BASE.Text = SelectFolder();}
-        private void BTN_SET_PATH_i04_REAL_RECP_Click(object sender, EventArgs e){TXT_PATH_i04_RECP_REAL.Text = SelectFolder();}
-
-        private void BTN_SET_PATH_i10_IMAGE_ORG_Click(object sender, EventArgs e){TXT_PATH_i10_IMAGE_ORG.Text = SelectFolder();}
-        private void BTN_SET_PATH_i11_IMAGE_PTRN_Click(object sender, EventArgs e){TXT_PATH_i11_IMAGE_PTRN.Text = SelectFolder();}
-
-        private void BTN_SET_PATH_i15_HISTORY_MEASURE_Click(object sender, EventArgs e){TXT_PATH_i15_HISTORY_MEASURE.Text = SelectFolder();        }
-        private void BTN_SET_PATH_i16_HISTORY_MATCHING_Click(object sender, EventArgs e){TXT_PATH_i16_HISTORY_PTRN.Text = SelectFolder();}
-
-        private void BTN_SET_PATH_i20_INI_Click(object sender, EventArgs e){TXT_PATH_i20_INI.Text = SelectFolder();}
-        private void BTN_SET_PATH_i21_LOG_Click(object sender, EventArgs e) { TXT_PATH_i21_LOG.Text = SelectFolder(); }
+        private void BTN_SET_PATH_i01_MAIN_Click/***************/(object sender, EventArgs e){TXT_PATH_i01_MAIN.Text/**************/= SelectFolder();}
+        private void BTN_SET_PATH_i02_DATA_DUMP_Click/**********/(object sender, EventArgs e){TXT_PATH_i02_DATA_DUMP.Text/*********/= SelectFolder();}
+        private void BTN_SET_PATH_i03_BASE_RECP_Click/**********/(object sender, EventArgs e){TXT_PATH_i03_RECP_BASE.Text/*********/= SelectFolder();}
+        private void BTN_SET_PATH_i04_REAL_RECP_Click/**********/(object sender, EventArgs e){TXT_PATH_i04_RECP_REAL.Text/*********/= SelectFolder();}
+        private void BTN_SET_PATH_i05_IMAGE_ORG_Click/**********/(object sender, EventArgs e){TXT_PATH_i05_IMAGE_ORG.Text/*********/= SelectFolder();}
+        private void BTN_SET_PATH_i06_IMAGE_PTRN_Click/*********/(object sender, EventArgs e){TXT_PATH_i06_IMAGE_PTRN.Text/********/= SelectFolder();}
+        private void BTN_SET_PATH_i07_HISTORY_MEASURE_Click/****/(object sender, EventArgs e){TXT_PATH_i07_HISTORY_MEASURE.Text/***/= SelectFolder();}
+        private void BTN_SET_PATH_i08_HISTORY_MATCHING_Click/***/(object sender, EventArgs e){TXT_PATH_i08_HISTORY_PTRN.Text/******/= SelectFolder();}
+        private void BTN_SET_PATH_i09_INI_Click/****************/(object sender, EventArgs e){TXT_PATH_i09_INI.Text/***************/= SelectFolder();}
+        private void BTN_SET_PATH_i10_LOG_Click/****************/(object sender, EventArgs e){TXT_PATH_i10_LOG.Text/***************/= SelectFolder();}
 
         private void BTN_CANCEL_Click(object sender, EventArgs e){this.Hide();}
 
@@ -79,35 +71,31 @@ namespace CD_VISION_DIALOG
         {
             PARAM_PATH buff = new PARAM_PATH();
 
-            buff.i01_PATH_MAIN = TXT_PATH_i01_MAIN.Text;
-            buff.i02_PATH_DATA_DUMP = TXT_PATH_i02_DATA_DUMP.Text;
-            buff.i03_PATH_RECP_BASE = TXT_PATH_i03_RECP_BASE.Text;
-            buff.i04_PATH_RECP_REAL = TXT_PATH_i04_RECP_REAL.Text;
-
-            buff.i10_PATH_IMG_ORG = TXT_PATH_i10_IMAGE_ORG.Text;
-            buff.i11_PATH_IMG_PTRN = TXT_PATH_i11_IMAGE_PTRN.Text;
-
-            buff.i15_PATH_HIST_MEASURE = TXT_PATH_i15_HISTORY_MEASURE.Text;
-            buff.i16_PATH_HIST_PTRN = TXT_PATH_i16_HISTORY_PTRN.Text;
-
-            buff.i20_PATH_INI = TXT_PATH_i20_INI.Text;
-            buff.i21_PATH_LOG = TXT_PATH_i21_LOG.Text;
+            buff.i01_PATH_MAIN/**********/= TXT_PATH_i01_MAIN.Text;
+            buff.i02_PATH_DATA_DUMP/*****/= TXT_PATH_i02_DATA_DUMP.Text;
+            buff.i03_PATH_RECP_BASE/*****/= TXT_PATH_i03_RECP_BASE.Text;
+            buff.i04_PATH_RECP_REAL/*****/= TXT_PATH_i04_RECP_REAL.Text;
+            buff.i05_PATH_IMG_ORG/********/= TXT_PATH_i05_IMAGE_ORG.Text;
+            buff.i06_PATH_IMG_PTRN/*******/= TXT_PATH_i06_IMAGE_PTRN.Text;
+            buff.i07_PATH_HIST_MEASURE/***/= TXT_PATH_i07_HISTORY_MEASURE.Text;
+            buff.i08_PATH_HIST_PTRN/******/= TXT_PATH_i08_HISTORY_PTRN.Text;
+            buff.i09_PATH_INI/************/= TXT_PATH_i09_INI.Text;
+            buff.i10_PATH_LOG/************/= TXT_PATH_i10_LOG.Text;
 
             eventDele_ChangeParamPath(buff);
             this.Hide();
         }
 
-        private void BTN_OPEN_PATH_i01_MAIN_Click(object sender, EventArgs e) { Process.Start(param_path.i01_PATH_MAIN); }
-        private void BTN_OPEN_PATH_i02_DATA_DUMP_Click(object sender, EventArgs e) { Process.Start(param_path.i02_PATH_DATA_DUMP); }
-        private void BTN_OPEN_PATH_i03_BASE_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i03_PATH_RECP_BASE); }
-        private void BTN_OPEN_PATH_i04_REAL_RECP_Click(object sender, EventArgs e) { Process.Start(param_path.i04_PATH_RECP_REAL); }
-        private void BTN_OPEN_PATH_i11_IMAGE_TAECHING_Click(object sender, EventArgs e) { Process.Start(param_path.i11_PATH_IMG_PTRN); }
-
-        private void BTN_OPEN_PATH_i10_IMAGE_ORG_Click(object sender, EventArgs e) { Process.Start(param_path.i10_PATH_IMG_ORG); }
-        private void BTN_OPEN_PATH_i15_HISTORY_MEASURE_Click(object sender, EventArgs e) { Process.Start(param_path.i15_PATH_HIST_MEASURE); }
-        private void BTN_OPEN_PATH_i16_HISTORY_PTRN_Click(object sender, EventArgs e) { Process.Start(param_path.i16_PATH_HIST_PTRN); }
-        private void BTN_OPEN_PATH_i20_INI_Click(object sender, EventArgs e) { Process.Start(param_path.i20_PATH_INI); }
-        private void BTN_OPEN_PATH_i21_LOG_Click(object sender, EventArgs e) { Process.Start(param_path.i21_PATH_LOG); }
+        private void BTN_OPEN_PATH_i01_MAIN_Click/**************/(object sender, EventArgs e) { Process.Start(param_path.i01_PATH_MAIN); }
+        private void BTN_OPEN_PATH_i02_DATA_DUMP_Click/*********/(object sender, EventArgs e) { Process.Start(param_path.i02_PATH_DATA_DUMP); }
+        private void BTN_OPEN_PATH_i03_BASE_RECP_Click/*********/(object sender, EventArgs e) { Process.Start(param_path.i03_PATH_RECP_BASE); }
+        private void BTN_OPEN_PATH_i04_REAL_RECP_Click/*********/(object sender, EventArgs e) { Process.Start(param_path.i04_PATH_RECP_REAL); }
+        private void BTN_OPEN_PATH_i05_IMAGE_ORG_Click/*********/(object sender, EventArgs e) { Process.Start(param_path.i05_PATH_IMG_ORG); }
+        private void BTN_OPEN_PATH_i06_IMAGE_TAECHING_Click/****/(object sender, EventArgs e) { Process.Start(param_path.i06_PATH_IMG_PTRN); }
+        private void BTN_OPEN_PATH_i07_HISTORY_MEASURE_Click/***/(object sender, EventArgs e) { Process.Start(param_path.i07_PATH_HIST_MEASURE); }
+        private void BTN_OPEN_PATH_i08_HISTORY_PTRN_Click/******/(object sender, EventArgs e) { Process.Start(param_path.i08_PATH_HIST_PTRN); }
+        private void BTN_OPEN_PATH_i09_INI_Click/***************/(object sender, EventArgs e) { Process.Start(param_path.i09_PATH_INI); }
+        private void BTN_OPEN_PATH_i10_LOG_Click/***************/(object sender, EventArgs e) { Process.Start(param_path.i10_PATH_LOG); }
 
 
         #region glass effect

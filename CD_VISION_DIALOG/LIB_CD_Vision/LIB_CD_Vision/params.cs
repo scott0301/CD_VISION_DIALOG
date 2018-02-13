@@ -15,32 +15,25 @@ namespace DEF_PARAMS
 
     public class CAdvancedMode
     {
-        public bool BOOL_SHOW_IMAGE_PROCESS { get; set; }
-        public bool BOOL_SHOW_DETECT_CROSS { get; set; }
-        public bool BOOL_USE_GRAB_SAVE { get; set; }
-        public bool BOOL_USE_FOCUS_SAVE { get; set; }
-        public bool BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET { get; set; }
-        public string PATH_EXPERIMENTAL_IMAGE_SET { get; set; }
-        public int INT_LOOP_COUNTER { get; set; }
+        public bool/*****/BOOL_SHOW_IMAGE_PROCESS/****************/= false;
+        public bool/*****/BOOL_USE_SAVE_MANUAL_GRAB/**************/= false;
+        public bool/*****/BOOL_USE_SAVE_FOCUS_REGION/*************/= false;
+        public bool/*****/BOOL_USE_SAVE_SEQUENTIAL_IMAGE_SET/*****/= false;
+        public bool/*****/BOOL_USE_SAVE_INPUT_IMAGE /*************/= false;
+        public bool/*****/BOOL_USE_LEAVE_HISTORY_ERROR_PTRN /*****/= false;
+        public bool/*****/BOOL_USE_LEAVE_HISTORY_MEASUREMENT/*****/= false;
+        public string/***/PATH_EXPERIMENTAL_IMAGE_SET/************/= string.Empty;
+        public int/******/INT_LOOP_COUNTER/***********************/= 1;
 
-        public CAdvancedMode()
-        {
-            BOOL_SHOW_IMAGE_PROCESS = false;
-            BOOL_SHOW_DETECT_CROSS = true;
-            BOOL_USE_GRAB_SAVE = false;
-            BOOL_USE_SAVE_EXPERIMENTAL_IMAGE_SET = false;
-            PATH_EXPERIMENTAL_IMAGE_SET = string.Empty;
-            BOOL_USE_FOCUS_SAVE = false;
-            INT_LOOP_COUNTER = 1;
-        }
+        public CAdvancedMode() { }
 
     }
     public class BASE_RECP : DEF_LAYERS
     {
-        public string PARAM_00_BASE_RECP_NAME { get; set; }
+        public string/***/PARAM_00_BASE_RECP_NAME { get; set; }
 
-        public int PARAM_01_LENS_INDEX { get; set; }
-        public string _param_lens_index
+        public int/******/PARAM_01_LENS_INDEX { get; set; }
+        public string/***/_param_01_lens_index
         {
             get
             {
@@ -56,8 +49,8 @@ namespace DEF_PARAMS
             }
         }
 
-        public int PARAM_02_LIGHT_INDEX { get; set; }
-        public string _param_light_index
+        public int/******/PARAM_02_LIGHT_INDEX { get; set; }
+        public string/***/_param_02_light_index
         {
             get
             {
@@ -73,37 +66,10 @@ namespace DEF_PARAMS
             }
         }
 
-        public int PARAM_03_LIGHT_VALUE { get; set; }
+        public int/******/ PARAM_03_LIGHT_VALUE { get; set; }
 
-        public int PARAM_04_FOCUS_TYPE { get; set; }
-        public int PARAM_05_USE_CENTERING { get; set; }
-
-        public double PARAM_06_COMPEN_A { get; set; }
-        public double PARAM_06_COMPEN_B { get; set; }
-
-        public double PARAM_07_ALGORITHM_INDEX { get; set; }
-        public string _param_algoritm_index
-        {
-            get
-            {
-                string algorithm = string.Empty;
-                /***/if (PARAM_07_ALGORITHM_INDEX == IFX_ALGORITHM.MEXHAT) { algorithm = "MAXHAT"; }
-                else if (PARAM_07_ALGORITHM_INDEX == IFX_ALGORITHM.DIR_IN) { algorithm = "DIR_IN"; }
-                else if (PARAM_07_ALGORITHM_INDEX == IFX_ALGORITHM.DIR_EX) { algorithm = "DIR_EX"; }
-                else if (PARAM_07_ALGORITHM_INDEX == IFX_ALGORITHM.CARDIN) { algorithm = "CARDIN"; }
-                return algorithm;
-            }
-            set
-            {
-                /***/if (value == "MAXHAT") PARAM_07_ALGORITHM_INDEX = IFX_ALGORITHM.MEXHAT;
-                else if (value == "DIR_IN") PARAM_07_ALGORITHM_INDEX = IFX_ALGORITHM.DIR_IN;
-                else if (value == "DIR_EX") PARAM_07_ALGORITHM_INDEX = IFX_ALGORITHM.DIR_EX;
-                else if (value == "CARDIN") PARAM_07_ALGORITHM_INDEX = IFX_ALGORITHM.CARDIN;
-            }
-        }
-
-        public double PARAM_08_DMG_TOLERANCE { get; set; }
-        public double PARAM_09_EDGE_POSITION { get; set; }
+        public int/******/PARAM_04_FOCUS_TYPE { get; set; }
+        public int/******/PARAM_05_USE_CENTERING { get; set; }
 
         public BASE_RECP()
         {
@@ -112,49 +78,34 @@ namespace DEF_PARAMS
 
         public void RemoveAll()
         {
-            PARAM_00_BASE_RECP_NAME = string.Empty;
-            PARAM_01_LENS_INDEX = 0;
-            PARAM_02_LIGHT_INDEX = 0;
-            PARAM_03_LIGHT_VALUE = 0;
-            PARAM_04_FOCUS_TYPE = 0;
-            PARAM_05_USE_CENTERING = 0;
-            PARAM_06_COMPEN_A = 1;
-            PARAM_06_COMPEN_B = 0;
-            PARAM_07_ALGORITHM_INDEX = 0;
-            PARAM_08_DMG_TOLERANCE = 0;
-            PARAM_09_EDGE_POSITION = 0;
+            PARAM_00_BASE_RECP_NAME/*****/= string.Empty;
+            PARAM_01_LENS_INDEX/*********/= 0;
+            PARAM_02_LIGHT_INDEX/********/= 0;
+            PARAM_03_LIGHT_VALUE/********/= 0;
+            PARAM_04_FOCUS_TYPE/*********/= 0;
+            PARAM_05_USE_CENTERING/******/= 0;
         }
 
         public BASE_RECP CopyTo()
         {
             BASE_RECP single = new BASE_RECP();
 
-            single.PARAM_00_BASE_RECP_NAME = this.PARAM_00_BASE_RECP_NAME;
-            single.PARAM_01_LENS_INDEX = this.PARAM_01_LENS_INDEX;
-            single.PARAM_02_LIGHT_INDEX = this.PARAM_02_LIGHT_INDEX;
-            single.PARAM_03_LIGHT_VALUE = this.PARAM_03_LIGHT_VALUE;
-            single.PARAM_04_FOCUS_TYPE = this.PARAM_04_FOCUS_TYPE;
-            single.PARAM_05_USE_CENTERING = this.PARAM_05_USE_CENTERING;
-            single.PARAM_06_COMPEN_A = this.PARAM_06_COMPEN_A;
-            single.PARAM_06_COMPEN_B = this.PARAM_06_COMPEN_B;
-            single.PARAM_07_ALGORITHM_INDEX = this.PARAM_07_ALGORITHM_INDEX;
-            single.PARAM_08_DMG_TOLERANCE = this.PARAM_08_DMG_TOLERANCE;
-            single.PARAM_09_EDGE_POSITION = this.PARAM_09_EDGE_POSITION;
+            single.PARAM_00_BASE_RECP_NAME/****/= this.PARAM_00_BASE_RECP_NAME;
+            single.PARAM_01_LENS_INDEX/********/= this.PARAM_01_LENS_INDEX;
+            single.PARAM_02_LIGHT_INDEX/*******/= this.PARAM_02_LIGHT_INDEX;
+            single.PARAM_03_LIGHT_VALUE/*******/= this.PARAM_03_LIGHT_VALUE;
+            single.PARAM_04_FOCUS_TYPE/********/= this.PARAM_04_FOCUS_TYPE;
+            single.PARAM_05_USE_CENTERING/*****/= this.PARAM_05_USE_CENTERING;
 
             return single;
         }
 
-        public static string DEF_PARAM_00_BASE_RECP = "PARAM_00_BASE_RECP_NAME";
-        public static string DEF_PARAM_01_LENS_INDEX = "PARAM_01_LENS_INDEX";
-        public static string DEF_PARAM_02_LIGHT_INDEX = "PARAM_02_LIGHT_INDEX";
-        public static string DEF_PARAM_03_LIGHT_VALUE = "PARAM_03_LIGHT_VALUE";
-        public static string DEF_PARAM_04_FOCUS_TYPE = "PARAM_04_FOCUS_TYPE";
-        public static string DEF_PARAM_05_USE_CENTERING = "PARAM_05_USE_CENTERING";
-        public static string DEF_PARAM_06_COMPEN_A = "PARAM_06_COMPEN_A";
-        public static string DEF_PARAM_06_COMPEN_B = "PARAM_06_COMPEN_B";
-        public static string DEF_PARAM_07_ALGORITHM_INDEX = "PARAM_07_ALGORITHM_INDEX";
-        public static string DEF_PARAM_08_DMG_TOLERANCE = "PARAM_08_DMG_TOLERANCE";
-        public static string DEF_PARAM_09_EDGE_POSITION = "PARAM_09_EDGE_POSITION";
+        public static string DEF_PARAM_00_BASE_RECP/*********/= "PARAM_00_BASE_RECP_NAME";
+        public static string DEF_PARAM_01_LENS_INDEX/********/= "PARAM_01_LENS_INDEX";
+        public static string DEF_PARAM_02_LIGHT_INDEX/*******/= "PARAM_02_LIGHT_INDEX";
+        public static string DEF_PARAM_03_LIGHT_VALUE/*******/= "PARAM_03_LIGHT_VALUE";
+        public static string DEF_PARAM_04_FOCUS_TYPE/********/= "PARAM_04_FOCUS_TYPE";
+        public static string DEF_PARAM_05_USE_CENTERING/*****/= "PARAM_05_USE_CENTERING";
 
         public string [] GetComparedData(BASE_RECP target)
         {
@@ -166,11 +117,6 @@ namespace DEF_PARAMS
             if (this.PARAM_03_LIGHT_VALUE /******/!= target.PARAM_03_LIGHT_VALUE)/******/ list_Diff.Add(string.Format("LIGHT VALUE : {0} → {1}",/****/ this.PARAM_03_LIGHT_VALUE,/******/ target.PARAM_03_LIGHT_VALUE));
             if (this.PARAM_04_FOCUS_TYPE /*******/!= target.PARAM_04_FOCUS_TYPE)/*******/ list_Diff.Add(string.Format("FOCUS TYPE : {0} → {1}",/*****/ this.PARAM_04_FOCUS_TYPE,/*******/ target.PARAM_04_FOCUS_TYPE));
             if (this.PARAM_05_USE_CENTERING/*****/!= target.PARAM_05_USE_CENTERING)/****/ list_Diff.Add(string.Format("USE CENTERING : {0} → {1}",/**/ this.PARAM_05_USE_CENTERING,/****/ target.PARAM_05_USE_CENTERING));
-            if (this.PARAM_06_COMPEN_A /*********/!= target.PARAM_06_COMPEN_A)/*********/ list_Diff.Add(string.Format("COMPEN A : {0} → {1}",/*******/ this.PARAM_06_COMPEN_A,/*********/ target.PARAM_06_COMPEN_A));
-            if (this.PARAM_06_COMPEN_B /*********/!= target.PARAM_06_COMPEN_B)/*********/ list_Diff.Add(string.Format("COMPEN B : {0} → {1}",/*******/ this.PARAM_06_COMPEN_B,/*********/ target.PARAM_06_COMPEN_B));
-            if (this.PARAM_07_ALGORITHM_INDEX /**/!= target.PARAM_07_ALGORITHM_INDEX)/**/ list_Diff.Add(string.Format("ALGORITHM : {0} → {1}",/******/ this.PARAM_07_ALGORITHM_INDEX,/**/ target.PARAM_07_ALGORITHM_INDEX));
-            if (this.PARAM_08_DMG_TOLERANCE /****/!= target.PARAM_08_DMG_TOLERANCE)/****/ list_Diff.Add(string.Format("DMG TOL(%) : {0} → {1}",/*****/ this.PARAM_08_DMG_TOLERANCE,/****/ target.PARAM_08_DMG_TOLERANCE));
-            if (this.PARAM_09_EDGE_POSITION /****/!= target.PARAM_09_EDGE_POSITION)/****/ list_Diff.Add(string.Format("Edge Pos(%) : {0} → {1}",/****/ this.PARAM_09_EDGE_POSITION,/****/ target.PARAM_09_EDGE_POSITION)); 
 
             return list_Diff.ToArray();
         }
@@ -260,12 +206,12 @@ namespace DEF_PARAMS
 
     public class PARAM_PTRN
     {
-        public string PTRN_FILE = string.Empty;
-        public bool BOOL_EDGE_BASED = false;
-        public bool BOOL_GLOBAL_SEARCHING = true;
-        public double ACC_RATIO = 55; // acceptance ratio for pattern matching 
-        public RectangleF RC_SEARCH_RGN = new RectangleF();
-        public RectangleF RC_TEMPLATE = new RectangleF();
+        public string/*******/PTRN_FILE/**************/ = string.Empty;
+        public bool/*********/BOOL_EDGE_BASED/********/= false;
+        public bool/*********/BOOL_GLOBAL_SEARCHING/**/= true;
+        public double/*******/ACC_RATIO/**************/= 55; // acceptance ratio for pattern matching 
+        public RectangleF/***/RC_SEARCH_RGN/**********/= new RectangleF();
+        public RectangleF/***/RC_TEMPLATE/************/= new RectangleF();
 
         public PARAM_PTRN()
         {
@@ -274,51 +220,49 @@ namespace DEF_PARAMS
         {
             PARAM_PTRN single = new PARAM_PTRN();
 
-            single.PTRN_FILE = this.PTRN_FILE;
-            single.BOOL_EDGE_BASED = this.BOOL_EDGE_BASED;
-            single.BOOL_GLOBAL_SEARCHING = this.BOOL_GLOBAL_SEARCHING;
-            single.ACC_RATIO = this.ACC_RATIO;
-            single.RC_SEARCH_RGN = this.RC_SEARCH_RGN;
-            single.RC_TEMPLATE = this.RC_TEMPLATE;
+            single.PTRN_FILE/***************/= this.PTRN_FILE;
+            single.BOOL_EDGE_BASED/*********/= this.BOOL_EDGE_BASED;
+            single.BOOL_GLOBAL_SEARCHING/***/= this.BOOL_GLOBAL_SEARCHING;
+            single.ACC_RATIO/***************/= this.ACC_RATIO;
+            single.RC_SEARCH_RGN/***********/= this.RC_SEARCH_RGN;
+            single.RC_TEMPLATE/*************/= this.RC_TEMPLATE;
             return single;
         }
 
     }
     public class PARAM_OPTICS
     {
-        public static int CAM_ALIGN = 1;
-        public static int CAM_25X = 2;
-        public static int CAM_50X = 3;
+        public static int CAM_ALIGN/*****/= 1;
+        public static int CAM_25X/*******/= 2;
+        public static int CAM_50X/*******/= 3;
 
-        public static int LIGHT_ALIGN = 1;
-        public static int LIGHT_BF = 2;
-        public static int LIGHT_DF = 3;
+        public static int LIGHT_ALIGN/***/= 1;
+        public static int LIGHT_BF/******/= 2;
+        public static int LIGHT_DF/******/= 3;
 
+        public int /******/i01_CAM_INDEX { get; set; }
+        public double /***/i02_PIXEL_RES { get; set; }
+        public int /******/i03_LIGHT_INDEX { get; set; }
+        public int /******/i04_LIGHT_VALUE { get; set; }
+        public int /******/i05_EXPOSURE { get; set; }
+        public int/*******/i06_MULTI_SHOT_COUNT { get; set; }
+        public int/*******/i07_MULTI_SHOT_DELAY { get; set; }
+        public bool/******/i08_MULTI_SHOT_VALUE_AVG { get; set; }
+        public string/****/i09_MAKE_ZERO_FILE { get; set; }
 
-        public int /******/CAM_INDEX { get; set; }
-        public double /***/PIXEL_RES { get; set; }
-        public int /******/LIGHT_INDEX { get; set; }
-        public int /******/LIGHT_VALUE { get; set; }
-        public int /******/EXPOSURE { get; set; }
-
-        public int MULTI_SHOT_COUNT { get; set; }
-        public int MULTI_SHOT_DELAY { get; set; }
-        public bool MULTI_SHOT_VALUE_AVG { get; set; }
-
-        public string MAKE_ZERO_FILE { get; set; }
-        public double REAL_SCALE_PIXEL_RES { get { return PIXEL_RES * 1000; } }
+        public double REAL_SCALE_PIXEL_RES { get { return i02_PIXEL_RES * 1000; } }
 
         public PARAM_OPTICS()
         {
-            CAM_INDEX = 0;
-            PIXEL_RES = 0.000069;
-            LIGHT_INDEX = 0;
-            LIGHT_VALUE = 0;
-            EXPOSURE = 100;
-            MULTI_SHOT_COUNT = 1;
-            MULTI_SHOT_DELAY = 100;
-            MULTI_SHOT_VALUE_AVG = true;
-            MAKE_ZERO_FILE = string.Empty;
+            i01_CAM_INDEX/*************/= 0;
+            i02_PIXEL_RES/*************/= 0.000069;
+            i03_LIGHT_INDEX/***********/= 0;
+            i04_LIGHT_VALUE/***********/= 0;
+            i05_EXPOSURE/**************/= 100;
+            i06_MULTI_SHOT_COUNT/******/= 1;
+            i07_MULTI_SHOT_DELAY/******/= 100;
+            i08_MULTI_SHOT_VALUE_AVG/**/= true;
+            i09_MAKE_ZERO_FILE/********/= string.Empty;
 
         }
 
@@ -326,78 +270,68 @@ namespace DEF_PARAMS
         {
             PARAM_OPTICS single = new PARAM_OPTICS();
 
-            single.CAM_INDEX = this.CAM_INDEX;
-            single.LIGHT_INDEX = this.LIGHT_INDEX;
-            single.LIGHT_VALUE = this.LIGHT_VALUE;
-            single.PIXEL_RES = this.PIXEL_RES;
-            single.EXPOSURE = this.EXPOSURE;
-            single.MULTI_SHOT_COUNT = this.MULTI_SHOT_COUNT;
-            single.MULTI_SHOT_DELAY = this.MULTI_SHOT_DELAY;
-            single.MULTI_SHOT_VALUE_AVG = this.MULTI_SHOT_VALUE_AVG;
-            single.MAKE_ZERO_FILE = this.MAKE_ZERO_FILE;
+            single.i01_CAM_INDEX/**************/= this.i01_CAM_INDEX;
+            single.i02_PIXEL_RES/**************/= this.i02_PIXEL_RES;
+            single.i03_LIGHT_INDEX/************/= this.i03_LIGHT_INDEX;
+            single.i04_LIGHT_VALUE/************/= this.i04_LIGHT_VALUE;
+            single.i05_EXPOSURE/***************/= this.i05_EXPOSURE;
+            single.i06_MULTI_SHOT_COUNT/*******/= this.i06_MULTI_SHOT_COUNT;
+            single.i07_MULTI_SHOT_DELAY/*******/= this.i07_MULTI_SHOT_DELAY;
+            single.i08_MULTI_SHOT_VALUE_AVG/***/= this.i08_MULTI_SHOT_VALUE_AVG;
+            single.i09_MAKE_ZERO_FILE/*********/= this.i09_MAKE_ZERO_FILE;
             return single;
         }
     }
 
-
+    public class PARAM_PROGRAM
+    {
+        public string i00_previous_recp = string.Empty;
+    }
   
     public class PARAM_PATH
     {
-        public string i01_PATH_MAIN { get; set; }
-        public string i02_PATH_DATA_DUMP { get; set; }
-        public string i03_PATH_RECP_BASE { get; set; }
-        public string i04_PATH_RECP_REAL { get; set; }
-
-        public string i10_PATH_IMG_ORG { get; set; }
-        public string i11_PATH_IMG_PTRN { get; set; }
-
-        public string i15_PATH_HIST_MEASURE { get; set; }
-        public string i16_PATH_HIST_PTRN { get; set; }
-
-        public string i20_PATH_INI { get; set; }
-        public string i21_PATH_LOG { get; set; }
+        public string i01_PATH_MAIN/***********/= string.Empty;
+        public string i02_PATH_DATA_DUMP/******/= string.Empty;
+        public string i03_PATH_RECP_BASE/******/= string.Empty;
+        public string i04_PATH_RECP_REAL/******/= string.Empty;
+        public string i05_PATH_IMG_ORG/********/= string.Empty;
+        public string i06_PATH_IMG_PTRN/*******/= string.Empty;
+        public string i07_PATH_HIST_MEASURE/***/= string.Empty;
+        public string i08_PATH_HIST_PTRN/******/= string.Empty;
+        public string i09_PATH_INI/************/= string.Empty;
+        public string i10_PATH_LOG/************/= string.Empty;
 
         public PARAM_PATH()
         {
-            i01_PATH_MAIN = "C:\\CD_METER";
-            i02_PATH_DATA_DUMP = "C:\\CD_METER\\DUMP";
-            i03_PATH_RECP_BASE = "C:\\CD_METER\\RECP_BASE";
-            i04_PATH_RECP_REAL = "C:\\CD_METER\\RECP";
-
-            i10_PATH_IMG_ORG = "C:\\CD_METER\\IMAGE_INPUT";
-            i11_PATH_IMG_PTRN = "C:\\CD_METER\\PTRN_TEACHING";
-
-            i15_PATH_HIST_MEASURE = "C:\\CD_METER\\HISTORY";
-            i16_PATH_HIST_PTRN = "C:\\CD_METER\\PTRN_ERR";
-
-            i20_PATH_INI = "C:\\CD_METER\\INI";
-            i21_PATH_LOG = "C:\\CD_METER\\LOG";
+            i01_PATH_MAIN/***********/= "C:\\CD_METER";
+            i02_PATH_DATA_DUMP/******/= "C:\\CD_METER\\DUMP";
+            i03_PATH_RECP_BASE/******/= "C:\\CD_METER\\RECP_BASE";
+            i04_PATH_RECP_REAL/******/= "C:\\CD_METER\\RECP";
+            i05_PATH_IMG_ORG/********/= "C:\\CD_METER\\IMAGE_INPUT";
+            i06_PATH_IMG_PTRN/*******/= "C:\\CD_METER\\PTRN_TEACHING";
+            i07_PATH_HIST_MEASURE/***/= "C:\\CD_METER\\HISTORY";
+            i08_PATH_HIST_PTRN/******/= "C:\\CD_METER\\PTRN_ERR";
+            i09_PATH_INI/************/= "C:\\CD_METER\\INI";
+            i10_PATH_LOG/************/= "C:\\CD_METER\\LOG";
         }
         public PARAM_PATH CopyTo()
         {
             PARAM_PATH single = new PARAM_PATH();
 
-            single.i01_PATH_MAIN = this.i01_PATH_MAIN;
-            single.i02_PATH_DATA_DUMP = this.i02_PATH_DATA_DUMP;
-            single.i03_PATH_RECP_BASE = this.i03_PATH_RECP_BASE;
-            single.i04_PATH_RECP_REAL = this.i04_PATH_RECP_REAL;
-
-            single.i10_PATH_IMG_ORG = this.i10_PATH_IMG_ORG;
-            single.i11_PATH_IMG_PTRN = this.i11_PATH_IMG_PTRN;
-
-            single.i15_PATH_HIST_MEASURE = this.i15_PATH_HIST_MEASURE;
-            single.i16_PATH_HIST_PTRN = this.i16_PATH_HIST_PTRN;
-
-            single.i20_PATH_INI = this.i20_PATH_INI;
-            single.i21_PATH_LOG = this.i21_PATH_LOG;
+            single.i01_PATH_MAIN/***********/= this.i01_PATH_MAIN;
+            single.i02_PATH_DATA_DUMP/******/= this.i02_PATH_DATA_DUMP;
+            single.i03_PATH_RECP_BASE/******/= this.i03_PATH_RECP_BASE;
+            single.i04_PATH_RECP_REAL/******/= this.i04_PATH_RECP_REAL;
+            single.i05_PATH_IMG_ORG/********/= this.i05_PATH_IMG_ORG;
+            single.i06_PATH_IMG_PTRN/*******/= this.i06_PATH_IMG_PTRN;
+            single.i07_PATH_HIST_MEASURE/***/= this.i07_PATH_HIST_MEASURE;
+            single.i08_PATH_HIST_PTRN/******/= this.i08_PATH_HIST_PTRN;
+            single.i09_PATH_INI/************/= this.i09_PATH_INI;
+            single.i10_PATH_LOG/************/= this.i10_PATH_LOG;
 
             return single;
         }
-
-
-        
     }
-
 
     public static class IFX_DIR
     {
@@ -405,7 +339,18 @@ namespace DEF_PARAMS
         public static int DIR_TOP = 1;
         public static int DIR_RHT = 2;
         public static int DIR_BTM = 3;
+
+        public static string ToStringType(int nType)
+        {
+            string strType = string.Empty;
+            /***/if (nType == DIR_LFT) /***/ strType = "DIR_LFT";
+            else if (nType == DIR_TOP) /***/ strType = "DIR_TOP";
+            else if (nType == DIR_RHT) /***/ strType = "DIR_RHT";
+            else if (nType == DIR_BTM) /***/ strType = "DIR_BTM";
+            return strType;   
+        }
     }
+    
     public static class IFX_RECT_TYPE
     {
         public static int DIR_HOR = 0;
@@ -431,16 +376,17 @@ namespace DEF_PARAMS
             return strType;
         }
     }
+   
     public static class IFX_FIGURE
     {
-        public static int PAIR_RCT = 0;
-        public static int PAIR_CIR = 1;
-        public static int PAIR_OVL = 2;
-        public static int RC_FOCUS = 3;
-        public static int MIXED_RC = 4;
-        public static int MIXED_CC = 5;
-        public static int MIXED_RCC = 6;
-        public static int TOTAL = 7;
+        public static int PAIR_RCT/****/= 0;
+        public static int PAIR_CIR/****/= 1;
+        public static int PAIR_OVL/****/= 2;
+        public static int RC_FOCUS/****/= 3;
+        public static int MIXED_RC/****/= 4;
+        public static int MIXED_CC/****/= 5;
+        public static int MIXED_RCC/***/= 6;
+        public static int TOTAL/*******/= 7;
 
         public static int ToNumericType(string strType)
         {
@@ -473,21 +419,13 @@ namespace DEF_PARAMS
         public static string[] ToStringArray()
         {
             List<string> list = new List<string>();
-
-            for (int i = 0; i < TOTAL; i++)
-            {
-                list.Add(ToStringType(i));
-            }
+            for (int i = 0; i < TOTAL; i++) { list.Add(ToStringType(i)); }
             return list.ToArray();
         }
         public static List<string> ToList()
         {
             List<string> list = new List<string>();
-
-            for (int i = 0; i < TOTAL; i++)
-            {
-                list.Add(ToStringType(i));
-            }
+            for (int i = 0; i < TOTAL; i++) { list.Add(ToStringType(i)); }
             return list;
         }
     }
@@ -505,9 +443,17 @@ namespace DEF_PARAMS
         public static int P2P = 0;
         public static int HOR = 1;
         public static int VER = 2;
+
+        public static string ToStringType(int nType)
+        {
+            string strType = string.Empty;
+            /***/if (nType == P2P) /***/ strType = "P2P";
+            else if (nType == HOR) /***/ strType = "HOR";
+            else if (nType == VER) /***/ strType = "VER";
+            return strType;
+        }
     }
-   
-    
+       
     public static class IFX_ALGORITHM
     {
         public static int CARDIN = 0;       // Cardinal direction

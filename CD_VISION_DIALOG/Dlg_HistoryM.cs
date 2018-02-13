@@ -27,9 +27,8 @@ namespace CD_VISION_DIALOG
         CFileIO fileIO = new CFileIO();
 
         public CFigureManager m_fm = new CFigureManager();
-
-        public delegate void dele_ChangeRecp(string strPathRecp, string strPathImage);
-        public event dele_ChangeRecp eventDele_ChangeRecp;
+        public delegate void/***/dele_ChangeRecp(string strPathRecp, string strPathImage);
+        public event/***********/dele_ChangeRecp eventDele_ChangeRecp;
 
         public Dlg_HistoryM()
         {
@@ -80,24 +79,24 @@ namespace CD_VISION_DIALOG
             TXT_HISTORY_PREV_IMAGE.Text = string.Empty;
 
 
-            string strPathHistory = m_fm.param_path.i15_PATH_HIST_MEASURE;
-            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
+            string strPathHistory = m_fm.param_path.i07_PATH_HIST_MEASURE;
+            String[] arrAllFiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
 
             LV_HISTORY.BeginUpdate();
 
-            Array.Reverse(allfiles);
+            Array.Reverse(arrAllFiles);
 
-            for (int i = 0; i < allfiles.Length; i++)
+            for (int i = 0; i < arrAllFiles.Length; i++)
             {
-                string single = allfiles.ElementAt(i);
+                string single = arrAllFiles.ElementAt(i);
 
                 string strFileName = Path.GetFileName(single);
 
                 if (Path.GetExtension(strFileName).ToUpper() == ".XML") continue;
                 if (Path.GetExtension(strFileName).ToUpper() == ".TXT") continue;
 
-                string strDate = single.Replace(m_fm.param_path.i15_PATH_HIST_MEASURE + "\\", "");
-                strDate = strDate.Replace(strFileName, "").Replace("\\", "");
+                string strDate = single.Replace(m_fm.param_path.i07_PATH_HIST_MEASURE + "\\", "");
+                /*****/strDate = strDate.Replace(strFileName, "").Replace("\\", "");
 
                 ListViewItem lvi = new ListViewItem();
 
@@ -114,7 +113,7 @@ namespace CD_VISION_DIALOG
 
         private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
         {
-            Process.Start(m_fm.param_path.i15_PATH_HIST_MEASURE);
+            Process.Start(m_fm.param_path.i07_PATH_HIST_MEASURE);
         }
         #endregion
 
@@ -183,8 +182,8 @@ namespace CD_VISION_DIALOG
             string strImageFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
 
             // Parsing
-            string PATH_DATE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate);
-            string PATH_IMAGE = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, strDate, strImageFile);
+            string PATH_DATE = Path.Combine(m_fm.param_path.i07_PATH_HIST_MEASURE, strDate);
+            string PATH_IMAGE = Path.Combine(m_fm.param_path.i07_PATH_HIST_MEASURE, strDate, strImageFile);
 
             string strTimeCode = strImageFile.Substring(0, 12);
             string strInspFile = strTimeCode + "_INSP.txt";
@@ -199,15 +198,15 @@ namespace CD_VISION_DIALOG
             uc_view_history.Refresh();
 
             // Get Recp File Names
-            String[] allfiles = System.IO.Directory.GetFiles(m_fm.param_path.i15_PATH_HIST_MEASURE, "*.*", System.IO.SearchOption.AllDirectories);
+            String[] strArrAllFiles = System.IO.Directory.GetFiles(m_fm.param_path.i07_PATH_HIST_MEASURE, "*.*", System.IO.SearchOption.AllDirectories);
 
             string PATH_PREV_RECP = string.Empty;
 
-            for (int i = 0; i < allfiles.Length; i++)
+            for (int i = 0; i < strArrAllFiles.Length; i++)
             {
-                if (allfiles.ElementAt(i).Contains(strTimeCode) && allfiles.ElementAt(i).Contains(".xml"))
+                if (strArrAllFiles.ElementAt(i).Contains(strTimeCode) && strArrAllFiles.ElementAt(i).Contains(".xml"))
                 {
-                    PATH_PREV_RECP = allfiles.ElementAt(i);
+                    PATH_PREV_RECP = strArrAllFiles.ElementAt(i);
                 }
             }
             // update set information 
@@ -231,13 +230,13 @@ namespace CD_VISION_DIALOG
             {
                 string strTimeCode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
 
-                string strPathImageView = strTimeCode + "_DCIM.BMP";
-                string strPathImageTemplate = strTimeCode + "_" + m_fm.param_ptrn.PTRN_FILE;
-                string strPathRecp = strTimeCode + "_" + m_fm.RECP_FILE;
-                string strPathInspRes = strTimeCode + "_INSP.txt";
+                string strPathImageView/*******/= strTimeCode + "_DCIM.BMP";
+                string strPathImageTemplate/***/= strTimeCode + "_" + m_fm.param_ptrn.PTRN_FILE;
+                string strPathRecp/************/= strTimeCode + "_" + m_fm.RECP_FILE;
+                string strPathInspRes/*********/= strTimeCode + "_INSP.txt";
 
                 // Setup Daily Directory
-                string strPathDaily = Path.Combine(m_fm.param_path.i15_PATH_HIST_MEASURE, Computer.GetTimeCode4Save_YYYY_MM_DD());
+                string strPathDaily = Path.Combine(m_fm.param_path.i07_PATH_HIST_MEASURE, Computer.GetTimeCode4Save_YYYY_MM_DD());
                 Computer.EnsureFolderExsistance(strPathDaily);
 
                 // Backup Recp File
@@ -266,12 +265,12 @@ namespace CD_VISION_DIALOG
             thr.Start();
         }
 
-       #region RECP DUMPING 
+       #region RECP DUMP IN & OUT
         private void BTN_RECP_DUMP_OUT_Click(object sender, EventArgs e)
         {
             // get the recp file and ptrn file path 
             string strCurrentRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, m_fm.RECP_FILE);
-            string strCurrentPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, m_fm.param_ptrn.PTRN_FILE);
+            string strCurrentPtrn = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, m_fm.param_ptrn.PTRN_FILE);
 
             bool bSuccess = true;
 
@@ -352,7 +351,7 @@ namespace CD_VISION_DIALOG
                     // generate appropriate full path 
                     string strAbsolutePtrn = Computer.GetFileName(destPtrn);
                     string strAbsoluteRecp = Computer.GetFileName(destRecp);
-                    string strDestPtrn = Path.Combine(m_fm.param_path.i11_PATH_IMG_PTRN, strAbsolutePtrn);
+                    string strDestPtrn = Path.Combine(m_fm.param_path.i06_PATH_IMG_PTRN, strAbsolutePtrn);
                     string strDestRecp = Path.Combine(m_fm.param_path.i04_PATH_RECP_REAL, strAbsoluteRecp);
 
                     // is there any duplicate?

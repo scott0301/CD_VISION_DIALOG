@@ -14,18 +14,18 @@ using System.Diagnostics;
 using System.IO;
 
 
+
 using DispObject;
 using DotNetMatrix;
 using CD_Figure;
+using DEF_PARAMS;
 using System.Windows.Forms;
-
+using WrapperCognex;
  
 namespace CD_Measure
 {
     public class CThrProc_FocusTool
     {
-        public event EventHandler<ThreadFinishedEventArgs> EventThreadFinished_CalcFocus;
-
         public class ThreadFinishedEventArgs : EventArgs
         {
             public Bitmap bmp = null;
@@ -36,6 +36,8 @@ namespace CD_Measure
             public int nLoopTarget = 0;
             public string strFileName;
         }
+
+        public event EventHandler<ThreadFinishedEventArgs> EventThreadFinished_CalcFocus;
 
         public static Task<Bitmap> staticImageLoadAsync(string strPath)
         {
@@ -91,6 +93,357 @@ namespace CD_Measure
             }
         }
 
+    }
+
+    public class CThreadProc_Insp
+    {
+        public class ThreadFinishedEventArgs : EventArgs
+        {
+            public CFigureManager fm = new CFigureManager();
+            public CMeasureReport report = new CMeasureReport();
+            public CInspUnit iu = new CInspUnit();
+
+            public double/*******/PTRN_fMAtchingRatio = 0;
+            public RectangleF/***/PTRN_rcTemplate = new RectangleF();
+            public PointF/*******/PTRN_ptDelta = new PointF();
+            public PointF/*******/PTRN_ptTemplateCenter = new PointF();
+            public string/*******/PTRN_MSG = string.Empty;
+
+            public Bitmap/*******/bmpFocus = null; 
+            public Bitmap/*******/bmpView = null;
+
+            public int IDX_Cam/*****/= 0;
+            public int IDX_Cycle/***/= 0;
+            public int IDX_Point/***/= 0;
+
+ 
+        }
+        public event EventHandler<ThreadFinishedEventArgs> EventThreadFinished_Inspection;
+        protected virtual void OnThreadFinished_Inspection(ThreadFinishedEventArgs e)
+        {
+            EventHandler<ThreadFinishedEventArgs> handler = EventThreadFinished_Inspection;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public void ThreadCall_Inspection(cogWrapper wrapperCog, CInspUnit iu, CMeasureReport report,
+            bool bSimulation, int nCamNo, int nIdxCycle, int nIdxPoint,
+            ThreadFinishedEventArgs e)
+        {
+            CFigureManager fm = iu.fm.Clone() as CFigureManager;
+
+            int imageW = 0; int imageH = 0;
+            byte[] rawView = iu.GetImage_Raw_First(out imageW, out imageH);
+            Bitmap bmpView = iu.GetImage_Bitmap_First();
+
+            report.IncreseSequenceIndex();
+
+            //*************************************************************************************
+            // Pattern matching
+            //*************************************************************************************
+
+            RectangleF rcTemplate/*****/ = new RectangleF();
+            double fMatchingRatio = 0;
+
+            string ptrn_msg = string.Empty;
+            PointF ptTemplateCenter = _DO_PTRN_And_Get_TemplatePos(wrapperCog, fm, bmpView, out rcTemplate, out fMatchingRatio, out ptrn_msg);
+            fm.SetPtrnDelta(rcTemplate.X, rcTemplate.Y);
+            report.m_listMatchPoint.Add(ptTemplateCenter);
+
+            e.IDX_Cam = nCamNo;
+            e.IDX_Cycle = nIdxCycle;
+            e.IDX_Point = nIdxPoint;
+
+            e.PTRN_fMAtchingRatio = fMatchingRatio;
+            e.PTRN_ptDelta = fm.PT_PTRN_DELTA;
+            e.PTRN_ptTemplateCenter = ptTemplateCenter;
+            e.PTRN_rcTemplate = rcTemplate;
+            e.PTRN_MSG = ptrn_msg;
+            e.bmpView = bmpView.Clone() as Bitmap;
+
+            //if (CHK_USE_SAVE_PTRN_ERR.Checked == true)
+            //{
+            //    // Setup Daily Directory
+            //    string strPathDir = Path.Combine(fm.param_path.i08_PATH_HIST_PTRN, Computer.GetTimeCode4Save_YYYY_MM_DD());
+            //    Computer.EnsureFolderExsistance(strPathDir);
+            //
+            //    string strTimeCode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
+            //    imageView2.ThreadCall_SaveImage(Path.Combine(strPathDir, strTimeCode + "_ERROR.BMP"), rawImage, imageW, imageH);
+            //}
+
+            //if (m_hacker.BOOL_USE_FOCUS_SAVE == true)
+            //{
+            //    string strPathDir = "c:\\" + Computer.GetTimeCode4Save_YYYY_MM_DD();
+            //    Computer.EnsureFolderExsistance(strPathDir);
+            //
+            //    string strTimeCode = Computer.GetTimeCode4Save_HH_MM_SS_MMM();
+            //
+            //    Bitmap bmpFocus = bmp.Clone() as Bitmap;
+            //    imageView2.ThreadCall_SaveImage(Path.Combine(strPathDir, strTimeCode + "_FOCUS.BMP"), bmpFocus);
+            //
+            //    //bmpFocus.Dispose();
+            //
+            //    System.Threading.Thread.Sleep(50);
+            //
+            //}
+
+            int [] histogram = new int[256];
+            double fFocusValue = ThrProc_01_FocusRegionProcess(fm, ptTemplateCenter, rawView, imageW, imageH, out histogram, out e.bmpFocus);
+            report.AddFocusMag(fFocusValue);
+            report.AddHistogram(histogram);
+            iu.mi.Focus = fFocusValue;
+
+
+
+            iu.Proc_00_DoPreProcess();
+
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            // just scale up to real unit. because optic parameter for pixel resolution is based-on stage unit ( mm )
+            // remark description date : 170809
+            // SEQ RES * 1000 == real scale pixel resolution
+            double PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES; 
+
+            if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, fm.PT_PTRN_DELTA, iu, report);
+
+            e.iu = iu;
+
+            OnThreadFinished_Inspection(e);
+        }
+
+        private double ThrProc_01_FocusRegionProcess(CFigureManager fm, PointF ptTemplateCenter, byte[] rawImage, int imageW, int imageH, out int[] nHisto, out Bitmap bmpFocus)
+        {
+            //*************************************************************************************
+            // Set histogram
+            nHisto = new int[256];
+            Array.Clear(nHisto, 0, nHisto.Length);
+            //*************************************************************************************
+
+
+            if (ptTemplateCenter.X > 0 && ptTemplateCenter.Y > 0)
+            {
+                fm.SetRelativeMovemntFocusRect();
+            }
+            else // matching failed == position(x,y) is  that the result placed on minus croodinates
+            {
+               
+            }
+
+            double fFocusValue = 0;
+
+            Rectangle rcFocus = Rectangle.Round(fm.RC_FOCUS);
+            Bitmap bmp = null;
+
+            if (rcFocus.X > 0 && rcFocus.Y > 0 && rcFocus.Width > 0 && rcFocus.Height > 0)
+            {
+                byte[] rawFocus = Computer.HC_CropImage(rawImage, imageW, imageH, rcFocus);
+
+                byte[] gradient = Computer.HC_TRANS_GradientImage(rawFocus, rcFocus.Width, rcFocus.Height);
+                double[] fGradient = gradient.Select(element => (double)element).ToArray();
+                fFocusValue = fGradient.Average();
+
+                nHisto = Computer.HC_HISTO_GetHistogram(rawImage, 256);
+                bmp = Computer.HC_CONV_Byte2Bmp(rawFocus, rcFocus.Width, rcFocus.Height);
+            }
+            else
+            {
+                bmp = new Bitmap(200, 200);
+            }
+
+            bmpFocus = new Bitmap(bmp);
+
+            return fFocusValue;
+        }
+        public static PointF _DO_PTRN_And_Get_TemplatePos(cogWrapper wrapperCog, CFigureManager fm, Bitmap bmpSrc, out RectangleF rcTemplate, out double fMatchingRatio, out string ptrn_msg)
+        {
+            // initialize matching center position info.
+            PointF ptTemplateCenter = new PointF(0, 0);
+
+            rcTemplate = new RectangleF();
+            fMatchingRatio = 0;
+            ptrn_msg = string.Empty;
+
+            // get the ptrn file name 
+            string strPtrnFile = fm.param_ptrn.PTRN_FILE;
+
+            // get all ptrn files
+            string[] arrPtrnFiles_All = Computer.GetFileList_Itself(fm.param_path.i06_PATH_IMG_PTRN, "*.bmp");
+            List<string> listFriends = new List<string>();
+
+            // get base ptrn file name 
+            string strPtrnOnlyName = Path.GetFileName(fm.param_ptrn.PTRN_FILE).ToUpper().Replace(".BMP", "");
+
+            if (strPtrnOnlyName != "") // if this is not an empty recp for ptrn
+            {
+                // get the related ptrn files 
+                for (int i = 0; i < arrPtrnFiles_All.Length; i++)
+                {
+                    string strFileCurrent = Path.GetFileName(arrPtrnFiles_All[i].ToUpper());
+                    string strNameOnly = strFileCurrent.Replace(".BMP", "");
+
+                    if (strNameOnly.IndexOf(strPtrnOnlyName) >= 0)
+                    {
+                        listFriends.Add(strFileCurrent);
+                    }
+                }
+            }
+
+
+            bool bMatchingSuccess = false;
+
+            // do multiple matching process for each related ptrn files.
+            for (int nPtrnLoop = 0; nPtrnLoop < listFriends.Count(); nPtrnLoop++)
+            {
+                // get the ptrn file one by one 
+                string strPTRN_FullPath = Path.Combine(fm.param_path.i06_PATH_IMG_PTRN, listFriends.ElementAt(nPtrnLoop));
+
+                // if currently successfull matching is not yet ??
+                if (File.Exists(strPTRN_FullPath) == true && bMatchingSuccess == false)
+                {
+                    // get the bitmap for ptrn 
+                    Bitmap bmpTemp = Bitmap.FromFile(strPTRN_FullPath) as Bitmap;
+                    Bitmap bmpPTRN = new Bitmap(bmpTemp);
+                    Bitmap bmpView = new Bitmap(bmpSrc);
+                    bmpTemp.Dispose();
+
+                    // in case of edge-based ptrn matching
+                    if (fm.param_ptrn.BOOL_EDGE_BASED == true)
+                    {
+                        bmpPTRN = Computer._Ptrn_Preprocess_Edge(bmpPTRN);
+                        bmpView = Computer._Ptrn_Preprocess_Edge(bmpView);
+                    }
+
+                    // initialize ptrn result structure
+                    ResultPTRN ptrn = new ResultPTRN();
+
+                    // find only one! and Set matching acceptance ratio 
+                    wrapperCog.PARAM_NUM_TO_FIND = 1;
+                    wrapperCog.PARAM_ACCEPT_RATIO = fm.param_ptrn.ACC_RATIO;
+
+                    // is global searching??
+                    if (fm.param_ptrn.BOOL_GLOBAL_SEARCHING == true)
+                    {
+                        wrapperCog.PARAM_RC_SEARCH = new RectangleF(0, 0, bmpView.Width, bmpView.Height);
+                    }
+                    //  is partial searching??
+                    else if (fm.param_ptrn.BOOL_GLOBAL_SEARCHING == false)
+                    {
+                        wrapperCog.PARAM_RC_SEARCH = fm.param_ptrn.RC_SEARCH_RGN;
+                    }
+
+                    wrapperCog.PARAM_PT_RELATIVE_ORIGIN = new PointF(0, 0);
+
+                    // Do! pattern matching 
+                    wrapperCog.Do_Ptrn(bmpView, bmpPTRN);
+
+                    ptrn = wrapperCog.ptrnResult;
+
+                    bmpPTRN.Dispose();
+                    bmpView.Dispose();
+
+                    // if matching succeed
+                    if (ptrn.Count >= 1)
+                    {
+                        bMatchingSuccess = true;
+
+                        // set data 
+                        ptTemplateCenter = ptrn.resultList.ElementAt(0).ptCenter;
+                        rcTemplate = ptrn.resultList.ElementAt(0).rc;
+                        fMatchingRatio = ptrn.resultList.ElementAt(0).fScore * 100.0;
+                        ptrn_msg = string.Format("MR = {0}", fMatchingRatio.ToString("F2"));
+                        // and finish
+                        break;
+                    }
+                }
+                else 
+                {
+                    ptrn_msg = "PTRN FILE NOT FOUND";
+                }
+            }
+
+            if (bMatchingSuccess == false)
+            {
+                ptrn_msg = "PTRN MATCHING FAILED";
+            }
+
+            return ptTemplateCenter;
+        }
+        private void _INSP_RC(CFigureManager fm, PointF ptDelta, CInspUnit iu, CMeasureReport report)
+        {
+            //*************************************************************************************
+            // Rectangle
+            //*************************************************************************************
+
+            List<PointF> listEdges_FEX = new List<PointF>(); List<PointF> listEdges_FMD = new List<PointF>(); List<PointF> listEdges_FIN = new List<PointF>();
+            List<PointF> listEdges_SEX = new List<PointF>(); List<PointF> listEdges_SMD = new List<PointF>(); List<PointF> listEdges_SIN = new List<PointF>();
+
+            int imageW = iu.imageW;
+            int imageH = iu.imageH;
+
+            List<double> list_Distance = new List<double>();
+
+            PointF P1 = new PointF(0, 0);
+            PointF P2 = new PointF(0, 0);
+
+            //*************************************************************************************
+            // Rectangle
+            //*************************************************************************************
+
+            #region Rectangle - Normal Case
+
+            for (int i = 0; i < fm.COUNT_PAIR_RCT; i++)
+            {
+                // get element 
+                CMeasurePairRct single = fm.ElementAt_PairRct(i);
+
+                single.PIXEL_RES = fm.param_optics.REAL_SCALE_PIXEL_RES;
+                single.SetRelativeMovement(ptDelta);
+
+                RectangleF rcEstimaged = new RectangleF();
+                RectangleF rcMeasured = new RectangleF();
+
+                List<double> listD = new List<double>();
+                double fDistance = 0;
+
+                for (int nImage = 0; nImage < iu.listImage_prep.Count; nImage++)
+                {
+                    byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
+
+                    // get measure data 
+                    fDistance = single.MeasureData(rawTargetImage, imageW, imageH,
+                        ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN,
+                        ref listEdges_SEX, ref listEdges_SMD, ref listEdges_SIN, out P1, out P2, out rcEstimaged, out rcMeasured);
+
+                    listD.Add(fDistance);
+                }
+
+                if (fm.param_optics.i08_MULTI_SHOT_VALUE_AVG == true || listD.Count < 3)
+                {
+                    fDistance = listD.Average();
+                }
+                else
+                {
+                    fDistance = listD.ElementAt((int)Math.Floor(listD.Count / 2.0));
+                }
+
+
+                iu.InsertDispResult_Rectangle(single.NICKNAME, fDistance);
+                iu.InsertTransResultData(fDistance);
+                report.AddResult_FIG(IFX_FIGURE.PAIR_RCT, single, fDistance);
+
+
+                iu.Insert_DispEdgePoints(listEdges_FEX, listEdges_FMD, listEdges_FIN);
+                iu.Insert_DispEdgePoints(listEdges_SEX, listEdges_SMD, listEdges_SIN);
+                iu.Insert_DispMeasurePoint(P1);
+                iu.Insert_DispMeasurePoint(P2);
+
+            }
+            #endregion
+        }
     }
 
     #region INI-Related
@@ -636,8 +989,7 @@ namespace CD_Measure
     }
 
     #endregion 
-
-
+    
     #region DATA GRID VIEW-RELATED
      public class WrapperDGView // 171010
     {
@@ -1097,7 +1449,7 @@ namespace CD_Measure
     }
     #endregion
 
-     #region LISTVIEW RELATED
+    #region LISTVIEW RELATED
 
      public static class WrapperLV
      {
@@ -1230,7 +1582,6 @@ namespace CD_Measure
          public bool convert_std_form()
          {
              // 타원 방정식에서 표준 형태의 타원의 매개변수로 변경
-             // 참조: http://blog.naver.com/helloktk/80035366367
 
              // orientation of ellipse;    
              theta = Math.Atan2(b, a - c) / 2.0;
@@ -1292,7 +1643,6 @@ namespace CD_Measure
 
             if (bHorizontal == true)
             {
-
                 int nHead = (int)rc.X;
                 int nTail = (int)rc.X + (int)rc.Width;
 
@@ -1456,12 +1806,10 @@ namespace CD_Measure
             {
                 samples.Clear();
 
-                // 1. hypothesis
-                // 원본 데이터에서 임의로 N개의 셈플 데이터를 고른다.
-
+                // get the random samples
                 get_samples(ref samples, no_samples, data);
 
-                // 이 데이터를 정상적인 데이터로 보고 모델 파라메터를 예측한다.
+                // estimate model parameter
                 estimated_model = compute_ellipse_model(ref samples);
                 if (!estimated_model.convert_std_form()) 
                 {
@@ -1473,12 +1821,10 @@ namespace CD_Measure
                     }
                 }
 
-                // 2. Verification
-
-                // 원본 데이터가 예측된 모델에 잘 맞는지 검사한다.
+                // verification
                 double cost = verify_ellipse(inliers, ref estimated_model, data, distance_threshold);
 
-                // 만일 예측된 모델이 잘 맞는다면, 이 모델에 대한 유효한 데이터로 새로운 모델을 구한다.
+                // update model
                 if (max_cost < cost)
                 {
                     max_cost = cost;
@@ -1513,7 +1859,6 @@ namespace CD_Measure
                 B.SetElement(i, 0, -x * x);
             }
 
-            // AX=B 형태의 해를 least squares solution으로 구하기 위해
             // Moore-Penrose pseudo-inverse를 이용한다.
             //DotNetMatrix.Matrix invA = 
 
@@ -1558,10 +1903,10 @@ namespace CD_Measure
             
             for(int i=0; i< data.Length; i++)
             {
-		        // 직선에 내린 수선의 길이를 계산한다.
+		        // calculate distance
 		        double distance = compute_ellipse_distance(ref estimated_model, data[i]);
 	
-		        // 예측된 모델에서 유효한 데이터인 경우, 유효한 데이터 집합에 더한다.
+		        // get the inliners
 		        if (distance < distance_threshold) 
                 {
 			        cost += 1.0;
@@ -1622,19 +1967,16 @@ namespace CD_Measure
             {
                 samples.Clear();
 
-                // 1. hypothesis
-                // 원본 데이터에서 임의로 N개의 셈플 데이터를 고른다.
-
+                // select the random samples
                 get_samples(ref samples, no_samples, data);
 
-                // 이 데이터를 정상적인 데이터로 보고 모델 파라메터를 예측한다.
+                // estimate model parameter
                 estimated_model = compute_model_line(ref samples);
 
-                // 2. Verification
-                // 원본 데이터가 예측된 모델에 잘 맞는지 검사한다.
+                // verification
                 double cost = verify_line(inliers, ref estimated_model, data, distance_threshold);
 
-                // 만일 예측된 모델이 잘 맞는다면, 이 모델에 대한 유효한 데이터로 새로운 모델을 구한다.
+                // update model
                 if (max_cost < cost)
                 {
                     max_cost = cost;
@@ -1703,11 +2045,12 @@ namespace CD_Measure
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    // 직선에 내린 수선의 길이를 계산한다.
+                    // get the distance of the line
                     double distance = compute_line_distance(ref estimated_model, data[i]);
 
                     arrDist[i] = distance;
-                    // 예측된 모델에서 유효한 데이터인 경우, 유효한 데이터 집합에 더한다.
+
+                    // select inliers
                     if (distance < distance_threshold)
                     {
                         cost += 1.0;
@@ -1776,8 +2119,8 @@ namespace CD_Measure
 
         public static CModelCircle compute_circle_model(ref List<PointF> samples)
         {
-            // 중심 (a,b), 반지름 c인 원의 방정식: (x - a)^2 + (y - b)^2 = c^2
-	        // 식을 전개하면: x^2 + y^2 - 2ax - 2by + a^2 + b^2 - c^2 = 0
+            // circle equation : (x - a)^2 + (y - b)^2 = c^2 from the circle center a,b and radius c,
+	        // = x^2 + y^2 - 2ax - 2by + a^2 + b^2 - c^2 = 0
             DotNetMatrix.Matrix A = new DotNetMatrix.Matrix(samples.Count, 3);
             DotNetMatrix.Matrix B = new DotNetMatrix.Matrix(samples.Count, 1);
 
@@ -1794,8 +2137,7 @@ namespace CD_Measure
                 B.SetElement(i, 0, (-x * x) - (y*y));
             }
 
-            // AX=B 형태의 해를 least squares solution으로 구하기 위해
-            // Moore-Penrose pseudo-inverse를 이용한다.
+             // Moore-Penrose pseudo-inverse를 이용한다.
             //DotNetMatrix.Matrix invA = 
 
             DotNetMatrix.Matrix transA = A.Transpose();
@@ -1819,9 +2161,7 @@ namespace CD_Measure
         }
         public static double /****/compute_circle_distance(ref CModelCircle model, PointF p)
         {
-            // 원의 둘레로부터 떨어진 거리를 계산한다.
-            // 즉, 점 x와 원의 중심 까지의 거리를 구해서 원의 반지름을 뺀다.
-
+            // calculate circle raidus from the estimated edge point
             double dx = model.cx - p.X;
             double dy = model.cy- p.Y;
 
@@ -1831,15 +2171,14 @@ namespace CD_Measure
         {
             inliers.Clear();
 
-
             double cost = 0.0;
 
             for (int i = 0; i < data.Length; i++)
             {
-                // 직선에 내린 수선의 길이를 계산한다.
+                // get the distance
                 double distance = compute_circle_distance(ref estimated_model, data[i]);
 
-                // 예측된 모델에서 유효한 데이터인 경우, 유효한 데이터 집합에 더한다.
+                // select inliers
                 if (distance < distance_threshold)
                 {
                     cost += 1.0;
@@ -2105,6 +2444,12 @@ namespace CD_Measure
             DateTime curr = DateTime.Now;
             string strTime = string.Format("{0:00}_{1:00}_{2:00}_{3:000}", curr.Hour, curr.Minute, curr.Second, curr.Millisecond);
             return strTime;
+        }
+        public static string GetTimeCodeString_YY_MM_DD_HH_MM_SS(DateTime dt)
+        {
+            DateTime curr = dt;
+
+            return string.Format("{0:0000}_{1:00}_{2:00}_{3:00}_{4:00}_{5:00}", curr.Year, curr.Month, curr.Day, curr.Hour, curr.Minute, curr.Second);
         }
        #endregion
 
@@ -3997,6 +4342,7 @@ namespace CD_Measure
             int GAP = KSIZE / 2;
             double fSubPos = 0;
 
+            int nLimit = rawImage.Length;
             try
             {
                 //for (int i = 0; i < arrPoints.Length; i++)
@@ -4020,13 +4366,23 @@ namespace CD_Measure
                             int y1 = (int)Math.Floor(cy);
                             int y2 = (int)Math.Ceiling(cy);
 
+                            int pos11 = y1 * imageW + x1;
+                            int pos12 = y2 * imageW + x1;
+                            int pos21 = y1 * imageW + x2;
+                            int pos22 = y2 * imageW + x2;
                         
-                            int q11 = rawImage[y1 * imageW + x1];
-                            int q12 = rawImage[y2 * imageW + x1];
-                            int q21 = rawImage[y1 * imageW + x2];
-                            int q22 = rawImage[y2 * imageW + x2];
+                            double fInterpolated = 0;
 
-                            double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+                            if (pos11 > 0 && pos12 > 0 && pos21 > 0 && pos22 > 0 &&
+                                pos11 < nLimit && pos12 < nLimit && pos21 < nLimit && pos22 < nLimit)
+                            {
+                                int q11 = rawImage[y1 * imageW + x1];
+                                int q12 = rawImage[y2 * imageW + x1];
+                                int q21 = rawImage[y1 * imageW + x2];
+                                int q22 = rawImage[y2 * imageW + x2];
+
+                                fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+                            }
 
                             if (fInterpolated == 0)
                             {
@@ -4116,7 +4472,6 @@ namespace CD_Measure
                     };
                 }
                 #endregion
-
             }
             else if (nFilterType == 2)
             {
@@ -4151,7 +4506,6 @@ namespace CD_Measure
             }
 
             double[] fImage = new double[arrPoints.Length];
-
             int KSIZE = (int)Math.Sqrt(fKernel.Length);
             int GAP = KSIZE / 2;
 
@@ -4165,7 +4519,6 @@ namespace CD_Measure
 
                 for (int j = -GAP; j <= GAP; j++)
                 {
-
                     for (int k = -GAP; k <= GAP; k++)
                     {
                         float cy = y - j;
@@ -4422,50 +4775,49 @@ namespace CD_Measure
 
             int KSIZE = (int)Math.Sqrt(fKernel.Length);
             int GAP = KSIZE / 2;
-
-            for (int i = 0; i < arrPoints.Length; i++)
-            {
-                float x = arrPoints.ElementAt(i).X;
-                float y = arrPoints.ElementAt(i).Y;
-
-                double kernelSum = 0;
-
-                for (int j = -GAP; j <= GAP; j++)
-                {
-                    for (int k = -GAP; k <= GAP; k++)
-                    {
-                        float cy = y - j;
-                        float cx = x - k;
-
-                        int x1 = (int)Math.Floor(cx);
-                        int x2 = (int)Math.Ceiling(cx);
-                        int y1 = (int)Math.Floor(cy);
-                        int y2 = (int)Math.Ceiling(cy);
-
-                        int q11 = rawImage[y1 * imageW + x1];
-                        int q12 = rawImage[y2 * imageW + x1];
-                        int q21 = rawImage[y1 * imageW + x2];
-                        int q22 = rawImage[y2 * imageW + x2];
-
-                        double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
-
-                        if (fInterpolated == 0)
-                        {
-                            fInterpolated = rawImage[(int)cy * imageW + (int)cx];
-                        }
-
-                        kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * fInterpolated);
-                    }
-                }
-                fImage[i] = kernelSum;
-            }
-
-            double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
-
             double fSubPos = 0;
 
             try
             {
+                for (int i = 0; i < arrPoints.Length; i++)
+                {
+                    float x = arrPoints.ElementAt(i).X;
+                    float y = arrPoints.ElementAt(i).Y;
+
+                    double kernelSum = 0;
+
+                    for (int j = -GAP; j <= GAP; j++)
+                    {
+                        for (int k = -GAP; k <= GAP; k++)
+                        {
+                            float cy = y - j;
+                            float cx = x - k;
+
+                            int x1 = (int)Math.Floor(cx);
+                            int x2 = (int)Math.Ceiling(cx);
+                            int y1 = (int)Math.Floor(cy);
+                            int y2 = (int)Math.Ceiling(cy);
+
+                            int q11 = rawImage[y1 * imageW + x1];
+                            int q12 = rawImage[y2 * imageW + x1];
+                            int q21 = rawImage[y1 * imageW + x2];
+                            int q22 = rawImage[y2 * imageW + x2];
+
+                            double fInterpolated = GetInterPolatedValue(cx, cy, x1, x2, y1, y2, q11, q12, q21, q22);
+
+                            if (fInterpolated == 0)
+                            {
+                                fInterpolated = rawImage[(int)cy * imageW + (int)cx];
+                            }
+
+                            kernelSum += (fKernel[(j + GAP) * KSIZE + k + GAP] * fInterpolated);
+                        }
+                    }
+                    fImage[i] = kernelSum;
+                }
+
+                double[] fDerivative = HC_EDGE_Get1stDerivativeArrayFromLineBuff(fImage);
+
                 double fValue = fDerivative.Max();
                 int nPos = Array.IndexOf(fDerivative, fValue);
                 fSubPos = nPos + GetSubPixelFromLineBuff(fDerivative, nPos);
