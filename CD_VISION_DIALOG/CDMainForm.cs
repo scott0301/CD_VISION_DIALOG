@@ -2837,25 +2837,25 @@ namespace CD_VISION_DIALOG
             //apply directional operation                                                        
             int m_nAction = 0;
 
-            /***/
-            if (RDO_ROI_POSITION.Checked == true) m_nAction = IFX_ADJ_ACTION.POS;
-            else if (RDO_ROI_GAP.Checked /***/== true) m_nAction = IFX_ADJ_ACTION.GAP;
-            else if (RDO_ROI_SIZE.Checked /**/== true) m_nAction = IFX_ADJ_ACTION.SIZE;
-            else if (RDO_ROI_ASYM.Checked /**/== true) m_nAction = IFX_ADJ_ACTION.ASYM;
+
+            if/***/ (RDO_FIGURE_ACTION_POSITION.Checked == true) m_nAction = IFX_ADJ_ACTION.POS;
+            else if (RDO_FIGURE_ACTION_GAP.Checked /***/== true) m_nAction = IFX_ADJ_ACTION.GAP;
+            else if (RDO_FIGURE_ACTION_SIZE.Checked /**/== true) m_nAction = IFX_ADJ_ACTION.SIZE;
+            else if (RDO_FIGURE_ACTION_WHEEL.Checked /**/== true) m_nAction = IFX_ADJ_ACTION.WHEEL;
 
 
             //************************************************************************************************
             // 01 Mode control 
             //************************************************************************************************
-            if (e.KeyCode == Keys.P || e.KeyCode == Keys.G || e.KeyCode == Keys.S || e.KeyCode == Keys.Z)
+            if (e.KeyCode == Keys.P || e.KeyCode == Keys.G || e.KeyCode == Keys.S || e.KeyCode == Keys.W)
             {
                 string mode = string.Empty;
 
-                /***/
-                if (e.KeyCode == Keys.P) { RDO_ROI_POSITION.Checked = true; mode = "POSITION ADJUST"; }
-                else if (e.KeyCode == Keys.G) { RDO_ROI_GAP.Checked /***/= true; mode = "GAP ADJUST"; }
-                else if (e.KeyCode == Keys.S) { RDO_ROI_SIZE.Checked /**/= true; mode = "SIZE ADJUST"; }
-                else if (e.KeyCode == Keys.Z) { RDO_ROI_ASYM.Checked/**/ = true; mode = "ZIG ZAG ADJUST"; }
+
+                if/***/ (e.KeyCode == Keys.P) { RDO_FIGURE_ACTION_POSITION.Checked = true; mode = "POSITION ADJUST"; }
+                else if (e.KeyCode == Keys.G) { RDO_FIGURE_ACTION_GAP.Checked /***/= true; mode = "GAP ADJUST"; }
+                else if (e.KeyCode == Keys.S) { RDO_FIGURE_ACTION_SIZE.Checked /**/= true; mode = "SIZE ADJUST"; }
+                else if (e.KeyCode == Keys.W) { RDO_FIGURE_ACTION_WHEEL.Checked/**/ = true; mode = "WHEEL ADJUST"; }
                 MessageBox.Show("MODE CHANGE : " + mode, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             //************************************************************************************************
@@ -2878,14 +2878,14 @@ namespace CD_VISION_DIALOG
             //************************************************************************************************
             else if (e.KeyCode == Keys.Add || e.KeyCode == Keys.Subtract)
             {
-                /***/
-                if (e.KeyCode == Keys.Add/***/) { _ChangeFigure_AdjustLevel(+1); }
+
+                if/***/ (e.KeyCode == Keys.Add/***/) { _ChangeFigure_AdjustLevel(+1); }
                 else if (e.KeyCode == Keys.Subtract) { _ChangeFigure_AdjustLevel(-1); }
             }
             else if (e.KeyCode == Keys.Oemcomma || e.KeyCode == Keys.OemPeriod)
             {
-                /***/
-                if (e.KeyCode == Keys.OemPeriod/***/) { _ChangeFigure_AdjustLevel(+1); }
+
+                if/***/ (e.KeyCode == Keys.OemPeriod/***/) { _ChangeFigure_AdjustLevel(+1); }
                 else if (e.KeyCode == Keys.Oemcomma/****/) { _ChangeFigure_AdjustLevel(-1); }
             }
             else
@@ -2896,8 +2896,7 @@ namespace CD_VISION_DIALOG
 
                     int nDir = 0;
 
-                    /***/
-                    if (e.KeyCode == Keys.Left)/****/nDir = IFX_DIR.DIR_LFT;
+                    if/***/ (e.KeyCode == Keys.Left)/****/nDir = IFX_DIR.DIR_LFT;
                     else if (e.KeyCode == Keys.Up)/******/nDir = IFX_DIR.DIR_TOP;
                     else if (e.KeyCode == Keys.Right)/***/nDir = IFX_DIR.DIR_RHT;
                     else if (e.KeyCode == Keys.Down)/****/nDir = IFX_DIR.DIR_BTM;
@@ -2919,29 +2918,25 @@ namespace CD_VISION_DIALOG
                 {
                     if (e.KeyCode == Keys.Left)
                     {
-                        /***/
-                        if (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, -tx, 0);
+                        if/***/ (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, -tx, 0);
                         else if (m_nAction == IFX_ADJ_ACTION.GAP/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.GAP, -tx, 0);
                         else if (m_nAction == IFX_ADJ_ACTION.SIZE/*****/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.SIZE, -tx, 0);
                     }
                     else if (e.KeyCode == Keys.Right)
                     {
-                        /***/
-                        if (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, tx, 0);
+                        if/***/ (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, tx, 0);
                         else if (m_nAction == IFX_ADJ_ACTION.GAP/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.GAP, tx, 0);
                         else if (m_nAction == IFX_ADJ_ACTION.SIZE/*****/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.SIZE, tx, 0);
                     }
                     else if (e.KeyCode == Keys.Up)
                     {
-                        /***/
-                        if (m_nAction == IFX_ADJ_ACTION.POS/******/) { imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, 0, -ty); }
+                        if/***/ (m_nAction == IFX_ADJ_ACTION.POS/******/) { imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, 0, -ty); }
                         else if (m_nAction == IFX_ADJ_ACTION.GAP/******/) { imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.GAP, 0, -ty); }
                         else if (m_nAction == IFX_ADJ_ACTION.SIZE/*****/) { imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.SIZE, 0, -ty); }
                     }
                     else if (e.KeyCode == Keys.Down)
                     {
-                        /***/
-                        if (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, 0, ty);
+                        if/***/ (m_nAction == IFX_ADJ_ACTION.POS/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.POS, 0, ty);
                         else if (m_nAction == IFX_ADJ_ACTION.GAP/******/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.GAP, 0, ty);
                         else if (m_nAction == IFX_ADJ_ACTION.SIZE/*****/) imageView1.iAdj_Figure(nFigureIndex, nDataIndex, IFX_ADJ_ACTION.SIZE, 0, ty);
                     }
@@ -3645,8 +3640,16 @@ namespace CD_VISION_DIALOG
 
             int nFigureIndex = TAB_FIGURE.SelectedIndex;
 
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.POS, false);
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.GAP, false);
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.SIZE, false);
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.WHEEL, false);
+
             // set visibility : according to tab selection only for OVL
-            RDO_ROI_ASYM.Visible = nFigureIndex == IFX_FIGURE.PAIR_OVL ? true : false;
+            RDO_FIGURE_ACTION_WHEEL.Visible = nFigureIndex == IFX_FIGURE.PAIR_OVL ? true : false;
+            BTN_FIGURE_ACTION_WHEEL.Visible = RDO_FIGURE_ACTION_WHEEL.Visible;
+
+
         }
         //*****************************************************************************************
         #region FIGURE MANIPULATION Scale
@@ -3670,10 +3673,10 @@ namespace CD_VISION_DIALOG
         {
             int nValue = TB_FIGURE_CTRL_SCALE.Value;
 
-            /***/
-            if (((Button)sender).Name == BTN_FIGURE_MODIF_SCALE_PLUS.Name) { nValue++; }
+            if/***/ (((Button)sender).Name == BTN_FIGURE_MODIF_SCALE_PLUS.Name) { nValue++; }
             else if (((Button)sender).Name == BTN_FIGURE_MODIF_SCALE_MINUS.Name) { nValue--; }
 
+            if (nValue == 0) nValue = 1;
             TB_FIGURE_CTRL_SCALE.Value = nValue;
             TXT_FIGURE_CONTROL_SCALE.Text = nValue.ToString("N0");
         }
@@ -4590,6 +4593,79 @@ namespace CD_VISION_DIALOG
                 string strFullFilePath = Path.Combine(imageView1.fm.param_path.i04_PATH_RECP_REAL, strRecpFile);
                 _Recp_Change(strFullFilePath);
             }
+        }
+
+        private void RDO_ROI_POSITION_CheckedChanged(object sender, EventArgs e)
+        {
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.POS, RDO_FIGURE_ACTION_POSITION.Checked);
+        }
+
+        private void RDO_ROI_GAP_CheckedChanged(object sender, EventArgs e)
+        {
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.GAP, RDO_FIGURE_ACTION_GAP.Checked);
+        }
+
+        private void RDO_ROI_SIZE_CheckedChanged(object sender, EventArgs e)
+        {
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.SIZE, RDO_FIGURE_ACTION_SIZE.Checked);   
+        }
+
+        private void RDO_ROI_WHEEL_CheckedChanged(object sender, EventArgs e)
+        {
+            _Set_ROI_Action_Image(IFX_ADJ_ACTION.WHEEL, RDO_FIGURE_ACTION_WHEEL.Checked);
+        }
+        private void _Set_ROI_Action_Image(int nAction, bool bPositive)
+        {
+
+            if (nAction == IFX_ADJ_ACTION.POS)
+            {
+                if (bPositive == true) BTN_FIGURE_ACTION_POS.BackgroundImage = Properties.Resources.act_pos_ON;
+                if (bPositive == false) BTN_FIGURE_ACTION_POS.BackgroundImage = Properties.Resources.act_pos_OFF;
+            }
+            else if (nAction == IFX_ADJ_ACTION.GAP)
+            {
+                if (bPositive== true) BTN_FIGURE_ACTION_GAP.BackgroundImage = Properties.Resources.act_gap_ON;
+                if (bPositive== false) BTN_FIGURE_ACTION_GAP.BackgroundImage = Properties.Resources.act_gap_OFF;
+            }
+            else if (nAction == IFX_ADJ_ACTION.SIZE)
+            {
+                if (bPositive == true) BTN_FIGURE_ACTION_SIZE.BackgroundImage = Properties.Resources.act_size_ON;
+                if (bPositive == false) BTN_FIGURE_ACTION_SIZE.BackgroundImage = Properties.Resources.act_size_OFF;
+            }
+            else if (nAction == IFX_ADJ_ACTION.WHEEL)
+            {
+                if (bPositive == true) BTN_FIGURE_ACTION_WHEEL.BackgroundImage = Properties.Resources.act_whee_ON;
+                if (bPositive == false) BTN_FIGURE_ACTION_WHEEL.BackgroundImage = Properties.Resources.act_whee_OFF;
+            }
+
+            
+            
+            
+            
+
+         
+
+            
+        }
+
+        private void BTN_FIGURE_ACTION_POS_Click(object sender, EventArgs e)
+        {
+            RDO_FIGURE_ACTION_POSITION.Checked = true;
+        }
+
+        private void BTN_FIGURE_ACTION_GAP_Click(object sender, EventArgs e)
+        {
+            RDO_FIGURE_ACTION_GAP.Checked = true;
+        }
+
+        private void BTN_FIGURE_ACTION_SIZE_Click(object sender, EventArgs e)
+        {
+            RDO_FIGURE_ACTION_SIZE.Checked = true;
+        }
+
+        private void BTN_FIGURE_ACTION_WHEEL_Click(object sender, EventArgs e)
+        {
+            RDO_FIGURE_ACTION_WHEEL.Checked = true;
         }
 
         

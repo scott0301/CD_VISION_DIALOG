@@ -145,6 +145,9 @@
   <data name="zoom_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Iteration" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iteration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="measure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\package graphics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,6 +163,9 @@
   <data name="openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="patching" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\patching.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,8 +175,11 @@
   <data name="image_save_ovr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image save_ovr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cam2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cam2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="act_whee_ON" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_whee_ON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="open_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open_folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -189,6 +198,9 @@
   </data>
   <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quick restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="act_gap_OFF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_gap_OFF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,6 +238,9 @@
   <data name="recpNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\recp New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="act_pos_OFF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_pos_OFF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="dir_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dir left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -256,14 +271,20 @@
   <data name="measureVer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\measureVer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="act_whee_OFF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_whee_OFF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="record_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\record_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="vxdlogo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vxdlogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="act_size_ON" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_size_ON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="act_gap_ON" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_gap_ON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="apiply2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apiply2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,11 +316,14 @@
   <data name="process" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\process.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="drawfigure_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drawfigure On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="history (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\history (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cam2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cam2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="alien male" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alien male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,8 +340,8 @@
   <data name="joystick_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\joystick_on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="drawfigure_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\drawfigure On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="act_pos_ON" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_pos_ON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_yo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit_yo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -328,7 +352,7 @@
   <data name="Posterious" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Posterious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Iteration" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Iteration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="act_size_OFF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\act_size_OFF1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

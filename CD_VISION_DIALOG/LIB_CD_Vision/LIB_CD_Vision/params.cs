@@ -435,7 +435,7 @@ namespace DEF_PARAMS
         public static int POS = 0;
         public static int GAP = 1;
         public static int SIZE = 2;
-        public static int ASYM = 3;
+        public static int WHEEL = 3;
     }
 
     public static class IFX_METRIC

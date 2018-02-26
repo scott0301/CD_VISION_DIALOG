@@ -567,7 +567,7 @@ namespace CD_View
                 /***/if (nTarget == TARGET_IN) { single.AdjustSize_IN(nDir, nScale, bHorizontal, bVertical); }
                 else if (nTarget == TARGET_EX) { single.AdjustSize_EX(nDir, nScale, bHorizontal, bVertical); }
             }
-            else if (nAction == IFX_ADJ_ACTION.ASYM)
+            else if (nAction == IFX_ADJ_ACTION.WHEEL)
             {
                 /***/if (nTarget == TARGET_IN) { single.AdjustAsym_IN(nDir, nScale, bHorizontal, bVertical); }
                 else if (nTarget == TARGET_EX) { single.AdjustAsym_EX(nDir, nScale, bHorizontal, bVertical); }

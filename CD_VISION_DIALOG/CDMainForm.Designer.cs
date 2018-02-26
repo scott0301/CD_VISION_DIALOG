@@ -57,14 +57,20 @@
             this.label31 = new System.Windows.Forms.Label();
             this.msg = new System.Windows.Forms.RichTextBox();
             this.panel27 = new System.Windows.Forms.Panel();
+            this.BTN_FIGURE_ACTION_WHEEL = new System.Windows.Forms.Button();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.BTN_FIGURE_ACTION_SIZE = new System.Windows.Forms.Button();
             this.BTN_FIGURE_MODIF_SCALE_PLUS = new System.Windows.Forms.Button();
             this.BTN_FIGURE_MODIF_SCALE_MINUS = new System.Windows.Forms.Button();
-            this.RDO_ROI_ASYM = new System.Windows.Forms.RadioButton();
-            this.RDO_ROI_SIZE = new System.Windows.Forms.RadioButton();
+            this.BTN_FIGURE_ACTION_GAP = new System.Windows.Forms.Button();
+            this.RDO_FIGURE_ACTION_WHEEL = new System.Windows.Forms.RadioButton();
+            this.RDO_FIGURE_ACTION_SIZE = new System.Windows.Forms.RadioButton();
+            this.BTN_FIGURE_ACTION_POS = new System.Windows.Forms.Button();
             this.TXT_FIGURE_CONTROL_SCALE = new System.Windows.Forms.TextBox();
             this.TB_FIGURE_CTRL_SCALE = new System.Windows.Forms.TrackBar();
-            this.RDO_ROI_POSITION = new System.Windows.Forms.RadioButton();
-            this.RDO_ROI_GAP = new System.Windows.Forms.RadioButton();
+            this.RDO_FIGURE_ACTION_POSITION = new System.Windows.Forms.RadioButton();
+            this.RDO_FIGURE_ACTION_GAP = new System.Windows.Forms.RadioButton();
             this.label47 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.TAB_VIEW = new System.Windows.Forms.TabControl();
@@ -706,14 +712,20 @@
             // 
             this.panel27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel27.Controls.Add(this.BTN_FIGURE_ACTION_WHEEL);
+            this.panel27.Controls.Add(this.label78);
+            this.panel27.Controls.Add(this.label3);
+            this.panel27.Controls.Add(this.BTN_FIGURE_ACTION_SIZE);
             this.panel27.Controls.Add(this.BTN_FIGURE_MODIF_SCALE_PLUS);
             this.panel27.Controls.Add(this.BTN_FIGURE_MODIF_SCALE_MINUS);
-            this.panel27.Controls.Add(this.RDO_ROI_ASYM);
-            this.panel27.Controls.Add(this.RDO_ROI_SIZE);
+            this.panel27.Controls.Add(this.BTN_FIGURE_ACTION_GAP);
+            this.panel27.Controls.Add(this.RDO_FIGURE_ACTION_WHEEL);
+            this.panel27.Controls.Add(this.RDO_FIGURE_ACTION_SIZE);
+            this.panel27.Controls.Add(this.BTN_FIGURE_ACTION_POS);
             this.panel27.Controls.Add(this.TXT_FIGURE_CONTROL_SCALE);
             this.panel27.Controls.Add(this.TB_FIGURE_CTRL_SCALE);
-            this.panel27.Controls.Add(this.RDO_ROI_POSITION);
-            this.panel27.Controls.Add(this.RDO_ROI_GAP);
+            this.panel27.Controls.Add(this.RDO_FIGURE_ACTION_POSITION);
+            this.panel27.Controls.Add(this.RDO_FIGURE_ACTION_GAP);
             this.panel27.Controls.Add(this.label47);
             this.panel27.Controls.Add(this.label87);
             this.panel27.Location = new System.Drawing.Point(3, 660);
@@ -721,9 +733,49 @@
             this.panel27.Size = new System.Drawing.Size(602, 89);
             this.panel27.TabIndex = 42;
             // 
+            // BTN_FIGURE_ACTION_WHEEL
+            // 
+            this.BTN_FIGURE_ACTION_WHEEL.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.act_whee_OFF;
+            this.BTN_FIGURE_ACTION_WHEEL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_ACTION_WHEEL.Location = new System.Drawing.Point(235, 7);
+            this.BTN_FIGURE_ACTION_WHEEL.Name = "BTN_FIGURE_ACTION_WHEEL";
+            this.BTN_FIGURE_ACTION_WHEEL.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_ACTION_WHEEL.TabIndex = 10;
+            this.BTN_FIGURE_ACTION_WHEEL.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_ACTION_WHEEL.Click += new System.EventHandler(this.BTN_FIGURE_ACTION_WHEEL_Click);
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(380, 60);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(31, 14);
+            this.label78.TabIndex = 9;
+            this.label78.Text = "(+)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(312, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 14);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "(-)";
+            // 
+            // BTN_FIGURE_ACTION_SIZE
+            // 
+            this.BTN_FIGURE_ACTION_SIZE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.act_size_OFF;
+            this.BTN_FIGURE_ACTION_SIZE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_ACTION_SIZE.Location = new System.Drawing.Point(176, 7);
+            this.BTN_FIGURE_ACTION_SIZE.Name = "BTN_FIGURE_ACTION_SIZE";
+            this.BTN_FIGURE_ACTION_SIZE.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_ACTION_SIZE.TabIndex = 10;
+            this.BTN_FIGURE_ACTION_SIZE.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_ACTION_SIZE.Click += new System.EventHandler(this.BTN_FIGURE_ACTION_SIZE_Click);
+            // 
             // BTN_FIGURE_MODIF_SCALE_PLUS
             // 
-            this.BTN_FIGURE_MODIF_SCALE_PLUS.Location = new System.Drawing.Point(574, 56);
+            this.BTN_FIGURE_MODIF_SCALE_PLUS.Location = new System.Drawing.Point(570, 56);
             this.BTN_FIGURE_MODIF_SCALE_PLUS.Name = "BTN_FIGURE_MODIF_SCALE_PLUS";
             this.BTN_FIGURE_MODIF_SCALE_PLUS.Size = new System.Drawing.Size(23, 23);
             this.BTN_FIGURE_MODIF_SCALE_PLUS.TabIndex = 8;
@@ -733,7 +785,7 @@
             // 
             // BTN_FIGURE_MODIF_SCALE_MINUS
             // 
-            this.BTN_FIGURE_MODIF_SCALE_MINUS.Location = new System.Drawing.Point(545, 56);
+            this.BTN_FIGURE_MODIF_SCALE_MINUS.Location = new System.Drawing.Point(501, 57);
             this.BTN_FIGURE_MODIF_SCALE_MINUS.Name = "BTN_FIGURE_MODIF_SCALE_MINUS";
             this.BTN_FIGURE_MODIF_SCALE_MINUS.Size = new System.Drawing.Size(23, 23);
             this.BTN_FIGURE_MODIF_SCALE_MINUS.TabIndex = 8;
@@ -741,50 +793,75 @@
             this.BTN_FIGURE_MODIF_SCALE_MINUS.UseVisualStyleBackColor = true;
             this.BTN_FIGURE_MODIF_SCALE_MINUS.Click += new System.EventHandler(this.BTN_FIGURE_MANIPULATION_SCALE_Click);
             // 
-            // RDO_ROI_ASYM
+            // BTN_FIGURE_ACTION_GAP
             // 
-            this.RDO_ROI_ASYM.AutoSize = true;
-            this.RDO_ROI_ASYM.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.RDO_ROI_ASYM.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_ASYM.Location = new System.Drawing.Point(232, 66);
-            this.RDO_ROI_ASYM.Name = "RDO_ROI_ASYM";
-            this.RDO_ROI_ASYM.Size = new System.Drawing.Size(68, 16);
-            this.RDO_ROI_ASYM.TabIndex = 2;
-            this.RDO_ROI_ASYM.Text = "ZIGZAG";
-            this.RDO_ROI_ASYM.UseVisualStyleBackColor = true;
-            this.RDO_ROI_ASYM.Visible = false;
+            this.BTN_FIGURE_ACTION_GAP.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.act_gap_OFF;
+            this.BTN_FIGURE_ACTION_GAP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_ACTION_GAP.Location = new System.Drawing.Point(117, 7);
+            this.BTN_FIGURE_ACTION_GAP.Name = "BTN_FIGURE_ACTION_GAP";
+            this.BTN_FIGURE_ACTION_GAP.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_ACTION_GAP.TabIndex = 10;
+            this.BTN_FIGURE_ACTION_GAP.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_ACTION_GAP.Click += new System.EventHandler(this.BTN_FIGURE_ACTION_GAP_Click);
+            // 
+            // RDO_ROI_WHEEL
+            // 
+            this.RDO_FIGURE_ACTION_WHEEL.AutoSize = true;
+            this.RDO_FIGURE_ACTION_WHEEL.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.RDO_FIGURE_ACTION_WHEEL.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_FIGURE_ACTION_WHEEL.Location = new System.Drawing.Point(232, 61);
+            this.RDO_FIGURE_ACTION_WHEEL.Name = "RDO_ROI_WHEEL";
+            this.RDO_FIGURE_ACTION_WHEEL.Size = new System.Drawing.Size(71, 14);
+            this.RDO_FIGURE_ACTION_WHEEL.TabIndex = 2;
+            this.RDO_FIGURE_ACTION_WHEEL.Text = "WHEEL(W)";
+            this.RDO_FIGURE_ACTION_WHEEL.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_WHEEL.Visible = false;
+            this.RDO_FIGURE_ACTION_WHEEL.CheckedChanged += new System.EventHandler(this.RDO_ROI_WHEEL_CheckedChanged);
             // 
             // RDO_ROI_SIZE
             // 
-            this.RDO_ROI_SIZE.AutoSize = true;
-            this.RDO_ROI_SIZE.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.RDO_ROI_SIZE.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_SIZE.Location = new System.Drawing.Point(170, 66);
-            this.RDO_ROI_SIZE.Name = "RDO_ROI_SIZE";
-            this.RDO_ROI_SIZE.Size = new System.Drawing.Size(50, 16);
-            this.RDO_ROI_SIZE.TabIndex = 2;
-            this.RDO_ROI_SIZE.Text = "SIZE";
-            this.RDO_ROI_SIZE.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_SIZE.AutoSize = true;
+            this.RDO_FIGURE_ACTION_SIZE.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.RDO_FIGURE_ACTION_SIZE.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_FIGURE_ACTION_SIZE.Location = new System.Drawing.Point(175, 61);
+            this.RDO_FIGURE_ACTION_SIZE.Name = "RDO_ROI_SIZE";
+            this.RDO_FIGURE_ACTION_SIZE.Size = new System.Drawing.Size(58, 14);
+            this.RDO_FIGURE_ACTION_SIZE.TabIndex = 2;
+            this.RDO_FIGURE_ACTION_SIZE.Text = "SIZE(S)";
+            this.RDO_FIGURE_ACTION_SIZE.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_SIZE.CheckedChanged += new System.EventHandler(this.RDO_ROI_SIZE_CheckedChanged);
+            // 
+            // BTN_FIGURE_ACTION_POS
+            // 
+            this.BTN_FIGURE_ACTION_POS.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.act_pos_OFF;
+            this.BTN_FIGURE_ACTION_POS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_FIGURE_ACTION_POS.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.BTN_FIGURE_ACTION_POS.Location = new System.Drawing.Point(58, 7);
+            this.BTN_FIGURE_ACTION_POS.Name = "BTN_FIGURE_ACTION_POS";
+            this.BTN_FIGURE_ACTION_POS.Size = new System.Drawing.Size(50, 50);
+            this.BTN_FIGURE_ACTION_POS.TabIndex = 10;
+            this.BTN_FIGURE_ACTION_POS.UseVisualStyleBackColor = true;
+            this.BTN_FIGURE_ACTION_POS.Click += new System.EventHandler(this.BTN_FIGURE_ACTION_POS_Click);
             // 
             // TXT_FIGURE_CONTROL_SCALE
             // 
             this.TXT_FIGURE_CONTROL_SCALE.BackColor = System.Drawing.Color.White;
             this.TXT_FIGURE_CONTROL_SCALE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_FIGURE_CONTROL_SCALE.ForeColor = System.Drawing.Color.Black;
-            this.TXT_FIGURE_CONTROL_SCALE.Location = new System.Drawing.Point(557, 28);
+            this.TXT_FIGURE_CONTROL_SCALE.Location = new System.Drawing.Point(531, 56);
             this.TXT_FIGURE_CONTROL_SCALE.Name = "TXT_FIGURE_CONTROL_SCALE";
-            this.TXT_FIGURE_CONTROL_SCALE.Size = new System.Drawing.Size(29, 22);
+            this.TXT_FIGURE_CONTROL_SCALE.Size = new System.Drawing.Size(35, 22);
             this.TXT_FIGURE_CONTROL_SCALE.TabIndex = 7;
             this.TXT_FIGURE_CONTROL_SCALE.Text = "10";
             this.TXT_FIGURE_CONTROL_SCALE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_FIGURE_CTRL_SCALE
             // 
-            this.TB_FIGURE_CTRL_SCALE.Location = new System.Drawing.Point(8, 6);
+            this.TB_FIGURE_CTRL_SCALE.Location = new System.Drawing.Point(301, 7);
             this.TB_FIGURE_CTRL_SCALE.Maximum = 50;
             this.TB_FIGURE_CTRL_SCALE.Minimum = 1;
             this.TB_FIGURE_CTRL_SCALE.Name = "TB_FIGURE_CTRL_SCALE";
-            this.TB_FIGURE_CTRL_SCALE.Size = new System.Drawing.Size(536, 45);
+            this.TB_FIGURE_CTRL_SCALE.Size = new System.Drawing.Size(292, 45);
             this.TB_FIGURE_CTRL_SCALE.SmallChange = 5;
             this.TB_FIGURE_CTRL_SCALE.TabIndex = 3;
             this.TB_FIGURE_CTRL_SCALE.TickFrequency = 5;
@@ -794,35 +871,37 @@
             // 
             // RDO_ROI_POSITION
             // 
-            this.RDO_ROI_POSITION.AutoSize = true;
-            this.RDO_ROI_POSITION.Checked = true;
-            this.RDO_ROI_POSITION.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.RDO_ROI_POSITION.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_POSITION.Location = new System.Drawing.Point(57, 65);
-            this.RDO_ROI_POSITION.Name = "RDO_ROI_POSITION";
-            this.RDO_ROI_POSITION.Size = new System.Drawing.Size(47, 16);
-            this.RDO_ROI_POSITION.TabIndex = 2;
-            this.RDO_ROI_POSITION.TabStop = true;
-            this.RDO_ROI_POSITION.Text = "POS";
-            this.RDO_ROI_POSITION.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_POSITION.AutoSize = true;
+            this.RDO_FIGURE_ACTION_POSITION.Checked = true;
+            this.RDO_FIGURE_ACTION_POSITION.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.RDO_FIGURE_ACTION_POSITION.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_FIGURE_ACTION_POSITION.Location = new System.Drawing.Point(57, 63);
+            this.RDO_FIGURE_ACTION_POSITION.Name = "RDO_ROI_POSITION";
+            this.RDO_FIGURE_ACTION_POSITION.Size = new System.Drawing.Size(56, 14);
+            this.RDO_FIGURE_ACTION_POSITION.TabIndex = 2;
+            this.RDO_FIGURE_ACTION_POSITION.TabStop = true;
+            this.RDO_FIGURE_ACTION_POSITION.Text = "POS(P)";
+            this.RDO_FIGURE_ACTION_POSITION.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_POSITION.CheckedChanged += new System.EventHandler(this.RDO_ROI_POSITION_CheckedChanged);
             // 
             // RDO_ROI_GAP
             // 
-            this.RDO_ROI_GAP.AutoSize = true;
-            this.RDO_ROI_GAP.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.RDO_ROI_GAP.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.RDO_ROI_GAP.Location = new System.Drawing.Point(116, 66);
-            this.RDO_ROI_GAP.Name = "RDO_ROI_GAP";
-            this.RDO_ROI_GAP.Size = new System.Drawing.Size(48, 16);
-            this.RDO_ROI_GAP.TabIndex = 2;
-            this.RDO_ROI_GAP.Text = "GAP";
-            this.RDO_ROI_GAP.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_GAP.AutoSize = true;
+            this.RDO_FIGURE_ACTION_GAP.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
+            this.RDO_FIGURE_ACTION_GAP.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.RDO_FIGURE_ACTION_GAP.Location = new System.Drawing.Point(116, 63);
+            this.RDO_FIGURE_ACTION_GAP.Name = "RDO_ROI_GAP";
+            this.RDO_FIGURE_ACTION_GAP.Size = new System.Drawing.Size(55, 14);
+            this.RDO_FIGURE_ACTION_GAP.TabIndex = 2;
+            this.RDO_FIGURE_ACTION_GAP.Text = "GAP(G)";
+            this.RDO_FIGURE_ACTION_GAP.UseVisualStyleBackColor = true;
+            this.RDO_FIGURE_ACTION_GAP.CheckedChanged += new System.EventHandler(this.RDO_ROI_GAP_CheckedChanged);
             // 
             // label47
             // 
             this.label47.AutoSize = true;
             this.label47.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label47.Location = new System.Drawing.Point(10, 66);
+            this.label47.Location = new System.Drawing.Point(3, 12);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(42, 14);
             this.label47.TabIndex = 0;
@@ -832,7 +911,7 @@
             // 
             this.label87.AutoSize = true;
             this.label87.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label87.Location = new System.Drawing.Point(550, 10);
+            this.label87.Location = new System.Drawing.Point(338, 61);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(41, 14);
             this.label87.TabIndex = 0;
@@ -921,7 +1000,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 3;
+            this.UC_LOG_VIEWER.m_workIndexer = 135;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1372,7 +1451,7 @@
             this.BTN_FIGURE_REFRESH.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.BTN_FIGURE_REFRESH.FlatAppearance.BorderSize = 3;
             this.BTN_FIGURE_REFRESH.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_FIGURE_REFRESH.Location = new System.Drawing.Point(6, 295);
+            this.BTN_FIGURE_REFRESH.Location = new System.Drawing.Point(6, 298);
             this.BTN_FIGURE_REFRESH.Name = "BTN_FIGURE_REFRESH";
             this.BTN_FIGURE_REFRESH.Size = new System.Drawing.Size(50, 50);
             this.BTN_FIGURE_REFRESH.TabIndex = 12;
@@ -1409,7 +1488,7 @@
             this.UC_Parameter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.UC_Parameter.Location = new System.Drawing.Point(239, 17);
             this.UC_Parameter.Name = "UC_Parameter";
-            this.UC_Parameter.Size = new System.Drawing.Size(363, 344);
+            this.UC_Parameter.Size = new System.Drawing.Size(370, 340);
             this.UC_Parameter.TabIndex = 1;
             // 
             // BTN_FIGURE_DELETE
@@ -2909,7 +2988,7 @@
             this.BTN_SET_MIXED_RC.Name = "BTN_SET_MIXED_RC";
             this.BTN_SET_MIXED_RC.Size = new System.Drawing.Size(127, 25);
             this.BTN_SET_MIXED_RC.TabIndex = 1;
-            this.BTN_SET_MIXED_RC.Text = "SET REGION TYPE";
+            this.BTN_SET_MIXED_RC.Text = "SET REGION";
             this.BTN_SET_MIXED_RC.UseVisualStyleBackColor = true;
             this.BTN_SET_MIXED_RC.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
@@ -3802,7 +3881,7 @@
             this.BTN_SET_MIXED_CC.Name = "BTN_SET_MIXED_CC";
             this.BTN_SET_MIXED_CC.Size = new System.Drawing.Size(127, 25);
             this.BTN_SET_MIXED_CC.TabIndex = 1;
-            this.BTN_SET_MIXED_CC.Text = "SET REGION TYPE";
+            this.BTN_SET_MIXED_CC.Text = "SET REGION";
             this.BTN_SET_MIXED_CC.UseVisualStyleBackColor = true;
             this.BTN_SET_MIXED_CC.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
@@ -4288,7 +4367,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(127, 25);
             this.button4.TabIndex = 1;
-            this.button4.Text = "SET REGION TYPE";
+            this.button4.Text = "SET REGION";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.BTN_SET_MIXED_FIGURES_Click);
             // 
@@ -4826,13 +4905,12 @@
         private CD_Paramter.pnl_parameter UC_Parameter;
         private CD_View.UC_CD_VIEWER imageView1;
         private System.Windows.Forms.Panel panel27;
-        private System.Windows.Forms.RadioButton RDO_ROI_ASYM;
-        private System.Windows.Forms.RadioButton RDO_ROI_SIZE;
+        private System.Windows.Forms.RadioButton RDO_FIGURE_ACTION_WHEEL;
+        private System.Windows.Forms.RadioButton RDO_FIGURE_ACTION_SIZE;
         private System.Windows.Forms.TextBox TXT_FIGURE_CONTROL_SCALE;
         private System.Windows.Forms.TrackBar TB_FIGURE_CTRL_SCALE;
-        private System.Windows.Forms.RadioButton RDO_ROI_POSITION;
-        private System.Windows.Forms.RadioButton RDO_ROI_GAP;
-        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.RadioButton RDO_FIGURE_ACTION_POSITION;
+        private System.Windows.Forms.RadioButton RDO_FIGURE_ACTION_GAP;
         private System.Windows.Forms.Label label87;
         private System.Windows.Forms.TabControl TAB_VIEW;
         private System.Windows.Forms.TabPage tabpage33;
@@ -5142,6 +5220,13 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ColumnHeader LAST_ACC;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BTN_FIGURE_ACTION_WHEEL;
+        private System.Windows.Forms.Button BTN_FIGURE_ACTION_SIZE;
+        private System.Windows.Forms.Button BTN_FIGURE_ACTION_GAP;
+        private System.Windows.Forms.Button BTN_FIGURE_ACTION_POS;
+        private System.Windows.Forms.Label label47;
 
 
 

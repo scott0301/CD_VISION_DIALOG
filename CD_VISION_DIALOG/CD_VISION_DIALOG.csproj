@@ -165,6 +165,11 @@
     <Compile Include="BaseRecpManageForm.Designer.cs">
       <DependentUpon>BaseRecpManageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="supports.cs" />
     <EmbeddedResource Include="BaseRecpCopyForm.resx">
       <DependentUpon>BaseRecpCopyForm.cs</DependentUpon>
@@ -202,14 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="BaseRecpManageForm.resx">
       <DependentUpon>BaseRecpManageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,6 +318,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="alien male.ico" />
+    <None Include="Resources\act_size_OFF1.png" />
+    <None Include="Resources\act_whee_ON.png" />
+    <None Include="Resources\act_whee_OFF.png" />
+    <None Include="Resources\act_size_ON.png" />
+    <None Include="Resources\act_size_OFF.png" />
+    <None Include="Resources\act_pos_ON.png" />
+    <None Include="Resources\act_gap_ON.png" />
+    <None Include="Resources\act_gap_OFF.png" />
+    <None Include="Resources\act_pos_OFF.png" />
     <None Include="Resources\Iteration.png" />
     <None Include="Resources\excel.png" />
     <None Include="Resources\recipe right.png" />
