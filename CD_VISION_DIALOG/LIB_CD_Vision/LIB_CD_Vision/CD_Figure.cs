@@ -20,10 +20,10 @@ namespace CD_Figure
     [Serializable]
     public class CFigureManager : ICloneable
     {
-        public BASE_RECP baseRecp = new BASE_RECP();
-        public PARAM_OPTICS param_optics = new PARAM_OPTICS();
-        public PARAM_PTRN param_ptrn = new PARAM_PTRN();
-        public PARAM_PATH param_path = new PARAM_PATH();
+        public BASE_RECP/******/baseRecp/*******/= new BASE_RECP();
+        public PARAM_OPTICS/***/param_optics/***/= new PARAM_OPTICS();
+        public PARAM_PTRN/*****/param_ptrn/*****/= new PARAM_PTRN();
+        public PARAM_PATH/*****/param_path/*****/= new PARAM_PATH();
 
         public List<string> listCommand = new List<string>();
 
@@ -42,7 +42,8 @@ namespace CD_Figure
         public int COUNT_MIXED_RC { get { return list_mixed_rc.Count; } }
         public int COUNT_MIXED_CC { get { return list_mixed_cc.Count;}}
         public int COUNT_MIXED_RCC{ get { return list_mixed_rcc.Count;}}
-        public int COUNT_RECT { get { return list_rect.Count; } }
+        public int COUNT_RECT/***/{ get { return list_rect.Count; } }
+
         public virtual object Clone() { return new CFigureManager(this); }
 
         public bool BOOL_USE_IMAGE_FOCUS { get; set; }
@@ -85,26 +86,25 @@ namespace CD_Figure
          }
         protected CFigureManager(CFigureManager myself)
         {
-            this.list_pair_Rct = myself.list_pair_Rct.ToList();
-            this.list_pair_Cir = myself.list_pair_Cir.ToList();
-            this.list_pair_Ovl = myself.list_pair_Ovl.ToList();
-            this.list_mixed_rc = myself.list_mixed_rc.ToList();
-            this.list_mixed_cc = myself.list_mixed_cc.ToList();
-            this.list_mixed_rcc = myself.list_mixed_rcc.ToList();
-            this.list_rect = myself.list_rect.ToList();
-            this.listCommand = myself.listCommand.ToList();
+            this.list_pair_Rct/**********/= myself.list_pair_Rct.ToList();
+            this.list_pair_Cir/**********/= myself.list_pair_Cir.ToList();
+            this.list_pair_Ovl/**********/= myself.list_pair_Ovl.ToList();
+            this.list_mixed_rc/**********/= myself.list_mixed_rc.ToList();
+            this.list_mixed_cc/**********/= myself.list_mixed_cc.ToList();
+            this.list_mixed_rcc/*********/= myself.list_mixed_rcc.ToList();
+            this.list_rect/**************/= myself.list_rect.ToList();
+            this.listCommand/************/= myself.listCommand.ToList();
             
-            this.RECP_FILE = myself.RECP_FILE;
+            this.RECP_FILE/**************/= myself.RECP_FILE;
+            this.RC_FOCUS/***************/= myself.RC_FOCUS;
+            this._rc_focus/**************/= myself._rc_focus;
 
-            this.RC_FOCUS = myself.RC_FOCUS;
-            this._rc_focus = myself._rc_focus;
+            this.BOOL_USE_IMAGE_FOCUS/***/= myself.BOOL_USE_IMAGE_FOCUS;
+            this.baseRecp/***************/= myself.baseRecp.CopyTo();
 
-            this.BOOL_USE_IMAGE_FOCUS = myself.BOOL_USE_IMAGE_FOCUS;
-            this.baseRecp = myself.baseRecp.CopyTo();
-
-            this.param_path = myself.param_path.CopyTo();
-            this.param_optics = myself.param_optics.CopyTo();
-            this.param_ptrn = myself.param_ptrn;
+            this.param_path/*************/= myself.param_path.CopyTo();
+            this.param_optics/***********/= myself.param_optics.CopyTo();
+            this.param_ptrn/*************/= myself.param_ptrn;
 
          }
         #endregion 
@@ -149,11 +149,7 @@ namespace CD_Figure
         public RectangleF ElementAt_Rectangle(int nIndex)
         {
             RectangleF rc = new RectangleF();
-
-            if (nIndex <= COUNT_RECT && COUNT_RECT != 0)
-            {
-                rc = list_rect.ElementAt(nIndex);
-            }
+            if (nIndex <= COUNT_RECT && COUNT_RECT != 0) { rc = list_rect.ElementAt(nIndex); }
             return rc;
         }
         #endregion
@@ -245,11 +241,8 @@ namespace CD_Figure
                 }
 
                 int nMax = 0;
+                if (list.Count > 0) { nMax = list.Max(); }// zero exception 170811
 
-                if (list.Count > 0)  // zero exception 170811
-                {
-                    nMax = list.Max(); ;
-                }
                 bool bFound = false;
 
                 // if there is empty index , set !!
@@ -554,7 +547,7 @@ namespace CD_Figure
         public byte[] DoPreProcess(byte[] rawImage, int imageW, int imageH, double fSigma, int KSize, Rectangle rc)
         {
             double[] fKernel = Computer.HC_FILTER_GenerateGaussianFilter(fSigma, KSize);
-            rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
+            /******/rawImage = Computer.HC_FILTER_ConvolutionWindow(fKernel, rawImage, imageW, imageH, rc);
             return rawImage;
         }
         public byte[] DoSPCProcess(byte[] rawImage, int imageW, int imageH, RectangleF rc, int nProcessType)
@@ -727,31 +720,7 @@ namespace CD_Figure
 
 
         }
-        //***************************************************************************
-        // Realistic Member Functions
-        //***************************************************************************
-
-        // for drawing : convert minus relative croodinate to absolute croodinate
-        //public RectangleF GetCompensatedRect(RectangleF rc)
-        //{
-        //    RectangleF rcResult = rc;
-        //
-        //    // 상대좌표가 들어있으면 상대 출력을 해야지
-        //    if (this.ptOrientBase.X != 0 && this.ptOrientBase.Y != 0)
-        //    {
-        //        rcResult.Offset(this.ptOrientBase);
-        //
-        //        // 보상좌표가 있으면 보상을 해야지
-        //        if (this.ptOrientCurr.X != 0 && this.ptOrientCurr.Y != 0)
-        //        {
-        //            PointF ptRelativeDist = new PointF(ptOrientCurr.X - ptOrientBase.X, ptOrientCurr.Y - ptOrientBase.Y);
-        //            rcResult.Offset(ptRelativeDist);
-        //        }
-        //        // 보상 좌표가 없으면 할게 없어.
-        //        else if (this.ptOrientCurr.X == 0 && this.ptOrientCurr.Y == 0) { }
-        //    }
-        //    return rcResult;
-        //}
+     
     }
   
     public class CMeasurePairRct : CMeasureMotherFucker
@@ -1056,6 +1025,7 @@ namespace CD_Figure
 
             RectangleF rcInflate = rcMerged;
             rcInflate.Inflate(rcInflate.Width / 2, rcInflate.Height / 2);
+
             if (this.param_comm_03_spc_enhance < 10)
             {
                 rawImage = DoPreProcess(rawImage, imageW, imageH, SIGMA, KERNEL, Rectangle.Round(rcInflate));
@@ -1064,6 +1034,7 @@ namespace CD_Figure
             {
                 this.param_comm_03_spc_enhance -= 10;
             }
+
             rawImage = DoSPCProcess(rawImage, imageW, imageH, rcInflate, param_comm_03_spc_enhance);
 
             rcEstimated = new RectangleF();
@@ -1739,21 +1710,21 @@ namespace CD_Figure
             single.RC_VER_IN = this.RC_VER_IN.CopyTo();
             single.RC_VER_EX = this.RC_VER_EX.CopyTo();
 
-            single.param_01_algorithm_HOR_IN = this.param_01_algorithm_HOR_IN;
-            single.param_02_algorithm_HOR_EX = this.param_02_algorithm_HOR_EX;
-            single.param_03_algorithm_VER_IN = this.param_03_algorithm_VER_IN;
-            single.param_04_algorithm_VER_EX = this.param_04_algorithm_VER_EX;
-            single.param_05_edge_position_hor_in = this.param_05_edge_position_hor_in;
-            single.param_06_edge_position_hor_ex = this.param_06_edge_position_hor_ex;
-            single.param_07_edge_position_ver_in = this.param_07_edge_position_ver_in;
-            single.param_08_edge_position_ver_ex = this.param_08_edge_position_ver_ex;
-            single.param_09_refinement = this.param_09_refinement;
-            single.param_10_shape_of_measure = this.param_10_shape_of_measure;
+            single.param_01_algorithm_HOR_IN/********/= this.param_01_algorithm_HOR_IN;
+            single.param_02_algorithm_HOR_EX/********/= this.param_02_algorithm_HOR_EX;
+            single.param_03_algorithm_VER_IN/********/= this.param_03_algorithm_VER_IN;
+            single.param_04_algorithm_VER_EX/********/= this.param_04_algorithm_VER_EX;
+            single.param_05_edge_position_hor_in/****/= this.param_05_edge_position_hor_in;
+            single.param_06_edge_position_hor_ex/****/= this.param_06_edge_position_hor_ex;
+            single.param_07_edge_position_ver_in/****/= this.param_07_edge_position_ver_in;
+            single.param_08_edge_position_ver_ex/****/= this.param_08_edge_position_ver_ex;
+            single.param_09_refinement/**************/= this.param_09_refinement;
+            single.param_10_shape_of_measure/********/= this.param_10_shape_of_measure;
 
-            single.param_comm_01_compen_A = this.param_comm_01_compen_A;
-            single.param_comm_02_compen_B = this.param_comm_02_compen_B;
-            single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
-            single.param_comm_04_show_raw_data = this.param_comm_04_show_raw_data;
+            single.param_comm_01_compen_A/***********/= this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B/***********/= this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance/********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_show_raw_data/******/= this.param_comm_04_show_raw_data;
 
             return single;
         }
@@ -2510,6 +2481,7 @@ namespace CD_Figure
             }
 
             #endregion
+
             //*************************************************************************************
             // 10 Summary Every Edges
             //*************************************************************************************
@@ -2574,10 +2546,10 @@ namespace CD_Figure
             }
             else if (param_10_shape_of_measure == 1)
             {
-                CLine lineT = CRansac.GenerateLine(model_hor_ex_top_ex, rcHOR_EX_TOP, true);
-                CLine lineB = CRansac.GenerateLine(model_hor_ex_btm_ex, rcHOR_EX_BTM, true);
-                CLine lineL = CRansac.GenerateLine(model_ver_ex_lft_ex, rcVER_EX_LFT, false);
-                CLine lineR = CRansac.GenerateLine(model_ver_ex_rht_ex, rcVER_EX_RHT, false);
+                CLine lineT = CRansac.GetStraightLine(model_hor_ex_top_ex, rcHOR_EX_TOP, true);
+                CLine lineB = CRansac.GetStraightLine(model_hor_ex_btm_ex, rcHOR_EX_BTM, true);
+                CLine lineL = CRansac.GetStraightLine(model_ver_ex_lft_ex, rcVER_EX_LFT, false);
+                CLine lineR = CRansac.GetStraightLine(model_ver_ex_rht_ex, rcVER_EX_RHT, false);
 
                 pt_hor_ex_top = lineT.GetIntersectPointOfInfiniteLines(lineL.P1, lineL.P2);
                 pt_ver_ex_rht = lineT.GetIntersectPointOfInfiniteLines(lineR.P1, lineR.P2);
@@ -2642,24 +2614,24 @@ namespace CD_Figure
 
             single.NICKNAME = this.NICKNAME;
             
-            single.rc_EX = this.rc_EX;
-            single.rc_IN = this.rc_IN;
-            single._rc_EX = this._rc_EX;
-            single._rc_IN = this._rc_IN;
+            single.rc_EX/*****/= this.rc_EX;
+            single.rc_IN/*****/= this.rc_IN;
+            single._rc_EX/****/= this._rc_EX;
+            single._rc_IN/****/= this._rc_IN;
 
-            single.param_00_algorithm_CIR = this.param_00_algorithm_CIR;
-            single.param_01_DMG_Tol = this.param_01_DMG_Tol;
-            single.param_02_BOOL_TREAT_AS_ELLIPSE = this.param_02_BOOL_TREAT_AS_ELLIPSE;
-            single.param_03_CircleDetecType = this.param_03_CircleDetecType;
-            single.param_04_Shrinkage = this.param_04_Shrinkage;
-            single.param_05_Outlier_Filter = this.param_05_Outlier_Filter;
-            single.param_06_EdgePos = this.param_06_EdgePos;
-            single.param_07_Coverage = this.param_07_Coverage;
+            single.param_00_algorithm_CIR/***********/= this.param_00_algorithm_CIR;
+            single.param_01_DMG_Tol/*****************/= this.param_01_DMG_Tol;
+            single.param_02_BOOL_TREAT_AS_ELLIPSE/***/= this.param_02_BOOL_TREAT_AS_ELLIPSE;
+            single.param_03_CircleDetecType/*********/= this.param_03_CircleDetecType;
+            single.param_04_Shrinkage/***************/= this.param_04_Shrinkage;
+            single.param_05_Outlier_Filter/**********/= this.param_05_Outlier_Filter;
+            single.param_06_EdgePos/*****************/= this.param_06_EdgePos;
+            single.param_07_Coverage/****************/= this.param_07_Coverage;
 
-            single.param_comm_01_compen_A = this.param_comm_01_compen_A;
-            single.param_comm_02_compen_B = this.param_comm_02_compen_B;
-            single.param_comm_03_spc_enhance = this.param_comm_03_spc_enhance;
-            single.param_comm_04_show_raw_data = this.param_comm_04_show_raw_data;
+            single.param_comm_01_compen_A/***********/= this.param_comm_01_compen_A;
+            single.param_comm_02_compen_B/***********/= this.param_comm_02_compen_B;
+            single.param_comm_03_spc_enhance/********/= this.param_comm_03_spc_enhance;
+            single.param_comm_04_show_raw_data/******/= this.param_comm_04_show_raw_data;
 
             return single;
         }
@@ -3342,18 +3314,9 @@ namespace CD_Figure
             PointF[] arrPt_IN = listContours_IN.ToArray();
 
 
-            /***/if (param_06_EdgePos == 0.0) 
-            {
-                rcMeasured = CRect.GenRectangle(model_IN.cx, model_IN.cy, model_IN.w, model_IN.h); 
-            }
-            else if (param_06_EdgePos == 0.5) 
-            {
-                rcMeasured = CRect.GenRectangle(model_MD.cx, model_MD.cy, model_IN.w, model_IN.h); 
-            }
-            else if (param_06_EdgePos == 1.0) 
-            {
-                rcMeasured = CRect.GenRectangle(model_EX.cx, model_EX.cy, model_IN.w, model_IN.h); 
-            }
+            if/***/ (param_06_EdgePos == 0.0) {rcMeasured = CRect.GenRectangle(model_IN.cx, model_IN.cy, model_IN.w, model_IN.h); }
+            else if (param_06_EdgePos == 0.5) {rcMeasured = CRect.GenRectangle(model_MD.cx, model_MD.cy, model_IN.w, model_IN.h); }
+            else if (param_06_EdgePos == 1.0) {rcMeasured = CRect.GenRectangle(model_EX.cx, model_EX.cy, model_IN.w, model_IN.h); }
             
             if (param_comm_04_show_raw_data == false)
             { 
@@ -3436,15 +3399,15 @@ namespace CD_Figure
         private double SIGMA = 1.5;
         private int KERNEL = 7;
 
-        public int/*****/param_00_algorithm_fst = IFX_ALGORITHM.CARDIN;
-        public int/*****/param_01_algorithm_scd = IFX_ALGORITHM.CARDIN;
-        public double/**/param_02_edge_position_fst  = 0;
-        public double/**/param_03_edge_position_scd = 0;
-        public int/*****/param_04_rc_type_fst = IFX_RECT_TYPE.DIR_HOR;
-        public int/*****/param_05_rc_type_scd = IFX_RECT_TYPE.DIR_HOR;
-        public int/*****/param_06_refinement = 3;
-        public int/*****/param_07_metric_type = IFX_METRIC.P2P;
-        public bool/****/param_08_use_centroid = false;
+        public int/*****/param_00_algorithm_fst/*******/= IFX_ALGORITHM.CARDIN;
+        public int/*****/param_01_algorithm_scd/*******/= IFX_ALGORITHM.CARDIN;
+        public double/**/param_02_edge_position_fst/***/= 0;
+        public double/**/param_03_edge_position_scd/***/= 0;
+        public int/*****/param_04_rc_type_fst/*********/= IFX_RECT_TYPE.DIR_HOR;
+        public int/*****/param_05_rc_type_scd/*********/= IFX_RECT_TYPE.DIR_HOR;
+        public int/*****/param_06_refinement/**********/= 3;
+        public int/*****/param_07_metric_type/*********/= IFX_METRIC.P2P;
+        public bool/****/param_08_use_centroid/********/= false;
 
         public parseRect rc_FST = new parseRect();
         public parseRect rc_SCD = new parseRect();
@@ -3477,12 +3440,12 @@ namespace CD_Figure
             single.param_comm_01_compen_A/**************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B/**************/= this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance/***********/= this.param_comm_03_spc_enhance;
-            single.param_comm_04_show_raw_data/****/= this.param_comm_04_show_raw_data;
+            single.param_comm_04_show_raw_data/*********/= this.param_comm_04_show_raw_data;
 
-            single.rc_FST = this.rc_FST.CopyTo();
-            single._rc_FST = this._rc_FST.CopyTo();
-            single.rc_SCD = this.rc_SCD.CopyTo();
-            single._rc_SCD = this._rc_SCD.CopyTo();
+            single.rc_FST/*****/= this.rc_FST.CopyTo();
+            single._rc_FST/****/= this._rc_FST.CopyTo();
+            single.rc_SCD/*****/= this.rc_SCD.CopyTo();
+            single._rc_SCD/****/= this._rc_SCD.CopyTo();
 
             return single;
         }
@@ -3801,7 +3764,7 @@ namespace CD_Figure
             single.param_comm_01_compen_A/************/= this.param_comm_01_compen_A;
             single.param_comm_02_compen_B/************/= this.param_comm_02_compen_B;
             single.param_comm_03_spc_enhance/*********/= this.param_comm_03_spc_enhance;
-            single.param_comm_04_show_raw_data/**/= this.param_comm_04_show_raw_data;
+            single.param_comm_04_show_raw_data/*******/= this.param_comm_04_show_raw_data;
 
             single.rc_FST_EX = this.rc_FST_EX;
             single.rc_FST_IN = this.rc_FST_IN;
@@ -4309,17 +4272,9 @@ namespace CD_Figure
             int nBegin = nSectorUnit * (nSectorIndex - 1);
             int nFinal = nSectorUnit * (nSectorIndex);
 
-            if (nSectorIndex == 1)
-            {
-                nBegin = 0;
-            }
+            if (nSectorIndex == 1){nBegin = 0;}
 
-
-            for (int angle = nBegin; angle < nFinal; angle++)
-            {
-                arrAngle[angle] = 1;
-            }
-
+            for (int angle = nBegin; angle < nFinal; angle++){arrAngle[angle] = 1;}
         }
         public int[] GetSelectedAngleByCoverage(string strCoverage)
         {
@@ -4363,9 +4318,9 @@ namespace CD_Figure
 
         }
 
-        private int GetRadiLength(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
-        private int GetRadiLength_INFULL(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
-        private int GetRadiStart(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiLength(RectangleF rc)/***********/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiLength_INFULL(RectangleF rc)/****/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiStart(RectangleF rc)/************/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
     }
 
     public class CMeasureMixedRCC : CMeasureMotherFucker
@@ -4377,16 +4332,16 @@ namespace CD_Figure
         private double SIGMA = 1.5;
         private int KERNEL = 7;
 
-        public int/******/param_00_algorithm_fst = IFX_ALGORITHM.CARDIN;
-        public double/***/param_01_edge_position_fst = 0;
-        public int/******/param_02_rc_type_fst = IFX_RECT_TYPE.DIR_HOR;
-        public int/******/param_03_refinement = 3;
-        public bool/*****/param_04_use_centroid = false;
+        public int/******/param_00_algorithm_fst/*******/= IFX_ALGORITHM.CARDIN;
+        public double/***/param_01_edge_position_fst/***/= 0;
+        public int/******/param_02_rc_type_fst/*********/= IFX_RECT_TYPE.DIR_HOR;
+        public int/******/param_03_refinement/**********/= 3;
+        public bool/*****/param_04_use_centroid/********/= false;
 
-        public int/*****/param_11_algorithm_scd = IFX_ALGORITHM.CARDIN;
-        public double/**/param_12_edge_position_scd = 0;
-        public string/**/param_13_Coverage_scd = "0";
-        public int/*****/param_14_ms_pos_scd = IFX_DIR.DIR_LFT;
+        public int/*****/param_11_algorithm_scd/********/= IFX_ALGORITHM.CARDIN;
+        public double/**/param_12_edge_position_scd/****/= 0;
+        public string/**/param_13_Coverage_scd/*********/= "0";
+        public int/*****/param_14_ms_pos_scd/***********/= IFX_DIR.DIR_LFT;
 
         public int/**/param_20_metric_type = IFX_METRIC.P2P;
 
@@ -4786,9 +4741,7 @@ namespace CD_Figure
             if (this.param_comm_04_show_raw_data == false && param_04_use_centroid == false)
             {
                 MakeResultForRect(this.param_02_rc_type_fst, ref listEdges_FEX, ref listEdges_FMD, ref listEdges_FIN, model_fex, model_fmd, model_fin, rcFST);
-             }
-
-
+            }
 
             fDistance *= PIXEL_RES;
             fDistance *= this.param_comm_01_compen_A;
@@ -4868,16 +4821,9 @@ namespace CD_Figure
             int nBegin = nSectorUnit * (nSectorIndex - 1);
             int nFinal = nSectorUnit * (nSectorIndex);
 
-            if (nSectorIndex == 1)
-            {
-                nBegin = 0;
-            }
+            if (nSectorIndex == 1){nBegin = 0;}
 
-
-            for (int angle = nBegin; angle < nFinal; angle++)
-            {
-                arrAngle[angle] = 1;
-            }
+            for (int angle = nBegin; angle < nFinal; angle++){arrAngle[angle] = 1;}
 
         }
         public int[] GetSelectedAngleByCoverage(string strCoverage)
@@ -4922,9 +4868,9 @@ namespace CD_Figure
 
         }
 
-        private int GetRadiLength(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
-        private int GetRadiLength_INFULL(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
-        private int GetRadiStart(RectangleF rc) { return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiLength(RectangleF rc)/**********/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiLength_INFULL(RectangleF rc)/***/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
+        private int GetRadiStart(RectangleF rc)/***********/{ return Convert.ToInt32(Math.Max(rc.Width / 2.0, rc.Height / 2.0)); }
     }
 
     public class COverlay
@@ -5901,30 +5847,30 @@ namespace CD_Figure
 
         public void AddResult_FIG(int nFigureType,  object Ini, double fDistance)
         {
-            string str_00_TargetName = string.Empty;
-            string str_01_figure_type = string.Empty;
-            string str_02_algo_method = string.Empty;
+            string str_00_TargetName/*********/= string.Empty;
+            string str_01_figure_type/********/= string.Empty;
+            string str_02_algo_method/********/= string.Empty;
 
-            string str_comm_01_compenA = string.Empty;
-            string str_comm_02_compenB = string.Empty;
-            string str_comm_03_spc_enhance = string.Empty;
-            string str_comm_04_refinement = string.Empty;
+            string str_comm_01_compenA/*******/= string.Empty;
+            string str_comm_02_compenB/*******/= string.Empty;
+            string str_comm_03_spc_enhance/***/= string.Empty;
+            string str_comm_04_refinement/****/= string.Empty;
 
-            string str_rect_01_bool_use_auto_peak_Detection = string.Empty;
-            string str_rect_02_peak_target_index_fst = string.Empty;
-            string str_rect_03_peak_target_index_scd = string.Empty;
-            string str_rect_04_peak_candidate= string.Empty;
-            string str_rect_05_peak_window_size = string.Empty;
-            string str_rect_06_edge_position_fst = string.Empty;
-            string str_rect_07_edge_position_scd = string.Empty;
+            string str_rect_01_bool_use_auto_peak_Detection/***/= string.Empty;
+            string str_rect_02_peak_target_index_fst/**********/= string.Empty;
+            string str_rect_03_peak_target_index_scd/**********/= string.Empty;
+            string str_rect_04_peak_candidate/*****************/= string.Empty;
+            string str_rect_05_peak_window_size/***************/= string.Empty;
+            string str_rect_06_edge_position_fst/**************/= string.Empty;
+            string str_rect_07_edge_position_scd/**************/= string.Empty;
 
-            string str_cir_01_damage_tolerance = string.Empty;
-            string str_cir_02_treat_as_ellipse = string.Empty;
-            string str_cir_03_circle_detection_type = string.Empty;
-            string str_cir_04_shrinkage = string.Empty;
-            string str_cir_05_outlier_filter = string.Empty;
-            string str_cir_06_edge_posistion = string.Empty;
-            string str_cir_07_coverage = string.Empty;
+            string str_cir_01_damage_tolerance/***********/= string.Empty;
+            string str_cir_02_treat_as_ellipse/***********/= string.Empty;
+            string str_cir_03_circle_detection_type/******/= string.Empty;
+            string str_cir_04_shrinkage/******************/= string.Empty;
+            string str_cir_05_outlier_filter/*************/= string.Empty;
+            string str_cir_06_edge_posistion/*************/= string.Empty;
+            string str_cir_07_coverage/*******************/= string.Empty;
 
             #region only for mixed rectangle
             string str_rc_00_algorithm_fst = string.Empty;
@@ -6038,42 +5984,42 @@ namespace CD_Figure
                 str_00_TargetName = buff.NICKNAME;
                 str_01_figure_type = IFX_FIGURE.ToStringType(IFX_FIGURE.MIXED_CC);
 
-                str_cc_00_algorithm_fst = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_fst);
-                str_cc_01_algorithm_scd = IFX_ALGORITHM.ToStringType(buff.param_01_algorithm_scd);
-                str_cc_02_edge_position_fst = buff.param_02_edge_position_fst.ToString("F2");
-                str_cc_03_edge_position_scd = buff.param_03_edge_position_scd.ToString("F2");
-                str_cc_04_Coverage_fst = buff.param_04_Coverage_fst;
-                str_cc_05_Coverage_scd = buff.param_05_Coverage_scd;
-                str_cc_06_ms_pos_fst = IFX_DIR.ToStringType(buff.param_06_ms_pos_fst);
-                str_cc_07_ms_pos_scd = IFX_DIR.ToStringType(buff.param_07_ms_pos_scd);
-                str_cc_08_metric_type = IFX_METRIC.ToStringType(buff.param_08_metric_type);
+                str_cc_00_algorithm_fst/*******/= IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_fst);
+                str_cc_01_algorithm_scd/*******/= IFX_ALGORITHM.ToStringType(buff.param_01_algorithm_scd);
+                str_cc_02_edge_position_fst/***/= buff.param_02_edge_position_fst.ToString("F2");
+                str_cc_03_edge_position_scd/***/= buff.param_03_edge_position_scd.ToString("F2");
+                str_cc_04_Coverage_fst/********/= buff.param_04_Coverage_fst;
+                str_cc_05_Coverage_scd/********/= buff.param_05_Coverage_scd;
+                str_cc_06_ms_pos_fst/**********/= IFX_DIR.ToStringType(buff.param_06_ms_pos_fst);
+                str_cc_07_ms_pos_scd/**********/= IFX_DIR.ToStringType(buff.param_07_ms_pos_scd);
+                str_cc_08_metric_type/*********/= IFX_METRIC.ToStringType(buff.param_08_metric_type);
 
-                str_comm_01_compenA = buff.param_comm_01_compen_A.ToString("F2");
-                str_comm_02_compenB = buff.param_comm_02_compen_B.ToString("F2");
-                str_comm_03_spc_enhance = buff.param_comm_03_spc_enhance.ToString("N0");
+                str_comm_01_compenA/***********/= buff.param_comm_01_compen_A.ToString("F2");
+                str_comm_02_compenB/***********/= buff.param_comm_02_compen_B.ToString("F2");
+                str_comm_03_spc_enhance/*******/= buff.param_comm_03_spc_enhance.ToString("N0");
 
             }
             else if (nFigureType == IFX_FIGURE.MIXED_RCC)
             {
                 CMeasureMixedRCC buff = ((CMeasureMixedRCC)Ini);
 
-                str_00_TargetName = buff.NICKNAME;
-                str_01_figure_type = IFX_FIGURE.ToStringType(IFX_FIGURE.MIXED_RCC);
+                str_00_TargetName/****/= buff.NICKNAME;
+                str_01_figure_type/***/= IFX_FIGURE.ToStringType(IFX_FIGURE.MIXED_RCC);
 
-                str_rcc_00_algorithm_fst = IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_fst);
-                str_rcc_01_edge_position_fst = buff.param_01_edge_position_fst.ToString("F2");
-                str_rcc_02_rc_type_fst = IFX_RECT_TYPE.ToStringType(buff.param_02_rc_type_fst);
-                str_rcc_03_refinement = buff.param_03_refinement.ToString("N0");
-                str_rcc_04_use_centroid = buff.param_04_use_centroid == true ? "TRUE" : "FALSE";
-                str_rcc_11_algorithm_scd = IFX_ALGORITHM.ToStringType(buff.param_11_algorithm_scd);
-                str_rcc_12_edge_position_scd = buff.param_12_edge_position_scd.ToString("F2");
-                str_rcc_13_Coverage_scd = buff.param_13_Coverage_scd;
-                str_rcc_14_ms_pos_scd = IFX_DIR.ToStringType(buff.param_14_ms_pos_scd);
-                str_rcc_20_metric_type = IFX_METRIC.ToStringType(buff.param_20_metric_type);
+                str_rcc_00_algorithm_fst/*********/= IFX_ALGORITHM.ToStringType(buff.param_00_algorithm_fst);
+                str_rcc_01_edge_position_fst/*****/= buff.param_01_edge_position_fst.ToString("F2");
+                str_rcc_02_rc_type_fst/***********/= IFX_RECT_TYPE.ToStringType(buff.param_02_rc_type_fst);
+                str_rcc_03_refinement/************/= buff.param_03_refinement.ToString("N0");
+                str_rcc_04_use_centroid/**********/= buff.param_04_use_centroid == true ? "TRUE" : "FALSE";
+                str_rcc_11_algorithm_scd/*********/= IFX_ALGORITHM.ToStringType(buff.param_11_algorithm_scd);
+                str_rcc_12_edge_position_scd/*****/= buff.param_12_edge_position_scd.ToString("F2");
+                str_rcc_13_Coverage_scd/**********/= buff.param_13_Coverage_scd;
+                str_rcc_14_ms_pos_scd/************/= IFX_DIR.ToStringType(buff.param_14_ms_pos_scd);
+                str_rcc_20_metric_type/***********/= IFX_METRIC.ToStringType(buff.param_20_metric_type);
 
-                str_comm_01_compenA = buff.param_comm_01_compen_A.ToString("F2");
-                str_comm_02_compenB = buff.param_comm_02_compen_B.ToString("F2");
-                str_comm_03_spc_enhance = buff.param_comm_03_spc_enhance.ToString("N0");
+                str_comm_01_compenA/**************/= buff.param_comm_01_compen_A.ToString("F2");
+                str_comm_02_compenB/**************/= buff.param_comm_02_compen_B.ToString("F2");
+                str_comm_03_spc_enhance/**********/= buff.param_comm_03_spc_enhance.ToString("N0");
             }
 
             DataFigure single = new DataFigure();
@@ -6082,61 +6028,61 @@ namespace CD_Figure
             
             single.global_01_insp_time = Computer.GetTImeCode4Save_YYYY_MM_DD_HH_MM_SS_MMM();
 
-            single.param_00_target_name = str_00_TargetName;
-            single.param_01_figure_type = str_01_figure_type;
-            single.param_02_algorithm = str_02_algo_method;
+            single.param_00_target_name/*****************/= str_00_TargetName;
+            single.param_01_figure_type/*****************/= str_01_figure_type;
+            single.param_02_algorithm/*******************/= str_02_algo_method;
 
-            single.param_cir_01_damage_tolerance = str_cir_01_damage_tolerance;
-            single.param_cir_02_treat_as_ellipse = str_cir_02_treat_as_ellipse;
-            single.param_cir_03_circle_detection_type = str_cir_03_circle_detection_type;
-            single.param_cir_04_shrinkage = str_cir_04_shrinkage;
-            single.param_cir_05_outlier_filter = str_cir_05_outlier_filter;
-            single.param_cir_06_edge_posistion = str_cir_06_edge_posistion;
-            single.param_cir_07_coverage = str_cir_07_coverage;
+            single.param_cir_01_damage_tolerance/********/= str_cir_01_damage_tolerance;
+            single.param_cir_02_treat_as_ellipse/********/= str_cir_02_treat_as_ellipse;
+            single.param_cir_03_circle_detection_type/***/= str_cir_03_circle_detection_type;
+            single.param_cir_04_shrinkage/***************/= str_cir_04_shrinkage;
+            single.param_cir_05_outlier_filter/**********/= str_cir_05_outlier_filter;
+            single.param_cir_06_edge_posistion/**********/= str_cir_06_edge_posistion;
+            single.param_cir_07_coverage/****************/= str_cir_07_coverage;
 
-            single.param_rect_01_bool_use_auto_peak_Detection = str_rect_01_bool_use_auto_peak_Detection;
-            single.param_rect_02_peak_target_index_fst = str_rect_02_peak_target_index_fst;
-            single.param_rect_03_peak_target_index_scd = str_rect_03_peak_target_index_scd;
-            single.param_rect_04_peak_candidate = str_rect_04_peak_candidate;
-            single.param_rect_05_peak_window_size = str_rect_05_peak_window_size;
-            single.param_rect_06_edge_position_fst = str_rect_06_edge_position_fst;
-            single.param_rect_07_edge_position_scd = str_rect_07_edge_position_scd;
+            single.param_rect_01_bool_use_auto_peak_Detection/***/= str_rect_01_bool_use_auto_peak_Detection;
+            single.param_rect_02_peak_target_index_fst/**********/= str_rect_02_peak_target_index_fst;
+            single.param_rect_03_peak_target_index_scd/**********/= str_rect_03_peak_target_index_scd;
+            single.param_rect_04_peak_candidate/*****************/= str_rect_04_peak_candidate;
+            single.param_rect_05_peak_window_size/***************/= str_rect_05_peak_window_size;
+            single.param_rect_06_edge_position_fst/**************/= str_rect_06_edge_position_fst;
+            single.param_rect_07_edge_position_scd/**************/= str_rect_07_edge_position_scd;
 
-            single.param_rc_00_algorithm_fst = str_rc_00_algorithm_fst;
-            single.param_rc_01_algorithm_scd = str_rc_01_algorithm_scd;
-            single.param_rc_02_edge_position_fst = str_rc_02_edge_position_fst;
-            single.param_rc_03_edge_position_scd = str_rc_03_edge_position_scd;
-            single.param_rc_04_rc_type_fst = str_rc_04_rc_type_fst;
-            single.param_rc_05_rc_type_scd = str_rc_05_rc_type_scd;
-            single.param_rc_06_refinement = str_rc_06_refinement;
-            single.param_rc_07_metric_type = str_rc_07_metric_type;
-            single.param_rc_08_use_centroid = str_rc_08_use_centroid;
+            single.param_rc_00_algorithm_fst/********/= str_rc_00_algorithm_fst;
+            single.param_rc_01_algorithm_scd/********/= str_rc_01_algorithm_scd;
+            single.param_rc_02_edge_position_fst/****/= str_rc_02_edge_position_fst;
+            single.param_rc_03_edge_position_scd/****/= str_rc_03_edge_position_scd;
+            single.param_rc_04_rc_type_fst/**********/= str_rc_04_rc_type_fst;
+            single.param_rc_05_rc_type_scd/**********/= str_rc_05_rc_type_scd;
+            single.param_rc_06_refinement/***********/= str_rc_06_refinement;
+            single.param_rc_07_metric_type/**********/= str_rc_07_metric_type;
+            single.param_rc_08_use_centroid/*********/= str_rc_08_use_centroid;
 
-            single.param_cc_00_algorithm_fst = str_cc_00_algorithm_fst;
-            single.param_cc_01_algorithm_scd = str_cc_01_algorithm_scd;
-            single.param_cc_02_edge_position_fst = str_cc_02_edge_position_fst;
-            single.param_cc_03_edge_position_scd = str_cc_03_edge_position_scd;
-            single.param_cc_04_Coverage_fst = str_cc_04_Coverage_fst;
-            single.param_cc_05_Coverage_scd = str_cc_05_Coverage_scd;
-            single.param_cc_06_ms_pos_fst = str_cc_06_ms_pos_fst;
-            single.param_cc_07_ms_pos_scd = str_cc_07_ms_pos_scd;
-            single.param_cc_08_metric_type = str_cc_08_metric_type;
+            single.param_cc_00_algorithm_fst/********/= str_cc_00_algorithm_fst;
+            single.param_cc_01_algorithm_scd/********/= str_cc_01_algorithm_scd;
+            single.param_cc_02_edge_position_fst/****/= str_cc_02_edge_position_fst;
+            single.param_cc_03_edge_position_scd/****/= str_cc_03_edge_position_scd;
+            single.param_cc_04_Coverage_fst/*********/= str_cc_04_Coverage_fst;
+            single.param_cc_05_Coverage_scd/*********/= str_cc_05_Coverage_scd;
+            single.param_cc_06_ms_pos_fst/***********/= str_cc_06_ms_pos_fst;
+            single.param_cc_07_ms_pos_scd/***********/= str_cc_07_ms_pos_scd;
+            single.param_cc_08_metric_type/**********/= str_cc_08_metric_type;
 
-            single.param_rcc_00_algorithm_fst = str_rcc_00_algorithm_fst;
-            single.param_rcc_01_edge_position_fst = str_rcc_01_edge_position_fst;
-            single.param_rcc_02_rc_type_fst = str_rcc_02_rc_type_fst;
-            single.param_rcc_03_refinement = str_rcc_03_refinement;
-            single.param_rcc_04_use_centroid = str_rcc_04_use_centroid;
-            single.param_rcc_11_algorithm_scd = str_rcc_11_algorithm_scd;
-            single.param_rcc_12_edge_position_scd = str_rcc_12_edge_position_scd;
-            single.param_rcc_13_Coverage_scd = str_rcc_13_Coverage_scd;
-            single.param_rcc_14_ms_pos_scd = str_rcc_14_ms_pos_scd;
-            single.param_rcc_20_metric_type = str_rcc_20_metric_type;
+            single.param_rcc_00_algorithm_fst/********/= str_rcc_00_algorithm_fst;
+            single.param_rcc_01_edge_position_fst/****/= str_rcc_01_edge_position_fst;
+            single.param_rcc_02_rc_type_fst/**********/= str_rcc_02_rc_type_fst;
+            single.param_rcc_03_refinement/***********/= str_rcc_03_refinement;
+            single.param_rcc_04_use_centroid/*********/= str_rcc_04_use_centroid;
+            single.param_rcc_11_algorithm_scd/********/= str_rcc_11_algorithm_scd;
+            single.param_rcc_12_edge_position_scd/****/= str_rcc_12_edge_position_scd;
+            single.param_rcc_13_Coverage_scd/*********/= str_rcc_13_Coverage_scd;
+            single.param_rcc_14_ms_pos_scd/***********/= str_rcc_14_ms_pos_scd;
+            single.param_rcc_20_metric_type/**********/= str_rcc_20_metric_type;
 
-            single.param_comm_01_compenA = str_comm_01_compenA;
-            single.param_comm_02_compenB = str_comm_02_compenB;
-            single.param_comm_03_spc_enhance = str_comm_03_spc_enhance;
-            single.param_comm_04_refinement = str_comm_04_refinement;
+            single.param_comm_01_compenA/*******/= str_comm_01_compenA;
+            single.param_comm_02_compenB/*******/= str_comm_02_compenB;
+            single.param_comm_03_spc_enhance/***/= str_comm_03_spc_enhance;
+            single.param_comm_04_refinement/****/= str_comm_04_refinement;
              
 
             m_listFigure.Add(single);
@@ -6162,10 +6108,10 @@ namespace CD_Figure
             single.EDGE_POS_VER_IN = ini.param_07_edge_position_ver_in.ToString("F2");
             single.EDGE_POS_VER_EX = ini.param_08_edge_position_ver_ex.ToString("F2");
 
-            single.str_comm_01_compenA = ini.param_comm_01_compen_A.ToString("F4");
-            single.str_comm_02_compenB = ini.param_comm_02_compen_B.ToString("F4");
-            single.str_comm_03_spc_enhance = ini.param_comm_03_spc_enhance.ToString("N0");
-            single.str_comm_04_refinement = ini.param_09_refinement.ToString("N0");
+            single.str_comm_01_compenA/********/= ini.param_comm_01_compen_A.ToString("F4");
+            single.str_comm_02_compenB/********/= ini.param_comm_02_compen_B.ToString("F4");
+            single.str_comm_03_spc_enhance/****/= ini.param_comm_03_spc_enhance.ToString("N0");
+            single.str_comm_04_refinement/*****/= ini.param_09_refinement.ToString("N0");
 
             m_listOverlay.Add(single);
         }
@@ -6196,8 +6142,6 @@ namespace CD_Figure
         {
             List<double[]> list = new List<double[]>();
 
-            
-
             for (int y = 0; y < MEAS_CYCLE; y++)
             {
                 double[] arrSimilarity = new double[MEAS_POINT];
@@ -6207,7 +6151,6 @@ namespace CD_Figure
                     int nIndex = y * MEAS_POINT + x;
 
                     int[] nHistoSrc = m_listHIstogram.ElementAt(0 * MEAS_POINT + x);
-
 
                     int[] nCurrentHisto = m_listHIstogram.ElementAt(nIndex);
 
@@ -6290,18 +6233,9 @@ namespace CD_Figure
             //*********************************************************************************************
             for (x = 0; x < 256; x++)
             {
-                if (QueryGrayHisto[x] < TargetGrayHisto[x])
-                {
-                    Buffer += QueryGrayHisto[x];
-                }
-                else if (QueryGrayHisto[x] > TargetGrayHisto[x])
-                {
-                    Buffer += TargetGrayHisto[x];
-                }
-                else if (QueryGrayHisto[x] == TargetGrayHisto[x])
-                {
-                    Buffer += QueryGrayHisto[x];
-                }
+                if/***/ (QueryGrayHisto[x] < TargetGrayHisto[x] ){Buffer += QueryGrayHisto[x];}
+                else if (QueryGrayHisto[x] > TargetGrayHisto[x] ){Buffer += TargetGrayHisto[x];}
+                else if (QueryGrayHisto[x] == TargetGrayHisto[x]){Buffer += QueryGrayHisto[x];}
                 SumOfModel += TargetGrayHisto[x];
             }
             //*********************************************************************************************
@@ -6321,10 +6255,7 @@ namespace CD_Figure
             //*********************************************************************************************
             //		The Histogram of the Distance
             //*********************************************************************************************
-            for (x = 0; x < 256; x++)
-            {
-                Buffer += Math.Abs(QueryGrayHisto[x] - TargetGrayHisto[x]);
-            }
+            for (x = 0; x < 256; x++){Buffer += Math.Abs(QueryGrayHisto[x] - TargetGrayHisto[x]);}
 
             return Buffer;
         }
@@ -6337,10 +6268,7 @@ namespace CD_Figure
             if (report.SequenceIndex == 1) return;
             if (report.INTERRUPT == true) return;
             
-            if( report.MEAS_CYCLE != 0 && report.MEAS_CYCLE*report.MEAS_POINT > report.SequenceIndex) 
-            {
-                return;
-            }
+            if( report.MEAS_CYCLE != 0 && report.MEAS_CYCLE*report.MEAS_POINT > report.SequenceIndex) {return;}
 
             if (report.SequenceIndex == 0) return;
 
@@ -6453,10 +6381,10 @@ namespace CD_Figure
                     single[0] = "OUTLIER_FILTER"; /*************/ single[1] = summary.param_cir_05_outlier_filter; ex.data.Add(single.ToArray());
                     single[0] = "EDGE_POS";/********************/ single[1] = summary.param_cir_06_edge_posistion; ex.data.Add(single.ToArray());
                     single[0] = "COVERAGE";/********************/ single[1] = summary.param_cir_07_coverage; ex.data.Add(single.ToArray());
-                    single[0] = "COMPEN_A";/**************/single[1] = summary.param_comm_01_compenA; ex.data.Add(single.ToArray());
-                    single[0] = "COMPEN_B";/**************/single[1] = summary.param_comm_02_compenB; ex.data.Add(single.ToArray());
-                    single[0] = "SPC_ENHANCE";/***********/single[1] = summary.param_comm_03_spc_enhance; ex.data.Add(single.ToArray());
-                    single[0] = "REFINEMENT"; /***********/single[1] = summary.param_comm_04_refinement; ex.data.Add(single.ToArray());
+                    single[0] = "COMPEN_A";/********************/single[1] = summary.param_comm_01_compenA; ex.data.Add(single.ToArray());
+                    single[0] = "COMPEN_B";/********************/single[1] = summary.param_comm_02_compenB; ex.data.Add(single.ToArray());
+                    single[0] = "SPC_ENHANCE";/*****************/single[1] = summary.param_comm_03_spc_enhance; ex.data.Add(single.ToArray());
+                    single[0] = "REFINEMENT"; /*****************/single[1] = summary.param_comm_04_refinement; ex.data.Add(single.ToArray());
 
                 }
                 single[0] = "FOCUS-MAG";/**/single[1] = report.GetFocusMagAvg().ToString("f2"); ex.data.Add(single.ToArray()); 

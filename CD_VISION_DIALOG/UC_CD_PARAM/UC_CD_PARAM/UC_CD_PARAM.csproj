@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataStructure.cs" />
-    <Compile Include="DataSupport.cs" />
     <Compile Include="uc_cd_param.cs">
       <SubType>UserControl</SubType>
     </Compile>

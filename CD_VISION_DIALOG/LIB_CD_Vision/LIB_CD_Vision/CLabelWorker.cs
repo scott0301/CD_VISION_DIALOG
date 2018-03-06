@@ -228,13 +228,7 @@ namespace CD_Measure
     {
         public List<Point> list = new List<Point>();
         public Rectangle RC { get; set; }
-        public PointF ptCenter
-        {
-            get
-            {
-                return CRect.GetCenter(RC);
-            }
-        }
+        public PointF ptCenter{get{return CRect.GetCenter(RC);}}
 
         public Color c = Color.Red;
         public int COUNT_POINT { get { return list.Count(); } }
@@ -271,8 +265,7 @@ namespace CD_Measure
         {
             Color c = Color.Empty;
 
-            /***/
-            if (INDEX == 00) { c = Color.Red; }
+            if/***/ (INDEX == 00) { c = Color.Red; }
             else if (INDEX == 01) { c = Color.Green; }
             else if (INDEX == 02) { c = Color.Blue; }
             else if (INDEX == 03) { c = Color.Beige; }

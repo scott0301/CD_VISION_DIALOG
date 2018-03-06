@@ -1637,28 +1637,7 @@ namespace CD_Measure
 
     public static class CRansac
     {
-        public static CLine GenerateLine(CModelLine model, RectangleF rc, bool bHorizontal)
-        {
-            CLine line = new CLine();
-
-            if (bHorizontal == true)
-            {
-                int nHead = (int)rc.X;
-                int nTail = (int)rc.X + (int)rc.Width;
-
-                line = new CLine(new PointF(nHead, (float)model.sy), new PointF(nTail, (float)model.sy));
-            }
-            else if (bHorizontal == false)
-            {
-                int nHead = (int)rc.Y;
-                int nTail = (int)rc.Y + (int)rc.Height;
-
-                line = new CLine(new PointF((float)model.sx, nHead), new PointF((float)model.sx, nTail));
-            }
-
-
-            return line;
-        }
+        #region POINT FUNCTIONS
         public static PointF GetMidPoint_by_Ratio(PointF P1, PointF P2, double fRatio)
         {
             double dx = CPoint.GetRatioDistance(P1.X, P2.X, fRatio);
@@ -1715,7 +1694,6 @@ namespace CD_Measure
 
             return Math.Abs(fLineY - SLineY);
         }
-
         public static double GetDistanceX(CModelLine fex, CModelLine fin, CModelLine sex, CModelLine sin, double posF, double posS)
         {
             if (posF > 1) posF = 1; if (posF < 0) posF = 0;
@@ -1734,6 +1712,8 @@ namespace CD_Measure
 
             return Math.Abs(fLineY - SLineY);
         }
+        #endregion
+
         //*****************************************************************************************
         // Random samples
         //*****************************************************************************************
@@ -1778,9 +1758,292 @@ namespace CD_Measure
         }
 
         //*****************************************************************************************
+        // Line Fitting
+        //*****************************************************************************************
+
+        #region LINE
+        public static double ransac_Line_fitting(PointF[] data, ref CModelLine model, double distance_threshold, int no_samples, int iter)
+        {
+            int no_data = data.Length;
+
+            if (no_data < no_samples)
+            {
+                return 0.0;
+            }
+
+            List<PointF> samples = new List<PointF>(); // count 5
+            List<PointF> inliers = new List<PointF>(); // count 5;
+
+            CModelLine estimated_model;
+            double max_cost = 0.0;
+
+            int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
+
+            for (int i = 0; i < iter; i++)
+            {
+                samples.Clear();
+
+                // select the random samples
+                get_samples(ref samples, no_samples, data);
+
+                // estimate model parameter
+                estimated_model = compute_model_line(ref samples);
+
+                // verification
+                double cost = verify_line(inliers, ref estimated_model, data, distance_threshold);
+
+                // update model
+                if (max_cost < cost)
+                {
+                    max_cost = cost;
+
+                    model = compute_model_line(ref inliers);
+                }
+            }
+            return max_cost;
+        }
+
+        //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
+        public static CModelLine compute_model_line(ref List<PointF> samples)
+        {
+            // PCA 방식으로 직선 모델의 파라메터를 예측한다.
+
+            double sx = 0, sy = 0;
+            double sxx = 0, syy = 0;
+            double sxy = 0, sw = 0;
+
+            for (int i = 0; i < samples.Count; ++i)
+            {
+                double x = samples[i].X;
+                double y = samples[i].Y;
+
+                sx += x;
+                sy += y;
+                sxx += x * x;
+                sxy += x * y;
+                syy += y * y;
+                sw += 1;
+            }
+
+            //variance;
+            double vxx = (sxx - sx * sx / sw) / sw;
+            double vxy = (sxy - sx * sy / sw) / sw;
+            double vyy = (syy - sy * sy / sw) / sw;
+
+            //principal axis
+            double theta = Math.Atan2(2 * vxy, vxx - vyy) / 2.0;
+
+            CModelLine model = new CModelLine();
+
+            model.mx = Math.Cos(theta);
+            model.my = Math.Sin(theta);
+
+            //center of mass(xc, yc)
+            model.sx = sx / sw;
+            model.sy = sy / sw;
+
+            //직선의 방정식: sin(theta)*(x - sx) = cos(theta)*(y - sy);
+            return model;
+        }
+        public static double /**/compute_line_distance(ref CModelLine model, PointF p)
+        {
+            // 한 점(x)로부터 직선(line)에 내린 수선의 길이(distance)를 계산한다.
+            return Math.Abs((p.X - model.sx) * model.my - (p.Y - model.sy) * model.mx) / Math.Sqrt(model.mx * model.mx + model.my * model.my);
+        }
+        public static double /**/verify_line(List<PointF> inliers, ref CModelLine estimated_model, PointF[] data, double distance_threshold)
+        {
+            inliers.Clear();
+
+            double[] arrDist = new double[data.Length];
+
+            double cost = 0.0;
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                // get the distance of the line
+                double distance = compute_line_distance(ref estimated_model, data[i]);
+
+                arrDist[i] = distance;
+
+                // select inliers
+                if (distance < distance_threshold)
+                {
+                    cost += 1.0;
+
+                    inliers.Add(data[i]);
+                }
+            }
+
+            return cost;
+        }
+
+        public static CLine GetStraightLine(CModelLine model, RectangleF rc, bool bHorizontal)
+        {
+            CLine line = new CLine();
+
+            if (bHorizontal == true)
+            {
+                int nHead = (int)rc.X;
+                int nTail = (int)rc.X + (int)rc.Width;
+
+                line = new CLine(new PointF(nHead, (float)model.sy), new PointF(nTail, (float)model.sy));
+            }
+            else if (bHorizontal == false)
+            {
+                int nHead = (int)rc.Y;
+                int nTail = (int)rc.Y + (int)rc.Height;
+
+                line = new CLine(new PointF((float)model.sx, nHead), new PointF((float)model.sx, nTail));
+            }
+
+
+            return line;
+        }
+        public static CLine GetFittedLine_VER(CModelLine model, RectangleF rc)
+        {
+            float fHalf_H = Convert.ToSingle(rc.Height / 2.0);
+
+            PointF p1 = new PointF(Convert.ToSingle(model.sx - fHalf_H * model.mx), Convert.ToSingle(model.sy - fHalf_H * model.my));
+            PointF p2 = new PointF(Convert.ToSingle(model.sx + fHalf_H * model.mx), Convert.ToSingle(model.sy + fHalf_H * model.my));
+
+            return new CLine(p1, p2);
+        }
+        #endregion
+
+        //*****************************************************************************************
+        // Circle Fitting
+        //*****************************************************************************************
+
+        #region CIRCLE
+        public static double ransac_Circle_fitting(PointF[] data, ref CModelCircle model, double distance_threshold, int no_samples, int iter)
+        {
+            int no_data = data.Length;
+
+            if (no_data < no_samples)
+            {
+                return 0.0;
+            }
+
+            List<PointF> samples = new List<PointF>(); // count 5
+            List<PointF> inliers = new List<PointF>(); // count 5;
+
+            CModelCircle model_buffer = new CModelCircle();
+            double max_cost = 0.0;
+
+            int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
+
+
+            for (int i = 0; i < iter; i++)
+            {
+                samples.Clear();
+
+                // 1. hypothesis
+                // 원본 데이터에서 임의로 N개의 셈플 데이터를 고른다.
+
+                get_samples(ref samples, no_samples, data);
+
+                // 이 데이터를 정상적인 데이터로 보고 모델 파라메터를 예측한다.
+                model = compute_circle_model(ref samples);
+
+                // 2. Verification
+                // 원본 데이터가 예측된 모델에 잘 맞는지 검사한다.
+                double cost = verify_circle(inliers, ref model, data, distance_threshold);
+
+                // 만일 예측된 모델이 잘 맞는다면, 이 모델에 대한 유효한 데이터로 새로운 모델을 구한다.
+                if (max_cost < cost)
+                {
+                    max_cost = cost;
+
+                    model = compute_circle_model(ref inliers);
+                }
+            }
+            if (max_cost == 0)
+            {
+                model = model_buffer;
+            }
+            return max_cost;
+        }
+        //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+        public static CModelCircle compute_circle_model(ref List<PointF> samples)
+        {
+            // circle equation : (x - a)^2 + (y - b)^2 = c^2 from the circle center a,b and radius c,
+            // = x^2 + y^2 - 2ax - 2by + a^2 + b^2 - c^2 = 0
+            DotNetMatrix.Matrix A = new DotNetMatrix.Matrix(samples.Count, 3);
+            DotNetMatrix.Matrix B = new DotNetMatrix.Matrix(samples.Count, 1);
+
+
+            for (int i = 0; i < samples.Count; i++)
+            {
+                double x = samples[i].X;
+                double y = samples[i].Y;
+
+                A.SetElement(i, 0, x);
+                A.SetElement(i, 1, y);
+                A.SetElement(i, 2, 1.0);
+
+                B.SetElement(i, 0, (-x * x) - (y * y));
+            }
+
+            // Moore-Penrose pseudo-inverse를 이용한다.
+            //DotNetMatrix.Matrix invA = 
+
+            DotNetMatrix.Matrix transA = A.Transpose();
+            DotNetMatrix.Matrix multiA = transA.Multiply(A);
+            DotNetMatrix.Matrix InverA = multiA.Inverse();
+            DotNetMatrix.Matrix invA = InverA.Multiply(transA);
+            //dMatrix invA = !(~A*A)*~A;
+
+            DotNetMatrix.Matrix X = invA.Multiply(B);
+
+            CModelCircle model = new CModelCircle();
+
+            double cx = -X.GetElement(0, 0) / 2.0;
+            double cy = -X.GetElement(1, 0) / 2.0;
+
+            model.r = Math.Sqrt(cx * cx + cy * cy - X.GetElement(2, 0));
+            model.cx = cx;
+            model.cy = cy;
+
+            return model;
+        }
+        public static double /****/compute_circle_distance(ref CModelCircle model, PointF p)
+        {
+            // calculate circle raidus from the estimated edge point
+            double dx = model.cx - p.X;
+            double dy = model.cy - p.Y;
+
+            return Math.Abs(Math.Sqrt(dx * dx + dy * dy) - model.r);
+        }
+        public static double /****/verify_circle(List<PointF> inliers, ref CModelCircle estimated_model, PointF[] data, double distance_threshold)
+        {
+            inliers.Clear();
+
+            double cost = 0.0;
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                // get the distance
+                double distance = compute_circle_distance(ref estimated_model, data[i]);
+
+                // select inliers
+                if (distance < distance_threshold)
+                {
+                    cost += 1.0;
+
+                    inliers.Add(data[i]);
+                }
+            }
+
+            return cost;
+        }
+        #endregion
+
+        //*****************************************************************************************
         // Ellipse Fitting
         //*****************************************************************************************
 
+        #region ELLIPSE
         public static double ransac_ellipse_fitting(PointF[] data, ref CModelEllipse model, double distance_threshold)
         {
             const int no_samples = 30;
@@ -1941,264 +2204,7 @@ namespace CD_Measure
 
             return list;
         }
-
-        //*****************************************************************************************
-        // Line Fitting
-        //*****************************************************************************************
-
-        public static double ransac_Line_fitting(PointF[] data, ref CModelLine model, double distance_threshold, int no_samples, int iter)
-        {
-             int no_data = data.Length;
-
-            if (no_data < no_samples)
-            {
-                return 0.0;
-            }
-
-            List<PointF> samples = new List<PointF>(); // count 5
-            List<PointF> inliers = new List<PointF>(); // count 5;
-
-            CModelLine estimated_model;
-            double max_cost = 0.0;
-
-            int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
-
-            for (int i = 0; i < iter; i++)
-            {
-                samples.Clear();
-
-                // select the random samples
-                get_samples(ref samples, no_samples, data);
-
-                // estimate model parameter
-                estimated_model = compute_model_line(ref samples);
-
-                // verification
-                double cost = verify_line(inliers, ref estimated_model, data, distance_threshold);
-
-                // update model
-                if (max_cost < cost)
-                {
-                    max_cost = cost;
-
-                    model = compute_model_line(ref inliers);
-                }
-            }
-            return max_cost;
-        }
-
-        //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-
-        public static CModelLine compute_model_line(ref List<PointF> samples)
-        {
-            // PCA 방식으로 직선 모델의 파라메터를 예측한다.
-
-            double sx = 0, sy = 0;
-            double sxx = 0, syy = 0;
-            double sxy = 0, sw = 0;
-
-            for (int i = 0; i < samples.Count; ++i)
-            {
-                double x = samples[i].X;
-                double y = samples[i].Y;
-
-                sx += x;
-                sy += y;
-                sxx += x * x;
-                sxy += x * y;
-                syy += y * y;
-                sw += 1;
-            }
-
-            //variance;
-            double vxx = (sxx - sx * sx / sw) / sw;
-            double vxy = (sxy - sx * sy / sw) / sw;
-            double vyy = (syy - sy * sy / sw) / sw;
-
-            //principal axis
-            double theta = Math.Atan2(2 * vxy, vxx - vyy) / 2.0;
-
-            CModelLine model = new CModelLine();
-
-            model.mx = Math.Cos(theta);
-            model.my = Math.Sin(theta);
-
-            //center of mass(xc, yc)
-            model.sx = sx / sw;
-            model.sy = sy / sw;
-
-            //직선의 방정식: sin(theta)*(x - sx) = cos(theta)*(y - sy);
-            return model;
-        }
-        public static double /**/compute_line_distance(ref CModelLine model, PointF p)
-        {
-            // 한 점(x)로부터 직선(line)에 내린 수선의 길이(distance)를 계산한다.
-            return Math.Abs((p.X - model.sx) * model.my - (p.Y - model.sy) * model.mx) / Math.Sqrt(model.mx * model.mx + model.my * model.my);
-        }
-        public static double /**/verify_line(List<PointF> inliers, ref CModelLine estimated_model, PointF[] data, double distance_threshold)
-            {
-                inliers.Clear();
-
-                double[] arrDist = new double[data.Length];
-
-                double cost = 0.0;
-
-                for (int i = 0; i < data.Length; i++)
-                {
-                    // get the distance of the line
-                    double distance = compute_line_distance(ref estimated_model, data[i]);
-
-                    arrDist[i] = distance;
-
-                    // select inliers
-                    if (distance < distance_threshold)
-                    {
-                        cost += 1.0;
-
-                        inliers.Add(data[i]);
-                    }
-                }
-
-                return cost;
-            }
-
-        //*****************************************************************************************
-        // Circle Fitting
-        //*****************************************************************************************
-
-        public static double ransac_Circle_fitting(PointF[] data, ref CModelCircle model, double distance_threshold, int no_samples, int iter)
-        {
-            int no_data = data.Length;
-
-            if (no_data < no_samples)
-            {
-                return 0.0;
-            }
-
-            List<PointF> samples = new List<PointF>(); // count 5
-            List<PointF> inliers = new List<PointF>(); // count 5;
-
-            CModelCircle model_buffer = new CModelCircle();
-            double max_cost = 0.0;
-
-            int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
-
-
-            for (int i = 0; i < iter; i++)
-            {
-                samples.Clear();
-
-                // 1. hypothesis
-                // 원본 데이터에서 임의로 N개의 셈플 데이터를 고른다.
-
-                get_samples(ref samples, no_samples, data);
-
-                // 이 데이터를 정상적인 데이터로 보고 모델 파라메터를 예측한다.
-                model = compute_circle_model(ref samples);
-
-                // 2. Verification
-                // 원본 데이터가 예측된 모델에 잘 맞는지 검사한다.
-                double cost = verify_circle(inliers, ref model, data, distance_threshold);
-
-                // 만일 예측된 모델이 잘 맞는다면, 이 모델에 대한 유효한 데이터로 새로운 모델을 구한다.
-                if (max_cost < cost)
-                {
-                    max_cost = cost;
-
-                    model = compute_circle_model(ref inliers);
-                }
-            }
-            if (max_cost == 0)
-            {
-                model = model_buffer;
-            }
-            return max_cost;
-        }
-
-        //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-
-        public static CModelCircle compute_circle_model(ref List<PointF> samples)
-        {
-            // circle equation : (x - a)^2 + (y - b)^2 = c^2 from the circle center a,b and radius c,
-	        // = x^2 + y^2 - 2ax - 2by + a^2 + b^2 - c^2 = 0
-            DotNetMatrix.Matrix A = new DotNetMatrix.Matrix(samples.Count, 3);
-            DotNetMatrix.Matrix B = new DotNetMatrix.Matrix(samples.Count, 1);
-
-
-            for (int i = 0; i < samples.Count; i++)
-            {
-                double x = samples[i].X;
-                double y = samples[i].Y;
-
-                A.SetElement(i, 0, x);
-                A.SetElement(i, 1, y);
-                A.SetElement(i, 2, 1.0);
-
-                B.SetElement(i, 0, (-x * x) - (y*y));
-            }
-
-             // Moore-Penrose pseudo-inverse를 이용한다.
-            //DotNetMatrix.Matrix invA = 
-
-            DotNetMatrix.Matrix transA = A.Transpose();
-            DotNetMatrix.Matrix multiA = transA.Multiply(A);
-            DotNetMatrix.Matrix InverA = multiA.Inverse();
-            DotNetMatrix.Matrix invA = InverA.Multiply(transA);
-            //dMatrix invA = !(~A*A)*~A;
-
-            DotNetMatrix.Matrix X = invA.Multiply(B);
-
-            CModelCircle model = new CModelCircle();
-            
-            double cx = -X.GetElement(0, 0) / 2.0;
-            double cy = -X.GetElement(1, 0) / 2.0;
-
-            model.r = Math.Sqrt(cx * cx + cy * cy - X.GetElement(2, 0));
-            model.cx = cx;
-            model.cy = cy;
-
-            return model;
-        }
-        public static double /****/compute_circle_distance(ref CModelCircle model, PointF p)
-        {
-            // calculate circle raidus from the estimated edge point
-            double dx = model.cx - p.X;
-            double dy = model.cy- p.Y;
-
-            return Math.Abs(Math.Sqrt(dx * dx + dy * dy) - model.r);
-        }
-        public static double /****/verify_circle(List<PointF> inliers, ref CModelCircle estimated_model, PointF[] data, double distance_threshold)
-        {
-            inliers.Clear();
-
-            double cost = 0.0;
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                // get the distance
-                double distance = compute_circle_distance(ref estimated_model, data[i]);
-
-                // select inliers
-                if (distance < distance_threshold)
-                {
-                    cost += 1.0;
-
-                    inliers.Add(data[i]);
-                }
-            }
-
-            return cost;
-        }
-
-        public static CLine GetFittedLine_VER(CModelLine model, RectangleF rc)
-        {
-            float fHalf_H = Convert.ToSingle(rc.Height / 2.0);
-
-            PointF p1 = new PointF(Convert.ToSingle(model.sx - fHalf_H * model.mx), Convert.ToSingle(model.sy - fHalf_H * model.my));
-            PointF p2 = new PointF(Convert.ToSingle(model.sx + fHalf_H * model.mx), Convert.ToSingle(model.sy + fHalf_H * model.my));
-
-            return new CLine(p1, p2);
-        }
+        #endregion
     }
 
     public static class Computer
@@ -3543,13 +3549,6 @@ namespace CD_Measure
 
         public static double[] HC_FILTER_GetLogKernel(int nKernelSize, double fSigma, int nSign = 1)
         {
-            //double[] fKernel = new double[5 * 5] 
-            //{ 0,0,1,0,0,
-            //  0,1,2,1,0,
-            //  1,2,-16,2,1,
-            //  0,1,2,1,0,
-            //  0,0,1,0,0};
-
             double[] fKernel = null;
 
             if (nKernelSize == 5)
@@ -5941,7 +5940,7 @@ namespace CD_Measure
        #endregion
 
         //*****************************************************************************************
-        // Overlay method
+        // NewtonRapson method
         //*****************************************************************************************
 
         #region OVERLAY METHOD
