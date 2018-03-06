@@ -75,9 +75,7 @@
             this.label87 = new System.Windows.Forms.Label();
             this.TAB_VIEW = new System.Windows.Forms.TabControl();
             this.tabpage33 = new System.Windows.Forms.TabPage();
-            this.imageView1 = new CD_View.UC_CD_VIEWER();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.imageView2 = new CD_View.UC_CD_VIEWER();
             this.UC_LOG_VIEWER = new UC_LogView.UC_LOG_VIEWER();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -117,10 +115,9 @@
             this.BTN_MENU_PTRN = new System.Windows.Forms.Button();
             this.PNL_DRAW_FIGURE = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.PROPT_PARAM = new System.Windows.Forms.PropertyGrid();
             this.BTN_FIGURE_REFRESH = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
             this.BTN_FIGURE_REMOVE_ALL = new System.Windows.Forms.Button();
-            this.UC_Parameter = new CD_Paramter.pnl_parameter();
             this.BTN_FIGURE_DELETE = new System.Windows.Forms.Button();
             this.BTN_FIGURE_UPDATE = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -388,6 +385,8 @@
             this.LB_TIME_PREDICTION = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_LIFE_TIME = new System.Windows.Forms.Label();
+            this.imageView1 = new CD_View.UC_CD_VIEWER();
+            this.imageView2 = new CD_View.UC_CD_VIEWER();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).BeginInit();
@@ -804,13 +803,13 @@
             this.BTN_FIGURE_ACTION_GAP.UseVisualStyleBackColor = true;
             this.BTN_FIGURE_ACTION_GAP.Click += new System.EventHandler(this.BTN_FIGURE_ACTION_GAP_Click);
             // 
-            // RDO_ROI_WHEEL
+            // RDO_FIGURE_ACTION_WHEEL
             // 
             this.RDO_FIGURE_ACTION_WHEEL.AutoSize = true;
             this.RDO_FIGURE_ACTION_WHEEL.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.RDO_FIGURE_ACTION_WHEEL.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_FIGURE_ACTION_WHEEL.Location = new System.Drawing.Point(232, 61);
-            this.RDO_FIGURE_ACTION_WHEEL.Name = "RDO_ROI_WHEEL";
+            this.RDO_FIGURE_ACTION_WHEEL.Name = "RDO_FIGURE_ACTION_WHEEL";
             this.RDO_FIGURE_ACTION_WHEEL.Size = new System.Drawing.Size(71, 14);
             this.RDO_FIGURE_ACTION_WHEEL.TabIndex = 2;
             this.RDO_FIGURE_ACTION_WHEEL.Text = "WHEEL(W)";
@@ -818,13 +817,13 @@
             this.RDO_FIGURE_ACTION_WHEEL.Visible = false;
             this.RDO_FIGURE_ACTION_WHEEL.CheckedChanged += new System.EventHandler(this.RDO_ROI_WHEEL_CheckedChanged);
             // 
-            // RDO_ROI_SIZE
+            // RDO_FIGURE_ACTION_SIZE
             // 
             this.RDO_FIGURE_ACTION_SIZE.AutoSize = true;
             this.RDO_FIGURE_ACTION_SIZE.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.RDO_FIGURE_ACTION_SIZE.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_FIGURE_ACTION_SIZE.Location = new System.Drawing.Point(175, 61);
-            this.RDO_FIGURE_ACTION_SIZE.Name = "RDO_ROI_SIZE";
+            this.RDO_FIGURE_ACTION_SIZE.Name = "RDO_FIGURE_ACTION_SIZE";
             this.RDO_FIGURE_ACTION_SIZE.Size = new System.Drawing.Size(58, 14);
             this.RDO_FIGURE_ACTION_SIZE.TabIndex = 2;
             this.RDO_FIGURE_ACTION_SIZE.Text = "SIZE(S)";
@@ -869,14 +868,14 @@
             this.TB_FIGURE_CTRL_SCALE.Value = 5;
             this.TB_FIGURE_CTRL_SCALE.Scroll += new System.EventHandler(this.TB_FIGURE_CTRL_SCALE_Scroll);
             // 
-            // RDO_ROI_POSITION
+            // RDO_FIGURE_ACTION_POSITION
             // 
             this.RDO_FIGURE_ACTION_POSITION.AutoSize = true;
             this.RDO_FIGURE_ACTION_POSITION.Checked = true;
             this.RDO_FIGURE_ACTION_POSITION.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.RDO_FIGURE_ACTION_POSITION.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_FIGURE_ACTION_POSITION.Location = new System.Drawing.Point(57, 63);
-            this.RDO_FIGURE_ACTION_POSITION.Name = "RDO_ROI_POSITION";
+            this.RDO_FIGURE_ACTION_POSITION.Name = "RDO_FIGURE_ACTION_POSITION";
             this.RDO_FIGURE_ACTION_POSITION.Size = new System.Drawing.Size(56, 14);
             this.RDO_FIGURE_ACTION_POSITION.TabIndex = 2;
             this.RDO_FIGURE_ACTION_POSITION.TabStop = true;
@@ -884,13 +883,13 @@
             this.RDO_FIGURE_ACTION_POSITION.UseVisualStyleBackColor = true;
             this.RDO_FIGURE_ACTION_POSITION.CheckedChanged += new System.EventHandler(this.RDO_ROI_POSITION_CheckedChanged);
             // 
-            // RDO_ROI_GAP
+            // RDO_FIGURE_ACTION_GAP
             // 
             this.RDO_FIGURE_ACTION_GAP.AutoSize = true;
             this.RDO_FIGURE_ACTION_GAP.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.RDO_FIGURE_ACTION_GAP.ForeColor = System.Drawing.SystemColors.Desktop;
             this.RDO_FIGURE_ACTION_GAP.Location = new System.Drawing.Point(116, 63);
-            this.RDO_FIGURE_ACTION_GAP.Name = "RDO_ROI_GAP";
+            this.RDO_FIGURE_ACTION_GAP.Name = "RDO_FIGURE_ACTION_GAP";
             this.RDO_FIGURE_ACTION_GAP.Size = new System.Drawing.Size(55, 14);
             this.RDO_FIGURE_ACTION_GAP.TabIndex = 2;
             this.RDO_FIGURE_ACTION_GAP.Text = "GAP(G)";
@@ -949,22 +948,6 @@
             this.tabpage33.TabIndex = 0;
             this.tabpage33.Text = "VIEW1";
             // 
-            // imageView1
-            // 
-            this.imageView1.AllowDrop = true;
-            this.imageView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.imageView1.BOOL_DRAW_FOCUS_ROI = true;
-            this.imageView1.BOOL_DRAW_PTRN_ROI = true;
-            this.imageView1.BOOL_TEACHING_ACTIVATION = false;
-            this.imageView1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageView1.ForeColor = System.Drawing.Color.Lime;
-            this.imageView1.Location = new System.Drawing.Point(0, 0);
-            this.imageView1.Name = "imageView1";
-            this.imageView1.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView1.PT_FIGURE_TO_DRAW")));
-            this.imageView1.ROI_INDEX = -1;
-            this.imageView1.Size = new System.Drawing.Size(600, 678);
-            this.imageView1.TabIndex = 0;
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -976,22 +959,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "VIEW2";
             // 
-            // imageView2
-            // 
-            this.imageView2.AllowDrop = true;
-            this.imageView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.imageView2.BOOL_DRAW_FOCUS_ROI = true;
-            this.imageView2.BOOL_DRAW_PTRN_ROI = true;
-            this.imageView2.BOOL_TEACHING_ACTIVATION = false;
-            this.imageView2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageView2.ForeColor = System.Drawing.Color.Lime;
-            this.imageView2.Location = new System.Drawing.Point(0, 0);
-            this.imageView2.Name = "imageView2";
-            this.imageView2.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView2.PT_FIGURE_TO_DRAW")));
-            this.imageView2.ROI_INDEX = -1;
-            this.imageView2.Size = new System.Drawing.Size(600, 678);
-            this.imageView2.TabIndex = 0;
-            // 
             // UC_LOG_VIEWER
             // 
             this.UC_LOG_VIEWER.AllowDrop = true;
@@ -1000,7 +967,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 135;
+            this.UC_LOG_VIEWER.m_workIndexer = 421;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1426,10 +1393,10 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.PROPT_PARAM);
             this.panel2.Controls.Add(this.BTN_FIGURE_REFRESH);
-            this.panel2.Controls.Add(this.label25);
             this.panel2.Controls.Add(this.BTN_FIGURE_REMOVE_ALL);
-            this.panel2.Controls.Add(this.UC_Parameter);
             this.panel2.Controls.Add(this.BTN_FIGURE_DELETE);
             this.panel2.Controls.Add(this.BTN_FIGURE_UPDATE);
             this.panel2.Controls.Add(this.LV_PARAMETER);
@@ -1441,8 +1408,34 @@
             this.panel2.Controls.Add(this.label12);
             this.panel2.Location = new System.Drawing.Point(3, 8);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(609, 370);
+            this.panel2.Size = new System.Drawing.Size(601, 370);
             this.panel2.TabIndex = 43;
+            // 
+            // PROPT_PARAM
+            // 
+            this.PROPT_PARAM.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.PROPT_PARAM.CategoryForeColor = System.Drawing.Color.DarkGray;
+            this.PROPT_PARAM.CategorySplitterColor = System.Drawing.Color.DarkGray;
+            this.PROPT_PARAM.CommandsBackColor = System.Drawing.Color.Cyan;
+            this.PROPT_PARAM.CommandsBorderColor = System.Drawing.Color.Green;
+            this.PROPT_PARAM.DisabledItemForeColor = System.Drawing.Color.Red;
+            this.PROPT_PARAM.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.PROPT_PARAM.HelpBackColor = System.Drawing.SystemColors.ControlDark;
+            this.PROPT_PARAM.HelpBorderColor = System.Drawing.Color.Cornsilk;
+            this.PROPT_PARAM.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.PROPT_PARAM.LineColor = System.Drawing.Color.Gray;
+            this.PROPT_PARAM.Location = new System.Drawing.Point(239, 17);
+            this.PROPT_PARAM.Margin = new System.Windows.Forms.Padding(5);
+            this.PROPT_PARAM.Name = "PROPT_PARAM";
+            this.PROPT_PARAM.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+            this.PROPT_PARAM.SelectedItemWithFocusForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.PROPT_PARAM.Size = new System.Drawing.Size(353, 344);
+            this.PROPT_PARAM.TabIndex = 42;
+            this.PROPT_PARAM.TabStop = false;
+            this.PROPT_PARAM.ViewBackColor = System.Drawing.SystemColors.Control;
+            this.PROPT_PARAM.ViewBorderColor = System.Drawing.Color.Cornsilk;
+            this.PROPT_PARAM.ViewForeColor = System.Drawing.Color.Black;
+            this.PROPT_PARAM.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PRPERTY_PARAM_PropertyValueChanged);
             // 
             // BTN_FIGURE_REFRESH
             // 
@@ -1458,17 +1451,6 @@
             this.BTN_FIGURE_REFRESH.UseVisualStyleBackColor = true;
             this.BTN_FIGURE_REFRESH.Click += new System.EventHandler(this.BTN_FIGURE_REFRESH_Click);
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label25.Location = new System.Drawing.Point(442, 275);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(151, 14);
-            this.label25.TabIndex = 0;
-            this.label25.Text = "235, 310 / 370 , 340";
-            this.label25.Visible = false;
-            // 
             // BTN_FIGURE_REMOVE_ALL
             // 
             this.BTN_FIGURE_REMOVE_ALL.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.Trash_empty;
@@ -1482,14 +1464,6 @@
             this.BTN_FIGURE_REMOVE_ALL.TabIndex = 12;
             this.BTN_FIGURE_REMOVE_ALL.UseVisualStyleBackColor = true;
             this.BTN_FIGURE_REMOVE_ALL.Click += new System.EventHandler(this.BTN_FIGURE_REMOVE_ALL_Click);
-            // 
-            // UC_Parameter
-            // 
-            this.UC_Parameter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UC_Parameter.Location = new System.Drawing.Point(239, 17);
-            this.UC_Parameter.Name = "UC_Parameter";
-            this.UC_Parameter.Size = new System.Drawing.Size(370, 340);
-            this.UC_Parameter.TabIndex = 1;
             // 
             // BTN_FIGURE_DELETE
             // 
@@ -4759,6 +4733,38 @@
             this.LB_LIFE_TIME.TabIndex = 64;
             this.LB_LIFE_TIME.Text = "LIFE_TIME :";
             // 
+            // imageView1
+            // 
+            this.imageView1.AllowDrop = true;
+            this.imageView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.imageView1.BOOL_DRAW_FOCUS_ROI = true;
+            this.imageView1.BOOL_DRAW_PTRN_ROI = true;
+            this.imageView1.BOOL_TEACHING_ACTIVATION = false;
+            this.imageView1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageView1.ForeColor = System.Drawing.Color.Lime;
+            this.imageView1.Location = new System.Drawing.Point(0, 0);
+            this.imageView1.Name = "imageView1";
+            this.imageView1.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView1.PT_FIGURE_TO_DRAW")));
+            this.imageView1.ROI_INDEX = -1;
+            this.imageView1.Size = new System.Drawing.Size(600, 678);
+            this.imageView1.TabIndex = 0;
+            // 
+            // imageView2
+            // 
+            this.imageView2.AllowDrop = true;
+            this.imageView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.imageView2.BOOL_DRAW_FOCUS_ROI = true;
+            this.imageView2.BOOL_DRAW_PTRN_ROI = true;
+            this.imageView2.BOOL_TEACHING_ACTIVATION = false;
+            this.imageView2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageView2.ForeColor = System.Drawing.Color.Lime;
+            this.imageView2.Location = new System.Drawing.Point(0, 0);
+            this.imageView2.Name = "imageView2";
+            this.imageView2.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView2.PT_FIGURE_TO_DRAW")));
+            this.imageView2.ROI_INDEX = -1;
+            this.imageView2.Size = new System.Drawing.Size(600, 678);
+            this.imageView2.TabIndex = 0;
+            // 
             // CDMainForm
             // 
             this.AllowDrop = true;
@@ -4902,7 +4908,6 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button BTN_MEASURE;
         private System.Windows.Forms.RichTextBox msg;
-        private CD_Paramter.pnl_parameter UC_Parameter;
         private CD_View.UC_CD_VIEWER imageView1;
         private System.Windows.Forms.Panel panel27;
         private System.Windows.Forms.RadioButton RDO_FIGURE_ACTION_WHEEL;
@@ -4967,7 +4972,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label LB_HACKER;
         private System.Windows.Forms.Button BTN_MENU_ADVANCED;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button BTN_PLAY;
         private System.Windows.Forms.Button BTN_MENU_STATISTICS;
         private System.Windows.Forms.Label label26;
@@ -5227,6 +5231,7 @@
         private System.Windows.Forms.Button BTN_FIGURE_ACTION_GAP;
         private System.Windows.Forms.Button BTN_FIGURE_ACTION_POS;
         private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.PropertyGrid PROPT_PARAM;
 
 
 

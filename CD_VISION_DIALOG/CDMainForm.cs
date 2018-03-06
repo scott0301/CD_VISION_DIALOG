@@ -17,7 +17,6 @@ using DispObject;
 
 using CD_Figure;
 using CD_Measure;
-using CD_Paramter;
 using CD_View;
 using UC_LogView;
 using WrapperCognex;
@@ -1013,8 +1012,7 @@ namespace CD_VISION_DIALOG
             UC_LOG_VIEWER.WRITE_LOG("Library Initialization", DEF_OPERATION.OPER_01_POWER);
             UC_LOG_VIEWER.SetSize(655, 235);
             UC_LOG_VIEWER.WRITE_LOG("Program Initialized.", DEF_OPERATION.OPER_01_POWER);
-            UC_Parameter.SetSize(380, 350);
-
+ 
             // update recp list 
             _Recp_Update_List();
 
@@ -2981,7 +2979,8 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_PairRct propertySingle = new PROPERTY_PairRct();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
+                prop_SetParam(propertySingle);
+
             }
             else if (strHeader == "CC")
             {
@@ -2990,7 +2989,7 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_PairCir propertySingle = new PROPERTY_PairCir();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
+                prop_SetParam(propertySingle);
             }
             else if (strHeader == "OVL")
             {
@@ -2999,12 +2998,12 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_PairOvl propertySingle = new PROPERTY_PairOvl();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
+                prop_SetParam(propertySingle);
             }
             else if (strHeader == "FOCUS")
             {
                 TAB_FIGURE.SelectedIndex = IFX_FIGURE.RC_FOCUS;
-                UC_Parameter.ClearData();
+                prop_ClearData();
             }
             else if (strHeader == "MRC")
             {
@@ -3013,7 +3012,7 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_MixedRC propertySingle = new PROPERTY_MixedRC();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
+                prop_SetParam(propertySingle);
             }
             else if (strHeader == "MCC")
             {
@@ -3022,7 +3021,7 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_MixedCC propertySingle = new PROPERTY_MixedCC();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
+                prop_SetParam(propertySingle);
             }
             else if (strHeader == "MRCC")
             {
@@ -3031,8 +3030,7 @@ namespace CD_VISION_DIALOG
 
                 PROPERTY_MixedRCC propertySingle = new PROPERTY_MixedRCC();
                 propertySingle.FromFigure(single);
-                UC_Parameter.SetParam(propertySingle);
-
+                prop_SetParam(propertySingle);
             }
 
             _UpdateUI_FigureSelection(nItemIndex);
@@ -3237,7 +3235,7 @@ namespace CD_VISION_DIALOG
             // delete selected figure
             if (m_speaker.Figure_Remove() == DialogResult.Yes)
             {
-                object objectSelected = UC_Parameter.GetCurrentData();
+                object objectSelected = prop_GetCurrentData();
 
                 /***/if (strHeader == "RC"/******/) { imageView1.iDel_Figure(IFX_FIGURE.PAIR_RCT, nSelectedIndex); }
                 else if (strHeader == "CC"/******/) { imageView1.iDel_Figure(IFX_FIGURE.PAIR_CIR, nSelectedIndex); }
@@ -3262,7 +3260,7 @@ namespace CD_VISION_DIALOG
         }
         private void BTN_FIGURE_REFRESH_Click(object sender, EventArgs e)
         {
-            UC_Parameter.ClearData();
+            prop_ClearData();
             LV_PARAMETER.Items.Clear();
             m_bChangedDiagonalAngle = false;
 
@@ -3373,7 +3371,7 @@ namespace CD_VISION_DIALOG
             if (m_speaker.Check_is_Error_Index_Validity(nSelectedIndex) == true){return;}
 
             // get the selected object
-            object objectSelected = UC_Parameter.GetCurrentData();
+            object objectSelected = prop_GetCurrentData();
 
             if (strHeader == "RC")
             {
@@ -4668,7 +4666,34 @@ namespace CD_VISION_DIALOG
             RDO_FIGURE_ACTION_WHEEL.Checked = true;
         }
 
-        
+        private void PRPERTY_PARAM_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            PropertyGrid pg = (PropertyGrid)s;
+
+            object objPrev = PROPT_PARAM.SelectedObject;
+            object objCurr = pg.SelectedObjects[0];
+
+            PROPT_PARAM.SelectedObject = objCurr;
+        }
+        public void prop_SetParam(object obj)
+        {
+            if/***/ (obj.GetType() == new PROPERTY_PairRct().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_PairRct)obj); }
+            else if (obj.GetType() == new PROPERTY_PairCir().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_PairCir)obj); }
+            else if (obj.GetType() == new PROPERTY_PairOvl().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_PairOvl)obj); }
+            else if (obj.GetType() == new PROPERTY_MixedRC().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_MixedRC)obj); }
+            else if (obj.GetType() == new PROPERTY_MixedCC().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_MixedCC)obj); }
+            else if (obj.GetType() == new PROPERTY_MixedRCC().GetType()) { PROPT_PARAM.SelectedObject = ((PROPERTY_MixedRCC)obj); }
+        }
+
+        public object prop_GetCurrentData()
+        {
+            return PROPT_PARAM.SelectedObject;
+        }
+
+        public void prop_ClearData()
+        {
+            PROPT_PARAM.SelectedObject = null;
+        }
     }
 
      static class ControlExtensions

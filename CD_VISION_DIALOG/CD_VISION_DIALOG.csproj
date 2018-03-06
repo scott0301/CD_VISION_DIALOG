@@ -63,10 +63,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UC_CD_PARAM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\UC_CD_PARAM.dll</HintPath>
-    </Reference>
     <Reference Include="UC_CD_View, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>UC_CD_VIEW\UC_CD_VIEW\Debug\UC_CD_View.dll</HintPath>
@@ -102,6 +98,7 @@
     <Compile Include="CDMainForm.Designer.cs">
       <DependentUpon>CDMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="property_params.cs" />
     <Compile Include="Dlg_Config.cs">
       <SubType>Form</SubType>
     </Compile>

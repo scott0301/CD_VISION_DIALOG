@@ -17,7 +17,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 using DispObject;
 using CD_Figure;
-using CD_Paramter;
 using CD_View;
 
  

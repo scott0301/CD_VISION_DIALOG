@@ -12,8 +12,10 @@ using System.Globalization;
 using CD_Figure;
 using DEF_PARAMS;
 
-namespace CD_Paramter
+namespace CD_VISION_DIALOG
 {
+
+
     [TypeConverter(typeof(CustomPoinDConverter))]
     public class CustomPointD
     {
