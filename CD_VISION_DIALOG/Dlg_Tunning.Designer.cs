@@ -32,28 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dlg_Tunning));
             this.label16 = new System.Windows.Forms.Label();
             this.TAB_TUNNING_TARGET = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.TXT_CIR_SHRINKAGE = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.TXT_CIRCLE_SELECTED_FIGURE = new System.Windows.Forms.TextBox();
-            this.TXT_CIRCLE_SELECTED_INDEX = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION = new System.Windows.Forms.Button();
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE = new System.Windows.Forms.ComboBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.uc_thumb_nail_circle = new NS_UC_THUMB_NAIL.UC_THUMB_NAIL();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.RDO_RECT_TYPE_DIA = new System.Windows.Forms.RadioButton();
+            this.RDO_RECT_TYPE_VER = new System.Windows.Forms.RadioButton();
+            this.RDO_RECT_TYPE_HOR = new System.Windows.Forms.RadioButton();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.BTN_CHECK_EDGE_DETECTION = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.TXT_RECT_CANDIDATE_COUNT = new System.Windows.Forms.NumericUpDown();
-            this.label27 = new System.Windows.Forms.Label();
-            this.TXT_RECT_WINDOW_SIZE = new System.Windows.Forms.NumericUpDown();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.RDO_RECT_APD_SCD = new System.Windows.Forms.RadioButton();
             this.RDO_RECT_APD_FST = new System.Windows.Forms.RadioButton();
@@ -78,23 +65,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.BTN_RECOVER = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.RDO_RECT_TYPE_HOR = new System.Windows.Forms.RadioButton();
-            this.RDO_RECT_TYPE_VER = new System.Windows.Forms.RadioButton();
-            this.RDO_RECT_TYPE_DIA = new System.Windows.Forms.RadioButton();
             this.TAB_TUNNING_TARGET.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TXT_CIR_SHRINKAGE)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TXT_RECT_CANDIDATE_COUNT)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TXT_RECT_WINDOW_SIZE)).BeginInit();
             this.groupBox17.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label16
@@ -109,7 +86,6 @@
             // 
             // TAB_TUNNING_TARGET
             // 
-            this.TAB_TUNNING_TARGET.Controls.Add(this.tabPage1);
             this.TAB_TUNNING_TARGET.Controls.Add(this.tabPage2);
             this.TAB_TUNNING_TARGET.ItemSize = new System.Drawing.Size(100, 40);
             this.TAB_TUNNING_TARGET.Location = new System.Drawing.Point(618, 12);
@@ -119,193 +95,6 @@
             this.TAB_TUNNING_TARGET.Size = new System.Drawing.Size(749, 608);
             this.TAB_TUNNING_TARGET.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TAB_TUNNING_TARGET.TabIndex = 83;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.tabPage1.Controls.Add(this.groupBox9);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.uc_thumb_nail_circle);
-            this.tabPage1.Location = new System.Drawing.Point(4, 44);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(741, 560);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "CIRCLE";
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.TXT_CIR_SHRINKAGE);
-            this.groupBox9.Controls.Add(this.label6);
-            this.groupBox9.Controls.Add(this.label3);
-            this.groupBox9.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox9.Location = new System.Drawing.Point(370, 228);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(365, 50);
-            this.groupBox9.TabIndex = 83;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "SHRINKAGE :";
-            // 
-            // TXT_CIR_SHRINKAGE
-            // 
-            this.TXT_CIR_SHRINKAGE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.TXT_CIR_SHRINKAGE.DecimalPlaces = 2;
-            this.TXT_CIR_SHRINKAGE.ForeColor = System.Drawing.Color.White;
-            this.TXT_CIR_SHRINKAGE.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.TXT_CIR_SHRINKAGE.Location = new System.Drawing.Point(99, 17);
-            this.TXT_CIR_SHRINKAGE.Name = "TXT_CIR_SHRINKAGE";
-            this.TXT_CIR_SHRINKAGE.Size = new System.Drawing.Size(110, 22);
-            this.TXT_CIR_SHRINKAGE.TabIndex = 4;
-            this.TXT_CIR_SHRINKAGE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_CIR_SHRINKAGE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_CIR_SHRINKAGE_KeyDown);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.Window;
-            this.label6.Location = new System.Drawing.Point(19, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 14);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "VALUE :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label3.Location = new System.Drawing.Point(215, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 14);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "(±)%";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.TXT_CIRCLE_SELECTED_FIGURE);
-            this.groupBox2.Controls.Add(this.TXT_CIRCLE_SELECTED_INDEX);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox2.Location = new System.Drawing.Point(6, 171);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(729, 50);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "TARGET INFO";
-            // 
-            // TXT_CIRCLE_SELECTED_FIGURE
-            // 
-            this.TXT_CIRCLE_SELECTED_FIGURE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.TXT_CIRCLE_SELECTED_FIGURE.ForeColor = System.Drawing.Color.White;
-            this.TXT_CIRCLE_SELECTED_FIGURE.Location = new System.Drawing.Point(319, 17);
-            this.TXT_CIRCLE_SELECTED_FIGURE.Name = "TXT_CIRCLE_SELECTED_FIGURE";
-            this.TXT_CIRCLE_SELECTED_FIGURE.Size = new System.Drawing.Size(402, 22);
-            this.TXT_CIRCLE_SELECTED_FIGURE.TabIndex = 3;
-            // 
-            // TXT_CIRCLE_SELECTED_INDEX
-            // 
-            this.TXT_CIRCLE_SELECTED_INDEX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.TXT_CIRCLE_SELECTED_INDEX.ForeColor = System.Drawing.Color.White;
-            this.TXT_CIRCLE_SELECTED_INDEX.Location = new System.Drawing.Point(70, 17);
-            this.TXT_CIRCLE_SELECTED_INDEX.Name = "TXT_CIRCLE_SELECTED_INDEX";
-            this.TXT_CIRCLE_SELECTED_INDEX.Size = new System.Drawing.Size(88, 22);
-            this.TXT_CIRCLE_SELECTED_INDEX.TabIndex = 3;
-            this.TXT_CIRCLE_SELECTED_INDEX.Text = "0";
-            this.TXT_CIRCLE_SELECTED_INDEX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(6, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 14);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "INDEX :";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(174, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(149, 14);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "SELECTED_TARGET : ";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.BTN_CIRCLE_CHECK_AUTO_DETECTION);
-            this.groupBox1.Controls.Add(this.CB_CIRCLE_AUTO_DETECTION_TYPE);
-            this.groupBox1.Controls.Add(this.label30);
-            this.groupBox1.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox1.Location = new System.Drawing.Point(6, 227);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 50);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "AUTO CIRCLE DETECTION";
-            // 
-            // BTN_CIRCLE_CHECK_AUTO_DETECTION
-            // 
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.ForeColor = System.Drawing.Color.Black;
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Location = new System.Drawing.Point(234, 14);
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Name = "BTN_CIRCLE_CHECK_AUTO_DETECTION";
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Size = new System.Drawing.Size(118, 30);
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.TabIndex = 81;
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Text = "CHECK";
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.UseVisualStyleBackColor = true;
-            this.BTN_CIRCLE_CHECK_AUTO_DETECTION.Click += new System.EventHandler(this.BTN_CIRCLE_CHECK_AUTO_DETECTION_Click);
-            // 
-            // CB_CIRCLE_AUTO_DETECTION_TYPE
-            // 
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.FormattingEnabled = true;
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"});
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Location = new System.Drawing.Point(84, 18);
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Name = "CB_CIRCLE_AUTO_DETECTION_TYPE";
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Size = new System.Drawing.Size(144, 22);
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.TabIndex = 5;
-            this.CB_CIRCLE_AUTO_DETECTION_TYPE.Text = "0";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(26, 21);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(42, 14);
-            this.label30.TabIndex = 4;
-            this.label30.Text = "TYPE";
-            // 
-            // uc_thumb_nail_circle
-            // 
-            this.uc_thumb_nail_circle.BackColor = System.Drawing.Color.Black;
-            this.uc_thumb_nail_circle.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.uc_thumb_nail_circle.Location = new System.Drawing.Point(3, 5);
-            this.uc_thumb_nail_circle.m_bLoadAvailable = false;
-            this.uc_thumb_nail_circle.Name = "uc_thumb_nail_circle";
-            this.uc_thumb_nail_circle.PATH_FOLDER = "C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\IDE";
-            this.uc_thumb_nail_circle.Size = new System.Drawing.Size(732, 160);
-            this.uc_thumb_nail_circle.TabIndex = 0;
-            this.uc_thumb_nail_circle.ThumbBorderColor = System.Drawing.Color.Wheat;
-            this.uc_thumb_nail_circle.ThumbNailSize = 196;
-            this.uc_thumb_nail_circle.UseCompatibleStateImageBehavior = false;
-            this.uc_thumb_nail_circle.DoubleClick += new System.EventHandler(this.uc_thumb_nail_DoubleClick);
             // 
             // tabPage2
             // 
@@ -322,29 +111,79 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RECT";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_DIA);
+            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_VER);
+            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_HOR);
+            this.groupBox3.ForeColor = System.Drawing.Color.Coral;
+            this.groupBox3.Location = new System.Drawing.Point(6, 227);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(729, 51);
+            this.groupBox3.TabIndex = 104;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "RECTANGLE TYPE";
+            // 
+            // RDO_RECT_TYPE_DIA
+            // 
+            this.RDO_RECT_TYPE_DIA.AutoSize = true;
+            this.RDO_RECT_TYPE_DIA.Enabled = false;
+            this.RDO_RECT_TYPE_DIA.ForeColor = System.Drawing.Color.White;
+            this.RDO_RECT_TYPE_DIA.Location = new System.Drawing.Point(243, 21);
+            this.RDO_RECT_TYPE_DIA.Name = "RDO_RECT_TYPE_DIA";
+            this.RDO_RECT_TYPE_DIA.Size = new System.Drawing.Size(93, 18);
+            this.RDO_RECT_TYPE_DIA.TabIndex = 0;
+            this.RDO_RECT_TYPE_DIA.TabStop = true;
+            this.RDO_RECT_TYPE_DIA.Text = "RECT_DIA";
+            this.RDO_RECT_TYPE_DIA.UseVisualStyleBackColor = true;
+            // 
+            // RDO_RECT_TYPE_VER
+            // 
+            this.RDO_RECT_TYPE_VER.AutoSize = true;
+            this.RDO_RECT_TYPE_VER.Enabled = false;
+            this.RDO_RECT_TYPE_VER.ForeColor = System.Drawing.Color.White;
+            this.RDO_RECT_TYPE_VER.Location = new System.Drawing.Point(126, 21);
+            this.RDO_RECT_TYPE_VER.Name = "RDO_RECT_TYPE_VER";
+            this.RDO_RECT_TYPE_VER.Size = new System.Drawing.Size(94, 18);
+            this.RDO_RECT_TYPE_VER.TabIndex = 0;
+            this.RDO_RECT_TYPE_VER.TabStop = true;
+            this.RDO_RECT_TYPE_VER.Text = "RECT_VER";
+            this.RDO_RECT_TYPE_VER.UseVisualStyleBackColor = true;
+            // 
+            // RDO_RECT_TYPE_HOR
+            // 
+            this.RDO_RECT_TYPE_HOR.AutoSize = true;
+            this.RDO_RECT_TYPE_HOR.Enabled = false;
+            this.RDO_RECT_TYPE_HOR.ForeColor = System.Drawing.Color.White;
+            this.RDO_RECT_TYPE_HOR.Location = new System.Drawing.Point(9, 21);
+            this.RDO_RECT_TYPE_HOR.Name = "RDO_RECT_TYPE_HOR";
+            this.RDO_RECT_TYPE_HOR.Size = new System.Drawing.Size(98, 18);
+            this.RDO_RECT_TYPE_HOR.TabIndex = 0;
+            this.RDO_RECT_TYPE_HOR.TabStop = true;
+            this.RDO_RECT_TYPE_HOR.Text = "RECT_HOR";
+            this.RDO_RECT_TYPE_HOR.UseVisualStyleBackColor = true;
+            // 
             // groupBox18
             // 
             this.groupBox18.Controls.Add(this.BTN_CHECK_EDGE_DETECTION);
             this.groupBox18.Controls.Add(this.label21);
             this.groupBox18.Controls.Add(this.TXT_RECT_CANDIDATE_COUNT);
-            this.groupBox18.Controls.Add(this.label27);
-            this.groupBox18.Controls.Add(this.TXT_RECT_WINDOW_SIZE);
             this.groupBox18.ForeColor = System.Drawing.Color.Coral;
             this.groupBox18.Location = new System.Drawing.Point(433, 284);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(302, 113);
             this.groupBox18.TabIndex = 104;
             this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "DETEC PARAM";
+            this.groupBox18.Text = "PEAK DETECTION PARAM";
             // 
             // BTN_CHECK_EDGE_DETECTION
             // 
             this.BTN_CHECK_EDGE_DETECTION.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_CHECK_EDGE_DETECTION.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.BTN_CHECK_EDGE_DETECTION.ForeColor = System.Drawing.Color.Black;
-            this.BTN_CHECK_EDGE_DETECTION.Location = new System.Drawing.Point(10, 80);
+            this.BTN_CHECK_EDGE_DETECTION.Location = new System.Drawing.Point(10, 47);
             this.BTN_CHECK_EDGE_DETECTION.Name = "BTN_CHECK_EDGE_DETECTION";
-            this.BTN_CHECK_EDGE_DETECTION.Size = new System.Drawing.Size(286, 30);
+            this.BTN_CHECK_EDGE_DETECTION.Size = new System.Drawing.Size(286, 52);
             this.BTN_CHECK_EDGE_DETECTION.TabIndex = 80;
             this.BTN_CHECK_EDGE_DETECTION.Text = "DETECTION";
             this.BTN_CHECK_EDGE_DETECTION.UseVisualStyleBackColor = true;
@@ -380,40 +219,6 @@
             this.TXT_RECT_CANDIDATE_COUNT.TabIndex = 95;
             this.TXT_RECT_CANDIDATE_COUNT.Value = new decimal(new int[] {
             2,
-            0,
-            0,
-            0});
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(16, 52);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(93, 14);
-            this.label27.TabIndex = 93;
-            this.label27.Text = "WINDOW SZ";
-            // 
-            // TXT_RECT_WINDOW_SIZE
-            // 
-            this.TXT_RECT_WINDOW_SIZE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.TXT_RECT_WINDOW_SIZE.ForeColor = System.Drawing.Color.White;
-            this.TXT_RECT_WINDOW_SIZE.Location = new System.Drawing.Point(115, 47);
-            this.TXT_RECT_WINDOW_SIZE.Maximum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
-            this.TXT_RECT_WINDOW_SIZE.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.TXT_RECT_WINDOW_SIZE.Name = "TXT_RECT_WINDOW_SIZE";
-            this.TXT_RECT_WINDOW_SIZE.Size = new System.Drawing.Size(182, 22);
-            this.TXT_RECT_WINDOW_SIZE.TabIndex = 95;
-            this.TXT_RECT_WINDOW_SIZE.Value = new decimal(new int[] {
-            10,
             0,
             0,
             0});
@@ -612,6 +417,7 @@
             // TXT_RECT_SELECTED_FIGURE
             // 
             this.TXT_RECT_SELECTED_FIGURE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.TXT_RECT_SELECTED_FIGURE.Enabled = false;
             this.TXT_RECT_SELECTED_FIGURE.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_SELECTED_FIGURE.Location = new System.Drawing.Point(319, 17);
             this.TXT_RECT_SELECTED_FIGURE.Name = "TXT_RECT_SELECTED_FIGURE";
@@ -621,6 +427,7 @@
             // TXT_RECT_SELECTED_INDEX
             // 
             this.TXT_RECT_SELECTED_INDEX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.TXT_RECT_SELECTED_INDEX.Enabled = false;
             this.TXT_RECT_SELECTED_INDEX.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_SELECTED_INDEX.Location = new System.Drawing.Point(70, 17);
             this.TXT_RECT_SELECTED_INDEX.Name = "TXT_RECT_SELECTED_INDEX";
@@ -734,55 +541,6 @@
             this.BTN_RECOVER.UseVisualStyleBackColor = true;
             this.BTN_RECOVER.Click += new System.EventHandler(this.BTN_RECOVER_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_DIA);
-            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_VER);
-            this.groupBox3.Controls.Add(this.RDO_RECT_TYPE_HOR);
-            this.groupBox3.ForeColor = System.Drawing.Color.Coral;
-            this.groupBox3.Location = new System.Drawing.Point(6, 227);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(729, 51);
-            this.groupBox3.TabIndex = 104;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "RECTANGLE TYPE";
-            // 
-            // RDO_RECT_TYPE_HOR
-            // 
-            this.RDO_RECT_TYPE_HOR.AutoSize = true;
-            this.RDO_RECT_TYPE_HOR.ForeColor = System.Drawing.Color.White;
-            this.RDO_RECT_TYPE_HOR.Location = new System.Drawing.Point(9, 21);
-            this.RDO_RECT_TYPE_HOR.Name = "RDO_RECT_TYPE_HOR";
-            this.RDO_RECT_TYPE_HOR.Size = new System.Drawing.Size(98, 18);
-            this.RDO_RECT_TYPE_HOR.TabIndex = 0;
-            this.RDO_RECT_TYPE_HOR.TabStop = true;
-            this.RDO_RECT_TYPE_HOR.Text = "RECT_HOR";
-            this.RDO_RECT_TYPE_HOR.UseVisualStyleBackColor = true;
-            // 
-            // RDO_RECT_TYPE_VER
-            // 
-            this.RDO_RECT_TYPE_VER.AutoSize = true;
-            this.RDO_RECT_TYPE_VER.ForeColor = System.Drawing.Color.White;
-            this.RDO_RECT_TYPE_VER.Location = new System.Drawing.Point(126, 21);
-            this.RDO_RECT_TYPE_VER.Name = "RDO_RECT_TYPE_VER";
-            this.RDO_RECT_TYPE_VER.Size = new System.Drawing.Size(94, 18);
-            this.RDO_RECT_TYPE_VER.TabIndex = 0;
-            this.RDO_RECT_TYPE_VER.TabStop = true;
-            this.RDO_RECT_TYPE_VER.Text = "RECT_VER";
-            this.RDO_RECT_TYPE_VER.UseVisualStyleBackColor = true;
-            // 
-            // RDO_RECT_TYPE_DIA
-            // 
-            this.RDO_RECT_TYPE_DIA.AutoSize = true;
-            this.RDO_RECT_TYPE_DIA.ForeColor = System.Drawing.Color.White;
-            this.RDO_RECT_TYPE_DIA.Location = new System.Drawing.Point(243, 21);
-            this.RDO_RECT_TYPE_DIA.Name = "RDO_RECT_TYPE_DIA";
-            this.RDO_RECT_TYPE_DIA.Size = new System.Drawing.Size(93, 18);
-            this.RDO_RECT_TYPE_DIA.TabIndex = 0;
-            this.RDO_RECT_TYPE_DIA.TabStop = true;
-            this.RDO_RECT_TYPE_DIA.Text = "RECT_DIA";
-            this.RDO_RECT_TYPE_DIA.UseVisualStyleBackColor = true;
-            // 
             // Dlg_Tunning
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -798,28 +556,19 @@
             this.Controls.Add(this.label5);
             this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Dlg_Tunning";
-            this.Text = "Dlg_Tunning";
+            this.Text = "PEAK INDEX MEASUREMENT";
             this.Load += new System.EventHandler(this.Dlg_Tunning_Load);
             this.TAB_TUNNING_TARGET.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TXT_CIR_SHRINKAGE)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TXT_RECT_CANDIDATE_COUNT)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TXT_RECT_WINDOW_SIZE)).EndInit();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -830,24 +579,12 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button BTN_PTRN_APPLY;
         private System.Windows.Forms.TabControl TAB_TUNNING_TARGET;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private CD_View.UC_CD_VIEWER uc_tunning_view;
         private System.Windows.Forms.Button BTN_RECOVER;
         private System.Windows.Forms.Label label1;
-        private NS_UC_THUMB_NAIL.UC_THUMB_NAIL uc_thumb_nail_circle;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TXT_CIRCLE_SELECTED_INDEX;
-        private System.Windows.Forms.TextBox TXT_CIRCLE_SELECTED_FIGURE;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BTN_PARAM_WRITE;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown TXT_CIR_SHRINKAGE;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox9;
         private NS_UC_THUMB_NAIL.UC_THUMB_NAIL uc_thumb_nail_rect;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.TextBox TXT_RECT_SELECTED_FIGURE;
@@ -859,8 +596,6 @@
         private System.Windows.Forms.NumericUpDown TXT_RECT_CANDIDATE_COUNT;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button BTN_CHECK_EDGE_DETECTION;
-        private System.Windows.Forms.NumericUpDown TXT_RECT_WINDOW_SIZE;
-        private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button BTN_RECT_VERIFY_EDGE_REGION_FST;
         private System.Windows.Forms.GroupBox groupBox17;
         private System.Windows.Forms.TextBox TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD;
@@ -872,9 +607,6 @@
         private System.Windows.Forms.Button BTN_RECT_UPDATE_SELECTED_PEAK_INDEX_FST;
         private System.Windows.Forms.RadioButton RDO_RECT_APD_SCD;
         private System.Windows.Forms.RadioButton RDO_RECT_APD_FST;
-        private System.Windows.Forms.ComboBox CB_CIRCLE_AUTO_DETECTION_TYPE;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Button BTN_CIRCLE_CHECK_AUTO_DETECTION;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton RDO_RECT_TYPE_DIA;
         private System.Windows.Forms.RadioButton RDO_RECT_TYPE_VER;

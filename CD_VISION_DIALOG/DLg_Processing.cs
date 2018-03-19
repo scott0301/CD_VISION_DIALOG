@@ -34,7 +34,7 @@ namespace CD_VISION_DIALOG
         {
             InitializeComponent();
 
-            uc_view_processing.eventDele_HereComesNewImage += new dele_HereComesNewImage(fuck);
+            uc_view_processing.eventDele_HereComesNewImage += new dele_HereComesNewImage(updateView);
             uc_view_processing.SetInit(500, 400, true);
 
             classUI = new subclass(this as DLg_Processing);
@@ -43,11 +43,8 @@ namespace CD_VISION_DIALOG
             uc_view_processing.BOOL_DRAW_PTRN_ROI = false; 
 
         }
-        
 
-        private void fuck()
-        {
-        }
+        public void updateView() { }
 
         private void DLg_Processing_Load(object sender, EventArgs e)
         {

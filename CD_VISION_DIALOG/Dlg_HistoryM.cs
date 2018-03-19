@@ -34,7 +34,7 @@ namespace CD_VISION_DIALOG
         {
             InitializeComponent();
 
-            uc_view_history.eventDele_HereComesNewImage += new dele_HereComesNewImage(fuck);
+            uc_view_history.eventDele_HereComesNewImage += new dele_HereComesNewImage(updateView);
             fileIO.EventThreadFinishedFileLoad += EventThreadFinished_LoadFile;
             fileIO.EventThreadFinishedFileLoad += EventThreadFinished_SaveFile;
 
@@ -42,6 +42,7 @@ namespace CD_VISION_DIALOG
             uc_view_history.BOOL_DRAW_PTRN_ROI = false;
             
         }
+        public void updateView() { }
 
         public bool SetParam(CFigureManager fm)
         {
@@ -119,9 +120,6 @@ namespace CD_VISION_DIALOG
 
         #region VIEWER RELATED EVENTS
 
-        public void fuck()
-        {
-        }
 
         private void EventThreadFinished_LoadFile(object sender, CFileIO.ThreadFinishedEventArgs e)
         {

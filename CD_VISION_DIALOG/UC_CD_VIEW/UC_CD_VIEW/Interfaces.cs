@@ -61,9 +61,6 @@ namespace CD_View
         void /********/iDel_Figure(int nFigureType, int nIndex);
         object /******/iGet_Figure(int nFigureType, int nIndex);
         CFigureManager iGet_AllData();
-
-        void iSetFigureDrawingActivation(bool bStatus);
-        bool iGetFigureDrawingActivation();
         
     }
 

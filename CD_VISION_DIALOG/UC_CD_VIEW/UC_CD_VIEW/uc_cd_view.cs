@@ -56,6 +56,7 @@ namespace CD_View
         bool m_bPanning = false;
         public bool m_bDrawOverlay = true;
 
+        public bool BOOL_DRAW_CROSS { get; set; }
         public bool BOOL_DRAW_FOCUS_ROI { get; set; }
         public bool BOOL_DRAW_PTRN_ROI { get; set; }
 
@@ -105,6 +106,7 @@ namespace CD_View
 
             BOOL_DRAW_FOCUS_ROI = true;
             BOOL_DRAW_PTRN_ROI = true;
+            BOOL_DRAW_CROSS = true;
             
         }
         public List<string> GetDispTextObjects()
@@ -356,7 +358,6 @@ namespace CD_View
             single.CroodinateBackup();
             Refresh();
         }
-    
 
         public void iMod_Figure(object single, int nIndex)
         {
@@ -417,18 +418,6 @@ namespace CD_View
         {
             fm.Figure_Remove(nFigureType, nIndex);
             Refresh();
-        }
-
-        // Set Figure Drawing Status 
-        public void iSetFigureDrawingActivation(bool bStatus)
-        {
-            BOOL_TEACHING_ACTIVATION = bStatus;
-            Refresh();
-        }
-        // Get figure drawing status
-        public bool iGetFigureDrawingActivation()
-        {
-            return BOOL_TEACHING_ACTIVATION;
         }
 
         public void iGet_CropsRectPairNormal(RectangleF rc1, RectangleF rc2,  out byte[] crop1, out byte[] crop2)
@@ -979,7 +968,7 @@ namespace CD_View
             m_VirtualImgPosY = 0;
 
             m_bPanning = true; // panning status 원복 161215 
-            BTN_VIEW_PANNING_Click(null, EventArgs.Empty); // 170803 fuck exception 
+            BTN_VIEW_PANNING_Click(null, EventArgs.Empty); // 170803 exception 
 
             // 원배율 복구니까 화면 갱신해야지
             this.UIThread(delegate { PIC_VIEW.Refresh(); });
@@ -1573,7 +1562,8 @@ namespace CD_View
                 {
                     DrawOverlay(m_dispObj, e, fTransX, fTransY);
                     DrawMeasures(e, fTransX, fTransY);
-                    DrawViewCross(e, imageW, imageH, fTransX, fTransY);
+
+                    if( BOOL_DRAW_CROSS) DrawViewCross(e, imageW, imageH, fTransX, fTransY);
 
                     Pen penYellow = new Pen(Color.Yellow);
                     Pen penOrange = new Pen(Color.Orange);
@@ -2086,8 +2076,8 @@ namespace CD_View
 
             this.UIThread(delegate
             {
-                if/***/ (bPanning == true) { BTN_VIEW_PANNING.BackgroundImage = UC_CD_VIEW.Properties.Resources.joystick_on; }
-                else if (bPanning == false) { BTN_VIEW_PANNING.BackgroundImage = UC_CD_VIEW.Properties.Resources.joystick_off; }
+                if/***/ (bPanning == true) {BTN_VIEW_PANNING_SMALL.BackgroundImage = UC_CD_VIEW.Properties.Resources.joystick_on; }
+                else if (bPanning == false) {BTN_VIEW_PANNING_SMALL.BackgroundImage = UC_CD_VIEW.Properties.Resources.joystick_off; }
                 Refresh();
             });
         }
@@ -2183,7 +2173,7 @@ namespace CD_View
 
                 if (CRect.IsIntersectPoint(rcCircle, ptClicked) == true)
                 {
-                    Console.WriteLine(String.Format("{0} CircleFucker {1}",i, arrCir[i].NICKNAME) );
+                    Console.WriteLine(String.Format("{0} Circle {1}",i, arrCir[i].NICKNAME) );
 
                     arrCir[i].UI_SELECTED = !arrCir[i].UI_SELECTED;
                 }

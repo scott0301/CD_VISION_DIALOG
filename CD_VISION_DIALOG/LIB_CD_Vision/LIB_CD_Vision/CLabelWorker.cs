@@ -249,7 +249,7 @@ namespace CD_Measure
             this.INDEX = colorIndex;
             _CalcRectangle();
         }
-        // get the fucking boundary rectangle for each object, this called automatically as an internal function
+        // get the boundary rectangle for each object, this called automatically as an internal function
         // when generate new object from the data.
         private void _CalcRectangle()
         {

@@ -1,6 +1,6 @@
 ﻿namespace CD_VISION_DIALOG
 {
-    partial class Dlg_Recp
+    partial class Dlg_Params
     {
         /// <summary>
         /// Required designer variable.
@@ -259,9 +259,9 @@
             this.TXT_PIXEL_RES.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_PIXEL_RES.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_PIXEL_RES.ForeColor = System.Drawing.Color.White;
-            this.TXT_PIXEL_RES.Location = new System.Drawing.Point(367, 9);
+            this.TXT_PIXEL_RES.Location = new System.Drawing.Point(372, 9);
             this.TXT_PIXEL_RES.Name = "TXT_PIXEL_RES";
-            this.TXT_PIXEL_RES.Size = new System.Drawing.Size(95, 23);
+            this.TXT_PIXEL_RES.Size = new System.Drawing.Size(90, 23);
             this.TXT_PIXEL_RES.TabIndex = 43;
             this.TXT_PIXEL_RES.Text = "0.0";
             // 
@@ -282,9 +282,9 @@
             this.label8.ForeColor = System.Drawing.Color.Coral;
             this.label8.Location = new System.Drawing.Point(301, 54);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 16);
+            this.label8.Size = new System.Drawing.Size(70, 16);
             this.label8.TabIndex = 47;
-            this.label8.Text = "VALUE";
+            this.label8.Text = "L-VALUE";
             // 
             // panel1
             // 
@@ -317,9 +317,9 @@
             this.TXT_LIGHT_VALUE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_LIGHT_VALUE.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TXT_LIGHT_VALUE.ForeColor = System.Drawing.Color.White;
-            this.TXT_LIGHT_VALUE.Location = new System.Drawing.Point(368, 54);
+            this.TXT_LIGHT_VALUE.Location = new System.Drawing.Point(373, 54);
             this.TXT_LIGHT_VALUE.Name = "TXT_LIGHT_VALUE";
-            this.TXT_LIGHT_VALUE.Size = new System.Drawing.Size(94, 16);
+            this.TXT_LIGHT_VALUE.Size = new System.Drawing.Size(89, 16);
             this.TXT_LIGHT_VALUE.TabIndex = 1;
             this.TXT_LIGHT_VALUE.Text = "0";
             this.TXT_LIGHT_VALUE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -394,9 +394,9 @@
             this.TXT_CAM_EXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_CAM_EXP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_CAM_EXP.ForeColor = System.Drawing.Color.White;
-            this.TXT_CAM_EXP.Location = new System.Drawing.Point(368, 95);
+            this.TXT_CAM_EXP.Location = new System.Drawing.Point(373, 95);
             this.TXT_CAM_EXP.Name = "TXT_CAM_EXP";
-            this.TXT_CAM_EXP.Size = new System.Drawing.Size(95, 23);
+            this.TXT_CAM_EXP.Size = new System.Drawing.Size(90, 23);
             this.TXT_CAM_EXP.TabIndex = 46;
             this.TXT_CAM_EXP.Text = "0";
             // 
@@ -515,7 +515,7 @@
             this.TXT_MULTI_FRAME_SHOT_DELAY.TabIndex = 1;
             this.TXT_MULTI_FRAME_SHOT_DELAY.Text = "100";
             // 
-            // Dlg_Recp
+            // Dlg_Params
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -524,9 +524,9 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Dlg_Recp";
+            this.Name = "Dlg_Params";
             this.Text = "RECIPE PARAMETERS";
-            this.Load += new System.EventHandler(this.Dlg_Recp_Load);
+            this.Load += new System.EventHandler(this.Dlg_Params_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

@@ -1058,7 +1058,7 @@ namespace CD_Measure
 
             try
             {
-                // Fucking Normalization
+                // Normalization
                 int Max = 1;
 
                 for (int nIndex = 0; nIndex < nArrCopy.Length; nIndex++)
@@ -1088,7 +1088,7 @@ namespace CD_Measure
 
             try
             {
-                // Fucking Normalization
+                // Normalization
                 int Max = 1;
 
                 for (int nIndex = 0; nIndex < fArrCopy.Length; nIndex++)

@@ -50,7 +50,7 @@ namespace CD_View
             
         }
         //*************************************************************************************
-        #region FORM DEFAULT BASIC FUCKING FUNCTIONS
+        #region FORM DEFAULT BASIC FUNCTIONS
         //*************************************************************************************
         private void FormPopup_Load(object sender, EventArgs e)
         {

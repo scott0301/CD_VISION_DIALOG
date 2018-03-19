@@ -75,7 +75,9 @@
             this.label87 = new System.Windows.Forms.Label();
             this.TAB_VIEW = new System.Windows.Forms.TabControl();
             this.tabpage33 = new System.Windows.Forms.TabPage();
+            this.imageView1 = new CD_View.UC_CD_VIEWER();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.imageView2 = new CD_View.UC_CD_VIEWER();
             this.UC_LOG_VIEWER = new UC_LogView.UC_LOG_VIEWER();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -85,7 +87,7 @@
             this.TXT_PTRN_POS_ORG_Y = new System.Windows.Forms.TextBox();
             this.TXT_FOCUS_POS_X = new System.Windows.Forms.TextBox();
             this.TXT_PTRN_POS_ORG_X = new System.Windows.Forms.TextBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -353,7 +355,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.PNL_MAIN = new System.Windows.Forms.Panel();
-            this.PROG_THREAD_POOL = new System.Windows.Forms.ProgressBar();
+            this.PROG_POOL = new System.Windows.Forms.ProgressBar();
             this.PIC_FOCUS = new System.Windows.Forms.PictureBox();
             this.PIC_PTRN = new System.Windows.Forms.PictureBox();
             this.BTN_RECIPE_SAVE = new System.Windows.Forms.Button();
@@ -385,8 +387,6 @@
             this.LB_TIME_PREDICTION = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_LIFE_TIME = new System.Windows.Forms.Label();
-            this.imageView1 = new CD_View.UC_CD_VIEWER();
-            this.imageView2 = new CD_View.UC_CD_VIEWER();
             ((System.ComponentModel.ISupportInitialize)(this.TB_BLENDING_RATIO)).BeginInit();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TB_FIGURE_CTRL_SCALE)).BeginInit();
@@ -948,6 +948,23 @@
             this.tabpage33.TabIndex = 0;
             this.tabpage33.Text = "VIEW1";
             // 
+            // imageView1
+            // 
+            this.imageView1.AllowDrop = true;
+            this.imageView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.imageView1.BOOL_DRAW_CROSS = true;
+            this.imageView1.BOOL_DRAW_FOCUS_ROI = true;
+            this.imageView1.BOOL_DRAW_PTRN_ROI = true;
+            this.imageView1.BOOL_TEACHING_ACTIVATION = false;
+            this.imageView1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageView1.ForeColor = System.Drawing.Color.Lime;
+            this.imageView1.Location = new System.Drawing.Point(0, 0);
+            this.imageView1.Name = "imageView1";
+            this.imageView1.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView1.PT_FIGURE_TO_DRAW")));
+            this.imageView1.ROI_INDEX = -1;
+            this.imageView1.Size = new System.Drawing.Size(600, 678);
+            this.imageView1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -959,6 +976,23 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "VIEW2";
             // 
+            // imageView2
+            // 
+            this.imageView2.AllowDrop = true;
+            this.imageView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.imageView2.BOOL_DRAW_CROSS = true;
+            this.imageView2.BOOL_DRAW_FOCUS_ROI = true;
+            this.imageView2.BOOL_DRAW_PTRN_ROI = true;
+            this.imageView2.BOOL_TEACHING_ACTIVATION = false;
+            this.imageView2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageView2.ForeColor = System.Drawing.Color.Lime;
+            this.imageView2.Location = new System.Drawing.Point(0, 0);
+            this.imageView2.Name = "imageView2";
+            this.imageView2.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView2.PT_FIGURE_TO_DRAW")));
+            this.imageView2.ROI_INDEX = -1;
+            this.imageView2.Size = new System.Drawing.Size(600, 678);
+            this.imageView2.TabIndex = 0;
+            // 
             // UC_LOG_VIEWER
             // 
             this.UC_LOG_VIEWER.AllowDrop = true;
@@ -967,7 +1001,7 @@
             this.UC_LOG_VIEWER.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UC_LOG_VIEWER.ForeColor = System.Drawing.Color.LimeGreen;
             this.UC_LOG_VIEWER.Location = new System.Drawing.Point(12, 799);
-            this.UC_LOG_VIEWER.m_workIndexer = 421;
+            this.UC_LOG_VIEWER.m_workIndexer = 23;
             this.UC_LOG_VIEWER.Name = "UC_LOG_VIEWER";
             this.UC_LOG_VIEWER.Size = new System.Drawing.Size(651, 237);
             this.UC_LOG_VIEWER.TabIndex = 13;
@@ -1061,15 +1095,15 @@
             this.TXT_PTRN_POS_ORG_X.Size = new System.Drawing.Size(70, 20);
             this.TXT_PTRN_POS_ORG_X.TabIndex = 1;
             // 
-            // notifyIcon1
+            // NotifyIcon
             // 
-            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon1.BalloonTipText = "CD_MEASURE";
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "Measure";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            this.NotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.NotifyIcon.BalloonTipText = "CD_MEASURE";
+            this.NotifyIcon.ContextMenuStrip = this.contextMenuStrip1;
+            this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+            this.NotifyIcon.Text = "Measure";
+            this.NotifyIcon.Visible = true;
+            this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -1220,9 +1254,9 @@
             this.label24.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label24.Location = new System.Drawing.Point(367, 69);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(59, 13);
+            this.label24.Size = new System.Drawing.Size(51, 13);
             this.label24.TabIndex = 42;
-            this.label24.Text = "Tunning";
+            this.label24.Text = "Tuning";
             // 
             // label21
             // 
@@ -4349,7 +4383,7 @@
             // 
             this.PNL_MAIN.BackColor = System.Drawing.SystemColors.Control;
             this.PNL_MAIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PNL_MAIN.Controls.Add(this.PROG_THREAD_POOL);
+            this.PNL_MAIN.Controls.Add(this.PROG_POOL);
             this.PNL_MAIN.Controls.Add(this.LV_RECP);
             this.PNL_MAIN.Controls.Add(this.label14);
             this.PNL_MAIN.Controls.Add(this.PIC_FOCUS);
@@ -4381,15 +4415,15 @@
             this.PNL_MAIN.Size = new System.Drawing.Size(604, 671);
             this.PNL_MAIN.TabIndex = 59;
             // 
-            // PROG_THREAD_POOL
+            // PROG_POOL
             // 
-            this.PROG_THREAD_POOL.Location = new System.Drawing.Point(13, 359);
-            this.PROG_THREAD_POOL.Maximum = 5;
-            this.PROG_THREAD_POOL.Name = "PROG_THREAD_POOL";
-            this.PROG_THREAD_POOL.Size = new System.Drawing.Size(577, 23);
-            this.PROG_THREAD_POOL.Step = 5;
-            this.PROG_THREAD_POOL.TabIndex = 30;
-            this.PROG_THREAD_POOL.Value = 5;
+            this.PROG_POOL.Location = new System.Drawing.Point(13, 359);
+            this.PROG_POOL.Maximum = 5;
+            this.PROG_POOL.Name = "PROG_POOL";
+            this.PROG_POOL.Size = new System.Drawing.Size(577, 23);
+            this.PROG_POOL.Step = 5;
+            this.PROG_POOL.TabIndex = 30;
+            this.PROG_POOL.Value = 5;
             // 
             // PIC_FOCUS
             // 
@@ -4733,38 +4767,6 @@
             this.LB_LIFE_TIME.TabIndex = 64;
             this.LB_LIFE_TIME.Text = "LIFE_TIME :";
             // 
-            // imageView1
-            // 
-            this.imageView1.AllowDrop = true;
-            this.imageView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.imageView1.BOOL_DRAW_FOCUS_ROI = true;
-            this.imageView1.BOOL_DRAW_PTRN_ROI = true;
-            this.imageView1.BOOL_TEACHING_ACTIVATION = false;
-            this.imageView1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageView1.ForeColor = System.Drawing.Color.Lime;
-            this.imageView1.Location = new System.Drawing.Point(0, 0);
-            this.imageView1.Name = "imageView1";
-            this.imageView1.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView1.PT_FIGURE_TO_DRAW")));
-            this.imageView1.ROI_INDEX = -1;
-            this.imageView1.Size = new System.Drawing.Size(600, 678);
-            this.imageView1.TabIndex = 0;
-            // 
-            // imageView2
-            // 
-            this.imageView2.AllowDrop = true;
-            this.imageView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.imageView2.BOOL_DRAW_FOCUS_ROI = true;
-            this.imageView2.BOOL_DRAW_PTRN_ROI = true;
-            this.imageView2.BOOL_TEACHING_ACTIVATION = false;
-            this.imageView2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageView2.ForeColor = System.Drawing.Color.Lime;
-            this.imageView2.Location = new System.Drawing.Point(0, 0);
-            this.imageView2.Name = "imageView2";
-            this.imageView2.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("imageView2.PT_FIGURE_TO_DRAW")));
-            this.imageView2.ROI_INDEX = -1;
-            this.imageView2.Size = new System.Drawing.Size(600, 678);
-            this.imageView2.TabIndex = 0;
-            // 
             // CDMainForm
             // 
             this.AllowDrop = true;
@@ -4926,7 +4928,7 @@
         private System.Windows.Forms.TextBox TXT_PTRN_POS_ORG_X;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button BTN_RECP_SAVE_AS;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon NotifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideToolStripMenuItem;
@@ -5220,7 +5222,7 @@
         private System.Windows.Forms.CheckBox CHK_MIXED_RCC_USE_CENTROID;
         private System.Windows.Forms.GroupBox groupBox19;
         private System.Windows.Forms.GroupBox groupBox20;
-        private System.Windows.Forms.ProgressBar PROG_THREAD_POOL;
+        private System.Windows.Forms.ProgressBar PROG_POOL;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ColumnHeader LAST_ACC;

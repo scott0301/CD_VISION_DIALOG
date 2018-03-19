@@ -589,18 +589,11 @@ namespace CD_VISION_DIALOG
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        //*******************************************************************************************
-        // FUCK THAT SHIT
-        //*******************************************************************************************
-
  
         BASE_RECP param_baseRecp = new BASE_RECP();
 
         public cogWrapper wrapperCog = new cogWrapper();
         public CMeasureReport report = new CMeasureReport();
-
-        int m_DrawType_Master = UC_Graph.IFX_GRAPH_TYPE.PROJ_V;
-        int m_DrawType_Slave = UC_Graph.IFX_GRAPH_TYPE.PROJ_V;
 
         public PARAM_PATH param_path = new PARAM_PATH();
         public PARAM_PROGRAM param_program = new PARAM_PROGRAM();
@@ -618,7 +611,7 @@ namespace CD_VISION_DIALOG
         FormBaseRecp formBaseRecp = new FormBaseRecp();
 
         DLG_Ptrn dlgPtrn = null;
-        Dlg_Recp dlgRecp = null;
+        Dlg_Params dlgRecp = null;
 
         DLg_Processing dlgProcessing = null;
 
@@ -664,7 +657,7 @@ namespace CD_VISION_DIALOG
             dlgPtrn = new DLG_Ptrn(this as iPtrn);
             dlgPtrn.eventDele_ApplyParamPtrn += new DLG_Ptrn.dele_ApplyParamPtrn(deleFunc_GetParamPtrn);
 
-            dlgRecp = new Dlg_Recp();
+            dlgRecp = new Dlg_Params();
 
             dlgHistM = new Dlg_HistoryM();
             dlgHistM.eventDele_ChangeRecp += new Dlg_HistoryM.dele_ChangeRecp(deleFunc_ChangeRecp);
@@ -1026,8 +1019,7 @@ namespace CD_VISION_DIALOG
         {
             if (m_speaker.Check_And_Ask_Further_Do_Program_Exit() ==true )
             {
-                exitToolStripMenuItem_Click(null, EventArgs.Empty);
-                notifyIcon1.Dispose();
+                _ExitProgram();
             }
             else
             {
@@ -1036,8 +1028,8 @@ namespace CD_VISION_DIALOG
 
                 // recover notifyicon
                 this.Visible = false;
-                notifyIcon1.Visible = true;
-                notifyIcon1.ShowBalloonTip(100);
+                NotifyIcon.Visible = true;
+                NotifyIcon.ShowBalloonTip(100);
 
             }
         }
@@ -1862,7 +1854,10 @@ namespace CD_VISION_DIALOG
                             _INI_SAVE_Program();
 
                             //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-                            _Do_Measurement(iu, true,  0, 0, 0);
+                            Parallel.Invoke(() =>
+                                {
+                                    _Do_Measurement(iu, true, 0, 0, 0);
+                                });
                             //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
                             this.UIThread(delegate 
@@ -2195,12 +2190,41 @@ namespace CD_VISION_DIALOG
             // CIRCLE 
             //*************************************************************************************
 
-            if( fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
-            if( fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
-            if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
-            if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
-            if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
-            if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
+            Parallel.Invoke
+            (
+                () =>
+                {
+                    if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
+                }, 
+                () =>
+                {
+                    if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
+                },
+                () =>
+                {
+                    if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
+                }, 
+                () =>
+                {
+                    if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
+                }, 
+                () =>
+                {
+                    if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
+                }, 
+                () =>
+                {
+                    if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
+                } 
+            ); 
+        
+
+            //if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
+            //if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
+            //if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
+            //if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
+            //if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
+            //if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
 
             return ;
         }
@@ -2473,7 +2497,7 @@ namespace CD_VISION_DIALOG
                 {
                     byte[] rawTargetImage = iu.GetImage_Prep_by_index(nImage);
 
-                    single.rape_MotherFucker(rawTargetImage, imageW, imageH,
+                    single.JustDoIt(rawTargetImage, imageW, imageH,
                         ref listEdgesHOR_EX, ref listEdgesHOR_MD, ref listEdgesHOR_IN,
                         ref listEdgesVER_EX, ref listEdgesVER_MD, ref listEdgesVER_IN,
                         ref listPoints,
@@ -2656,7 +2680,7 @@ namespace CD_VISION_DIALOG
             if (this.WindowState == FormWindowState.Minimized){this.WindowState = FormWindowState.Normal;}
 
             this.Activate();
-            notifyIcon1.Visible = false;
+            NotifyIcon.Visible = false;
         }
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2665,17 +2689,25 @@ namespace CD_VISION_DIALOG
             if (this.WindowState == FormWindowState.Minimized){this.WindowState = FormWindowState.Normal;}
 
             this.Activate();
-            notifyIcon1.Visible = false;
+            NotifyIcon.Visible = false;
         }
         private void hideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            notifyIcon1.Visible = true;
+            NotifyIcon.Visible = true;
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (m_speaker.Check_And_Ask_Further_Do_Program_Exit() == true)
+            {
+                _ExitProgram();
+                Application.Exit();
+            }
+        }
+        private void _ExitProgram()
+        {
             wrapperCog.Dispose();
-            Application.Exit();
+            NotifyIcon.Visible = false;    
         }
         #endregion
         

@@ -28,6 +28,90 @@ namespace DEF_PARAMS
         public CAdvancedMode() { }
 
     }
+
+    public class DEF_LAYERS
+    {
+        private int _type = 0; // 0 == ADI | 1 == ACI 
+        private int _layer = 0;
+
+        public int TYPE { get { return _type; } set { _type = value; } }
+        public int LAYER { get { return _layer; } set { _layer = value; } }
+
+        public DEF_LAYERS() { this.TYPE = TYPE_ACI; this.LAYER = LAYER_ACTIVE; }
+
+        public void SetADI() { TYPE = TYPE_ADI; }
+        public void SetACI() { TYPE = TYPE_ACI; }
+
+        public void SetType(string strType) { TYPE = GetTypeToInt(strType); }
+        public void SetLayer(string strLayer) { LAYER = GetTypeToInt(strLayer); }
+
+        #region DEFINE TYPE & LAYER
+
+        public static int TYPE_ADI/*******/= 0;
+        public static int TYPE_ACI/*******/= 1;
+        public static int LAYER_ACTIVE/***/= 0;
+        public static int LAYER_GATE1/****/= 1;
+        public static int LAYER_CNT1/*****/= 2;
+        public static int LAYER_SDR/******/= 3;
+        public static int LAYER_VIA/******/= 4;
+        public static int LAYER_HPDL/*****/= 5;
+
+        #endregion
+
+        #region STRING FUCNTIONS
+
+        public static string GetTypeString(int nType)
+        {
+            List<string> list = GetTypesToString();
+            string strType = string.Empty;
+
+            /***/
+            if (nType == TYPE_ADI) { strType = list.ElementAt(0); }
+            else if (nType == TYPE_ACI) { strType = list.ElementAt(1); }
+            return strType;
+        }
+        public static string GetLayerString(int nLayer)
+        {
+            List<string> list = GetLayersToString();
+            string strLayer = string.Empty;
+
+            if (nLayer <= list.Count) { strLayer = list.ElementAt(nLayer); }
+            return strLayer;
+        }
+
+        public static List<string> GetTypesToString()
+        {
+            List<string> list = new List<string>();
+
+            list.Add("ADI");
+            list.Add("ACI");
+            return list;
+        }
+        public static int GetTypeToInt(string strType)
+        {
+            List<string> list = GetTypesToString();
+            return list.IndexOf(strType);
+        }
+        public static List<string> GetLayersToString()
+        {
+            List<string> list = new List<string>();
+            list.Add("ACTIVE");
+            list.Add("GATE1");
+            list.Add("CNT1");
+            list.Add("SDR");
+            list.Add("VIA");
+            list.Add("HPDL");
+            return list;
+        }
+        public static int GetLayerToInt(string strLayer)
+        {
+            List<string> list = GetLayersToString();
+            return list.IndexOf(strLayer);
+        }
+        #endregion
+    }
+
+
     public class BASE_RECP : DEF_LAYERS
     {
         public string/***/PARAM_00_BASE_RECP_NAME { get; set; }
@@ -66,8 +150,7 @@ namespace DEF_PARAMS
             }
         }
 
-        public int/******/ PARAM_03_LIGHT_VALUE { get; set; }
-
+        public int/******/PARAM_03_LIGHT_VALUE { get; set; }
         public int/******/PARAM_04_FOCUS_TYPE { get; set; }
         public int/******/PARAM_05_USE_CENTERING { get; set; }
 
@@ -122,87 +205,6 @@ namespace DEF_PARAMS
         }
     }
 
-    public class DEF_LAYERS
-    {
-        private int _type = 0; // 0 == ADI | 1 == ACI 
-        private int _layer = 0; 
-
-        public int TYPE { get { return _type; } set { _type = value; } }
-        public int LAYER { get { return _layer; } set { _layer = value; } }
-
-        public DEF_LAYERS() { this.TYPE = TYPE_ACI;  this.LAYER = LAYER_ACTIVE; }
-
-        public void SetADI(){TYPE = TYPE_ADI;}
-        public void SetACI(){TYPE = TYPE_ACI;}
-
-        public void SetType(string strType) { TYPE = GetTypeToInt(strType); }
-        public void SetLayer(string strLayer) { LAYER = GetTypeToInt(strLayer); }
-        
-        #region DEFINE TYPE & LAYER 
-
-        public static int TYPE_ADI = 0; 
-        public static int TYPE_ACI = 1;
-
-        public static int LAYER_ACTIVE = 0;
-        public static int LAYER_GATE1  = 1;
-        public static int LAYER_CNT1 = 2;
-        public static int LAYER_SDR = 3;
-        public static int LAYER_VIA = 4;
-        public static int LAYER_HPDL = 5;
-
-        #endregion  
-
-        #region STRING FUCNTIONS 
-
-        public static string GetTypeString(int nType)
-        {
-            List<string> list = GetTypesToString();
-            string strType = string.Empty;
-
-            /***/if (nType == TYPE_ADI) { strType = list.ElementAt(0); }
-            else if (nType == TYPE_ACI) { strType = list.ElementAt(1); }
-            return strType;
-        }
-        public static string GetLayerString(int nLayer)
-        {
-            List<string> list = GetLayersToString();
-            string strLayer = string.Empty;
-
-            if (nLayer <= list.Count) { strLayer = list.ElementAt(nLayer); }
-            return strLayer;
-        }
-
-        public static List<string> GetTypesToString()
-        {
-            List<string> list = new List<string>();
-
-            list.Add("ADI");
-            list.Add("ACI");
-            return list;
-        }
-        public static int GetTypeToInt(string strType)
-        {
-            List<string> list = GetTypesToString();
-            return list.IndexOf(strType);
-        }
-        public static List<string> GetLayersToString()
-        {
-            List<string> list = new List<string>();
-            list.Add("ACTIVE");
-            list.Add("GATE1");
-            list.Add("CNT1");
-            list.Add("SDR");
-            list.Add("VIA");
-            list.Add("HPDL");
-            return list;
-        }
-        public static int GetLayerToInt(string strLayer)
-        {
-            List<string> list = GetLayersToString();
-            return list.IndexOf(strLayer);
-        }
-        #endregion  
-    }
 
     public class PARAM_PTRN
     {
@@ -230,6 +232,7 @@ namespace DEF_PARAMS
         }
 
     }
+
     public class PARAM_OPTICS
     {
         public static int CAM_ALIGN/*****/= 1;
@@ -360,7 +363,6 @@ namespace DEF_PARAMS
         public static int ToNumericType(string strType)
         {
             int nReturn = 0;
-
             /***/if (strType == "DIR_HOR") { nReturn = DIR_HOR; }
             else if (strType == "DIR_VER") { nReturn = DIR_VER; }
             else if (strType == "DIR_DIA") { nReturn = DIR_DIA; }
@@ -459,14 +461,12 @@ namespace DEF_PARAMS
         public static int CARDIN = 0;       // Cardinal direction
         public static int DIR_IN = 1;      // Direction = To Inside Falling
         public static int DIR_EX = 2;      // Direction = to outside Falling
-        public static int MEXHAT = 3;
-        public static int TOTAL/***/ = 4;
+        public static int TOTAL/***/ = 3;
 
         public static int ToNumericType(string strType)
         {
             int nReturn = 0;
-            /***/if (strType == "MEXHAT") /***/nReturn = MEXHAT;
-            else if (strType == "DIR_IN") /***/nReturn = DIR_IN;
+            if/***/ (strType == "DIR_IN") /***/nReturn = DIR_IN;
             else if (strType == "DIR_EX") /***/nReturn = DIR_EX;
             else if (strType == "CARDIN")/****/nReturn = CARDIN;
             return nReturn;
@@ -474,8 +474,7 @@ namespace DEF_PARAMS
         public static string ToStringType(int nType)
         {
             string strType = string.Empty;
-            /***/if (nType == MEXHAT) /***/ strType = "MEXHAT";
-            else if (nType == DIR_IN) /***/ strType = "DIR_IN";
+            if/***/ (nType == DIR_IN) /***/ strType = "DIR_IN";
             else if (nType == DIR_EX) /***/ strType = "DIR_EX";
             else if (nType == CARDIN)/****/ strType = "CARDIN";
             return strType;

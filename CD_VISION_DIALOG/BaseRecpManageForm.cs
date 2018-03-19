@@ -275,7 +275,6 @@ namespace CD_VISION_DIALOG
                 {
                     helperBaseRecp.MSG_DENY_IMPOARTANT_RECP_REMOVE();
                 }
-                // if this is fucking shit, proceed ~
                 else
                 {
                     File.Delete(Path.Combine(m_fm.param_path.i03_PATH_RECP_BASE, strFileNameBaseRecp));

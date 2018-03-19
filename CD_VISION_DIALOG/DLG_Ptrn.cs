@@ -42,7 +42,7 @@ namespace CD_VISION_DIALOG
 
             m_pHandle = handle;
 
-            uc_view_ptrn.eventDele_HereComesNewImage += new dele_HereComesNewImage(fuck);
+            uc_view_ptrn.eventDele_HereComesNewImage += new dele_HereComesNewImage(updateView);
 
             // backup input image
             MAIN_IMAGE = m_pHandle.iPtrn_LoadImage();
@@ -55,9 +55,7 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.Refresh();
 
         }
-        private void fuck()
-        {
-        }
+        public void updateView() { }
 
         private void DLG_Ptrn_Load(object sender, EventArgs e)
         {

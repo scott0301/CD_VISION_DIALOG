@@ -135,11 +135,11 @@
     <Compile Include="DLG_Ptrn.Designer.cs">
       <DependentUpon>DLG_Ptrn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dlg_Recipe.cs">
+    <Compile Include="Dlg_Params.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dlg_Recipe.Designer.cs">
-      <DependentUpon>Dlg_Recipe.cs</DependentUpon>
+    <Compile Include="Dlg_Params.Designer.cs">
+      <DependentUpon>Dlg_Params.cs</DependentUpon>
     </Compile>
     <Compile Include="Dlg_Spc.cs">
       <SubType>Form</SubType>
@@ -193,8 +193,8 @@
     <EmbeddedResource Include="DLG_Ptrn.resx">
       <DependentUpon>DLG_Ptrn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dlg_Recipe.resx">
-      <DependentUpon>Dlg_Recipe.cs</DependentUpon>
+    <EmbeddedResource Include="Dlg_Params.resx">
+      <DependentUpon>Dlg_Params.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dlg_Spc.resx">
       <DependentUpon>Dlg_Spc.cs</DependentUpon>

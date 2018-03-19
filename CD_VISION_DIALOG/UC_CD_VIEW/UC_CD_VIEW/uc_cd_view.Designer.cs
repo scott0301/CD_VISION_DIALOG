@@ -59,7 +59,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BTN_VIEW_PANNING_SMALL = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -427,7 +427,7 @@
             this.PNL_TOOL_BASIC.Controls.Add(this.label10);
             this.PNL_TOOL_BASIC.Controls.Add(this.label16);
             this.PNL_TOOL_BASIC.Controls.Add(this.label17);
-            this.PNL_TOOL_BASIC.Controls.Add(this.button2);
+            this.PNL_TOOL_BASIC.Controls.Add(this.BTN_VIEW_PANNING_SMALL);
             this.PNL_TOOL_BASIC.Controls.Add(this.button5);
             this.PNL_TOOL_BASIC.Controls.Add(this.button8);
             this.PNL_TOOL_BASIC.Controls.Add(this.button10);
@@ -480,20 +480,20 @@
             this.label17.TabIndex = 1;
             this.label17.Text = "ORIGIN";
             // 
-            // button2
+            // BTN_VIEW_PANNING_SMALL
             // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.button2.Location = new System.Drawing.Point(7, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 50);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.BTN_VIEW_PANNING_Click);
+            this.BTN_VIEW_PANNING_SMALL.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_VIEW_PANNING_SMALL.BackgroundImage")));
+            this.BTN_VIEW_PANNING_SMALL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_VIEW_PANNING_SMALL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_VIEW_PANNING_SMALL.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.BTN_VIEW_PANNING_SMALL.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.BTN_VIEW_PANNING_SMALL.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_VIEW_PANNING_SMALL.Location = new System.Drawing.Point(7, 3);
+            this.BTN_VIEW_PANNING_SMALL.Name = "BTN_VIEW_PANNING_SMALL";
+            this.BTN_VIEW_PANNING_SMALL.Size = new System.Drawing.Size(50, 50);
+            this.BTN_VIEW_PANNING_SMALL.TabIndex = 0;
+            this.BTN_VIEW_PANNING_SMALL.UseVisualStyleBackColor = true;
+            this.BTN_VIEW_PANNING_SMALL.Click += new System.EventHandler(this.BTN_VIEW_PANNING_Click);
             // 
             // button5
             // 
@@ -616,7 +616,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BTN_VIEW_PANNING_SMALL;
         private System.Windows.Forms.Panel PNL_VIEW;
     }
 }

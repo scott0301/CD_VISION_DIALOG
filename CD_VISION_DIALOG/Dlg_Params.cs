@@ -16,11 +16,11 @@ using CodeKing.Native;
 
 namespace CD_VISION_DIALOG
 {
-    public partial class Dlg_Recp : Form
+    public partial class Dlg_Params : Form
     {
         public CFigureManager fm = new CFigureManager();
 
-        public Dlg_Recp()
+        public Dlg_Params()
         {
             InitializeComponent();
         }
@@ -81,7 +81,7 @@ namespace CD_VISION_DIALOG
             return true;
         }
 
-        private void Dlg_Recp_Load(object sender, EventArgs e)
+        private void Dlg_Params_Load(object sender, EventArgs e)
         {
         }
 
@@ -181,6 +181,7 @@ namespace CD_VISION_DIALOG
             }
             return nFocusValue;
         }
+
         #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;

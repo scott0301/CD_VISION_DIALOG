@@ -36,10 +36,8 @@ namespace CD_VISION_DIALOG
             InitializeComponent();
 
             uc_tunning_view.SetInit();
-            uc_tunning_view.eventDele_HereComesNewImage += new dele_HereComesNewImage(fuck);
+            uc_tunning_view.eventDele_HereComesNewImage += new dele_HereComesNewImage(updateView);
 
-            uc_thumb_nail_circle.ThumbNailSize = 128;
-            uc_thumb_nail_circle.SetInit();
 
             uc_thumb_nail_rect.ThumbNailSize = 128;
             uc_thumb_nail_rect.SetInit();
@@ -49,11 +47,13 @@ namespace CD_VISION_DIALOG
 
             
         }
+        public void updateView() { }
 
         public bool SetParam(CFigureManager fm, Bitmap bmp)
         {
             MAIN_IMAGE = bmp.Clone() as Bitmap;
 
+            uc_tunning_view.BOOL_DRAW_CROSS = false;    
             uc_tunning_view.SetDisplay(MAIN_IMAGE);
             uc_tunning_view.VIEW_SET_Mag_Origin();
 
@@ -61,37 +61,10 @@ namespace CD_VISION_DIALOG
             int imageH = 0;
             byte[] rawImage = Computer.HC_CONV_Bmp2Raw(bmp.Clone() as Bitmap, ref imageW, ref imageH);
 
-            List<Bitmap> listImageCircle = new List<Bitmap>();
-            List<string> listFilesCircle = new List<string>();
-
             List<Bitmap> listImageRect = new List<Bitmap>();
             List<string> listFilesRect = new List<string>();
 
             this.fm = fm;
-
-            //********************************************************************************************
-            // For Circle
-            //********************************************************************************************
-
-            for (int i = 0; i < this.fm.COUNT_PAIR_CIR; i++)
-            {
-                CMeasurePairCir single = this.fm.list_pair_Cir.ElementAt(i);
-
-                Rectangle rc = Rectangle.Round(single.rc_EX);
-
-                uc_tunning_view.DrawRect(rc, Color.Red);
-                uc_tunning_view.DrawString(single.NICKNAME, rc.X, rc.Y-10, 10, Color.Yellow);
-
-                byte[] rawCrop = Computer.HC_CropImage(rawImage, imageW, imageH, rc);
-                int rcW = rc.Width;
-                int rcH = rc.Height;
-
-                Bitmap bmpCrop = Computer.HC_CONV_Byte2Bmp(rawCrop, rcW, rcH);
-
-                listFilesCircle.Add(single.NICKNAME);
-                listImageCircle.Add(bmpCrop);
-            }
-            uc_thumb_nail_circle.LoadImages(listImageCircle.ToArray(), listFilesCircle);
 
             //********************************************************************************************
             // For Rect
@@ -133,10 +106,7 @@ namespace CD_VISION_DIALOG
  
         }
 
-        private void fuck()
-        {
-
-        }
+        
         #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
@@ -209,42 +179,9 @@ namespace CD_VISION_DIALOG
             uc_tunning_view.Refresh();
         }
 
-        private void uc_thumb_nail_DoubleClick(object sender, EventArgs e)
-        {
-            int nIndex = uc_thumb_nail_circle.FocusedItem.Index;
-            Bitmap bmp = uc_thumb_nail_circle.GetImageOriginal(nIndex);
+        
 
-            CMeasurePairCir single = fm.ElementAt_PairCir(nIndex);
-
-            // 01 Target Info
-            TXT_CIRCLE_SELECTED_FIGURE.Text = single.NICKNAME;
-            TXT_CIRCLE_SELECTED_INDEX.Text = nIndex.ToString("N0");
-
-            // 03 Auto Circle Detection
-
-            int nValue = _FromUI_GetCircleDetectionType();
-            _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nValue);
-
-            // 04 Shrinkage 
-            TXT_CIR_SHRINKAGE.Text = single.param_04_Shrinkage.ToString("F2");
-
-            uc_tunning_view.VIEW_Set_Clear_DispObject();
-            uc_tunning_view.SetDisplay(bmp);
-            uc_tunning_view.VIEW_SET_Mag_Origin();
-        }
-
-        private CMeasurePairCir _FromUI_GetParameters_Circle()
-        {
-            CMeasurePairCir single = new CMeasurePairCir();
-
-            // auto circle detection
-            single.param_03_CircleDetecType = _FromUI_GetCircleDetectionType();
-
-            // shrinkage
-            single.param_04_Shrinkage = Convert.ToDouble(TXT_CIR_SHRINKAGE.Value);
-
-            return single;
-        }
+        
         private CMeasurePairRct _FromUI_GetParameters_Rect()
         {
             int nValue = 0;
@@ -260,41 +197,13 @@ namespace CD_VISION_DIALOG
             // candidate count 
             int.TryParse(TXT_RECT_CANDIDATE_COUNT.Text, out nValue); single.param_06_peakCandidate = nValue;
 
-            // profile filtering window size 
-            int.TryParse(TXT_RECT_WINDOW_SIZE.Text, out nValue); single.param_07_windowSize = nValue;
-
             return single;
         }
 
-        private int _FromUI_GetCircleDetectionType()
-        {
-            int nValue = 0;
-            int.TryParse(CB_CIRCLE_AUTO_DETECTION_TYPE.Text, out nValue);
-            return nValue; ;
-        }
-
-        private void _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(int nType)
-        {
-            uc_tunning_view.VIEW_Set_Clear_DispObject();
-
-            RectangleF rcRegion = new RectangleF();
-
-            byte[] rawImage = uc_tunning_view.GetDisplay_Raw();
-            int imageW = uc_tunning_view.VIEW_GetImageW();
-            int imageH = uc_tunning_view.VIEW_GetImageH();
-
-            double fShrinkage = 0;
-            double.TryParse(TXT_CIR_SHRINKAGE.Text, out fShrinkage);
-
-            rcRegion = Computer.HC_CIRCLE_CENTERING(rawImage, imageW, imageH, new RectangleF(0, 0, imageW, imageH), fShrinkage, nType);
-            uc_tunning_view.DrawCircle(rcRegion, Color.Cyan, 1);
-            uc_tunning_view.Refresh();
-        }
+        
          
 
         private void RDO_CIRCLE_DETEC_NONE_Click(object sender, EventArgs e){uc_tunning_view.VIEW_Set_Clear_DispObject();uc_tunning_view.Refresh();}
-        private void RDO_CIRCLE_DETECT_POSSITIVE_Click(object sender, EventArgs e){_CHANGE_AUTO_CIRCLE_DETECTION_TYPE(1);}
-        private void RDO_CIRCLE_DETEC_NEGATIVE_Click(object sender, EventArgs e){_CHANGE_AUTO_CIRCLE_DETECTION_TYPE(2);}
 
         private void BTN_PARAM_WRITE_Click(object sender, EventArgs e)
         {
@@ -303,78 +212,33 @@ namespace CD_VISION_DIALOG
                 return;
             }
 
-            const int TARGET_CIR = 0;
-            const int TARGET_RECT = 1;
+             
+            // empty operation exception 171017
+            if (fm.COUNT_PAIR_RCT == 0) return;
 
-            //*************************************************************************************
-            // CIRCLE 
-            //*************************************************************************************
+            CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
 
-            if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_CIR)
+            string strTarget = TXT_RECT_SELECTED_FIGURE.Text;
+
+            int element = 0;
+            Int32.TryParse(TXT_RECT_SELECTED_INDEX.Text, out element);
+
+            CMeasurePairRct single = _FromUI_GetParameters_Rect();
+
+            if (arrRect[element].NICKNAME == strTarget)
             {
-                // empty operation exception 171017
-                if (fm.COUNT_PAIR_CIR == 0) return;
-
-                CMeasurePairCir[] arrCircle = fm.ToArray_PairCir();
-
-                string strTarget = TXT_CIRCLE_SELECTED_FIGURE.Text;
-
-                int element = 0;
-                Int32.TryParse(TXT_CIRCLE_SELECTED_INDEX.Text, out element);
-
-                CMeasurePairCir single = _FromUI_GetParameters_Circle();
-
-                if (arrCircle[element].NICKNAME == strTarget)
-                {
-                    arrCircle[element].param_03_CircleDetecType = single.param_03_CircleDetecType;
-                    arrCircle[element].param_04_Shrinkage = single.param_04_Shrinkage;
-                    arrCircle[element] = single.CopyTo();
-                }
-
-                this.fm.list_pair_Cir = arrCircle.ToList();
+                arrRect[element].param_03_bool_Use_AutoDetection = single.param_03_bool_Use_AutoDetection;
+                arrRect[element].param_04_peakTargetIndex_fst = single.param_04_peakTargetIndex_fst;
+                arrRect[element].param_05_peakTargetIndex_scd = single.param_05_peakTargetIndex_scd;
+                arrRect[element].param_06_peakCandidate = single.param_06_peakCandidate;
+                arrRect[element].param_07_windowSize = single.param_07_windowSize;
             }
-            //*************************************************************************************
-            // RECTANGLE
-            //*************************************************************************************
-            else if (TAB_TUNNING_TARGET.SelectedIndex == TARGET_RECT)
-            {
-                // empty operation exception 171017
-                if (fm.COUNT_PAIR_RCT == 0) return;
-
-                CMeasurePairRct[] arrRect = fm.ToArray_PairRct();
-
-                string strTarget = TXT_RECT_SELECTED_FIGURE.Text;
-
-                int element = 0;
-                Int32.TryParse(TXT_RECT_SELECTED_INDEX.Text, out element);
-
-                CMeasurePairRct single = _FromUI_GetParameters_Rect();
-
-                if (arrRect[element].NICKNAME == strTarget)
-                {
-                    arrRect[element].param_03_bool_Use_AutoDetection = single.param_03_bool_Use_AutoDetection;
-                    arrRect[element].param_04_peakTargetIndex_fst = single.param_04_peakTargetIndex_fst;
-                    arrRect[element].param_05_peakTargetIndex_scd = single.param_05_peakTargetIndex_scd;
-                    arrRect[element].param_06_peakCandidate = single.param_06_peakCandidate;
-                    arrRect[element].param_07_windowSize = single.param_07_windowSize;
-                }
-                this.fm.list_pair_Rct = arrRect.ToList();
-            }
-
+            this.fm.list_pair_Rct = arrRect.ToList();
+             
             MessageBox.Show("Update Finished", "JOB FINISHED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            eventDele_FinishTunning();
         }
 
-        
-
- 
-        private void TXT_CIR_SHRINKAGE_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                int nType = _FromUI_GetCircleDetectionType();
-                _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nType);
-            }
-        }
 
         private void uc_thumb_nail_rect_DoubleClick(object sender, EventArgs e)
         {
@@ -402,8 +266,6 @@ namespace CD_VISION_DIALOG
             CB_RECT_TARGET_INDEX_SCD.SelectedIndex = single.param_05_peakTargetIndex_scd;
             // update UI from the first line data 
 
-            TXT_RECT_WINDOW_SIZE.Text = single.param_07_windowSize.ToString("NO");
-
             uc_tunning_view.VIEW_Set_Clear_DispObject();
             uc_tunning_view.SetDisplay(bmp);
             uc_tunning_view.VIEW_SET_Mag_Origin();
@@ -424,7 +286,6 @@ namespace CD_VISION_DIALOG
                 CMeasurePairRct rcProc = new CMeasurePairRct();
 
                 
-                int param_00_FilterSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
                 int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
   
                 Bitmap bmp = uc_tunning_view.GetDisplay_Bmp();
@@ -441,8 +302,7 @@ namespace CD_VISION_DIALOG
         {
             uc_tunning_view.VIEW_Set_Clear_DispObject();
 
-            int param_00_WindowSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
-            int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
+             int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
             int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_FST.Text);            
 
             RDO_RECT_APD_FST.Checked = true;
@@ -459,7 +319,7 @@ namespace CD_VISION_DIALOG
             // get the selected peak and region
             PointF ptCurrent = pm.GetPeakDesinated(param_01_PeakCandidate, bool_horizontal_dir, param_02_target_peak_index);
 
-            int nParse = Convert.ToInt32(param_00_WindowSize / 2.0);
+            int nParse = 5;
 
             if( bool_horizontal_dir == true)
             {
@@ -468,9 +328,9 @@ namespace CD_VISION_DIALOG
                 CLine lineM = line.ShiftLine(0, -nParse);
                 CLine lineP = line.ShiftLine(0, +nParse);
 
+                uc_tunning_view.DrawLine(lineM, 1, Color.DeepSkyBlue);
                 uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.DeepSkyBlue);
             }
             else if (bool_horizontal_dir == false)
             {
@@ -479,16 +339,15 @@ namespace CD_VISION_DIALOG
                 CLine lineM = line.ShiftLine(-nParse, 0);
                 CLine lineP = line.ShiftLine(+nParse, 0);
 
+                uc_tunning_view.DrawLine(lineM, 1, Color.DeepSkyBlue);
                 uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.DeepSkyBlue);
             }
 
              uc_tunning_view.Refresh();
         }
         private void BTN_RECT_VERIFY_EDGE_REGION_SCD_Click(object sender, EventArgs e)
         {
-            int param_00_WindowSize = Convert.ToInt32(TXT_RECT_WINDOW_SIZE.Value);
             int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
             int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_SCD.Text);
 
@@ -508,7 +367,7 @@ namespace CD_VISION_DIALOG
             // get the selected peak and region
             PointF ptCurrent = pm.GetPeakDesinated(param_01_PeakCandidate, bool_horizontal_dir, param_02_target_peak_index);
 
-            int nParse = Convert.ToInt32(param_00_WindowSize / 2.0);
+            int nParse = 5;
 
             if (bool_horizontal_dir == true)
             {
@@ -517,9 +376,9 @@ namespace CD_VISION_DIALOG
                 CLine lineM = line.ShiftLine(0, -nParse);
                 CLine lineP = line.ShiftLine(0, +nParse);
 
+                uc_tunning_view.DrawLine(lineM, 1, Color.DeepSkyBlue);
                 uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.DeepSkyBlue);
             }
             else if (bool_horizontal_dir == false)
             {
@@ -528,9 +387,9 @@ namespace CD_VISION_DIALOG
                 CLine lineM = line.ShiftLine(-nParse, 0);
                 CLine lineP = line.ShiftLine(+nParse, 0);
 
-                uc_tunning_view.DrawLine(line, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(line, 1, Color.DeepSkyBlue);
                 uc_tunning_view.DrawLine(lineM, 1, Color.LimeGreen);
-                uc_tunning_view.DrawLine(lineP, 1, Color.LimeGreen);
+                uc_tunning_view.DrawLine(lineP, 1, Color.DeepSkyBlue);
             }
             uc_tunning_view.Refresh();
 
@@ -595,13 +454,7 @@ namespace CD_VISION_DIALOG
 
         
 
-        private void BTN_CIRCLE_CHECK_AUTO_DETECTION_Click(object sender, EventArgs e)
-        {
-            int nType = _FromUI_GetCircleDetectionType();
-            _CHANGE_AUTO_CIRCLE_DETECTION_TYPE(nType);
-        }
-
- 
+      
          
 
       

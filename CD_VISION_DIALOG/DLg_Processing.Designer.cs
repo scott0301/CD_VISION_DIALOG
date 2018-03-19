@@ -603,9 +603,9 @@
             this.CHK_CONTROL_SHARPENING.ForeColor = System.Drawing.Color.Coral;
             this.CHK_CONTROL_SHARPENING.Location = new System.Drawing.Point(12, 68);
             this.CHK_CONTROL_SHARPENING.Name = "CHK_CONTROL_SHARPENING";
-            this.CHK_CONTROL_SHARPENING.Size = new System.Drawing.Size(135, 18);
+            this.CHK_CONTROL_SHARPENING.Size = new System.Drawing.Size(125, 18);
             this.CHK_CONTROL_SHARPENING.TabIndex = 65;
-            this.CHK_CONTROL_SHARPENING.Text = "SHARPENNING :";
+            this.CHK_CONTROL_SHARPENING.Text = "SHARPENING :";
             this.CHK_CONTROL_SHARPENING.UseVisualStyleBackColor = true;
             this.CHK_CONTROL_SHARPENING.CheckedChanged += new System.EventHandler(this.CHK_CONTROL_SHARPENING_CheckedChanged);
             // 
@@ -698,21 +698,21 @@
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(13, 276);
+            this.label14.Location = new System.Drawing.Point(22, 276);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(81, 14);
+            this.label14.Size = new System.Drawing.Size(63, 14);
             this.label14.TabIndex = 80;
-            this.label14.Text = "REMOVE IT";
+            this.label14.Text = "REMOVE";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(319, 277);
+            this.label13.Location = new System.Drawing.Point(343, 277);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(92, 14);
+            this.label13.Size = new System.Drawing.Size(50, 14);
             this.label13.TabIndex = 80;
-            this.label13.Text = "REMOVE ALL";
+            this.label13.Text = "CLEAR";
             // 
             // BTN_PROC_DELETE_IT
             // 
@@ -750,7 +750,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(1548, 656);
+            this.label16.Location = new System.Drawing.Point(1544, 656);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(52, 14);
             this.label16.TabIndex = 79;
@@ -822,7 +822,7 @@
             this.BTN_CHANGING_NOISE_REMOVAL.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_CHANGING_NOISE_REMOVAL.BackgroundImage")));
             this.BTN_CHANGING_NOISE_REMOVAL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTN_CHANGING_NOISE_REMOVAL.Enabled = false;
-            this.BTN_CHANGING_NOISE_REMOVAL.Location = new System.Drawing.Point(183, 17);
+            this.BTN_CHANGING_NOISE_REMOVAL.Location = new System.Drawing.Point(440, 21);
             this.BTN_CHANGING_NOISE_REMOVAL.Name = "BTN_CHANGING_NOISE_REMOVAL";
             this.BTN_CHANGING_NOISE_REMOVAL.Size = new System.Drawing.Size(40, 40);
             this.BTN_CHANGING_NOISE_REMOVAL.TabIndex = 68;
@@ -859,7 +859,7 @@
             this.BTN_CHANGING_SHARPENING.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_CHANGING_SHARPENING.BackgroundImage")));
             this.BTN_CHANGING_SHARPENING.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTN_CHANGING_SHARPENING.Enabled = false;
-            this.BTN_CHANGING_SHARPENING.Location = new System.Drawing.Point(183, 61);
+            this.BTN_CHANGING_SHARPENING.Location = new System.Drawing.Point(440, 65);
             this.BTN_CHANGING_SHARPENING.Name = "BTN_CHANGING_SHARPENING";
             this.BTN_CHANGING_SHARPENING.Size = new System.Drawing.Size(40, 40);
             this.BTN_CHANGING_SHARPENING.TabIndex = 68;
@@ -871,7 +871,7 @@
             this.BTN_CHANGING_MAGNITUDE.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_CHANGING_MAGNITUDE.BackgroundImage")));
             this.BTN_CHANGING_MAGNITUDE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTN_CHANGING_MAGNITUDE.Enabled = false;
-            this.BTN_CHANGING_MAGNITUDE.Location = new System.Drawing.Point(183, 107);
+            this.BTN_CHANGING_MAGNITUDE.Location = new System.Drawing.Point(440, 111);
             this.BTN_CHANGING_MAGNITUDE.Name = "BTN_CHANGING_MAGNITUDE";
             this.BTN_CHANGING_MAGNITUDE.Size = new System.Drawing.Size(40, 40);
             this.BTN_CHANGING_MAGNITUDE.TabIndex = 68;

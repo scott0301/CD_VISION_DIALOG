@@ -683,7 +683,7 @@ namespace CD_Measure
         {
             bool bReturn = false;
             try { bReturn = Convert.ToBoolean(GetField(section, field)); }
-            catch { /* no need any fucking exception message */}
+            catch { /* no need any exception message */}
             return bReturn;
         }
 
@@ -691,7 +691,7 @@ namespace CD_Measure
         {
             int nReturn = 0;
             try { nReturn = Convert.ToInt32(GetField(section, field)); }
-            catch { /* no need any fucking exception message */}
+            catch { /* no need any exception message */}
             return nReturn;
         }
 
@@ -699,7 +699,7 @@ namespace CD_Measure
         {
             double dbReturn = 0.0;
             try { dbReturn = Convert.ToDouble(GetField(section, field)); }
-            catch { /* no need any fucking exception message */ }
+            catch { /* no need any exception message */ }
             return dbReturn;
         }
 
@@ -707,7 +707,7 @@ namespace CD_Measure
         {
             string strReturn = "";
             try { strReturn = GetField(section, field).ToString(); }
-            catch { /* no need any fucking exception message */ }
+            catch { /* no need any exception message */ }
             return strReturn;
         }
 
@@ -715,7 +715,7 @@ namespace CD_Measure
         {
             string strReturn = "";
             try { strReturn = GetField(section, field).ToString(); }
-            catch { /* no need any fucking exception message */ }
+            catch { /* no need any exception message */ }
             return strReturn;
         }
 
@@ -873,7 +873,7 @@ namespace CD_Measure
             strMainPath = iniFile;
 
             // Read all the lines in, remove all the blank space.
-            // enables fucking korean processing : System.Text.Encoding.Defalut
+            // enables korean processing : System.Text.Encoding.Defalut
             var rawFileData =
                 System.IO.File.ReadAllLines(iniFile, System.Text.Encoding.UTF8).Where(line => !line.Equals(string.Empty) && !line.StartsWith(";"));
 
@@ -2044,10 +2044,9 @@ namespace CD_Measure
         //*****************************************************************************************
 
         #region ELLIPSE
-        public static double ransac_ellipse_fitting(PointF[] data, ref CModelEllipse model, double distance_threshold)
+        public static double ransac_ellipse_fitting(PointF[] data, ref CModelEllipse model, double distance_threshold, int no_samples, int nIter)
         {
-            const int no_samples = 30;
-            int no_data = data.Length;
+             int no_data = data.Length;
 
             if (no_data < no_samples)
             {
@@ -2063,9 +2062,7 @@ namespace CD_Measure
             int max_iteration = (int)(1 + Math.Log(1.0 - 0.99) / Math.Log(1.0 - Math.Pow(0.5, no_samples)));
 
 
-            int nFuckCount = 0;
-
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < nIter; i++)
             {
                 samples.Clear();
 
@@ -2076,12 +2073,8 @@ namespace CD_Measure
                 estimated_model = compute_ellipse_model(ref samples);
                 if (!estimated_model.convert_std_form()) 
                 {
-                    if (nFuckCount < 1000)
-                    {
-                        nFuckCount++;
                         --i;
                         continue;
-                    }
                 }
 
                 // verification
@@ -3071,7 +3064,7 @@ namespace CD_Measure
         #endregion
 
        #region IMAGE CONVERSION
-        public static Bitmap/***/HC_CONV_Byte2Bmp(byte[] rawImage, int imageW, int imageH)
+        public static Bitmap/*****/HC_CONV_Byte2Bmp(byte[] rawImage, int imageW, int imageH)
         {
             if (imageW == 0 || imageH == 0)
             {
@@ -3114,7 +3107,7 @@ namespace CD_Measure
 
             return bmpImage;
         }
-        public static double[]/**/HC_CONV_Byte2Double(byte[] byteArray)
+        public static double[]/***/HC_CONV_Byte2Double(byte[] byteArray)
         {
             double[] fArray = new double[byteArray.Length];
 
@@ -3128,7 +3121,7 @@ namespace CD_Measure
 
             return fArray;
         }
-        public static byte[] /**/HC_CONV_Double2Byte(double[] fArray)
+        public static byte[] /****/HC_CONV_Double2Byte(double[] fArray)
         {
             byte[] rawImage = new byte[fArray.Length];
 
@@ -3153,7 +3146,7 @@ namespace CD_Measure
             return Computer.HC_CONV_Byte2Bmp(rawImage, imageW, imageH);
         }
 
-        public static byte[] /**/HC_CONV_Bmp2Raw(System.Drawing.Bitmap bmpImage, ref int imageW, ref int imageH)
+        public static byte[] /****/HC_CONV_Bmp2Raw(System.Drawing.Bitmap bmpImage, ref int imageW, ref int imageH)
         {
             imageW = bmpImage.Width;
             imageH = bmpImage.Height;
@@ -3189,7 +3182,7 @@ namespace CD_Measure
             });
             return rawImage;
         }
-        public static byte[] /**/HC_CONV_BlendedImage(byte[] i1, byte[] i2, int imageW, int imageH, int nBlend)
+        public static byte[] /****/HC_CONV_BlendedImage(byte[] i1, byte[] i2, int imageW, int imageH, int nBlend)
         {
             byte[] returnRaw = new byte[imageW * imageH];
 
@@ -3227,11 +3220,11 @@ namespace CD_Measure
             });
             return rawImage;
         }
-        public static void /***/HC_HISTO_Normalization(int[] nArray, int nLength, int nNormalizationValue)
+        public static void /*******/HC_HISTO_Normalization(int[] nArray, int nLength, int nNormalizationValue)
         {
             try
             {
-                // Fucking Normalization
+                // Normalization
                 int Max = 1;
 
                 for (int nIndex = 0; nIndex < nArray.Length; nIndex++)
@@ -5130,7 +5123,7 @@ namespace CD_Measure
 
         public static double[] HC_EDGE_Get2ndDerivativeArrayFromLineBuff(double[] fLineBuff)
         {
-            // fucking error exception 170901 
+            // error exception 170901 
             if (fLineBuff == null || fLineBuff.Length < 2) return new double[2];
 
             double[] arr1st = new double[fLineBuff.Length - 1];
@@ -5966,7 +5959,7 @@ namespace CD_Measure
                 }
                 int nPos = (int)(nMinPos - ((KSIZE - 1) / 2.0) + y);
 
-                // additive fuck exception : incase of Position want to place on the asshole 
+                // additive exception : incase of Position want to place on the asshole 
                 if (nPos > 0 && arrAccProfile.Length > nPos)
                 {
                     pMatrix[y][KSIZE] = arrAccProfile[nPos];
@@ -5977,7 +5970,7 @@ namespace CD_Measure
                 }
             }
 
-            // fucking gauss
+            // gauss
             _GaussElimination(pMatrix, KSIZE + 1, KSIZE);
 
             double[] pNewton = new double[KSIZE];
@@ -5989,7 +5982,7 @@ namespace CD_Measure
 
             double NRValue = _NewtonRaphson(pNewton, KSIZE - 1, (double)(KSIZE + 1) / 2.0);
 
-            // set fucking value
+            // set value
             return Convert.ToSingle(nMinPos + NRValue);
         }
         public static void HC_EDGE_PREWITT_SUBPIXEL(double[] buffLine, ref double fMaxPos, ref double fMinPos)
@@ -7011,8 +7004,6 @@ namespace CD_Measure
 
             double[] fImageCrop = null;
             Parallel.Invoke(() => { fImageCrop = cropImage.Select(element => (double)element).ToArray(); });
-
-            //SaveImage(cropImage, cropW, cropH, "c:\\micle.bmp");
 
             double[] meanPow = ARRAY_GetMeanImage(fImageCrop, cropW, cropH, nKernelSize);
             meanPow = ARRAY_GetPowImage(meanPow);

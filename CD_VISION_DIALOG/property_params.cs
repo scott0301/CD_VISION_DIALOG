@@ -140,13 +140,13 @@ namespace CD_VISION_DIALOG
         private CustomPointD _pt_scd_lb = new CustomPointD();
         private CustomPointD _pt_scd_rb = new CustomPointD();
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
-        [CategoryAttribute("01 Rectangle Type"), DescriptionAttribute("Rectangle Type : HOR | VER | DIA")]
+        [CategoryAttribute("01 Rectangle Type"), DescriptionAttribute("Rectangle Type : Horizontal | Vertical | Diagonal "), ReadOnly(true)]
         public string RECT_TYPE { get { return param_01_rect_type; } set { param_01_rect_type = value; } }
 
-        [CategoryAttribute("02 Angle"), DescriptionAttribute("Angle of figures"), ReadOnly(true)]
+        [CategoryAttribute("02 Angle"), DescriptionAttribute("Angle Of Figure"), ReadOnly(true)]
         public int ANGLE { get { return param_02_rect_angle; } set { param_02_rect_angle = value; } }
 
         private CustomPointD PT_FST_LT { get { return pt_FST_LT; } set { pt_FST_LT = value; } }
@@ -159,7 +159,7 @@ namespace CD_VISION_DIALOG
         private CustomPointD PT_SCD_LB { get { return pt_SCD_LB; } set { pt_SCD_LB = value; } }
         private CustomPointD PT_SCD_RB { get { return pt_SCD_RB; } set { pt_SCD_RB = value; } }
 
-        [CategoryAttribute("03 Measure Algorithm"), DescriptionAttribute("Measure Algorithm { MEXHAT | DIR_IN | DIR_EX | CARDIN")]
+        [CategoryAttribute("03 Algorithm"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
         public string ALGORITHM
@@ -174,23 +174,24 @@ namespace CD_VISION_DIALOG
             set { param_00_algorithm = value; }
         }
 
-        [CategoryAttribute("04 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        [CategoryAttribute("04 Edge Position - First Rectangle"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], Diagonal = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_FST { get{return param_08_edge_pos_fst;} set{param_08_edge_pos_fst=value;} }
-        [CategoryAttribute("05 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+
+        [CategoryAttribute("05 Edge Position - Second Rectangle"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], Diagonal = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_SCD { get { return param_09_edge_pos_scd; } set { param_09_edge_pos_scd = value; } }
 
-        [CategoryAttribute("06 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        [CategoryAttribute("06 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
+        public int REFINEMENT { get { return param_10_refinement; } set { param_10_refinement = value; } }
+
+        [CategoryAttribute("07 Compensation A"), DescriptionAttribute("A of Ax + B")]
         public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("07 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        [CategoryAttribute("08 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get{ return param_comm_02_compen_B;} set{param_comm_02_compen_B=value;} }
 
-        [CategoryAttribute("08 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        [CategoryAttribute("09 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
-        public int REFINEMENT { get { return param_10_refinement; } set { param_10_refinement= value; } }
-
-        [CategoryAttribute("15 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get { return param_comm_04_show_raw_data; } set { param_comm_04_show_raw_data = value; } }
 
         public CMeasurePairRct ToFigure()
@@ -292,7 +293,7 @@ namespace CD_VISION_DIALOG
 
         public PROPERTY_PairOvl(){}
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
         // for absolution coordinate for display 
@@ -328,10 +329,10 @@ namespace CD_VISION_DIALOG
         private CustomRectangleD RC_VER_EX_BTM { get { return rect_VER_ex_btm; } set { rect_VER_ex_btm = value; } }
         //*****************************************************************************************
 
-        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("01 Algorithm - Horizontal IN"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_IN
+        public string ALGO_HOR_IN
         {
             get
             {
@@ -344,10 +345,10 @@ namespace CD_VISION_DIALOG
             set { param_01_algorithm_hor_in = value; }
         }
 
-        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("02 Algorithm - Horizontal EX"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_HOR_EX
+        public string ALGO_HOR_EX
         {
             get
             {
@@ -358,14 +359,13 @@ namespace CD_VISION_DIALOG
             }
             set { param_02_algorithm_hor_ex = value; }
         }
-        
 
         //*****************************************************************************************
 
-        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("03 Algorithm - Vertical IN"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_IN
+        public string ALGO_VER_IN
         {
             get
             {
@@ -377,10 +377,10 @@ namespace CD_VISION_DIALOG
             set { param_03_algorithm_ver_in = value; }
         }
 
-        [CategoryAttribute("11 Measure Method"), DescriptionAttribute("Measure Method")]
+        [CategoryAttribute("04 Algorithm - Vertical EX"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string MEASURE_VER_EX
+        public string ALGO_VER_EX
         {
             get
             {
@@ -395,31 +395,36 @@ namespace CD_VISION_DIALOG
 
         //*****************************************************************************************
 
-        [CategoryAttribute("15 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        [CategoryAttribute("05 Edge Pos - Horizontal IN"), DescriptionAttribute("Available [ 0.0 ~ 1.0  ]")]
         public double EDGE_POS_HOR_IN { get { return param_05_edge_pos_hor_in;} set { param_05_edge_pos_hor_in = value;} }
-        [CategoryAttribute("16 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+
+        [CategoryAttribute("06 Edge Pos - Horizontal EX"), DescriptionAttribute("Available [ 0.0 ~ 1.0  ]")]
+        public double EDGE_POS_HOR_EX { get { return param_06_edge_pos_hor_ex; } set { param_06_edge_pos_hor_ex = value; } }
+        
+        [CategoryAttribute("07 Edge Pos - Vertical IN"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
         public double EDGE_POS_VER_IN { get { return param_07_edge_pos_ver_in; } set { param_07_edge_pos_ver_in = value; } }
 
-        //*****************************************************************************************
-
-        [CategoryAttribute("17 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
-        public double EDGE_POS_HOR_EX { get { return param_06_edge_pos_hor_ex; } set { param_06_edge_pos_hor_ex = value; } }
-        [CategoryAttribute("18 Edge Pos"), DescriptionAttribute("Available [ -1, 0, +1 ]")]
+        [CategoryAttribute("08 Edge Pos - Vertical EX"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
         public double EDGE_POS_VER_EX { get{return param_08_edge_pos_ver_ex;} set{param_08_edge_pos_ver_ex = value;} }
 
         //*****************************************************************************************
 
-        [CategoryAttribute("20 COMPENSATION A "), DescriptionAttribute("True or False")]
-        public double COMPEN_A {get{return param_comm_01_compen_A;} set{param_comm_01_compen_A =value;}}
-        [CategoryAttribute("21 COMPENSATION B"), DescriptionAttribute("True or False")]
-        public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
-        [CategoryAttribute("22 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
-        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-        [CategoryAttribute("23 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
+        [CategoryAttribute("09 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N)")]
         public int REFINEMENT { get { return param_09_refinement; } set { param_09_refinement = value; } }
-        [CategoryAttribute("24 Shape Of Measure"), DescriptionAttribute("Default- OVL(0), Rectangle(1)")]
-        public int SHAPE_OF_MEASURE { get {return param_10_shape_of_measure ;} set{param_10_shape_of_measure =value;} }
-        [CategoryAttribute("33 Show Raw Data"), DescriptionAttribute("True or False")]
+
+        [CategoryAttribute("10 Shape Of Measure"), DescriptionAttribute("Default- Overlay(0), Rectangle(1)")]
+        public int SHAPE_OF_MEASURE { get { return param_10_shape_of_measure; } set { param_10_shape_of_measure = value; } }
+
+        [CategoryAttribute("11 COMPENSATION A "), DescriptionAttribute("[ True | False ]")]
+        public double COMPEN_A {get{return param_comm_01_compen_A;} set{param_comm_01_compen_A =value;}}
+
+        [CategoryAttribute("12 COMPENSATION B"), DescriptionAttribute("[ True | False ]")]
+        public double COMPEN_B {get { return param_comm_02_compen_B;} set{ param_comm_02_compen_B = value;}}
+
+        [CategoryAttribute("13 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+        
+        [CategoryAttribute("14 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;}}
 
         public CMeasurePairOvl ToFigure()
@@ -536,7 +541,7 @@ namespace CD_VISION_DIALOG
         private CustomRectangleD _rcEX = new CustomRectangleD();
         private CustomRectangleD _rcIN = new CustomRectangleD();
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
         //[CategoryAttribute("03 Outter Circle"), DescriptionAttribute("Region Information"), ReadOnly(true)]
@@ -545,8 +550,7 @@ namespace CD_VISION_DIALOG
         //[CategoryAttribute("04 Inner Circle"), DescriptionAttribute("Region Information"), ReadOnly(true)]
         private CustomRectangleD CIRCLE_IN { get { return rcIN; } set { rcIN = value; } }
 
-        [CategoryAttribute("01 Measure Method"), DescriptionAttribute("Measure Method")]
-
+        [CategoryAttribute("01 Algorithm"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
 
@@ -562,36 +566,36 @@ namespace CD_VISION_DIALOG
             set { param_00_algorithm = value; }
         }
 
-        [CategoryAttribute("02 Searching Direction"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        [CategoryAttribute("02 Edge Position"), DescriptionAttribute("Available [0.0, 0.5, 1.0]")]
         public double EDGE_POS { get{return param_06_edge_pos;} set{param_06_edge_pos = value;} }
+        
+        //[CategoryAttribute("05 Pre Circle Detection"), DescriptionAttribute("DEFAULT(0) : DRVS(1), RVS(2), MNDIF(3), BRSA(4), GGRAD(5)")]
+        private int CIRCLE_DETECT_TYPE { get { return param_03_circle_detect_type; } set { param_03_circle_detect_type = value; } }
 
-        [CategoryAttribute("03 Compensation A"), DescriptionAttribute("A of Ax + B")]
-        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
-        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
-
-        [CategoryAttribute("05 Pre Circle Detection"), DescriptionAttribute("DEFAULT(0) : DRVS(1), RVS(2), MNDIF(3), BRSA(4), GGRAD(5)")]
-        public int CIRCLE_DETECT_TYPE { get { return param_03_circle_detect_type; } set { param_03_circle_detect_type = value; } }
-
-        [CategoryAttribute("06 Estimated Circle Shrinkage"), DescriptionAttribute(" ±F(%)")]
+        [CategoryAttribute("03 Estimated Circle Shrinkage"), DescriptionAttribute(" ±F(%)")]
         public double CIRCLE_SHRINKAGE { get { return param_04_Shrinkage; } set { param_04_Shrinkage = value; } }
 
-        [CategoryAttribute("07 Data Filtering"), DescriptionAttribute("Available [ 0 = none, 1 = inside 2 = outside, 3 = dual ]")]
+        [CategoryAttribute("04 Data Filtering"), DescriptionAttribute("Available [ 0 = None, 1 = Inside]")]
         public int OUTLIER_FILTER { get { return param_05_Outlier_Filter; } set { param_05_Outlier_Filter = value; } }
 
-        [CategoryAttribute("08 Circle DAM Mag"), DescriptionAttribute("Available [ 0 ~ 0.99 (%)]")]
+        [CategoryAttribute("05 Damage Ignorance"), DescriptionAttribute("Available [ 0 ~ 0.99 (%)]")]
         public double DMG_IGNORANCE { get{return param_01_damage_tolerance;} set{param_01_damage_tolerance = value;} }
 
-        [CategoryAttribute("09 Ellipse Process"), DescriptionAttribute("Treat As Ellipse\nTrue or False")]
+        [CategoryAttribute("06 Ellipse Process"), DescriptionAttribute("[ True | False ]")]
         public bool TREAT_AS_ELLIPSE { get{return param_02_bool_treat_as_ellipse;} set{param_02_bool_treat_as_ellipse = value;} }
-
-        [CategoryAttribute("10 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
-        public int SPC_ENHANCE{ get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-
-        [CategoryAttribute("11 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
+                
+        [CategoryAttribute("07 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) :PARTIAL(1, 1,...,12)")]
         public string COVERAGE { get { return param_07_coverage; } set { param_07_coverage= value; } }
 
-        [CategoryAttribute("12 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("08 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
+        [CategoryAttribute("09 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
+
+        [CategoryAttribute("10 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+
+        [CategoryAttribute("11 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get{return param_comm_04_show_raw_data;} set{param_comm_04_show_raw_data = value;} }
 
         public CMeasurePairCir ToFigure()
@@ -691,14 +695,14 @@ namespace CD_VISION_DIALOG
         private CustomPointD _pt_scd_lb = new CustomPointD();
         private CustomPointD _pt_scd_rb = new CustomPointD();
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
-        [CategoryAttribute("01 Rectangle Type FST"), DescriptionAttribute("Rectangle Type : HOR | VER")]
-        public string RC_TYPE_FST { get { return param_04_rect_type_fst; } set { param_04_rect_type_fst = value; } }
+        //[CategoryAttribute("01 Rectangle Type - First"), DescriptionAttribute("Rectangle Type [ Horizontal | Vertical ]")]
+        private string RC_TYPE_FST { get { return param_04_rect_type_fst; } set { param_04_rect_type_fst = value; } }
 
-        [CategoryAttribute("01 Rectangle Type FST"), DescriptionAttribute("Rectangle Type : HOR | VER")]
-        public string RC_TYPE_SCD { get { return param_05_rect_type_scd; } set { param_05_rect_type_scd = value; } }
+        //[CategoryAttribute("02 Rectangle Type - Second"), DescriptionAttribute("Rectangle Type [ Horizontal | Vertical ]")]
+        private string RC_TYPE_SCD { get { return param_05_rect_type_scd; } set { param_05_rect_type_scd = value; } }
 
         private CustomPointD PT_FST_LT { get { return pt_FST_LT; } set { pt_FST_LT = value; } }
         private CustomPointD PT_FST_RT { get { return pt_FST_RT; } set { pt_FST_RT = value; } }
@@ -710,10 +714,10 @@ namespace CD_VISION_DIALOG
         private CustomPointD PT_SCD_LB { get { return pt_SCD_LB; } set { pt_SCD_LB = value; } }
         private CustomPointD PT_SCD_RB { get { return pt_SCD_RB; } set { pt_SCD_RB = value; } }
 
-        [CategoryAttribute("03 Measure Algorithm FST"), DescriptionAttribute("Measure Algorithm { MEXHAT | DIR_IN | DIR_EX | CARDIN")]
+        [CategoryAttribute("01 Algorithm - First Rectagle"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_FST
+        public string ALGO_FST
         {
             get
             {
@@ -725,10 +729,10 @@ namespace CD_VISION_DIALOG
             set { param_00_algorithm_fst = value; }
         }
 
-        [CategoryAttribute("03 Measure Algorithm SCD"), DescriptionAttribute("Measure Algorithm { MEXHAT | DIR_IN | DIR_EX | CARDIN")]
+        [CategoryAttribute("02 Algorithm - Second Rectangle"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_SCD
+        public string ALGO_SCD
         {
             get
             {
@@ -740,35 +744,34 @@ namespace CD_VISION_DIALOG
             set { param_01_algorithm_scd = value; }
         }
 
-        [CategoryAttribute("04 DISTANCE METRIC"), DescriptionAttribute("P2P(0) HOR(1), VER(2)")]
-        public int DIST_METRIC { get { return param_07_dist_metric; } set { param_07_dist_metric = value; } }
+        [CategoryAttribute("03 Axis Direction - First Rectangle"), DescriptionAttribute("Direction [ Horizontal | Vertical ]"), ReadOnly(true)]
+        public string AXIS_DIR_FST { get { return this.param_04_rect_type_fst; } set { this.param_04_rect_type_fst = value; } }
 
-        [CategoryAttribute("09 Edge Position for FST"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+        [CategoryAttribute("04 Axis Direction - Second Rectangle"), DescriptionAttribute("Direction [ Horizontal | Vertical ]"), ReadOnly(true)]
+        public string AXIS_DIR_SCD { get { return param_05_rect_type_scd; } set { param_05_rect_type_scd = value; } }
+
+        [CategoryAttribute("05 Edge Position - First Rectagle"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], Diagonal = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_FST { get { return param_02_edge_pos_fst; } set { param_02_edge_pos_fst = value; } }
-        [CategoryAttribute("10 Edge Position SCD"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], In case of DIGONAL = [0.0, 0.5, 1.0]")]
+
+        [CategoryAttribute("06 Edge Position - Second Rectangle"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ], Diagonal = [0.0, 0.5, 1.0]")]
         public double EDGE_POS_SCD { get { return param_03_edge_pos_scd; } set { param_03_edge_pos_scd = value; } }
 
-        [CategoryAttribute("01 Rectangle Type"), DescriptionAttribute("Rectangle Type : HOR | VER"), ReadOnly(true)]
-        public string RECT_TYPE_FST { get { return this.param_04_rect_type_fst; } set { this.param_04_rect_type_fst = value; } }
-
-        [CategoryAttribute("01 Rectangle Type"), DescriptionAttribute("Rectangle Type : HOR | VER"), ReadOnly(true)]
-        public string RECT_TYPE_SCD { get { return param_05_rect_type_scd; } set { param_05_rect_type_scd = value; } }
-
-        [CategoryAttribute("11 Compensation A"), DescriptionAttribute("A of Ax + B")]
-        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("12 Compensation B"), DescriptionAttribute("B of Ax + B")]
-        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
-
-        [CategoryAttribute("13 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
-        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-
-        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
+        [CategoryAttribute("07 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
         public int REFINEMENT { get { return param_06_refinement; } set { param_06_refinement = value; } }
 
-        [CategoryAttribute("15 USE CENTROID"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("08 Use Centroid"), DescriptionAttribute("[ True | False ]")]
         public bool USE_CENTROID { get { return param_08_use_centroid; } set { param_08_use_centroid = value; } }
 
-        [CategoryAttribute("16 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("09 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
+
+        [CategoryAttribute("10 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
+
+        [CategoryAttribute("11 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+
+        [CategoryAttribute("12 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get { return param_comm_04_show_raw_data; } set { param_comm_04_show_raw_data = value; } }
 
         public CMeasureMixedRC ToFigure()
@@ -872,13 +875,13 @@ namespace CD_VISION_DIALOG
         private CustomRectangleD _rc_SCD_EX = new CustomRectangleD();
         private CustomRectangleD _rc_SCD_IN = new CustomRectangleD();
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
-        [CategoryAttribute("01 Measure Method"), DescriptionAttribute("Measure Method for FIRST CIRCLE")]
+        [CategoryAttribute("01 Algorithm - First Circle"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_FST
+        public string ALGO_FST
         {
             get
             {
@@ -890,10 +893,10 @@ namespace CD_VISION_DIALOG
             set { param_00_algorithm_fst = value; }
         }
 
-        [CategoryAttribute("02 Measure Method"), DescriptionAttribute("Measure Method for SECOND CIRCLE")]
+        [CategoryAttribute("02 Algorithm - Second Circle"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_SCD
+        public string ALGO_SCD
         {
             get
             {
@@ -905,36 +908,33 @@ namespace CD_VISION_DIALOG
             set { param_01_algorithm_scd = value; }
         }
 
-        [CategoryAttribute("02 Searching Direction"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        [CategoryAttribute("03 Edge Position - First Circle"), DescriptionAttribute("Available [0.0, 0.5, 1.0]")]
         public double EDGE_POS_FST { get { return param_02_edge_pos_fst; } set { param_02_edge_pos_fst = value; } }
 
-        [CategoryAttribute("02 Searching Direction"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        [CategoryAttribute("04 Edge Position - Second Circle"), DescriptionAttribute("Available [0.0, 0.5, 1.0]")]
         public double EDGE_POS_SCD { get { return param_03_edge_pos_scd; } set { param_03_edge_pos_scd = value; } }
 
-        [CategoryAttribute("03 DISTANCE METRIC"), DescriptionAttribute("P2P(0) HOR(1), VER(2)")]
-        public int DIST_METRIC { get { return param_08_dist_metric; } set { param_08_dist_metric = value; } }
-
-        [CategoryAttribute("03 Compensation A"), DescriptionAttribute("A of Ax + B")]
-        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
-        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
-
-        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
-        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
-
-        [CategoryAttribute("06 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
+        [CategoryAttribute("05 Coverage - First Circle"), DescriptionAttribute("DEFAULT=FULL(0) : PARTIAL(3, 1,...,12)")]
         public string COVERAGE_FST { get { return param_04_coverage_fst; } set { param_04_coverage_fst = value; } }
 
-        [CategoryAttribute("07 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
+        [CategoryAttribute("06 Coverage - Second Circle"), DescriptionAttribute("DEFAULT=FULL(0) : PARTIAL(3, 1,...,12)")]
         public string COVERAGE_SCD { get { return param_05_coverage_scd; } set { param_05_coverage_scd = value; } }
 
-        [CategoryAttribute("08 Measurement Direction for First Circle"), DescriptionAttribute("LFT(0), TOP(1) RHT(2) BTM(3)")]
-        public int MS_DIR_FST { get { return param_06_ms_dir_fst; } set { param_06_ms_dir_fst= value; } }
+        [CategoryAttribute("07 Measurement Position - First Circle"), DescriptionAttribute("LFT(0), TOP(1) RHT(2) BTM(3)")]
+        public int MS_POS_FST { get { return param_06_ms_dir_fst; } set { param_06_ms_dir_fst = value; } }
 
-        [CategoryAttribute("09 Measurement Direction for Second Circle"), DescriptionAttribute("LFT(0), TOP(1) RHT(2) BTM(3)")]
-        public int MS_DIR_SCD { get { return param_07_ms_pos_scd; } set { param_07_ms_pos_scd = value; } }
+        [CategoryAttribute("08 Measurement Position - Second Circle"), DescriptionAttribute("LFT(0), TOP(1) RHT(2) BTM(3)")]
+        public int MS_POS_SCD { get { return param_07_ms_pos_scd; } set { param_07_ms_pos_scd = value; } }
 
-        [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("09 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
+        [CategoryAttribute("10 Compensation B"), DescriptionAttribute("B of Ax + B")]
+        public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
+        
+        [CategoryAttribute("11 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
+
+        [CategoryAttribute("12 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get { return param_comm_04_show_raw_data; } set { param_comm_04_show_raw_data = value; } }
 
 
@@ -1046,13 +1046,13 @@ namespace CD_VISION_DIALOG
         private CustomRectangleD _rc_CIRCLE_EX = new CustomRectangleD();
         private CustomRectangleD _rc_CIRCLE_IN = new CustomRectangleD();
 
-        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Nick Name"), ReadOnly(true)]
+        [CategoryAttribute("00 Nick Name"), DescriptionAttribute("Figure Name"), ReadOnly(true)]
         public string NICKNAME { get; set; }
 
-        [CategoryAttribute("01 Measure Method"), DescriptionAttribute("Measure Method for FIRST RECTANGLE")]
+        [CategoryAttribute("01 Algorithm - Rectangle"), DescriptionAttribute("Measurement Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_FST
+        public string ALGO_FST
         {
             get
             {
@@ -1064,23 +1064,22 @@ namespace CD_VISION_DIALOG
             set { param_00_algorithm_fst = value; }
         }
 
-       
-        [CategoryAttribute("01 Rectangle Type"), DescriptionAttribute("Rectangle Type : HOR | VER"), ReadOnly(true)]
-        public string RECT_TYPE_FST { get { return this.param_02_rc_type_fst; } set { this.param_02_rc_type_fst = value; } }
+       [CategoryAttribute("02 Axis Direction"), DescriptionAttribute("Direction [ Horizontal | Vertical ]"), ReadOnly(true)]
+        public string AXIS_DIR_FST { get { return this.param_02_rc_type_fst; } set { this.param_02_rc_type_fst = value; } }
 
-        [CategoryAttribute("02 Edge Position"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
-        public double EDGE_POS_RC { get { return param_01_edge_position_fst; } set { param_01_edge_position_fst = value; } }
+        [CategoryAttribute("03 Edge Position"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
+        public double EDGE_POS_FST { get { return param_01_edge_position_fst; } set { param_01_edge_position_fst = value; } }
 
-        [CategoryAttribute("14 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
+        [CategoryAttribute("04 Refinement"), DescriptionAttribute("DEFAULT(3) : Not Use 0, Refinement Distance(N), Only For V/H")]
         public int REFINEMENT { get { return param_03_refinement; } set { param_03_refinement = value; } }
 
-        [CategoryAttribute("15 USE CENTROID"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("05 Use Centroid"), DescriptionAttribute("[ True | False ]"), ReadOnly(true)]
         public bool USE_CENTROID { get { return param_04_use_centroid; } set { param_04_use_centroid = value; } }
 
-        [CategoryAttribute("02 Measure Method"), DescriptionAttribute("Measure Method for SECOND CIRCLE")]
+        [CategoryAttribute("06 Algorithm - Circle"), DescriptionAttribute("Measure Algorithm [ CARDIN | DIR_IN | DIR_EX ]")]
         [Browsable(true)]
         [TypeConverter(typeof(ConverterMeasureTyes))]
-        public string ALGORITHM_SCD
+        public string ALGO_SCD
         {
             get
             {
@@ -1092,28 +1091,25 @@ namespace CD_VISION_DIALOG
             set { param_11_algorithm_scd = value; }
         }
         
+        [CategoryAttribute("07 Edge Position"), DescriptionAttribute("Available [0.0, 0.5, 1.0]")]
+        public double EDGE_POS_SCD { get { return param_12_edge_position_scd; } set { param_12_edge_position_scd= value; } }
 
-        [CategoryAttribute("02 Searching Direction"), DescriptionAttribute("Available [ 0.0 ~ 1.0 ]")]
-        public double EDGE_POS_CC { get { return param_12_edge_position_scd; } set { param_12_edge_position_scd= value; } }
-
-        [CategoryAttribute("06 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : DIG↘(1), DIG↙(2), PARTIAL(3, 1,...,12)")]
+        [CategoryAttribute("08 Coverage"), DescriptionAttribute("DEFAULT=FULL(0) : PARTIAL(3, 1,...,12)")]
         public string COVERAGE_CIRCLE { get { return param_13_Coverage_scd; } set { param_13_Coverage_scd = value; } }
 
-        [CategoryAttribute("08 Measurement Direction for First Circle"), DescriptionAttribute("East=(0), West=(1), South=(2), North=(3)")]
-        public int MS_DIR_CIRCLE { get { return param_14_ms_pos_scd; } set { param_14_ms_pos_scd = value; } }
+        [CategoryAttribute("09 Measurement Position - Circle"), DescriptionAttribute("LFT(0), TOP(1) RHT(2) BTM(3)")]
+        public int MS_POS_CIRCLE { get { return param_14_ms_pos_scd; } set { param_14_ms_pos_scd = value; } }
 
-        [CategoryAttribute("03 DISTANCE METRIC"), DescriptionAttribute("P2P(0) HOR(1), VER(2)")]
-        public int DIST_METRIC { get { return param_20_metric_type; } set { param_20_metric_type = value; } }
-
-        [CategoryAttribute("03 Compensation A"), DescriptionAttribute("A of Ax + B")]
+        [CategoryAttribute("10 Compensation A"), DescriptionAttribute("A of Ax + B")]
         public double COMPEN_A { get { return param_comm_01_compen_A; } set { param_comm_01_compen_A = value; } }
-        [CategoryAttribute("04 Compensation B"), DescriptionAttribute("B of Ax + B")]
+
+        [CategoryAttribute("11 Compensation B"), DescriptionAttribute("B of Ax + B")]
         public double COMPEN_B { get { return param_comm_02_compen_B; } set { param_comm_02_compen_B = value; } }
 
-        [CategoryAttribute("05 SPC-EF"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
+        [CategoryAttribute("12 Special Enhancement"), DescriptionAttribute("DEFAULT(0) : ADF(1), RVS(2), STD(3), MN(4), PWRVSUB(5), GRD(6), GRDRVSUB(7), POWRVSUBAD(8)")]
         public int SPC_ENHANCE { get { return param_comm_03_spc_enhance; } set { param_comm_03_spc_enhance = value; } }
 
-        [CategoryAttribute("10 Show Raw Data"), DescriptionAttribute("True or False")]
+        [CategoryAttribute("13 Show Raw Data"), DescriptionAttribute("[ True | False ]")]
         public bool SHOW_RAW_DATA { get { return param_comm_04_show_raw_data; } set { param_comm_04_show_raw_data = value; } }
 
 

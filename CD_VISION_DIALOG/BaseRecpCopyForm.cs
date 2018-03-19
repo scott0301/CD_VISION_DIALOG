@@ -92,7 +92,7 @@ namespace CD_VISION_DIALOG
                     msg = ex.ToString();
                 }
 
-                // triggered twice !!! fuck!!
+                // triggered twice !!! 
                 event_GeneratedBaseRecp(msg);
                 this.Close();
             }

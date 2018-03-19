@@ -25,14 +25,13 @@ namespace CD_VISION_DIALOG
         public Dlg_HistoryP()
         {
             InitializeComponent();
-            uc_view_history.eventDele_HereComesNewImage += new dele_HereComesNewImage(fuck);
+            uc_view_history.eventDele_HereComesNewImage += new dele_HereComesNewImage(updateView);
 
             uc_view_history.BOOL_DRAW_FOCUS_ROI = false;
             uc_view_history.BOOL_DRAW_PTRN_ROI = false;
         }
-        private void fuck()
-        {
-        }
+        public void updateView() { }
+
         public bool SetParam(PARAM_PATH config)
         {
             this.config = config;

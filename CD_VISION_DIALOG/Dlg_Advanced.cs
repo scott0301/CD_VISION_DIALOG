@@ -17,7 +17,7 @@ namespace CD_VISION_DIALOG
 {
     public partial class Dlg_Advanced : Form
     {
-        public CAdvancedMode hacker = new CAdvancedMode();
+        public CAdvancedMode advanced = new CAdvancedMode();
 
         public Dlg_Advanced()
         {
@@ -25,7 +25,7 @@ namespace CD_VISION_DIALOG
         }
         public void SetParam(CAdvancedMode handle)
         {
-            hacker = handle;
+            advanced = handle;
         }
 
         public void _ToUI_DisplayData()
@@ -45,38 +45,32 @@ namespace CD_VISION_DIALOG
 
         #region IMAGE SAVE OPTIONS
 
-        private void CHK_USE_SAVE_MANUAL_GRAB_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_MANUAL_GRAB = CHK_USE_SAVE_MANUAL_GRAB.Checked; }
-        private void CHK_USE_SAVE_FOCUS_REGION_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_FOCUS_REGION = CHK_USE_SAVE_FOCUS_REGION.Checked; }
-        private void CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_SAVE_SEQUENTIAL_IMAGE_SET = CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Checked; }
-        private void CHK_USE_SAVE_INPUT_IMAGE_CheckedChanged(object sender, EventArgs e){hacker.BOOL_USE_SAVE_INPUT_IMAGE = CHK_USE_SAVE_INPUT_IMAGE.Checked;}
+        private void CHK_USE_SAVE_MANUAL_GRAB_CheckedChanged(object sender, EventArgs e) { advanced.BOOL_USE_SAVE_MANUAL_GRAB = CHK_USE_SAVE_MANUAL_GRAB.Checked; }
+        private void CHK_USE_SAVE_FOCUS_REGION_CheckedChanged(object sender, EventArgs e) { advanced.BOOL_USE_SAVE_FOCUS_REGION = CHK_USE_SAVE_FOCUS_REGION.Checked; }
+        private void CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET_CheckedChanged(object sender, EventArgs e) { advanced.BOOL_USE_SAVE_SEQUENTIAL_IMAGE_SET = CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Checked; }
+        private void CHK_USE_SAVE_INPUT_IMAGE_CheckedChanged(object sender, EventArgs e){advanced.BOOL_USE_SAVE_INPUT_IMAGE = CHK_USE_SAVE_INPUT_IMAGE.Checked;}
 
         private void BTN_SET_SAVE_IMAGE_PATH_Click(object sender, EventArgs e)
         {
             string strPath = Computer.SelectFolderAndGetName();
             TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
 
-            hacker.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
+            advanced.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
         }
 
         #endregion
 
         #region HISTORY RELATED OPTIONS
 
-        private void CHK_USE_LEAVE_HISTORY_ERROR_PTRN_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_LEAVE_HISTORY_ERROR_PTRN = CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Checked; }
-        private void CHK_USE_LEAVE_HISTORY_MEASUREMENT_CheckedChanged(object sender, EventArgs e) { hacker.BOOL_USE_LEAVE_HISTORY_MEASUREMENT = CHK_USE_LEAVE_HISTORY_MEASUREMENT.Checked; }
+        private void CHK_USE_LEAVE_HISTORY_ERROR_PTRN_CheckedChanged(object sender, EventArgs e) { advanced.BOOL_USE_LEAVE_HISTORY_ERROR_PTRN = CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Checked; }
+        private void CHK_USE_LEAVE_HISTORY_MEASUREMENT_CheckedChanged(object sender, EventArgs e) { advanced.BOOL_USE_LEAVE_HISTORY_MEASUREMENT = CHK_USE_LEAVE_HISTORY_MEASUREMENT.Checked; }
 
         #endregion 
 
         private void CHK_SHOW_IMAGE_PROCESSING_CheckedChanged(object sender, EventArgs e)
         {
-            hacker.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
+            advanced.BOOL_SHOW_IMAGE_PROCESS = CHK_SHOW_IMAGE_PROCESSING.Checked;
         }
-
-        
-
-        
-
-        
 
 
         #region glass effect
