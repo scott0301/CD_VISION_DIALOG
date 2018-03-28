@@ -614,7 +614,54 @@ namespace CD_Figure
 
                     Computer.SaveImage(rawImage, imageW, imageH, string.Format("c:\\PRP_STEP{0}.BMP", nStep));
                 }
+            }
+            else if( bSave == false)
+            {
+                if (nProcessType == 1) // ADF
+                {
+                    rawImage = Computer.HC_FILTER_ADF_Window(rawImage, imageW, imageH, rc, fKappa, nIter, fDelta);
+                }
+                else if (nProcessType == 2) //  Reverse Substraction
+                {
+                    byte[]/***/reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
+                    /********/rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
+                }
+                else if (nProcessType == 3) // Standard Deviation
+                {
+                    rawImage = Computer.HC_FILTER_STD_Window(rawImage, imageW, imageH, rc, 5, 1);
+                    Computer.SaveImage(rawImage, imageW, imageH, string.Format("c:\\nagari.BMP"));
 
+                }
+                else if (nProcessType == 4) // Mean Window
+                {
+                    rawImage = Computer.HC_FILTER_MEAN_Window(rawImage, imageW, imageH, rc, 5);
+                }
+                else if (nProcessType == 5) // Power Reverse Substraction
+                {
+                    /****/rawImage = Computer.ARRAY_GetPowImage(rawImage);
+                    byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
+                    /****/rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
+                }
+                else if (nProcessType == 6) // Gradient
+                {
+                    rawImage = Computer.HC_TRANS_GradientImage(rawImage, imageW, imageH);
+                }
+                else if (nProcessType == 7) // Gradient Reverse Substraction
+                {
+                    /********/rawImage = Computer.HC_TRANS_GradientImage(rawImage, imageW, imageH);
+                    byte[]/***/reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
+                    /********/rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
+                }
+                else if (nProcessType == 8) // Power Reverse Substraction Addition
+                {
+                    byte[] rawTemp = new byte[rawImage.Length];
+                    Array.Copy(rawImage, rawTemp, rawImage.Length);
+
+                    /****/rawImage = Computer.ARRAY_GetPowImage(rawImage);
+                    byte[] reverse = Computer.HC_TRANS_Reverse(rawImage, imageW, imageH);
+                    /****/rawImage = Computer.HC_ARITH_SUB(reverse, rawImage, imageW, imageH);
+                    /****/rawImage = Computer.HC_ARITH_ADD(rawTemp, rawImage, imageW, imageH);
+                }
             }
           
             return rawImage;
@@ -1014,8 +1061,10 @@ namespace CD_Figure
             double fDistance = 0;
             p1 = p2 = new PointF(0, 0);
 
-            if (CRect.IsIntersectRect(new RectangleF(0, 0, imageW, imageH), rcFST.ToRectangleF()) == false ||
-              CRect.IsIntersectRect(new RectangleF(0, 0, imageW, imageH), rcSCD.ToRectangleF()) == false) {return -444; }
+            if (/***/CRect.IsIntersectRect(new RectangleF(0, 0, imageW, imageH), rcFST.ToRectangleF()) == false ||
+              /*****/CRect.IsIntersectRect(new RectangleF(0, 0, imageW, imageH), rcSCD.ToRectangleF()) == false ||
+              /*****/CRect.IsBoarderPosition(rcFST.ToRectangleF(), imageW, imageH) == true ||
+              /*****/CRect.IsBoarderPosition(rcSCD.ToRectangleF(), imageW, imageH) == true)  {return -444; }
 
             if (this.param_01_rc_type == IFX_RECT_TYPE.DIR_HOR)
             {
@@ -2337,8 +2386,7 @@ namespace CD_Figure
 
                 if (this.param_01_algorithm_HOR_IN == IFX_ALGORITHM.DIR_IN || this.param_01_algorithm_HOR_IN == IFX_ALGORITHM.DIR_EX)
                 {
-                    /***/
-                    if (this.param_01_algorithm_HOR_IN == IFX_ALGORITHM.DIR_IN)
+                    if/***/ (this.param_01_algorithm_HOR_IN == IFX_ALGORITHM.DIR_IN)
                     {
                         Computer.HC_EDGE_GetRawPoints_1stDeriv_MULTI_VER(rawImage, imageW, imageH, rcHOR_IN_TOP, false, listEdges_HOR_IN_TOP_EX, listEdges_HOR_IN_TOP_MD, listEdges_HOR_IN_TOP_IN);
                         Computer.HC_EDGE_GetRawPoints_1stDeriv_MULTI_VER(rawImage, imageW, imageH, rcHOR_IN_BTM, true, listEdges_HOR_IN_BTM_EX, listEdges_HOR_IN_BTM_MD, listEdges_HOR_IN_BTM_IN);
@@ -2362,8 +2410,8 @@ namespace CD_Figure
 
                 if (this.param_03_algorithm_VER_IN == IFX_ALGORITHM.DIR_IN || this.param_03_algorithm_VER_IN == IFX_ALGORITHM.DIR_EX)
                 {
-                    /***/
-                    if (this.param_03_algorithm_VER_IN == IFX_ALGORITHM.DIR_IN)
+
+                    if/***/(this.param_03_algorithm_VER_IN == IFX_ALGORITHM.DIR_IN)
                     {
                         Computer.HC_EDGE_GetRawPoints_1stDeriv_MULTI_HOR(rawImage, imageW, imageH, rcVER_IN_LFT, false, listEdges_VER_IN_LFT_IN, listEdges_VER_IN_LFT_MD, listEdges_VER_IN_LFT_EX);
                         Computer.HC_EDGE_GetRawPoints_1stDeriv_MULTI_HOR(rawImage, imageW, imageH, rcVER_IN_RHT, true, listEdges_VER_IN_RHT_IN, listEdges_VER_IN_RHT_MD, listEdges_VER_IN_RHT_EX);
@@ -2378,6 +2426,7 @@ namespace CD_Figure
                 }
                 else if (this.param_03_algorithm_VER_IN == IFX_ALGORITHM.CARDIN)
                 {
+
                     Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rcVER_IN_LFT, listEdges_VER_IN_LFT_IN, listEdges_VER_IN_LFT_MD, listEdges_VER_IN_LFT_EX);
                     Computer.HC_EDGE_GetRawPoints_CARDIN_MULTI_VER(rawImage, imageW, imageH, rcVER_IN_RHT, listEdges_VER_IN_RHT_IN, listEdges_VER_IN_RHT_MD, listEdges_VER_IN_RHT_EX);
                 }

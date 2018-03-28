@@ -1430,12 +1430,14 @@ namespace CD_VISION_DIALOG
             thr.IsBackground = true;
             thr.Start();
         }
+
         private void PIC_FOCUS_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Low;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
         }
+
         private PointF _DO_PTRN_And_Get_TemplatePos(CFigureManager fm, Bitmap bmpSrc, out RectangleF rcTemplate, out double fMatchingRatio)
         {
             // initialize matching center position info.
@@ -1860,6 +1862,13 @@ namespace CD_VISION_DIALOG
                                 });
                             //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
+                            //*************************************************************************************
+                            if (m_hacker.BOOL_USE_LEAVE_HISTORY_MEASUREMENT == true)
+                            {
+                                bmp = Computer.HC_CONV_Byte2Bmp(rawImage, iu.imageW, iu.imageH);
+                                dlgHistM.AppedHistory(bmp, iu.listInspResult, imageView1.GetDispTextObjects());
+                            }
+
                             this.UIThread(delegate 
                             {
                                 //rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
@@ -2190,41 +2199,41 @@ namespace CD_VISION_DIALOG
             // CIRCLE 
             //*************************************************************************************
 
-            Parallel.Invoke
-            (
-                () =>
-                {
-                    if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
-                }, 
-                () =>
-                {
-                    if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
-                },
-                () =>
-                {
-                    if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
-                }, 
-                () =>
-                {
-                    if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
-                }, 
-                () =>
-                {
-                    if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
-                }, 
-                () =>
-                {
-                    if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
-                } 
-            ); 
+           // Parallel.Invoke
+           // (
+           //     () =>
+           //     {
+           //         if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
+           //     }, 
+           //     () =>
+           //     {
+           //         if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
+           //     },
+           //     () =>
+           //     {
+           //         if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
+           //     }, 
+           //     () =>
+           //     {
+           //         if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
+           //     }, 
+           //     () =>
+           //     {
+           //         if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
+           //     }, 
+           //     () =>
+           //     {
+           //         if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
+           //     } 
+           // ); 
         
 
-            //if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
-            //if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
-            //if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
-            //if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
-            //if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
-            //if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
+            if (fm.COUNT_PAIR_RCT != 0) _INSP_RC(fm, ptDelta, iu);
+            if (fm.COUNT_PAIR_CIR != 0) _INSP_CIR(fm, ptDelta, iu);
+            if (fm.COUNT_PAIR_OVL != 0) _INSP_OL(fm, ptDelta, iu);
+            if (fm.COUNT_MIXED_RC != 0) _INSP_MRC(fm, ptDelta, iu);
+            if (fm.COUNT_MIXED_CC != 0) _INSP_MCC(fm, ptDelta, iu);
+            if (fm.COUNT_MIXED_RCC != 0) _INSP_MRCC(fm, ptDelta, iu);
 
             return ;
         }
@@ -3380,7 +3389,7 @@ namespace CD_VISION_DIALOG
         private void BTN_FIGURE_Modify_Click(object sender, EventArgs e)
         {
             // exception
-            if (LV_PARAMETER.FocusedItem == null) return;
+             if (LV_PARAMETER.FocusedItem == null) return;
 
             // in order to avoid data twist
             if( m_bChangedDiagonalAngle == true)
@@ -3420,6 +3429,11 @@ namespace CD_VISION_DIALOG
                     obj.param_06_peakCandidate = org.param_06_peakCandidate;
                     obj.param_07_windowSize = org.param_07_windowSize;
 
+                    obj.rc_FST = org.rc_FST;
+                    obj.rc_SCD = org.rc_SCD;
+                    obj._rc_FST = org._rc_FST;
+                    obj._rc_SCD = org._rc_SCD;
+
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
@@ -3434,6 +3448,11 @@ namespace CD_VISION_DIALOG
 
                 if (org.NICKNAME == obj.NICKNAME)
                 {
+                    obj.rc_EX = org.rc_EX;
+                    obj.rc_IN = org.rc_IN;
+                    obj._rc_EX = org._rc_EX;
+                    obj._rc_IN = org._rc_IN;
+
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
@@ -3448,6 +3467,11 @@ namespace CD_VISION_DIALOG
 
                 if (org.NICKNAME == obj.NICKNAME)
                 {
+                    obj.rc_FST = org.rc_FST;
+                    obj.rc_SCD = org.rc_SCD;
+                    obj._rc_FST = org._rc_FST;
+                    obj._rc_SCD = org._rc_SCD;
+
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
@@ -3462,6 +3486,16 @@ namespace CD_VISION_DIALOG
 
                 if (org.NICKNAME == obj.NICKNAME)
                 {
+                    obj.rc_FST_EX = org.rc_FST_EX;
+                    obj.rc_FST_IN = org.rc_FST_IN;
+                    obj._rc_FST_EX = org._rc_FST_EX;
+                    obj._rc_FST_IN = org._rc_FST_IN;
+
+                    obj.rc_SCD_EX = org.rc_SCD_EX;
+                    obj.rc_SCD_IN = org.rc_SCD_IN;
+                    obj._rc_SCD_EX = org._rc_SCD_EX;
+                    obj._rc_SCD_IN = org._rc_SCD_IN;
+
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
@@ -3476,6 +3510,14 @@ namespace CD_VISION_DIALOG
 
                 if (org.NICKNAME == obj.NICKNAME)
                 {
+                    obj.rc_FST = org.rc_FST;
+                    obj._rc_FST = org._rc_FST;
+
+                    obj.rc_FST_EX = org.rc_FST_EX;
+                    obj.rc_FST_IN = org.rc_FST_IN;
+                    obj._rc_FST_EX = org._rc_FST_EX;
+                    obj._rc_FST_IN = org._rc_FST_IN;
+                    
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
@@ -3490,6 +3532,14 @@ namespace CD_VISION_DIALOG
 
                 if (org.NICKNAME == obj.NICKNAME)
                 {
+
+                    obj.RC_HOR_EX = org.RC_HOR_EX;
+                    obj.RC_HOR_IN = org.RC_HOR_IN;
+                    obj.RC_VER_EX = org.RC_VER_EX;
+                    obj.RC_VER_IN = org.RC_VER_IN;
+
+                    
+
                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);

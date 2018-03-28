@@ -4238,6 +4238,7 @@ namespace CD_Measure
             
             double[] fKernel = null;
 
+            // for circle
             if (nFilterType == 0)
             {
                 if (nSign == -1)
@@ -4267,6 +4268,7 @@ namespace CD_Measure
                     };
                 }
             }
+            // for line 
             else if (nFilterType == 1)
             {
                 if (nSign == -1)
@@ -4287,7 +4289,7 @@ namespace CD_Measure
                     fKernel = new double[] 
                     { 
                         -77,-77,-77,-00,-77,-77,-77,
-                        -55,-55,-55,-00,-55,-55,+55,
+                        -55,-55,-55,-00,-55,-55,-55,
                         -99,-99,-99,-00,-99,-99,-99,
                         +00,+00,+00,+00,+00,+00,+00,
                         +99,+99,+99,+00,+99,+99,+99,
@@ -6276,7 +6278,7 @@ namespace CD_Measure
         {
             double pa = 0; double pb = 0; double pc = 0;
 
-            double fSubPixel = 0;
+            double fPeak = 0;
 
             try
             {
@@ -6287,15 +6289,17 @@ namespace CD_Measure
                     pc = Convert.ToDouble(lineBuff[nPos + 1]);
 
                     // simple quadratic interpolation
-                    fSubPixel = 0.5 * (pa - pc) / (pa - (2 * pb) + pc);
+                    fPeak = (pc - pa) / (2 * (2 * pb - pc - pa));
+                    //double fHeight = pb - 0.25 * (pa - pc) * fPeak;
+                    //double fCurvature = 0.5 * (pa - pc) / (pa - (2.0 * pb) + pc);
 
-                    if (double.IsNaN(fSubPixel) == true)
+                    if (double.IsNaN(fPeak) == true)
                     {
-                        fSubPixel = 0;
+                        fPeak = 0;
                     }
-                    else if (double.IsInfinity(fSubPixel) == true)
+                    else if (double.IsInfinity(fPeak) == true)
                     {
-                        fSubPixel = 0;
+                        fPeak = 0;
                     }
 
                 }
@@ -6306,7 +6310,7 @@ namespace CD_Measure
             }
 
 
-            return fSubPixel;
+            return fPeak;
         }
 
         //*****************************************************************************************
