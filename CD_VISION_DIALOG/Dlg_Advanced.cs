@@ -19,29 +19,13 @@ namespace CD_VISION_DIALOG
     {
         public CAdvancedMode advanced = new CAdvancedMode();
 
-        public Dlg_Advanced()
-        {
-            InitializeComponent();
-        }
-        public void SetParam(CAdvancedMode handle)
-        {
-            advanced = handle;
-        }
+        public Dlg_Advanced(){InitializeComponent();}
 
-        public void _ToUI_DisplayData()
-        {
+        public void SetParam(CAdvancedMode handle){advanced = handle;}
 
-        }
+        private void Dlg_Hacker_Load(object sender, EventArgs e){ }
 
-        private void Dlg_Hacker_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BTN_APPLY_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void BTN_APPLY_Click(object sender, EventArgs e){this.Hide();}
 
         #region IMAGE SAVE OPTIONS
 
@@ -54,7 +38,6 @@ namespace CD_VISION_DIALOG
         {
             string strPath = Computer.SelectFolderAndGetName();
             TXT_SAVE_IMAGE_SET_PATH.Text = strPath;
-
             advanced.PATH_EXPERIMENTAL_IMAGE_SET = strPath;
         }
 

@@ -30,12 +30,12 @@ namespace CD_VISION_DIALOG
             uc_view_history.BOOL_DRAW_FOCUS_ROI = false;
             uc_view_history.BOOL_DRAW_PTRN_ROI = false;
         }
+
         public void updateView() { }
 
         public bool SetParam(PARAM_PATH config)
         {
             this.config = config;
-
             return true;
         }
 
@@ -52,8 +52,7 @@ namespace CD_VISION_DIALOG
 
             for (int i = 0; i < strArrAllFiles.Length; i++)
             {
-                string single = strArrAllFiles.ElementAt(i);
-
+                string single/****/= strArrAllFiles.ElementAt(i);
                 string strFileName = Path.GetFileName(single);
 
                 string strDate = single.Replace(config.i08_PATH_HIST_PTRN + "\\", "");
@@ -72,10 +71,7 @@ namespace CD_VISION_DIALOG
             LV_HISTORY.EndUpdate();
         }
 
-        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
-        {
-            Process.Start(@config.i08_PATH_HIST_PTRN);
-        }
+        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e){Process.Start(@config.i08_PATH_HIST_PTRN);}
 
         private void Dlg_HistoryP_Load(object sender, EventArgs e)
         {
@@ -110,15 +106,9 @@ namespace CD_VISION_DIALOG
             LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
         }
 
-        private void BTN_CLOSE_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void BTN_CLOSE_Click(object sender, EventArgs e){this.Hide();}
 
-        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperLV.SortData(LV_HISTORY, e.Column);
-        }
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e){WrapperLV.SortData(LV_HISTORY, e.Column);}
 
        #region glass effect
         // defines how far we are extending the Glass margins

@@ -61,10 +61,10 @@
             this.uc_thumb_nail_rect = new NS_UC_THUMB_NAIL.UC_THUMB_NAIL();
             this.BTN_PARAM_WRITE = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.uc_tunning_view = new CD_View.UC_CD_VIEWER();
             this.label1 = new System.Windows.Forms.Label();
             this.BTN_PTRN_APPLY = new System.Windows.Forms.Button();
             this.BTN_RECOVER = new System.Windows.Forms.Button();
+            this.uc_tunning_view = new CD_View.UC_CD_VIEWER();
             this.TAB_TUNNING_TARGET.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,10 +77,11 @@
             // label16
             // 
             this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(1307, 689);
+            this.label16.Location = new System.Drawing.Point(1312, 689);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(52, 14);
+            this.label16.Size = new System.Drawing.Size(41, 12);
             this.label16.TabIndex = 81;
             this.label16.Text = "CLOSE";
             // 
@@ -131,7 +132,7 @@
             this.RDO_RECT_TYPE_DIA.ForeColor = System.Drawing.Color.White;
             this.RDO_RECT_TYPE_DIA.Location = new System.Drawing.Point(243, 21);
             this.RDO_RECT_TYPE_DIA.Name = "RDO_RECT_TYPE_DIA";
-            this.RDO_RECT_TYPE_DIA.Size = new System.Drawing.Size(93, 18);
+            this.RDO_RECT_TYPE_DIA.Size = new System.Drawing.Size(89, 17);
             this.RDO_RECT_TYPE_DIA.TabIndex = 0;
             this.RDO_RECT_TYPE_DIA.TabStop = true;
             this.RDO_RECT_TYPE_DIA.Text = "RECT_DIA";
@@ -144,7 +145,7 @@
             this.RDO_RECT_TYPE_VER.ForeColor = System.Drawing.Color.White;
             this.RDO_RECT_TYPE_VER.Location = new System.Drawing.Point(126, 21);
             this.RDO_RECT_TYPE_VER.Name = "RDO_RECT_TYPE_VER";
-            this.RDO_RECT_TYPE_VER.Size = new System.Drawing.Size(94, 18);
+            this.RDO_RECT_TYPE_VER.Size = new System.Drawing.Size(89, 17);
             this.RDO_RECT_TYPE_VER.TabIndex = 0;
             this.RDO_RECT_TYPE_VER.TabStop = true;
             this.RDO_RECT_TYPE_VER.Text = "RECT_VER";
@@ -157,7 +158,7 @@
             this.RDO_RECT_TYPE_HOR.ForeColor = System.Drawing.Color.White;
             this.RDO_RECT_TYPE_HOR.Location = new System.Drawing.Point(9, 21);
             this.RDO_RECT_TYPE_HOR.Name = "RDO_RECT_TYPE_HOR";
-            this.RDO_RECT_TYPE_HOR.Size = new System.Drawing.Size(98, 18);
+            this.RDO_RECT_TYPE_HOR.Size = new System.Drawing.Size(91, 17);
             this.RDO_RECT_TYPE_HOR.TabIndex = 0;
             this.RDO_RECT_TYPE_HOR.TabStop = true;
             this.RDO_RECT_TYPE_HOR.Text = "RECT_HOR";
@@ -195,7 +196,7 @@
             this.label21.ForeColor = System.Drawing.Color.White;
             this.label21.Location = new System.Drawing.Point(14, 25);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(94, 14);
+            this.label21.Size = new System.Drawing.Size(87, 13);
             this.label21.TabIndex = 93;
             this.label21.Text = "PEAK COUNT";
             // 
@@ -215,7 +216,7 @@
             0,
             0});
             this.TXT_RECT_CANDIDATE_COUNT.Name = "TXT_RECT_CANDIDATE_COUNT";
-            this.TXT_RECT_CANDIDATE_COUNT.Size = new System.Drawing.Size(182, 22);
+            this.TXT_RECT_CANDIDATE_COUNT.Size = new System.Drawing.Size(182, 20);
             this.TXT_RECT_CANDIDATE_COUNT.TabIndex = 95;
             this.TXT_RECT_CANDIDATE_COUNT.Value = new decimal(new int[] {
             2,
@@ -249,7 +250,7 @@
             this.RDO_RECT_APD_SCD.AutoSize = true;
             this.RDO_RECT_APD_SCD.Location = new System.Drawing.Point(12, 75);
             this.RDO_RECT_APD_SCD.Name = "RDO_RECT_APD_SCD";
-            this.RDO_RECT_APD_SCD.Size = new System.Drawing.Size(121, 18);
+            this.RDO_RECT_APD_SCD.Size = new System.Drawing.Size(113, 17);
             this.RDO_RECT_APD_SCD.TabIndex = 95;
             this.RDO_RECT_APD_SCD.TabStop = true;
             this.RDO_RECT_APD_SCD.Text = "SECOND PEAK";
@@ -260,7 +261,7 @@
             this.RDO_RECT_APD_FST.AutoSize = true;
             this.RDO_RECT_APD_FST.Location = new System.Drawing.Point(10, 46);
             this.RDO_RECT_APD_FST.Name = "RDO_RECT_APD_FST";
-            this.RDO_RECT_APD_FST.Size = new System.Drawing.Size(104, 18);
+            this.RDO_RECT_APD_FST.Size = new System.Drawing.Size(100, 17);
             this.RDO_RECT_APD_FST.TabIndex = 95;
             this.RDO_RECT_APD_FST.TabStop = true;
             this.RDO_RECT_APD_FST.Text = "FIRST PEAK";
@@ -338,7 +339,7 @@
             "9"});
             this.CB_RECT_TARGET_INDEX_SCD.Location = new System.Drawing.Point(234, 78);
             this.CB_RECT_TARGET_INDEX_SCD.Name = "CB_RECT_TARGET_INDEX_SCD";
-            this.CB_RECT_TARGET_INDEX_SCD.Size = new System.Drawing.Size(54, 22);
+            this.CB_RECT_TARGET_INDEX_SCD.Size = new System.Drawing.Size(54, 21);
             this.CB_RECT_TARGET_INDEX_SCD.TabIndex = 94;
             this.CB_RECT_TARGET_INDEX_SCD.Text = "0";
             // 
@@ -362,7 +363,7 @@
             "9"});
             this.CB_RECT_TARGET_INDEX_FST.Location = new System.Drawing.Point(234, 46);
             this.CB_RECT_TARGET_INDEX_FST.Name = "CB_RECT_TARGET_INDEX_FST";
-            this.CB_RECT_TARGET_INDEX_FST.Size = new System.Drawing.Size(54, 22);
+            this.CB_RECT_TARGET_INDEX_FST.Size = new System.Drawing.Size(54, 21);
             this.CB_RECT_TARGET_INDEX_FST.TabIndex = 94;
             this.CB_RECT_TARGET_INDEX_FST.Text = "0";
             // 
@@ -372,7 +373,7 @@
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.ForeColor = System.Drawing.Color.White;
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.Location = new System.Drawing.Point(12, 21);
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.Name = "CHK_RECT_USE_AUTO_PEAK_DETECTION";
-            this.CHK_RECT_USE_AUTO_PEAK_DETECTION.Size = new System.Drawing.Size(231, 18);
+            this.CHK_RECT_USE_AUTO_PEAK_DETECTION.Size = new System.Drawing.Size(216, 17);
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.TabIndex = 12;
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.Text = "USE_AUTO_PEAK_DETECTION";
             this.CHK_RECT_USE_AUTO_PEAK_DETECTION.UseVisualStyleBackColor = true;
@@ -384,7 +385,7 @@
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Location = new System.Drawing.Point(148, 78);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Name = "TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD";
-            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Size = new System.Drawing.Size(44, 22);
+            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Size = new System.Drawing.Size(44, 20);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.TabIndex = 3;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = "0";
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -395,7 +396,7 @@
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Location = new System.Drawing.Point(148, 46);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Name = "TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST";
-            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Size = new System.Drawing.Size(44, 22);
+            this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Size = new System.Drawing.Size(44, 20);
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.TabIndex = 3;
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.Text = "0";
             this.TXT_RECT_EDGE_DETEC_TARGET_INDEX_FST.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -421,7 +422,7 @@
             this.TXT_RECT_SELECTED_FIGURE.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_SELECTED_FIGURE.Location = new System.Drawing.Point(319, 17);
             this.TXT_RECT_SELECTED_FIGURE.Name = "TXT_RECT_SELECTED_FIGURE";
-            this.TXT_RECT_SELECTED_FIGURE.Size = new System.Drawing.Size(186, 22);
+            this.TXT_RECT_SELECTED_FIGURE.Size = new System.Drawing.Size(186, 20);
             this.TXT_RECT_SELECTED_FIGURE.TabIndex = 3;
             // 
             // TXT_RECT_SELECTED_INDEX
@@ -431,7 +432,7 @@
             this.TXT_RECT_SELECTED_INDEX.ForeColor = System.Drawing.Color.White;
             this.TXT_RECT_SELECTED_INDEX.Location = new System.Drawing.Point(70, 17);
             this.TXT_RECT_SELECTED_INDEX.Name = "TXT_RECT_SELECTED_INDEX";
-            this.TXT_RECT_SELECTED_INDEX.Size = new System.Drawing.Size(88, 22);
+            this.TXT_RECT_SELECTED_INDEX.Size = new System.Drawing.Size(88, 20);
             this.TXT_RECT_SELECTED_INDEX.TabIndex = 3;
             this.TXT_RECT_SELECTED_INDEX.Text = "0";
             this.TXT_RECT_SELECTED_INDEX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -442,7 +443,7 @@
             this.label17.ForeColor = System.Drawing.Color.White;
             this.label17.Location = new System.Drawing.Point(6, 21);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(59, 14);
+            this.label17.Size = new System.Drawing.Size(55, 13);
             this.label17.TabIndex = 2;
             this.label17.Text = "INDEX :";
             // 
@@ -452,7 +453,7 @@
             this.label18.ForeColor = System.Drawing.Color.White;
             this.label18.Location = new System.Drawing.Point(174, 21);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(149, 14);
+            this.label18.Size = new System.Drawing.Size(141, 13);
             this.label18.TabIndex = 2;
             this.label18.Text = "SELECTED_TARGET : ";
             // 
@@ -485,36 +486,22 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(1235, 689);
+            this.label5.Location = new System.Drawing.Point(1239, 689);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 14);
+            this.label5.Size = new System.Drawing.Size(52, 12);
             this.label5.TabIndex = 82;
             this.label5.Text = "UPDATE";
-            // 
-            // uc_tunning_view
-            // 
-            this.uc_tunning_view.AllowDrop = true;
-            this.uc_tunning_view.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.uc_tunning_view.BOOL_DRAW_FOCUS_ROI = true;
-            this.uc_tunning_view.BOOL_DRAW_PTRN_ROI = true;
-            this.uc_tunning_view.BOOL_TEACHING_ACTIVATION = false;
-            this.uc_tunning_view.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uc_tunning_view.ForeColor = System.Drawing.Color.Lime;
-            this.uc_tunning_view.Location = new System.Drawing.Point(12, 13);
-            this.uc_tunning_view.Name = "uc_tunning_view";
-            this.uc_tunning_view.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("uc_tunning_view.PT_FIGURE_TO_DRAW")));
-            this.uc_tunning_view.ROI_INDEX = -1;
-            this.uc_tunning_view.Size = new System.Drawing.Size(600, 685);
-            this.uc_tunning_view.TabIndex = 84;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(618, 689);
+            this.label1.Location = new System.Drawing.Point(623, 689);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 14);
+            this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 82;
             this.label1.Text = "RECOVER";
             // 
@@ -541,6 +528,23 @@
             this.BTN_RECOVER.UseVisualStyleBackColor = true;
             this.BTN_RECOVER.Click += new System.EventHandler(this.BTN_RECOVER_Click);
             // 
+            // uc_tunning_view
+            // 
+            this.uc_tunning_view.AllowDrop = true;
+            this.uc_tunning_view.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_tunning_view.BOOL_DRAW_CROSS = true;
+            this.uc_tunning_view.BOOL_DRAW_FOCUS_ROI = true;
+            this.uc_tunning_view.BOOL_DRAW_PTRN_ROI = true;
+            this.uc_tunning_view.BOOL_TEACHING_ACTIVATION = false;
+            this.uc_tunning_view.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uc_tunning_view.ForeColor = System.Drawing.Color.Lime;
+            this.uc_tunning_view.Location = new System.Drawing.Point(12, 13);
+            this.uc_tunning_view.Name = "uc_tunning_view";
+            this.uc_tunning_view.PT_FIGURE_TO_DRAW = ((System.Drawing.PointF)(resources.GetObject("uc_tunning_view.PT_FIGURE_TO_DRAW")));
+            this.uc_tunning_view.ROI_INDEX = -1;
+            this.uc_tunning_view.Size = new System.Drawing.Size(600, 685);
+            this.uc_tunning_view.TabIndex = 84;
+            // 
             // Dlg_Tunning
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -554,7 +558,7 @@
             this.Controls.Add(this.BTN_RECOVER);
             this.Controls.Add(this.BTN_PARAM_WRITE);
             this.Controls.Add(this.label5);
-            this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.Name = "Dlg_Tunning";
             this.Text = "PEAK INDEX MEASUREMENT";
             this.Load += new System.EventHandler(this.Dlg_Tunning_Load);

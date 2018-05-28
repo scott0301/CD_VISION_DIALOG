@@ -50,6 +50,7 @@
             // 
             this.uc_view_history.AllowDrop = true;
             this.uc_view_history.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_history.BOOL_DRAW_CROSS = true;
             this.uc_view_history.BOOL_DRAW_FOCUS_ROI = true;
             this.uc_view_history.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_history.BOOL_TEACHING_ACTIVATION = false;
@@ -76,7 +77,7 @@
             this.LV_HISTORY.Location = new System.Drawing.Point(618, 33);
             this.LV_HISTORY.MultiSelect = false;
             this.LV_HISTORY.Name = "LV_HISTORY";
-            this.LV_HISTORY.Size = new System.Drawing.Size(578, 559);
+            this.LV_HISTORY.Size = new System.Drawing.Size(578, 614);
             this.LV_HISTORY.TabIndex = 58;
             this.LV_HISTORY.UseCompatibleStateImageBehavior = false;
             this.LV_HISTORY.View = System.Windows.Forms.View.Details;
@@ -118,6 +119,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(684, 718);
             this.label3.Name = "label3";
@@ -128,6 +130,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(617, 716);
             this.label2.Name = "label2";
@@ -138,6 +141,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label17.ForeColor = System.Drawing.Color.White;
             this.label17.Location = new System.Drawing.Point(1135, 717);
             this.label17.Name = "label17";
@@ -151,7 +155,7 @@
             this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.label1.Location = new System.Drawing.Point(622, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 14);
+            this.label1.Size = new System.Drawing.Size(196, 17);
             this.label1.TabIndex = 72;
             this.label1.Text = ":- PREVIOUSE HISTORY";
             // 
@@ -161,7 +165,7 @@
             this.label6.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.label6.Location = new System.Drawing.Point(12, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 14);
+            this.label6.Size = new System.Drawing.Size(148, 17);
             this.label6.TabIndex = 72;
             this.label6.Text = ":- HISTORY VIEW";
             // 
@@ -204,7 +208,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(1212, 758);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.Name = "Dlg_HistoryP";
             this.Text = "PATTERN MATCHING FAILED - HISTORY";
             this.Load += new System.EventHandler(this.Dlg_HistoryP_Load);

@@ -21,10 +21,7 @@ namespace CD_Measure
 
         public List<string[]> data = new List<string[]>();
 
-        public int ROW
-        {
-            get { return data.Count; }
-        }
+        public int ROW {get { return data.Count; }}
         public int COL
         {
             get 
@@ -35,28 +32,15 @@ namespace CD_Measure
             }
         }
 
-        public void Add(string [] columData)
-        {
-            data.Add(columData);
-        }
-        public string GetCol(int row, int col)
-        {
-            return data.ElementAt(row).ElementAt(col);
-        }
-        public string [] GetRow(int row )
-        {
-            return data.ElementAt(row);
-        }
-        public void Clear()
-        {
-            data.Clear();
-        }
+        public void Add(string [] columData){data.Add(columData);}
+        public string GetCol(int row, int col){return data.ElementAt(row).ElementAt(col);}
+        public string [] GetRow(int row ){return data.ElementAt(row);}
+        public void Clear(){data.Clear();}
 
         public bool LoadFromFile_XLS(string strFilePath)
         {
             HSSFWorkbook wb;
             HSSFSheet sh;
-
 
             if( File.Exists( strFilePath))
             {
@@ -98,9 +82,6 @@ namespace CD_Measure
                     Console.WriteLine(ex.ToString());
 
                 }
-                
-
-                
             }
             else
             {
@@ -163,22 +144,6 @@ namespace CD_Measure
             process.Start();
         }
 
-        // 이거 쓰레기네..
-        public void DistillByDelivery(List<string[]> listdelivery, int ndeliveryIndex, int nPriceIndex)
-        {
-            for( int i = 0; i < listdelivery.Count; i++ )
-            {
-                string deliveryCode = listdelivery.ElementAt(i).ElementAt(0);
-
-                for( int rows= 0; rows< ROW; rows++ )
-                {
-                    for (int cols = 0; cols < COL; cols++)
-                    {
-                        string code = GetCol(rows, cols);
-                    }
-                }
-            }
-        }
         public void DeleteItem(string[] item)
         {
             

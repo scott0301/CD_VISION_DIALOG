@@ -50,16 +50,8 @@ namespace CD_Measure
             }
 
             // external converter!!! real called function 
-            public static IComparer Sort_By_Horizontal()
-            {
-                return (IComparer)new SortByHorizontal();
-            }
-            public static IComparer Sort_By_Vertical()
-            {
-                return (IComparer)new SortByVertical();
-            }
-
-
+            public static IComparer Sort_By_Horizontal(){return (IComparer)new SortByHorizontal();}
+            public static IComparer Sort_By_Vertical(){return (IComparer)new SortByVertical();}
         }
 
         public List<PeakPair> listPeaks = new List<PeakPair>();
@@ -67,17 +59,11 @@ namespace CD_Measure
         public PeakPair GetElement(int nIndex)
         {
             PeakPair single = new PeakPair();
-
-            if (nIndex >= 0 && nIndex < this.COUNT)
-            {
-                single = listPeaks.ElementAt(nIndex);
-            }
+            if (nIndex >= 0 && nIndex < this.COUNT){single = listPeaks.ElementAt(nIndex);}
             return single;
         }
-        public void Clear()
-        {
-            listPeaks.Clear();
-        }
+        public void Clear(){listPeaks.Clear();}
+
         public void Add(CLine l1, CLine l2, PointF ptJoint)
         {
             l1.EnsureDirectionalPosition();
@@ -122,7 +108,8 @@ namespace CD_Measure
             byte[] rawCopy = new byte[imageW * imageH];
             Array.Copy(rawImage, rawCopy, rawImage.Length);
             m_rawImage = rawCopy;
-            m_imageW = imageW; m_imageH = imageH;
+            m_imageW = imageW;
+            m_imageH = imageH;
         }
 
         public void SetImage(Bitmap bmp)
@@ -220,10 +207,8 @@ namespace CD_Measure
             List<PointF> listPoints = GetDispProjectionPoints_VER(proj, nPeakH);
             List<CLine> listLine = GetLineSegments(listPoints, false);
 
-
             float[] arrValueList_Y1 = listLine.Select(element => element.P1.Y).ToArray();
             float[] arrValueList_Y2 = listLine.Select(element => element.P2.Y).ToArray();
-
 
             CPeakPair peakData = new CPeakPair();
 
@@ -380,6 +365,7 @@ namespace CD_Measure
             }
             return rcRegion;
         }
+
         //*****************************************************************************************
         // Static Functions
         //*****************************************************************************************
@@ -446,15 +432,14 @@ namespace CD_Measure
 
             if (bCroodX == true)
             {
-                /***/
-                if (P1.X == P2.X) nSign = 0;
+
+                if /***/(P1.X == P2.X) nSign = 0;
                 else if (P1.X < P2.X) nSign = 1;
                 else if (P1.X > P2.X) nSign = -1;
             }
             else
             {
-                /***/
-                if (P1.Y == P2.Y) nSign = 0;
+                if /***/(P1.Y == P2.Y) nSign = 0;
                 else if (P1.Y < P2.Y) nSign = 1;
                 else if (P1.Y > P2.Y) nSign = -1;
             }
@@ -527,7 +512,6 @@ namespace CD_Measure
                     PointF p1 = new PointF((float)arr[y], y);
                     list.Add(p1);
                 }
-
             }
 
             return list;

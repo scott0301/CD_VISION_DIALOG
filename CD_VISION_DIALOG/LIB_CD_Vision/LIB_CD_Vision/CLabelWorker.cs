@@ -32,8 +32,7 @@ namespace CD_Measure
         public void Remove_BoundingRect()
         {
             List<CSegment> listBuff = new List<CSegment>();
-
-
+            
             for (int i = 0; i < listFull.Count(); i++)
             {
                 CSegment seg = listFull.ElementAt(i);
@@ -94,9 +93,7 @@ namespace CD_Measure
         public Color GetColorByIndex(int nIndex)
         {
             CSegment seg = listFull.ElementAt(nIndex);
-
             return seg.c;
-
         }
 
 
@@ -206,7 +203,6 @@ namespace CD_Measure
                     stack.Push(GetValidPoint(P04)); map[P04] = INDEXER;
                 }
             }
-
         }
 
         private Point GetValidPoint(int nIndexPoint)

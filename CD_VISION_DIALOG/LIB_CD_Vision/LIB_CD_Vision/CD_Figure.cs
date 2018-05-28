@@ -800,11 +800,7 @@ namespace CD_Figure
             return single;
         }
 
-        private double _GetDistance(double f1, double f2)
-        {
-            return Math.Max(f1, f2) - Math.Min(f1,f2);
-        }
-      
+         
         
        # region COMMON OVERRIDINGS - NAVICATOR FUNCTIONS
 
@@ -3215,9 +3211,9 @@ namespace CD_Figure
             double fRadius_IN = 0;
 
             // Remove ZeroPoisition!!! to make accurate circle fitting result 171124
-            listContours_EX = CPoint.getList_Without_ZeroPosition(listContours_EX);
-            listContours_MD = CPoint.getList_Without_ZeroPosition(listContours_MD);
-            listContours_IN = CPoint.getList_Without_ZeroPosition(listContours_IN);
+            listContours_EX = CPoint.GetList_Without_ZeroPosition(listContours_EX);
+            listContours_MD = CPoint.GetList_Without_ZeroPosition(listContours_MD);
+            listContours_IN = CPoint.GetList_Without_ZeroPosition(listContours_IN);
 
             {
                 Computer.HC_FIT_Circle(listContours_EX, ref ptCenter_EX, ref fRadius_EX);
@@ -3272,9 +3268,9 @@ namespace CD_Figure
             CModelEllipse model_IN = new CModelEllipse();
 
             // Remove ZeroPoisition!!! to make accurate circle fitting result 171124
-            listContours_EX = CPoint.getList_Without_ZeroPosition(listContours_EX);
-            listContours_MD = CPoint.getList_Without_ZeroPosition(listContours_MD);
-            listContours_IN = CPoint.getList_Without_ZeroPosition(listContours_IN);
+            listContours_EX = CPoint.GetList_Without_ZeroPosition(listContours_EX);
+            listContours_MD = CPoint.GetList_Without_ZeroPosition(listContours_MD);
+            listContours_IN = CPoint.GetList_Without_ZeroPosition(listContours_IN);
 
             CRansac.ransac_ellipse_fitting(listContours_EX.ToArray(), ref model_EX, distanceThreshold, 10, 50);
             CRansac.ransac_ellipse_fitting(listContours_MD.ToArray(), ref model_MD, distanceThreshold, 10, 50);
@@ -4169,9 +4165,9 @@ namespace CD_Figure
             double fRadius_IN = 0;
 
             // Remove ZeroPoisition!!! to make accurate circle fitting result 171124
-            listContours_EX = CPoint.getList_Without_ZeroPosition(listContours_EX);
-            listContours_MD = CPoint.getList_Without_ZeroPosition(listContours_MD);
-            listContours_IN = CPoint.getList_Without_ZeroPosition(listContours_IN);
+            listContours_EX = CPoint.GetList_Without_ZeroPosition(listContours_EX);
+            listContours_MD = CPoint.GetList_Without_ZeroPosition(listContours_MD);
+            listContours_IN = CPoint.GetList_Without_ZeroPosition(listContours_IN);
 
             // get center and radius
             Computer.HC_FIT_Circle(listContours_EX, ref ptCenter_EX, ref fRadius_EX);
@@ -4689,9 +4685,9 @@ namespace CD_Figure
             double fRadius_IN = 0;
 
             // Remove ZeroPoisition!!! to make accurate circle fitting result 171124
-            listContours_EX = CPoint.getList_Without_ZeroPosition(listContours_EX);
-            listContours_MD = CPoint.getList_Without_ZeroPosition(listContours_MD);
-            listContours_IN = CPoint.getList_Without_ZeroPosition(listContours_IN);
+            listContours_EX = CPoint.GetList_Without_ZeroPosition(listContours_EX);
+            listContours_MD = CPoint.GetList_Without_ZeroPosition(listContours_MD);
+            listContours_IN = CPoint.GetList_Without_ZeroPosition(listContours_IN);
 
             // get center and radius
             Computer.HC_FIT_Circle(listContours_EX, ref ptCenter_EX, ref fRadius_EX);

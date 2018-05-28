@@ -1411,16 +1411,16 @@ namespace CD_View
         //******************************************************************************************
 
         #region OVERLAY RELATED...
-        public void DrawRect(double x, double y, double dx, double dy, Color c, float Thickness)
+        public void DrawRect(double x, double y, double tx, double ty, Color c, float thick)
         {
-            m_dispObj.InsertRect(x, y, dx, dy, c, Thickness);
+            m_dispObj.InsertRect((float)x, (float)y, (float)tx, (float)ty, thick, c);
         }
-        public void DrawRect(RectangleF rect, Color c) { m_dispObj.InsertRect(rect.X, rect.Y, rect.Width, rect.Height, c, 2); }
+        public void DrawRect(RectangleF rect, Color c) { m_dispObj.InsertRect(rect.X, rect.Y, rect.Width, rect.Height, 2,  c); }
         public void DrawRects(List<RectangleF> list, Color c)
         {
             foreach (RectangleF rc in list)
             {
-                m_dispObj.InsertRect(rc.X, rc.Y, rc.Width, rc.Height, c, 2);
+                m_dispObj.InsertRect(rc.X, rc.Y, rc.Width, rc.Height, 2, c);
             }
         }
         public void DrawPoint(PointF pt, float size, float thick, Color c)
@@ -1467,23 +1467,23 @@ namespace CD_View
         }
         public void DrawLine(PointF p1, PointF p2, double thick, Color c)
         {
-            m_dispObj.InsertLine(p1, p2, c, (float)thick);
+            m_dispObj.InsertLine(p1, p2, (float)thick, c);
         }
-        public void DrawLine(CLine line, double Thickness, Color c)
+        public void DrawLine(CLine line, double thick, Color c)
         {
-            m_dispObj.InsertLine(line.P1, line.P2, c, (float)Thickness);
+            m_dispObj.InsertLine(line.P1, line.P2, (float)thick, c);
         }
         public void DrawCircle(RectangleF rc, Color color, double thick)
         {
-            m_dispObj.InsertCircle(new PointF(rc.X, rc.Y), (float)(rc.Width / 2), (float)(rc.Height / 2), color, (float)thick);
+            m_dispObj.InsertCircle(rc.X, rc.Y, (float)(rc.Width / 2), (float)(rc.Height / 2), (float)thick, color);
         }
         public void DrawCircle(PointF pt, float rx, float ry, Color c, double thick)
         {
-            m_dispObj.InsertCircle(pt, rx, ry, c, thick);
+            m_dispObj.InsertCircle(pt.X, pt.Y, rx, ry, (float)thick, c);
         }
         public void DrawBlob(int nID, int nType, float cx, float cy, RectangleF rc, List<PointF> ptArr)
         {
-            m_dispObj.InsertBlob(nID, nType, new PointF(cx, cy), rc, ptArr);
+            m_dispObj.InsertBlob(nID,  new PointF(cx, cy), rc, ptArr);
         }
         public void DrawPatternMathcing(PointF PtCenter, RectangleF rcTemplate)
         {
@@ -1507,10 +1507,7 @@ namespace CD_View
                     imageH = m_bmp.Height;
                 }
 
-                if (imageW == 0 || imageH == 0)
-                {
-                    return;
-                }
+                if (imageW == 0 || imageH == 0) { return; }
 
                 //***************************************************************************************
                 // Step 1 :: Image Transformation and Interpolation
@@ -1952,6 +1949,7 @@ namespace CD_View
                     e.Graphics.DrawString(string.Format("{0}", "HOR_IN_B"), font, brush, rcHOR_IN_BTM.X, rcHOR_IN_BTM.Y - nFontGap);
                     e.Graphics.DrawString(string.Format("{0}", "VER_IN_L"), font, brush, rcVER_IN_LFT.X, rcVER_IN_LFT.Y - nFontGap);
                     e.Graphics.DrawString(string.Format("{0}", "VER_IN_R"), font, brush, rcVER_IN_RHT.X, rcVER_IN_RHT.Y - nFontGap);
+                    
                 }
                 #endregion
             }
@@ -1980,10 +1978,10 @@ namespace CD_View
                 {
                     DPoint ptCur = arrPoint[i];
 
-                    int nSize = (int)(ptCur.Size / 2);
+                    int nSize = (int)(ptCur.size / 2);
                     lock (pointLocker)
                     {
-                        Pen pen = new Pen(arrPoint[i].Color, arrPoint[i].Thick);
+                        Pen pen = new Pen(arrPoint[i].color, arrPoint[i].Thick);
                         {
                             PointF[] arrCross = CPoint.GetCrossPointsOfLine(ptCur.ToPoint(), nSize);
 
@@ -2004,12 +2002,12 @@ namespace CD_View
                 for( int i = 0; i < arrRect.Length; i++)
                 {
                     DRect rect = arrRect[i].CopyTo(); 
-                    rect.OffsetRect(fTransX, fTransY);
+                    rect.Offset(fTransX, fTransY);
 
                     Rectangle rc = rect.ToRectangle();
                     lock (rectLocker)
                     {
-                        Pen pen = new Pen(rect.Color);
+                        Pen pen = new Pen(rect.color);
                         e.Graphics.DrawRectangle(pen, rc);
                         pen.Dispose();
                     }
@@ -2021,9 +2019,9 @@ namespace CD_View
                 #region Circle Drawing
                 for( int i = 0; i < arrCircle.Length; i++)
                 {
-                    DCircle circle = arrCircle[i].Copy();
-                    circle.OffsetCircle(fTransX, fTransY);
-                    using (Pen pen = new Pen(arrCircle[i].Color))
+                    DCircle circle = arrCircle[i].CopyTo();
+                    circle.Offset(fTransX, fTransY);
+                    using (Pen pen = new Pen(arrCircle[i].color))
                     {
                         e.Graphics.DrawEllipse(pen, circle.ToRectangle());
                     }
@@ -2036,8 +2034,8 @@ namespace CD_View
                 for( int i = 0; i < arrLine.Length; i++)
                 {
                     DLine line = arrLine[i].CopyTo();
-                    line.OffsetLine(fTransX, fTransY);
-                    using (Pen pen = new Pen(line.Color, line.Thick))
+                    line.Offset(fTransX, fTransY);
+                    using (Pen pen = new Pen(line.color, line.thick))
                     {
                         e.Graphics.DrawLine(pen, line.P1, line.P2);
                     }
@@ -2052,7 +2050,7 @@ namespace CD_View
                     DString str = arrString[i].Copy();
                     str.OffsetString(fTransX, fTransY);
 
-                    Brush brush = new SolidBrush(str.Color);
+                    Brush brush = new SolidBrush(str.color);
                     
                     using( Font font = new Font("verdana", str.SIZE))
                     {

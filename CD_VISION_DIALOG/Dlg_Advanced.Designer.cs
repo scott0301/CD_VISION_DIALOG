@@ -50,7 +50,7 @@
             this.CHK_SHOW_IMAGE_PROCESSING.AutoSize = true;
             this.CHK_SHOW_IMAGE_PROCESSING.Location = new System.Drawing.Point(18, 271);
             this.CHK_SHOW_IMAGE_PROCESSING.Name = "CHK_SHOW_IMAGE_PROCESSING";
-            this.CHK_SHOW_IMAGE_PROCESSING.Size = new System.Drawing.Size(222, 18);
+            this.CHK_SHOW_IMAGE_PROCESSING.Size = new System.Drawing.Size(256, 21);
             this.CHK_SHOW_IMAGE_PROCESSING.TabIndex = 0;
             this.CHK_SHOW_IMAGE_PROCESSING.Text = "SHOW_IMAGE_PROCESSING";
             this.CHK_SHOW_IMAGE_PROCESSING.UseVisualStyleBackColor = true;
@@ -59,8 +59,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(577, 367);
+            this.label1.Location = new System.Drawing.Point(571, 326);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 14);
             this.label1.TabIndex = 85;
@@ -70,7 +71,7 @@
             // 
             this.BTN_APPLY.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.button_ok;
             this.BTN_APPLY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_APPLY.Location = new System.Drawing.Point(569, 307);
+            this.BTN_APPLY.Location = new System.Drawing.Point(563, 266);
             this.BTN_APPLY.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_APPLY.Name = "BTN_APPLY";
             this.BTN_APPLY.Size = new System.Drawing.Size(60, 60);
@@ -84,7 +85,7 @@
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Location = new System.Drawing.Point(14, 100);
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Name = "CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET";
-            this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Size = new System.Drawing.Size(328, 18);
+            this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Size = new System.Drawing.Size(382, 21);
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.TabIndex = 0;
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.Text = "BOOL_USE_SAVE_SEQUENTIAL_IMAGE_SET";
             this.CHK_USE_SAVE_SEQUENTIAL_IMAGE_SET.UseVisualStyleBackColor = true;
@@ -96,7 +97,7 @@
             this.CHK_USE_SAVE_MANUAL_GRAB.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_SAVE_MANUAL_GRAB.Location = new System.Drawing.Point(14, 21);
             this.CHK_USE_SAVE_MANUAL_GRAB.Name = "CHK_USE_SAVE_MANUAL_GRAB";
-            this.CHK_USE_SAVE_MANUAL_GRAB.Size = new System.Drawing.Size(257, 18);
+            this.CHK_USE_SAVE_MANUAL_GRAB.Size = new System.Drawing.Size(297, 21);
             this.CHK_USE_SAVE_MANUAL_GRAB.TabIndex = 0;
             this.CHK_USE_SAVE_MANUAL_GRAB.Text = "BOOL_USE_SAVE_MANUAL_GRAB";
             this.CHK_USE_SAVE_MANUAL_GRAB.UseVisualStyleBackColor = true;
@@ -108,7 +109,7 @@
             this.CHK_USE_SAVE_FOCUS_REGION.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_SAVE_FOCUS_REGION.Location = new System.Drawing.Point(14, 47);
             this.CHK_USE_SAVE_FOCUS_REGION.Name = "CHK_USE_SAVE_FOCUS_REGION";
-            this.CHK_USE_SAVE_FOCUS_REGION.Size = new System.Drawing.Size(264, 18);
+            this.CHK_USE_SAVE_FOCUS_REGION.Size = new System.Drawing.Size(303, 21);
             this.CHK_USE_SAVE_FOCUS_REGION.TabIndex = 0;
             this.CHK_USE_SAVE_FOCUS_REGION.Text = "BOOL_USE_SAVE_FOCUS_REGION";
             this.CHK_USE_SAVE_FOCUS_REGION.UseVisualStyleBackColor = true;
@@ -116,17 +117,17 @@
             // 
             // TXT_SAVE_IMAGE_SET_PATH
             // 
-            this.TXT_SAVE_IMAGE_SET_PATH.Location = new System.Drawing.Point(33, 124);
+            this.TXT_SAVE_IMAGE_SET_PATH.Location = new System.Drawing.Point(14, 124);
             this.TXT_SAVE_IMAGE_SET_PATH.Name = "TXT_SAVE_IMAGE_SET_PATH";
-            this.TXT_SAVE_IMAGE_SET_PATH.Size = new System.Drawing.Size(483, 22);
+            this.TXT_SAVE_IMAGE_SET_PATH.Size = new System.Drawing.Size(483, 24);
             this.TXT_SAVE_IMAGE_SET_PATH.TabIndex = 86;
             // 
             // BTN_SET_SAVE_IMAGE_PATH
             // 
             this.BTN_SET_SAVE_IMAGE_PATH.ForeColor = System.Drawing.Color.Black;
-            this.BTN_SET_SAVE_IMAGE_PATH.Location = new System.Drawing.Point(519, 124);
+            this.BTN_SET_SAVE_IMAGE_PATH.Location = new System.Drawing.Point(503, 124);
             this.BTN_SET_SAVE_IMAGE_PATH.Name = "BTN_SET_SAVE_IMAGE_PATH";
-            this.BTN_SET_SAVE_IMAGE_PATH.Size = new System.Drawing.Size(92, 23);
+            this.BTN_SET_SAVE_IMAGE_PATH.Size = new System.Drawing.Size(108, 23);
             this.BTN_SET_SAVE_IMAGE_PATH.TabIndex = 87;
             this.BTN_SET_SAVE_IMAGE_PATH.Text = "SET_PATH";
             this.BTN_SET_SAVE_IMAGE_PATH.UseVisualStyleBackColor = true;
@@ -138,7 +139,7 @@
             this.CHK_USE_SAVE_INPUT_IMAGE.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_SAVE_INPUT_IMAGE.Location = new System.Drawing.Point(14, 76);
             this.CHK_USE_SAVE_INPUT_IMAGE.Name = "CHK_USE_SAVE_INPUT_IMAGE";
-            this.CHK_USE_SAVE_INPUT_IMAGE.Size = new System.Drawing.Size(250, 18);
+            this.CHK_USE_SAVE_INPUT_IMAGE.Size = new System.Drawing.Size(290, 21);
             this.CHK_USE_SAVE_INPUT_IMAGE.TabIndex = 0;
             this.CHK_USE_SAVE_INPUT_IMAGE.Text = "BOOL_USE_SAVE_INPUT_IMAGE";
             this.CHK_USE_SAVE_INPUT_IMAGE.UseVisualStyleBackColor = true;
@@ -178,7 +179,7 @@
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.Location = new System.Drawing.Point(6, 50);
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.Name = "CHK_USE_LEAVE_HISTORY_MEASUREMENT";
-            this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.Size = new System.Drawing.Size(334, 18);
+            this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.Size = new System.Drawing.Size(388, 21);
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.TabIndex = 0;
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.Text = "BOOL_USE_LEAVE_HISTORY_MEASUREMENT";
             this.CHK_USE_LEAVE_HISTORY_MEASUREMENT.UseVisualStyleBackColor = true;
@@ -190,7 +191,7 @@
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.ForeColor = System.Drawing.Color.LimeGreen;
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Location = new System.Drawing.Point(6, 21);
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Name = "CHK_USE_LEAVE_HISTORY_ERROR_PTRN";
-            this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Size = new System.Drawing.Size(324, 18);
+            this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Size = new System.Drawing.Size(375, 21);
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.TabIndex = 0;
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.Text = "BOOL_USE_LEAVE_HISTORY_ERROR_PTRN";
             this.CHK_USE_LEAVE_HISTORY_ERROR_PTRN.UseVisualStyleBackColor = true;
@@ -198,16 +199,15 @@
             // 
             // Dlg_Advanced
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(651, 394);
+            this.ClientSize = new System.Drawing.Size(635, 358);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BTN_APPLY);
             this.Controls.Add(this.CHK_SHOW_IMAGE_PROCESSING);
-            this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.Name = "Dlg_Advanced";
             this.Text = "Advanced Experimental Options";

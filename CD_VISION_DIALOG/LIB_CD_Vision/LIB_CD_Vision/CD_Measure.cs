@@ -196,8 +196,6 @@ namespace CD_Measure
             report.AddHistogram(histogram);
             iu.mi.Focus = fFocusValue;
 
-
-
             iu.Proc_00_DoPreProcess();
 
             PointF P1 = new PointF(0, 0);
@@ -4985,8 +4983,8 @@ namespace CD_Measure
                     ptEX = new PointF(ex - (float)fSubPosEX, y);
                 }
 
-                /***/
-                if (nDir == -1) { list.Add(ptIN); }
+
+                if/***/ (nDir == -1) { list.Add(ptIN); }
                 else if (nDir == +1) { list.Add(ptEX); }
                 else if (nDir == +0)
                 {
@@ -5146,11 +5144,9 @@ namespace CD_Measure
             {
                 Console.WriteLine(ex.ToString());
             }
-
-
-
             return arr2nd;
         }
+
         public static double[] HC_EDGE_Get1stDerivativeArrayFromLineBuff(double[] fLineBuff)
         {
             double[] arr1st = new double[fLineBuff.Length - 1];

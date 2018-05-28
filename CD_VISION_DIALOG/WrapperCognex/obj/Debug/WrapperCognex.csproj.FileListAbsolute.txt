@@ -30,3 +30,8 @@ E:\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\WrapperCognex.pdb
 E:\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.csprojResolveAssemblyReference.cache
 E:\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.dll
 E:\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.pdb
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\WrapperCognex.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\WrapperCognex.pdb
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.csprojResolveAssemblyReference.cache
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\WrapperCognex\obj\Debug\WrapperCognex.pdb

@@ -23,10 +23,7 @@ namespace CD_VISION_DIALOG
         WrapperDGView m_dgview = new WrapperDGView();
         Boolean m_bFolderStatus = true;
 
-        public Dlg_Spc()
-        {
-            InitializeComponent();
-        }
+        public Dlg_Spc() { InitializeComponent(); }
 
         private void Dlg_Spc_Load(object sender, EventArgs e)
         {
@@ -48,17 +45,12 @@ namespace CD_VISION_DIALOG
         public bool SetParam(PARAM_PATH config)
         {
             this.config = config;
-
             BTN_UPDATE_HISTORY_Click(null, EventArgs.Empty);
-
             return true;
         }
 
        #region WINDOW FOLDER - DATAVIEW 
-        private void BTN_SHOW_AND_HIDE_Click(object sender, EventArgs e)
-        {
-            _SetChange_WindowFolderStatus();
-        }
+        private void BTN_SHOW_AND_HIDE_Click(object sender, EventArgs e){_SetChange_WindowFolderStatus();}
 
         private void _SetChange_WindowFolderStatus()
         {
@@ -80,7 +72,111 @@ namespace CD_VISION_DIALOG
         }
         #endregion
 
-       #region glass effect
+       #region MAIN BUTTON EVENTS
+
+        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
+        {
+            LV_HISTORY.Items.Clear();
+
+            string strPathHistory = config.i02_PATH_DATA_DUMP;
+            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
+
+            LV_HISTORY.BeginUpdate();
+
+            Array.Reverse(allfiles);
+
+            for (int i = 0; i < allfiles.Length; i++)
+            {
+                string single = allfiles.ElementAt(i);
+
+                string strFileName = Path.GetFileName(single);
+                if (strFileName.Contains("$") == true) continue;
+
+                // Get File Name 
+                strFileName = Computer.GetFileName(strFileName);
+                // Get Folder Name 
+                string strDate = Path.GetDirectoryName(single);
+                /****/ strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
+
+
+                ListViewItem lvi = new ListViewItem();
+
+                int nCount = LV_HISTORY.Items.Count;
+                lvi.Text = (nCount + 1).ToString();
+                lvi.SubItems.Add(strDate);
+                lvi.SubItems.Add(strFileName);
+
+                LV_HISTORY.Items.Add(lvi);
+            }
+
+            LV_HISTORY.EndUpdate();
+        }
+
+        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e){Process.Start(config.i02_PATH_DATA_DUMP);}
+
+        private void BTN_OPEN_FILE_Click(object sender, EventArgs e)
+        {
+            if (LV_HISTORY.FocusedItem == null)
+            {
+                MessageBox.Show("Select The Target.", "EMPTY SELECTION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Get Selected Item
+            int nIndex = LV_HISTORY.FocusedItem.Index;
+
+            string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
+            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
+
+            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
+
+            if/***/(File.Exists(strFullPath) == true){Computer.ExcuteExcel(strFullPath);}
+            else if(File.Exists(strFullPath) == false){MessageBox.Show("File Not Found.", "FILE EXISTANCE", MessageBoxButtons.OK, MessageBoxIcon.Information);}
+        }
+       
+        private void BTN_CLEAR_Click(object sender, EventArgs e){m_dgview.Clear();}
+
+        private void BTN_CLOSE_Click(object sender, EventArgs e){this.Hide();}
+        #endregion 
+
+       #region LISTVIEW-RELATED
+
+        private void LV_HISTORY_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LV_HISTORY.FocusedItem == null) return;
+
+            LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
+
+            // Get Selected Item
+            int nIndex = LV_HISTORY.FocusedItem.Index;
+            
+            string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
+            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
+
+            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
+
+            WrapperCVS cvs = new WrapperCVS();
+            string msg = string.Empty;
+
+            if (cvs.ReadCSVFile(strFullPath, out msg) == false)
+            {
+                MessageBox.Show(string.Format("{0}\nUsed In Another Process.", strFullPath), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            m_dgview.Clear();
+            List<string[]> list = cvs.GetAll();
+
+            m_dgview.DisplayData(list);
+
+            LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
+        }
+
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e){WrapperLV.SortData(LV_HISTORY, e.Column);}
+
+        #endregion
+
+        #region glass effect
         // defines how far we are extending the Glass margins
         private Win32.MARGINS margins;
         private int padding_TOP = 5;
@@ -138,141 +234,5 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-       #region MAIN BUTTON EVENTS
-
-        private void BTN_UPDATE_HISTORY_Click(object sender, EventArgs e)
-        {
-            LV_HISTORY.Items.Clear();
-
-            string strPathHistory = config.i02_PATH_DATA_DUMP;
-            String[] allfiles = System.IO.Directory.GetFiles(strPathHistory, "*.*", System.IO.SearchOption.AllDirectories);
-
-            LV_HISTORY.BeginUpdate();
-
-            Array.Reverse(allfiles);
-
-            for (int i = 0; i < allfiles.Length; i++)
-            {
-                string single = allfiles.ElementAt(i);
-
-                string strFileName = Path.GetFileName(single);
-                if (strFileName.Contains("$") == true) continue;
-
-                // Get File Name 
-                strFileName = Computer.GetFileName(strFileName);
-                // Get Folder Name 
-                string strDate = Path.GetDirectoryName(single);
-                /****/ strDate = strDate.Replace(config.i02_PATH_DATA_DUMP + "\\", "");
-
-
-                ListViewItem lvi = new ListViewItem();
-
-                int nCount = LV_HISTORY.Items.Count;
-                lvi.Text = (nCount + 1).ToString();
-                lvi.SubItems.Add(strDate);
-                lvi.SubItems.Add(strFileName);
-
-                LV_HISTORY.Items.Add(lvi);
-            }
-
-            LV_HISTORY.EndUpdate();
-        }
-
-
-        private void BTN_OPEN_HISTORY_FOLDER_Click(object sender, EventArgs e)
-        {
-            Process.Start(config.i02_PATH_DATA_DUMP);
-
-        }
-
-        private void BTN_OPEN_FILE_Click(object sender, EventArgs e)
-        {
-            if (LV_HISTORY.FocusedItem == null)
-            {
-                MessageBox.Show("Select The Target.", "EMPTY SELECTION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-
-            }
-
-            // Get Selected Item
-            int nIndex = LV_HISTORY.FocusedItem.Index;
-
-            string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
-            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
-
-            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
-
-            if (File.Exists(strFullPath) == true)
-            {
-                Computer.ExcuteExcel(strFullPath);
-            }
-            else
-            {
-                MessageBox.Show("File Not Found.", "FILE EXISTANCE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-        }
-       
-        private void BTN_CLEAR_Click(object sender, EventArgs e)
-        {
-            m_dgview.Clear();
-        }
-
-        private void BTN_CLOSE_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        #endregion 
-
-       #region LISTVIEW-RELATED
-
-        private void LV_HISTORY_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (LV_HISTORY.FocusedItem == null) return;
-
-            LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
-
-            // Get Selected Item
-            int nIndex = LV_HISTORY.FocusedItem.Index;
-            
-            string strDate = LV_HISTORY.Items[nIndex].SubItems[1].Text;
-            string strDumpFile = LV_HISTORY.Items[nIndex].SubItems[2].Text;
-
-            string strFullPath = Path.Combine(config.i02_PATH_DATA_DUMP, strDate, strDumpFile);
-
-            WrapperCVS cvs = new WrapperCVS();
-            string msg = string.Empty;
-
-            if (cvs.ReadCSVFile(strFullPath, out msg) == false)
-            {
-                MessageBox.Show(string.Format("{0}\nUsed In Another Process.", strFullPath), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            m_dgview.Clear();
-            List<string[]> list = cvs.GetAll();
-
-            m_dgview.DisplayData(list);
-
-
-
-            LV_HISTORY.ItemSelectionChanged -= new ListViewItemSelectionChangedEventHandler(LV_HISTORY_SelectedIndexChanged);
-
-
-        }
-
-        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperLV.SortData(LV_HISTORY, e.Column);
-        }
-
-        #endregion
-
-
-
-
-
     }
 }

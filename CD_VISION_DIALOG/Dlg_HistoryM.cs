@@ -47,18 +47,13 @@ namespace CD_VISION_DIALOG
         public bool SetParam(CFigureManager fm)
         {
             this.m_fm = fm;
-
- 
             BTN_UPDATE_HISTORY_Click(null, EventArgs.Empty);
-
             return true;
         }
 
         #region MAIN BUTTON RELATED EVENTS
-        private void BTN_PTRN_APPLY_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void BTN_PTRN_APPLY_Click(object sender, EventArgs e){this.Hide();}
+
         private void BTN_HISTORY_EXPERIMENT_SET_Click(object sender, EventArgs e)
         {
             string strTestImage = TXT_HISTORY_PREV_IMAGE.Text;
@@ -120,7 +115,6 @@ namespace CD_VISION_DIALOG
 
         #region VIEWER RELATED EVENTS
 
-
         private void EventThreadFinished_LoadFile(object sender, CFileIO.ThreadFinishedEventArgs e)
         {
             this.UIThread(delegate
@@ -150,16 +144,9 @@ namespace CD_VISION_DIALOG
 
 
         }
-        private void EventThreadFinished_SaveFile(object sender, CFileIO.ThreadFinishedEventArgs e)
-        {
-            // Nothing To do. Just Finish
-        }
-
-        private void Dlg_History_Load(object sender, EventArgs e)
-        {
-             uc_view_history.SetInit();
-        }
-
+        private void EventThreadFinished_SaveFile(object sender, CFileIO.ThreadFinishedEventArgs e){/* Nothing To do. Just Finish*/}
+        private void Dlg_History_Load(object sender, EventArgs e){uc_view_history.SetInit();}
+        
         #endregion
 
         #region LIST_VIEW RELATED 
@@ -215,10 +202,7 @@ namespace CD_VISION_DIALOG
 
         }
 
-        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperLV.SortData(LV_HISTORY, e.Column);
-        }
+        private void LV_HISTORY_ColumnClick(object sender, ColumnClickEventArgs e){WrapperLV.SortData(LV_HISTORY, e.Column);}
 
         #endregion 
 
@@ -279,7 +263,7 @@ namespace CD_VISION_DIALOG
                     // if all pass for checking path validity
                     // getnerate zip list
                     List<string> list = new List<string>();
-                    list.Add( strCurrentPtrn);
+                    list.Add(strCurrentPtrn);
                     list.Add(strCurrentRecp);
 
                     // do it!!!
@@ -300,7 +284,6 @@ namespace CD_VISION_DIALOG
             openFileDialog1.Title = "Select a Zip File";
 
             string strFileNmae = string.Empty;
-
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

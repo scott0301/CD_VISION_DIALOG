@@ -47,8 +47,10 @@ namespace DEF_PARAMS
 
         #region DEFINE TYPE & LAYER
 
+        // For types
         public static int TYPE_ADI/*******/= 0;
         public static int TYPE_ACI/*******/= 1;
+        // For Layers
         public static int LAYER_ACTIVE/***/= 0;
         public static int LAYER_GATE1/****/= 1;
         public static int LAYER_CNT1/*****/= 2;
@@ -65,8 +67,7 @@ namespace DEF_PARAMS
             List<string> list = GetTypesToString();
             string strType = string.Empty;
 
-            /***/
-            if (nType == TYPE_ADI) { strType = list.ElementAt(0); }
+            if/***/ (nType == TYPE_ADI) { strType = list.ElementAt(0); }
             else if (nType == TYPE_ACI) { strType = list.ElementAt(1); }
             return strType;
         }
@@ -82,7 +83,6 @@ namespace DEF_PARAMS
         public static List<string> GetTypesToString()
         {
             List<string> list = new List<string>();
-
             list.Add("ADI");
             list.Add("ACI");
             return list;
@@ -144,7 +144,7 @@ namespace DEF_PARAMS
             }
             set
             {
-                /***/if (value == "ALIGN") PARAM_02_LIGHT_INDEX = 1;
+                if/***/ (value == "ALIGN") PARAM_02_LIGHT_INDEX = 1;
                 else if (value == "BF") PARAM_02_LIGHT_INDEX = 2;
                 else if (value == "DF") PARAM_02_LIGHT_INDEX = 3;
             }
@@ -154,10 +154,7 @@ namespace DEF_PARAMS
         public int/******/PARAM_04_FOCUS_TYPE { get; set; }
         public int/******/PARAM_05_USE_CENTERING { get; set; }
 
-        public BASE_RECP()
-        {
-            RemoveAll(); 
-        }
+        public BASE_RECP(){RemoveAll(); }
 
         public void RemoveAll()
         {
@@ -215,9 +212,8 @@ namespace DEF_PARAMS
         public RectangleF/***/RC_SEARCH_RGN/**********/= new RectangleF();
         public RectangleF/***/RC_TEMPLATE/************/= new RectangleF();
 
-        public PARAM_PTRN()
-        {
-        }
+        public PARAM_PTRN(){}
+
         public PARAM_PTRN CopyTo()
         {
             PARAM_PTRN single = new PARAM_PTRN();
@@ -449,7 +445,7 @@ namespace DEF_PARAMS
         public static string ToStringType(int nType)
         {
             string strType = string.Empty;
-            /***/if (nType == P2P) /***/ strType = "P2P";
+            if/***/ (nType == P2P) /***/ strType = "P2P";
             else if (nType == HOR) /***/ strType = "HOR";
             else if (nType == VER) /***/ strType = "VER";
             return strType;
@@ -458,10 +454,10 @@ namespace DEF_PARAMS
        
     public static class IFX_ALGORITHM
     {
-        public static int CARDIN = 0;       // Cardinal direction
-        public static int DIR_IN = 1;      // Direction = To Inside Falling
-        public static int DIR_EX = 2;      // Direction = to outside Falling
-        public static int TOTAL/***/ = 3;
+        public static int CARDIN/***/= 0;       // Cardinal direction
+        public static int DIR_IN/***/= 1;      // Direction = To Inside Falling
+        public static int DIR_EX/***/= 2;      // Direction = to outside Falling
+        public static int TOTAL/****/= 3;
 
         public static int ToNumericType(string strType)
         {
@@ -483,21 +479,13 @@ namespace DEF_PARAMS
         public static string[] ToStringArray()
         {
             List<string> list = new List<string>();
-
-            for (int i = 0; i < TOTAL; i++)
-            {
-                list.Add(ToStringType(i));
-            }
+            for (int i = 0; i < TOTAL; i++){list.Add(ToStringType(i));}
             return list.ToArray();
         }
         public static List<string> ToList()
         {
             List<string> list = new List<string>();
-
-            for (int i = 0; i < TOTAL; i++)
-            {
-                list.Add(ToStringType(i));
-            }
+            for (int i = 0; i < TOTAL; i++){list.Add(ToStringType(i));}
             return list;
         }
     }

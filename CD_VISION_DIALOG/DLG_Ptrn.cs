@@ -30,9 +30,7 @@ namespace CD_VISION_DIALOG
         iPtrn m_pHandle = null;
 
         Boolean m_bFolderStatus = true;
-
         private CFigureManager m_fm = new CFigureManager();
-
         CLinguisticHelper m_speaker = new CLinguisticHelper();
 
         public DLG_Ptrn(iPtrn handle)
@@ -55,6 +53,7 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.Refresh();
 
         }
+
         public void updateView() { }
 
         private void DLG_Ptrn_Load(object sender, EventArgs e)
@@ -409,6 +408,7 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.iRemove_Roi_Ptrn();
             uc_view_ptrn.Refresh();
         }
+
         private void BTN_PTRN_TEACH_NEW_Click(object sender, EventArgs e)
         {
             Rectangle rc = uc_view_ptrn.iGet_Roi_Ptrn();
@@ -484,20 +484,11 @@ namespace CD_VISION_DIALOG
             uc_view_ptrn.Refresh();
         }
 
-        private void BTN_PTRN_CANCEL_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void BTN_PTRN_CANCEL_Click(object sender, EventArgs e){this.Hide();}
 
-        private void uc_view_history_Load(object sender, EventArgs e)
-        {
-            this.Padding = new Padding(10);
-        }
+        private void uc_view_history_Load(object sender, EventArgs e){this.Padding = new Padding(10);}
 
-        private void LV_PTRN_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            WrapperLV.SortData(LV_PTRN, e.Column);
-        }
+        private void LV_PTRN_ColumnClick(object sender, ColumnClickEventArgs e){WrapperLV.SortData(LV_PTRN, e.Column);}
 
         private void BTN_SYNC_WITH_RECP_NAME_Click(object sender, EventArgs e)
         {

@@ -26,10 +26,10 @@ namespace CD_VISION_DIALOG
         public delegate void dele_FinishTunning();
         public event dele_FinishTunning eventDele_FinishTunning;
 
-         public Bitmap MAIN_IMAGE = new Bitmap(100, 100);
-         public CFigureManager fm = new CFigureManager();
+        public Bitmap MAIN_IMAGE = new Bitmap(100, 100);
+        public CFigureManager fm = new CFigureManager();
 
-         public CPeakMaster pm = new CPeakMaster();
+        public CPeakMaster pm = new CPeakMaster();
 
         public Dlg_Tunning()
         {
@@ -44,8 +44,6 @@ namespace CD_VISION_DIALOG
 
             uc_tunning_view.BOOL_DRAW_FOCUS_ROI = false;
             uc_tunning_view.BOOL_DRAW_PTRN_ROI = false;
-
-            
         }
         public void updateView() { }
 
@@ -178,9 +176,6 @@ namespace CD_VISION_DIALOG
             uc_tunning_view.SetDisplay(MAIN_IMAGE.Clone() as Bitmap);
             uc_tunning_view.Refresh();
         }
-
-        
-
         
         private CMeasurePairRct _FromUI_GetParameters_Rect()
         {
@@ -199,11 +194,7 @@ namespace CD_VISION_DIALOG
 
             return single;
         }
-
         
-         
-
-        private void RDO_CIRCLE_DETEC_NONE_Click(object sender, EventArgs e){uc_tunning_view.VIEW_Set_Clear_DispObject();uc_tunning_view.Refresh();}
 
         private void BTN_PARAM_WRITE_Click(object sender, EventArgs e)
         {
@@ -211,7 +202,6 @@ namespace CD_VISION_DIALOG
             {
                 return;
             }
-
              
             // empty operation exception 171017
             if (fm.COUNT_PAIR_RCT == 0) return;
@@ -227,11 +217,11 @@ namespace CD_VISION_DIALOG
 
             if (arrRect[element].NICKNAME == strTarget)
             {
-                arrRect[element].param_03_bool_Use_AutoDetection = single.param_03_bool_Use_AutoDetection;
-                arrRect[element].param_04_peakTargetIndex_fst = single.param_04_peakTargetIndex_fst;
-                arrRect[element].param_05_peakTargetIndex_scd = single.param_05_peakTargetIndex_scd;
-                arrRect[element].param_06_peakCandidate = single.param_06_peakCandidate;
-                arrRect[element].param_07_windowSize = single.param_07_windowSize;
+                arrRect[element].param_03_bool_Use_AutoDetection/***/= single.param_03_bool_Use_AutoDetection;
+                arrRect[element].param_04_peakTargetIndex_fst/******/= single.param_04_peakTargetIndex_fst;
+                arrRect[element].param_05_peakTargetIndex_scd/******/= single.param_05_peakTargetIndex_scd;
+                arrRect[element].param_06_peakCandidate/************/= single.param_06_peakCandidate;
+                arrRect[element].param_07_windowSize/***************/= single.param_07_windowSize;
             }
             this.fm.list_pair_Rct = arrRect.ToList();
              
@@ -302,7 +292,7 @@ namespace CD_VISION_DIALOG
         {
             uc_tunning_view.VIEW_Set_Clear_DispObject();
 
-             int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
+            int param_01_PeakCandidate = Convert.ToInt32(TXT_RECT_CANDIDATE_COUNT.Value);
             int param_02_target_peak_index = Convert.ToInt32(CB_RECT_TARGET_INDEX_FST.Text);            
 
             RDO_RECT_APD_FST.Checked = true;
@@ -392,22 +382,6 @@ namespace CD_VISION_DIALOG
                 uc_tunning_view.DrawLine(lineP, 1, Color.DeepSkyBlue);
             }
             uc_tunning_view.Refresh();
-
-        }
-        
-     
-
-        private void _ToUI_DrawPeakAnalysis(CPeakPair peakData)
-        {
-            for (int i = 0; i < peakData.COUNT; i++)
-            {
-                CPeakPair.PeakPair single = peakData.listPeaks.ElementAt(i);
-
-                uc_tunning_view.DrawLine(single.l1, (float)0.5, Color.Magenta);
-                uc_tunning_view.DrawLine(single.l2, (float)0.5, Color.Cyan);
-                uc_tunning_view.DrawCircle(single.ptJoint, (float)1.5, (float)1.5, Color.LimeGreen, (float)0.5);
-                uc_tunning_view.DrawString(i.ToString("N0"), (int)single.ptJoint.X - 2, (int)single.ptJoint.Y - 4, 5, Color.Red);
-            }
         }
 
         private void _ToUI_DrawPeakAnalysis(List<PointF> list, bool bHorizontal)
@@ -434,7 +408,6 @@ namespace CD_VISION_DIALOG
                     uc_tunning_view.DrawString(i.ToString("N0"), (int)ptCurrent.X-4, nAxisPos, 5, Color.Red);
                 }
             }
-            
         }
 
         private void CHK_RECT_USE_AUTO_PEAK_DETECTION_CheckedChanged(object sender, EventArgs e)
@@ -451,18 +424,6 @@ namespace CD_VISION_DIALOG
         {
             TXT_RECT_EDGE_DETEC_TARGET_INDEX_SCD.Text = CB_RECT_TARGET_INDEX_SCD.Text;
         }
-
-        
-
-      
          
-
-      
-
-       
-        
-       
-
-       
     }
 }

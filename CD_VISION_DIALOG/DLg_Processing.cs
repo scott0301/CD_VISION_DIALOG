@@ -25,9 +25,7 @@ namespace CD_VISION_DIALOG
         public Bitmap m_bmp_Back = new Bitmap(600,600);
 
         public bool m_bStatus_Record = false;
-
         public List<String> listCommand = new List<String>();
-
         public subclass classUI = null;
  
         public DLg_Processing()
@@ -120,7 +118,6 @@ namespace CD_VISION_DIALOG
 
             classUI.DrawHistogram();
         }
-
       
         private void TB_BRIGHTNESS_CHANGE_Scroll(object sender, EventArgs e)
         {
@@ -231,7 +228,6 @@ namespace CD_VISION_DIALOG
             BTN_ADD_PROC_MAGNITUDE.Enabled = CHK_CONTROL_MAGNITUDE.Checked;
             BTN_CHANGING_MAGNITUDE.Enabled = CHK_CONTROL_MAGNITUDE.Checked;
         }
-
         private void BTN_SHOW_RESULT_IMAGE_Click(object sender, EventArgs e)
         {
             int imageW =  0; int imageH =  0;
@@ -247,7 +243,6 @@ namespace CD_VISION_DIALOG
 
             MessageBox.Show("Result Displayed.", "Pre-Processing Simulation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        
         private void BTN_ADD_PROC_BR_Click(object sender, EventArgs e)
         {
             m_bmp_Back = uc_view_processing.GetDisplay_Bmp();
@@ -338,18 +333,14 @@ namespace CD_VISION_DIALOG
             }
          }
 
-        
-        private void BTN_RECORD_Click(object sender, EventArgs e)
-        {
-            _SetRecordStatus(!m_bStatus_Record);
-        }
+        private void BTN_RECORD_Click(object sender, EventArgs e){_SetRecordStatus(!m_bStatus_Record);}
 
         // Set Record Status (on / off ) 170809
         private void _SetRecordStatus(bool bStatus)
         {
             m_bStatus_Record = bStatus;
 
-            /***/if (m_bStatus_Record == false) 
+            if/***/(m_bStatus_Record == false) 
             {
                 BTN_RECORD.BackgroundImage = Properties.Resources.record_off;
                 GB_OPERATIONS1.Enabled = false;
@@ -357,7 +348,7 @@ namespace CD_VISION_DIALOG
                 LB_RECORD_STATUS.Text = ": RECOARDING OFF";
                 _PRINT_MSG("Recording Finished.");
             }
-            else if (m_bStatus_Record == true) 
+            else if(m_bStatus_Record == true) 
             {
                 BTN_RECORD.BackgroundImage = Properties.Resources.record_on;
                 GB_OPERATIONS1.Enabled = true;
@@ -373,15 +364,12 @@ namespace CD_VISION_DIALOG
             string s = Computer.GetTimeCode4Save_HH_MM_SS_MMM() + " : " + msg + System.Environment.NewLine;
             RICH_MESSAGE_WINDOW.AppendText(s);
             RICH_MESSAGE_WINDOW.ScrollToCaret();
-            
         }
 
         private void BTN_PTRN_APPLY_Click(object sender, EventArgs e)
         {
             _SetRecordStatus(false);
-
             this.fm.listCommand = this.listCommand.ToList();
-
             this.Hide();
         }
 
@@ -443,11 +431,6 @@ namespace CD_VISION_DIALOG
         }
 
         #endregion
-
-       
-
-     
-         
     }
     public class subclass  
     {
@@ -518,12 +501,9 @@ namespace CD_VISION_DIALOG
         {
             Bitmap bmp = handle.PIC_INPUT.Image.Clone() as Bitmap;
 
-            // set init
             imageW = imageH = 0;
-
             byte[] rawImage = Computer.HC_CONV_Bmp2Raw(bmp, ref imageW, ref imageH);
             return rawImage;
-
         }
         public byte[] GetMainRawImage()
         {

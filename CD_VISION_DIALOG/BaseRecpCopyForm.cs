@@ -22,10 +22,7 @@ namespace CD_VISION_DIALOG
 
         public string strBasePath { get; set; }
 
-        public FormBaseRecpCopy()
-        {
-             InitializeComponent();
-        }
+        public FormBaseRecpCopy() { InitializeComponent(); }
 
         private void BTN_GENERATE_Click(object sender, EventArgs e)
         {
@@ -98,23 +95,12 @@ namespace CD_VISION_DIALOG
             }
         }
 
-        private void BaseRecpCopyForm_Load(object sender, EventArgs e)
-        {
-        }
+        private void BaseRecpCopyForm_Load(object sender, EventArgs e) { }
 
-        public void SetBaseFilePath(string strBasePath)
-        {
-            this.strBasePath = strBasePath;
-        }
-        public void _TriggerSetBaseRecp(string strBaseRecp)
-        {
-             TXT_BASE_FILE.Text = strBaseRecp.Replace(".INI", "");;
-        }
+        public void SetBaseFilePath(string strBasePath) { this.strBasePath = strBasePath; }
+        public void _TriggerSetBaseRecp(string strBaseRecp) { TXT_BASE_FILE.Text = strBaseRecp.Replace(".INI", "");; }
 
-        private void BTN_CLOSE_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void BTN_CLOSE_Click(object sender, EventArgs e) { this.Close(); }
 
     }
 }

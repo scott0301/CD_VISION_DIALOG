@@ -80,7 +80,7 @@
             this.RDO_TYPE_ADI.ForeColor = System.Drawing.Color.White;
             this.RDO_TYPE_ADI.Location = new System.Drawing.Point(88, 20);
             this.RDO_TYPE_ADI.Name = "RDO_TYPE_ADI";
-            this.RDO_TYPE_ADI.Size = new System.Drawing.Size(50, 18);
+            this.RDO_TYPE_ADI.Size = new System.Drawing.Size(59, 21);
             this.RDO_TYPE_ADI.TabIndex = 0;
             this.RDO_TYPE_ADI.TabStop = true;
             this.RDO_TYPE_ADI.Text = "ADI";
@@ -93,7 +93,7 @@
             this.RDO_TYPE_ACI.ForeColor = System.Drawing.Color.White;
             this.RDO_TYPE_ACI.Location = new System.Drawing.Point(143, 20);
             this.RDO_TYPE_ACI.Name = "RDO_TYPE_ACI";
-            this.RDO_TYPE_ACI.Size = new System.Drawing.Size(49, 18);
+            this.RDO_TYPE_ACI.Size = new System.Drawing.Size(59, 21);
             this.RDO_TYPE_ACI.TabIndex = 0;
             this.RDO_TYPE_ACI.Text = "ACI";
             this.RDO_TYPE_ACI.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             this.label1.ForeColor = System.Drawing.Color.Coral;
             this.label1.Location = new System.Drawing.Point(12, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 14);
+            this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "TYPE :";
             // 
@@ -156,7 +156,7 @@
             this.RDO_LENS_50X.ForeColor = System.Drawing.Color.White;
             this.RDO_LENS_50X.Location = new System.Drawing.Point(231, 23);
             this.RDO_LENS_50X.Name = "RDO_LENS_50X";
-            this.RDO_LENS_50X.Size = new System.Drawing.Size(52, 18);
+            this.RDO_LENS_50X.Size = new System.Drawing.Size(60, 21);
             this.RDO_LENS_50X.TabIndex = 0;
             this.RDO_LENS_50X.TabStop = true;
             this.RDO_LENS_50X.Text = "50X";
@@ -168,7 +168,7 @@
             this.RDO_LENS_25X.ForeColor = System.Drawing.Color.White;
             this.RDO_LENS_25X.Location = new System.Drawing.Point(119, 23);
             this.RDO_LENS_25X.Name = "RDO_LENS_25X";
-            this.RDO_LENS_25X.Size = new System.Drawing.Size(52, 18);
+            this.RDO_LENS_25X.Size = new System.Drawing.Size(60, 21);
             this.RDO_LENS_25X.TabIndex = 0;
             this.RDO_LENS_25X.TabStop = true;
             this.RDO_LENS_25X.Text = "25X";
@@ -180,7 +180,7 @@
             this.RDO_LENS_ALIGN.ForeColor = System.Drawing.Color.White;
             this.RDO_LENS_ALIGN.Location = new System.Drawing.Point(7, 23);
             this.RDO_LENS_ALIGN.Name = "RDO_LENS_ALIGN";
-            this.RDO_LENS_ALIGN.Size = new System.Drawing.Size(68, 18);
+            this.RDO_LENS_ALIGN.Size = new System.Drawing.Size(79, 21);
             this.RDO_LENS_ALIGN.TabIndex = 0;
             this.RDO_LENS_ALIGN.TabStop = true;
             this.RDO_LENS_ALIGN.Text = "ALIGN";
@@ -207,7 +207,7 @@
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(303, 25);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(42, 14);
+            this.label8.Size = new System.Drawing.Size(50, 17);
             this.label8.TabIndex = 2;
             this.label8.Text = "VAL :";
             // 
@@ -217,7 +217,7 @@
             this.TXT_LIGHT_VALUE.ForeColor = System.Drawing.Color.White;
             this.TXT_LIGHT_VALUE.Location = new System.Drawing.Point(356, 22);
             this.TXT_LIGHT_VALUE.Name = "TXT_LIGHT_VALUE";
-            this.TXT_LIGHT_VALUE.Size = new System.Drawing.Size(84, 22);
+            this.TXT_LIGHT_VALUE.Size = new System.Drawing.Size(84, 24);
             this.TXT_LIGHT_VALUE.TabIndex = 1;
             // 
             // RDO_LIGHT_DF
@@ -226,7 +226,7 @@
             this.RDO_LIGHT_DF.ForeColor = System.Drawing.Color.White;
             this.RDO_LIGHT_DF.Location = new System.Drawing.Point(231, 23);
             this.RDO_LIGHT_DF.Name = "RDO_LIGHT_DF";
-            this.RDO_LIGHT_DF.Size = new System.Drawing.Size(43, 18);
+            this.RDO_LIGHT_DF.Size = new System.Drawing.Size(49, 21);
             this.RDO_LIGHT_DF.TabIndex = 0;
             this.RDO_LIGHT_DF.TabStop = true;
             this.RDO_LIGHT_DF.Text = "DF";
@@ -238,7 +238,7 @@
             this.RDO_LIGHT_BF.ForeColor = System.Drawing.Color.White;
             this.RDO_LIGHT_BF.Location = new System.Drawing.Point(119, 23);
             this.RDO_LIGHT_BF.Name = "RDO_LIGHT_BF";
-            this.RDO_LIGHT_BF.Size = new System.Drawing.Size(42, 18);
+            this.RDO_LIGHT_BF.Size = new System.Drawing.Size(49, 21);
             this.RDO_LIGHT_BF.TabIndex = 0;
             this.RDO_LIGHT_BF.TabStop = true;
             this.RDO_LIGHT_BF.Text = "BF";
@@ -250,7 +250,7 @@
             this.RDO_LIGHT_ALIGN.ForeColor = System.Drawing.Color.White;
             this.RDO_LIGHT_ALIGN.Location = new System.Drawing.Point(7, 23);
             this.RDO_LIGHT_ALIGN.Name = "RDO_LIGHT_ALIGN";
-            this.RDO_LIGHT_ALIGN.Size = new System.Drawing.Size(68, 18);
+            this.RDO_LIGHT_ALIGN.Size = new System.Drawing.Size(79, 21);
             this.RDO_LIGHT_ALIGN.TabIndex = 0;
             this.RDO_LIGHT_ALIGN.TabStop = true;
             this.RDO_LIGHT_ALIGN.Text = "ALIGN";
@@ -262,7 +262,7 @@
             this.label9.ForeColor = System.Drawing.Color.Coral;
             this.label9.Location = new System.Drawing.Point(12, 54);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(68, 14);
+            this.label9.Size = new System.Drawing.Size(82, 17);
             this.label9.TabIndex = 4;
             this.label9.Text = "TARGET :";
             // 
@@ -270,9 +270,9 @@
             // 
             this.TXT_TARGET_BASE_RECP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_TARGET_BASE_RECP.ForeColor = System.Drawing.Color.White;
-            this.TXT_TARGET_BASE_RECP.Location = new System.Drawing.Point(86, 50);
+            this.TXT_TARGET_BASE_RECP.Location = new System.Drawing.Point(100, 50);
             this.TXT_TARGET_BASE_RECP.Name = "TXT_TARGET_BASE_RECP";
-            this.TXT_TARGET_BASE_RECP.Size = new System.Drawing.Size(257, 22);
+            this.TXT_TARGET_BASE_RECP.Size = new System.Drawing.Size(243, 24);
             this.TXT_TARGET_BASE_RECP.TabIndex = 7;
             // 
             // groupBox3
@@ -295,7 +295,7 @@
             this.CHK_FOCUS_IAF.ForeColor = System.Drawing.Color.White;
             this.CHK_FOCUS_IAF.Location = new System.Drawing.Point(317, 26);
             this.CHK_FOCUS_IAF.Name = "CHK_FOCUS_IAF";
-            this.CHK_FOCUS_IAF.Size = new System.Drawing.Size(49, 18);
+            this.CHK_FOCUS_IAF.Size = new System.Drawing.Size(58, 21);
             this.CHK_FOCUS_IAF.TabIndex = 1;
             this.CHK_FOCUS_IAF.Text = "IAF";
             this.CHK_FOCUS_IAF.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             this.CHK_FOCUS_LAF.ForeColor = System.Drawing.Color.White;
             this.CHK_FOCUS_LAF.Location = new System.Drawing.Point(224, 25);
             this.CHK_FOCUS_LAF.Name = "CHK_FOCUS_LAF";
-            this.CHK_FOCUS_LAF.Size = new System.Drawing.Size(51, 18);
+            this.CHK_FOCUS_LAF.Size = new System.Drawing.Size(59, 21);
             this.CHK_FOCUS_LAF.TabIndex = 1;
             this.CHK_FOCUS_LAF.Text = "LAF";
             this.CHK_FOCUS_LAF.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             this.CHK_FOCUS_NONE.ForeColor = System.Drawing.Color.White;
             this.CHK_FOCUS_NONE.Location = new System.Drawing.Point(7, 25);
             this.CHK_FOCUS_NONE.Name = "CHK_FOCUS_NONE";
-            this.CHK_FOCUS_NONE.Size = new System.Drawing.Size(65, 18);
+            this.CHK_FOCUS_NONE.Size = new System.Drawing.Size(74, 21);
             this.CHK_FOCUS_NONE.TabIndex = 1;
             this.CHK_FOCUS_NONE.Text = "NONE";
             this.CHK_FOCUS_NONE.UseVisualStyleBackColor = true;
@@ -328,7 +328,7 @@
             this.CHK_FOCUS_ZAF.ForeColor = System.Drawing.Color.White;
             this.CHK_FOCUS_ZAF.Location = new System.Drawing.Point(128, 25);
             this.CHK_FOCUS_ZAF.Name = "CHK_FOCUS_ZAF";
-            this.CHK_FOCUS_ZAF.Size = new System.Drawing.Size(51, 18);
+            this.CHK_FOCUS_ZAF.Size = new System.Drawing.Size(60, 21);
             this.CHK_FOCUS_ZAF.TabIndex = 1;
             this.CHK_FOCUS_ZAF.Text = "ZAF";
             this.CHK_FOCUS_ZAF.UseVisualStyleBackColor = true;
@@ -379,7 +379,7 @@
             this.CHK_USE_CENTERING.ForeColor = System.Drawing.Color.White;
             this.CHK_USE_CENTERING.Location = new System.Drawing.Point(7, 25);
             this.CHK_USE_CENTERING.Name = "CHK_USE_CENTERING";
-            this.CHK_USE_CENTERING.Size = new System.Drawing.Size(135, 18);
+            this.CHK_USE_CENTERING.Size = new System.Drawing.Size(159, 21);
             this.CHK_USE_CENTERING.TabIndex = 1;
             this.CHK_USE_CENTERING.Text = "USE CENTERING";
             this.CHK_USE_CENTERING.UseVisualStyleBackColor = true;
@@ -387,6 +387,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(284, 560);
             this.label15.Name = "label15";
@@ -397,6 +398,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label14.ForeColor = System.Drawing.Color.White;
             this.label14.Location = new System.Drawing.Point(217, 559);
             this.label14.Name = "label14";
@@ -407,6 +409,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(159, 559);
             this.label13.Name = "label13";
@@ -417,6 +420,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(759, 558);
             this.label11.Name = "label11";
@@ -427,6 +431,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(6, 558);
             this.label12.Name = "label12";
@@ -437,6 +442,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(688, 558);
             this.label10.Name = "label10";
@@ -513,12 +519,11 @@
             // 
             // FormBaseRecp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(850, 597);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.Name = "FormBaseRecp";
             this.Text = "RECIPE CREATION ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBaseRecp_FormClosing);

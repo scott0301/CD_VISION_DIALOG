@@ -46,6 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BTN_RGN_INFO_PTRN = new System.Windows.Forms.Button();
             this.label51 = new System.Windows.Forms.Label();
             this.CHK_PTRN_SEARCH_GLOBAL = new System.Windows.Forms.CheckBox();
             this.TXT_PTRN_TEACH_ROI_W = new System.Windows.Forms.TextBox();
@@ -55,6 +56,7 @@
             this.TXT_PTRN_TEACH_ROI_X = new System.Windows.Forms.TextBox();
             this.TXT_PTRN_TEACH_ROI_Y = new System.Windows.Forms.TextBox();
             this.GB_PTRN_SEARCH_RGN = new System.Windows.Forms.GroupBox();
+            this.BTN_RGN_INFO_SEARCH = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -86,8 +88,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.BTN_RGN_INFO_PTRN = new System.Windows.Forms.Button();
-            this.BTN_RGN_INFO_SEARCH = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PIC_PTRN_NORMAL)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -144,7 +144,7 @@
             this.BTN_UPDATE_PTRN_LIST.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.view_refresh;
             this.BTN_UPDATE_PTRN_LIST.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTN_UPDATE_PTRN_LIST.ForeColor = System.Drawing.Color.Black;
-            this.BTN_UPDATE_PTRN_LIST.Location = new System.Drawing.Point(599, 252);
+            this.BTN_UPDATE_PTRN_LIST.Location = new System.Drawing.Point(597, 252);
             this.BTN_UPDATE_PTRN_LIST.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_UPDATE_PTRN_LIST.Name = "BTN_UPDATE_PTRN_LIST";
             this.BTN_UPDATE_PTRN_LIST.Size = new System.Drawing.Size(60, 60);
@@ -157,7 +157,7 @@
             this.BTN_MATCHING.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.matchfind;
             this.BTN_MATCHING.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_MATCHING.ForeColor = System.Drawing.Color.Black;
-            this.BTN_MATCHING.Location = new System.Drawing.Point(531, 252);
+            this.BTN_MATCHING.Location = new System.Drawing.Point(533, 254);
             this.BTN_MATCHING.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_MATCHING.Name = "BTN_MATCHING";
             this.BTN_MATCHING.Size = new System.Drawing.Size(60, 60);
@@ -169,9 +169,9 @@
             // 
             this.TXT_PTRN_FILE_NAME.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.TXT_PTRN_FILE_NAME.ForeColor = System.Drawing.Color.White;
-            this.TXT_PTRN_FILE_NAME.Location = new System.Drawing.Point(344, 222);
+            this.TXT_PTRN_FILE_NAME.Location = new System.Drawing.Point(357, 222);
             this.TXT_PTRN_FILE_NAME.Name = "TXT_PTRN_FILE_NAME";
-            this.TXT_PTRN_FILE_NAME.Size = new System.Drawing.Size(247, 23);
+            this.TXT_PTRN_FILE_NAME.Size = new System.Drawing.Size(234, 24);
             this.TXT_PTRN_FILE_NAME.TabIndex = 32;
             // 
             // BTN_PTRN_CANCEL
@@ -229,6 +229,7 @@
             // BTN_SYNC_WITH_RECP_NAME
             // 
             this.BTN_SYNC_WITH_RECP_NAME.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BTN_SYNC_WITH_RECP_NAME.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.BTN_SYNC_WITH_RECP_NAME.Location = new System.Drawing.Point(596, 222);
             this.BTN_SYNC_WITH_RECP_NAME.Name = "BTN_SYNC_WITH_RECP_NAME";
             this.BTN_SYNC_WITH_RECP_NAME.Size = new System.Drawing.Size(63, 23);
@@ -240,50 +241,55 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(272, 316);
+            this.label7.Location = new System.Drawing.Point(270, 316);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 16);
+            this.label7.Size = new System.Drawing.Size(49, 14);
             this.label7.TabIndex = 77;
             this.label7.Text = "DRAW";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(403, 316);
+            this.label12.Location = new System.Drawing.Point(419, 316);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 16);
+            this.label12.Size = new System.Drawing.Size(89, 14);
             this.label12.TabIndex = 77;
-            this.label12.Text = "Overwrite";
+            this.label12.Text = "OVERWRITE";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(328, 316);
+            this.label6.Location = new System.Drawing.Point(336, 316);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 16);
+            this.label6.Size = new System.Drawing.Size(78, 14);
             this.label6.TabIndex = 77;
-            this.label6.Text = "SaveNew";
+            this.label6.Text = "SAVE NEW";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(533, 316);
+            this.label5.Location = new System.Drawing.Point(539, 318);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 16);
+            this.label5.Size = new System.Drawing.Size(54, 14);
             this.label5.TabIndex = 77;
             this.label5.Text = "MATCH";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(600, 316);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 16);
+            this.label4.Size = new System.Drawing.Size(61, 14);
             this.label4.TabIndex = 77;
             this.label4.Text = "UPDATE";
             // 
@@ -304,13 +310,24 @@
             this.groupBox3.TabIndex = 40;
             this.groupBox3.TabStop = false;
             // 
+            // BTN_RGN_INFO_PTRN
+            // 
+            this.BTN_RGN_INFO_PTRN.ForeColor = System.Drawing.Color.Black;
+            this.BTN_RGN_INFO_PTRN.Location = new System.Drawing.Point(8, 23);
+            this.BTN_RGN_INFO_PTRN.Name = "BTN_RGN_INFO_PTRN";
+            this.BTN_RGN_INFO_PTRN.Size = new System.Drawing.Size(113, 23);
+            this.BTN_RGN_INFO_PTRN.TabIndex = 39;
+            this.BTN_RGN_INFO_PTRN.Text = "RGN INFO";
+            this.BTN_RGN_INFO_PTRN.UseVisualStyleBackColor = true;
+            this.BTN_RGN_INFO_PTRN.Click += new System.EventHandler(this.BTN_RGN_INFO_PTRN_Click);
+            // 
             // label51
             // 
             this.label51.AutoSize = true;
             this.label51.ForeColor = System.Drawing.Color.White;
             this.label51.Location = new System.Drawing.Point(250, 66);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(36, 16);
+            this.label51.Size = new System.Drawing.Size(41, 17);
             this.label51.TabIndex = 36;
             this.label51.Text = "AR :";
             // 
@@ -322,7 +339,7 @@
             this.CHK_PTRN_SEARCH_GLOBAL.ForeColor = System.Drawing.Color.White;
             this.CHK_PTRN_SEARCH_GLOBAL.Location = new System.Drawing.Point(15, 70);
             this.CHK_PTRN_SEARCH_GLOBAL.Name = "CHK_PTRN_SEARCH_GLOBAL";
-            this.CHK_PTRN_SEARCH_GLOBAL.Size = new System.Drawing.Size(193, 20);
+            this.CHK_PTRN_SEARCH_GLOBAL.Size = new System.Drawing.Size(209, 21);
             this.CHK_PTRN_SEARCH_GLOBAL.TabIndex = 38;
             this.CHK_PTRN_SEARCH_GLOBAL.Text = "Apply Global Searching";
             this.CHK_PTRN_SEARCH_GLOBAL.UseVisualStyleBackColor = true;
@@ -336,7 +353,7 @@
             this.TXT_PTRN_TEACH_ROI_W.ForeColor = System.Drawing.Color.White;
             this.TXT_PTRN_TEACH_ROI_W.Location = new System.Drawing.Point(263, 23);
             this.TXT_PTRN_TEACH_ROI_W.Name = "TXT_PTRN_TEACH_ROI_W";
-            this.TXT_PTRN_TEACH_ROI_W.Size = new System.Drawing.Size(57, 20);
+            this.TXT_PTRN_TEACH_ROI_W.Size = new System.Drawing.Size(57, 24);
             this.TXT_PTRN_TEACH_ROI_W.TabIndex = 37;
             this.TXT_PTRN_TEACH_ROI_W.Text = "0";
             // 
@@ -347,7 +364,7 @@
             this.label52.ForeColor = System.Drawing.Color.White;
             this.label52.Location = new System.Drawing.Point(374, 70);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(14, 8);
+            this.label52.Size = new System.Drawing.Size(16, 12);
             this.label52.TabIndex = 35;
             this.label52.Text = "%";
             // 
@@ -359,7 +376,7 @@
             this.TXT_PTRN_TEACH_ROI_H.ForeColor = System.Drawing.Color.White;
             this.TXT_PTRN_TEACH_ROI_H.Location = new System.Drawing.Point(331, 23);
             this.TXT_PTRN_TEACH_ROI_H.Name = "TXT_PTRN_TEACH_ROI_H";
-            this.TXT_PTRN_TEACH_ROI_H.Size = new System.Drawing.Size(57, 20);
+            this.TXT_PTRN_TEACH_ROI_H.Size = new System.Drawing.Size(57, 24);
             this.TXT_PTRN_TEACH_ROI_H.TabIndex = 37;
             this.TXT_PTRN_TEACH_ROI_H.Text = "0";
             // 
@@ -371,7 +388,7 @@
             this.TXT_PTRN_ACC_RATIO.ForeColor = System.Drawing.Color.White;
             this.TXT_PTRN_ACC_RATIO.Location = new System.Drawing.Point(294, 64);
             this.TXT_PTRN_ACC_RATIO.Name = "TXT_PTRN_ACC_RATIO";
-            this.TXT_PTRN_ACC_RATIO.Size = new System.Drawing.Size(74, 20);
+            this.TXT_PTRN_ACC_RATIO.Size = new System.Drawing.Size(74, 24);
             this.TXT_PTRN_ACC_RATIO.TabIndex = 37;
             this.TXT_PTRN_ACC_RATIO.Text = "55";
             // 
@@ -383,7 +400,7 @@
             this.TXT_PTRN_TEACH_ROI_X.ForeColor = System.Drawing.Color.White;
             this.TXT_PTRN_TEACH_ROI_X.Location = new System.Drawing.Point(127, 23);
             this.TXT_PTRN_TEACH_ROI_X.Name = "TXT_PTRN_TEACH_ROI_X";
-            this.TXT_PTRN_TEACH_ROI_X.Size = new System.Drawing.Size(57, 20);
+            this.TXT_PTRN_TEACH_ROI_X.Size = new System.Drawing.Size(57, 24);
             this.TXT_PTRN_TEACH_ROI_X.TabIndex = 37;
             this.TXT_PTRN_TEACH_ROI_X.Text = "0";
             // 
@@ -395,7 +412,7 @@
             this.TXT_PTRN_TEACH_ROI_Y.ForeColor = System.Drawing.Color.White;
             this.TXT_PTRN_TEACH_ROI_Y.Location = new System.Drawing.Point(195, 23);
             this.TXT_PTRN_TEACH_ROI_Y.Name = "TXT_PTRN_TEACH_ROI_Y";
-            this.TXT_PTRN_TEACH_ROI_Y.Size = new System.Drawing.Size(57, 20);
+            this.TXT_PTRN_TEACH_ROI_Y.Size = new System.Drawing.Size(57, 24);
             this.TXT_PTRN_TEACH_ROI_Y.TabIndex = 37;
             this.TXT_PTRN_TEACH_ROI_Y.Text = "0";
             // 
@@ -419,33 +436,47 @@
             this.GB_PTRN_SEARCH_RGN.TabStop = false;
             this.GB_PTRN_SEARCH_RGN.Visible = false;
             // 
+            // BTN_RGN_INFO_SEARCH
+            // 
+            this.BTN_RGN_INFO_SEARCH.ForeColor = System.Drawing.Color.Black;
+            this.BTN_RGN_INFO_SEARCH.Location = new System.Drawing.Point(8, 102);
+            this.BTN_RGN_INFO_SEARCH.Name = "BTN_RGN_INFO_SEARCH";
+            this.BTN_RGN_INFO_SEARCH.Size = new System.Drawing.Size(113, 23);
+            this.BTN_RGN_INFO_SEARCH.TabIndex = 39;
+            this.BTN_RGN_INFO_SEARCH.Text = "RGN INFO";
+            this.BTN_RGN_INFO_SEARCH.UseVisualStyleBackColor = true;
+            this.BTN_RGN_INFO_SEARCH.Click += new System.EventHandler(this.BTN_RGN_INFO_SEARCH_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(92, 80);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 16);
+            this.label9.Size = new System.Drawing.Size(32, 14);
             this.label9.TabIndex = 77;
             this.label9.Text = "SET";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(19, 80);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 16);
+            this.label8.Size = new System.Drawing.Size(49, 14);
             this.label8.TabIndex = 77;
             this.label8.Text = "DRAW";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(228, 79);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 16);
+            this.label11.Size = new System.Drawing.Size(63, 14);
             this.label11.TabIndex = 78;
             this.label11.Text = "SET IMG";
             this.label11.Visible = false;
@@ -482,7 +513,7 @@
             this.TXT_LOCAL_SEARCH_RGN_X.ForeColor = System.Drawing.Color.White;
             this.TXT_LOCAL_SEARCH_RGN_X.Location = new System.Drawing.Point(127, 102);
             this.TXT_LOCAL_SEARCH_RGN_X.Name = "TXT_LOCAL_SEARCH_RGN_X";
-            this.TXT_LOCAL_SEARCH_RGN_X.Size = new System.Drawing.Size(57, 20);
+            this.TXT_LOCAL_SEARCH_RGN_X.Size = new System.Drawing.Size(57, 24);
             this.TXT_LOCAL_SEARCH_RGN_X.TabIndex = 37;
             this.TXT_LOCAL_SEARCH_RGN_X.Text = "0";
             // 
@@ -494,7 +525,7 @@
             this.TXT_LOCAL_SEARCH_RGN_H.ForeColor = System.Drawing.Color.White;
             this.TXT_LOCAL_SEARCH_RGN_H.Location = new System.Drawing.Point(331, 102);
             this.TXT_LOCAL_SEARCH_RGN_H.Name = "TXT_LOCAL_SEARCH_RGN_H";
-            this.TXT_LOCAL_SEARCH_RGN_H.Size = new System.Drawing.Size(57, 20);
+            this.TXT_LOCAL_SEARCH_RGN_H.Size = new System.Drawing.Size(57, 24);
             this.TXT_LOCAL_SEARCH_RGN_H.TabIndex = 37;
             this.TXT_LOCAL_SEARCH_RGN_H.Text = "0";
             // 
@@ -506,7 +537,7 @@
             this.TXT_LOCAL_SEARCH_RGN_Y.ForeColor = System.Drawing.Color.White;
             this.TXT_LOCAL_SEARCH_RGN_Y.Location = new System.Drawing.Point(195, 102);
             this.TXT_LOCAL_SEARCH_RGN_Y.Name = "TXT_LOCAL_SEARCH_RGN_Y";
-            this.TXT_LOCAL_SEARCH_RGN_Y.Size = new System.Drawing.Size(57, 20);
+            this.TXT_LOCAL_SEARCH_RGN_Y.Size = new System.Drawing.Size(57, 24);
             this.TXT_LOCAL_SEARCH_RGN_Y.TabIndex = 37;
             this.TXT_LOCAL_SEARCH_RGN_Y.Text = "0";
             // 
@@ -530,7 +561,7 @@
             this.TXT_LOCAL_SEARCH_RGN_W.ForeColor = System.Drawing.Color.White;
             this.TXT_LOCAL_SEARCH_RGN_W.Location = new System.Drawing.Point(263, 102);
             this.TXT_LOCAL_SEARCH_RGN_W.Name = "TXT_LOCAL_SEARCH_RGN_W";
-            this.TXT_LOCAL_SEARCH_RGN_W.Size = new System.Drawing.Size(57, 20);
+            this.TXT_LOCAL_SEARCH_RGN_W.Size = new System.Drawing.Size(57, 24);
             this.TXT_LOCAL_SEARCH_RGN_W.TabIndex = 37;
             this.TXT_LOCAL_SEARCH_RGN_W.Text = "0";
             // 
@@ -540,7 +571,7 @@
             this.CHK_PTRN_APPLY_EDGE_BASED.ForeColor = System.Drawing.Color.White;
             this.CHK_PTRN_APPLY_EDGE_BASED.Location = new System.Drawing.Point(7, 293);
             this.CHK_PTRN_APPLY_EDGE_BASED.Name = "CHK_PTRN_APPLY_EDGE_BASED";
-            this.CHK_PTRN_APPLY_EDGE_BASED.Size = new System.Drawing.Size(230, 20);
+            this.CHK_PTRN_APPLY_EDGE_BASED.Size = new System.Drawing.Size(247, 21);
             this.CHK_PTRN_APPLY_EDGE_BASED.TabIndex = 38;
             this.CHK_PTRN_APPLY_EDGE_BASED.Text = "Apply Edge-Based Matching";
             this.CHK_PTRN_APPLY_EDGE_BASED.UseVisualStyleBackColor = true;
@@ -550,9 +581,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(267, 224);
+            this.label2.Location = new System.Drawing.Point(267, 222);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 16);
+            this.label2.Size = new System.Drawing.Size(82, 17);
             this.label2.TabIndex = 36;
             this.label2.Text = "TARGET :";
             // 
@@ -573,7 +604,7 @@
             this.BTN_PTRN_TEACH_OVERWRITE.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
             this.BTN_PTRN_TEACH_OVERWRITE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_PTRN_TEACH_OVERWRITE.ForeColor = System.Drawing.Color.Black;
-            this.BTN_PTRN_TEACH_OVERWRITE.Location = new System.Drawing.Point(398, 252);
+            this.BTN_PTRN_TEACH_OVERWRITE.Location = new System.Drawing.Point(431, 252);
             this.BTN_PTRN_TEACH_OVERWRITE.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_PTRN_TEACH_OVERWRITE.Name = "BTN_PTRN_TEACH_OVERWRITE";
             this.BTN_PTRN_TEACH_OVERWRITE.Size = new System.Drawing.Size(60, 60);
@@ -586,7 +617,7 @@
             this.BTN_PTRN_TEACH_NEW.BackgroundImage = global::CD_VISION_DIALOG.Properties.Resources.new_recp;
             this.BTN_PTRN_TEACH_NEW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BTN_PTRN_TEACH_NEW.ForeColor = System.Drawing.Color.Black;
-            this.BTN_PTRN_TEACH_NEW.Location = new System.Drawing.Point(333, 252);
+            this.BTN_PTRN_TEACH_NEW.Location = new System.Drawing.Point(348, 252);
             this.BTN_PTRN_TEACH_NEW.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_PTRN_TEACH_NEW.Name = "BTN_PTRN_TEACH_NEW";
             this.BTN_PTRN_TEACH_NEW.Size = new System.Drawing.Size(60, 60);
@@ -659,30 +690,33 @@
             // label16
             // 
             this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(1156, 660);
+            this.label16.Location = new System.Drawing.Point(1154, 660);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 16);
+            this.label16.Size = new System.Drawing.Size(52, 14);
             this.label16.TabIndex = 77;
             this.label16.Text = "APPLY";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(1009, 659);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 16);
+            this.label10.Size = new System.Drawing.Size(70, 14);
             this.label10.TabIndex = 78;
             this.label10.Text = "LOAD_IN";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(1080, 660);
+            this.label17.Location = new System.Drawing.Point(1086, 660);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(65, 16);
+            this.label17.Size = new System.Drawing.Size(60, 14);
             this.label17.TabIndex = 78;
             this.label17.Text = "CANCEL";
             // 
@@ -690,6 +724,7 @@
             // 
             this.uc_view_ptrn.AllowDrop = true;
             this.uc_view_ptrn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.uc_view_ptrn.BOOL_DRAW_CROSS = true;
             this.uc_view_ptrn.BOOL_DRAW_FOCUS_ROI = true;
             this.uc_view_ptrn.BOOL_DRAW_PTRN_ROI = true;
             this.uc_view_ptrn.BOOL_TEACHING_ACTIVATION = false;
@@ -707,10 +742,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(1711, 726);
+            this.label13.Location = new System.Drawing.Point(1714, 732);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(64, 16);
+            this.label13.Size = new System.Drawing.Size(61, 14);
             this.label13.TabIndex = 80;
             this.label13.Text = "UPDATE";
             // 
@@ -732,7 +768,7 @@
             this.label14.Location = new System.Drawing.Point(1312, 17);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 16);
+            this.label14.Size = new System.Drawing.Size(98, 17);
             this.label14.TabIndex = 83;
             this.label14.Text = ":- HISTORY";
             // 
@@ -770,28 +806,6 @@
             this.columnHeader4.Text = "DATA";
             this.columnHeader4.Width = 225;
             // 
-            // BTN_RGN_INFO_PTRN
-            // 
-            this.BTN_RGN_INFO_PTRN.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RGN_INFO_PTRN.Location = new System.Drawing.Point(8, 23);
-            this.BTN_RGN_INFO_PTRN.Name = "BTN_RGN_INFO_PTRN";
-            this.BTN_RGN_INFO_PTRN.Size = new System.Drawing.Size(113, 23);
-            this.BTN_RGN_INFO_PTRN.TabIndex = 39;
-            this.BTN_RGN_INFO_PTRN.Text = "RGN INFO";
-            this.BTN_RGN_INFO_PTRN.UseVisualStyleBackColor = true;
-            this.BTN_RGN_INFO_PTRN.Click += new System.EventHandler(this.BTN_RGN_INFO_PTRN_Click);
-            // 
-            // BTN_RGN_INFO_SEARCH
-            // 
-            this.BTN_RGN_INFO_SEARCH.ForeColor = System.Drawing.Color.Black;
-            this.BTN_RGN_INFO_SEARCH.Location = new System.Drawing.Point(8, 102);
-            this.BTN_RGN_INFO_SEARCH.Name = "BTN_RGN_INFO_SEARCH";
-            this.BTN_RGN_INFO_SEARCH.Size = new System.Drawing.Size(113, 23);
-            this.BTN_RGN_INFO_SEARCH.TabIndex = 39;
-            this.BTN_RGN_INFO_SEARCH.Text = "RGN INFO";
-            this.BTN_RGN_INFO_SEARCH.UseVisualStyleBackColor = true;
-            this.BTN_RGN_INFO_SEARCH.Click += new System.EventHandler(this.BTN_RGN_INFO_SEARCH_Click);
-            // 
             // DLG_Ptrn
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -802,7 +816,7 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.BTN_UPDATE_HISTORY);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DLG_Ptrn";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;

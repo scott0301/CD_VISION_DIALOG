@@ -33,32 +33,24 @@ namespace CD_VISION_DIALOG
         public FormBaseRecp()
         {
             InitializeComponent();
-
             dlgGenerateRecp.event_GeneratedBaseRecp += new FormBaseRecpCopy.dele_GenerateBaseRecp(_GeneratedBaseRecp);
-
         }
 
         private void RecpCreateForm_Load(object sender, EventArgs e)
         {
-
             // Create Window for GenerateBaseRecp & set Hide
             dlgGenerateRecp.Show();
             dlgGenerateRecp.Hide();
 
             // Update Base Recp Files
             _UpdateBaseRecpFiles();
-
-
            
             helperBaseRecp = new CHelper_BaseRecp(LV_BASE_RECP, RDO_TYPE_ADI, RDO_TYPE_ACI);
             helperBaseRecp.SetBasePath(m_fm.param_path.i03_PATH_RECP_BASE);
             this.Padding = new Padding(10);
         }
-        private void FormBaseRecp_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-            return;
-        }
+
+        private void FormBaseRecp_FormClosing(object sender, FormClosingEventArgs e) {e.Cancel = true;return; }
 
         private void _GeneratedBaseRecp(string msg)
         {
@@ -284,10 +276,7 @@ namespace CD_VISION_DIALOG
             }
         }
 
-        private void BTN_BASE_RECP_CANCEL_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void BTN_BASE_RECP_CANCEL_Click(object sender, EventArgs e) { this.Hide(); }
         private void BTN_BASE_RECP_APPLY_Click(object sender, EventArgs e)
         {
             if (helperBaseRecp.BaseRecpNullSelection() == true) return;
@@ -417,10 +406,7 @@ namespace CD_VISION_DIALOG
 
         public List<string> listVIP = new List<string>();
 
-        public void SetBasePath(string strTemp)
-        {
-            basePath = strTemp;
-        }
+        public void SetBasePath(string strTemp) { basePath = strTemp; }
 
         public CHelper_BaseRecp(ListView lv, RadioButton rdoTypeADI, RadioButton rdoTypeACI)
         {
@@ -439,6 +425,7 @@ namespace CD_VISION_DIALOG
                 }
             }
         }
+
         /// <summary>
         /// Return T/F whether the input is important or not 
         /// </summary>
@@ -466,6 +453,7 @@ namespace CD_VISION_DIALOG
             }
             return bRes;
         }
+
         /// <summary>
         /// Return Selected base Recp File Name ( pure file name with extension )
         /// </summary>
@@ -479,20 +467,16 @@ namespace CD_VISION_DIALOG
 
             return strSelectedBaseRecpFileName;
         }
+        
         /// <summary>
         /// remove ini extension
         /// </summary>
-        public string ExtensionRemove(string strFileName)
-        {
-            return strFileName.Replace(".INI", "");
-        }
+        public string ExtensionRemove(string strFileName) { return strFileName.Replace(".INI", ""); }
+       
         /// <summary>
         /// add ini extension
         /// </summary>
-        public string ExtensionAdd(string strFileName)
-        {
-            return strFileName + ".INI";
-        }
+        public string ExtensionAdd(string strFileName) { return strFileName + ".INI"; }
         /// <summary>
         /// coloring for selected recp
         /// </summary>
@@ -544,13 +528,5 @@ namespace CD_VISION_DIALOG
         {
             MessageBox.Show("Invalid Parameter {FOCUS_TYPE}\n Please Check Value.", "Invalid Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        public void MSG_INVALID_PARAM_ALGORITHM()
-        {
-            MessageBox.Show("Invalid Parameter {ALGORITHM}\n Please Check Value.", "Invalid Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-
-
-
     }
 }

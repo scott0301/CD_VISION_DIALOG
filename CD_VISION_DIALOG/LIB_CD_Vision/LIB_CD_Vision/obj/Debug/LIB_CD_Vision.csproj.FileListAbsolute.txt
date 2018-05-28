@@ -51,3 +51,8 @@ E:\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_C
 E:\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.pdb
 E:\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\LIB_CD_VISION.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\Library\LIB_CD_VISION.pdb
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_Vision.csprojResolveAssemblyReference.cache
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\LIB_CD_Vision\LIB_CD_Vision\obj\Debug\LIB_CD_VISION.pdb

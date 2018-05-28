@@ -610,8 +610,7 @@ namespace CD_VISION_DIALOG
 
         FormBaseRecp formBaseRecp = new FormBaseRecp();
 
-        DLG_Ptrn dlgPtrn = null;
-        Dlg_Params dlgRecp = null;
+        
 
         DLg_Processing dlgProcessing = null;
 
@@ -621,12 +620,14 @@ namespace CD_VISION_DIALOG
         Dlg_Tunning/*****/dlgTunning = null;
         Dlg_Advanced/****/dlgAdvanced = null;
         Dlg_Spc/*********/dlgSPC = null;
+        DLG_Ptrn/********/dlgPtrn = null;
+        Dlg_Params/******/dlgRecp = null;
 
         CAdvancedMode m_hacker = new CAdvancedMode();
 
-        CThrProc_FocusTool proc_FocusTool = new CThrProc_FocusTool();
-        CIterativeStaticRun proc_IterativeRun = new CIterativeStaticRun();
-        CThreadProc_Insp proc_inspection = new CThreadProc_Insp();
+        CThrProc_FocusTool/****/proc_FocusTool = new CThrProc_FocusTool();
+        CIterativeStaticRun/***/proc_IterativeRun = new CIterativeStaticRun();
+        CThreadProc_Insp/******/proc_inspection = new CThreadProc_Insp();
 
         DateTime dt_Measurement_start = new DateTime();
 
@@ -664,8 +665,7 @@ namespace CD_VISION_DIALOG
 
             dlgHistP = new Dlg_HistoryP();
             dlgProcessing = new DLg_Processing();
-
-
+            
             dlgConfig = new Dlg_Config();
             dlgConfig.eventDele_ChangeParamPath += new Dlg_Config.dele_ChangeParamPath(deleFunc_ChangeConfig);
 
@@ -1950,35 +1950,35 @@ namespace CD_VISION_DIALOG
                     this.UIThread(delegate  { _PRINT_MSG("SEQUENTIAL IMAGE " + string.Format(" [{0}/{1}]", 1 + i, nTOTAL_REPEAT)); });
 
                     //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-                    //_Do_Measurement(iu, true, 0, 0, 0);
+                    _Do_Measurement(iu, true, 0, 0, 0);
                     //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-                    CThreadProc_Insp.ThreadFinishedEventArgs temp = new CThreadProc_Insp.ThreadFinishedEventArgs();
 
-                    System.Threading.Thread thr = new System.Threading.Thread(delegate() { proc_inspection.ThreadCall_Inspection(wrapperCog, iu, report, true, 0, 0, i, temp); });
-                    thr.IsBackground = true;
-                    thr.Start();
+                    int imageW = 0; int imageH = 0;
+                    byte[] rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+                    
+                    if (m_hacker.BOOL_SHOW_IMAGE_PROCESS == true && iu.IsPreprocessed() == true)
+                    {
+                        rawImage = iu.GetImage_prep_Last(out imageW, out imageH);
+                    }
+                    
+                    imageView1.VIEW_Set_Clear_DispObject();
+                    imageView1.SetDisplay(rawImage, imageW, imageH);
+                    imageView1.DrawPoints(iu.listDispEdgePoints);
+                    imageView1.Refresh();
+                    
+                    // display data to the message window 
+                    for (int nItem = 0; nItem < iu.listInspResult.Count; nItem++) 
+                    {
+                        _PRINT_MSG(iu.listInspResult.ElementAt(nItem)); 
+                    }
+                    
+                    System.Threading.Thread.Sleep(20);
 
-                    //int imageW = 0; int imageH = 0;
-                    //byte[] rawImage = iu.GetImage_Raw_Last(out imageW, out imageH);
+                    //CThreadProc_Insp.ThreadFinishedEventArgs temp = new CThreadProc_Insp.ThreadFinishedEventArgs();
                     //
-                    //if (m_hacker.BOOL_SHOW_IMAGE_PROCESS == true && iu.IsPreprocessed() == true)
-                    //{
-                    //    rawImage = iu.GetImage_prep_Last(out imageW, out imageH);
-                    //}
-                    //
-                    //imageView1.VIEW_Set_Clear_DispObject();
-                    //imageView1.SetDisplay(rawImage, imageW, imageH);
-                    //imageView1.DrawPoints(iu.listDispEdgePoints);
-                    //imageView1.Refresh();
-                    //
-                    //// display data to the message window 
-                    //for (int nItem = 0; nItem < iu.listInspResult.Count; nItem++) 
-                    //{
-                    //    _PRINT_MSG(iu.listInspResult.ElementAt(nItem)); 
-                    //}
-                    //
-                    //System.Threading.Thread.Sleep(20);
-
+                    //System.Threading.Thread thr = new System.Threading.Thread(delegate () { proc_inspection.ThreadCall_Inspection(wrapperCog, iu, report, true, 0, 0, i, temp); });
+                    //thr.IsBackground = true;
+                    //thr.Start();
 
                     _ctrlProgressBarUpdate(i);
                 }
@@ -3453,7 +3453,7 @@ namespace CD_VISION_DIALOG
                     obj._rc_EX = org._rc_EX;
                     obj._rc_IN = org._rc_IN;
 
-                    org = obj.CopyTo();
+                     org = obj.CopyTo();
 
                     imageView1.iMod_Figure(org, nSelectedIndex);
                     UC_LOG_VIEWER.WRITE_LOG("PARAM Changed. FIG-CIR", DEF_OPERATION.OPER_03_PARAM);

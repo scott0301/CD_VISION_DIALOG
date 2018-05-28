@@ -46,3 +46,9 @@ D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.p
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\IPCData.dll
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\IPCData.pdb
 D:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\PylonC.NET.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\IPCData.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\IPCData.pdb
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\Debug\PylonC.NET.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.csprojResolveAssemblyReference.cache
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.dll
+E:\Develope\CD_VISION_DIALOG\CD_VISION_DIALOG\CDData\IPCData\obj\Debug\IPCData.pdb

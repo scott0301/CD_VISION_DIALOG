@@ -20,10 +20,7 @@ namespace CD_VISION_DIALOG
     {
         public CFigureManager fm = new CFigureManager();
 
-        public Dlg_Params()
-        {
-            InitializeComponent();
-        }
+        public Dlg_Params(){InitializeComponent();}
 
         public bool SetParam(CFigureManager figure)
         {
@@ -77,13 +74,10 @@ namespace CD_VISION_DIALOG
             /***/if (baseRecp.PARAM_05_USE_CENTERING == 0) CHK_USE_CENTERING.Checked = false;
             else if (baseRecp.PARAM_05_USE_CENTERING == 1) CHK_USE_CENTERING.Checked = true;
 
-
             return true;
         }
 
-        private void Dlg_Params_Load(object sender, EventArgs e)
-        {
-        }
+        private void Dlg_Params_Load(object sender, EventArgs e){}
 
         private void BTN_RECP_PARAM_CANCEL_Click(object sender, EventArgs e){this.Hide();}
 
@@ -148,17 +142,9 @@ namespace CD_VISION_DIALOG
             this.Hide();
         }
 
-         
-
         private void CHK_FOCUS_NONE_CheckedChanged(object sender, EventArgs e)
         {
-            if (CHK_FOCUS_NONE.Checked == true)
-            {
-                CHK_FOCUS_ZAF.Checked = false;
-                CHK_FOCUS_LAF.Checked = false;
-                CHK_FOCUS_IAF.Checked = false;
-            }
-           
+            if (CHK_FOCUS_NONE.Checked == true){CHK_FOCUS_ZAF.Checked = CHK_FOCUS_LAF.Checked = CHK_FOCUS_IAF.Checked = false;}
         }
 
         private void CHK_FOCUS_ZAF_CheckedChanged(object sender, EventArgs e) {  }

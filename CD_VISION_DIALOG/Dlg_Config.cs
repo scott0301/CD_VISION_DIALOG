@@ -21,10 +21,7 @@ namespace CD_VISION_DIALOG
         public delegate void/***/dele_ChangeParamPath(PARAM_PATH param_path);
         public event/***********/dele_ChangeParamPath eventDele_ChangeParamPath;
 
-        public Dlg_Config()
-        {
-            InitializeComponent();
-        }
+        public Dlg_Config(){InitializeComponent();}
 
         private void Dlg_Config_Load(object sender, EventArgs e)
         {

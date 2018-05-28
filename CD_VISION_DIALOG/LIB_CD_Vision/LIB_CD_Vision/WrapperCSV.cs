@@ -15,15 +15,9 @@ namespace CD_Measure
 
     public class CsvFileWriter : StreamWriter
     {
-        public CsvFileWriter(Stream stream)
-            : base(stream)
-        {
-        }
+        public CsvFileWriter(Stream stream): base(stream){}
 
-        public CsvFileWriter(string filename)
-            : base(filename)
-        {
-        }
+        public CsvFileWriter(string filename): base(filename){}
 
         /// <summary>
         /// Writes a single row to a CSV file.
@@ -65,13 +59,9 @@ namespace CD_Measure
     }
     public class CsvFileReader : StreamReader
     {
-         public CsvFileReader(Stream stream): base(stream)
-        {
-        }
+        public CsvFileReader(Stream stream): base(stream){}
 
-        public CsvFileReader(string filename): base(filename)
-        {
-        }
+        public CsvFileReader(string filename): base(filename){}
 
         /// <summary>
         /// Reads a row of data from a CSV file
@@ -152,35 +142,17 @@ namespace CD_Measure
     }
     public class CFileWriter : StreamWriter
     {
-        public CFileWriter(Stream stream)
-            : base(stream)
-        {
-        }
+        public CFileWriter(Stream stream): base(stream){}
 
-        public CFileWriter(string filename)
-            : base(filename)
-        {
-        }
+        public CFileWriter(string filename): base(filename){}
 
-        public void WriteFile(List<string> list)
-        {
-            foreach (string value in list)
-            {
-                WriteLine(value);
-            }
-        }
+        public void WriteFile(List<string> list){foreach (string value in list){WriteLine(value);}}
     }
     public class CFileReader : StreamReader
     {
-        public CFileReader(Stream stream)
-            : base(stream)
-        {
-        }
+        public CFileReader(Stream stream): base(stream){}
 
-        public CFileReader(string filename)
-            : base(filename)
-        {
-        }
+        public CFileReader(string filename) : base(filename){}
 
         /// <summary>
         /// Reads a row of data from a CSV file
@@ -221,14 +193,8 @@ namespace CD_Measure
             return bValid;
         }
 
-        public void RemoveAll()
-        {
-            m_list.Clear();
-        }
-        public void AddData(string[] data)
-        {
-            m_list.Add(data);
-        }
+        public void RemoveAll() { m_list.Clear(); }
+        public void AddData(string[] data){m_list.Add(data);}
         public string[] GetRow(int row)
         {
             if (this.IsValidIndex(row) == false) return new string[0];
@@ -244,10 +210,7 @@ namespace CD_Measure
             string strCol = arrRow[col];
             return strCol;
         }
-        public List<string[]> GetAll()
-        {
-            return m_list.ToList();
-        }
+        public List<string[]> GetAll(){return m_list.ToList();}
 
         public bool ReadCSVFile(string strPath, out string msg)
         {
